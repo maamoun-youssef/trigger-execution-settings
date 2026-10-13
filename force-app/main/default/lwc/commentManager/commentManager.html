@@ -1,0 +1,211 @@
+<template>
+    <div class="comment-manager" if:false={isLoading} style="position:relative;">
+        <ul class="slds-feed__list">
+            <li class="slds-feed__item">
+                <article if:true={showFirstRecord} class="slds-post slds-p-top--medium" style={commentContainerStyle}>
+                    <header class="slds-post__header slds-media comment-post-header">
+                        <div class="slds-media__figure">
+                            <a href="#" class="slds-avatar slds-avatar_circle slds-avatar_large"
+                                style={firstRecord.photoStyle}>
+                                <div style={firstRecord.photoStyle}></div>
+                            </a>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+                                <p>
+                                    <a href="#" title={firstRecord.assignee}>{firstRecord.assignee}</a>
+                                </p>
+                            </div>
+                            <p class="slds-text-body_small">
+                                <a href="#" title="Click for single-item view of this post"
+                                    class="slds-text-link_reset"><lightning-formatted-date-time
+                                        value={firstRecord.actionDate} year="numeric" month="2-digit"
+                                        day="2-digit" hour="2-digit"
+                                        minute="2-digit"></lightning-formatted-date-time></a>
+                            </p>
+                        </div>
+                        <div class="comment-header-actions">
+                            <button if:true={firstRecord.showDelete}
+                                class="slds-button slds-button_reset slds-post__footer-action"
+                                title={Labels.LBL_Delete} type="button" data-id={firstRecord.Id} data-index={index}
+                                onclick={handleResolve}>
+                                <lightning-icon icon-name="utility:delete" size="xx-small" data-id={firstRecord.Id}
+                                    data-index={index} class="slds-m-right_xx-small slds-align-middle"
+                                    alternative-text={Labels.LBL_Delete}></lightning-icon>
+                            </button>
+                            <button if:true={firstRecord.showEdit}
+                                class="slds-button slds-button_reset slds-post__footer-action"
+                                title={Labels.LBL_Copy} type="button" onclick={handleCopyToClipboard}>
+                                <lightning-icon icon-name="utility:copy" size="x-small"
+                                    class="slds-m-right_xx-small slds-align-middle"
+                                    alternative-text={Labels.LBL_Copy}></lightning-icon>
+                            </button>
+                            <button if:true={firstRecord.showEdit}
+                                class="slds-button slds-button_reset slds-post__footer-action" disabled={firstRecord.disableEditing}
+                                title="Edit comment" type="button" data-all="true" onclick={handleEditAll}>
+                                <lightning-icon icon-name="utility:edit" size="x-small"
+                                    class="slds-m-right_xx-small slds-align-middle" data-all="true"
+                                    alternative-text={Labels.LBL_Edit}></lightning-icon>
+                            </button>
+                        </div>
+                    </header>
+                    <div class="slds-post__content slds-text-longform">
+                        <div if:true={showEdit} class="slds-media slds-comment slds-hint-parent slds-m-top--medium slds-m-bottom--medium" style="width:350px">
+                            <div class="slds-media__figure">
+                                <a class="slds-avatar slds-avatar_circle slds-avatar_medium" style={defaultPhoto} href="#">
+                                    <div style={defaultPhoto}></div>
+                                </a>
+                            </div>
+                            <div class="slds-media__body">
+                                <div class="slds-publisher slds-publisher_comment slds-is-active slds-has-focus comment-manager-publisher">
+                                    <label for="comment-text-input-02"
+                                        class="slds-assistive-text">{Labels.LBL_LDWriteComment}</label>
+                                    <lightning-textarea value={firstRecord.comment} variant="label-hidden"
+                                        class="" placeholder={Labels.LBL_LDWriteComment}
+                                        onchange={handleAddCommentText}></lightning-textarea>
+                                    <div class="slds-publisher__actions slds-grid slds-grid_align-spread slds-m-top--small"
+                                        style="justify-content: flex-end;">
+                                        <button onclick={handleSaveComment} data-edit="full" data-type="portal" data-index="0" data-first="true"
+                                            style="font-size: smaller;"
+                                            class="slds-button slds-button_brand">{Labels.LBL_LDComment}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p if:false={showEdit}>{firstRecord.comment}</p>
+                    </div>
+                    <template lwc:if={editable}>
+                        <footer class="slds-post__footer">
+                            <ul class="slds-post__footer-actions-list slds-list_horizontal"></ul>
+                            <ul class="slds-post__footer-meta-list slds-list_horizontal slds-text-title comment-footer-actions">
+                                <li class="slds-col slds-item slds-m-right_medium">
+                                    <button class="slds-button slds-button_reset slds-post__footer-action"
+                                        title={Labels.LBL_LDComment} onclick={handleAddReply} type="button">
+                                        <lightning-icon icon-name="utility:share_post" size="x-small"
+                                            class="slds-m-right_xx-small slds-align-middle"
+                                            alternative-text="Comment"></lightning-icon>
+                                        <span class="slds-align-middle">{Labels.LBL_LDComment}</span>
+                                    </button>
+                                </li>
+                                <li if:true={islegal} class="slds-col slds-item slds-m-right_medium">
+                                    <button class="slds-button slds-button_reset slds-post__footer-action"
+                                        title={Labels.LBL_LDCommentResolve} type="button" data-all="true"
+                                        onclick={handleResolve}>
+                                        <lightning-icon icon-name="utility:end_chat" size="x-small"
+                                            class="slds-m-right_xx-small slds-align-middle" data-all="true"
+                                            alternative-text="Resolve"></lightning-icon>
+                                        <span class="slds-align-middle">{Labels.LBL_LDCommentResolve}</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </footer>
+                    </template>
+                </article>
+                <div class={commentsSyleClass}>
+                    <ul>
+                        <template if:true={showMoreComments} for:each={moreComments} for:item="comment"
+                            for:index="index">
+                            <li key={comment.Id} class="slds-m-top--xx-small">
+                                <article class="slds-comment slds-media slds-hint-parent comment-item-article" style={commentContainerStyle}
+                                    data-index={index}>
+                                    <div class="slds-media__figure">
+                                        <a href="#" class="slds-avatar slds-avatar_circle slds-avatar_medium"
+                                            style={comment.photoStyle}>
+                                            <div style={comment.photoStyle}></div>
+                                        </a>
+                                    </div>
+                                    <div class="slds-media__body comment-item-media-body">
+                                        <header class="slds-media slds-media_center">
+                                            <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+                                                <p class="slds-truncate" title="Jenna Davis">
+                                                    <a href="#">{comment.assignee}</a>
+                                                </p>
+                                            </div>
+                                        </header>
+                                        <div if:true={comment.isEdit} class="slds-media slds-comment slds-hint-parent slds-m-top--medium" style="width: 350px;">
+                                           <div class="slds-media__body">
+                                                <div class="slds-publisher slds-publisher_comment slds-is-active slds-has-focus comment-manager-publisher">
+                                                    <label for="comment-text-input-02"
+                                                        class="slds-assistive-text">{Labels.LBL_LDWriteComment}</label>
+                                                    <lightning-textarea value={comment.comment} variant="label-hidden"
+                                                        class="" placeholder={Labels.LBL_LDWriteComment}
+                                                        onchange={handleAddCommentText}></lightning-textarea>
+                                                    <div class="slds-publisher__actions slds-grid slds-grid_align-spread slds-m-top--small"
+                                                        style="justify-content: flex-end;">
+                                                        <button onclick={handleSaveComment} data-edit="full" data-type="portal" data-index={index}
+                                                            style="font-size: smaller;"
+                                                            class="slds-button slds-button_brand">{Labels.LBL_LDComment}</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div if:false={comment.isEdit}
+                                            class="slds-comment__content slds-text-longform">
+                                            {comment.comment}</div>
+                                        <footer>
+                                            <ul
+                                                class="slds-list_horizontal slds-has-dividers_right slds-text-body_small">
+                                                <li class="slds-item"> <lightning-formatted-date-time
+                                                        value={comment.actionDate} year="numeric"
+                                                        month="2-digit" day="2-digit" hour="2-digit"
+                                                        minute="2-digit"></lightning-formatted-date-time></li>
+                                            </ul>
+                                        </footer>
+                                    </div>
+                                    <div class="comment-item-actions">
+                                        <button if:true={comment.showDelete}
+                                            class="slds-button slds-button_reset slds-post__footer-action"
+                                            title={Labels.LBL_Delete} type="button" data-id={comment.Id} data-index={index}
+                                            onclick={handleResolve}>
+                                            <lightning-icon icon-name="utility:delete" size="xx-small" data-id={comment.Id}
+                                                data-index={index} class="slds-m-right_xx-small slds-align-middle"
+                                                alternative-text={Labels.LBL_Delete}></lightning-icon>
+                                        </button>
+                                        <button if:true={comment.showEdit}
+                                            class="slds-button slds-button_reset slds-post__footer-action"
+                                            title={Labels.LBL_Copy} type="button" data-index={index}
+                                            onclick={handleCopyToClipboard}>
+                                            <lightning-icon icon-name="utility:copy" size="xx-small" data-index={index}
+                                                class="slds-m-right_xx-small slds-align-middle"
+                                                alternative-text={Labels.LBL_Copy}></lightning-icon>
+                                        </button>
+                                        <button if:true={comment.showEdit}
+                                            class="slds-button slds-button_reset slds-post__footer-action"
+                                            title={Labels.LBL_Edit} type="button" data-id={comment.Id} data-index={index} disabled={comment.disableEditing}
+                                            onclick={handleEdit}>
+                                            <lightning-icon icon-name="utility:edit" size="xx-small" data-id={comment.Id}
+                                                data-index={index} class="slds-m-right_xx-small slds-align-middle" 
+                                                alternative-text={Labels.LBL_Edit}></lightning-icon>
+                                        </button>
+                                    </div>
+                                </article>
+                            </li>
+                        </template>
+                    </ul>
+                    <div if:true={showReply} class="slds-media slds-comment slds-hint-parent slds-m-top--medium">
+                        <div class="slds-media__figure">
+                            <a class="slds-avatar slds-avatar_circle slds-avatar_medium" style={defaultPhoto} href="#">
+                                <div style={defaultPhoto}></div>
+                            </a>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-publisher slds-publisher_comment slds-is-active slds-has-focus comment-manager-publisher">
+                                <label for="comment-text-input-01"
+                                    class="slds-assistive-text">{Labels.LBL_LDWriteComment}</label>
+                                <textarea id="comment-text-input-01"
+                                    class="slds-publisher__input slds-input_bare slds-text-longform comment-input-field"
+                                    placeholder={Labels.LBL_LDWriteComment} onchange={handleAddCommentText}></textarea>
+                                <div class="slds-publisher__actions slds-grid slds-grid_align-spread"
+                                    style="justify-content: flex-end;">
+                                    <button onclick={handleSaveComment} data-type={type}
+                                        style="font-size: smaller;"
+                                        class="slds-button slds-button_brand">{Labels.LBL_LDComment}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</template>

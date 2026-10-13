@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- The Organisation Business Type. This value will be set for one time only, you cannot change it after save. --></help>
+    <label><!-- Business Type --></label>
+    <name>Business_Type__c</name>
+</CustomFieldTranslation>

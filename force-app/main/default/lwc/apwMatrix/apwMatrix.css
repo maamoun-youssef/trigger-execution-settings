@@ -1,0 +1,29 @@
+table tbody td{
+    text-align: center;
+    white-space: pre-wrap;
+    /* padding: 10px !important; */
+}
+ table thead th{
+    text-align: center;
+    white-space: nowrap;
+}
+thead {
+    position: sticky !important;
+    z-index: 4 !important;
+    top: 0px;
+}
+div label span {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.textWrap {
+    white-space: pre-wrap !important;;
+    word-break: break-word;
+}
+.purple-utility-icon {
+    --sds-c-icon-color-foreground-default: #995bb6;
+}
+/* tr td:first-child {
+    border-left-width: 1px;
+    border-right-width: 1px;
+} */

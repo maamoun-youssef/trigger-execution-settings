@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Purchasing</fullName>
+    <active>true</active>
+    <label>HE Purchasing</label>
+    <picklistValues>
+        <picklist>ExtractStatus__c</picklist>
+        <values>
+            <fullName>Extracted</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>NegoType__c</picklist>
+        <values>
+            <fullName>Commission</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Concession</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Condition</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ferme</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Active</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In preparation</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

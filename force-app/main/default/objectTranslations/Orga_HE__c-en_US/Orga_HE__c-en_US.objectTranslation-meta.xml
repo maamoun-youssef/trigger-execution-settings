@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Hierarchy Element (old)</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Hierarchy Elements (old)</value>
+    </caseValues>
+    <layouts>
+        <layout>O - CPG Hierarchy Element</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Filter Settings --></label>
+            <section>Filter Settings</section>
+        </sections>
+        <sections>
+            <label><!-- Life Cycle --></label>
+            <section>Life Cycle</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Name</nameFieldLabel>
+    <recordTypes>
+        <label><!-- Product (deprecated) --></label>
+        <name>Product</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

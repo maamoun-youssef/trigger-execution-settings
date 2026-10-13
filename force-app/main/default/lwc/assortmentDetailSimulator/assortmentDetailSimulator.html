@@ -1,0 +1,368 @@
+<template>
+    <div class="slds-card">
+        <div class="header">
+            <div class="slds-grid">
+                <div class="slds-col slds-p-around_xx-small slds-has-flexi-truncate">
+                    <!-- HEADING AREA -->
+                    <!-- MEDIA OBJECT = FIGURE + BODY -->
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div
+                            class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                            <lightning-icon icon-name="custom:custom90" class="headerIconColor" if:true={isBloc}>
+                            </lightning-icon>
+                            <lightning-icon icon-name="standard:sort" style="transform: rotate(90deg);"
+                                class="headerIconColor" if:false={isBloc}>
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small">
+                            <p class="slds-text-title slds-line-height_reset">
+                                {headerName}
+                            </p>
+                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate"
+                                if:true={isBloc}>
+                                {labels.LBL_Compare_Bloc}
+                            </h1>
+                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate"
+                                if:false={isBloc}>
+                                {labels.LBL_Compare_Detail}
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-no-flex slds-grid slds-align--absolute-center">
+                    <div class="slds-m-right_small slds-align_absolute-center">
+                        <span class="slds-m-right_small">{labels.LBL_Show_Only_Line_With_Difference}</span>
+                        <label class="switch">
+                            <input class="checkbox" type="checkbox" data-filter-type="onlyLineWithDiff"
+                                onchange={handleChangeFilter} />
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="slds-m-right_small slds-align_absolute-center">
+                        <span class="slds-m-right_small">{labels.LBL_Show_Only_Inno_Product}</span>
+                        <label class="switch">
+                            <input class="checkbox" type="checkbox" data-filter-type="onlyInno"
+                                onchange={handleChangeFilter} />
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="slds-m-right_small slds-align_absolute-center">
+                        <span class="slds-m-right_small">{labels.LBL_Show_Only_Stop_Product}</span>
+                        <label class="switch">
+                            <input class="checkbox" type="checkbox" data-filter-type="onlyStop"
+                                onchange={handleChangeFilter} />
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <lightning-checkbox-group variant="label-hidden" class="slds-m-horizontal_small"
+                        options={recordTypesAS} value={filters.RTs} data-filter-type="RTs"
+                        onchange={handleChangeFilter}></lightning-checkbox-group>
+                </div>
+            </div>
+        </div>
+        <div class="main-panel slds-scrollable">
+            <template if:true={loading}>
+                <div class="slds-spinner_container">
+                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </template>
+            <div if:true={isBloc}>
+                <div class="firstDiv slds-scrollable">
+                    <table
+                        class="slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border--right slds-no-row-hover">
+                        <thead>
+                            <tr>
+                                <th class="scopeHeaderClass borderSeparator" rowspan="2" colspan="2">
+                                    {labels.LBL_Scope_Name}</th>
+                                <template for:each={kpiGroups} for:item="kpi">
+                                    <template for:each={kpi.assortmentHeaders} for:item="assortment">
+                                        <th key={assortment.headerKey} colspan={kpi.negFields.length}
+                                            class="borderSeparator" style={kpi.headerStyle}>
+                                            <div class="slds-grid" style="justify-content:center;">
+                                                <div>
+                                                    <a href={assortment.link} target="_blank" style="color:white;">
+                                                        {assortment.Name}
+                                                    </a>
+                                                </div>
+                                                <div if:true={assortment.isOnTop} class="slds-m-left--xx-small">
+                                                    <lightning-icon icon-name="utility:trail" size="xx-small"
+                                                        class="my-icon round-icon">
+                                                    </lightning-icon>
+                                                </div>
+                                            </div>
+                                        </th>
+                                    </template>
+                                </template>
+                            </tr>
+                            <tr>
+                                <template for:each={kpiGroups} for:item="kpi">
+                                    <template for:each={kpi.assortmentHeaders} for:item="assortment">
+                                        <template for:each={assortment.fields} for:item="field">
+                                            <th key={field.key} class="limitWidth" style={field.style}>
+                                                {field.fieldLabel}
+                                            </th>
+                                        </template>
+                                    </template>
+                                </template>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template if:false={records.length}>
+                                <tr>
+                                    <td colspan={colspan}>
+                                        <h2
+                                            class="slds-align_absolute-center slds-text-align_center slds-m-around_xx-large slds-card__header-title slds-align-content-center">
+                                            {labels.LBL_No_Item_To_Display}
+                                        </h2>
+                                    </td>
+                                </tr>
+                            </template>
+                            <template if:true={records.length}>
+                                <tr style="font-weight: bold;" class="total">
+                                    <td colspan="2"
+                                        style="background-color:#595959;color:#FFFFFF;border-right: 2px solid black;">
+                                        Total
+                                    </td>
+                                    <template for:each={grandtTotalFields} for:item="totalField">
+                                        <td key={totalField.key}
+                                            style="background-color:#595959;color:#FFFFFF;text-align:right;">
+                                            <lightning-formatted-number value={totalField.fieldValue}
+                                                minimum-fraction-digits={totalField.scale}
+                                                maximum-fraction-digits={totalField.scale}></lightning-formatted-number>
+                                        </td>
+                                    </template>
+                                </tr>
+                                <template for:each={records} for:item="scope">
+                                    <tr key={scope.Name} class="category">
+                                        <td colspan="2" class="scopeClass borderSeparator"
+                                            style="background-color: white;">
+                                            {scope.label}
+                                        </td>
+                                        <td colspan={colspan} class="scopeClass" style="background-color: white;">
+                                        </td>
+                                    </tr>
+                                    <template for:each={scope.scopeValues} for:item="scopeValue">
+                                        <tr key={scopeValue}>
+                                            <td style={scopeValue.style}>
+                                                {scopeValue.value}
+                                            </td>
+                                            <td style={scopeValue.style} class="borderSeparator">
+                                                <lightning-button-icon variant="bare" size="large"
+                                                    icon-name="utility:products" data-scope-value={scopeValue.value}
+                                                    data-scope-name={scope.Name} onclick={buildDetailSection}>
+                                                </lightning-button-icon>
+                                            </td>
+                                            <template for:each={scopeValue.fields} for:item="field">
+                                                <td key={field} style={field.style} class="slds-text-align_right">
+                                                    <lightning-formatted-number value={field.fieldValue}
+                                                        minimum-fraction-digits={field.scale}
+                                                        maximum-fraction-digits={field.scale}></lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                </template>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="secondDiv slds-scrollable" if:true={showDetailedData}>
+                    <table
+                        class="slds-table slds-table_bordered slds-table_col-bordered product-table slds-border--left slds-border--right slds-no-row-hover">
+                        <thead>
+                            <tr>
+                                <th class="scopeHeaderClass borderSeparator" colspan={productFields.length}>
+                                    {labels.LBL_Product_Info}
+                                </th>
+                                <template for:each={kpiGroups} for:item="kpi">
+                                    <template for:each={assortmentList} for:item="assortment">
+                                        <th key={assortment.headerKey} colspan={kpi.detailColspan}
+                                            class="borderSeparator" style={kpi.headerStyle}>
+                                            <div class="slds-grid" style="justify-content:center;">
+                                                <div>
+                                                    <a href={assortment.link} target="_blank" style="color:white;">
+                                                        {assortment.Name}
+                                                    </a>
+                                                </div>
+                                                <div if:true={assortment.isOnTop} class="slds-m-left--xx-small">
+                                                    <lightning-icon icon-name="utility:trail" size="xx-small"
+                                                        class="my-icon round-icon">
+                                                    </lightning-icon>
+                                                </div>
+                                            </div>
+                                        </th>
+                                    </template>
+                                </template>
+                            </tr>
+                            <tr>
+                                <template iterator:field={productFields}>
+                                    <th if:false={field.last} key={field.value.fieldName} class="mainFieldsWidth"
+                                        style="background-color:#0d807d;color:white;">
+                                        {field.value.fieldLabel}
+                                    </th>
+                                    <th if:true={field.last} key={field.value.fieldName}
+                                        class="mainFieldsWidth borderSeparator"
+                                        style="background-color:#0d807d;color:white;">
+                                        {field.value.fieldLabel}
+                                    </th>
+                                </template>
+
+                                <template for:each={kpiGroups} for:item="kpi">
+                                    <template for:each={kpi.assortmentHeaders} for:item="assortment">
+                                        <th key={assortment.headerKey} style={kpi.headerStyle}>{labels.LBL_Cluster}</th>
+                                        <th key={assortment.headerKey} style={kpi.headerStyle}>
+                                            {labels.LBL_Client_Status}</th>
+                                        <template for:each={assortment.fields} for:item="field">
+                                            <th key={field.key} class="limitWidth" style={field.style}>
+                                                {field.fieldLabel}
+                                            </th>
+                                        </template>
+                                    </template>
+                                </template>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={productDetailedData} for:item="product">
+                                <tr key={product.prodId}>
+                                    <template for:each={product.fields} for:item="field">
+                                        <template lwc:if={field.isHachured}>
+                                            <td key={field.fieldName} style={field.fieldStyle}>
+                                                <span class="blank-cell"></span>
+                                            </td>
+                                        </template>
+                                        <template lwc:else>
+                                            <td key={field.fieldName} class="slds-text-align_right"
+                                                if:true={field.isNumber} style={field.fieldStyle}>
+                                                <lightning-formatted-number value={field.fieldValue}
+                                                    minimum-fraction-digits={field.scale}
+                                                    maximum-fraction-digits={field.scale}></lightning-formatted-number>
+                                            </td>
+                                            <td key={field.fieldApiName} class="slds-text-align_center"
+                                                if:false={field.isNumber} style={field.fieldStyle}>
+                                                {field.fieldValue}</td>
+                                        </template>
+                                    </template>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div if:false={isBloc}>
+                <div class="secondDiv slds-scrollable">
+                    <table
+                        class="slds-table slds-table_bordered slds-table_col-bordered product-table slds-border--left slds-border--right slds-no-row-hover">
+                        <thead>
+                            <tr>
+                                <th class="scopeHeaderClass borderSeparator" colspan={productFields.length}>
+                                    {labels.LBL_Product_Info}
+                                </th>
+                                <template for:each={kpiGroups} for:item="kpi">
+                                    <template for:each={kpi.assortmentHeaders} for:item="assortment">
+                                        <th key={assortment.headerKey} colspan={kpi.detailColspan}
+                                            class="borderSeparator" style={kpi.headerStyle}>
+                                            <div class="slds-grid" style="justify-content:center;">
+                                                <div>
+                                                    <a href={assortment.link} target="_blank" style="color:white;">
+                                                        {assortment.Name}
+                                                    </a>
+                                                </div>
+                                                <div if:true={assortment.isOnTop} class="slds-m-left--xx-small">
+                                                    <lightning-icon icon-name="utility:trail" size="xx-small"
+                                                        class="my-icon round-icon">
+                                                    </lightning-icon>
+                                                </div>
+                                            </div>
+                                        </th>
+                                    </template>
+                                </template>
+                            </tr>
+                            <tr>
+                                <template iterator:field={productFields}>
+                                    <th if:false={field.last} key={field.value.fieldName} class="mainFieldsWidth"
+                                        style="background-color:#0d807d;color:white;">
+                                        {field.value.fieldLabel}
+                                    </th>
+                                    <th if:true={field.last} key={field.value.fieldName}
+                                        class="mainFieldsWidth borderSeparator"
+                                        style="background-color:#0d807d;color:white;">
+                                        {field.value.fieldLabel}
+                                    </th>
+                                </template>
+                                <template for:each={kpiGroups} for:item="kpi">
+                                    <template for:each={kpi.assortmentHeaders} for:item="assortment">
+                                        <th key={assortment.headerKey} style={kpi.headerStyle}>{labels.LBL_Cluster}</th>
+                                        <th key={assortment.headerKey} style={kpi.headerStyle}>
+                                            {labels.LBL_Client_Status}</th>
+                                        <template for:each={assortment.fields} for:item="field">
+                                            <th key={field.key} class="limitWidth" style={field.style}>
+                                                {field.fieldLabel}
+                                            </th>
+                                        </template>
+                                    </template>
+                                </template>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="font-weight: bold;" class="total">
+                                <td colspan={productFields.length}
+                                    style="background-color:#595959;color:#FFFFFF;border-right: 2px solid black;">
+                                    Grand Total</td>
+                                <template for:each={grandtTotalFields} for:item="totalField">
+                                    <td key={totalField.key}
+                                        style="background-color:#595959;color:#FFFFFF;text-align:right;">
+                                        <lightning-formatted-number value={totalField.fieldValue}
+                                            minimum-fraction-digits={totalField.scale}
+                                            maximum-fraction-digits={totalField.scale}></lightning-formatted-number>
+                                    </td>
+                                </template>
+                            </tr>
+                            <template for:each={productDetailedData} for:item="categoryW">
+                                <tr key={categoryW.categoryId} style="font-weight: bold;" class="category">
+                                    <td colspan={productFields.length}
+                                        style="background-color:#595959;color:#FFFFFF;border-right: 2px solid black;">
+                                        {categoryW.categoryName}</td>
+                                    <template for:each={categoryW.fields} for:item="totalField">
+                                        <td key={totalField.key}
+                                            style="background-color:#595959;color:#FFFFFF;text-align:right;">
+                                            <lightning-formatted-number value={totalField.fieldValue}
+                                                minimum-fraction-digits={totalField.scale}
+                                                maximum-fraction-digits={totalField.scale}></lightning-formatted-number>
+                                        </td>
+                                    </template>
+                                </tr>
+                                <template for:each={categoryW.prodList} for:item="product">
+                                    <tr key={product.prodId}>
+                                        <template for:each={product.fields} for:item="field">
+                                            <template lwc:if={field.isHachured}>
+                                                <td key={field.fieldName} style={field.fieldStyle}>
+                                                    <span class="blank-cell"></span>
+                                                </td>
+                                            </template>
+                                            <template lwc:else>
+                                                <td key={field.fieldName} class="slds-text-align_right"
+                                                    if:true={field.isNumber} style={field.fieldStyle}>
+                                                    <lightning-formatted-number value={field.fieldValue}
+                                                        minimum-fraction-digits={field.scale}
+                                                        maximum-fraction-digits={field.scale}></lightning-formatted-number>
+                                                </td>
+                                                <td key={field.fieldApiName} class="slds-text-align_center"
+                                                    if:false={field.isNumber} style={field.fieldStyle}>
+                                                    {field.fieldValue}</td>
+                                            </template>
+                                        </template>
+                                    </tr>
+                                </template>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

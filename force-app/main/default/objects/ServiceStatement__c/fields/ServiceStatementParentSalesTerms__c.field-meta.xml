@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ServiceStatementParentSalesTerms__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Lookup relationship linking a Terms Dispute record to its parent Sales Terms declaration. Used to associate disputed clauses with the main Service Statement for tracking and reporting purposes. This field is populated only for records of type Terms Dispute.</description>
+    <label>Service Statement Parent Sales Terms</label>
+    <referenceTo>ServiceStatement__c</referenceTo>
+    <relationshipLabel>Service Statements</relationshipLabel>
+    <relationshipName>SERServiceStatementParentSalesTerms</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

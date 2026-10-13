@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <label>Doc Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>value1</fullName>
+                <default>false</default>
+                <label>value1</label>
+            </value>
+            <value>
+                <fullName>Framework Contract</fullName>
+                <default>false</default>
+                <label>Framework Contract</label>
+            </value>
+            <value>
+                <fullName>Amendment to the Framework Contract</fullName>
+                <default>false</default>
+                <label>Amendment to the Framework Contract</label>
+            </value>
+            <value>
+                <fullName>Single Agreement</fullName>
+                <default>false</default>
+                <label>Single Agreement</label>
+            </value>
+            <value>
+                <fullName>Supplier contract</fullName>
+                <default>false</default>
+                <label>Supplier contract</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

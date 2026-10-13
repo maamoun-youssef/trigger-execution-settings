@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Status --></label>
+    <name>Status__c</name>
+    <picklistValues>
+        <masterLabel>Closed</masterLabel>
+        <translation><!-- Closed --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Closed (Upgraded version)</masterLabel>
+        <translation><!-- Closed (Upgraded version) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Deleted</masterLabel>
+        <translation><!-- Deleted --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Open (in bulding process)</masterLabel>
+        <translation><!-- Open (in bulding process) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Request for Approval</masterLabel>
+        <translation><!-- Request for Approval --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Signed IN</masterLabel>
+        <translation><!-- Signed IN --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Signed OUT</masterLabel>
+        <translation><!-- Signed OUT --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Validated</masterLabel>
+        <translation><!-- Validated --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

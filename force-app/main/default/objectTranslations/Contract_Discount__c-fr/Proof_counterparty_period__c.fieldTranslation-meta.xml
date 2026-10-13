@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Specify the periodicity of the dealing counterparty. --></help>
+    <label>Contrepartie - Période</label>
+    <name>Proof_counterparty_period__c</name>
+    <picklistValues>
+        <masterLabel>Monthly</masterLabel>
+        <translation>Mois</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Oneshot</masterLabel>
+        <translation>Une fois</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Quarterly</masterLabel>
+        <translation>Trimèstre</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Weekly</masterLabel>
+        <translation>Hebdo</translation>
+    </picklistValues>
+</CustomFieldTranslation>

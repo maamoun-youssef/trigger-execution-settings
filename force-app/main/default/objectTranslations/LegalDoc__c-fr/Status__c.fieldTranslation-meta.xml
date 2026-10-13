@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Statut</label>
+    <name>Status__c</name>
+    <picklistValues>
+        <masterLabel>Approved</masterLabel>
+        <translation>Approuvé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Closed</masterLabel>
+        <translation>Fermé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Deleted</masterLabel>
+        <translation>Supprimé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>InPreparation</masterLabel>
+        <translation>En préparation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Legal publishing</masterLabel>
+        <translation>Publication client (Boulanger)</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Open</masterLabel>
+        <translation>Ouvert</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Supplier publishing</masterLabel>
+        <translation>Publication four.</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Validated</masterLabel>
+        <translation>Validé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Validated by legal</masterLabel>
+        <translation>Validé client (Boulanger)</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Validated by supplier</masterLabel>
+        <translation>Validé four.</translation>
+    </picklistValues>
+</CustomFieldTranslation>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Designation__c</fullName>
+    <defaultValue>&quot;Saisissez une désignation commerciale pour vos CGV ici / Enter a business name for your terms here&quot;</defaultValue>
+    <description>Supplier-provided name or title for this Service Statement (e.g., the commercial label of Sales Terms, service declaration, or contract). Used for display and reporting purposes.</description>
+    <externalId>false</externalId>
+    <label>Designation</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

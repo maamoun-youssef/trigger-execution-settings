@@ -1,0 +1,4 @@
+.slds-path__link:focus {
+    outline: none;
+    box-shadow: none;
+}

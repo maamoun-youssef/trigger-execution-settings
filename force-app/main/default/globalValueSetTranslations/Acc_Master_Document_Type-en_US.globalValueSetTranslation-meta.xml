@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Credit Note</masterLabel>
+        <translation>Credit Note</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Credit Note Request</masterLabel>
+        <translation>Credit Note Request</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Debit Note</masterLabel>
+        <translation>Debit Note</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Invoice</masterLabel>
+        <translation>Invoice</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

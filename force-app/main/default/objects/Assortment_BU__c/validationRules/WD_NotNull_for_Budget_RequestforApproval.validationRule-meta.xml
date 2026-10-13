@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>WD_NotNull_for_Budget_RequestforApproval</fullName>
+    <active>true</active>
+    <errorConditionFormula>(RecordType.DeveloperName = &apos;Budget&apos;) 
+&amp;&amp; (Text(Status__c) = &apos;Request for Approval&apos; || Text(Status__c) = &apos;Validated&apos;) &amp;&amp; WD_Equal_Null_Counter__c &lt;&gt; 0</errorConditionFormula>
+    <errorMessage>WD can&apos;t be equal to NULL for this status.</errorMessage>
+</ValidationRule>

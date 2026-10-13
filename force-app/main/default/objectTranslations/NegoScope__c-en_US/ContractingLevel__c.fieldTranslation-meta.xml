@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Défini le niveau de contractualisation des accords de ce NS. &lt;br/&gt;• Aucun : pas de formalisation contractuelle des accords saisis pour ce NS. &lt;br/&gt;• Toutes les lignes : l&apos;accord validé de ce NS fait l&apos;objet d&apos;une contractualisation et toutes les lignes sont intégrées au contrat &lt;br/&gt;• Seulement les lignes saisies : l&apos;accord validé de ce NS fait l&apos;objet d&apos;une contractualisation mais seules les lignes saisies à ce niveau sont intégrées au contrat --></help>
+    <label>Contracting Level</label>
+    <name>ContractingLevel__c</name>
+    <picklistValues>
+        <masterLabel>Advanced And Partner</masterLabel>
+        <translation>Advanced and Partner</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Advanced Only</masterLabel>
+        <translation>Advanced Only</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Partner Only</masterLabel>
+        <translation>Partner Only</translation>
+    </picklistValues>
+</CustomFieldTranslation>

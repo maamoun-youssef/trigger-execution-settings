@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Nom API du champ de relation reliant l’objet principal à l’objet maître.</help>
+    <label><!-- RelationShip Api --></label>
+    <name>Relationship_Name__c</name>
+</CustomFieldTranslation>

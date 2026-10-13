@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Sous-type</label>
+    <name>SubType__c</name>
+    <picklistValues>
+        <masterLabel>Account Status</masterLabel>
+        <translation>Etat des comptes</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Addendum</masterLabel>
+        <translation>Avenant</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Admin Certification</masterLabel>
+        <translation>Certificat Administratif</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Advertising Materials</masterLabel>
+        <translation>Supports Publicitaires</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Appendix</masterLabel>
+        <translation>Annexe</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Application Contract</masterLabel>
+        <translation>Contrat d&apos;application</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Banking Document</masterLabel>
+        <translation>Document bancaire</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Benchmark</masterLabel>
+        <translation><!-- Benchmark --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Blank Template</masterLabel>
+        <translation>Template Vierge</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Branding Elements</masterLabel>
+        <translation>Elements de marque</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Certifications</masterLabel>
+        <translation><!-- Certifications --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Compliance Audit</masterLabel>
+        <translation>Audits de conformité</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Credit Note</masterLabel>
+        <translation>Avoir</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Datasharing</masterLabel>
+        <translation><!-- Datasharing --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Ethical Chart</masterLabel>
+        <translation>Charte éthique</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Framework Agreement</masterLabel>
+        <translation>Contrat Cadre</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Framework Agreement Template</masterLabel>
+        <translation>Template Contrat Cadre</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Invoice</masterLabel>
+        <translation>Facture</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Letter of reservation</masterLabel>
+        <translation>Lettre de réserve</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Mandate</masterLabel>
+        <translation>Mandat</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Market Analysis</masterLabel>
+        <translation>Analyse de marché</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Non Disclosure Agreement</masterLabel>
+        <translation>Accord de confidentialité</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Non-conformance report</masterLabel>
+        <translation>Rapport de non conformité</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Other</masterLabel>
+        <translation><!-- Other --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Payment</masterLabel>
+        <translation>Preuve de paiement</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Penalty</masterLabel>
+        <translation>Pénalité</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Planograms</masterLabel>
+        <translation>Plannogramme</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Pre-Populated Template</masterLabel>
+        <translation>Template pré-rempli</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Proforma Invoice</masterLabel>
+        <translation>Facture Proforma</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Purchasing Terms</masterLabel>
+        <translation>CGA</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Sales Forecast</masterLabel>
+        <translation>Prévisions</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Sales Terms</masterLabel>
+        <translation>CGV</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Sample request form</masterLabel>
+        <translation>Demande d&apos;échantillonnage</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Scorecard</masterLabel>
+        <translation><!-- Scorecard --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Specification Book</masterLabel>
+        <translation>Cahier des charges</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Tariff</masterLabel>
+        <translation>Tarifs</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Tender Master Document</masterLabel>
+        <translation>Appel d&apos;offres</translation>
+    </picklistValues>
+</CustomFieldTranslation>

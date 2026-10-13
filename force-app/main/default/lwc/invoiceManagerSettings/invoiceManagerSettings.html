@@ -1,0 +1,275 @@
+<template>
+    <template lwc:if={isLoading}>
+        <div class="slds-spinner_container">
+            <div class="slds-spinner_container greyBg">
+                <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+            </div>
+        </div>
+    </template>
+    <template lwc:else>
+        <div>
+            <div class="save-btn">
+                <lightning-button variant="brand" label={labels.LBL_Save} onclick={handleSaveInvoiceSettings}>
+                </lightning-button>
+            </div>
+            <!--Actions' topics section-->
+            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                <div class="sectionTitle slds-media__body">
+                    {labels.LBL_InvoiceMng_TopicTitle}
+                </div>
+            </div>
+            <div class="section-Container slds-m-top_medium">
+                <div class="label-toggle">
+                    {labels.LBL_InvoiceMng_TopicSubTitle}
+                </div>
+            </div>
+            <div class="negoptim-tablesection">
+                <table>
+                    <tr class="table-header">
+                        <th class="table-th th-w7">{labels.LBL_InvoiceMng_Topic}</th>
+                        <th class="table-th">{labels.LBL_InvoiceMng_TopicName}</th>
+                        <th class="table-th">{labels.LBL_InvoiceMng_Activation}</th>
+                    </tr>
+                    <!--list of topics should be displayed here-->
+                    <template lwc:if={invoiceSettings.invoiceManagerTopics}
+                        for:each={invoiceSettings.invoiceManagerTopics} for:item="item" for:index="index">
+                        <tr key={item.index}>
+                            <td class="table-td slds-text-align--center">{item.index}</td>
+                            <td class="table-td">
+                                <lightning-input value={item.name} data-index={index} data-field="name"
+                                    data-id="invoiceManagerTopics" onchange={handleFieldSelection}
+                                    variant="label-hidden">
+                                </lightning-input>
+                            </td>
+                            <td class="table-td slds-text-align--center">
+                                <label class="switch" data-index={index} data-field="isActive">
+                                    <input type="checkbox" checked={item.isActive} data-field="isActive"
+                                        data-index={index} onchange={handleFieldSelection}
+                                        data-id="invoiceManagerTopics" />
+                                    <span class="slider">
+                                    </span>
+                                </label>
+                            </td>
+                        </tr>
+                    </template>
+                </table>
+            </div>
+            <!--Actions section-->
+            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                <div class="sectionTitle slds-media__body">
+                    {labels.LBL_InvoiceMng_Actions_Activation}
+                </div>
+            </div>
+            <div class="section-Container slds-m-top_medium">
+                <div class="label-toggle">
+                    {labels.LBL_InvoiceMng_Info_Actions_Activation}
+                </div>
+            </div>
+            <div class="negoptim-tablesection">
+                <table>
+                    <tr class="table-header">
+                        <th class="table-th th-w7">{labels.LBL_InvoiceMng_Action}</th>
+                        <th class="table-th">{labels.LBL_InvoiceMng_Action_Name}</th>
+                        <th class="table-th">{labels.LBL_InvoiceMng_Activation}</th>
+                        <th class="table-th">{labels.LBL_InvoiceMng_Topic}</th>
+                        <th class="table-th">{labels.LBL_InvoiceMng_Grid_Displayed}</th>
+                    </tr>
+                    <template lwc:if={invoiceManagerActions} for:each={invoiceManagerActions} for:item="item"
+                        for:index="index">
+                        <tr key={item.index} lwc:if={item.name}>
+                            <td class="table-td slds-text-align--center">{item.index}</td>
+                            <td class="table-td slds-text-align--left">{item.name}</td>
+                            <td class="table-td slds-text-align--center">
+                                <label class="switch" data-number={item.value}>
+                                    <input type="checkbox" checked={item.isActive} data-field={item.label}
+                                        data-index={item.index} onchange={handleFieldSelection}
+                                        data-id="invoiceManagerActions" />
+                                    <span class="slider">
+                                    </span>
+                                </label>
+                            </td>
+                            <td class="table-td slds-text-align--center">
+                                <lightning-combobox value={item.selectedTopicIndex} options={topicOptions}
+                                    variant="label-hidden" data-field={item.label} data-id="invoiceManagerActionsTopic"
+                                    onchange={handleFieldSelection}>
+                                </lightning-combobox>
+                            </td>
+                            <td class="table-td slds-text-align--center">
+                                <lightning-combobox value={item.selectedGrid} variant="label-hidden"
+                                    data-id="invoiceManagerActionsGrid" if:true={item.gridSettingsAvailable}
+                                    options={item.gridOptions} onchange={handleFieldSelection}
+                                    data-field={item.label}></lightning-combobox>
+                            </td>
+                        </tr>
+                    </template>
+                </table>
+            </div>
+            <!-- second -->
+            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                <div class="sectionTitle slds-media__body">
+                    {labels.LBL_InvoiceMng_KPIs_Activation}
+                </div>
+            </div>
+            <div class="section-Container slds-m-top_medium">
+                <div class="label-toggle">
+                    {labels.LBL_InvoiceMng_Info_KPIs_Activation}
+                </div>
+            </div>
+            <div class="negoptim-tablesection">
+                <table>
+                    <tr class="table-header">
+                        <th class="table-th th-w7">{labels.LBL_InvoiceMng_KPI}</th>
+                        <th class="table-th">{labels.LBL_InvoiceMng_KPI_Name}</th>
+                        <th class="table-th">{labels.LBL_InvoiceMng_Activation}</th>
+                        <th class="table-th">{labels.LBL_InvoiceMng_Grid_Displayed}</th>
+                    </tr>
+                    <template lwc:if={invoiceManagerKpis} for:each={invoiceManagerKpis} for:item="item"
+                        for:index="index">
+                        <tr key={item.index} lwc:if={item.name}>
+                            <td class="table-td slds-text-align--center">{item.index}</td>
+                            <td class="table-td slds-text-align--left">{item.name}</td>
+                            <td class="table-td slds-text-align--center">
+                                <label class="switch" data-number={item.value}>
+                                    <input type="checkbox" checked={item.isActive} data-field={item.label}
+                                        data-index={item.index} onchange={handleFieldSelection}
+                                        data-id="invoiceManagerKpis" />
+                                    <span class="slider">
+                                    </span>
+                                </label>
+                            </td>
+                            <td class="table-td slds-text-align--center">
+                                <lightning-combobox value={item.selectedGrid} variant="label-hidden"
+                                    data-id="invoiceManagerKpisGrid" options={invoiceGridOptions}
+                                    onchange={handleFieldSelection} data-field={item.label}></lightning-combobox>
+                            </td>
+                        </tr>
+                    </template>
+                </table>
+            </div>
+            <!-- Actions filters in Invoice Manager  -->
+            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                <div class="sectionTitle slds-media__body">
+                    {labels.LBL_InvoiceMng_Actions_Filters}
+                </div>
+            </div>
+            <div class="section-Container slds-m-top_medium">
+                <div class="label-toggle">
+                    {labels.LBL_InvoiceMng_Info_Actions_Filters}
+                </div>
+            </div>
+            <div class="negoptim-tablesection">
+                <table>
+                    <tr class="table-header">
+                        <th class="table-th th-w7">{labels.LBL_InvoiceMng_Action}</th>
+                        <th class="table-th">{labels.LBL_InvoiceMng_Action_Name}</th>
+                        <th class="table-th">{labels.LBL_InvoiceMng_Status_Filter}</th>
+                        <th class="table-th">{labels.LBL_InvoiceMng_Doc_Complement_Filter}</th>
+                    </tr>
+                    <template lwc:if={invoiceManagerActionsValues} for:each={invoiceManagerActionsValues}
+                        for:item="item" for:index="index">
+                        <tr key={item.index} lwc:if={item.name}>
+                            <td class="table-td slds-text-align--center">{item.index}</td>
+                            <td class="table-td slds-text-align--left">{item.name}</td>
+                            <td class="table-td slds-text-align--center">
+                                <c-neg-optim-custom-picklist lwc:if={statusPicklist} data-type="picklist"
+                                    data-field={item.label} placeholder='' data-id="invoiceManagerActionsStatuses"
+                                    options={statusPicklist} show-all-option="true"
+                                    selected-event={Events.handleChangeMultiPicklistValues}
+                                    selected-values={item.status}
+                                    onhandlechangemultipicklistvalues={handleChangePickList}>
+                                </c-neg-optim-custom-picklist>
+                            </td>
+                            <td class="table-td slds-text-align--center">
+                                <c-neg-optim-custom-picklist lwc:if={accDocPicklist} data-type="picklist"
+                                    disabled={item.readOnly} data-field={item.label} placeholder=''
+                                    data-id="invoiceManagerActionsAccDoc" options={accDocPicklist}
+                                    show-all-option="true" selected-event={Events.handleChangeMultiPicklistValues}
+                                    selected-values={item.accDocs}
+                                    onhandlechangemultipicklistvalues={handleChangePickList}>
+                                </c-neg-optim-custom-picklist>
+                            </td>
+                        </tr>
+                    </template>
+                </table>
+            </div>
+            <!-- Actions filters in Invoice Manager  -->
+            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                <div class="sectionTitle slds-media__body">
+                    {labels.LBL_InvoiceMng_KPIs_Filters}
+                </div>
+            </div>
+            <div class="section-Container slds-m-top_medium">
+                <div class="label-toggle">
+                    {labels.LBL_InvoiceMng_Info_KPIs_Filters}
+                </div>
+            </div>
+            <div class="negoptim-tablesection">
+                <table>
+                    <tr class="table-header">
+                        <th class="table-th th-w7">{labels.LBL_InvoiceMng_KPI}</th>
+                        <th class="table-th">{labels.LBL_InvoiceMng_KPI_Name}</th>
+                        <th class="table-th">{labels.LBL_Status_Filter}</th>
+                        <th class="table-th">{labels.LBL_InvoiceMng_Doc_Complement_Filter}</th>
+                    </tr>
+                    <template lwc:if={invoiceManagerKpisValues} for:each={invoiceManagerKpisValues} for:item="item"
+                        for:index="index">
+                        <tr key={item.index} lwc:if={item.name}>
+                            <td class="table-td slds-text-align--center">{item.index}</td>
+                            <td class="table-td slds-text-align--left">{item.name}</td>
+                            <td class="table-td slds-text-align--center">
+                                <c-neg-optim-custom-picklist lwc:if={statusPicklist} data-type="picklist"
+                                    data-field={item.label} data-id="invoiceManagerKpisStatuses"
+                                    options={statusPicklist} show-all-option="true"
+                                    selected-event={Events.handleChangeMultiPicklistValues}
+                                    selected-values={item.status}
+                                    onhandlechangemultipicklistvalues={handleChangePickList}>
+                                </c-neg-optim-custom-picklist>
+                            </td>
+                            <td class="table-td slds-text-align--center">
+                                <c-neg-optim-custom-picklist lwc:if={accDocPicklist} data-type="picklist"
+                                    data-field={item.label} placeholder='' data-id="invoiceManagerKpisAccDoc"
+                                    options={accDocPicklist} show-all-option="true"
+                                    selected-event={Events.handleChangeMultiPicklistValues}
+                                    selected-values={item.accDocs}
+                                    onhandlechangemultipicklistvalues={handleChangePickList}>
+                                </c-neg-optim-custom-picklist>
+                            </td>
+                        </tr>
+                    </template>
+                </table>
+            </div>
+            <!-- Actions filters in Invoice Manager  -->
+            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                <div class="sectionTitle slds-media__body">
+                    {labels.LBL_InvoiceMng_KPIs_Detail_by_category_Activation}
+                </div>
+            </div>
+            <div class="section-Container slds-m-top_medium">
+                <div class="label-toggle">
+                    {labels.LBL_InvoiceMng_Info_KPIs_Detail_by_category}
+                </div>
+            </div>
+            <div class="negoptim-tablesection">
+                <table>
+                    <tr class="table-header">
+                        <th class="table-th th-w7">{labels.LBL_InvoiceMng_KPIs_detail_by_category}</th>
+                        <th class="table-th">{labels.LBL_InvoiceMng_Activation}</th>
+                    </tr>
+                    <tr>
+                        <td class="table-td slds-text-align--center">
+                            {labels.LBL_InvoiceMng_KPIs_ShowDetail_by_category_link}
+                        </td>
+                        <td class="table-td slds-text-align--center">
+                            <label class="switch">
+                                <input type="checkbox" checked={invoiceSettings.enableInvoiceKPICategory}
+                                    onchange={handleEnableInvoiceKPICategory} />
+                                <span class="slider">
+                                </span>
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Provide a JSON object (e.g. {&quot;deliveryChannel&quot;:&quot;PORTAL&quot;}). Leave empty if not required. --></help>
+    <label><!-- Default Metadata JSON --></label>
+    <name>DefaultMetadata__c</name>
+</CustomFieldTranslation>

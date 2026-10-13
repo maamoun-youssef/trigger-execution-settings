@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>National Brand</fullName>
+        <default>true</default>
+        <label>National Brand</label>
+    </customValue>
+    <customValue>
+        <fullName>Private Brand</fullName>
+        <default>false</default>
+        <label>Private Brand</label>
+    </customValue>
+    <customValue>
+        <fullName>First Price</fullName>
+        <default>false</default>
+        <label>First Price</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Private Brand 2</fullName>
+        <default>false</default>
+        <label>Private Brand 2</label>
+    </customValue>
+    <description>Specify the Type of Brand managed to the client area</description>
+    <masterLabel>Brand Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,95 @@
+:host {
+    --dp-l: 20px;
+}
+
+/* Laoding */
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+/*  */
+.greyBg {
+    background-color: #f3f3f3;
+}
+
+/* Header */
+.save-btn {
+    position: absolute;
+    top: 80px;
+    right: 3%;
+    z-index: 10;
+}
+
+.sectionTitle {
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+    translate: 0px 7px;
+}
+
+.stickyHeader {
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    background-color: var(--verdigris);
+    padding-left: var(--dp-l);
+    height: 70px;
+}
+
+.section-Container {
+    display: flex;
+    column-gap: 40px;
+}
+
+.label-toggle {
+    font-size: 16px;
+    color: var(--text-body);
+    padding-left: var(--dp-l);
+    font-weight: 600;
+}
+
+.accdocs-field {
+    display: flex;
+    gap: 20px;
+}
+
+.dp {
+    padding-left: var(--dp-l);
+}
+
+.accfield {
+    overflow-wrap: break-word;
+}
+
+.validation-contrller {
+    gap: 20px;
+}
+
+.gp-10 {
+    display: flex;
+    gap: 10px;
+}

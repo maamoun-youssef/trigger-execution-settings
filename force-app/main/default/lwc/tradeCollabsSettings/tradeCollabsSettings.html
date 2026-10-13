@@ -1,0 +1,351 @@
+<template>
+    <template lwc:if={isLoading}>
+        <div class="slds-spinner_container greyBg">
+            <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+        </div>
+    </template>
+    <template lwc:else>
+        <div class="slds-card mainContainer">
+            <div class="settings-header">
+                <lightning-icon icon-name='utility:settings' class="custom-icon-settings">
+                </lightning-icon>
+                <div>
+                    <p class="settings-subtitle">
+                        <!-- {labels.LBL_MyFileSettings} -->
+                         MyTrade
+                    </p>
+                    <h1 class="slds-page-header__title settings-header-title">
+                        TradeCollabs Settings
+                    </h1>
+                </div>
+            </div>
+            <div class="slds-grid slds-grid_align-end">
+                <div class="slds-col save-button-container">
+                    <lightning-button class="slds-button slds-m-right_x-small" disabled={saveStatus} variant="brand"
+                        label={labels.LBL_Save} onclick={handleSave}>
+                    </lightning-button>
+                </div>
+            </div>
+            <lightning-tabset variant="vertical" class="tab-set-style slds-m-bottom_x-small mainHeight"
+                active-tab-value="1">
+                <template if:true={popup.visibility}>
+                    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                        class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <div class="slds-modal__header">
+                                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate" tabindex="-1">
+                                    {popup.title}</h1>
+                            </div>
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <p>{popup.body}</p>
+                            </div>
+                            <div class="slds-modal__footer">
+                                <button data-id="cancel" class="slds-button slds-button_neutral"
+                                    aria-label="Cancel and close"
+                                    onclick={handlePopupAction}>{labels.LBL_Cancel}</button>
+                                <button data-id="confirm" class="slds-button slds-button_destructive"
+                                    onclick={handlePopupAction}>{labels.LBL_Delete}</button>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+                </template>
+                <lightning-tab value="1" tabindex="-1" label={labels.Section_general_informations}
+                    class="slds-scrollable_y">
+                    <div style={mainPanelHeight}>
+                        <div>
+                            <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                                <div class="sectionTitle">
+                                    <!-- {labels.LBL_FileDirectorySectionTitle} -->
+                                     Trade Collabs sections
+                                </div>
+                            </div>
+                            <div class="slds-grid slds-p-bottom_xx-small">
+                                <div class="slds-col slds-has-flexi-truncate">
+                                    <div class="slds-media slds-no-space slds-grow">
+                                        <div class="label">
+                                            {labels.LBL_FileDirectorySectionDescription}
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <lightning-button label='{labels.LBL_FileDirectoryAddSection}'
+                                    class="slds-m-around_xx-small slds-button button-mt" onclick={handleAddSection}
+                                    icon-name="utility:add" icon-position="left">
+                                </lightning-button>
+                            </div>
+                            <div class="negoptim-tablesection">
+                                <table>
+                                    <tr class="table-header">
+                                        <th class="table-th td-5"></th>
+                                        <th class="table-th">{labels.LBL_FileDirectorySection_TableTitle}
+                                        </th>
+                                        <th class="table-th">
+                                            {labels.LBL_FileDirectorySection_TableSubTitle}
+                                        </th>
+                                        <th class="table-th">
+                                            {labels.LBL_FileDirectorySection_TableSectionIcon}
+                                        </th>
+                                        <th class="table-th">
+                                            {labels.LBL_FileDirectorySection_TableDisplayOrder}</th>
+                                        <th class="table-th th-w12">
+                                            {labels.LBL_FileDirectorySection_SectionColor}</th>
+                                        <th class="table-th th-w10">
+                                            {labels.LBL_FileDirectorySection_DisplayRelatedThemes}</th>
+                                    </tr>
+                                    <tbody>
+                                        <template for:each={settingsList} for:item="setting" for:index="index">
+                                            <tr key={setting.id} style="text-align: center;">
+                                                <td class="table-td">
+                                                    <div class="slds-icon_container custom-icon-delete edit-icon">
+                                                        <lightning-icon icon-name='utility:delete' size="x-small"
+                                                            data-id="largeThemeImage" data-index={index}
+                                                            data-cell="section" onclick={deleteItem}
+                                                            class="delete-trans">
+                                                        </lightning-icon>
+                                                    </div>
+                                                </td>
+                                                <td class="table-td td-w30 ">
+                                                    <lightning-input value={setting.sectionTitle} data-index={index}
+                                                        data-cell="theme" data-id="sectionTitle"
+                                                        onchange={handleDocumentCenterSetionInput}
+                                                        variant="label-hidden">
+                                                    </lightning-input>
+                                                </td>
+                                                <td class="table-td">
+                                                    <textarea max-length="1000" name="inputName" class="text-area"
+                                                        placeholder={labels.LBL_FileDirectorySection_TypeHere}
+                                                        data-index={index} data-cell="theme" data-id="sectionSubTitle"
+                                                        onchange={handleDocumentCenterSetionInput}>{setting.sectionSubTitle}</textarea>
+                                                </td>
+                                                <td class="table-td td-w100 slds-align_absolute-center">
+                                                    <div class="td-char">
+                                                        <div style={setting.sectionIconStyle}></div>
+                                                        <div>
+                                                            <lightning-button-icon icon-name="utility:replace"
+                                                                size="small" data-index={index} data-cell="image"
+                                                                onclick={handleFieldsEdit}>
+                                                            </lightning-button-icon>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="table-td td-5">
+                                                    <lightning-input onfocus={handleFocusInput}
+                                                        value={setting.displayOrder} data-index={index}
+                                                        data-cell="theme" data-id="displayOrder" variant="label-hidden"
+                                                        type="number" onblur={displayOrderSubmit}>
+                                                    </lightning-input>
+                                                </td>
+                                                <td class="table-td td-15">
+                                                    <lightning-input class="input-p" type="color" name="input-color"
+                                                        value={setting.sectionColor} data-index={index}
+                                                        onchange={handlesectionColorChange}>
+                                                    </lightning-input>
+                                                </td>
+                                                <td class="section-check-box table-td">
+                                                    <div if:false={setting.isNew}>
+                                                        <lightning-button-icon icon-name="utility:summarydetail"
+                                                            size="small" data-index={index} data-cell="image"
+                                                            onclick={handleThemesSelection}>
+                                                        </lightning-button-icon>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                                    <div class="sectionTitle">
+                                        <!-- {labels.LBL_FileDirectoryThemesTitle} {currentThemeLabel} -->
+                                         Themes of Trade Collabs
+                                    </div>
+                                </div>
+
+                                <div class="slds-grid slds-p-bottom_xx-small">
+                                    <div class="slds-col slds-has-flexi-truncate">
+                                        <div class="slds-media slds-no-space slds-grow">
+                                            <div class="label">
+                                                {labels.LBL_FileDirectoryThemesDescription}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <lightning-button lwc:if={themeButtonVisibility} label={labels.LBL_AddTheme}
+                                        class="slds-m-around_xx-small slds-button button-mt" onclick={handleAddTheme}
+                                        icon-name="utility:add" icon-position="left">
+                                    </lightning-button>
+                                </div>
+                                <div class="negoptim-tablesection">
+                                    <table>
+                                        <thead class="table-header">
+                                            <th class="table-th td-5"></th>
+                                            <th class="table-th th-w25">
+                                                {labels.LBL_FileDirectoryTheme}
+                                            </th>
+                                            <th class="table-th th-w10">
+                                                {labels.LBL_FileDirectoryRelatedGridName}</th>
+                                            <th class="table-th th-w10">
+                                                {labels.LBL_FileDirectorySimplifiedIcon}</th>
+                                            <th class="table-th th-w10">
+                                                {labels.LBL_FileDirectoryDispalyInternalDocumentsCenter}</th>
+                                            <th class="table-th th-w10">
+                                                {labels.LBL_FileDirectoryDispalyConnectDocumentsCenter}</th>
+                                            <th class="table-th th-w10">
+                                                {labels.LBL_FileDirectoryMenuImage}</th>
+                                        </thead>
+                                        <tbody>
+                                            <template for:each={currentThemes.themesSettings} for:item="themeItem"
+                                                for:index="themesIndex">
+                                                <tr key={themeItem.index}>
+                                                    <td class="table-td">
+                                                        <div class="slds-icon_container custom-icon-delete edit-icon">
+                                                            <lightning-icon icon-name='utility:delete' size="x-small"
+                                                                data-id="largeThemeImage" data-index={themesIndex}
+                                                                data-cell="theme" onclick={deleteItem}
+                                                                class="delete-trans">
+                                                            </lightning-icon>
+                                                        </div>
+                                                    </td>
+                                                    <td class="table-td">
+                                                        <lightning-input value={themeItem.theme}
+                                                            data-index={themeItem.index} data-cell={themesIndex}
+                                                            data-id="theme" onchange={handleThemesInput}
+                                                            variant="label-hidden">
+                                                        </lightning-input>
+                                                    </td>
+                                                    <td class="table-td">
+                                                        <lightning-combobox variant="label-hidden"
+                                                            data-cell={themesIndex} data-id="gridSettingsName"
+                                                            value={themeItem.gridSettingsName} name="defaultUser"
+                                                            label=" " placeholder='theme' options={themeOptions}
+                                                            data-index={themeItem.index} onchange={handleThemesInput}>
+                                                        </lightning-combobox>
+                                                    </td>
+                                                    <td class="table-td slds-align_absolute-center">
+                                                        <div class="td-char">
+                                                            <div style={themeItem.smallThemeImageStyle}></div>
+                                                            <div>
+                                                                <lightning-button-icon icon-name="utility:replace"
+                                                                    size="small" data-id="smallThemeImage"
+                                                                    data-index={themeItem.index} data-cell={themesIndex}
+                                                                    onclick={handleThemeIconChange}>
+                                                                </lightning-button-icon>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="table-td">
+                                                        <label class="switch">
+                                                            <input type="checkbox" checked={themeItem.isDisplayed}
+                                                                data-index={themeItem.index} data-cell={themesIndex}
+                                                                data-id="isDisplayed" onclick={displayCheck} />
+                                                            <span class="slider">
+                                                            </span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="table-td">
+                                                        <label class="switch">
+                                                            <input type="checkbox" checked={themeItem.isPortalDisplayed}
+                                                                data-index={themeItem.index} data-cell={themesIndex}
+                                                                data-id="isPortalDisplayed" onclick={displayCheck} />
+                                                            <span class="slider">
+                                                            </span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="table-td slds-align_absolute-center">
+                                                        <div class="td-char">
+                                                            <div style={themeItem.largeThemeImageStyle}></div>
+                                                            <div>
+                                                                <lightning-button-icon icon-name="utility:replace"
+                                                                    size="small" data-id="largeThemeImage"
+                                                                    data-index={themeItem.index} data-cell={themesIndex}
+                                                                    onclick={handleThemeIconChange}>
+                                                                </lightning-button-icon>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                            <template for:each={newThemes} for:item="themeItem" for:index="index"
+                                                lwc:if={themeButtonVisibility}>
+                                                <tr key={themeItem}>
+                                                    <td class="table-td">
+                                                        <div class="slds-icon_container custom-icon-delete edit-icon">
+                                                            <lightning-icon icon-name='utility:delete' size="x-small"
+                                                                data-id="largeThemeImage" data-index={index}
+                                                                data-table="new" data-cell="theme" onclick={deleteItem}
+                                                                class="delete-trans">
+                                                            </lightning-icon>
+                                                        </div>
+                                                    </td>
+                                                    <td class="table-td">
+                                                        <lightning-input value={themeItem.theme} data-table="new"
+                                                            data-index={index} data-id="theme"
+                                                            onchange={handleThemesInput} variant="label-hidden">
+                                                        </lightning-input>
+                                                    </td>
+                                                    <td class="table-td">
+                                                        <lightning-combobox variant="label-hidden" data-table="new"
+                                                            data-index={index} data-id="gridSettingsName"
+                                                            value={themeItem.gridSettingsName} name="defaultUser"
+                                                            label=" " placeholder='theme' options={themeOptions}
+                                                            onchange={handleThemesInput}>
+                                                        </lightning-combobox>
+                                                    </td>
+                                                    <td class="table-td td-w7 slds-align_absolute-center">
+                                                        <div class="td-char">
+                                                            <div style={themeItem.smallThemeImageStyle}></div>
+                                                            <div>
+                                                                <lightning-button-icon data-id="smallThemeImage"
+                                                                    icon-name="utility:replace" size="small"
+                                                                    data-table="new" data-index={index}
+                                                                    data-cell="image" onclick={handleThemeIconChange}>
+                                                                </lightning-button-icon>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="table-td td-5">
+                                                        <label class="switch">
+                                                            <input type="checkbox" checked={themeItem.isDisplayed}
+                                                                data-table="new" data-index={index}
+                                                                data-id="isDisplayed" onclick={displayCheck} />
+                                                            <span class="slider">
+                                                            </span>
+
+                                                        </label>
+                                                    </td>
+                                                    <td class="table-td td-5">
+                                                        <label class="switch">
+                                                            <input type="checkbox" checked={themeItem.isPortalDisplayed}
+                                                                data-table="new" data-index={index}
+                                                                data-id="isPortalDisplayed" onclick={displayCheck} />
+                                                            <span class="slider">
+                                                            </span>
+
+                                                        </label>
+                                                    </td>
+                                                    <td class="table-td td-w7 slds-align_absolute-center">
+                                                        <div class="td-char">
+                                                            <div style={themeItem.largeThemeImageStyle}></div>
+                                                            <div>
+                                                                <lightning-button-icon data-id="largeThemeImage"
+                                                                    icon-name="utility:replace" size="small"
+                                                                    data-table="new" data-index={index}
+                                                                    data-cell="image" onclick={handleThemeIconChange}>
+                                                                </lightning-button-icon>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-tab>
+            </lightning-tabset>
+        </div>
+    </template>
+</template>

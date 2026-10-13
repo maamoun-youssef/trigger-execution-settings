@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NegoScopeSlab__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <label>Slab NegoScope</label>
+    <referenceTo>NegoScope__c</referenceTo>
+    <relationshipLabel>AGLS (Slab Nego Scope)</relationshipLabel>
+    <relationshipName>AGLSNegoScopeSlab</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

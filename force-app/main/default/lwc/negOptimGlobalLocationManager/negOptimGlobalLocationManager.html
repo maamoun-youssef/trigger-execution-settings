@@ -1,0 +1,118 @@
+<template>
+    <div class="mainContainer">
+        <template if:true={isLoading}>
+            <div class="slds-spinner_container greyBg">
+                <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+            </div>
+        </template>
+        <template if:false={isLoading}>
+            <div class=" slds-card slds-color__background_gray-3 bodyDiv" style="height:100%;">
+                <div class="slds-grid   pageHeader slds-p-horizontal--none slds-p-vertical--small slds-page-header ">
+                    <div class="slds-col slds-has-flexi-truncate">
+                        <!-- HEADING AREA -->
+                        <div class="slds-media slds-no-space slds-grow">
+                            <div class="slds-media__body slds-p-around_x-small slds-grid ">
+                                <div class="slds-border--right">
+                                    <h2
+                                        class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                        {labels.LBL_Title_Global_Location}
+                                    </h2>
+                                </div>
+                                <div class="slds-m-horizontal--small badgeDiv">
+                                    <span class="slds-badge badgeDiv active-btn" onclick={toggleActive}>
+                                        {labels.LBL_Active_GL}
+                                    </span>
+                                </div>
+                                <div class="badgeDiv"><span class="slds-badge badgeDiv inactive-btn"
+                                        onclick={toggleInactive}>
+                                        {labels.LBL_Inactive}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <lightning-button if:false={readOnly} class="slds-button  slds-m-around_xx-small slds-m-right--none"
+                        label={labels.LBL_Add_GL} variant="brand" onclick={createNewRecord}
+                        style=" margin-right: 1.7%;"></lightning-button>
+                </div>
+                <div class="tile-container slds-scrollable">
+                    <template for:each={globalLocations} for:item="sticker" for:index="index">
+                        <c-global-location-sticker lwc:if={readOnly} key={sticker.Id} sticker={sticker}
+                            edit-mode="false" select-mode="false" is-checked="false" index={index}
+                            oncheckgl={handleCheckGl} oneditgl={handleEditSticker} onswitchstatus={switchStickerStatus}>
+                        </c-global-location-sticker>
+                        <c-global-location-sticker lwc:else key={sticker.Id} sticker={sticker} edit-mode="true"
+                            select-mode={selectMode} is-checked="false" index={index} oncheckgl={handleCheckGl}
+                            oneditgl={handleEditSticker} onswitchstatus={switchStickerStatus}>
+                        </c-global-location-sticker>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </div>
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                            size="small">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 class="slds-modal__title slds-hyphenate">{modalTitle}</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-messages></lightning-messages>
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <template for:each={modalFields} for:item="field">
+                            <div key={field.fieldApiName} class="slds-col slds-size_1-of-2">
+                                <template if:true={field.isString}>
+                                    <lightning-input label={field.label} value={field.value}
+                                        data-field={field.fieldApiName} required={field.required}
+                                        disabled={field.disabled} onchange={handleFieldChange}>
+                                    </lightning-input>
+                                </template>
+                                <template if:true={field.isPicklist}>
+                                    <lightning-combobox label={field.label} value={field.value} options={field.options}
+                                        data-field={field.fieldApiName} required={field.required}
+                                        disabled={field.disabled} onchange={handleFieldChange}>
+                                    </lightning-combobox>
+                                </template>
+                                <template if:true={field.isMultiPicklist}>
+                                    <lightning-dual-listbox label={field.label} source-label="Available"
+                                        selected-label="Selected" options={field.options} value={field.value}
+                                        data-field={field.fieldApiName} required={field.required}
+                                        disabled={field.disabled} onchange={handleFieldChange}>
+                                    </lightning-dual-listbox>
+                                </template>
+                                <template if:true={field.isDate}>
+                                    <lightning-input type="date" label={field.label} value={field.value}
+                                        data-field={field.fieldApiName} required={field.required}
+                                        disabled={field.disabled} onchange={handleFieldChange}>
+                                    </lightning-input>
+                                </template>
+                                <template if:true={field.isLookup}>
+                                    <lightning-record-picker label={field.label} value={field.value}
+                                        object-api-name={field.objectApiName} data-field={field.fieldApiName}
+                                        required={field.required} disabled={field.disabled} onchange={handleFieldChange}
+                                        onblur={handleFieldChange}>
+                                    </lightning-record-picker>
+                                </template>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer slds-grid slds-grid_align-center">
+                    <lightning-button variant="neutral" label="Cancel" title="Cancel" onclick={closeModal}>
+                    </lightning-button>
+                    <lightning-button variant="brand" label="Save" title="Save" class="slds-m-left_small"
+                        onclick={handleModalSubmit}>
+                    </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

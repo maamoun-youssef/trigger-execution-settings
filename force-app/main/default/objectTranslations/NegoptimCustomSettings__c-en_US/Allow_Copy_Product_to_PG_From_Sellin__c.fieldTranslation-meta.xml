@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Allow Copy Product to PG From Sellin --></label>
+    <name>Allow_Copy_Product_to_PG_From_Sellin__c</name>
+</CustomFieldTranslation>

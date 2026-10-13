@@ -1,0 +1,11 @@
+.input-right *{
+    text-align: right;
+}
+
+.input-center *{
+    text-align: center;
+}
+
+.imgRichText img {
+    margin-bottom: 0 !important;
+}

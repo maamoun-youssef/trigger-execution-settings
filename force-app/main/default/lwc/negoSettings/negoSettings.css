@@ -1,0 +1,601 @@
+.targetContractTypesContainer {
+    display: grid;
+    grid-template-columns: 3fr 3fr 1fr;
+}
+.errorDuplication {
+    transition: all 1000ms linear;
+    background-color: #f38686ec;
+}
+
+.slds-vertical-tabs__content {
+    padding: 0 !important;
+}
+
+table tbody td,
+table thead th {
+    text-align: center;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.mainHeight{
+    height: 100%;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.save-button-container {
+    top: 10px;
+    z-index: 4;
+    margin-top: 190px;
+    position: fixed;
+    margin-right: 20px;
+}
+
+.comboBoxContainer {
+    display: flex;
+    column-gap: 20px;
+}
+.comboBoxLabel {
+    font-weight: 600;
+}
+.infoIcon {
+    translate: 5px -10px;
+}
+
+.info-container-w {
+    width: 75%;
+}
+
+.infoIconWrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.lightningIcon {
+    cursor: pointer;
+    translate: 5px -10px;
+}
+
+.infoPopover {
+    position: absolute;
+    /* top: 100%;
+    left: 0; */
+    translate: 20px -20px;
+    z-index: 10;
+}
+
+:host {
+    --beij: #F2F6DFff;
+    --midnight-green: #08484Aff;
+    --verdigris: #14B2BBff;
+    --amethyst: #816BC0ff;
+    --russian-violet: #3C094Bff;
+    --space-cadet: #322B4Cff;
+    --honeydew: #E8F4E8ff;
+    --dark-violet: #9719BBff;
+    --pistachio: #8BC58Aff;
+    --mint-green: #DDF4EEff;
+    --text-body: #5C5C5C;
+    --light-gray: #B1B1B1;
+}
+
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+.showRecordTypeConfigContainer {
+    display: grid;
+    justify-items: right;
+}
+
+.contactConfigAddButtonContainer {
+    display: grid;
+    justify-items: right;
+}
+
+.newRow {
+    background-color: #FFFFC5;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.errorDuplicationTarget {
+    transition: all 1000ms linear;
+    background-color: #f8af30;
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+.negoptim-icon {
+    --slds-c-icon-color-foreground: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255)) !important;
+    --slds-c-icon-color-foreground-default: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255)) !important;
+}
+
+table thead th {
+    height: 35px;
+}
+
+.slds-page-header {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.slds-vertical-tabs__content {
+    padding: 0 !important;
+}
+
+table tbody td,
+table thead th {
+    text-align: center;
+}
+.sellInconfiguration-col {
+    padding: 10px;
+}
+a {
+    text-decoration: none !important;
+}
+
+.mainPanelHeight {
+    height: 100%;
+}
+
+.contractDefaultContainer {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.stickyHeader {
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    background-color: var(--verdigris);
+    padding-left: 20px;
+    height: 60px;
+}
+
+.sectionTitle {
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+    translate: 0px 7px;
+}
+
+/* .table-w {
+    width: 65%;
+} */
+
+
+.label {
+    font-weight: 600;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    font-size: 16px;
+    color: var(--text-body);
+    padding-top: 25px;
+}
+
+.slds-button:hover {
+    slds-c-button-color-background: none !important;
+    background: none;
+}
+
+.settings-header {
+    background-color: var(--space-cadet);
+    padding: var(--lwc-spacingXSmall);
+    gap: var(--lwc-spacingXSmall);
+    display: flex;
+    align-items: flex-start;
+}
+
+.custom-icon-settings {
+    --slds-c-icon-color-foreground-default: white;
+    --slds-c-icon-color-background: var(--space-cadet);
+    vertical-align: middle;
+    align-self: center;
+    margin-left: var(--lwc-spacingXSmall);
+}
+
+.settings-header-title {
+    color: white;
+}
+
+.settings-subtitle {
+    font-size: medium;
+    color: white;
+}
+
+.negoptim-tablesection {
+    background-color: white;
+    padding: 20PX 0PX 20PX 0PX;
+}
+
+
+.icon-header {
+    translate: 0px 8px;
+}
+
+.custom-icon-settings {
+    --slds-c-icon-color-foreground-default: white;
+    --slds-c-icon-color-background: var(--space-cadet);
+}
+
+.table-th {
+    width: 130px;
+    text-align: center;
+    background-color: var(--mint-green);
+    color: var(--text-body);
+    font-size: 1rem;
+}
+
+.table-th-third {
+    text-align: center;
+    background-color: var(--mint-green);
+    color: var(--text-body);
+    font-size: 1rem;
+}
+
+.table-header {
+    height: 56px;
+    background-color: var(--mint-green);
+}
+
+.add-m {
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.th-w {
+    width: 50%;
+}
+
+.th-wid {
+    width: 1%;
+}
+
+.scroll {
+    overflow-y: scroll;
+}
+
+.add-padding {
+    padding-bottom: 20px;
+}
+
+.th-w-container {
+    width: 60%;
+}
+
+.td-disp {
+    display: grid;
+    place-content: center;
+}
+
+.delete-trans {
+    translate: 0px 6px;
+}
+
+.edit-icon {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.trans-del {
+    translate: 10px 25px;
+}
+
+.custom-icon-delete {
+    --slds-c-icon-color-foreground-default: white;
+    --slds-c-icon-color-background: var(--dark-violet);
+}
+
+.custom-icon-add {
+    --slds-c-icon-color-foreground-default: white;
+    --slds-c-icon-color-background: var(--verdigris);
+}
+
+.add-trans {
+    translate: 0px 6px;
+}
+
+.label-link {
+    padding-left: 10px;
+}
+
+.grid-settings-link:hover {
+    color: #ff5733;
+    text-decoration: underline;
+}
+
+.section-m {
+    margin-left: 10px;
+}
+
+.add-breaks {
+    height: 30px;
+}
+
+.section-container {
+    display: flex;
+    column-gap: 40px;
+
+}
+
+.section-label {
+    font-weight: 600;
+    width: 30%;
+    padding-left: 20px;
+    font-size: 16px;
+    color: var(--text-body);
+}
+
+.table-section-label {
+    font-weight: 600;
+    width: 50%;
+    padding-left: 20px;
+    font-size: 16px;
+    color: var(--text-body);
+}
+
+.custom-tooltip {
+    cursor: help;
+    white-space: pre-line; /* Allows line breaks to render */
+}
+
+.label-helptext {
+    font-weight: 600;
+    width: 30%;
+    padding-left: 10px;
+    font-size: 14px;
+    color: var(--text-body);
+}
+
+.input-w {
+    width: 300px;
+}
+
+.add-space {
+    padding-top: 10px;
+}
+
+.custom-icon-delete {
+    --slds-c-icon-color-foreground-default: white;
+    --slds-c-icon-color-background: var(--dark-violet);
+}
+
+.display-divs {
+    display: inline-block;
+}
+.disp {
+    display: inline-block;
+}
+
+.section-label-help {
+    font-weight: 600;
+    width: 30%;
+    padding-left: 10px;
+    font-size: 16px;
+    color: var(--text-body);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 55px;
+    height: 20px;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: .4s;
+    border-radius: 34px;
+    border: 1px solid #D14141;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 4px;
+    bottom: 4px;
+    top: 3.5px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+    border: 1px solid #1bb5b5;
+}
+
+input:checked+.slider {
+    background-color: #cfedeb;
+    /* Green color when checked */
+    border: 1px solid #1bb5b5;
+    /* Green border when checked */
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #FCE2CC;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(35px);
+    -ms-transform: translateX(35px);
+    transform: translateX(35px);
+}
+
+input:not(:checked)+.slider {
+    background-color: #FFDDDD;
+    /* Red color when not checked */
+    border: 1px solid #D14141;
+    /* Red border when not checked */
+}
+
+input:not(:checked)+.slider:before {
+    border: 1px solid #D14141;
+}
+.save-btn {
+    position: absolute;
+    top: 87px;
+    right: 40px;
+    z-index: 10;
+}
+
+.label-toggle {
+    font-size: 16px;
+    color: var(--text-body);
+    padding-left: 20px;
+    font-weight: 600;
+}
+
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+@media screen and (max-width: 980px) {
+    .sectionTitle {
+        font-size: 18px;
+        translate: 0px 12px;
+    }
+
+    .section-label {
+        font-size: 14px;
+        width: 40%;
+    }
+
+    .section-label-help {
+        font-size: 14px;
+    }
+
+    .table-th {
+        font-size: 16px;
+    }
+
+    .table-th-third {
+        font-size: 16px;
+    }
+
+    .settings-header-title {
+        font-size: 20px;
+    }
+
+    .icon-header {
+        translate: 0px 6px;
+    }
+
+    .add-breaks {
+        height: 20px;
+    }
+
+    .table-w {
+        width: 100%;
+    }
+
+    .save-button-container {
+        margin-top: 230px;
+    }
+}
+
+.section-label-year {
+    font-weight: 600;
+    padding-left: 20px;
+    font-size: 16px;
+    color: var(--text-body);
+}
+
+.w18 {
+    width: 18%;
+}
+
+.date-display {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.icon-container {
+    cursor: pointer;
+}
+
+.hidden-date-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    top: 30px;
+}
+
+.custom-date-picker-container {
+    position: relative;
+    display: inline-block;
+}
+
+.add-new-line-btn {
+    margin-right: 20px;
+}
+
+.search-wrapper {
+    position: relative;
+    width: 280px;
+    margin-left: auto;
+    align-self: center;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    padding: 4px 6px;
+}
+
+.searchSectionMenu {
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.search-highlighted {
+    background-color: rgb(250, 255, 189) !important;
+    color: var(--text-body) !important;
+    transition: background-color 0.3s ease;
+}

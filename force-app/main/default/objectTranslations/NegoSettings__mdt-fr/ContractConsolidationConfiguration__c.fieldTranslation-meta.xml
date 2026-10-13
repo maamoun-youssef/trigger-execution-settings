@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Negoptim permet de consolider les prolongations de période et les contrats signés dans des versions annuelles. Ces versions peuvent être utilisées pour la facturation et servir de base aux négociations de l&apos;année suivante.&lt;br/&gt;Il existe trois types de contrats consolidés. Vous pouvez choisir de les activer séparément et de définir une date de génération pour chacun.</help>
+    <label>Contract Consolidation Configuration</label>
+    <name>ContractConsolidationConfiguration__c</name>
+</CustomFieldTranslation>

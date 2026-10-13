@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Page Settings Plugin Theme List",
+  "contentBody" : {
+    "activeViewId" : "Page_Settings_Plugin_Theme_List",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-page-settings-plugin-theme-list",
+    "urlPrefix" : "page-settings-plugin-theme-list"
+  },
+  "urlName" : "page-settings-plugin-theme-list"
+}

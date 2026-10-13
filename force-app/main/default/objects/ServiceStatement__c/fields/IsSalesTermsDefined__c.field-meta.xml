@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsSalesTermsDefined__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates that the supplier has completed the “Sales Terms Definition” step in the Sales Terms process. At this stage, the supplier has provided key information such as whether it is a first submission, if the Sales Terms have changed, if the price list has been updated, and the main changes involved.</description>
+    <label>Is Sales Terms Defined</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

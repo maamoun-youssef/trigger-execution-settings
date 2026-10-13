@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <description>Modèle d&apos;e-mail pour confirmer la planification d&apos;un rendez-vous de service payé.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Planificateur de paiement : e-mail de confirmation du rendez-vous de service</name>
+    <style>none</style>
+    <subject>Rendez-vous planifié</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

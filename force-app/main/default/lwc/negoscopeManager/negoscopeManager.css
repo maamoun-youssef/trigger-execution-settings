@@ -1,0 +1,198 @@
+.mainContainer {
+  height: 100%;
+}
+
+.white-background {
+  background: white !important;
+}
+
+.add-relationship {
+  transition: transform 0.4s;
+  --sds-c-icon-color-background: #31a83199;
+  padding: 5px !important;
+}
+mainContainer
+.remove-relationship {
+  transition: transform 0.4s;
+  --sds-c-icon-color-background: #a83131bf;
+  padding: 5px !important;
+}
+
+.light-green-icon {
+  --slds-c-icon-color-foreground: #b8de24 !important;
+  --slds-c-icon-color-foreground-default: #b8de24 !important;
+}
+
+.green-icon {
+  --slds-c-icon-color-foreground: #21a0d9 !important;
+  --slds-c-icon-color-foreground-default: #21a0d9 !important;
+}
+
+.red-icon {
+  --slds-c-icon-color-foreground: #ff0000 !important;
+  --slds-c-icon-color-foreground-default: #ff0000 !important;
+}
+
+.main-icon {
+  --slds-c-icon-color-foreground: #25c29e !important;
+  --slds-c-icon-color-foreground-default: #25c29e !important;
+}
+
+.blue-icon {
+  --slds-c-icon-color-foreground: #00b5bd !important;
+  --slds-c-icon-color-foreground-default: #00b5bd !important;
+}
+
+.orange-icon {
+  --slds-c-icon-color-foreground: #ffae00 !important;
+  --slds-c-icon-color-foreground-default: #ffae00 !important;
+}
+
+.category-box {
+  border-style: solid;
+  margin: 1px;
+}
+
+.icluded-category {
+  border-color: #31a831;
+  background-color: #e1ffe1;
+}
+
+.centerAlignment {
+  text-align: center;
+}
+
+.excluded-category {
+  border-color: #a83131;
+  background-color: #ffe1e1;
+}
+
+.he-sections {
+  /* min-height:200px;
+max-height:200px;
+height: 200px; */
+}
+
+.he-sections {
+  /* min-height:180px;
+max-height:180px;
+height: 180px; */
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  position: relative;
+  width: 95% !important;
+  height: 95% !important;
+  background-color: #b0d56c;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+}
+
+.modal-footer {
+  position: absolute;
+  bottom: 2%;
+  width: 95%;
+}
+
+.filter-btn {
+  --outline: 1px solid #ffffff;
+  border: 2px solid var(--clr);
+  background: var(--clr);
+  color: #fffdfd;
+  outline: var(--outline);
+  margin: 1.5px;
+  padding: 1px;
+}
+
+.THIS .choiceIncludeIconStyle {
+  fill: #62b7ed;
+}
+
+.sticky-header {
+  position: sticky;
+  /* Make the table header sticky */
+  top: 0;
+  /* Stick the header to the top of the container element */
+  z-index: 3;
+}
+
+select {
+  display: block;
+  position: relative;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  border-radius: 4px;
+  z-index: 2;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.checkboxTh {
+  width: 20px;
+  position: sticky;
+  left: 0px;
+  z-index: 5;
+}
+
+.filterDropdownStyle {
+  position: absolute;
+  left: 0px;
+  z-index: 5;
+  margin-left: 40%;
+}
+.orange-icon {
+  --sds-c-icon-color-foreground-default: orange;
+}
+.firstTdProduct {
+  width: 50px;
+  max-width: 50px;
+  min-width: 50px;
+}
+.hover-popup {
+  position: absolute;
+  z-index: 999;
+  top: -50px;
+  right: 10px;
+}
+.popup-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 0.5rem solid transparent;
+  border-top: 0.5rem solid #d8dde6;
+  bottom: -0.5rem;
+  right: 5rem;
+}
+.sectionTitle {
+    font-weight: 600;
+    font-size: large;
+}
+/* Replace .slds-form-element__icon with the actual class or selector of the help text icon */
+
+.slds-form-element__icon {
+
+  display: none;
+  
+  }
+
+  th,td {
+    white-space: pre-wrap;
+  }

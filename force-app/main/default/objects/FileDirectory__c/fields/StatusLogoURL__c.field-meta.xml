@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StatusLogoURL__c</fullName>
+    <externalId>false</externalId>
+    <formula>StaticResourceBaseURL__c + CASE(TEXT(Status__c),
+&quot;Sent&quot;,&quot;Sent_Icon&quot;,
+&quot;Validated&quot;,&quot;Validated_Icon?&quot;,
+&quot;Signed&quot;,&quot;Signed_Icon?&quot;,
+&quot;Cancelled&quot;,&quot;Cancelled_Icon?&quot;,
+&quot;Receipt Confirmed&quot;,&quot;ReceiptConfirmed_Icon?&quot;,
+&quot;Requested&quot;,&quot;Requested_Icon?&quot;,
+&quot;Rejected&quot;,&quot;Rejected_Icon?&quot;,
+null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Status Logo URL</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

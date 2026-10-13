@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LongName__c</fullName>
+    <externalId>false</externalId>
+    <formula>NegoScope__r.Name
++ &quot; - &quot;
++ TEXT(ReferenceYear__c)
++ &quot; - &quot; +
+TEXT(PeriodType__c)
++ &apos; - &apos; +
+CASE(
+TEXT( PeriodType__c ),
+&quot;Month&quot;,
+CASE(
+TEXT( PeriodNumber__c ),
+&quot;1&quot;, $Label.LBL_January,
+&quot;2&quot;, $Label.LBL_February,
+&quot;3&quot;, $Label.LBL_March,
+&quot;4&quot;, $Label.LBL_April,
+&quot;5&quot;, $Label.LBL_May,
+&quot;6&quot;, $Label.LBL_June,
+&quot;7&quot;, $Label.LBL_July,
+&quot;8&quot;, $Label.LBL_August,
+&quot;9&quot;, $Label.LBL_September,
+&quot;10&quot;, $Label.LBL_October,
+&quot;11&quot;, $Label.LBL_November,
+&quot;12&quot;, $Label.LBL_December,
+TEXT( PeriodNumber__c)
+),
+&quot;Trimester&quot;, $Label.LBL_Trimester + &quot; &quot; + TEXT( PeriodNumber__c ),
+&quot;Semester&quot;, $Label.LBL_Semester + &quot; &quot; + TEXT( PeriodNumber__c ),
+&quot;Annual&quot;, TEXT( PeriodNumber__c ),
+TEXT( PeriodNumber__c )
+)
++ &quot; - (&quot; + TEXT( Version__c ) + &quot;)&quot;</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Sell In Statement Name</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

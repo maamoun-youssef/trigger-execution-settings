@@ -1,0 +1,502 @@
+/*---------------------------------------
+  1. :host - CSS Variables
+----------------------------------------*/
+:host {
+    /* Primary color for buttons, highlights */
+    --primary: #0070d2;
+    /* Darker shade of primary */
+    --primary-dark: #005fb2;
+    /* Accent color for highlights or secondary elements */
+    --accent: #00c6ff;
+    /* Light background color */
+    --bg-light: #f4f6f9;
+    /* Toolbar background */
+    --bg-toolbar: #fafafa;
+    /* Editor background */
+    --bg-editor: #ffffff;
+    /* Main text color */
+    --text-body: #032d60;
+    /* Soft shadow for containers */
+    --shadow-soft: 0 6px 18px rgba(0,0,0,0.08);
+    /* Hover shadow for interactive elements */
+    --shadow-hover: 0 12px 28px rgba(0,0,0,0.15);
+    /* Border radius for rounded corners */
+    --radius: 10px;
+    /* Smooth transition for hover/focus effects */
+    --transition: all 0.2s ease-in-out;
+}
+
+/*---------------------------------------
+  2. Editor Container
+----------------------------------------*/
+.editor-container {
+    border: 1px solid #d0d0d0; /* Light border */
+    border-radius: var(--radius); /* Rounded corners */
+    box-shadow: var(--shadow-soft); /* Soft drop shadow */
+    background: var(--bg-editor); /* White background for editor area */
+    overflow: hidden; /* Prevent content overflow */
+}
+
+/*---------------------------------------
+  3. Toolbar and Groups
+----------------------------------------*/
+.toolbar {
+    display: flex; /* Horizontal layout */
+    flex-wrap: wrap; /* Wrap buttons on small screens */
+    align-items: center; /* Vertically align items */
+    background: var(--bg-toolbar); /* Toolbar background */
+    padding: 6px; /* Inner spacing */
+    border-bottom: 1px solid #ccc; /* Bottom border for separation */
+}
+
+.group {
+    display: flex; /* Group buttons horizontally */
+    align-items: center; /* Vertically align within group */
+    gap: 4px; /* Space between buttons */
+    margin-right: 10px; /* Space between groups */
+    padding-right: 10px; /* Inner spacing on the right */
+    border-right: 1px solid #ccc; /* Visual separation of groups */
+}
+
+/* Remove right border on last group */
+.toolbar .group:last-child {
+    border-right: none;
+}
+
+/*---------------------------------------
+  4. Buttons
+----------------------------------------*/
+button {
+    background: transparent; /* Transparent background */
+    border: none; /* No border by default */
+    border-radius: 4px; /* Rounded corners */
+    height: 32px; /* Fixed height for all buttons */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    cursor: pointer; /* Pointer on hover */
+    font-size: 16px;
+    color: var(--text-body); /* Default text color */
+    transition: var(--transition); /* Smooth hover effects */
+}
+
+/* Hover effects */
+button:hover {
+    background: rgba(0, 112, 210, 0.08); /* Slight blue background */
+    color: var(--primary); /* Text color changes */
+    transform: scale(1.05); /* Slight enlargement */
+}
+
+/* Click effect */
+button:active {
+    transform: scale(0.92); /* Shrink on click */
+}
+
+/* Active state for toolbar buttons */
+button.active-btn {
+    background: rgba(0, 112, 210, 0.15); /* Highlight background */
+    color: var(--primary); /* Highlight text */
+}
+
+/*---------------------------------------
+  5. Toolbar Button Specific Classes
+  (replaces inline styles)
+----------------------------------------*/
+.toolbar-btn-bold { width: 32px; font-weight: bold; }
+.toolbar-btn-italic { width: 32px; }
+.toolbar-btn-underline { width: 32px; }
+
+/*---------------------------------------
+  6. Dropdowns and Color Pickers
+----------------------------------------*/
+select, input[type="color"] {
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 6px; /* Rounded edges */
+    padding: 4px 6px; /* Inner padding */
+    font-size: 14px; /* Font size */
+    cursor: pointer; /* Pointer cursor */
+}
+
+/* Hover effect for inputs */
+select:hover, input[type="color"]:hover {
+    border-color: var(--primary); /* Highlight border */
+}
+
+/*---------------------------------------
+  7. Editable Editor Area
+----------------------------------------*/
+.editor {
+    min-height: 600px; /* Minimum height of editor */
+    padding: 12px; /* Inner padding */
+    border: 1px solid #ccc; /* Border */
+    border-top: none; /* No top border (toolbar already above) */
+    font-family: Arial, sans-serif; /* Default font */
+    font-size: 16px;
+    line-height: 1.5; /* Line spacing */
+    background: var(--bg-editor); /* White background */
+    overflow-y: auto; /* Scrollable vertically */
+}
+
+/* Focus outline when editing */
+.editor:focus-within {
+    outline: 2px solid rgba(0,112,210,0.2); /* Soft blue outline */
+}
+
+/*---------------------------------------
+  8. Headings inside Editor
+----------------------------------------*/
+.editor h1 { font-size: 2.2rem; font-weight: 700; margin: 0.75em 0; }
+.editor h2 { font-size: 1.8rem; font-weight: 700; margin: 0.75em 0; }
+.editor h3 { font-size: 1.5rem; font-weight: 600; margin: 0.75em 0; }
+.editor h4 { font-size: 1.25rem; font-weight: 600; margin: 1em 0; }
+.editor h5 { font-size: 1.05rem; font-weight: 600; margin: 1.25em 0; }
+.editor h6 { font-size: 0.9rem; font-weight: 600; margin: 1.5em 0; }
+
+/*---------------------------------------
+  9. Lists
+----------------------------------------*/
+.editor ul { list-style-type: disc; margin-left: 1.5em; }
+.editor ol { list-style-type: decimal; margin-left: 1.5em; }
+
+/*---------------------------------------
+ 10. Source Modal Backdrop
+----------------------------------------*/
+.source-modal-backdrop { 
+    position: fixed; /* Cover full screen */
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.4); /* Semi-transparent black */
+    z-index: 999; /* Above editor but below modal */
+}
+
+/*---------------------------------------
+ 11. Animations
+----------------------------------------*/
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -45%); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+/*---------------------------------------
+ 12. Lightning Icons in Buttons
+----------------------------------------*/
+button lightning-icon {
+    color: #0070d2; /* Icon color */
+}
+
+/*---------------------------------------
+ 13. Heading Select Options Styling
+----------------------------------------*/
+.heading-select option.opt-paragraph { font-size: 14px; }
+.heading-select option.opt-h1 { font-size: 28px; font-weight: bold; }
+.heading-select option.opt-h2 { font-size: 22px; font-weight: bold; }
+.heading-select option.opt-h3 { font-size: 18px; font-weight: bold; }
+.heading-select option.opt-blockquote { font-style: italic; color: gray; }
+/*---------------------------------------
+ 14. Link Balloon Container
+----------------------------------------*/
+.link-balloon {
+    min-width: 220px; /* Minimum width */
+    max-width: 320px; /* Maximum width */
+    padding: 12px; /* Inner spacing */
+    display: flex; 
+    flex-direction: column;  /* Stack header, inputs, buttons vertically */
+    gap: 8px; /* Space between child elements */
+    background: #fff; /* White background */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 6px; /* Rounded corners */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35); /* Strong shadow */
+    z-index: 1000; /* On top of other elements */
+    font-size: 14px; 
+    position: absolute; /* Position relative to editor */
+}
+
+/*---------------------------------------
+ 15. Link Balloon Header
+----------------------------------------*/
+.link-balloon-header {
+    font-weight: bold; /* Bold text */
+    font-size: 16px; /* Slightly larger font */
+    margin-bottom: 6px; /* Space below header */
+    border-bottom: 1px solid #ddd; /* Underline effect */
+    padding-bottom: 4px; /* Padding inside header */
+}
+
+/*---------------------------------------
+ 16. Inputs inside Link Balloon
+----------------------------------------*/
+.link-balloon input {
+    width: 100%; /* Full width of container */
+    padding: 6px 8px; /* Inner padding */
+    font-size: 14px; 
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded edges */
+    outline: none; /* Remove default focus outline */
+    box-sizing: border-box; /* Include padding in width */
+    transition: box-shadow 0.2s, border-color 0.2s; /* Smooth focus effects */
+}
+
+/* Blue glow when input is focused */
+.link-balloon input:focus {
+    border-color: #0070d2; /* Highlight border */
+    box-shadow: 0 0 6px rgba(0, 112, 210, 0.5); /* Glow effect */
+}
+
+/*---------------------------------------
+ 17. Buttons Container in Link Balloon
+----------------------------------------*/
+.link-buttons {
+    display: flex; /* Horizontal layout */
+    justify-content: flex-end; /* Align to right */
+    gap: 8px; /* Space between buttons */
+}
+
+/* Default button styles inside link balloon */
+.link-buttons button {
+    padding: 6px 10px;
+    font-size: 13px;
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; 
+    cursor: pointer;
+    transition: all 0.2s ease-in-out; /* Smooth hover */
+}
+
+/* Hover effect for buttons */
+.link-buttons button:hover {
+    background: #e0e6ef; 
+    border-color: #0070d2; 
+}
+
+/* Green Insert button specific styles */
+.btn-insert {
+    background-color: #28a745; /* Green background */
+    color: #fff; /* White text */
+    border-color: #28a745; 
+}
+.btn-insert:hover {
+    background-color: #218838; 
+    border-color: #1e7e34; 
+}
+
+/*---------------------------------------
+ 18. Arrow for Link Balloon
+----------------------------------------*/
+.link-balloon::after {
+    content: '';
+    position: absolute;
+    top: -8px; /* Position above balloon */
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 8px 8px; /* Arrow pointing down */
+    border-color: transparent transparent #ccc transparent; /* Only bottom colored */
+}
+
+/* Position arrow based on alignment */
+.link-balloon[data-arrow="left"]::after { left: 12px; }
+.link-balloon[data-arrow="center"]::after { left: 50%; transform: translateX(-50%); }
+.link-balloon[data-arrow="right"]::after { right: 12px; }
+
+/*---------------------------------------
+ 19. Arrow for Toolbar Balloon
+----------------------------------------*/
+.toolbar-balloon::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 8px 8px;
+    border-color: transparent transparent #ccc transparent;
+}
+.toolbar-balloon[data-arrow="left"]::after { left: 12px; }
+.toolbar-balloon[data-arrow="center"]::after { left: 50%; transform: translateX(-50%); }
+.toolbar-balloon[data-arrow="right"]::after { right: 12px; }
+
+/*---------------------------------------
+ 20. Toolbar Balloon Button Groups
+----------------------------------------*/
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 4px; /* Space between buttons in group */
+    padding: 0 4px; /* Inner spacing */
+}
+
+/* Add left border between groups */
+.button-group + .button-group {
+    border-left: 1px solid #ccc;
+}
+
+/*---------------------------------------
+ 21. Toolbar Balloon Container
+----------------------------------------*/
+.toolbar-balloon{
+    position: absolute; /* Positioned relative to editor */
+    background: #fff; 
+    border: 1px solid #ccc;
+    padding: 4px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    z-index: 1000; 
+    display: flex; 
+}
+
+/*---------------------------------------
+ 22. Source Modal
+----------------------------------------*/
+.source-modal {
+    position: fixed; /* Center modal */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center exactly */
+    width: 90%; 
+    max-width: 1000px; 
+    height: 80%;
+    background: #fff;
+    color: #333;
+    border-radius: 10px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    overflow: hidden; /* Hide overflow content */
+}
+
+/*---------------------------------------
+ 23. Source Header
+----------------------------------------*/
+.source-header {
+    padding: 12px 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    background: #f7f7f7;
+    display: flex;
+    justify-content: space-between; /* Space between title and close button */
+    align-items: center;
+}
+
+/* Close button for source modal */
+.close-btn {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #555;
+}
+
+/*---------------------------------------
+ 24. Editor Wrapper (Source Modal)
+----------------------------------------*/
+.editor-wrapper {
+    display: flex; /* Horizontal layout for line numbers + textarea */
+    flex: 1; /* Take remaining space */
+    overflow: hidden;
+    font-family: Consolas, 'Courier New', monospace; /* Monospace for code */
+    font-size: 14px;
+}
+
+/*---------------------------------------
+ 25. Line Numbers Column
+----------------------------------------*/
+.line-numbers {
+    background: #f0f0f0;
+    color: #999;
+    padding: 8px 6px;
+    text-align: right;
+    user-select: none; /* Cannot select text */
+    border-right: 1px solid #ddd;
+    overflow: hidden; /* Remove independent scroll */
+}
+
+/* Match line height for textarea */
+.line-numbers div {
+    line-height: 20px;
+}
+
+/*---------------------------------------
+ 26. Textarea for HTML Source
+----------------------------------------*/
+.source-textarea {
+    flex: 1; /* Take remaining width */
+    padding: 10px;
+    border: none;
+    outline: none;
+    resize: none;
+    background: #fafafa;
+    overflow: auto;
+    line-height: 20px; /* Match line numbers */
+}
+
+/*---------------------------------------
+ 27. Source Modal Footer with Buttons
+----------------------------------------*/
+.source-footer {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to right */
+    padding: 12px;
+    border-top: 1px solid #ddd;
+    background: #f7f7f7;
+}
+
+/* Save button */
+.btn-save {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    margin-right: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.btn-save:hover { background-color: #0069d9; }
+
+/* Cancel button */
+.btn-cancel {
+    background-color: #e0e0e0;
+    color: #333;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.btn-cancel:hover { background-color: #d5d5d5; }
+
+
+
+
+.color-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.color-picker {
+    position: relative;
+    cursor: pointer;
+}
+
+.color-picker input[type="color"] {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.icon-text {
+    font-size: 18px;
+    color: black; /* Will stay readable */
+}
+
+.icon-bg {
+    font-size: 18px;
+    background: yellow; /* Default highlight look */
+    padding: 2px 4px;
+    border-radius: 3px;
+}

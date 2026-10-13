@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Exception that could not be synchronized with Legacy ERP but need to be specified. --></help>
+    <label><!-- Payment Term Others Exception --></label>
+    <name>Payment_Term_Others_Exception__c</name>
+</CustomFieldTranslation>

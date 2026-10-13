@@ -1,0 +1,143 @@
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+.filter-panel {
+    position: relative;
+}
+
+.filterButtons {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.saveRow {
+    text-align: center;
+    background: rgb(243, 243, 243);
+}
+
+.alignRight {
+    justify-self: end;
+}
+
+.buttonSection {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: end;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.alignRight {
+    justify-self: end;
+}
+
+.newRow td {
+    background-color: rgb(248 255 150 / 32%);
+}
+
+.inputText {
+    /* width: max-content; */
+}
+
+.buttonTd {
+    text-align: left;
+}
+
+.pageBody {
+    min-height: 250px;
+}
+
+.truncate {
+    width: 300px;
+    white-space: break-spaces;
+}
+.tableDiv {
+    height: 100%;
+    /* height: 50%; */
+    /* width: 50%; */
+}
+
+.largeWidth {
+    width: 50%;
+}
+
+.medWidth {
+    width: 25%;
+    border-left: 0.5px #ffffff4a solid;
+}
+
+.slds-table th,
+.slds-table td {
+    white-space: pre-wrap;
+}
+
+.rowspanHeightTh {
+    height: 60px;
+    min-height: 60px;
+    max-height: 60px;
+}
+
+.HeightTh {
+    height: 30px;
+    min-height: 30px;
+    max-height: 30px;
+}
+
+.priceWidthTh {
+    width: 150px;
+    min-width: 150px;
+    max-width: 150px;
+}
+
+.sortSelected-icon {
+    --slds-c-icon-color-foreground: #17d7b3 !important;
+    --slds-c-icon-color-foreground-default: #17d7b3 !important;
+}
+
+.history {
+    background-color: #fff;
+    opacity: 0.40;
+}
+
+.trHeight {
+    height: 40px;
+    max-height: 40px;
+    min-height: 40px;
+}

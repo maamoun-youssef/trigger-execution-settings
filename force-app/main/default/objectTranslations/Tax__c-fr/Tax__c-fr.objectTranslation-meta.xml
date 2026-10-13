@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Tax</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Taxes</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>negOptim Tax</layout>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Nom</nameFieldLabel>
+    <recordTypes>
+        <description><!-- Rate byCategory --></description>
+        <label><!-- Rate byCategory --></label>
+        <name>CATEGORY</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Taxes eco, sucre ...</description>
+        <label>Autres</label>
+        <name>Regular</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- VATs --></description>
+        <label>TVAs</label>
+        <name>VAT</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Règle de TVA</label>
+        <name>VATRule</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,905 @@
+@font-face {
+  font-family: 'fontUlit';
+  src: url('/resource/ASSETTS/Exo_2/Exo2-VariableFont_wght.ttf') format('TrueType');
+}
+
+c-negotiate {
+  /* font-family: 'fontUlit'; */
+}
+
+negoptim-negotiate .slds-combobox__input-entity-icon,
+c-negotiate .slds-combobox__input-entity-icon {
+  display: none !important;
+}
+
+.toastMessage.forceActionsText {
+  white-space: pre-line !important;
+}
+
+.blank-cell {
+  background: repeating-linear-gradient(45deg, var(--c-empty-cell-color-1-background, #7AD4EF) 10px, var(--c-empty-cell-color-2-background, #ffffff) 15px);
+  height: 20px;
+}
+
+.preclosed-cell {
+  background: repeating-linear-gradient(45deg, var(--c-empty-cell-color-1-background, #FFE1F1) 10px, var(--c-empty-cell-color-2-background, #ffffff) 15px) !important;
+}
+
+.nego-type-cell input {
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-bottom: 0px;
+  padding-right: 5px;
+  min-height: 0px !important;
+  line-height: normal !important;
+  text-align: right;
+  min-width: 100px;
+  width: 100px;
+  max-width: 100px;
+}
+
+.NegoRiseRate lightning-formatted-number {
+  color: darkblue;
+  font-weight: bold;
+}
+
+.nego-type-cell lightning-helptext,
+.hide-info lightning-helptext {
+  display: none;
+}
+
+input {
+  color: #000000;
+}
+
+.conditionTable thead tr th {
+  height: 32px;
+  min-height: 32px;
+  max-height: 32px;
+}
+
+table.contract-table thead tr th {
+  background-color: var(--c-default-header-color-background);
+  color: var(--c-default-header-color-text);
+}
+
+.index-cell,
+.nego-type-cell {
+  height: 32px;
+  font-weight: bold;
+}
+
+.condition-cell {
+  height: 33.47px;
+}
+
+.slds-tree__item:hover {
+  background: unset;
+  cursor: auto;
+}
+
+.has-error-rate input {
+  color: red !important;
+}
+
+.force-read-only-style [disabled] {
+  background-color: white !important;
+  border: none !important;
+  padding: 0 !important;
+  resize: none !important;
+  cursor: auto !important;
+}
+
+.force-read-only-style .hide-input input[disabled] {
+  opacity: 0 !important;
+}
+
+.force-read-only-style [disabled]+* svg {
+  fill: white !important;
+}
+
+.force-read-only-style .slds-form-element_stacked:not(.slds-form-element_readonly) {
+  margin: 0 !important;
+}
+
+.force-read-only-style .slds-form-element__label {
+  padding-top: 0 !important;
+  margin-bottom: 0 !important;
+  font-weight: bold !important;
+}
+
+.force-read-only-style textarea {
+  height: calc(var(--lwc-heightInput, 1.875rem) + (var(--lwc-borderWidthThin, 1px) * 2)) !important;
+  line-height: var(--lwc-heightInput, 1.875rem) !important;
+  overflow: hidden !important;
+}
+
+.force-read-only-style .slds-popover__header {
+  padding: var(--lwc-spacingSmall, 0.75rem) !important;
+}
+
+.slabs-button,
+.slabs-button * {
+  height: 20px !important;
+}
+
+/* [c-negotiatecontracts_negotiatecontracts].index-cell {
+  background-color: var(--c-on-top-index-color-background, --c-index-color2-background) !important;
+  color: var(--c-on-top-index-color-text, --c-index-color2-text) !important;
+}
+[c-negotiatecontracts_negotiatecontracts].index-cell-icon {
+  fill: var(--c-on-top-index-color-text, --c-index-color2-text) !important;
+}
+[c-negotiatecontracts_negotiatecontracts].nego-type-cell {
+  background-color: var(--c-on-top-hmp-color-background, --c-nego-type-color2-background) !important;
+  color: var(--c-on-top-hmp-color-text, --c-nego-type-color2-text) !important;
+}
+[c-negotiatecontracts_negotiatecontracts].nego-type-cell-icon {
+  fill: var(--c-on-top-hmp-color-text, --c-nego-type-color2-text) !important;
+} */
+.conditionTable .index-cell {
+  background-color: var(--c-on-top-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-on-top-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable .index-cell-icon {
+  fill: var(--c-on-top-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable .nego-type-cell {
+  background-color: var(--c-on-top-hmp-color-background, var(--c-nego-type-color2-background)) !important;
+  color: var(--c-on-top-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable .nego-type-cell-icon {
+  fill: var(--c-on-top-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_On_Top tr th {
+  background-color: var(--c-on-top-header-color-background, var(--c-default-header-color-background)) !important;
+  color: var(--c-on-top-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_On_Top tr th a {
+  color: var(--c-on-top-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_On_Top .index-cell {
+  background-color: var(--c-on-top-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-on-top-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+/*.conditionTable_On_Top tr th *:not(.On_Top)>lightning-icon>lightning-primitive-icon>svg {
+  fill: var(--c-on-top-header-color-text, var(--c-default-header-color-text)) !important;
+}*/
+
+.conditionTable_On_Top tr th svg {
+  fill: var(--c-on-top-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_On_Top .index-cell-icon {
+  fill: var(--c-on-top-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_On_Top .nego-type-cell {
+  background-color: var(--c-on-top-hmp-color-background, var(--c-nego-type-color2-background)) !important;
+  color: var(--c-on-top-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_On_Top .nego-type-cell-icon {
+  fill: var(--c-on-top-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_On_Top .indexTable {
+  border: 2px solid var(--c-on-top-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.cell_On_Top,
+.cell_On_Top .slds-form-element__label {
+  background-color: var(--c-on-top-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-on-top-index-color-text, var(--c-index-color2-text)) !important;
+  fill: var(--c-on-top-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.cell_On_Top input {
+  color: black !important;
+  fill: black !important;
+  /* background-color: var(--c-on-top-index-color-background, --c-index-color2-background) !important;
+  color: var(--c-on-top-index-color-text, --c-index-color2-text) !important;
+  fill: var(--c-on-top-index-color-text, --c-index-color2-text) !important; */
+}
+
+.legend_On_Top svg {
+  fill: var(--c-on-top-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+div.On_Top>lightning-icon>lightning-primitive-icon>svg {
+  fill: greenyellow !important;
+}
+
+.open-condition {
+  background-color: #BDF0B5;
+}
+
+/* ------ */
+.conditionTable_landing tr th {
+  background-color: var(--c-landing-header-color-background, var(--c-default-header-color-background)) !important;
+  color: var(--c-landing-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_landing tr th a {
+  color: var(--c-landing-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_landing tr th svg {
+  fill: var(--c-landing-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_landing .index-cell {
+  background-color: var(--c-landing-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-landing-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_landing .index-cell-icon {
+  fill: var(--c-landing-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_landing .nego-type-cell {
+  background-color: var(--c-landing-hmp-color-background, var(--c-nego-type-color2-background)) !important;
+  color: var(--c-landing-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_landing .nego-type-cell-icon {
+  fill: var(--c-landing-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_landing .indexTable {
+  border: 2px solid var(--c-landing-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.cell_landing,
+.cell_landing .slds-form-element__label {
+  background-color: var(--c-landing-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-landing-index-color-text, var(--c-index-color2-text)) !important;
+  fill: var(--c-landing-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.cell_landing input {
+  color: black !important;
+  fill: black !important;
+}
+
+.legend_landing svg {
+  fill: var(--c-landing-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.conditionTable_nego-base-exit tr th {
+  background-color: var(--c-nego-base-exit-header-color-background, var(--c-default-header-color-background)) !important;
+  color: var(--c-nego-base-exit-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_nego-base-exit tr th a {
+  color: var(--c-nego-base-exit-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_nego-base-exit tr th svg {
+  fill: var(--c-nego-base-exit-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_nego-base-exit .index-cell {
+  background-color: var(--c-nego-base-exit-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-nego-base-exit-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_nego-base-exit .index-cell-icon {
+  fill: var(--c-nego-base-exit-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_nego-base-exit .nego-type-cell {
+  background-color: var(--c-nego-base-exit-hmp-color-background, var(--c-nego-type-color2-background)) !important;
+  color: var(--c-nego-base-exit-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_nego-base-exit .nego-type-cell-icon {
+  fill: var(--c-nego-base-exit-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_nego-base-exit .indexTable {
+  border: 2px solid var(--c-nego-base-exit-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.cell_nego-base-exit,
+.cell_nego-base-exit .slds-form-element__label {
+  background-color: var(--c-nego-base-exit-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-nego-base-exit-index-color-text, var(--c-index-color2-text)) !important;
+  fill: var(--c-nego-base-exit-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.cell_nego-base-exit input {
+  color: black !important;
+  fill: black !important;
+}
+
+.legend_nego-base-exit svg {
+  fill: var(--c-nego-base-exit-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.conditionTable_nego-base-init tr th {
+  background-color: var(--c-nego-base-init-header-color-background, var(--c-default-header-color-background)) !important;
+  color: var(--c-nego-base-init-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_nego-base-init tr th a {
+  color: var(--c-nego-base-init-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_nego-base-init tr th svg {
+  fill: var(--c-nego-base-init-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_nego-base-init .index-cell {
+  background-color: var(--c-nego-base-init-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-nego-base-init-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_nego-base-init .index-cell-icon {
+  fill: var(--c-nego-base-init-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_nego-base-init .nego-type-cell {
+  background-color: var(--c-nego-base-init-hmp-color-background, var(--c-nego-type-color2-background)) !important;
+  color: var(--c-nego-base-init-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_nego-base-init .nego-type-cell-icon {
+  fill: var(--c-nego-base-init-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_nego-base-init .indexTable {
+  border: 2px solid var(--c-nego-base-init-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.cell_nego-base-init,
+.cell_nego-base-init .slds-form-element__label {
+  background-color: var(--c-nego-base-init-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-nego-base-init-index-color-text, var(--c-index-color2-text)) !important;
+  fill: var(--c-nego-base-init-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.cell_nego-base-init input {
+  color: black !important;
+  fill: black !important;
+}
+
+.legend_nego-base-init svg {
+  fill: var(--c-nego-base-init-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.conditionTable_nego-base tr th {
+  background-color: var(--c-nego-base-header-color-background, var(--c-default-header-color-background)) !important;
+  color: var(--c-nego-base-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_nego-base tr th a {
+  color: var(--c-nego-base-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_nego-base tr th svg {
+  fill: var(--c-nego-base-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_nego-base .index-cell {
+  background-color: var(--c-nego-base-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-nego-base-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_nego-base .index-cell-icon {
+  fill: var(--c-nego-base-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_nego-base .nego-type-cell {
+  background-color: var(--c-nego-base-hmp-color-background, var(--c-nego-type-color2-background)) !important;
+  color: var(--c-nego-base-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_nego-base .nego-type-cell-icon {
+  fill: var(--c-nego-base-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_nego-base .indexTable {
+  border: 2px solid var(--c-nego-base-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.cell_nego-base,
+.cell_nego-base .slds-form-element__label {
+  background-color: var(--c-nego-base-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-nego-base-index-color-text, var(--c-index-color2-text)) !important;
+  fill: var(--c-nego-base-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.cell_nego-base input {
+  color: black !important;
+  fill: black !important;
+}
+
+.legend_nego-base svg {
+  fill: var(--c-nego-base-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.conditionTable_perfcom-3112 tr th {
+  background-color: var(--c-perfcom-3112-header-color-background, var(--c-default-header-color-background)) !important;
+  color: var(--c-perfcom-3112-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_perfcom-3112 tr th a {
+  color: var(--c-perfcom-3112-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_perfcom-3112 tr th svg {
+  fill: var(--c-perfcom-3112-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_perfcom-3112 .index-cell {
+  background-color: var(--c-perfcom-3112-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-perfcom-3112-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_perfcom-3112 .index-cell-icon {
+  fill: var(--c-perfcom-3112-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_perfcom-3112 .nego-type-cell {
+  background-color: var(--c-perfcom-3112-hmp-color-background, var(--c-nego-type-color2-background)) !important;
+  color: var(--c-perfcom-3112-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_perfcom-3112 .nego-type-cell-icon {
+  fill: var(--c-perfcom-3112-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_perfcom-3112 .indexTable {
+  border: 2px solid var(--c-perfcom-3112-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.cell_perfcom-3112,
+.cell_perfcom-3112 .slds-form-element__label {
+  background-color: var(--c-perfcom-3112-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-perfcom-3112-index-color-text, var(--c-index-color2-text)) !important;
+  fill: var(--c-perfcom-3112-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.cell_perfcom-3112 input {
+  color: black !important;
+  fill: black !important;
+}
+
+.legend_perfcom-3112 svg {
+  fill: var(--c-perfcom-3112-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.conditionTable_period-extension tr th {
+  background-color: var(--c-period-extension-header-color-background, var(--c-default-header-color-background)) !important;
+  color: var(--c-period-extension-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_period-extension tr th a {
+  color: var(--c-period-extension-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_period-extension tr th svg {
+  fill: var(--c-period-extension-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_period-extension .index-cell {
+  background-color: var(--c-period-extension-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-period-extension-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_period-extension .index-cell-icon {
+  fill: var(--c-period-extension-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_period-extension .nego-type-cell {
+  background-color: var(--c-period-extension-hmp-color-background, var(--c-nego-type-color2-background)) !important;
+  color: var(--c-period-extension-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_period-extension .nego-type-cell-icon {
+  fill: var(--c-period-extension-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_period-extension .indexTable {
+  border: 2px solid var(--c-period-extension-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.cell_period-extension,
+.cell_period-extension .slds-form-element__label {
+  background-color: var(--c-period-extension-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-period-extension-index-color-text, var(--c-index-color2-text)) !important;
+  fill: var(--c-period-extension-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.cell_period-extension input {
+  color: black !important;
+  fill: black !important;
+}
+
+.legend_period-extension svg {
+  fill: var(--c-period-extension-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.conditionTable_postnego-simulation tr th {
+  background-color: var(--c-postnego-simulation-header-color-background, var(--c-default-header-color-background)) !important;
+  color: var(--c-postnego-simulation-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_postnego-simulation tr th a {
+  color: var(--c-postnego-simulation-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_postnego-simulation tr th svg {
+  fill: var(--c-postnego-simulation-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_postnego-simulation .index-cell {
+  background-color: var(--c-postnego-simulation-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-postnego-simulation-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_postnego-simulation .index-cell-icon {
+  fill: var(--c-postnego-simulation-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_postnego-simulation .nego-type-cell {
+  background-color: var(--c-postnego-simulation-hmp-color-background, var(--c-nego-type-color2-background)) !important;
+  color: var(--c-postnego-simulation-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_postnego-simulation .nego-type-cell-icon {
+  fill: var(--c-postnego-simulation-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_postnego-simulation .indexTable {
+  border: 2px solid var(--c-postnego-simulation-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.cell_postnego-simulation,
+.cell_postnego-simulation .slds-form-element__label {
+  background-color: var(--c-postnego-simulation-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-postnego-simulation-index-color-text, var(--c-index-color2-text)) !important;
+  fill: var(--c-postnego-simulation-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.cell_postnego-simulation input {
+  color: black !important;
+  fill: black !important;
+}
+
+.legend_postnego-simulation svg {
+  fill: var(--c-postnego-simulation-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.conditionTable_proposal tr th {
+  background-color: var(--c-proposal-header-color-background, var(--c-default-header-color-background)) !important;
+  color: var(--c-proposal-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_proposal tr th a {
+  color: var(--c-proposal-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_proposal tr th svg {
+  fill: var(--c-proposal-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_proposal .index-cell {
+  background-color: var(--c-proposal-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-proposal-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_proposal .index-cell-icon {
+  fill: var(--c-proposal-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_proposal .nego-type-cell {
+  background-color: var(--c-proposal-hmp-color-background, var(--c-nego-type-color2-background)) !important;
+  color: var(--c-proposal-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_proposal .nego-type-cell-icon {
+  fill: var(--c-proposal-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_proposal .indexTable {
+  border: 2px solid var(--c-proposal-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.cell_proposal,
+.cell_proposal .slds-form-element__label {
+  background-color: var(--c-proposal-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-proposal-index-color-text, var(--c-index-color2-text)) !important;
+  fill: var(--c-proposal-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.cell_proposal input {
+  color: black !important;
+  fill: black !important;
+}
+
+.legend_proposal svg {
+  fill: var(--c-proposal-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.conditionTable_safe-balance tr th {
+  background-color: var(--c-safe-balance-header-color-background, var(--c-default-header-color-background)) !important;
+  color: var(--c-safe-balance-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_safe-balance tr th a {
+  color: var(--c-safe-balance-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_safe-balance tr th svg {
+  fill: var(--c-safe-balance-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_safe-balance .index-cell {
+  background-color: var(--c-safe-balance-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-safe-balance-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_safe-balance .index-cell-icon {
+  fill: var(--c-safe-balance-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_safe-balance .nego-type-cell {
+  background-color: var(--c-safe-balance-hmp-color-background, var(--c-nego-type-color2-background)) !important;
+  color: var(--c-safe-balance-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_safe-balance .nego-type-cell-icon {
+  fill: var(--c-safe-balance-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_safe-balance .indexTable {
+  border: 2px solid var(--c-safe-balance-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.cell_safe-balance,
+.cell_safe-balance .slds-form-element__label {
+  background-color: var(--c-safe-balance-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-safe-balance-index-color-text, var(--c-index-color2-text)) !important;
+  fill: var(--c-safe-balance-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.cell_safe-balance input {
+  color: black !important;
+  fill: black !important;
+}
+
+.legend_safe-balance svg {
+  fill: var(--c-safe-balance-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.conditionTable_signed-copy tr th {
+  background-color: var(--c-signed-copy-header-color-background, var(--c-default-header-color-background)) !important;
+  color: var(--c-signed-copy-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_signed-copy tr th a {
+  color: var(--c-signed-copy-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_signed-copy tr th svg {
+  fill: var(--c-signed-copy-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_signed-copy .index-cell {
+  background-color: var(--c-signed-copy-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-signed-copy-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_signed-copy .index-cell-icon {
+  fill: var(--c-signed-copy-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_signed-copy .nego-type-cell {
+  background-color: var(--c-signed-copy-hmp-color-background, var(--c-nego-type-color2-background)) !important;
+  color: var(--c-signed-copy-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_signed-copy .nego-type-cell-icon {
+  fill: var(--c-signed-copy-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_signed-copy .indexTable {
+  border: 2px solid var(--c-signed-copy-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.cell_signed-copy,
+.cell_signed-copy .slds-form-element__label {
+  background-color: var(--c-signed-copy-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-signed-copy-index-color-text, var(--c-index-color2-text)) !important;
+  fill: var(--c-signed-copy-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.cell_signed-copy input {
+  color: black !important;
+  fill: black !important;
+}
+
+.legend_signed-copy svg {
+  fill: var(--c-signed-copy-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.conditionTable_signed tr th {
+  background-color: var(--c-signed-header-color-background, var(--c-default-header-color-background)) !important;
+  color: var(--c-signed-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_signed tr th a {
+  color: var(--c-signed-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_signed tr th svg {
+  fill: var(--c-signed-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_signed .index-cell {
+  background-color: var(--c-signed-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-signed-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_signed .index-cell-icon {
+  fill: var(--c-signed-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_signed .nego-type-cell {
+  background-color: var(--c-signed-hmp-color-background, var(--c-nego-type-color2-background)) !important;
+  color: var(--c-signed-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_signed .nego-type-cell-icon {
+  fill: var(--c-signed-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_signed .indexTable {
+  border: 2px solid var(--c-signed-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.cell_signed,
+.cell_signed .slds-form-element__label {
+  background-color: var(--c-signed-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-signed-index-color-text, var(--c-index-color2-text)) !important;
+  fill: var(--c-signed-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.cell_signed input {
+  color: black !important;
+  fill: black !important;
+}
+
+.legend_signed svg {
+  fill: var(--c-signed-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.conditionTable_simulation tr th {
+  background-color: var(--c-simulation-header-color-background, var(--c-default-header-color-background)) !important;
+  color: var(--c-simulation-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_simulation tr th a {
+  color: var(--c-simulation-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_simulation tr th svg {
+  fill: var(--c-simulation-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_simulation .index-cell {
+  background-color: var(--c-simulation-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-simulation-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_simulation .index-cell-icon {
+  fill: var(--c-simulation-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_simulation .nego-type-cell {
+  background-color: var(--c-simulation-hmp-color-background, var(--c-nego-type-color2-background)) !important;
+  color: var(--c-simulation-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_simulation .nego-type-cell-icon {
+  fill: var(--c-simulation-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_simulation .indexTable {
+  border: 2px solid var(--c-simulation-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.cell_simulation,
+.cell_simulation .slds-form-element__label {
+  background-color: var(--c-simulation-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-simulation-index-color-text, var(--c-index-color2-text)) !important;
+  fill: var(--c-simulation-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.cell_simulation input {
+  color: black !important;
+  fill: black !important;
+}
+
+.legend_simulation svg {
+  fill: var(--c-simulation-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.conditionTable_target tr th {
+  background-color: var(--c-target-header-color-background, var(--c-default-header-color-background)) !important;
+  color: var(--c-target-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_target tr th a {
+  color: var(--c-target-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_target tr th svg {
+  fill: var(--c-target-header-color-text, var(--c-default-header-color-text)) !important;
+}
+
+.conditionTable_target .index-cell {
+  background-color: var(--c-target-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-target-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_target .index-cell-icon {
+  fill: var(--c-target-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.conditionTable_target .nego-type-cell {
+  background-color: var(--c-target-hmp-color-background, var(--c-nego-type-color2-background)) !important;
+  color: var(--c-target-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_target .nego-type-cell-icon {
+  fill: var(--c-target-hmp-color-text, var(--c-nego-type-color2-text)) !important;
+}
+
+.conditionTable_target .indexTable {
+  border: 2px solid var(--c-target-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.cell_target,
+.cell_target .slds-form-element__label {
+  background-color: var(--c-target-index-color-background, var(--c-index-color2-background)) !important;
+  color: var(--c-target-index-color-text, var(--c-index-color2-text)) !important;
+  fill: var(--c-target-index-color-text, var(--c-index-color2-text)) !important;
+}
+
+.cell_target input {
+  color: black !important;
+  fill: black !important;
+}
+
+.legend_target svg {
+  fill: var(--c-target-index-color-background, var(--c-index-color2-background)) !important;
+}
+
+.slds-popover__body .slds-input {
+  min-height: 16px !important;
+  line-height: 20px !important;
+}
+
+.slds-nubbin_bottom-right:before,
+.slds-nubbin_bottom-right:after,
+.slds-nubbin--bottom-right:before,
+.slds-nubbin--bottom-right:after,
+.slds-nubbin_bottom-right-corner:before,
+.slds-nubbin_bottom-right-corner:after {
+  left: auto;
+  /* right: var(--lwc-spacingLarge, 1.5rem); */
+  top: 100%;
+  margin-top: -0.5rem;
+  margin-right: -0.5rem;
+  right: 15px !important;
+}

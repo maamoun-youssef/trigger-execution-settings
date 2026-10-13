@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>ToExtract</fullName>
+        <default>false</default>
+        <label>To Extract</label>
+    </customValue>
+    <customValue>
+        <fullName>Extracted</fullName>
+        <default>false</default>
+        <label>Extracted</label>
+    </customValue>
+    <customValue>
+        <fullName>To Extract old</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>To Extract old</label>
+    </customValue>
+    <masterLabel>ExtractStatus</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Specify the level that contract is negotiated and signed --></help>
+    <label><!-- Contract Business Unit --></label>
+    <lookupFilter>
+        <errorMessage><!-- BusinessUnitContract__c - Value does not exist or does not match filter criteria. --></errorMessage>
+    </lookupFilter>
+    <name>BusinessUnitContract__c</name>
+    <relationshipLabel><!-- contracts (Business Unit Contract) --></relationshipLabel>
+</CustomFieldTranslation>

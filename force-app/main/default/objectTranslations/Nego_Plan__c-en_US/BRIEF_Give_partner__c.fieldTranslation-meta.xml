@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Success &amp; lost of the position / Submitted counter-position. --></help>
+    <label><!-- BRIEF - Give Partner Posture --></label>
+    <name>BRIEF_Give_partner__c</name>
+</CustomFieldTranslation>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Défini le niveau de facturation des conditions saisies poiur les accords de ce NS.</help>
+    <label>Niveau de facturation</label>
+    <name>InvoicingLevel__c</name>
+    <picklistValues>
+        <masterLabel>Advanced And Partner</masterLabel>
+        <translation>Niveaux avancé et partenaire</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Advanced Only</masterLabel>
+        <translation>Niveau avancé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Partner Only</masterLabel>
+        <translation>Niveau partenaire</translation>
+    </picklistValues>
+</CustomFieldTranslation>

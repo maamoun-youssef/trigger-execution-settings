@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Statut</label>
+    <name>Status__c</name>
+    <picklistValues>
+        <masterLabel>Deleted</masterLabel>
+        <translation>Suprimé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>InPreparation</masterLabel>
+        <translation><!-- InPreparation --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>InProcess</masterLabel>
+        <translation><!-- InProcess --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Rejected</masterLabel>
+        <translation><!-- Rejected --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Requested</masterLabel>
+        <translation><!-- Requested --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Submitted</masterLabel>
+        <translation><!-- Submitted --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Updated</masterLabel>
+        <translation>Mis à jour</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Validated</masterLabel>
+        <translation><!-- Validated --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

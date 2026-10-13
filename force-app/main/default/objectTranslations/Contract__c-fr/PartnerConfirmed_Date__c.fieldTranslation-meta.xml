@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Précisez la date de validation fournisseur du contrat avant le process de signature</help>
+    <label>Date confirmée du partenaire</label>
+    <name>PartnerConfirmed_Date__c</name>
+</CustomFieldTranslation>

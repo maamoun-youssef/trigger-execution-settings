@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Provision_base__c</fullName>
+    <description>What is the reference database used for the calculation?</description>
+    <inlineHelpText>What is the reference database used for the calculation?</inlineHelpText>
+    <label>Provision base</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Database_origin</valueSetName>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Specify the number of signatories for the contract. Should be different to 1 (default value) if the contract include more than one signartory. --></help>
+    <label>Signatories Number</label>
+    <name>Signatories_Number__c</name>
+</CustomFieldTranslation>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Index</label>
+    <name>Index__c</name>
+    <picklistValues>
+        <masterLabel>Index1</masterLabel>
+        <translation><!-- Index1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Index2</masterLabel>
+        <translation><!-- Index2 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Index3</masterLabel>
+        <translation><!-- Index3 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Index4</masterLabel>
+        <translation><!-- Index4 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Index5</masterLabel>
+        <translation><!-- Index5 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Index6</masterLabel>
+        <translation><!-- Index6 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Index7</masterLabel>
+        <translation><!-- Index7 --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>test2</label>
+    <protected>false</protected>
+    <values>
+        <field>Description__c</field>
+        <value xsi:type="xsd:string">testtt</value>
+    </values>
+    <values>
+        <field>FlowSettings__c</field>
+        <value xsi:type="xsd:string">{&quot;name&quot;:null,&quot;flowLabel&quot;:null,&quot;buttonLabel&quot;:null,&quot;buttonIcon&quot;:null}</value>
+    </values>
+    <values>
+        <field>HeaderBackground__c</field>
+        <value xsi:type="xsd:string">/resource/1746800143000/ConnectHeaderAvatar</value>
+    </values>
+    <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">/resource/1746601734000/ConnectLogo</value>
+    </values>
+    <values>
+        <field>Name__c</field>
+        <value xsi:type="xsd:string">test2</value>
+    </values>
+    <values>
+        <field>Sections__c</field>
+        <value xsi:type="xsd:string">[{&quot;title&quot;:&quot;negop&quot;,&quot;subTitle&quot;:&quot;1m1m&quot;,&quot;order&quot;:1,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/resource/1747040114000/ConnectSectionAvatar&quot;,&quot;color&quot;:&quot;&quot;},{&quot;title&quot;:&quot;samm&quot;,&quot;subTitle&quot;:&quot;&quot;,&quot;order&quot;:2,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/resource/1747040114000/ConnectSectionAvatar&quot;,&quot;color&quot;:&quot;&quot;}]</value>
+    </values>
+    <values>
+        <field>Themes__c</field>
+        <value xsi:type="xsd:string">[{&quot;sectionIndex&quot;:0,&quot;redirectionType&quot;:&quot;Page&quot;,&quot;redirection&quot;:&quot;Account_Status_Grid&quot;,&quot;params&quot;:null,&quot;label&quot;:&quot;b&quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/resource/1747038985000/ConnectThemeAvatar&quot;},{&quot;sectionIndex&quot;:0,&quot;redirectionType&quot;:&quot;URL&quot;,&quot;redirection&quot;:&quot;https://negoptim2-dev4-dev-ed.develop.lightning.force.com/lightning/n/ConnectSettings&quot;,&quot;params&quot;:null,&quot;label&quot;:&quot;m&quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/resource/1747038985000/ConnectThemeAvatar&quot;},{&quot;sectionIndex&quot;:1,&quot;redirectionType&quot;:&quot;Grid&quot;,&quot;redirection&quot;:&quot;ProductDiscountStatementPortalListView2&quot;,&quot;params&quot;:null,&quot;label&quot;:&quot;sam&quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/resource/1747038985000/ConnectThemeAvatar&quot;}]</value>
+    </values>
+    <values>
+        <field>isActive__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>isDeleted__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Secure Multi-year --></label>
+    <name>Secure_Multiyear__c</name>
+    <picklistValues>
+        <masterLabel>1 year</masterLabel>
+        <translation><!-- 1 year --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>2 years</masterLabel>
+        <translation><!-- 2 years --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>3 years</masterLabel>
+        <translation><!-- 3 years --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

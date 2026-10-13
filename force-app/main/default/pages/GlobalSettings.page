@@ -1,0 +1,1990 @@
+<apex:page showHeader="false" sidebar="false" setup="false" applyHtmlTag="false" applyBodyTag="false" controller="GlobalSettingsController"
+           lightningStylesheets="true" docType="html-5.0">
+    <html class="slds-scope">
+        <head>
+            <apex:slds />
+            <style type="text/css">
+                .selectClass {
+                min-width: 14rem !important;
+                }
+                .message[role='alert'] {
+                margin-bottom: 0px !important;
+                }
+            </style>
+        </head>
+        <body class="slds-brand-band slds-brand-band_large">
+            <div id="msg" class="slds-p-horizontal_small">
+                <apex:pageMessages id="apexMessages"/>
+            </div>
+            <!-- <apex:sectionHeader title="{!$Organization.Name}" subtitle="{!$ObjectType.NegoptimCustomSettings__c.Label}" /> -->
+            <apex:form id="settingform" enctype="multipart/form-data">
+                <div class="slds-page-header slds-m-around_small" id="pageHeader">
+                    <!-- LAYOUT GRID -->
+                    <div class="slds-grid">
+                        <!-- GRID COL -->
+                        <div class="slds-col slds-has-flexi-truncate">
+                            <div class="slds-media slds-no-space slds-grow">
+                                <div class="slds-media__figure">
+                                    <svg aria-hidden="true" class="slds-icon slds-icon-standard-orders" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <use xlink:href="/_slds/icons/standard-sprite/svg/symbols.svg#orders">
+                                        </use>
+                                    </svg>
+                                </div>
+                                <div class="slds-media__body">
+                                    <p class="slds-line-height_reset">
+                                        <apex:outputText value="{!$Organization.Name}" />
+                                    </p>
+                                    <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" title="Global Settings">
+                                        <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.Label}" />
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-grid">
+                            <apex:commandButton value="Save" action="{!save}" rerender="settingform, apexMessages" status="status" styleClass="slds-button slds-button_brand" />
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-p-horizontal_small">
+                    <apex:pageBlock mode="edit">
+                        <apex:actionStatus id="status">
+                            <apex:facet name="start">
+                                <div class="slds-spinner_container">
+                                    <div role="status" class="slds-spinner slds-spinner_large">
+                                        <span class="slds-assistive-text">
+                                            {!JSINHTMLENCODE($Label.Loading)}
+                                        </span>
+                                        <div class="slds-spinner__dot-a"></div>
+                                        <div class="slds-spinner__dot-b"></div>
+                                    </div>
+                                </div>
+                            </apex:facet>
+                        </apex:actionStatus>
+                        <apex:pageBlockSection title="Organization Settings" collapsible="false" columns="2">
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Business_Type__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Business_Type__c.Label}" for="businessType" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Business_Type__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Business_Type__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Business_Type__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList label="Business Type" accesskey="1" id="businessType" value="{!tempBusinessType}" multiselect="false" size="1"
+                                                 required="true" disabled="{!IF(negoSettings.sBusinessType == businessTypeNone, false, true)}">
+                                    <apex:selectOptions value="{!BusinessTypes}" />
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Activate_Maintenance_Mode__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Activate_Maintenance_Mode__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Activate_Maintenance_Mode__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Activate_Maintenance_Mode__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Activate_Maintenance_Mode__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputCheckbox value="{!negoSettings.activateMaintenanceMode}" />
+                            </apex:pageBlockSectionItem>
+                        </apex:pageBlockSection>
+                        <!-- Community Users -->
+                        <apex:pageBlockSection title="Community Users" collapsible="false" columns="2">
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Insert_Account_On_Insert_Supplier__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Insert_Account_On_Insert_Supplier__c.Label}"/>
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Allow_Insert_Account_On_Insert_Supplier__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Insert_Account_On_Insert_Supplier__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Insert_Account_On_Insert_Supplier__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputCheckbox value="{!negoSettings.Allow_Insert_Account_On_Insert_Supplier}" />
+                            </apex:pageBlockSectionItem>
+                        </apex:pageBlockSection>
+                        <!-- General Settings -->
+                        <apex:pageBlockSection title="General Settings" collapsible="false" columns="2">
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.CSV_Delimiter__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.CSV_Delimiter__c.Label}" for="businessType" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.CSV_Delimiter__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.CSV_Delimiter__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.CSV_Delimiter__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList id="delimiter" value="{!negoSettings.delimiter}" multiselect="false" size="1" required="false">
+                                    <apex:selectOptions value="{!Delimiters}" />
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                            <apex:selectList label="{!$ObjectType.NegoptimCustomSettings__c.fields.Group_Code_BU_for_Integration__c.Label}" id="groupBU"
+                                             value="{!negoSettings.groupBU}" multiselect="false" size="1" required="false">
+                                <apex:selectOptions value="{!Groups}" />
+                            </apex:selectList>
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Dispatch_Max_Closing_Day__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Dispatch_Max_Closing_Day__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Dispatch_Max_Closing_Day__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Dispatch_Max_Closing_Day__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Dispatch_Max_Closing_Day__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:input html-min="1" html-max="31" value="{!negoSettings.dispatchMaxClosingDay}" styleClass="slds-input"/>
+                            </apex:pageBlockSectionItem>
+                            <!-- -->
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Run_Sellin_Reparenting_For_Business_Unit__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Run_Sellin_Reparenting_For_Business_Unit__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Run_Sellin_Reparenting_For_Business_Unit__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Run_Sellin_Reparenting_For_Business_Unit__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Run_Sellin_Reparenting_For_Business_Unit__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputCheckbox value="{!negoSettings.runSellinReparentingForBusinessUnit}" />
+                            </apex:pageBlockSectionItem>
+                            <!--  -->
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Default_Condition_Code__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Default_Condition_Code__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Default_Condition_Code__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Default_Condition_Code__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Default_Condition_Code__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:input value="{!negoSettings.defaultConditionCode}" styleClass="slds-input"/>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Synchro_Mode__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Synchro_Mode__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Assortment_Synchro_Mode__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Synchro_Mode__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Synchro_Mode__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList value="{!negoSettings.assortmentSynchroMode}" multiselect="false" size="1" required="false">
+                                    <apex:selectOptions value="{!assortmentSynchroModeoptions}" />
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                        </apex:pageBlockSection>
+                        <apex:pageBlockSection title="Contract Settings" collapsible="false" columns="2">
+                            <!-- <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Contract_Number_Unicity__c.inlineHelpText}">
+                                <apex:outputPanel>
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Contract_Number_Unicity__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Contract_Number_Unicity__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Contract_Number_Unicity__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}"
+                                                />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Contract_Number_Unicity__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputCheckbox value="{!negoSettings.contractNumberUnicity}" />
+                            </apex:pageBlockSectionItem> -->
+                            <!-- <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Contract_Name_Number_Generation__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Contract_Name_Number_Generation__c.Label}"
+                                    />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Allow_Contract_Name_Number_Generation__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Contract_Name_Number_Generation__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}"
+                                                />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Contract_Name_Number_Generation__c.inlineHelpText}"
+                                                />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputCheckbox value="{!negoSettings.allowContractNameNumberGeneration}" />
+                            </apex:pageBlockSectionItem> -->                          
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Prioritize_Sort_BDate_Negotiate__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Prioritize_Sort_BDate_Negotiate__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Prioritize_Sort_BDate_Negotiate__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Prioritize_Sort_BDate_Negotiate__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}"
+                                                />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Prioritize_Sort_BDate_Negotiate__c.inlineHelpText}"
+                                                />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputCheckbox value="{!negoSettings.prioritizeSortBDateNegotiate}" />
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                            </apex:pageBlockSectionItem>
+                            <!--apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Starting_Day_to_create_Landing_on_conso__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Starting_Day_to_create_Landing_on_conso__c.Label}" for="startingDayToCreateLandingOnConso" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Starting_Day_to_create_Landing_on_conso__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Starting_Day_to_create_Landing_on_conso__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Starting_Day_to_create_Landing_on_conso__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:input label="datePicker" value="{!negoSettings.startingDayToCreateLandingOnConsoDate}" type="date"
+                                            style="text-align: left;"
+                                            html-placeholder="{!$ObjectType.NegoptimCustomSettings__c.fields.Starting_Day_to_create_Landing_on_conso__c.Label}"/>
+                            </apex:pageBlockSectionItem-->
+                            <!--apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Starting_Day_to_create_NegoBase_on_conso__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Starting_Day_to_create_NegoBase_on_conso__c.Label}" for="startingDayToCreateNegoBaseOnConso" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Starting_Day_to_create_NegoBase_on_conso__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Starting_Day_to_create_NegoBase_on_conso__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Starting_Day_to_create_NegoBase_on_conso__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:input label="datePicker" value="{!negoSettings.startingDayToCreateNegoBaseOnConsoDate}" type="date"
+                                            style="text-align: left;"
+                                            html-placeholder="{!$ObjectType.NegoptimCustomSettings__c.fields.Starting_Day_to_create_NegoBase_on_conso__c.Label}"/>
+                            </apex:pageBlockSectionItem-->
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.DiscountPercentScale__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.DiscountPercentScale__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.DiscountPercentScale__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.DiscountPercentScale__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.DiscountPercentScale__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList label="{!$ObjectType.NegoptimCustomSettings__c.fields.DiscountPercentScale__c.Label}" value="{!negoSettings.discountPercentScale}" multiselect="false" size="1">
+                                    <apex:selectOptions value="{!discountPercentScaleOptions}" />
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                            </apex:pageBlockSectionItem>
+                            <!-- <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Contract_Record_Types_Post_Nego_N__c.inlineHelpText}">
+                                <apex:outputPanel>
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Contract_Record_Types_Post_Nego_N__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Contract_Record_Types_Post_Nego_N__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Contract_Record_Types_Post_Nego_N__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}"
+                                                />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Contract_Record_Types_Post_Nego_N__c.inlineHelpText}"
+                                                />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                            </apex:pageBlockSectionItem> -->
+                            <!-- <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Contract_Record_Types_Post_Nego_N1__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Contract_Record_Types_Post_Nego_N1__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Contract_Record_Types_Post_Nego_N1__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Contract_Record_Types_Post_Nego_N1__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}"
+                                                />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Contract_Record_Types_Post_Nego_N1__c.inlineHelpText}"
+                                                />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                            </apex:pageBlockSectionItem> -->
+                            <!-- <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Prioritize_Sort_BDate_Negotiate_Followup__c.inlineHelpText}">
+                                <apex:outputPanel>
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Prioritize_Sort_BDate_Negotiate_Followup__c.Label}"
+                                    />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Prioritize_Sort_BDate_Negotiate_Followup__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Prioritize_Sort_BDate_Negotiate_Followup__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}"
+                                                />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Prioritize_Sort_BDate_Negotiate_Followup__c.inlineHelpText}"
+                                                />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputCheckbox value="{!negoSettings.prioritizeSortBDateNegotiateFollowup}" />
+                            </apex:pageBlockSectionItem> -->
+                            <!-- <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Dispatching_in_Condition_List__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Dispatching_in_Condition_List__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Allow_Dispatching_in_Condition_List__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Dispatching_in_Condition_List__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}"
+                                                />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Dispatching_in_Condition_List__c.inlineHelpText}"
+                                                />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputCheckbox value="{!negoSettings.Allow_Dispatching_in_Condition_List}" />
+                            </apex:pageBlockSectionItem> -->
+                            <!-- <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.GRC_Contract_Data_Source__c.inlineHelpText}">
+                                <apex:outputPanel>
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.GRC_Contract_Data_Source__c.Label}" for="grcContractDataSource"
+                                    />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.GRC_Contract_Data_Source__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.GRC_Contract_Data_Source__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}"
+                                                />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.GRC_Contract_Data_Source__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList id="grcContractDataSource" value="{!negoSettings.grcContractDataSource}" multiselect="false" size="1" required="false">
+                                    <apex:selectOptions value="{!grcContractDataSourceOptions}" />
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem> -->
+                            <!-- <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.BU_Navigation_Depth__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.BU_Navigation_Depth__c.Label}" for="grcContractDataSource"
+                                    />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.BU_Navigation_Depth__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.BU_Navigation_Depth__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}"
+                                                />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.BU_Navigation_Depth__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputText value="{!negoSettings.buNavigationDepth}" />
+                            </apex:pageBlockSectionItem> -->
+                        </apex:pageBlockSection>
+                        <apex:pageBlockSection title="Page Settings" collapsible="false" columns="2">
+                            <!-- open pages filter section by default -->
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Open_Pages_Filter_Section_by_Default__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Open_Pages_Filter_Section_by_Default__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Open_Pages_Filter_Section_by_Default__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Open_Pages_Filter_Section_by_Default__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Open_Pages_Filter_Section_by_Default__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputCheckbox value="{!negoSettings.openPagesFilterSectionByDefault}" />
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Manage_Assort_By_Personalized_Category__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Manage_Assort_By_Personalized_Category__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Manage_Assort_By_Personalized_Category__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Manage_Assort_By_Personalized_Category__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Manage_Assort_By_Personalized_Category__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputCheckbox value="{!negoSettings.manageAssortByPersonalizedCategory}" />
+                            </apex:pageBlockSectionItem>
+                        </apex:pageBlockSection>
+                        <apex:variable var="itemIndex" value="{!0}"/>
+                        <!-- <apex:pageBlockSection title="Price List Settings" collapsible="false" columns="1" id="pricelistSettings">
+<apex:repeat value="{!priceListSettingsWrapperList}" var="priceListSettingsWrapper" id="priceListSettingsWrapperList">
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Price_List_Init_Default_BU__c.inlineHelpText}">
+<apex:outputPanel layout="block" styleclass="slds-grid">
+<div class="slds-col slds-size_1-of-2" >
+<apex:outputPanel layout="block" styleClass="slds-form-element slds-form_inline" id="userRole">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.UserRole.Label}" for="userRoleInput" styleClass="slds-form-element__label slds-p-right_medium" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Price_List_Init_Default_BU__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Price_List_Init_Default_BU__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Price_List_Init_Default_BU__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<div class="slds-form-element__control" style="min-width:30em">
+<div class="slds-combobox_container">
+<div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-combobox-toggle-{!itemIndex} slds-combobox-role-toggle-{!itemIndex}" aria-expanded="true" aria-haspopup="listbox" role="combobox">
+<div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+<apex:inputText value="{!priceListSettingsWrapper.roleName}" id="userRoleInput" styleClass="slds-input slds-combobox__input" onfocus="setvalue(this); defaultToggleIndex = {!itemIndex}; hideAllLists(); searchUserRole(this.value);" onchange="setvalue(this); defaultToggleIndex = {!itemIndex}; hideAllLists(); searchUserRole(this.value);" onkeyup="setvalue(this); defaultToggleIndex = {!itemIndex}; hideAllLists(); searchUserRole(this.value);" />
+<div class="UR{!itemIndex}">
+<apex:inputHidden value="{!priceListSettingsWrapper.roleId}" id="userRoleHidden" />
+</div>
+</div>
+<apex:outputPanel id="userRoleSelectList" layout="block" styleClass="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid">
+<ul class="slds-listbox slds-listbox_vertical" role="presentation">
+<apex:repeat value="{!roleSelectList}" var="roleSelectOption">
+<li role="presentation" class="slds-listbox__item slds-text-align_left">
+<div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small" role="option" onclick="setValueUserRoleValue('{!roleSelectOption.value}', '{!roleSelectOption.label}');">
+<span class="slds-media__body">
+<span class="slds-truncate">
+<apex:outputText value="{!roleSelectOption.label}" />
+</span>
+</span>
+</div>
+</li>
+</apex:repeat>
+</ul>
+</apex:outputPanel>
+</div>
+</div>
+</div>
+</apex:outputPanel>
+</div>
+<div class="slds-col">
+<apex:outputPanel layout="block" styleClass=" slds-form-element slds-form_inline" id="BU">
+<apex:outputLabel value="{!$ObjectType.BusinessUnit__c.Label}" for="buInput" styleClass="slds-form-element__label slds-p-right_medium" />
+<div class="slds-form-element__control" style="min-width:30em">
+<div class="slds-combobox_container">
+<div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-combobox-toggle-{!itemIndex} slds-combobox-bu-toggle-{!itemIndex}" aria-expanded="true" aria-haspopup="listbox" role="combobox">
+<div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+<apex:inputText value="{!priceListSettingsWrapper.buName}" id="buInput" styleClass="slds-input slds-combobox__input" onfocus="setvalue(this); defaultToggleIndex = {!itemIndex}; searchBU(this.value);" onchange="setvalue(this); defaultToggleIndex = {!itemIndex}; hideAllLists(); searchBU(this.value);" onkeyup="setvalue(this); defaultToggleIndex = {!itemIndex}; hideAllLists(); searchBU(this.value);" />
+<div class="BU{!itemIndex}">
+<apex:inputHidden value="{!priceListSettingsWrapper.buId}" id="buHidden" />
+</div>
+</div>
+<apex:outputPanel id="buSelectList" layout="block" styleClass="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid">
+<ul class="slds-listbox slds-listbox_vertical" role="presentation">
+<apex:repeat value="{!buSelectList}" var="buSelectOption">
+<li role="presentation" class="slds-listbox__item slds-text-align_left">
+<div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small" role="option" onclick="setValueBuValue('{!buSelectOption.value}', '{!buSelectOption.label}');">
+<span class="slds-media__body">
+<span class="slds-truncate">
+<apex:outputText value="{!buSelectOption.label}" />
+</span>
+</span>
+</div>
+</li>
+</apex:repeat>
+</ul>
+</apex:outputPanel>
+</div>
+</div>
+</div>
+</apex:outputPanel>
+</div>
+</apex:outputPanel>
+</apex:pageBlockSectionItem>
+<apex:variable var="itemIndex" value="{!itemIndex + 1}" />
+</apex:repeat>
+</apex:pageBlockSection> -->
+                        <apex:pageBlockSection title="Grid Layout Settings" collapsible="false" columns="2">
+                            <!-- Assortment Matrix Grid Settings -->
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Grid_Layout__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Grid_Layout__c.Label}" for="assortmentMatrixGridLayout"/>
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Grid_Layout__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Grid_Layout__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Grid_Layout__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList id="assortmentMatrixGridLayout" value="{!negoSettings.assortmentMatrixGridLayout}" multiselect="false" size="1" required="false">
+                                    <apex:selectOptions value="{!gridSettingsLayoutsMap[$ObjectType.AssortmentDetail__c.Name]}"
+                                                        rendered="{!CONTAINS(gridSettingsLayoutsMapSerialized, prefix + 'AssortmentDetail__c')}" />
+                                    <apex:selectOption value="{!blankSelectOption}" rendered="{!!CONTAINS(gridSettingsLayoutsMapSerialized, prefix + 'AssortmentDetail__c')}"/>
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                            <!-- Assortment Matrix Target Grid Settings -->
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Target_Grid_Layout__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Target_Grid_Layout__c.Label}" for="assortmentMatrixTargetGridLayout"/>
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Target_Grid_Layout__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Target_Grid_Layout__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Target_Grid_Layout__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList id="assortmentMatrixTargetGridLayout" value="{!negoSettings.assortmentMatrixTargetGridLayout}" multiselect="false" size="1" required="false">
+                                    <apex:selectOptions value="{!gridSettingsLayoutsMap[$ObjectType.AssortmentDetail__c.Name]}" rendered="{!CONTAINS(gridSettingsLayoutsMapSerialized, prefix + 'AssortmentDetail__c')}" />
+                                    <apex:selectOption value="{!blankSelectOption}" rendered="{!!CONTAINS(gridSettingsLayoutsMapSerialized, prefix + 'AssortmentDetail__c')}"/>
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                            <!-- Commercial Plan Grid Settings -->
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Commercial_Plan_Grid_Layout__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Commercial_Plan_Grid_Layout__c.Label}" for="commercialPlanGridLayout"/>
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Commercial_Plan_Grid_Layout__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Commercial_Plan_Grid_Layout__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Commercial_Plan_Grid_Layout__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList id="commercialPlanGridLayout" value="{!negoSettings.commercialPlanGridLayout}" multiselect="false" size="1" required="false">
+                                    <apex:selectOptions value="{!gridSettingsLayoutsMap[$ObjectType.CommercialPlanDetail__c.Name]}" rendered="{!CONTAINS(gridSettingsLayoutsMapSerialized, prefix + 'CommercialPlanDetail__c')}" />
+                                    <apex:selectOption value="{!blankSelectOption}" rendered="{!!CONTAINS(gridSettingsLayoutsMapSerialized, prefix + 'CommercialPlanDetail__c')}"/>
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                            <!-- <apex:selectList id="higherLevelPackagingRecordTypeId" value="{!negoSettings.higherLevelPackagingRecordTypeId}" multiselect="false" size="1">
+<apex:selectOptions value="{!product2RecordTypesSelectOptions}" />
+</apex:selectList> -->
+                            <!-- OHide Unused Settings
+Product Switch Grid Settings
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Switch_Grid_Layout__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Switch_Grid_Layout__c.Label}" for="productSwitchGridLayout"/>
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Product_Switch_Grid_Layout__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Switch_Grid_Layout__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Switch_Grid_Layout__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:selectList id="productSwitchGridLayout" value="{!negoSettings.productSwitchGridLayout}" multiselect="false" size="1" required="false">
+<apex:selectOptions value="{!gridSettingsLayoutsMap[$ObjectType.Product2.Name]}" rendered="{!CONTAINS(gridSettingsLayoutsMapSerialized, 'Product2')}" />
+<apex:selectOption value="{!blankSelectOption}" rendered="{!!CONTAINS(gridSettingsLayoutsMapSerialized, 'Product2')}"/>
+</apex:selectList>
+</apex:pageBlockSectionItem>-->
+                            <!-- Assortment Budget Simulator Grid Settings -->
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Budget_Simulator_Grid_Layout__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Budget_Simulator_Grid_Layout__c.Label}"
+                                                      for="assortmentBudgetSimulatorGridLayout" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Assortment_Budget_Simulator_Grid_Layout__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Budget_Simulator_Grid_Layout__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Budget_Simulator_Grid_Layout__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList id="assortmentBudgetSimulatorGridLayout" value="{!negoSettings.assortmentBudgetSimulatorGridLayout}" multiselect="false" size="1" required="false">
+                                    <apex:selectOptions value="{!gridSettingsLayoutsMap[$ObjectType.Product2.Name]}" rendered="{!CONTAINS(gridSettingsLayoutsMapSerialized, 'Product2')}" />
+                                    <apex:selectOption value="{!blankSelectOption}" rendered="{!!CONTAINS(gridSettingsLayoutsMapSerialized, 'Product2')}"/>
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                            <!-- Assortment Matrix Comparator Grid Settings -->
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Comparator_Grid_Layout__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Comparator_Grid_Layout__c.Label}"
+                                                      for="assortmentMatrixComparatorGridLayout" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Comparator_Grid_Layout__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Comparator_Grid_Layout__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Comparator_Grid_Layout__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList id="assortmentMatrixComparatorGridLayout" value="{!negoSettings.assortmentMatrixComparatorGridLayout}" multiselect="false" size="1" required="false">
+                                    <apex:selectOptions value="{!gridSettingsLayoutsMap[$ObjectType.AssortmentDetail__c.Name]}" rendered="{!CONTAINS(gridSettingsLayoutsMapSerialized, prefix + 'AssortmentDetail__c')}" />
+                                    <apex:selectOption value="{!blankSelectOption}" rendered="{!!CONTAINS(gridSettingsLayoutsMapSerialized, prefix + 'AssortmentDetail__c')}"/>
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                            <!-- Product Selection PG-->
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Selection_PG_Grid_Layout__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Selection_PG_Grid_Layout__c.Label}" for="ProductSelectionPG"/>
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Product_Selection_PG_Grid_Layout__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Selection_PG_Grid_Layout__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Selection_PG_Grid_Layout__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList id="ProductSelectionPG" value="{!negoSettings.ProductSelectionPGGridLayout}" multiselect="false" size="1" required="false">
+                                    <apex:selectOptions value="{!gridSettingsLayoutsMap[$ObjectType.Product2.Name]}"
+                                                        rendered="{!CONTAINS(gridSettingsLayoutsMapSerialized, 'Product2')}" />
+                                    <apex:selectOption value="{!blankSelectOption}" rendered="{!!CONTAINS(gridSettingsLayoutsMapSerialized, 'Product2')}"/>
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                            <!-- Promo Calendar CPD -->
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Promo_Calendar_Grid_Layout__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Promo_Calendar_Grid_Layout__c.Label}" for="PromoCalendar"/>
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Promo_Calendar_Grid_Layout__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Promo_Calendar_Grid_Layout__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Promo_Calendar_Grid_Layout__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList id="PromoCalendar" value="{!negoSettings.PromoCalendarGridLayout}" multiselect="false" size="1" required="false">
+                                    <apex:selectOptions value="{!gridSettingsLayoutsMap[$ObjectType.CommercialPlanDetail__c.Name]}"
+                                                        rendered="{!CONTAINS(gridSettingsLayoutsMapSerialized, prefix + 'CommercialPlanDetail__c')}" />
+                                    <apex:selectOption value="{!blankSelectOption}" rendered="{!!CONTAINS(gridSettingsLayoutsMapSerialized, prefix + 'CommercialPlanDetail__c')}"/>
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                        </apex:pageBlockSection>
+                        <!-- Grid Settings Profiles -->
+                        <apex:pageBlockSection title="Grid Settings Profiles: Press Ctrl or Cmd to Select Profiles" collapsible="false" columns="2">
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Profile__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Profile__c.Label}" for="assortmentMatrixProfile"/>
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Profile__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Profile__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Profile__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList id="AssortmentMatrixProfile" value="{!negoSettings.assortmentMatrixProfile}" multiselect="true" size="3">
+                                    <apex:selectOptions value="{!Profiles}" />
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Target_Profile__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Target_Profile__c.Label}" for="assortmentMatrixTargetProfile"/>
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Target_Profile__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Target_Profile__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Target_Profile__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList id="AssortmentMatrixTargetProfile" value="{!negoSettings.assortmentMatrixTargetProfile}" multiselect="true" size="3">
+                                    <apex:selectOptions value="{!Profiles}" />
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                            <!-- OHide Unused Settings
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Switch_Profile__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Switch_Profile__c.Label}" for="productSwitchProfile"/>
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Product_Switch_Profile__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Switch_Profile__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Switch_Profile__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:selectList id="ProductSwitchProfile" value="{!negoSettings.productSwitchProfile}" multiselect="true" size="3">
+<apex:selectOptions value="{!Profiles}" />
+</apex:selectList>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Inno_Profile__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Inno_Profile__c.Label}" for="productInnoProfile"/>
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Product_Inno_Profile__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Inno_Profile__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Inno_Profile__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:selectList id="ProductInnoProfile" value="{!negoSettings.productInnoProfile}" multiselect="true" size="3">
+<apex:selectOptions value="{!Profiles}" />
+</apex:selectList>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Stop_Profile__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Stop_Profile__c.Label}" for="productStopProfile"/>
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Product_Stop_Profile__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Stop_Profile__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Stop_Profile__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:selectList id="ProductStopProfile" value="{!negoSettings.productStopProfile}" multiselect="true" size="3">
+<apex:selectOptions value="{!Profiles}" />
+</apex:selectList>
+</apex:pageBlockSectionItem>-->
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Budget_Simulator_Profile__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Budget_Simulator_Profile__c.Label}" for="assortmentBudgetSimulatorProfile"/>
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Assortment_Budget_Simulator_Profile__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Budget_Simulator_Profile__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Budget_Simulator_Profile__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList id="AssortmentBudgetSimulatorProfile" value="{!negoSettings.assortmentBudgetSimulatorProfile}" multiselect="true" size="3">
+                                    <apex:selectOptions value="{!Profiles}" />
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Comparator_Profile__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Comparator_Profile__c.Label}" for="assortmentMatrixComparatorProfile" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Comparator_Profile__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Comparator_Profile__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Assortment_Matrix_Comparator_Profile__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList id="AssortmentMatrixComparatorProfile" value="{!negoSettings.assortmentMatrixComparatorProfile}" multiselect="true" size="3">
+                                    <apex:selectOptions value="{!Profiles}" />
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                        </apex:pageBlockSection>
+                        <!-- Store Clustering -->
+                        <apex:pageBlockSection title="Store Clustering Settings" collapsible="false" columns="2">
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Update_P2_Clustering__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Update_P2_Clustering__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Allow_Update_P2_Clustering__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Update_P2_Clustering__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Update_P2_Clustering__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputCheckbox value="{!negoSettings.AllowUpdateP2Clustering}" label="{!P2}" />
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Update_P1_Clustering__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Update_P1_Clustering__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Allow_Update_P1_Clustering__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Update_P1_Clustering__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Update_P1_Clustering__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputCheckbox value="{!negoSettings.AllowUpdateP1Clustering}" label="{!P1}" />
+                            </apex:pageBlockSectionItem>
+                        </apex:pageBlockSection>
+                        <!-- Products Management -->
+                        <apex:pageBlockSection title="Products Management" collapsible="false" columns="2">
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Allowed_profiles_to_manage_Products__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allowed_profiles_to_manage_Products__c.Label}" for="allowedProfilesToManageProducts"/>
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Allowed_profiles_to_manage_Products__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Allowed_profiles_to_manage_Products__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allowed_profiles_to_manage_Products__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList id="AssortmentMatrixComparatorProfile" value="{!negoSettings.allowedProfilesToManageProducts}" multiselect="true" size="3">
+                                    <apex:selectOptions value="{!Profiles}" />
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Higher_Level_Packaging_Record_Type_Id__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Higher_Level_Packaging_Record_Type_Id__c.Label}" for="higherLevelPackagingRecordTypeId"/>
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Higher_Level_Packaging_Record_Type_Id__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Higher_Level_Packaging_Record_Type_Id__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Higher_Level_Packaging_Record_Type_Id__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList id="higherLevelPackagingRecordTypeId" value="{!negoSettings.higherLevelPackagingRecordTypeId}" multiselect="false" size="1">
+                                    <apex:selectOptions value="{!product2RecordTypesSelectOptions}" />
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                            <!--apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Override_Product_Name_with_AutoNum__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Override_Product_Name_with_AutoNum__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Override_Product_Name_with_AutoNum__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Override_Product_Name_with_AutoNum__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Override_Product_Name_with_AutoNum__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputCheckbox value="{!negoSettings.overrideProductNameWithAutoNum}" />
+                            </apex:pageBlockSectionItem-->
+                            <!--apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Name_Prefix__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Name_Prefix__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Product_Name_Prefix__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Name_Prefix__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Name_Prefix__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputText value="{!negoSettings.productNamePrefix}" />
+                            </apex:pageBlockSectionItem-->
+                            <!--apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Record_Types_for_NS_PG__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Record_Types_for_NS_PG__c.Label}" for="productRecordTypesforNSPG"/>
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Product_Record_Types_for_NS_PG__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Record_Types_for_NS_PG__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Product_Record_Types_for_NS_PG__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:selectList id="productRecordTypesforNSPG" value="{!negoSettings.productRecordTypesforNSPG}" multiselect="true" size="6">
+                                    <apex:selectOptions value="{!product2RecordTypesSelectOptions}" />
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem-->
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Copy_Product_to_PG_From_Sellin__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Copy_Product_to_PG_From_Sellin__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Allow_Copy_Product_to_PG_From_Sellin__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Copy_Product_to_PG_From_Sellin__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Copy_Product_to_PG_From_Sellin__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputCheckbox value="{!negoSettings.AllowCopyProducttoPGFromSellin}" />
+                            </apex:pageBlockSectionItem>
+                        </apex:pageBlockSection>
+                        <!-- OHide Unused Settings
+Contract Balancing
+<apex:pageBlockSection title="Contract Balancing Settings" collapsible="false" columns="2">
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.TO_gap_Tolerence_neg__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.TO_gap_Tolerence_neg__c.Label}" for="tOGapTolerenceNegative"/>
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.TO_gap_Tolerence_neg__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.TO_gap_Tolerence_neg__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.TO_gap_Tolerence_neg__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputText id="tOGapTolerenceNegative" value="{!negoSettings.tOGapTolerenceNegative}" required="true" onkeyup="decimalOnly(this);">
+</apex:inputText>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.TO_gap_Tolerence_Pos__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.TO_gap_Tolerence_Pos__c.Label}" for="tOGapTolerencePositive"/>
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.TO_gap_Tolerence_neg__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.TO_gap_Tolerence_Pos__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.TO_gap_Tolerence_Pos__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputText id="tOGapTolerencePositive" value="{!negoSettings.tOGapTolerencePositive}" required="true" onkeyup="decimalOnly(this);">
+</apex:inputText>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Coop_gap_Tolerence_neg__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Coop_gap_Tolerence_neg__c.Label}" for="coopGapTolerenceNegative"/>
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.TO_gap_Tolerence_neg__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Coop_gap_Tolerence_neg__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Coop_gap_Tolerence_neg__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputText id="coopGapTolerenceNegative" value="{!negoSettings.coopGapTolerenceNegative}" required="true" onkeyup="decimalOnly(this);">
+</apex:inputText>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Coop_gap_Tolerence_pos__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Coop_gap_Tolerence_pos__c.Label}" for="coopGapTolerencePositive"/>
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Coop_gap_Tolerence_pos__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Coop_gap_Tolerence_pos__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Coop_gap_Tolerence_pos__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputText id="coopGapTolerencePositive" value="{!negoSettings.coopGapTolerencePositive}" required="true" onkeyup="decimalOnly(this);">
+</apex:inputText>
+</apex:pageBlockSectionItem>
+</apex:pageBlockSection>-->
+                        <!-- OHide Unused Settings
+Dispatching
+<apex:pageBlockSection title="Dispatching" collapsible="false" columns="2">
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Dispatch_On_Higher_Level_Packaging__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Dispatch_On_Higher_Level_Packaging__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Dispatch_On_Higher_Level_Packaging__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Dispatch_On_Higher_Level_Packaging__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Dispatch_On_Higher_Level_Packaging__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.dispatchOnHLP}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Dispatch_Head_On_Condition_Level__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Dispatch_Head_On_Condition_Level__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Dispatch_Head_On_Condition_Level__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Dispatch_Head_On_Condition_Level__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Dispatch_Head_On_Condition_Level__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.dispatchHeadOnConditionLevel}" />
+</apex:pageBlockSectionItem>
+</apex:pageBlockSection>-->
+                        <!-- OHide Unused Settings
+Invoicing
+<apex:pageBlockSection title="Invoicing" collapsible="false" columns="1">
+<apex:pageBlockSection collapsible="false" columns="2">
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Updating_Invoice_Date_On_Print__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Updating_Invoice_Date_On_Print__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Allow_Updating_Invoice_Date_On_Print__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Updating_Invoice_Date_On_Print__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Updating_Invoice_Date_On_Print__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.allowUpdatingInvoiceDateOnPrint}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Updating_Print_Date_On_Print__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Updating_Print_Date_On_Print__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Allow_Updating_Print_Date_On_Print__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Updating_Print_Date_On_Print__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_Updating_Print_Date_On_Print__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.allowUpdatingPrintDateOnPrint}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Invoice_Max_Closing_Day__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Invoice_Max_Closing_Day__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Invoice_Max_Closing_Day__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Invoice_Max_Closing_Day__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Invoice_Max_Closing_Day__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:input html-min="1" html-max="31" value="{!negoSettings.invoiceMaxClosingDay}" styleClass="slds-input" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Dispatch_Aggregate_Mode__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Dispatch_Aggregate_Mode__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Dispatch_Aggregate_Mode__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Dispatch_Aggregate_Mode__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Dispatch_Aggregate_Mode__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.dispatchAggregateMode}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Is_Invoice_Amount_Distributed__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Is_Invoice_Amount_Distributed__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Is_Invoice_Amount_Distributed__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Is_Invoice_Amount_Distributed__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Is_Invoice_Amount_Distributed__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.isInvoiceAmountDistributed}" />
+</apex:pageBlockSectionItem>
+Monthly Selling Product
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Sellin_Aggregate_Mode__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Sellin_Aggregate_Mode__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Sellin_Aggregate_Mode__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Sellin_Aggregate_Mode__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Sellin_Aggregate_Mode__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:selectList label="{!$ObjectType.NegoptimCustomSettings__c.fields.Sellin_Aggregate_Mode__c.Label}" value="{!negoSettings.sellinAggregateMode}" multiselect="false" size="1">
+<apex:selectOptions value="{!sellinAggregateMode}" />
+</apex:selectList>
+</apex:pageBlockSectionItem>
+</apex:pageBlockSection>
+<apex:pageBlockSection collapsible="false" columns="1" title="Invoice Reminder">
+<apex:pageBlockSection columns="2">
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_BU_Managed__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_BU_Managed__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Reminder_BU_Managed__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_BU_Managed__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_BU_Managed__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:selectList value="{!negoSettings.reminderBUManagedList}" multiselect="true" size="5">
+<apex:selectOptions value="{!GroupsBU}" />
+</apex:selectList>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Level_of_reminder_managed__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Level_of_reminder_managed__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Level_of_reminder_managed__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Level_of_reminder_managed__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_BU_Managed__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:selectList label="{!$ObjectType.NegoptimCustomSettings__c.fields.Level_of_reminder_managed__c.Label}" id="reminderLevel" value="{!negoSettings.reminderLevel}" multiselect="false" size="1" required="false">
+<apex:selectOptions value="{!ReminderLevels}" />
+</apex:selectList>
+</apex:pageBlockSectionItem>
+</apex:pageBlockSection>
+<apex:pageBlockSection columns="3">
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder1__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder1__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Reminder1__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder1__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder1__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:input type="number" id="reminder1" value="{!negoSettings.reminderValue1}" required="false" styleClass="slds-input">
+</apex:input>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder2__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder2__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Reminder2__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder2__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder2__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:input type="number" id="reminder2" value="{!negoSettings.reminderValue2}" required="false" styleClass="slds-input">
+</apex:input>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder3__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder3__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Reminder3__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder3__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder3__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:input type="number" id="reminder3" value="{!negoSettings.reminderValue3}" required="false" styleClass="slds-input">
+</apex:input>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description1__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description1__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description1__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description1__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description1__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputTextArea id="reminderDescription1" label="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description1__c.Label}" style="width: 100%" value="{!negoSettings.reminderDescription1}" rows="5" cols="50" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description2__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description2__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description2__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description2__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description2__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputTextArea id="reminderDescription2" label="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description2__c.Label}" style="width: 100%" value="{!negoSettings.reminderDescription2}" rows="5" cols="50" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description3__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description3__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description3__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description3__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description3__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputTextArea id="reminderDescription3" label="{!$ObjectType.NegoptimCustomSettings__c.fields.Reminder_Description3__c.Label}" style="width: 100%" value="{!negoSettings.reminderDescription3}" rows="5" cols="50" />
+</apex:pageBlockSectionItem>
+</apex:pageBlockSection>
+</apex:pageBlockSection>
+</apex:pageBlockSection>-->
+                        <!-- OHide Unused Settings
+<apex:pageBlockSection title="Contract update filter" collapsible="false" columns="3">
+<apex:pageBlockSectionItem >
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Profile__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Profile__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Profile__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Profile__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:selectList label="{!$ObjectType.NegoptimCustomSettings__c.fields.Profile__c.Label}" id="groupBU3" value="{!negoSettings.profile}" multiselect="false" size="1">
+<apex:selectOptions value="{!Profiles}" />
+</apex:selectList>
+</apex:pageBlockSectionItem>
+</apex:pageBlockSection> -->
+                        <!-- OHide Unused Settings
+<apex:pageBlockSection title="Dates Overlap Control on BU level" collapsible="false" columns="1">
+<apex:pageBlockSectionItem >
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_contract_overlap_dates__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.Allow_contract_overlap_dates__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_contract_overlap_dates__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.Allow_contract_overlap_dates__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.datesOverlapControlBU}" />
+</apex:pageBlockSectionItem>
+</apex:pageBlockSection> -->
+                        <!-- OHide Unused Settings
+<apex:pageBlockSection title="BU Record type for Distribution" collapsible="false" columns="3">
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.BU_Record_types__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.BU_Record_types__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.BU_Record_types__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.BU_Record_types__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.BU_Record_types__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:selectcheckboxes id="type" value="{!negoSettings.selectedBURTList}" layout="pageDirection" required="false">
+<apex:selectOptions value="{!BURecordTypes}" />
+</apex:selectcheckboxes>
+</apex:pageBlockSectionItem>
+</apex:pageBlockSection> -->
+                        <apex:pageBlockSection title="Advanced Settings" collapsible="false" columns="2">
+                            <apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.csv_Date_Format__c.inlineHelpText}">
+                                <apex:outputPanel >
+                                    <apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.csv_Date_Format__c.Label}" />
+                                    <apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.csv_Date_Format__c.inlineHelpText)}">
+                                        <span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.csv_Date_Format__c.inlineHelpText}">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+                                            </svg>
+                                            <span class="slds-assistive-text">
+                                                <apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.csv_Date_Format__c.inlineHelpText}" />
+                                            </span>
+                                        </span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <apex:inputText id="csvDateFormat" value="{!negoSettings.csvDateFormat}" required="false" />
+                            </apex:pageBlockSectionItem>
+                        </apex:pageBlockSection>
+                        <!-- OHide Unused Settings
+Mass Batch Form Settings
+<apex:pageBlockSection title="Mass Batch Form Settings" collapsible="false" columns="2">
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractTOProcedures__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractTOProcedures__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractTOProcedures__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractTOProcedures__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractTOProcedures__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.MBF_Section_ContractTOProcedures}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractDuplication__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractDuplication__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractDuplication__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractDuplication__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractDuplication__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.MBF_Section_ContractDuplication}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_LastActiveContractProcedure__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_LastActiveContractProcedure__c.Label}"/>
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_LastActiveContractProcedure__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_LastActiveContractProcedure__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_LastActiveContractProcedure__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.MBF_Section_LastActiveContractProcedure}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractRates__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractRates__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractRates__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractRates__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractRates__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.MBF_Section_ContractRates}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_GroupScanAndSynchro__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_GroupScanAndSynchro__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_GroupScanAndSynchro__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_GroupScanAndSynchro__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_GroupScanAndSynchro__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.MBF_Section_GroupScanAndSynchro}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_PromoDetailProcedure__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_PromoDetailProcedure__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_PromoDetailProcedure__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_PromoDetailProcedure__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_PromoDetailProcedure__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.MBF_Section_PromoDetailProcedure}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractCounterpartyDetail__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractCounterpartyDetail__c.Label}"/>
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractCounterpartyDetail__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractCounterpartyDetail__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_ContractCounterpartyDetail__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.MBF_Section_ContractCounterpartyDetail}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_MarketDataCollection__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_MarketDataCollection__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_MarketDataCollection__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_MarketDataCollection__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_MarketDataCollection__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.MBF_Section_MarketDataCollection}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_AssortmentSFPlanning__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_AssortmentSFPlanning__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_AssortmentSFPlanning__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_AssortmentSFPlanning__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_AssortmentSFPlanning__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.MBF_Section_AssortmentSFPlanning}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_SellInProcedure__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_SellInProcedure__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_SellInProcedure__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_SellInProcedure__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_SellInProcedure__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.MBF_Section_SellInProcedure}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_InvoiceReminder__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_InvoiceReminder__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_InvoiceReminder__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_InvoiceReminder__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_InvoiceReminder__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.MBF_Section_InvoiceReminder}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_MassDistribution__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_MassDistribution__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_MassDistribution__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_MassDistribution__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_MassDistribution__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.MBF_Section_MassDistribution}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_CallingWebServices__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_CallingWebServices__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_CallingWebServices__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_CallingWebServices__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_CallingWebServices__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.MBF_Section_CallingWebServices}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_Batches__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_Batches__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_Batches__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_Batches__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_Batches__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.MBF_Section_Batches}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_PenaltiesProcedure__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_PenaltiesProcedure__c.Label}" />
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_PenaltiesProcedure__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_PenaltiesProcedure__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_PenaltiesProcedure__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.MBF_Section_PenaltiesProcedure}" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem helpText="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_RecalculateAssortmentDetail__c.inlineHelpText}">
+<apex:outputPanel >
+<apex:outputLabel value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_RecalculateAssortmentDetail__c.Label}"/>
+<apex:outputPanel rendered="{!!ISBLANK($ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_RecalculateAssortmentDetail__c.inlineHelpText)}">
+<span class="slds-button slds-button_icon slds-button_icon-small" title="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_RecalculateAssortmentDetail__c.inlineHelpText}">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}" />
+</svg>
+<span class="slds-assistive-text">
+<apex:outputText value="{!$ObjectType.NegoptimCustomSettings__c.fields.MBF_Section_RecalculateAssortmentDetail__c.inlineHelpText}" />
+</span>
+</span>
+</apex:outputPanel>
+</apex:outputPanel>
+<apex:inputCheckbox value="{!negoSettings.MBF_Section_RecalculateAssortmentDetail}" />
+</apex:pageBlockSectionItem>
+</apex:pageBlockSection>-->
+                    </apex:pageBlock>
+                </div>
+                <apex:actionFunction name="searchUserRole" action="{!searchUserRole}" reRender="userRoleSelectList, apexMessages" oncomplete="showListUR();">
+                    <apex:param name="roleSearchTerm" assignTo="{!roleSearchTerm}" value=""/>
+                </apex:actionFunction>
+                <apex:actionFunction name="searchBU" action="{!searchBU}" reRender="buSelectList, apexMessages" oncomplete="showListBU();">
+                    <apex:param name="buSearchTerm" assignTo="{!buSearchTerm}" value=""/>
+                </apex:actionFunction>
+            </apex:form>
+            <script>
+            var defaultToggleIndex;
+            function goToGridSettingsJS(layoutClass) {
+                var templateName = document.getElementsByClassName(layoutClass)[0].value;
+                if (templateName) {
+                    let prefix = `{!prefix}`;
+                    window.open('/lightning/n/' + prefix + 'Grid_Settings_Manager?c__templateName=' + templateName, '_blank');
+                }
+            }
+            function decimalOnly(e){
+                e.value = e.value.replace(/[^0-9\.]/g,'');
+                if(e.value.split('.').length>2) e.value = e.value.replace(/\.+$/,"");
+            };
+            let focusedSelectList;
+            function selectOption(selectedListId, defaultListId, inputClassName) {
+                let list = document.getElementById(defaultListId);
+                let selectedElement = [];
+                for(let item of list.options) {
+                    if(item.selected) {
+                        selectedElement.push(item);
+                    }
+                }
+                if (selectedElement.length > 0) {
+                    let SelectedOptions = document.getElementById(selectedListId);
+                    for(let item of selectedElement) {
+                        item.remove();
+                        item.selected = false;
+                        SelectedOptions.appendChild(item);
+                    }
+                    let values =[];
+                    for(let item of SelectedOptions.options) {
+                        values.push(item.value);
+                    }
+                    document.querySelector('.' + inputClassName).value = values.join(',');
+                }
+            }
+            function removeOption(selectedListId, defaultListId, inputClassName) {
+                let SelectedKPI = document.getElementById(selectedListId);
+                let selectedElement = [];
+                for(let item of SelectedKPI.options) {
+                    if(item.selected) {
+                        selectedElement.push(item);
+                    }
+                }
+                if (selectedElement.length > 0) {
+                    let list = document.getElementById(defaultListId);
+                    for(let item of selectedElement) {
+                        item.remove();
+                        item.selected = false;
+                        list.appendChild(item);
+                    }
+                    let values =[];
+                    for(let item of SelectedKPI.options) {
+                        values.push(item.value);
+                    }
+                    document.querySelector('.' + inputClassName).value = values.join(',');
+                }
+            }
+            function focusOn(who, selectedListId, defaultListId) {
+                this.focusedSelectList = who;
+                if (who == 'Old'){
+                    let DefaultOptions = document.getElementById(defaultListId);
+                    for(let item of DefaultOptions.options) {
+                        item.selected = false;
+                    }
+                } else {
+                    let SelectedOptions = document.getElementById(selectedListId);
+                    for(let item of SelectedOptions.options) {
+                        item.selected = false;
+                    }
+                }
+            }
+            function moveUp(selectedListId, inputClassName) {
+                if (this.focusedSelectList == 'Old') {
+                    let SelectedOptions = document.getElementById(selectedListId);
+                    let length = SelectedOptions.options.length;
+                    let options = [];
+                    let selectedElement = [];
+                    for(let item of SelectedOptions.options) {
+                        if (item.selected) {
+                            selectedElement.push(item);
+                        }
+                        options.push(item);
+                    }
+                    if (options.length == 0) {
+                        return;
+                    }
+                    let oldIndexList = [];
+                    for (let k = 0; k < length; k++) {
+                        for (let l = 0; l < selectedElement.length; l++) {
+                            if (options[k].value == selectedElement[l].value) {
+                                oldIndexList[l] = k;
+                                break;
+                            }
+                        }
+                    }
+                    oldIndexList.sort(function (a, b) {
+                        return a - b
+                    });
+                    for (let t = 0; t < oldIndexList.length; t++) {
+                        options = array_move_one_item(options, oldIndexList[t], oldIndexList[t] - 1);
+                    }
+                    SelectedOptions.innerHTML = "";
+                    let values = [];
+                    for (let index=0; index < length; index++) {
+                        SelectedOptions.appendChild(options[index]);
+                        values.push(options[index].value);
+                    }
+                    document.querySelector('.' + inputClassName).value = values.join(',');
+                }
+            }
+            function moveDown(selectedListId, inputClassName) {
+                if (this.focusedSelectList == 'Old') {
+                    let SelectedOptions = document.getElementById(selectedListId);
+                    let length = SelectedOptions.options.length;
+                    let options = [];
+                    let selectedElement = [];
+                    for(let item of SelectedOptions.options) {
+                        if (item.selected) {
+                            selectedElement.push(item);
+                        }
+                        options.push(item);
+                    }
+                    if (options.length == 0) {
+                        return;
+                    }
+                    let oldIndexList = [];
+                    for (let k = 0; k < options.length; k++) {
+                        for (let l = 0; l < selectedElement.length; l++) {
+                            if (options[k].value == selectedElement[l].value) {
+                                oldIndexList[l] = k;
+                                break;
+                            }
+                        }
+                    }
+                    oldIndexList.sort(function (a, b) {
+                        return b - a;
+                    });
+                    for (let t = 0; t < oldIndexList.length; t++) {
+                        options = array_move_one_item(options, oldIndexList[t], oldIndexList[t] + 1);
+                    }
+                    let values = [];
+                    SelectedOptions.innerHTML = "";
+                    for (let index=0; index < length; index++) {
+                        SelectedOptions.appendChild(options[index]);
+                        values.push(options[index].value);
+                    }
+                    document.querySelector('.' + inputClassName).value = values.join(',');
+                }
+            }
+            function array_move_one_item(arr, old_index, new_index){
+                if (new_index < 0) {
+                    new_index = 0;
+                }
+                if (new_index > arr.length) {
+                    new_index = arr.length;
+                }
+                arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+                return arr;
+            }
+            function setValueUserRoleValue(value, label){
+                let elemt = document.querySelector('.UR' + defaultToggleIndex);
+                if (elemt) {
+                    elemt.parentElement.children[0].value = label;
+                    elemt = elemt.children[0];
+                    if (elemt) {
+                        elemt.value = value;
+                    }
+                }
+                hideAllLists();
+            }
+            function setValueBuValue(value, label){
+                let elemt = document.querySelector('.BU' + defaultToggleIndex);
+                if (elemt) {
+                    elemt.parentElement.children[0].value = label;
+                    elemt = elemt.children[0];
+                    if (elemt) {
+                        elemt.value = value;
+                    }
+                }
+                hideAllLists();
+            }
+            function hideAllLists() {
+                let elems = document.querySelectorAll('[class*="slds-combobox-toggle-"].slds-is-open , [class*="slds-combobox-toggle-"].slds-is-open');
+                for (let index = 0; elems && index < elems.length; index++) {
+                    elems[index].classList.remove('slds-is-open');
+                }
+            }
+            function showListUR(){
+                hideAllLists();
+                let elm = document.querySelector('.slds-combobox-role-toggle-' + defaultToggleIndex);
+                if(elm) {
+                    elm.classList.add('slds-is-open');
+                }
+            }
+            function showListBU(){
+                hideAllLists();
+                let elems = document.querySelectorAll('[class*="slds-combobox-toggle-"].slds-is-open');
+                for (let index = 0; elems && index < elems.length; index++) {
+                    elems[index].classList.remove('slds-is-open');
+                }
+                let elm = document.querySelector('.slds-combobox-bu-toggle-' + defaultToggleIndex);
+                if (elm) {
+                    elm.classList.add('slds-is-open');
+                }
+            }
+            function setvalue(element) {
+                if (element && !element.value) {
+                    element.nextElementSibling.children[0].value = '';
+                }
+            }
+            </script>
+        </body>
+    </html>
+</apex:page>

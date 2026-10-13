@@ -1,0 +1,12 @@
+<template>
+    <div>
+        <lightning-combobox label={labels.LBL_Type} options={typeOptions} onchange={handleSelectedType}
+            value={recordType}>
+        </lightning-combobox>
+    </div>
+    <div>
+        <lightning-combobox label={labels.LBL_FileDirectorySection_TableSubTitle} options={subTypeOptions}
+            onchange={handleSelectedSubType}>
+        </lightning-combobox>
+    </div>
+</template>

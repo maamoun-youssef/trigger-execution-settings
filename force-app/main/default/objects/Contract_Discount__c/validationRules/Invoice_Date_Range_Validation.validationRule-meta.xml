@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Invoice_Date_Range_Validation</fullName>
+    <active>false</active>
+    <description>The invoice date should fall between the start date and the end date</description>
+    <errorConditionFormula>Disc_BDate__c   &gt;   first_invoice_date__c   ||   first_invoice_date__c   &gt;    Disc_EDate__c</errorConditionFormula>
+    <errorDisplayField>first_invoice_date__c</errorDisplayField>
+    <errorMessage>Discount invoice first date must be between the start date and end date.</errorMessage>
+</ValidationRule>

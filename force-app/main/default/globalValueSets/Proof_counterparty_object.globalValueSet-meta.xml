@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Online publishing w/o approval</fullName>
+        <default>false</default>
+        <label>Online publishing w/o approval</label>
+    </customValue>
+    <customValue>
+        <fullName>Online publishing with approval</fullName>
+        <default>false</default>
+        <label>Online publishing with approval</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Plan</fullName>
+        <default>false</default>
+        <label>Merch Plan</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Schema</fullName>
+        <default>false</default>
+        <label>Merch Schema</label>
+    </customValue>
+    <customValue>
+        <fullName>Photo Event</fullName>
+        <default>true</default>
+        <label>Photo Event</label>
+    </customValue>
+    <customValue>
+        <fullName>Photo Shelf</fullName>
+        <default>false</default>
+        <label>Photo Shelf</label>
+    </customValue>
+    <customValue>
+        <fullName>Photo Shop Window</fullName>
+        <default>false</default>
+        <label>Photo Shop Window</label>
+    </customValue>
+    <customValue>
+        <fullName>Listing Assortment</fullName>
+        <default>false</default>
+        <label>Listing Assortment</label>
+    </customValue>
+    <customValue>
+        <fullName>Listing Detention</fullName>
+        <default>false</default>
+        <label>Listing Detention</label>
+    </customValue>
+    <customValue>
+        <fullName>Listing Sales</fullName>
+        <default>false</default>
+        <label>Listing Sales</label>
+    </customValue>
+    <customValue>
+        <fullName>Listing Stock</fullName>
+        <default>false</default>
+        <label>Listing Stock</label>
+    </customValue>
+    <description>Define the objects (photo, listing, online publishing, ...) that will have to be used to proof your execution of the negotiated counterparty</description>
+    <masterLabel>Counterparty object</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

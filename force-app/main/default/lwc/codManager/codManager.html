@@ -1,0 +1,1848 @@
+<template>
+    <div class="mainDiv slds-is-relative">
+        <div class="mainContainer">
+            <div class="slds-grid pageHeader slds-p-horizontal_medium slds-p-vertical_small slds-page-header ">
+                <div class="slds-col slds-has-flexi-truncate">
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div class="slds-media__body slds-p-around_x-small slds-grid slds-p-left_none">
+                            <div class="slds-border_right">
+                                <h2 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                    {labels.LBL_Connect_COD_Manager_Title}
+                                </h2>
+                            </div>
+                            <div class="slds-m-horizontal_small badgeDiv">
+                                <span class="slds-badge badgeDiv active-btn" onclick={toggleActive}>
+                                    {labels.LBL_Active_GL}
+                                </span>
+                            </div>
+                            <div class="badgeDiv">
+                                <span class="slds-badge badgeDiv inactive-btn" onclick={toggleInactive}>
+                                    {labels.LBL_Inactive}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <lightning-input class="slds-m-around_xx-small" variant="label-hidden" type="text"
+                        style="margin-top: 1.6% !important;min-width:200px !important;" value={searchTerm}
+                        onchange={searchContacts} placeholder={labels.LBL_Connect_Contact_Search}
+                        disabled={isSearchDisabled}>
+                    </lightning-input>
+                    <lightning-button lwc:if={allowNewContact}
+                        class="slds-button  slds-m-around_xx-small slds-m-right_none addButton"
+                        label={labels.LBL_Connect_Add_Contact} variant="brand" onclick={handleNewContact}
+                        style=" margin-right: 1.7%;">
+                    </lightning-button>
+                </div>
+            </div>
+            <div class="pageBody">
+                <template lwc:if={isLoading}>
+                    <div class="slds-spinner_container greyBg">
+                        <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+                    </div>
+                </template>
+                <template lwc:else>
+                    <div lwc:if={isEmpty} class="emptyBody">
+                        <div class="emptyContainer slds-m-top_large">
+                            <div class="emptyIconDiv">
+                                <img src={icons.emptyIcon} />
+                            </div>
+                            <div class="emptyTitle slds-page-header__title">
+                                {labels.LBL_Connect_Empty_Title}
+                            </div>
+                            <div class="emptySubtitle">
+                                {labels.LBL_Connect_Empty_Subtitle}
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div lwc:ref="tileContainer" class="tile-container ">
+                            <template for:each={contactList} for:item="currentContact" for:index="contactIndex">
+                                <div key={currentContact.id} class="tile slds-p-around_medium" data-index={contactIndex}
+                                    style={cardStyle} onclick={openContactPanel} if:true={currentContact}>
+                                    <div data-index={contactIndex} style="overflow: hidden;">
+                                        <div data-index={contactIndex} class="tile-image"
+                                            style={currentContact.imageUrl}>
+                                        </div>
+                                        <div data-index={contactIndex}>
+                                            <div data-index={contactIndex}
+                                                class="slds-m-bottom_small slds-grid slds-wrap"
+                                                style="float:left;width:55%;">
+                                                <div class="slds-size_1-of-1" data-index={contactIndex}>
+                                                    <p data-index={contactIndex} class="tile-Name slds-truncate"
+                                                        title={currentContact.name}>{currentContact.name}</p>
+                                                </div>
+                                                <div data-index={contactIndex}
+                                                    class="slds-size_1-of-1 slds-grid slds-grid_vertical-align-center">
+                                                    <div data-index={contactIndex}>
+                                                        <img src={icons.caseIcon} data-index={contactIndex}
+                                                            alt="Case Icon" class="custom-icon slds-m-right_x-small" />
+                                                    </div>
+                                                    <div data-index={contactIndex} class="tile-Job">
+                                                        {currentContact.title}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-index={contactIndex}>
+                                        <template lwc:if={currentContact.isMailbox}>
+                                            <div class="slds-m-bottom_xx-small" data-index={contactIndex}>
+                                                <span data-index={contactIndex}><img src={icons.emailIcon}
+                                                        data-index={contactIndex} alt="Email Icon"
+                                                        class="custom-icon" /></span>
+                                                <span data-index={contactIndex} style="font-weight: bold;"
+                                                    class="slds-m-left_x-small slds-m-right_xx-small">
+                                                    {labels.LBL_Email}
+                                                </span>
+                                                <span data-index={contactIndex}
+                                                    class="slds-p-left_x-small tile-Summary">
+                                                    {currentContact.email}
+                                                </span>
+                                                <template if:false={currentContact.isEmailVerified}>
+                                                    <span data-index={contactIndex}
+                                                        class="slds-p-left_x-small email-not-verified">
+                                                        {labels.LBL_NotVerified}
+                                                    </span>
+                                                </template>
+                                            </div>
+                                            <div class="slds-m-bottom_xx-small" data-index={contactIndex}>
+                                                <span data-index={contactIndex}><img src={icons.faxIcon}
+                                                        data-index={contactIndex} alt="Fax Icon"
+                                                        class="custom-icon" /></span>
+                                                <span data-index={contactIndex} style="font-weight: bold;"
+                                                    class="slds-m-left_x-small slds-m-right_xx-small">
+                                                    {labels.LBL_Fax}
+                                                </span>
+                                                <span data-index={contactIndex}
+                                                    class="slds-p-left_x-small tile-Summary">
+                                                    {currentContact.fax}
+                                                </span>
+                                            </div>
+                                            <div class="slds-m-bottom_xx-small" data-index={contactIndex}>
+                                                <span data-index={contactIndex}><img src={icons.infoIcon}
+                                                        data-index={contactIndex} alt="Info Icon"
+                                                        class="custom-icon" /></span>
+                                                <span data-index={contactIndex} style="font-weight: bold;"
+                                                    class="slds-m-left_x-small slds-m-right_xx-small">{labels.LBL_Invoice_Recipient}</span>
+                                                <div class="slds-checkbox slds-p-left_x-small tile-Summary"
+                                                    style="width:fit-content" data-index={contactIndex}>
+                                                    <input type="checkbox" value={currentContact.isInvoiceRecipient}
+                                                        checked={currentContact.isInvoiceRecipient}
+                                                        data-index={contactIndex} />
+                                                    <label class="slds-checkbox__label" data-index={contactIndex}>
+                                                        <span class="slds-checkbox_faux"
+                                                            data-index={contactIndex}></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </template>
+                                        <template lwc:else for:each={currentContact.summaryFields} for:item='field'>
+                                            <div class="slds-m-bottom_xx-small" data-index={contactIndex}
+                                                key={field.fieldName}>
+                                                <span data-index={contactIndex}>
+                                                    <template lwc:if={field.isEmail}>
+                                                        <img src={icons.emailIcon} data-index={contactIndex}
+                                                            alt="Email Icon" class="custom-icon" />
+                                                    </template>
+                                                    <template lwc:elseif={field.isPhone}>
+                                                        <img src={icons.telephoneIcon} data-index={contactIndex}
+                                                            alt="Telephone Icon" class="custom-icon" />
+                                                    </template>
+                                                    <template lwc:else>
+                                                        <img src={icons.infoIcon} data-index={contactIndex}
+                                                            alt="Info Icon" class="custom-icon" />
+                                                    </template>
+                                                    <span data-index={contactIndex} style="font-weight: bold;"
+                                                        class="slds-m-left_x-small slds-m-right_xx-small">
+                                                        {field.fieldLabel}
+                                                    </span>
+                                                    <span data-index={contactIndex}
+                                                        class="slds-p-left_x-small tile-Summary">
+                                                        <lightning-formatted-number lwc:if={field.isNumberField}
+                                                            maximum-fraction-digits={field.scale}
+                                                            value={field.fieldValue}>
+                                                        </lightning-formatted-number>
+                                                        <a lwc:elseif={field.isReference} href={field.link}
+                                                            target="_blank" data-index={contactIndex}>
+                                                            {field.fieldValue}</a>
+                                                        <lightning-formatted-date-time lwc:elseif={field.isDate}
+                                                            value={field.fieldValue} year="numeric" month="2-digit"
+                                                            day="2-digit"></lightning-formatted-date-time>
+                                                        <template lwc:elseif={field.isPicklist}>
+                                                            {field.fieldOutputValue}
+                                                        </template>
+                                                        <template lwc:elseif={field.isBoolean}>
+                                                            <div class="slds-checkbox" style="width:fit-content"
+                                                                data-index={contactIndex}>
+                                                                <input type="checkbox" value={field.fieldValue}
+                                                                    checked={field.fieldValue}
+                                                                    data-index={contactIndex} />
+                                                                <label class="slds-checkbox__label"
+                                                                    data-index={contactIndex}>
+                                                                    <span class="slds-checkbox_faux"
+                                                                        data-index={contactIndex}></span>
+                                                                </label>
+                                                            </div>
+                                                        </template>
+                                                        <template lwc:else>{field.fieldValue}</template>
+                                                        <template lwc:if={field.isEmail}>
+                                                            <template if:false={currentContact.isEmailVerified}>
+                                                                <span class="slds-p-left_x-small email-not-verified">
+                                                                    {labels.LBL_NotVerified}
+                                                                </span>
+                                                            </template>
+                                                        </template>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <div data-index={contactIndex} class="tile-icons-container"
+                                        if:false={currentContact.isMailbox}>
+                                        <!-- <lightning-icon data-index={contactIndex} icon-name="utility:preview"
+                                            alternative-text="preview" title="preview" size="x-small" class="tile-icon">
+                                        </lightning-icon> -->
+                                        <div class="icon-container slds-m-right_small" data-index={contactIndex}>
+                                            <img src={icons.previewIcon} data-index={contactIndex} alt="Preview Icon"
+                                                class="custom-icon" />
+                                        </div>
+                                        <!--  <lightning-icon data-index={contactIndex} icon-name="utility:app_web_messaging"
+                                                alternative-text="app_web_messaging" title="messaging" size="x-small"
+                                                class="tile-icon">
+                                            </lightning-icon> -->
+                                        <div class="icon-container slds-m-right_small" data-index={contactIndex}>
+                                            <img src={icons.textMessageIcon} data-index={contactIndex}
+                                                alt="Text Message Icon" class="custom-icon" />
+                                        </div>
+                                        <!--  <lightning-icon data-index={contactIndex} icon-name="utility:lock"
+                                                alternative-text="access" title="access" size="x-small" class="tile-icon">
+                                            </lightning-icon> -->
+                                        <!-- Lock Icon with green background and green outline -->
+                                        <div class="icon-container green-background  slds-m-right_small"
+                                            if:true={currentContact.isActivated} data-index={contactIndex}>
+                                            <img src={icons.activeProtalIcon} data-index={contactIndex} alt="Lock Icon"
+                                                class="custom-icon green" />
+                                        </div>
+                                        <!-- Unlock Icon with red background and red outline -->
+                                        <div class="icon-container red-background  slds-m-right_small"
+                                            if:false={currentContact.isActivated} data-index={contactIndex}>
+                                            <img src={icons.inactiveProtalIcon} data-index={contactIndex}
+                                                alt="Unlock Icon" class="custom-icon red" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <div lwc:if={showSidePanel} class="modal">
+            <div class="sidePanelTransparent" onclick={closePanel}></div>
+            <div class="sidePanel slds-p-around_small">
+                <div class={panelContainerClass}>
+                    <template lwc:if={showContactTypePanel}>
+                        <div style="height: 100%;background:white;color:#08484B;">
+                            <div class="slds-grid slds-gutters slds-wrap">
+                                <div class="slds-col slds-size_1-of-1">
+                                    <div class="slds-text-heading_large slds-text-align_center slds-p-top_x-large"
+                                        style="font-weight: bold;">{labels.LBL_Connect_ContactTypeSelection}</div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <div class="slds-grid slds-wrap slds-gutters slds-grid_align-center">
+                                        <div class="slds-col slds-size_2-of-12 slds-p-around_xx-large"
+                                            style="max-width: 300px;">
+                                            <div
+                                                style="display: flex;flex-direction:column;align-items:center;justify-content:center;">
+                                                <div style="width: 100%;background: #F3F3F3; border-radius: 2rem;border: 1px solid #999999;cursor:pointer;"
+                                                    class="slds-m-bottom_large slds-p-around_x-large"
+                                                    data-contact-type="individual" onclick={handleContactTypeChoice}>
+                                                    <img style="width: 100%;" src={icons.individualIcon}
+                                                        data-contact-type="individual"
+                                                        onclick={handleContactTypeChoice} />
+                                                </div>
+                                                <div class="slds-text-heading_medium slds-text-align_center"
+                                                    style="font-weight: bold;">
+                                                    {labels.LBL_Connect_IndividualContact}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_2-of-12 slds-p-around_xx-large"
+                                            style="max-width: 300px;">
+                                            <div
+                                                style="display: flex;flex-direction:column;align-items:center;justify-content:center;">
+                                                <div style="width: 100%;background: #F3F3F3; border-radius: 2rem;border: 1px solid #999999;cursor:pointer;"
+                                                    class="slds-m-bottom_large slds-p-around_x-large"
+                                                    data-contact-type="mailbox" onclick={handleContactTypeChoice}>
+                                                    <img style="width: 100%;" src={icons.mailboxIcon}
+                                                        data-contact-type="mailbox" onclick={handleContactTypeChoice} />
+                                                </div>
+                                                <div class="slds-text-heading_medium slds-text-align_center"
+                                                    style="font-weight: bold;">
+                                                    {labels.LBL_Connect_GenericMailbox}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <template lwc:elseif={showContactPanel}>
+                        <div class="panelHeader" if:true={contact}>
+                            <div class="contact-headerSection slds-p-around--large">
+                                <div class="contact-titleSection">
+                                    <div class="banner-image" style={contact.imageUrl}></div>
+                                    <div>
+                                        <div class="slds-grid">
+                                            <div class="banner-Name">
+                                                <template lwc:if={isReadOnly}>
+                                                    <span class="panel-contact-name ">{contact.name}</span>
+                                                </template>
+                                                <template lwc:else>
+                                                    <a href={contact.link} data-contact-id={contact.Id}
+                                                        target="_blank">{contact.name}</a>
+                                                </template>
+                                                <template if:true={contact.isMailbox}>
+                                                    <br> <span class="slds-text-heading_small"
+                                                        style="font-weight:normal;">{contact.title}</span>
+                                                </template>
+                                            </div>
+                                            <div lwc:if={allowAdd} class="slds-p-left_medium"
+                                                style="align-items:center;">
+                                                <lightning-icon icon-name="utility:new_direct_message" size="small"
+                                                    alternative-text="Settings" title="Settings"
+                                                    onclick={handleActivateEditContact}></lightning-icon>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div if:false={contact.isMailbox} class="banner-summaryContainer">
+                                            <template for:each={contact.headerFields} for:item='field'>
+                                                <span key={field.fieldName}>
+                                                    <span if:false={field.isFirst} class="slds-p-horizontal_x-small"> •
+                                                    </span>
+                                                    <lightning-icon lwc:if={field.isEmail} icon-name="utility:email"
+                                                        alternative-text="email" title="email" size="x-small">
+                                                    </lightning-icon>
+                                                    <lightning-icon lwc:elseif={field.isPhone} icon-name="utility:call"
+                                                        alternative-text="phone" title="phone" size="x-small">
+                                                    </lightning-icon>
+                                                    <lightning-icon lwc:else icon-name="utility:info_alt"
+                                                        alternative-text="info" title={field.fieldLabel} size="x-small">
+                                                    </lightning-icon>
+                                                    <span class="slds-p-left_x-small">
+                                                        <lightning-formatted-number lwc:if={field.isNumberField}
+                                                            maximum-fraction-digits={field.scale}
+                                                            value={field.fieldValue}>
+                                                        </lightning-formatted-number>
+                                                        <a lwc:elseif={field.isReference} href={field.link}
+                                                            target="_blank">
+                                                            {field.fieldValue}</a>
+                                                        <span lwc:elseif={field.isBoolean} data-index={contactIndex}>
+                                                            {field.fieldLabel}
+                                                            <div class="slds-checkbox slds-p-left_x-small tile-Summary"
+                                                                style="width:fit-content" data-index={contactIndex}>
+                                                                <input type="checkbox" value={field.fieldValue}
+                                                                    checked={field.fieldValue}
+                                                                    data-index={contactIndex} />
+                                                                <label class="slds-checkbox__label"
+                                                                    data-index={contactIndex}>
+                                                                    <span class="slds-checkbox_faux"
+                                                                        data-index={contactIndex}></span>
+                                                                </label>
+                                                            </div>
+                                                        </span>
+                                                        <lightning-formatted-date-time lwc:elseif={field.isDate}
+                                                            value={field.fieldValue} year="numeric" month="2-digit"
+                                                            day="2-digit"></lightning-formatted-date-time>
+                                                        <template lwc:elseif={field.isPicklist}>
+                                                            {field.fieldOutputValue}
+                                                        </template>
+                                                        <template lwc:else>
+                                                            {field.fieldValue}
+                                                        </template>
+                                                    </span>
+                                                </span>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contact-buttonContainer">
+                                    <lightning-button class="slds-button slds-m-around_xx-small slds-m-right_none"
+                                        label={labels.LBL_Connect_Back} variant="neutral"
+                                        onclick={toggleContactPanel}></lightning-button>
+                                    <template if:false={contact.isMailbox}>
+                                        <template lwc:if={portalActivationPanel}>
+                                            <lightning-button
+                                                class="slds-button slds-m-around_xx-small slds-m-right_none"
+                                                label={labels.LBL_Connect_Contact_Profile} variant="neutral"
+                                                onclick={togglePortalActivationScreen}></lightning-button>
+                                        </template>
+                                        <template lwc:else>
+                                            <template lwc:if={contact.isActivated}>
+                                                <lightning-button lwc:if={isManager}
+                                                    class="greenButton slds-m-around_xx-small slds-m-right_none"
+                                                    label={labels.LBL_Connect_Portal_Activated} variant="brand"
+                                                    onclick={togglePortalActivationScreen}></lightning-button>
+                                                <div lwc:else
+                                                    class="greenDisabledButton slds-p-horizontal_medium slds-p-vertical_x-small slds-m-around_xx-small slds-m-right_none">
+                                                    {labels.LBL_Connect_Portal_Activated}</div>
+                                            </template>
+                                            <lightning-button lwc:elseif={contact.isRequested}
+                                                class="orangeButton slds-m-around_xx-small slds-m-right_none"
+                                                label={labels.LBL_Connect_Portal_Activation_Requested} variant="brand"
+                                                onclick={togglePortalActivationScreen}></lightning-button>
+                                            <template lwc:else>
+                                                <lightning-button lwc:if={isManager}
+                                                    class="grayButton slds-m-around_xx-small slds-m-right_none"
+                                                    label={labels.LBL_Connect_Portal_Inactive} variant="brand"
+                                                    onclick={togglePortalActivationScreen}></lightning-button>
+                                                <div lwc:else
+                                                    class="grayDisabledButton slds-p-horizontal_medium slds-p-vertical_x-small slds-m-around_xx-small slds-m-right_none">
+                                                    {labels.LBL_Connect_Portal_Inactive}</div>
+                                            </template>
+                                        </template>
+                                    </template>
+                                </div>
+                            </div>
+                            <div
+                                class="contact-bannerFieldsSection slds-p-around--large slds-border_top slds-border_bottom">
+                                <template lwc:if={contact.isMailbox}>
+                                    <div data-index={contactIndex} class="flex-item slds-m-horizontal_medium">
+                                        <div class="header-Name">{labels.LBL_Email}</div>
+                                        <span>{contact.email}</span>
+                                    </div>
+                                    <div data-index={contactIndex} class="flex-item slds-m-horizontal_medium">
+                                        <div class="header-Name">{labels.LBL_Fax}</div>
+                                        <span>{contact.fax}</span>
+                                    </div>
+                                    <div data-index={contactIndex} class="flex-item slds-m-horizontal_medium">
+                                        <div class="header-Name">{labels.LBL_Invoice_Recipient}</div>
+                                        <span>
+                                            <lightning-input type="checkbox" class="input-center" variant="label-hidden"
+                                                checked={contact.isInvoiceRecipient} disabled>
+                                            </lightning-input>
+                                        </span>
+                                    </div>
+                                </template>
+                                <template lwc:else for:each={contact.additionalFields} for:item='field'>
+                                    <div data-index={contactIndex} key={field.fieldName}
+                                        class="flex-item slds-m-horizontal_medium">
+                                        <div class="header-Name">{field.fieldLabel}</div>
+                                        <span>
+                                            <lightning-formatted-number lwc:if={field.isNumberField}
+                                                maximum-fraction-digits={field.scale} value={field.fieldValue}>
+                                            </lightning-formatted-number>
+                                            <a lwc:elseif={field.isReference} href={field.link} target="_blank">
+                                                {field.fieldValue}</a>
+                                            <lightning-input lwc:elseif={field.isBoolean} type="checkbox"
+                                                class="input-center" variant="label-hidden" checked={field.fieldValue}
+                                                disabled>
+                                            </lightning-input>
+                                            <lightning-formatted-date-time lwc:elseif={field.isDate}
+                                                value={field.fieldValue} year="numeric" month="2-digit"
+                                                day="2-digit"></lightning-formatted-date-time>
+                                            <template lwc:elseif={field.isPicklist}>
+                                                {field.fieldOutputValue}
+                                            </template>
+                                            <template lwc:else>
+                                                {field.fieldValue}
+                                            </template>
+                                        </span>
+                                    </div>
+                                </template>
+                                <div if:true={contactEditMode} class="slds-card popupContainter ">
+                                    <section lwc:if={contact.isMailbox} aria-label="Dialog title"
+                                        aria-describedby="popover-body-id"
+                                        class="slds-popover slds-nubbin_top popupContent" role="dialog"
+                                        style="min-width: 500px;">
+                                        <div id="popover-body-id" class="slds-popover__body slds-grid"
+                                            style="min-width:500px;flex-wrap:wrap;gap:4%">
+                                            <div class="inputDiv">
+                                                <lightning-input class="info-input" type='text'
+                                                    label={labels.LBL_Connect_MailboxName} data-fieldtype="string"
+                                                    data-fieldname={CONTACT_API_NAMES.LastName} value={contact.lastName}
+                                                    onchange={handleEditContactInfos}>
+                                                </lightning-input>
+                                            </div>
+                                            <div class="inputDiv">
+                                                <lightning-input class="info-input" type='text'
+                                                    label={labels.LBL_Connect_MailboxRole} data-fieldtype="string"
+                                                    data-fieldname={CONTACT_API_NAMES.Title} value={contact.title}
+                                                    onchange={handleEditContactInfos}>
+                                                </lightning-input>
+                                            </div>
+                                            <div class="inputDiv">
+                                                <lightning-input class="info-input" type='email'
+                                                    label={labels.LBL_Email} data-fieldtype="email"
+                                                    data-fieldname={CONTACT_API_NAMES.Email} value={contact.email}
+                                                    onchange={handleEditContactInfos} required>
+                                                </lightning-input>
+                                            </div>
+                                            <div class="inputDiv">
+                                                <lightning-input class="info-input" type='tel' label={labels.LBL_Fax}
+                                                    message-when-pattern-mismatch={labels.LBL_Connect_Invalid_Phone_Number}
+                                                    pattern="[0-9]*" data-fieldtype='phone'
+                                                    data-fieldname={CONTACT_API_NAMES.Fax} value={contact.fax}
+                                                    onchange={handleEditContactInfos}>
+                                                </lightning-input>
+                                            </div>
+                                            <div class="inputDiv">
+                                                <div class="slds-form-element">
+                                                    <label class="slds-form-element__label">
+                                                        {labels.LBL_Invoice_Recipient}</label>
+                                                    <lightning-input class="info-input" type='checkbox'
+                                                        variant='label-hidden' label={labels.LBL_Invoice_Recipient}
+                                                        data-fieldtype="boolean"
+                                                        data-fieldname={CONTACT_API_NAMES.IsInvoiceRecipient__c}
+                                                        checked={contact.isInvoiceRecipient}
+                                                        onchange={handleEditContactInfos}>
+                                                    </lightning-input>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <footer class="slds-popover__footer slds-m-top_small slds-text-align_right">
+                                            <lightning-button label={labels.LBL_Connect_Cancel}
+                                                title="Non-primary action" class="slds-m-left_x-small"
+                                                onclick={handleCancelContactInfoEdit}>
+                                            </lightning-button>
+                                            <lightning-button variant="brand" label='OK' title="Primary action"
+                                                class="slds-m-left_x-small"
+                                                onclick={handleSaveContactInfoEdit}></lightning-button>
+                                        </footer>
+                                    </section>
+                                    <section lwc:else aria-label="Dialog title" aria-describedby="popover-body-id1"
+                                        class="slds-popover slds-nubbin_top popupContent" role="dialog"
+                                        style="min-width: 500px;">
+                                        <div id="popover-body-id1" class="slds-popover__body slds-grid"
+                                            style="min-width:500px;flex-wrap:wrap;gap:4%">
+                                            <template for:each={contact.editableFields} for:item='field'>
+                                                <div key={field.fieldName} class="inputDiv">
+                                                    <lightning-input if:true={field.isEmail} class="info-input"
+                                                        type='email' label={field.fieldLabel} data-field={field}
+                                                        data-fieldtype={field.type} data-fieldname={field.fieldName}
+                                                        value={field.fieldValue} onchange={handleEditContactInfos}
+                                                        required={field.isRequired}>
+                                                    </lightning-input>
+                                                    <lightning-input if:true={field.isDate} class="info-input"
+                                                        type='date' label={field.fieldLabel} data-field={field}
+                                                        data-fieldtype={field.type} data-fieldname={field.fieldName}
+                                                        value={field.fieldValue} onchange={handleEditContactInfos}
+                                                        required={field.isRequired}>
+                                                    </lightning-input>
+                                                    <div class="slds-form-element" if:true={field.isBoolean}>
+                                                        <label class="slds-form-element__label">
+                                                            {field.fieldLabel}</label>
+                                                        <lightning-input if:true={field.isBoolean} class="info-input"
+                                                            type='checkbox' variant='label-hidden'
+                                                            label={field.fieldLabel} data-field={field}
+                                                            data-fieldtype={field.type} data-fieldname={field.fieldName}
+                                                            checked={field.fieldValue} onchange={handleEditContactInfos}
+                                                            required={field.isRequired}>
+                                                        </lightning-input>
+                                                    </div>
+                                                    <lightning-input if:true={field.isPhone} class="info-input"
+                                                        type='tel' label={field.fieldLabel} data-field={field}
+                                                        message-when-pattern-mismatch={labels.LBL_Connect_Invalid_Phone_Number}
+                                                        pattern="[0-9]*" data-fieldtype={field.type}
+                                                        data-fieldname={field.fieldName} value={field.fieldValue}
+                                                        onchange={handleEditContactInfos} required={field.isRequired}>
+                                                    </lightning-input>
+                                                    <lightning-input if:true={field.isText} class="info-input"
+                                                        data-requiredfield={field.isRequired} type='text'
+                                                        label={field.fieldLabel} required={field.isRequired}
+                                                        data-field={field} data-fieldtype={field.type}
+                                                        data-fieldname={field.fieldName} value={field.fieldValue}
+                                                        onchange={handleEditContactInfos}>
+                                                    </lightning-input>
+                                                    <lightning-combobox if:true={field.isPicklist} class="info-input"
+                                                        type='text' label={field.fieldLabel} data-field={field}
+                                                        data-fieldtype={field.type} data-fieldname={field.fieldName}
+                                                        value={field.fieldValue} onchange={handleEditContactInfos}
+                                                        required={field.isRequired} options={field.fieldOptions}>
+                                                    </lightning-combobox>
+                                                    <!-- <lightning-record-picker if:true={field.isReference}
+                                                    label={field.fieldLabel} data-field={field}
+                                                    data-fieldtype={field.type} data-fieldname={field.fieldName}
+                                                    value={field.recordIdValue}
+                                                    object-api-name={field.referenceTo}
+                                                    placeholder="Search Contact..."
+                                                    onchange={handleEditContactInfos} required={field.isRequired}>
+                                                </lightning-record-picker> -->
+                                                    <lightning-record-edit-form if:true={field.isReference}
+                                                        object-api-name="Contact">
+                                                        <lightning-input-field class="slds-p-horizontal_none"
+                                                            field-name={field.fieldName} data-field={field}
+                                                            data-fieldtype={field.type} data-fieldname={field.fieldName}
+                                                            value={field.recordIdValue}
+                                                            onchange={handleEditContactInfos}>
+                                                        </lightning-input-field>
+                                                    </lightning-record-edit-form>
+                                                </div>
+                                            </template>
+                                            <template if:true={contact.isActivated}>
+                                                <!-- <div class="user-formContainer-inner"> -->
+                                                <!-- Language Picklist -->
+                                                <div class="inputDiv">
+                                                    <lightning-combobox name="LanguageLocaleKey"
+                                                        label={labels.LBL_User_LanguageLocaleKey}
+                                                        value={user.LanguageLocaleKey} options={languageOptions}
+                                                        placeholder="Select Language"
+                                                        data-field={USER_API_NAMES.LanguageLocaleKey}
+                                                        onchange={handleEditUser} required>
+                                                    </lightning-combobox>
+                                                </div>
+                                                <!-- Locale Picklist -->
+                                                <div class="inputDiv">
+                                                    <lightning-combobox name="LocaleSidKey"
+                                                        label={labels.LBL_User_LocaleSidKey} value={user.LocaleSidKey}
+                                                        options={localeOptions} placeholder="Select Locale"
+                                                        data-field={USER_API_NAMES.LocaleSidKey}
+                                                        onchange={handleEditUser} required>
+                                                    </lightning-combobox>
+                                                </div>
+                                                <!-- </div> -->
+                                            </template>
+                                        </div>
+                                        <footer class="slds-popover__footer slds-m-top_small slds-text-align_right">
+                                            <lightning-button label={labels.LBL_Connect_Cancel}
+                                                title="Non-primary action" class="slds-m-left_x-small"
+                                                onclick={handleCancelContactInfoEdit}>
+                                            </lightning-button>
+                                            <lightning-button variant="brand" label='OK' title="Primary action"
+                                                class="slds-m-left_x-small"
+                                                onclick={handleSaveContactInfoEdit}></lightning-button>
+                                        </footer>
+                                    </section>
+                                </div>
+                            </div>
+                            <template if:true={showCodTable}>
+                                <div if:false={portalActivationPanel}
+                                    class="contact-tableActions slds-text-align_right slds-m-left_small slds-m-top_small slds-m-right_small slds-m-bottom--x-small">
+                                    <template if:false={isReadOnly}>
+                                        <lightning-button icon-name="utility:add" lwc:if={isApproval}
+                                            label={labels.LBL_Connect_Request_Responsibility}
+                                            title={labels.LBL_Connect_Request_Responsibility}
+                                            onclick={handleAddNewRequest}>
+                                        </lightning-button>
+                                        <lightning-button icon-name="utility:add" lwc:elseif={allowAdd}
+                                            label={labels.LBL_Connect_Add_Responsibility}
+                                            title={labels.LBL_Connect_Add_Responsibility} onclick={handleAddNewCod}>
+                                        </lightning-button>
+                                        <lightning-button lwc:if={isEditMode} class="slds-button slds-m-left_x-small"
+                                            label={labels.LBL_Save} variant="brand" onclick={handleSaveNewCod}>
+                                        </lightning-button>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                    <template lwc:elseif={showAddIndividualContact}>
+                        <div class='addContact-container panelHeader'>
+                            <div class=" slds-p-left_large slds-p-right_large slds-p-top_large">
+                                <div class="contact-formHeader slds-p-around--medium slds-m-bottom--medium">
+                                    {labels.LBL_Connect_Add_Contact_Title}
+                                </div>
+                                <div class="contact-formContainer">
+                                    <lightning-combobox class="info-input" options={salutationOptions}
+                                        label={labels.LBL_Salutation} data-field={CONTACT_API_NAMES.Salutation}
+                                        onchange={handleEditContact}>
+                                    </lightning-combobox>
+                                    <lightning-input class="info-input" type='text' required="true"
+                                        label={labels.LBL_FirstName} data-field={CONTACT_API_NAMES.FirstName}
+                                        onblur={handleEditContact}>
+                                    </lightning-input>
+                                    <lightning-input class="info-input" type='text' required="true"
+                                        label={labels.LBL_LastName} data-field={CONTACT_API_NAMES.LastName}
+                                        onblur={handleEditContact}>
+                                    </lightning-input>
+                                    <lightning-input class="info-input" type='text' label={labels.LBL_Title}
+                                        data-field={CONTACT_API_NAMES.Title} onblur={handleEditContact}>
+                                    </lightning-input>
+                                    <lightning-input class="info-input" type='tel' pattern="[0-9]*"
+                                        label={labels.LBL_Phone}
+                                        message-when-pattern-mismatch={labels.LBL_Connect_Invalid_Phone_Number}
+                                        data-field={CONTACT_API_NAMES.Phone} onblur={handleEditContact}>
+                                    </lightning-input>
+                                    <lightning-input class="info-input" type='tel' pattern="[0-9]*"
+                                        label={labels.LBL_MobilePhone}
+                                        message-when-pattern-mismatch={labels.LBL_Connect_Invalid_Phone_Number}
+                                        data-field={CONTACT_API_NAMES.MobilePhone} onblur={handleEditContact}>
+                                    </lightning-input>
+                                    <lightning-input class="info-input" type='tel' pattern="[0-9]*"
+                                        label={labels.LBL_OtherPhone}
+                                        message-when-pattern-mismatch={labels.LBL_Connect_Invalid_Phone_Number}
+                                        data-field={CONTACT_API_NAMES.OtherPhone} onblur={handleEditContact}>
+                                    </lightning-input>
+                                    <lightning-input class="info-input" type='email' required="true"
+                                        label={labels.LBL_Email} data-field={CONTACT_API_NAMES.Email}
+                                        onblur={handleEditContact}>
+                                    </lightning-input>
+                                    <!-- <lightning-record-picker class="info-input slds-p-top_" type='text'
+                                    label={labels.LBL_ReportsToId} data-field={CONTACT_API_NAMES.ReportsToId}
+                                    object-api-name="Contact" placeholder="Search Contact..." data-index={index}
+                                    onchange={handleEditContact}>
+                                </lightning-record-picker> -->
+                                    <div class="slds-p-top_">
+                                        <lightning-record-picker field-name={CONTACT_API_NAMES.ReportsToId}
+                                            data-field={CONTACT_API_NAMES.ReportsToId} data-index={index}
+                                            object-api-name="Contact" label={fieldsMap.Contact.ReportsToId.label}
+                                            filter={contactFilter} matching-info={matchingInfo}
+                                            onchange={handleEditContact}>
+                                        </lightning-record-picker>
+                                    </div>
+                                    <lightning-input class="info-input slds-m-top_xx-small slds-m-bottom--none"
+                                        type='checkbox' label={labels.LBL_IsOrgAdmin__c} variant="label-stacked"
+                                        data-field={CONTACT_API_NAMES.IsOrgAdmin__c} onchange={handleEditContact}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <div
+                                class="contact-tableActions slds-text-align_right slds-m-left_small slds-m-top_small slds-m-right_small slds-m-bottom--x-small">
+                                <lightning-button lwc:if={showAddIndividualContact} class="slds-button"
+                                    label={labels.LBL_Connect_Back} variant="neutral"
+                                    onclick={backToContactTypePanel}></lightning-button>
+                                <lightning-button lwc:if={showAddIndividualContact}
+                                    class="slds-button slds-m-right_xx-small" label={labels.LBL_Save} variant="brand"
+                                    onclick={handleInsertContact}></lightning-button>
+                                <lightning-button icon-name="utility:add" lwc:if={isApproval}
+                                    label={labels.LBL_Connect_Request_Responsibility} data-is-request="true"
+                                    title={labels.LBL_Connect_Request_Responsibility} onclick={handleAddNewRequest}>
+                                </lightning-button>
+                                <lightning-button icon-name="utility:add" lwc:elseif={isNonApproval}
+                                    label={labels.LBL_Connect_Add_Responsibility}
+                                    title={labels.LBL_Connect_Add_Responsibility} onclick={handleAddNewCod}>
+                                </lightning-button>
+                                <!-- <lightning-button icon-name="utility:add"
+                                            label={labels.LBL_Connect_Add_Responsibility}
+                                            title={labels.LBL_Connect_Add_Responsibility} onclick={handleAddNewCod}>
+                                        </lightning-button> -->
+                            </div>
+                        </div>
+                    </template>
+                    <template lwc:elseif={showAddMailboxContact}>
+                        <div class='addContact-container panelHeader'>
+                            <div class=" slds-p-left_large slds-p-right_large slds-p-top_large">
+                                <div class="contact-formHeader slds-p-around--medium slds-m-bottom--medium">
+                                    {labels.LBL_GenericMailboxCreationTitle}
+                                </div>
+                                <div class="contact-formContainer">
+                                    <lightning-input class="info-input" type='text' required="true"
+                                        label={labels.LBL_Connect_MailboxName} data-field={CONTACT_API_NAMES.LastName}
+                                        onblur={handleEditContact}>
+                                    </lightning-input>
+                                    <lightning-input class="info-input" type='text'
+                                        label={labels.LBL_Connect_MailboxRole} data-field={CONTACT_API_NAMES.Title}
+                                        onblur={handleEditContact}>
+                                    </lightning-input>
+                                    <lightning-input class="info-input" type='email' required="true"
+                                        label={labels.LBL_Email} data-field={CONTACT_API_NAMES.Email}
+                                        onblur={handleEditContact}>
+                                    </lightning-input>
+                                    <lightning-input class="info-input" type='tel' pattern="[0-9]*"
+                                        label={labels.LBL_Fax}
+                                        message-when-pattern-mismatch={labels.LBL_Connect_Invalid_Phone_Number}
+                                        data-field={CONTACT_API_NAMES.Fax} onblur={handleEditContact}>
+                                    </lightning-input>
+                                    <lightning-input type="checkbox" label={labels.LBL_Invoice_Recipient}
+                                        class="slds-p-top_small" onchange={handleEditContact}
+                                        data-field={CONTACT_API_NAMES.IsInvoiceRecipient__c}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <div
+                                class="contact-tableActions slds-text-align_right slds-m-left_small slds-m-top_small slds-m-right_small slds-m-bottom--x-small">
+                                <lightning-button class="slds-button" label={labels.LBL_Connect_Back} variant="neutral"
+                                    onclick={backToContactTypePanel}></lightning-button>
+                                <lightning-button class="slds-button slds-m-right_xx-small" label={labels.LBL_Save}
+                                    variant="brand" onclick={handleInsertContact}></lightning-button>
+                            </div>
+                        </div>
+                    </template>
+                    <template if:true={showCodTable}>
+                        <div lwc:if={portalActivationPanel}
+                            class="cod-container slds-m-around--xx-small slds-p-around_small">
+                            <div class="portalTitle slds-m-bottom-medium">
+                                {labels.LBL_Connect_Portal_Title}
+                            </div>
+                            <div lwc:if={userInsertForm}>
+                                <div class="user-formContainer slds-box slds-m-top_medium">
+                                    <lightning-record-edit-form object-api-name="User" onsubmit={handleSaveUser}
+                                        onsuccess={handleSuccess} onerror={handleError}>
+                                        <div class="user-formContainer-inner">
+                                            <lightning-input-field style="display: none;" data-field="ContactId"
+                                                value={contact.id} field-name="ContactId"></lightning-input-field>
+                                            <lightning-input-field style="display: none;" data-field="AccountId"
+                                                value={contact.supplierAccount}
+                                                field-name="AccountId"></lightning-input-field>
+                                            <lightning-input-field style="display: none;" data-field="Alias"
+                                                value={user.Alias} field-name="Alias"></lightning-input-field>
+                                            <lightning-input-field style="display: none;" data-field="MobilePhone"
+                                                value={contact.MobilePhone}
+                                                field-name="MobilePhone"></lightning-input-field>
+                                            <lightning-input-field style="display: none;" data-field="Phone"
+                                                value={contact.Phone} field-name="Phone"></lightning-input-field>
+                                            <!-- MISSING FIELDS -->
+                                            <lightning-combobox name="LanguageLocaleKey" variant="label-inline"
+                                                label={labels.LBL_User_LanguageLocaleKey} value={user.LanguageLocaleKey}
+                                                options={languageOptions} onchange={handleInputChange} required>
+                                            </lightning-combobox>
+                                            <lightning-combobox label={labels.LBL_User_LocaleSidKey}
+                                                variant="label-inline" value={user.LocaleSidKey} name="LocaleSidKey"
+                                                options={localeOptions} onchange={handleInputChange} required>
+                                            </lightning-combobox>
+                                            <div
+                                                style="display: flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;">
+                                                <lightning-input-field data-field={USER_API_NAMES.Username}
+                                                    variant="label-inline" value={user.Username}
+                                                    field-name="Username"></lightning-input-field>
+                                                <p class="slds-text-color_destructive"
+                                                    if:true={showUserNameValidationMsg}>
+                                                    {labels.MSG_Connect_UsernameExist}</p>
+                                            </div>
+                                            <lightning-input-field data-field={USER_API_NAMES.TimeZoneSidKey}
+                                                variant="label-inline" value={user.TimeZoneSidKey}
+                                                field-name="TimeZoneSidKey"></lightning-input-field>
+                                            <lightning-input-field style="display: none;"
+                                                data-field={USER_API_NAMES.EmailEncodingKey}
+                                                value={user.EmailEncodingKey}
+                                                field-name="EmailEncodingKey"></lightning-input-field>
+                                        </div>
+                                        <div class="user-bottomActions slds-p-around--x-small">
+                                            <lightning-button
+                                                class="slds-button slds-m-around_xx-small slds-m-right_none"
+                                                label={labels.LBL_Connect_Back} variant="neutral"
+                                                onclick={exitPortalActivation}>
+                                            </lightning-button>
+                                            <lightning-button type="submit" class="slds-button" label={labels.LBL_Save}
+                                                variant="brand">
+                                            </lightning-button>
+                                        </div>
+                                    </lightning-record-edit-form>
+                                </div>
+                            </div>
+                            <div lwc:else class="choiceGrid slds-m-around--medium">
+                                <div class="choiceTile slds-box header-Name" onclick={handlePriorPortalActivation}>
+                                    <div lwc:if={contact.isActivated} class="portalActivationIcon slds-m-bottom_medium">
+                                        <img src={icons.activeProtalIcon} />
+                                    </div>
+                                    <div lwc:else class="portalActivationIcon slds-m-bottom_medium">
+                                        <img src={icons.inactiveProtalIcon} />
+                                    </div>
+                                    <span lwc:if={contact.isActivated}>{labels.LBL_Connect_Portal_Deactivation}</span>
+                                    <span
+                                        lwc:elseif={contact.isRequested}>{labels.LBL_Connect_Portal_Activation_Requested}</span>
+                                    <span lwc:else>{labels.LBL_Connect_Portal_Activation}</span>
+                                </div>
+                                <div class="choiceTile slds-box header-Name" onclick={handleResetPassword}>
+                                    <div class="resetPassIcon slds-m-bottom_medium">
+                                        <img src={icons.resetPassIcon} />
+                                    </div>
+                                    <div class="alignBottom">
+                                        {labels.LBL_Connect_Password_Reset}
+                                    </div>
+                                </div>
+                                <template lwc:if={licenseQuota}>
+                                    <div lwc:if={licenseQuota.activation} class="choiceTile slds-box">
+                                        <div class="licenseNumber slds-m-bottom_medium">
+                                            {supplierLicenseQuota}
+                                        </div>
+                                        <div class="header-Name">
+                                            {labels.LBL_Connect_License_Quota}
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                        <div lwc:elseif={showCodTable} class="cod-container">
+                            <!-- <div class="slds-p-around_x-small">
+                                <i>{labels.LBL_Connect_SupplierLevelRole}</i><br/>
+                                {labels.LBL_Connect_SupplierLevelRoleDescription}<br/>
+                                <i>{labels.LBL_Connect_NegoscopeLevelRole}</i><br/>
+                                {labels.LBL_Connect_NegoscopeLevelRoleDescription}
+                            </div> -->
+                            <table
+                                class="tableDiv cod-table no-help-text main-table slds-table slds-table_bordered slds-table_cell-buffer slds-border_left slds-border_right">
+                                <!-- HEADER -->
+                                <thead>
+                                    <tr>
+                                        <th if:false={isReadOnly}>
+                                            <div class="slds-m-around_small">{labels.LBL_Connect_Actions}</div>
+                                        </th>
+                                        <th>
+                                            <div class="slds-m-around_small">{labels.LBL_Activation_Status}
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="slds-m-around_small" style="min-width: 280px;">
+                                                {labels.LBL_Negoscopes}
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="slds-m-around_small" style="min-width: 220px;">
+                                                {labels.LBL_Role}
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="slds-m-around_small">{labels.LBL_Signatory_Role}</div>
+                                        </th>
+                                        <th>
+                                            <div class="slds-m-around_small">{labels.LBL_Signatory_Role}</div>
+                                        </th>
+                                        <!-- <th if:true={isApproval}>
+                                            <div class="slds-m-around_small" style="min-width: 180px;">
+                                                Requested Accounting Role
+                                            </div>
+                                        </th> -->
+                                        <th>
+                                            <div class="slds-m-around_small">{labels.LBL_Invoice_Recipient}</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template lwc:if={contact.hasCod} for:each={contact.codWrapList} for:item="cod"
+                                        for:index="index">
+                                        <!-- new line {cod.id} index {index} -->
+                                        <!-- COD ROW -->
+                                        <tr key={cod.id} class={cod.rowClass}>
+                                            <td if:false={isReadOnly}>
+                                                <!-- {cod.id} -->
+                                                <template lwc:if={isApproval}>
+                                                    <!-- Cancel the Req -->
+                                                    <template if:true={cod.canCancelReq}>
+                                                        <lightning-button-icon class="slds-m-left_xx-small"
+                                                            data-with-approval="true" icon-name="utility:clear"
+                                                            title={labels.LBL_Connect_ContactResponsibility_Cancel}
+                                                            variant='border-filled' data-index={index}
+                                                            onclick={handleRejectRequest}>
+                                                        </lightning-button-icon>
+                                                    </template>
+                                                    <!-- Cod Activate Req -->
+                                                    <template if:true={cod.canActivate}>
+                                                        <button
+                                                            class="slds-button slds-button_icon slds-button_icon-border-filled slds-m-left_xx-small"
+                                                            data-id={cod.id} onclick={handleActivate}
+                                                            data-index={index}>
+                                                            <svg class="slds-button__icon" aria-hidden="true"
+                                                                style="fill: green;" data-id={cod.id} data-index={index}
+                                                                onclick={handleActivate}>
+                                                                <use
+                                                                    xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#power">
+                                                                </use>
+                                                            </svg>
+                                                        </button>
+                                                    </template>
+                                                    <template if:true={cod.showActions}>
+                                                        <lightning-button-icon if:false={cod.isRequesting}
+                                                            class="slds-m-left_xx-small"
+                                                            icon-name="utility:new_direct_message"
+                                                            variant='border-filled' data-index={index}
+                                                            onclick={handleAddRequest}>
+                                                        </lightning-button-icon>
+                                                        <template if:false={cod.isRequesting}>
+                                                        </template>
+                                                    </template>
+                                                    <!-- Deactive Action For Aproval profile -->
+                                                    <template if:true={cod.canDeactivate}>
+                                                        <button
+                                                            class="slds-button slds-button_icon slds-button_icon-border-filled slds-m-left_xx-small"
+                                                            title={labels.LBL_Connect_ContactResponsibility_Deactivate}
+                                                            data-id={cod.id} onclick={handlePriorDeactivate}
+                                                            data-with-approval="true">
+                                                            <svg class="slds-button__icon" aria-hidden="true"
+                                                                style="fill: red;" data-id={cod.id}
+                                                                onclick={handlePriorDeactivate}
+                                                                data-with-approval="true">
+                                                                <use
+                                                                    xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#power">
+                                                                </use>
+                                                            </svg>
+                                                        </button>
+                                                    </template>
+                                                    <!-- Delete Action For Aproval profile -->
+                                                </template>
+                                                <template lwc:elseif={isNonApproval}>
+                                                    <template if:true={cod.canActivate}>
+                                                        <button
+                                                            class="slds-button slds-button_icon slds-button_icon-border-filled slds-m-left_xx-small"
+                                                            data-id={cod.id} onclick={handleActivate}
+                                                            data-index={index}>
+                                                            <svg class="slds-button__icon" aria-hidden="true"
+                                                                style="fill: green;" data-id={cod.id}
+                                                                onclick={handleActivate} data-index={index}>
+                                                                <use
+                                                                    xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#power">
+                                                                </use>
+                                                            </svg>
+                                                        </button>
+                                                    </template>
+                                                    <!-- Delete Action For not Aproval profile -->
+                                                    <template if:true={cod.canDelete}>
+                                                        <lightning-button-icon class="slds-m-left_xx-small"
+                                                            icon-name="utility:delete" variant='border-filled'
+                                                            data-id={cod.id}
+                                                            title={labels.LBL_Connect_ContactResponsibility_Delete}
+                                                            data-index={index} onclick={handleDeleteCod}
+                                                            data-recordid={cod.Id}>
+                                                        </lightning-button-icon>
+                                                    </template>
+                                                    <lightning-button-icon lwc:if={cod.isNew}
+                                                        class="slds-m-left_xx-small" icon-name="utility:close"
+                                                        data-id={cod.id} variant='border-filled' data-index={index}
+                                                        onclick={handleDeleteCod} data-recordid={cod.Id}>
+                                                    </lightning-button-icon>
+                                                    <div lwc:else class="rowActionsContainer">
+                                                        <template if:true={cod.isActive}>
+                                                            <lightning-button-icon lwc:if={cod.isEdit}
+                                                                class="slds-m-left_xx-small" icon-name="utility:close"
+                                                                variant='border-filled' data-index={index}
+                                                                onclick={toggleEditMode}>
+                                                            </lightning-button-icon>
+                                                            <template lwc:else>
+                                                                <lightning-button-icon data-index={index}
+                                                                    icon-name="utility:copy" variant='border-filled'
+                                                                    title={labels.LBL_Connect_ContactResponsibility_Clone}
+                                                                    onclick={handleCloneCod}>
+                                                                </lightning-button-icon>
+                                                                <lightning-button-icon class="slds-m-left_xx-small"
+                                                                    icon-name="utility:edit" variant='border-filled'
+                                                                    title={labels.LBL_Connect_ContactResponsibility_Edit}
+                                                                    data-index={index} onclick={toggleEditMode}>
+                                                                </lightning-button-icon>
+                                                                <!-- Deactive Action For Aproval profile -->
+                                                                <template if:true={cod.canDeactivate}>
+                                                                    <button
+                                                                        class="slds-button slds-button_icon slds-button_icon-border-filled slds-m-left_xx-small"
+                                                                        title={labels.LBL_Connect_ContactResponsibility_Deactivate}
+                                                                        data-id={cod.id}
+                                                                        onclick={handlePriorDeactivate}>
+                                                                        <svg class="slds-button__icon"
+                                                                            aria-hidden="true" style="fill: red;"
+                                                                            data-id={cod.id}
+                                                                            onclick={handlePriorDeactivate}>
+                                                                            <use
+                                                                                xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#power">
+                                                                            </use>
+                                                                        </svg>
+                                                                    </button>
+                                                                </template>
+                                                            </template>
+                                                        </template>
+                                                    </div>
+                                                </template>
+                                                <template lwc:else>
+                                                </template>
+                                            </td>
+                                            <td>
+                                                <!-- {cod.id} -->
+                                                <span class="slds-p-horizontal_medium">
+                                                    <!-- {cod.activationStatusOutput} -->
+                                                    <lightning-icon icon-name={cod.activationStatusIcon}
+                                                        title={cod.activationStatusOutput}></lightning-icon>
+                                                </span>
+                                            </td>
+                                            <template lwc:if={cod.isEdit}>
+                                                <td class="wrapped-text slds-p-horizontal_medium">
+                                                    <!-- <c-neg-optim-custom-lookup if:true={cod.isNew} class="class1"
+                                                    search-term={selectedRequestedNSName} object-name={NS_API_NAMES.objectApiName}
+                                                    field-name="Name" is-multi="false" icon-name=""
+                                                    selected-event={Events.selectNegoScopeAction} data-id={cod.id}
+                                                    onselectnegoscopeaction={selectNegoScopeAction}
+                                                    search-fields={searchNegoScopeFields} data-search="true"
+                                                    data-field={COD_API_NAMES.Negoscope__c} place-holder="NegoScope"
+                                                    label="NegoScope" isportal="true" label-variant="label-hidden"
+                                                    filter-token={NegoScopeFilter}
+                                                    >
+                                                </c-neg-optim-custom-lookup> -->
+                                                    <c-neg-optim-custom-lookup if:true={cod.isNew} class="class1"
+                                                        search-term={cod.negoScopeName}
+                                                        object-name={NS_API_NAMES.objectApiName} field-name="Name"
+                                                        is-multi="false" icon-name=""
+                                                        selected-event={Events.selectNegoScopeAction} data-id={cod.id}
+                                                        onselectnegoscopeaction={selectNegoScopeAction}
+                                                        search-fields={searchNegoScopeFields} data-search="true"
+                                                        data-field={COD_API_NAMES.Negoscope__c} place-holder="NegoScope"
+                                                        label="NegoScope" isportal="true" label-variant="label-hidden"
+                                                        filter-token={NegoScopeFilter}>
+                                                    </c-neg-optim-custom-lookup>
+                                                    <!-- <lightning-record-picker dropdown-alignment="auto"
+                                                    label={labels.LBL_Negoscopes} variant="label-hidden"
+                                                    placeholder={labels.LBL_Negoscopes}
+                                                    object-api-name={NS_API_NAMES.objectApiName} value={cod._Negoscope__c}
+                                                    data-field={COD_API_NAMES.Negoscope__c} data-id={cod.id}
+                                                    onchange={handleFieldEdits}>
+                                                </lightning-record-picker> -->
+                                                    <span if:false={cod.isNew}>
+                                                        <a href={cod.negoScopeLink}>
+                                                            {cod.negoScopeName}
+                                                        </a>
+                                                    </span>
+                                                </td>
+                                                <td class="wrapped-text slds-p-horizontal_medium">
+                                                    <lightning-combobox name="Role" variant="label-hidden"
+                                                        dropdown-alignment="auto" label={labels.LBL_Role}
+                                                        data-field={COD_API_NAMES.ContactRole__c} data-id={cod.id}
+                                                        value={cod._ContactRole__c} placeholder={labels.LBL_Role}
+                                                        options={roleOptions} onchange={handleFieldEdits}>
+                                                    </lightning-combobox>
+                                                </td>
+                                                <td>
+                                                    <!-- {cod.id} -->
+                                                    <template if:true={cod.hasNegoscope}>
+                                                        <lightning-input lwc:if={cod._IsSignatory__c} type="checkbox"
+                                                            onchange={handleFieldEdits} variant="label-hidden"
+                                                            value={cod._IsSignatory__c} checked
+                                                            data-field={COD_API_NAMES.IsSignatory__c} data-id={cod.id}>
+                                                        </lightning-input>
+                                                        <lightning-input lwc:else type="checkbox" variant="label-hidden"
+                                                            onchange={handleFieldEdits} value={cod._IsSignatory__c}
+                                                            data-field={COD_API_NAMES.IsSignatory__c} data-id={cod.id}>
+                                                        </lightning-input>
+                                                    </template>
+                                                </td>
+                                                <td class="wrapped-text slds-p-horizontal_medium">
+                                                    <template if:true={cod.hasNegoscope}>
+                                                        <lightning-combobox name="SignatoryRole" variant="label-hidden"
+                                                            dropdown-alignment="auto" label='Signatory Role'
+                                                            data-field={COD_API_NAMES.SignatoryRole__c} data-id={cod.id}
+                                                            value={cod._SignatoryRole__c} placeholder='Signatory Role'
+                                                            options={signatoryOptions} onchange={handleFieldEdits}>
+                                                        </lightning-combobox>
+                                                    </template>
+                                                </td>
+                                                <td>
+                                                    <!-- {cod.id} -->
+                                                    <lightning-input lwc:if={cod._IsInvoiceRecipient__c} type="checkbox"
+                                                        onchange={handleFieldEdits} variant="label-hidden"
+                                                        value={cod._IsInvoiceRecipient__c} checked
+                                                        data-field={COD_API_NAMES.IsInvoiceRecipient__c}
+                                                        data-id={cod.id}>
+                                                    </lightning-input>
+                                                    <lightning-input lwc:else type="checkbox" variant="label-hidden"
+                                                        onchange={handleFieldEdits} value={cod._IsInvoiceRecipient__c}
+                                                        data-field={COD_API_NAMES.IsInvoiceRecipient__c}
+                                                        data-id={cod.id}>
+                                                    </lightning-input>
+                                                </td>
+                                            </template>
+                                            <template lwc:else>
+                                                <td class="wrapped-text slds-p-horizontal_medium">
+                                                    <span>
+                                                        <a href={cod.negoScopeLink}>
+                                                            {cod.negoScopeName}
+                                                        </a>
+                                                    </span>
+                                                </td>
+                                                <td><span class="slds-p-horizontal_medium">{cod.roleOutput}</span>
+                                                </td>
+                                                <td><span class="slds-p-horizontal_medium" if:true={cod.hasNegoscope}>
+                                                        <lightning-input lwc:if={cod._IsSignatory__c} type="checkbox"
+                                                            onchange={handleFieldEdits} variant="label-hidden"
+                                                            value={cod._IsSignatory__c} checked
+                                                            data-field={COD_API_NAMES.IsSignatory__c} data-id={cod.id}
+                                                            disabled>
+                                                        </lightning-input>
+                                                        <lightning-input lwc:else type="checkbox"
+                                                            onchange={handleFieldEdits} variant="label-hidden"
+                                                            value={cod._IsSignatory__c}
+                                                            data-field={COD_API_NAMES.IsSignatory__c} data-id={cod.id}
+                                                            disabled>
+                                                        </lightning-input>
+                                                    </span>
+                                                </td>
+                                                <td><span class="slds-p-horizontal_medium">{cod.signatoryOutput}</span>
+                                                </td>
+                                                <td>
+                                                    <span class="slds-p-horizontal_medium">
+                                                        <lightning-input lwc:if={cod._IsInvoiceRecipient__c}
+                                                            type="checkbox" onchange={handleFieldEdits}
+                                                            variant="label-hidden" value={cod._IsInvoiceRecipient__c}
+                                                            checked data-field={COD_API_NAMES.IsInvoiceRecipient__c}
+                                                            data-id={cod.id} disabled>
+                                                        </lightning-input>
+                                                        <lightning-input lwc:else type="checkbox"
+                                                            onchange={handleFieldEdits} variant="label-hidden"
+                                                            value={cod._IsInvoiceRecipient__c}
+                                                            data-field={COD_API_NAMES.IsInvoiceRecipient__c}
+                                                            data-id={cod.id} disabled>
+                                                        </lightning-input>
+                                                    </span>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                        <!-- ADD REQUEST ROW -->
+                                        <!-- modification request-->
+                                        <tr lwc:if={cod.isRequesting} key={cod.id} class="requestRow class1">
+                                            <td if:false={isReadOnly}>
+                                                <div class="rowActionsContainer">
+                                                    <template if:true={cod.showActions}>
+                                                        <!-- <lightning-button-icon class="slds-m-left_xx-small"
+                                                    data-with-approval="true" icon-name="utility:check" variant='border-filled'
+                                                    data-index={index} onclick={handleConfirmRequest}>
+                                                </lightning-button-icon> -->
+                                                        <lightning-button-icon class="slds-m-left_xx-small"
+                                                            data-with-approval="true" icon-name="utility:clear"
+                                                            title={labels.LBL_Connect_ContactResponsibility_Cancel}
+                                                            variant='border-filled' data-index={index} data-id={cod.id}
+                                                            onclick={handleCancelRequest}>
+                                                        </lightning-button-icon>
+                                                    </template>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {CodActivationStatusLabels.RequestedModification}
+                                            </td>
+                                            <td class="wrapped-text slds-p-horizontal_medium">
+                                                <span>
+                                                    <a href={cod.negoScopeLink}>
+                                                        {cod.negoScopeName}
+                                                    </a>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <lightning-combobox name="Role" variant="label-hidden"
+                                                    dropdown-alignment="auto" label={labels.LBL_Role}
+                                                    data-field={COD_API_NAMES.RequestedRole__c} data-id={cod.id}
+                                                    value={cod._RequestedRole__c} placeholder={labels.LBL_Role}
+                                                    options={roleOptions}
+                                                    onchange={handleFieldEdits}></lightning-combobox>
+                                            </td>
+                                            <td>
+                                                <template if:true={cod.hasNegoscope}>
+                                                    <lightning-input lwc:if={cod._RequestedSignatoryRole__c}
+                                                        type="checkbox" variant="label-hidden"
+                                                        onchange={handleFieldEdits}
+                                                        value={cod._RequestedSignatoryRole__c} checked
+                                                        data-field={COD_API_NAMES.RequestedSignatoryRole__c}
+                                                        data-id={cod.id}>
+                                                    </lightning-input>
+                                                    <lightning-input lwc:else type="checkbox" variant="label-hidden"
+                                                        value={cod._RequestedSignatoryRole__c}
+                                                        onchange={handleFieldEdits}
+                                                        data-field={COD_API_NAMES.RequestedSignatoryRole__c}
+                                                        data-id={cod.id}>
+                                                    </lightning-input>
+                                                </template>
+                                            </td>
+                                            <td>
+                                                <template if:true={cod.hasNegoscope}>
+                                                    <lightning-combobox name="RequestedAccountingRole"
+                                                        variant="label-hidden" dropdown-alignment="auto"
+                                                        label={labels.LBL_Role}
+                                                        data-field={COD_API_NAMES.RequestedAccountingRole__c}
+                                                        data-id={cod.id} value={cod._RequestedAccountingRole__c}
+                                                        placeholder={labels.LBL_Role} options={reqAccountingRoleOptions}
+                                                        onchange={handleFieldEdits}></lightning-combobox>
+                                                </template>
+                                            </td>
+                                            <td>
+                                                <lightning-input lwc:if={cod._RequestedInvoiceRecipient__c}
+                                                    type="checkbox" variant="label-hidden" onchange={handleFieldEdits}
+                                                    value={cod._RequestedInvoiceRecipient__c} checked
+                                                    data-field={COD_API_NAMES.RequestedInvoiceRecipient__c}
+                                                    data-id={cod.id}>
+                                                </lightning-input>
+                                                <lightning-input lwc:else type="checkbox" variant="label-hidden"
+                                                    value={cod._RequestedInvoiceRecipient__c}
+                                                    onchange={handleFieldEdits}
+                                                    data-field={COD_API_NAMES.RequestedInvoiceRecipient__c}
+                                                    data-id={cod.id}>
+                                                </lightning-input>
+                                            </td>
+                                        </tr>
+                                        <template if:false={cod.isRequesting}>
+                                            <tr lwc:if={cod.hasRequest} key={cod.id} class="requestRow class2">
+                                                <td class="slds-text-align--center" if:false={isReadOnly}>
+                                                    <template lwc:if={isManager}>
+                                                        <lightning-button-icon class="activateButton"
+                                                            icon-name="utility:check" variant='base' data-index={index}
+                                                            data-id={cod.id} onclick={handleValidateRequest}>
+                                                        </lightning-button-icon>
+                                                    </template>
+                                                    <lightning-button-icon
+                                                        class="deactivateButton slds-m-left--xx-small"
+                                                        icon-name="utility:clear" variant='base' data-index={index}
+                                                        title={labels.LBL_Connect_ContactResponsibility_Cancel}
+                                                        data-id={cod.id} onclick={handleRejectRequest}>
+                                                    </lightning-button-icon>
+                                                </td>
+                                                <td>
+                                                    <div class="requestTd">
+                                                        <p class="requestTitle">
+                                                            <!-- {labels.LBL_Connect_Request} -->
+                                                            {CodActivationStatusLabels.RequestedModification}
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                                <td class="wrapped-text slds-p-horizontal--medium">
+                                                    <span>
+                                                        <a href={cod.RequestedNegoScopeLink}>
+                                                            {cod.RequestedNegoScopeName}
+                                                        </a>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="slds-p-horizontal--medium">
+                                                        {cod.RequestedRoleOutput}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="slds-p-horizontal--medium" if:true={cod.hasNegoscope}>
+                                                        <lightning-input lwc:if={cod._RequestedSignatoryRole__c}
+                                                            type="checkbox" variant="label-hidden"
+                                                            value={cod._RequestedSignatoryRole__c} checked="{}"
+                                                            data-field={COD_API_NAMES.RequestedSignatoryRole__c}
+                                                            data-id={cod.id} disabled>
+                                                        </lightning-input>
+                                                        <lightning-input lwc:else type="checkbox" variant="label-hidden"
+                                                            value={cod._RequestedSignatoryRole__c}
+                                                            data-field={COD_API_NAMES.RequestedSignatoryRole__c}
+                                                            data-id={cod.id} disabled>
+                                                        </lightning-input>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="slds-p-horizontal--medium" if:true={cod.hasNegoscope}>
+                                                        {cod.RequestedSignatoryOutput}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="slds-p-horizontal--medium">
+                                                        <lightning-input lwc:if={cod._RequestedInvoiceRecipient__c}
+                                                            type="checkbox" variant="label-hidden"
+                                                            value={cod._RequestedInvoiceRecipient__c} checked
+                                                            data-field={COD_API_NAMES.RequestedInvoiceRecipient__c}
+                                                            data-id={cod.id} disabled>
+                                                        </lightning-input>
+                                                        <lightning-input lwc:else type="checkbox" variant="label-hidden"
+                                                            value={cod._RequestedInvoiceRecipient__c}
+                                                            data-field={COD_API_NAMES.RequestedInvoiceRecipient__c}
+                                                            data-id={cod.id} disabled>
+                                                        </lightning-input>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                        <tr lwc:if={cod._IsDeactivationRequested__c} key={cod.id}
+                                            class="deactivationRequestRow class2">
+                                            <td class="slds-text-align_center" if:false={isReadOnly}>
+                                                <template lwc:if={isManager}>
+                                                    <lightning-button-icon class="activateButton"
+                                                        icon-name="utility:check" variant='border-filled'
+                                                        data-index={index} data-id={cod.id}
+                                                        onclick={handleValidateRequest}>
+                                                    </lightning-button-icon>
+                                                    <lightning-button-icon class="deactivateButton slds-m-left_xx-small"
+                                                        icon-name="utility:clear" variant='border-filled'
+                                                        data-index={index}
+                                                        title={labels.LBL_Connect_ContactResponsibility_Cancel}
+                                                        data-id={cod.id} onclick={handleRejectRequest}>
+                                                    </lightning-button-icon>
+                                                </template>
+                                            </td>
+                                            <td>
+                                                <div class="requestTd">
+                                                    <p class="requestTitle">
+                                                        {CodActivationStatusLabels.RequestedDeactivation}
+                                                    </p>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr lwc:if={cod._IsReactivationRequested__c} key={cod.id}
+                                            class="reactivation-request-row class2">
+                                            <td class="slds-text-align_center" if:false={isReadOnly}>
+                                                <template lwc:if={isManager}>
+                                                    <lightning-button-icon class="activateButton"
+                                                        icon-name="utility:check" variant='border-filled'
+                                                        data-index={index} data-id={cod.id}
+                                                        onclick={handleValidateRequest}>
+                                                    </lightning-button-icon>
+                                                    <lightning-button-icon class="deactivateButton slds-m-left_xx-small"
+                                                        icon-name="utility:clear" variant='border-filled'
+                                                        data-index={index}
+                                                        title={labels.LBL_Connect_ContactResponsibility_Cancel}
+                                                        data-id={cod.id} onclick={handleRejectRequest}>
+                                                    </lightning-button-icon>
+                                                </template>
+                                            </td>
+                                            <td>
+                                                <div class="requestTd">
+                                                    <p class="requestTitle">
+                                                        {CodActivationStatusLabels.RequestedReactivation}
+                                                    </p>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </template>
+                                    <template lwc:else>
+                                        <tr>
+                                            <td colspan="8">
+                                                {labels.LBL_Connect_Empty_Cod}
+                                            </td>
+                                        </tr>
+                                    </template>
+                                    <tr if:true={contact.hasrequestedCods}>
+                                        <th colspan="8" style="background: #4EC2A9;" class="requestedHeader">
+                                            {CodActivationStatusLabels.RequestedCreation}
+                                        </th>
+                                    </tr>
+                                    <template if:true={contact.hasrequestedCods}>
+                                        <template for:each={contact.requestedCods} for:item='cod' for:index="index">
+                                            <!-- request line {cod.id} index {index} -->
+                                            <!-- SHOW EXISTING REQUEST -->
+                                            <tr key={cod.id} class="class3">
+                                                <td class="slds-text-align_center" if:false={isReadOnly}>
+                                                    <template lwc:if={isManager}>
+                                                        <lightning-button-icon class="activateButton"
+                                                            icon-name="utility:check" variant='border-filled'
+                                                            data-index={index} data-id={cod.id} data-new-request="true"
+                                                            onclick={handleValidateRequest}>
+                                                        </lightning-button-icon>
+                                                        <lightning-button-icon
+                                                            class="deactivateButton slds-m-left_xx-small"
+                                                            icon-name="utility:clear" variant='border-filled'
+                                                            data-index={index}
+                                                            title={labels.LBL_Connect_ContactResponsibility_Cancel}
+                                                            data-id={cod.id} data-new-request="true"
+                                                            onclick={handleRejectRequest}>
+                                                        </lightning-button-icon>
+                                                    </template>
+                                                    <template lwc:else>
+                                                        <template if:true={cod.canDeactivate}>
+                                                            <button
+                                                                class="slds-button slds-button_icon slds-button_icon-border-filled slds-m-left_xx-small"
+                                                                title={labels.LBL_Connect_ContactResponsibility_Deactivate}
+                                                                data-id={cod.id} onclick={handlePriorDeactivate}
+                                                                data-with-approval="true">
+                                                                <svg class="slds-button__icon" aria-hidden="true"
+                                                                    style="fill: red;" data-id={cod.id}
+                                                                    onclick={handlePriorDeactivate}
+                                                                    data-with-approval="true">
+                                                                    <use
+                                                                        xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#power">
+                                                                    </use>
+                                                                </svg>
+                                                            </button>
+                                                        </template>
+                                                        <template if:true={cod.canCancelReq}>
+                                                            <lightning-button-icon class="slds-m-left_xx-small"
+                                                                data-with-approval="true" icon-name="utility:clear"
+                                                                title={labels.LBL_Connect_ContactResponsibility_Cancel}
+                                                                variant='border-filled' data-index={index}
+                                                                data-cancel="true" data-id={cod.id}
+                                                                data-new-request="true" onclick={handleRejectRequest}>
+                                                            </lightning-button-icon>
+                                                        </template>
+                                                    </template>
+                                                </td>
+                                                <td>
+                                                    <div class="requestTd">
+                                                        <!-- <span class="requestTitle"> -->
+                                                        <!-- {labels.LBL_Connect_Request} -->
+                                                        <!-- {cod.id} -->
+                                                        <!--   Requested Creation -->
+                                                        <span class="slds-p-horizontal_medium">
+                                                            <lightning-icon title={cod.activationStatusOutput}
+                                                                icon-name={cod.activationStatusIcon}></lightning-icon>
+                                                        </span>
+                                                        <!-- Requested Modification -->
+                                                        <!-- </span> -->
+                                                    </div>
+                                                </td>
+                                                <td class="wrapped-text slds-p-horizontal_medium">
+                                                    <span>
+                                                        <a href={cod.RequestedNegoScopeLink}>
+                                                            {cod.RequestedNegoScopeName}
+                                                        </a>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="slds-p-horizontal_medium">
+                                                        {cod.RequestedRoleOutput}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="slds-p-horizontal_medium" if:true={cod.hasNegoscope}>
+                                                        <lightning-input lwc:if={cod._RequestedSignatoryRole__c}
+                                                            type="checkbox" variant="label-hidden"
+                                                            value={cod._RequestedSignatoryRole__c} checked
+                                                            data-field={COD_API_NAMES.RequestedSignatoryRole__c}
+                                                            data-id={cod.id} disabled>
+                                                        </lightning-input>
+                                                        <lightning-input lwc:else type="checkbox" variant="label-hidden"
+                                                            value={cod._RequestedSignatoryRole__c}
+                                                            data-field={COD_API_NAMES.RequestedSignatoryRole__c}
+                                                            data-id={cod.id} disabled>
+                                                        </lightning-input>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="slds-p-horizontal_medium" if:true={cod.hasNegoscope}>
+                                                        {cod.RequestedSignatoryOutput}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="slds-p-horizontal_medium">
+                                                        <lightning-input lwc:if={cod._RequestedInvoiceRecipient__c}
+                                                            type="checkbox" variant="label-hidden"
+                                                            value={cod._RequestedInvoiceRecipient__c} checked
+                                                            data-field={COD_API_NAMES.RequestedInvoiceRecipient__c}
+                                                            data-id={cod.id} disabled>
+                                                        </lightning-input>
+                                                        <lightning-input lwc:else type="checkbox" variant="label-hidden"
+                                                            value={cod._RequestedInvoiceRecipient__c}
+                                                            data-field={COD_API_NAMES.RequestedInvoiceRecipient__c}
+                                                            data-id={cod.id} disabled>
+                                                        </lightning-input>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </template>
+                                    <template if:false={isReadOnly}>
+                                        <template if:true={isApproval}>
+                                            <template if:true={contact.hasinPreparationCods}>
+                                                <tr>
+                                                    <!-- <th colspan="8">{labels.LBL_Connect_New_Request_List}</th> -->
+                                                    <th colspan="8" style="background: #806BBF;">
+                                                        {CodActivationStatusLabels.InPreparation}
+                                                    </th>
+                                                </tr>
+                                            </template>
+                                            <template if:true={contact.hasinPreparationCods}>
+                                                <template for:each={contact.inPreparationCods} for:item='cod'
+                                                    for:index="index">
+                                                    <!-- ADD REQUEST ROW -->
+                                                    <template lwc:if={cod.newRequest}>
+                                                        <tr key={cod.id} class=" class4">
+                                                            <td>
+                                                                <div class="rowActionsContainer">
+                                                                    <template if:true={cod.showActions}>
+                                                                        <!-- <lightning-button-icon class="slds-m-left_xx-small" if:false={showAddIndividualContact}
+                                                            icon-name="utility:check" variant='border-filled'
+                                                            data-with-approval="true" data-new-request="true"
+                                                            data-index={index} onclick={handleConfirmRequest}>
+                                                        </lightning-button-icon> -->
+                                                                        <lightning-button-icon
+                                                                            class="slds-m-left_xx-small"
+                                                                            icon-name="utility:clear"
+                                                                            variant='border-filled'
+                                                                            title={labels.LBL_Connect_ContactResponsibility_Cancel}
+                                                                            data-with-approval="true"
+                                                                            data-new-request="true" data-index={index}
+                                                                            data-id={cod.id}
+                                                                            onclick={handleCancelRequest}>
+                                                                        </lightning-button-icon>
+                                                                    </template>
+                                                                </div>
+                                                            </td>
+                                                            <td></td>
+                                                            <td>
+                                                                <c-neg-optim-custom-lookup
+                                                                    search-term={cod.RequestedNegoScopeName}
+                                                                    object-name={NS_API_NAMES.objectApiName}
+                                                                    field-name="Name" is-multi="false" icon-name=""
+                                                                    selected-event={Events.selectNegoScopeAction}
+                                                                    data-id={cod.id}
+                                                                    onselectnegoscopeaction={selectNegoScopeAction}
+                                                                    search-fields={searchNegoScopeFields}
+                                                                    data-search="true"
+                                                                    data-field={COD_API_NAMES.RequestedNegoscope__c}
+                                                                    place-holder="NegoScope" label="NegoScope"
+                                                                    isportal="true" label-variant="label-hidden"
+                                                                    filter-token={NegoScopeFilter}
+                                                                    data-with-approval="true">
+                                                                </c-neg-optim-custom-lookup>
+                                                            </td>
+                                                            <td>
+                                                                <lightning-combobox name="Role" variant="label-hidden"
+                                                                    dropdown-alignment="auto" label={labels.LBL_Role}
+                                                                    data-field={COD_API_NAMES.RequestedRole__c}
+                                                                    data-id={cod.id} value={cod._RequestedRole__c}
+                                                                    placeholder={labels.LBL_Role}
+                                                                    data-new-request="true" options={roleOptions}
+                                                                    onchange={handleFieldEdits}></lightning-combobox>
+                                                            </td>
+                                                            <td>
+                                                                <template if:true={cod.hasNegoscope}>
+                                                                    <lightning-input
+                                                                        lwc:if={cod._RequestedSignatoryRole__c}
+                                                                        type="checkbox" variant="label-hidden"
+                                                                        onchange={handleFieldEdits}
+                                                                        data-new-request="true" checked
+                                                                        data-field={COD_API_NAMES.RequestedSignatoryRole__c}
+                                                                        data-id={cod.id}>
+                                                                    </lightning-input>
+                                                                    <lightning-input lwc:else type="checkbox"
+                                                                        variant="label-hidden" data-new-request="true"
+                                                                        onchange={handleFieldEdits}
+                                                                        data-field={COD_API_NAMES.RequestedSignatoryRole__c}
+                                                                        data-id={cod.id}>
+                                                                    </lightning-input>
+                                                                </template>
+                                                            </td>
+                                                            <td>
+                                                                <template if:true={cod.hasNegoscope}>
+                                                                    <lightning-combobox name="RequestedAccountingRole"
+                                                                        variant="label-hidden" dropdown-alignment="auto"
+                                                                        label={labels.LBL_Role}
+                                                                        data-field={COD_API_NAMES.RequestedAccountingRole__c}
+                                                                        data-id={cod.id}
+                                                                        value={cod._RequestedAccountingRole__c}
+                                                                        placeholder={labels.LBL_Role}
+                                                                        options={reqAccountingRoleOptions}
+                                                                        onchange={handleFieldEdits}></lightning-combobox>
+                                                                </template>
+                                                            </td>
+                                                            <td>
+                                                                <lightning-input
+                                                                    lwc:if={cod._RequestedInvoiceRecipient__c}
+                                                                    type="checkbox" variant="label-hidden"
+                                                                    onchange={handleFieldEdits} data-new-request="true"
+                                                                    checked
+                                                                    data-field={COD_API_NAMES.RequestedInvoiceRecipient__c}
+                                                                    data-id={cod.id}>
+                                                                </lightning-input>
+                                                                <lightning-input lwc:else type="checkbox"
+                                                                    variant="label-hidden" data-new-request="true"
+                                                                    onchange={handleFieldEdits}
+                                                                    data-field={COD_API_NAMES.RequestedInvoiceRecipient__c}
+                                                                    data-id={cod.id}>
+                                                                </lightning-input>
+                                                            </td>
+                                                        </tr>
+                                                    </template>
+                                                    <!-- SHOW EXISTING REQUEST -->
+                                                    <template lwc:else>
+                                                        <tr key={cod.id} class=" class5">
+                                                            <td class="slds-text-align_center">
+                                                                <!-- <lightning-button-icon class="slds-m-left_xx-small"
+                                                                icon-name="utility:delete" variant='border-filled'
+                                                                data-id={cod.id}
+                                                                title={labels.LBL_Connect_ContactResponsibility_Delete}
+                                                                data-index={index} onclick={handleDeleteCod}
+                                                                data-recordid={cod.Id}>
+                                                            </lightning-button-icon> -->
+                                                                <!-- <template if:false={cod.isEditable}>
+                                                                <button
+                                                                    class="slds-button slds-button_icon slds-button_icon-border-filled slds-m-right_xx-small"
+                                                                    title={labels.LBL_Connect_ContactResponsibility_Deactivate}
+                                                                    data-id={cod.id} onclick={handlePriorDeactivate}
+                                                                    data-fieldype="inPreparation">
+                                                                    <svg class="slds-button__icon" aria-hidden="true"
+                                                                        style="fill: red;" data-id={cod.id}
+                                                                        onclick={handlePriorDeactivate}
+                                                                        data-fieldype="inPreparation">
+                                                                        <use
+                                                                            xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#power">
+                                                                        </use>
+                                                                    </svg>
+                                                                </button>
+                                                            </template> -->
+                                                                <template lwc:if={isManager}>
+                                                                    <lightning-button-icon class="activateButton"
+                                                                        icon-name="utility:check"
+                                                                        variant='border-filled' data-index={index}
+                                                                        data-id={cod.id} data-new-request="true"
+                                                                        onclick={handleValidateRequest}>
+                                                                    </lightning-button-icon>
+                                                                    <lightning-button-icon
+                                                                        class="deactivateButton slds-m-left_xx-small"
+                                                                        icon-name="utility:clear"
+                                                                        variant='border-filled'
+                                                                        title={labels.LBL_Connect_ContactResponsibility_Cancel}
+                                                                        data-index={index} data-id={cod.id}
+                                                                        data-new-request="true"
+                                                                        onclick={handleRejectRequest}>
+                                                                    </lightning-button-icon>
+                                                                </template>
+                                                                <template lwc:else>
+                                                                    <lightning-button-icon class="activateButton"
+                                                                        icon-name="utility:send" variant='border-filled'
+                                                                        data-index={index} data-id={cod.id}
+                                                                        data-new-request="true"
+                                                                        onclick={handleSendRequest}>
+                                                                    </lightning-button-icon>
+                                                                    <lightning-button-icon
+                                                                        class="activateButton slds-m-left_xx-small"
+                                                                        icon-name="utility:new_direct_message"
+                                                                        variant='border-filled' data-index={index}
+                                                                        data-id={cod.id} data-editable="true"
+                                                                        onclick={handleEditRequestInPreperation}>
+                                                                    </lightning-button-icon>
+                                                                    <lightning-button-icon class="slds-m-left_xx-small"
+                                                                        icon-name="utility:delete"
+                                                                        variant='border-filled' data-id={cod.id}
+                                                                        title={labels.LBL_Connect_ContactResponsibility_Delete}
+                                                                        data-index={index} onclick={handleDeleteCod}
+                                                                        data-new-request="true" data-recordid={cod.Id}>
+                                                                    </lightning-button-icon>
+                                                                </template>
+                                                            </td>
+                                                            <td>
+                                                                <div class="requestTd">
+                                                                    <!-- <span class="requestTitle"> -->
+                                                                    <!-- {labels.LBL_Connect_Request} -->
+                                                                    <!-- {cod.id} -->
+                                                                    <!--   In preparation -->
+                                                                    <span class="slds-p-horizontal_medium">
+                                                                        <!-- {cod.activationStatusOutput} -->
+                                                                        <lightning-icon
+                                                                            title={cod.activationStatusOutput}
+                                                                            icon-name={cod.activationStatusIcon}></lightning-icon>
+                                                                    </span>
+                                                                    <!-- </span> -->
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <span class="slds-p-horizontal_medium">
+                                                                    {cod.RequestedNegoScopeName}
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <template lwc:if={cod.readOnly}>
+                                                                    <span class="slds-p-horizontal_medium">
+                                                                        {cod.RequestedRoleOutput}
+                                                                    </span>
+                                                                </template>
+                                                                <template lwc:else>
+                                                                    <lightning-combobox name="Role"
+                                                                        variant="label-hidden" dropdown-alignment="auto"
+                                                                        label={labels.LBL_Role}
+                                                                        data-field={COD_API_NAMES.RequestedRole__c}
+                                                                        data-id={cod.id} value={cod._RequestedRole__c}
+                                                                        placeholder={labels.LBL_Role}
+                                                                        data-new-request="true" options={roleOptions}
+                                                                        onchange={handleEditInPreparationValue}>
+                                                                    </lightning-combobox>
+                                                                </template>
+                                                            </td>
+                                                            <td>
+                                                                <span class="slds-p-horizontal_medium"
+                                                                    if:true={cod.hasNegoscope}>
+                                                                    <lightning-input type="checkbox"
+                                                                        variant="label-hidden"
+                                                                        checked={cod._RequestedSignatoryRole__c}
+                                                                        data-field={COD_API_NAMES.RequestedSignatoryRole__c}
+                                                                        data-id={cod.id} disabled={cod.readOnly}
+                                                                        onchange={handleEditInPreparationValue}>
+                                                                    </lightning-input>
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <template lwc:if={cod.readOnly}>
+                                                                    <span class="slds-p-horizontal_medium">
+                                                                        {cod.RequestedSignatoryOutput}
+                                                                    </span>
+                                                                </template>
+                                                                <template lwc:else>
+                                                                    <span class="slds-p-horizontal_medium"
+                                                                        if:true={cod.hasNegoscope}>
+                                                                        <lightning-combobox name="RequestedAccountingRole"
+                                                                            variant="label-hidden" dropdown-alignment="auto"
+                                                                            label={labels.LBL_Role}
+                                                                            data-field={COD_API_NAMES.RequestedAccountingRole__c}
+                                                                            data-id={cod.id} value={cod._RequestedAccountingRole__c}
+                                                                            placeholder={labels.LBL_Role}
+                                                                            data-new-request="true" options={reqAccountingRoleOptions}
+                                                                            onchange={handleEditInPreparationValue}></lightning-combobox>
+                                                                    </span>
+                                                                </template>
+                                                            </td>
+                                                            <td>
+                                                                <span class="slds-p-horizontal_medium">
+                                                                    <lightning-input type="checkbox"
+                                                                        variant="label-hidden"
+                                                                        checked={cod._RequestedInvoiceRecipient__c}
+                                                                        data-field={COD_API_NAMES.RequestedInvoiceRecipient__c}
+                                                                        data-id={cod.id} disabled={cod.readOnly}
+                                                                        onchange={handleEditInPreparationValue}>
+                                                                    </lightning-input>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    </template>
+                                                </template>
+                                            </template>
+                                        </template>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+        <template if:true={confirmationPopUp.show}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <lightning-button-icon icon-name="utility:close" alternative-text="Cancel and close" size="large"
+                        class="confirmationPopUpDismissBtn" variant="bare" onclick={confirmationPopUp.close}>
+                    </lightning-button-icon>
+                    <div class="slds-modal__header" if:true={title}>
+                        <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate" tabindex="-1">
+                            {confirmationPopUp.title}
+                        </h1>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <p>{confirmationPopUp.message}</p>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" aria-label="Cancel and close"
+                            onclick={confirmationPopUp.close}>
+                            {labels.LBL_Connect_Cancel}
+                        </button>
+                        <button class="slds-button slds-button_brand" onclick={confirmationPopUp.action}>
+                            {labels.LBL_Yes}
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <template if:true={popup.visibility}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- <lightning-button-icon icon-name="utility:close" alternative-text="Cancel and close" size="large"
+                        style="background: white; width: fit-content; margin-bottom: 5px; border-radius: 4px;"
+                        class="dc-modal-close-button-icon" variant="bare" onclick={submitPopUp} data-id="cancel"
+                        ></lightning-button-icon> -->
+                    <div class="slds-modal__header">
+                        <h1 class="slds-modal__title slds-hyphenate" tabindex="-1">
+                            {popup.title}
+                        </h1>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <p>{popup.body}</p>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2"
+                        lwc:if={popup.subBody}>
+                        <p>{popup.subBody}</p>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button data-id="cancel" class="slds-button slds-button_neutral" onclick={submitPopUp}
+                            lwc:if={popup.cancelBtn}>
+                            {popup.cancelBtn}
+                        </button>
+                        <button data-id="confirm" class={popup.submitBtnClass} onclick={submitPopUp}>
+                            {popup.submitBtn}
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+    </div>
+</template>

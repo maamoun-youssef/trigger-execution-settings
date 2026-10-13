@@ -1,0 +1,117 @@
+<template>
+    <div class="slds-form-element">
+        <label if:true={label} class="slds-form-element__label slds-grid slds-grid_vertical-align-center">
+            <span class="slds-m-right_x-small">
+                <abbr if:true={required} class="slds-required" title="required">*</abbr>
+                {label}
+            </span>
+            <lightning-helptext if:true={helpText} content={helpText}></lightning-helptext>
+        </label>
+        <div class="slds-form-element__control">
+            <div class="slds-combobox_container" data-id="combobox">
+                <div class={dropdownClass} aria-expanded={isDropdownOpen} aria-haspopup="listbox" role="combobox">
+                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                        <input
+                            type="text"
+                            class="slds-input slds-combobox__input"
+                            placeholder={placeholder}
+                            value={displayValue}
+                            oninput={handleSearch}
+                            onclick={toggleDropdown}
+                            onfocus={handleFocus}
+                            onblur={handleBlur}
+                            disabled={disabledState}
+                            readonly={readOnly}
+                        />
+                        <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                            <lightning-icon icon-name="utility:search" size="x-small"></lightning-icon>
+                        </span>
+                    </div>
+                    <template if:true={isMultiSelect}>
+                        <template if:true={currentMode.showPills}>
+                            <template if:true={selectedPills.length}>
+                                <template if:true={disabledState}>
+                                    <div class="slds-m-top_x-small slds-grid slds-wrap">
+                                        <template
+                                            for:each={selectedPills}
+                                            for:item="pill">
+                                            <lightning-badge
+                                                key={pill.name}
+                                                label={pill.label}
+                                                class="slds-m-right_xx-small slds-m-bottom_xx-small">
+                                            </lightning-badge>
+                                        </template>
+                                    </div>
+                                </template>
+                                <!-- Editable -->
+                                <template if:false={disabledState}>
+                                    <lightning-pill-container
+                                        items={selectedPills}
+                                        onitemremove={handleRemove}>
+                                    </lightning-pill-container>
+                                </template>
+                            </template>
+                        </template>
+                    </template>
+                    <div id="listbox-id-1" class="slds-dropdown slds-dropdown_fluid slds-dropdown_length-5" role="listbox" onmousedown={handlePreventBlur}>
+                        <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                            <!-- <template if:true={showCheckbox}>
+                                <lightning-input
+                                    type="checkbox"
+                                    checked={allOptionsChecked}
+                                    tabindex="-1"
+                                    data-value="allOptions"
+                                    onchange={handleCheckboxClick}>
+                                </lightning-input>
+                            </template>  -->
+                            <template if:true={displayOptions} for:each={options} for:item="opt">
+                                <li key={opt.value} role="presentation" class="slds-listbox__item" data-value={opt.value} onclick={handleSelect}>
+                                    <div class={opt.itemClass} role="option">
+                                        <span class="slds-media__figure slds-listbox__option-icon">
+                                            <template if:true={showCheckbox}>
+                                                <lightning-input
+                                                    type="checkbox"
+                                                    checked={opt.isSelected}
+                                                    data-value={opt.value}
+                                                    tabindex="-1"
+                                                    onblur={handleBlur}
+                                                    onchange={handleSelect}>
+                                                </lightning-input>
+                                            </template>
+                                            <!-- Default checkmark -->
+                                            <template if:false={showCheckbox}>
+                                                <lightning-icon
+                                                    if:true={opt.isSelected}
+                                                    icon-name="utility:check"
+                                                    size="x-small">
+                                                </lightning-icon>
+                                            </template>
+                                        </span>
+                                        <template if:true={opt.iconName}>
+                                            <span class="slds-media__figure slds-listbox__option-icon slds-m-right_small">
+                                                <lightning-icon icon-name={opt.iconName} size="x-small"></lightning-icon>
+                                            </span>
+                                        </template>
+                                        <span class="slds-media__body">
+                                            <span class="slds-truncate" title={opt.label}>{opt.label}</span>
+                                        </span>
+                                    </div>
+                                </li>
+                            </template>
+                            <!-- <template if:true={showCheckbox}>
+                                <lightning-input
+                                    type="checkbox"
+                                    checked={opt.isSelected}
+                                    data-value={opt.value}
+                                    tabindex="-1"
+                                    onchange={handleCheckboxClick}>
+                                </lightning-input>
+                            </template> -->
+                            <li if:false={displayOptions} class="slds-p-around_small">No results found.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

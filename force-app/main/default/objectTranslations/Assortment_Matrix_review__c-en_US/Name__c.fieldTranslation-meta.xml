@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Nom --></label>
+    <name>Name__c</name>
+    <picklistValues>
+        <masterLabel>Budget</masterLabel>
+        <translation><!-- Budget --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Budget P1</masterLabel>
+        <translation><!-- Budget P1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Fact1</masterLabel>
+        <translation><!-- Fact1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Fact1 P1</masterLabel>
+        <translation><!-- Fact1 P1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Fact2</masterLabel>
+        <translation><!-- Fact2 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Fact2 P1</masterLabel>
+        <translation><!-- Fact2 P1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Forecast</masterLabel>
+        <translation><!-- Forecast --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Forecast P1</masterLabel>
+        <translation><!-- Forecast P1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Like4Like</masterLabel>
+        <translation><!-- Like4Like --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Like4Like P1</masterLabel>
+        <translation><!-- Like4Like P1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Negotiated</masterLabel>
+        <translation><!-- Negotiated --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Negotiated P1</masterLabel>
+        <translation><!-- Negotiated P1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Salesforce</masterLabel>
+        <translation><!-- Salesforce --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Salesforce P1</masterLabel>
+        <translation><!-- Salesforce P1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Target</masterLabel>
+        <translation><!-- Target --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Target P1</masterLabel>
+        <translation><!-- Target P1 --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

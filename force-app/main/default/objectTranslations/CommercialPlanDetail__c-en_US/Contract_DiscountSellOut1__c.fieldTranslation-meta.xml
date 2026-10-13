@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Contract Discount SellOut 1 --></label>
+    <name>Contract_DiscountSellOut1__c</name>
+    <relationshipLabel><!-- CPD (Contract Discount SellOut 1) --></relationshipLabel>
+</CustomFieldTranslation>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Line Type --></label>
+    <name>LineType__c</name>
+    <picklistValues>
+        <masterLabel>BUPeriodBase</masterLabel>
+        <translation><!-- BUPeriodBase --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>BUTotalBase</masterLabel>
+        <translation><!-- BUTotalBase --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>BUYearBase</masterLabel>
+        <translation><!-- BUYearBase --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>PeriodBase</masterLabel>
+        <translation><!-- PeriodBase --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>TotalBase</masterLabel>
+        <translation><!-- TotalBase --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>YearBase</masterLabel>
+        <translation><!-- YearBase --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

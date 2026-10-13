@@ -1,0 +1,220 @@
+.prof-user {
+  border-radius: 50px;
+  top: 1.5px;
+  left: 1.5px;
+  right: 1.5px;
+  bottom: 1.5px;
+  position: absolute;
+}
+
+.Prof-details {
+  color: white;
+  font-size: 14px;
+  position: absolute;
+  background-color: #3d3d3d;
+  border-radius: 0px 0px 0px 10px;
+  width: 150px;
+  float: right;
+  right: -2%;
+  text-align: center;
+}
+
+.search-details {
+  width: 33.33%;
+  font-size: 16px;
+  background-color: white;
+  max-height: 200px;
+  margin-right: 33.33%;
+  position: absolute;
+  margin-left: 33.33%;
+  float: right;
+  padding: 15px;
+  overflow-y: scroll;
+  color: black;
+  border-radius: 0px 0px 5px 5px;
+  text-align: center;
+}
+
+.Prof-details a:link {
+  color: white !important;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.Prof-details .a,
+.Prof-details a:link:not(.slds-button, .slds-dropdown__item>a),
+.Prof-details a:visited:not(.slds-button, .slds-dropdown__item>a) {
+  color: white !important;
+}
+
+.Prof-details a:hover {
+  color: white !important;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.pf {
+  position: none;
+}
+
+.negoptim-guide {
+  right: 2%;
+  margin-top: 15%;
+}
+
+.negoptim-icon {
+  position: absolute;
+  color: black;
+  right: 7%;
+  margin-top: 100%;
+}
+
+.negoptim-notfcolor {
+  background-color: #E8E8E8;
+}
+
+.read-notification {
+  background-color: white;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #E8E8E8;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.negoptim-notfcolor {
+  background-color: #E8E8E8;
+}
+
+.read-notification {
+  background-color: white;
+}
+
+.negoptim-notfcolor a:link,
+.negoptim-notfcolor a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+.negoptim-notfcolor a:hover {
+  text-decoration: none;
+  cursor: default;
+}
+
+.negoptim-notfcolor a:active {
+  color: black;
+}
+
+.read-notification a:link,
+.read-notification a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+.read-notification a:hover {
+  text-decoration: none;
+  cursor: default;
+}
+
+.read-notification a:active {
+  color: black;
+}
+
+.notification-link {
+  color: black;
+  text-decoration: underline;
+}
+
+.notification-link:hover {
+  color: black;
+  text-decoration: underline;
+  cursor: default;
+}
+
+.notification-link:active {
+  color: black;
+}
+
+.slds-notification__target:hover {
+  background-color: var(--lwc-colorBackgroundRowHover, rgba(25, 124, 190, 0.05));
+}
+
+/* .prof-m {
+  margin-right: 27%;
+} */
+
+/* .img-m {
+  margin-left: 23%;
+} */
+
+.zoom-container {
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+
+.custom-icon-in_app_assistant {
+  --slds-c-icon-color-foreground-default: #ffff;
+}
+
+
+@media (max-width: 900px) {
+  .prof-m {
+    margin-right: 0%;
+  }
+
+  .img-m {
+    margin-left: 0%;
+  }
+
+  .negoptim-icon {
+    right: 20%;
+  }
+
+  .negoptim-guide {
+    right: 5%;
+  }
+
+  /* .Prof-details {
+    right: 10%;
+  } */
+}
+
+@media (max-width: 768px) {
+  .top-text-color {
+    color: white;
+  }
+}
+
+@media (max-width: 500px) {
+  .negoptim-icon {
+    right: 20%;
+  }
+
+  .negoptim-guide {
+    right: 4%;
+  }
+
+  /* .Prof-details {
+    right: 10%;
+  } */
+
+  .hide-on-mobile {
+    display: none !important;
+  }
+}

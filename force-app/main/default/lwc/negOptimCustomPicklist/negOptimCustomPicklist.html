@@ -1,0 +1,36 @@
+<template>
+    <div class="slds-col">
+        <div class="slds-combobox_container picklistContainer">
+            <div class=" slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
+                <lightning-input variant={variantLabel} placeholder={placeholder} label={label} type="text"
+                    value={selectedLabels} class="picklistDropDown" autocomplete="off"
+                    onfocus={handleOpenPicklistDropdown} disabled={disabled} onchange={handleSearchChange}>
+                </lightning-input>
+                <div class="picklistOptionsDropdown slds-popover slds-popover_full-width slds-hide picklistContainer"
+                    style="position: absolute; top:35px">
+                    <div class="slds-popover__body slds-scrollable" style="max-height: 50vh;" id="dialog-body-id-26">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                <template for:each={filteredOptionsList} for:item="item">
+                                    <div key={item.value} style="display: flex; margin-bottom: 8px;">
+                                        <lightning-input type="checkbox" variant="label-hidden"
+                                            class="margin-right: 8px;" checked={item.isSelected}
+                                            onchange={item.toggle}></lightning-input>
+                                        <label class="checkbox-label">
+                                            {item.label}
+                                        </label>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-popover__footer slds-popover__footer_form">
+                        <button class="slds-button slds-button_brand" type="button" onclick={handleConfirmSelection}>
+                            {Label.LBL_Ok}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fact_WD_MarketBased__c</fullName>
+    <label>Fact WD MarketBased</label>
+    <summarizedField>Assortment_Detail__c.Fact_WD_MarketBased__c</summarizedField>
+    <summaryFilterItems>
+        <field>Assortment_Detail__c.Version__c</field>
+        <operation>equals</operation>
+        <value></value>
+    </summaryFilterItems>
+    <summaryForeignKey>Assortment_Detail__c.Assortment_BU__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

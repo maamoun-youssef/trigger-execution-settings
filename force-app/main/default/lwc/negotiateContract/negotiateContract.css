@@ -1,0 +1,119 @@
+table tbody td:not(.index-cell):not(.nego-type-cell),
+table tbody th:not(.index-cell):not(.nego-type-cell) {
+    height: 33.47px;
+}
+
+.rightBorder {
+    border-right: 3px solid #d5d1d1 !important;
+}
+
+.conditionTable {
+    border-spacing: 0px 3px;
+    background-color: rgba(255, 255, 255, 1);
+    table-layout: unset;
+    position: sticky;
+}
+
+.whiteBackground {
+    background-color: #ffffff !important;
+}
+
+.conditionTable input[type="text"] {
+    padding: 0;
+}
+
+.third-header th {
+    text-align: center;
+    font-weight: normal;
+}
+
+.output-number-field {
+    text-align: right !important;
+    display: block;
+    margin-right: 2px;
+}
+
+.input-number-field {
+    text-align: right !important;
+    width: 70px;
+}
+
+.conditionTable input[type="text"] {
+    padding: 0;
+}
+
+.type-field {
+    display: table-cell !important;
+}
+
+.type-field {
+    display: table-cell !important;
+}
+
+.output-number-field {
+    text-align: right !important;
+    display: block;
+    margin-right: 2px;
+}
+
+.input-number-field {
+    text-align: right !important;
+    float: right;
+    width: 70px;
+}
+
+.preClosed-condition td {
+    background-color: #FCD3D1 !important;
+}
+
+.topSimulBG {
+    background-color: #FDFFB6 !important;
+}
+
+.safeBalanceBG {
+    background-color: #ece0ff !important;
+}
+
+.label-success {
+    color: green !important;
+}
+
+.label-error {
+    color: red !important;
+}
+
+.rates-error {
+    color: red !important;
+    font-weight: bold !important;
+}
+
+.output-number-field {
+    text-align: right !important;
+    display: block;
+    margin-right: 2px;
+}
+
+.limited-cell {
+    width: 1px;
+}
+
+.condition-table-left-part {
+    display: inline-block;
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    /* margin: 0; */
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.slds-popover__body .slds-input {
+    min-height: 16px !important;
+}

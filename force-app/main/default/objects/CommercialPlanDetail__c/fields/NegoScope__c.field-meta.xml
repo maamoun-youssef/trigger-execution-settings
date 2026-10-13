@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NegoScope__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>NS de référence (trigger en fonction du produit lié) ou saisie manuelle si UB spécifique à la promo</description>
+    <label>Nego Scope</label>
+    <referenceTo>NegoScope__c</referenceTo>
+    <relationshipLabel>Commercial Plan Details (Nego Scope)</relationshipLabel>
+    <relationshipName>CommercialPlanDetailsNegoScope</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MBF_Section_InvoiceReminder__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Mass Batch Form - display the section of Invoice Reminder</description>
+    <inlineHelpText>Display the section of Invoice Reminder</inlineHelpText>
+    <label>Section - Invoice Reminder</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

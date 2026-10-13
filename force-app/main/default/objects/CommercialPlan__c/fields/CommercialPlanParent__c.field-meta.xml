@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CommercialPlanParent__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Marketing Plan</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>The CP Parent should have the same Client as the CP.
+The Begin date of the CP should be posterior or equal to the Begin date of the CP Parent.
+The End date of the CP should be anterior or equal to the End date of the CP Parent.</errorMessage>
+        <filterItems>
+            <field>$Source.Supplier__c</field>
+            <operation>equals</operation>
+            <valueField>CommercialPlan__c.Supplier__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>$Source.SellOutBDate__c</field>
+            <operation>greaterOrEqual</operation>
+            <valueField>CommercialPlan__c.SellOutBDate__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>$Source.SellOutEDate__c</field>
+            <operation>lessOrEqual</operation>
+            <valueField>CommercialPlan__c.SellOutEDate__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>CommercialPlan__c</referenceTo>
+    <relationshipLabel>Commercial Plans</relationshipLabel>
+    <relationshipName>CommercialPlansParent</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

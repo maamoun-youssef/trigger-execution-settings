@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dispatch_Head_On_Condition_Level__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>used to Dispatch the Head(Inv_BUDispatch__c) based on the condition (Discount) and BU</description>
+    <label>Dispatch Head On Condition Level</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

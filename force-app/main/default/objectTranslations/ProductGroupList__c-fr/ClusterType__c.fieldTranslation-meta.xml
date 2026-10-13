@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Niv. du cluster</label>
+    <name>ClusterType__c</name>
+    <picklistValues>
+        <masterLabel>Cluster1</masterLabel>
+        <translation><!-- Cluster1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Cluster2</masterLabel>
+        <translation><!-- Cluster2 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Cluster3</masterLabel>
+        <translation><!-- Cluster3 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>OtherCluster</masterLabel>
+        <translation><!-- OtherCluster --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

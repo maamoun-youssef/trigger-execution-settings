@@ -1,0 +1,87 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "All Tasks Community Page",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"eb17eef1-ec13-45d4-aa55-bbd58320ea4f\",\"columns\":[{\"UUID\":\"53ee70ac-90d6-4828-bbaf-f0512dd6d7ff\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "allowDelete" : false,
+                "allowExport" : false,
+                "allowFilter" : false,
+                "allowImport" : false,
+                "displayCloneButton" : false,
+                "displayNewInlineButton" : false,
+                "displayShowHideColumns" : false,
+                "dxpStyle" : { },
+                "filterOnNoneDisplayedFields" : false,
+                "isReadOnly" : true,
+                "labelNewInlineButton" : "New inline row",
+                "nameAsURL" : false,
+                "numberFixedColumns" : 0,
+                "partialSave" : false,
+                "quickActions" : "",
+                "readOnly" : false,
+                "refreshViewAfterSave" : false,
+                "showCurrency" : true,
+                "showCurrencyAsSymbol" : false,
+                "showSubTotal" : false,
+                "templateName" : "Task_Community_Page",
+                "useRecordIsoCurrency" : false
+              },
+              "definition" : "c:gridSettingsPlugin",
+              "id" : "13d30351-1ad3-4e48-8eb4-21ffb2875702",
+              "type" : "component"
+            } ],
+            "id" : "53ee70ac-90d6-4828-bbaf-f0512dd6d7ff",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "eb17eef1-ec13-45d4-aa55-bbd58320ea4f",
+          "type" : "component"
+        } ],
+        "id" : "1443b660-734e-4629-a107-5a6d4d056421",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "dxpStyle" : { },
+            "pageTitle" : "All Tasks Community Page",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "a4ff6d31-a511-4ac6-9b5c-4939fa76e955",
+          "type" : "component"
+        } ],
+        "id" : "486dc186-218d-4846-a2c6-938d12a3f959",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "d199a649-a792-442f-a4cd-9b4f55ec34d9",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-all-tasks-community-page"
+  },
+  "urlName" : "all-tasks-community-page"
+}

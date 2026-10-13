@@ -1,0 +1,47 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+        aria-describedby="modal-content-id-1" class="slds-modal slds-backdrop slds-backdrop_open slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                    onclick={cancelHandler}>
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                </button>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    {Label.LBL_List_View_Templates_Selection}
+                </div>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" style="overflow: unset;">
+                <template if:true={loading}>
+                    <div class="slds-is-relative slds-card slds-m-top--small" style="height: initial; width:initial;">
+                        <lightning-spinner class="slds-spinner_brand" alternative-text="Loading" size="medium"
+                            variant="brand"></lightning-spinner>
+                    </div>
+                </template>
+
+                <template if:false={loading}>
+                    <div class="slds-card slds-m-top--small">
+                        <lightning-combobox label={Label.LBL_Select_Object} options={listViews}
+                            placeholder={Label.LBL_Select_Object} onchange={handleObjectChange}
+                            class="slds-m-around_small" value={objectName} style="width: 250px;">
+                        </lightning-combobox>
+
+                        <template if:true={showTemplates}>
+                            <lightning-dual-listbox class="slds-m-around--small" label={Label.LBL_Select_Templates}
+                                source-label={Label.LBL_Available} selected-label={Label.LBL_Display_as_List_View}
+                                options={allTemplates} value={selectedTemplates} onchange={handleTemplatesChange}>
+                            </lightning-dual-listbox>
+                        </template>
+                    </div>
+                </template>
+            </div>
+            <div class="slds-modal__footer">
+                <lightning-button label={Label.LBL_Cancel} class="slds-p-right--small" variant="neutral"
+                    onclick={cancelHandler}></lightning-button>
+                <lightning-button label={Label.LBL_Save} variant="brand" onclick={saveHandler}></lightning-button>
+            </div>
+        </div>
+    </section>
+</template>

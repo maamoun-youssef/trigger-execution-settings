@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Documents Center",
+  "contentBody" : {
+    "activeViewId" : "Documents_Center",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-documents-center",
+    "urlPrefix" : "documents-center"
+  },
+  "urlName" : "documents-center"
+}

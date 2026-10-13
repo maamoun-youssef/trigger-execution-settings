@@ -1,0 +1,233 @@
+<template>
+    <div class="mainContainer" style="position: relative;">
+        <div class="slds-page-header pageHeader">
+            <template lwc:if={isLoading}>
+                <!-- <lightning-spinner variant="brand" size="large"></lightning-spinner> -->
+                <div class="slds-spinner_container spinnerDiv">
+                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </template>
+            <template lwc:else>
+                <div class="slds-page-header__row slds-p-around--medium">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                            <div class="slds-media__figure slds-align_absolute-center">
+                                <lightning-icon icon-name="standard:change_request"
+                                    alternative-text={labels.LBL_Matrix_Comparator_Title}
+                                    title={labels.LBL_Matrix_Comparator_Title} size="medium"></lightning-icon>
+                            </div>
+                            <div lwc:if={isSearchingStage} class="slds-media__body ">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                        <h1>
+                                            <span class="headerTitle slds-page-header__title slds-truncate"
+                                                title={labels.LBL_Matrix_Comparator_Title}>
+                                                {labels.LBL_Matrix_Comparator_Title} </span>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div lwc:else class="slds-media__body">
+                                <p class="slds-text-title slds-line-height_reset">
+                                    {labels.LBL_Matrix_Comparator_Title}
+                                </p>
+                                <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                    {title}
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="slds-page-header__col-actions slds-align-bottom">
+                        <div class="slds-page-header__controls">
+                            <div if:false={isLoading} class="slds-page-header__control slds-grid">
+                                <button class="slds-button slds-button_neutral" style="margin-left: 10px;"
+                                    onclick={handleBack}>Back</button>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </template>
+        </div>
+        <div if:false={isLoading} class="slds-card" style="margin-top: 0; border-top: 0;">
+            <div
+                class="pageBody slds-grid slds-card tableDiv slds-scrollable slds-border--left slds-border--right slds-border--top slds-border--bottom slds-m-top--small">
+                <template lwc:if={isDataLoading}>
+                    <!-- <lightning-spinner variant="brand" size="large"></lightning-spinner> -->
+                    <div class="noDataText loadingContainer">
+                        <div class="slds-spinner_container spinnerDiv">
+                            <div class="loader slds-spinner_container slds-align--absolute-center">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <template lwc:elseif={hasNoData}>
+                    <div class="noDataText slds-text-align--center slds-m-around--large">
+                        {labels.LBL_No_Item_To_Display}
+                    </div>
+                </template>
+                <div>
+                    <template if:false={hasNoData}>
+                        <table if:false={isDataLoading} class="pgTable slds-table slds-table_bordered slds-table--col-bordered">
+                            <thead>
+                                <tr class="slds-border_top slds-border_bottom sticky-thead header-row-1">
+                                    <th style="min-width: 30vh;z-index: 4;" class="color1 assortmentTd1">
+                                    </th>
+                                    <th colspan="3" class="color2">
+                                        <div class="headerTds slds-text-align--center">
+                                            {labels.LBL_Assortment_Conso}
+                                        </div>
+                                    </th>
+                                    <template for:each={assortmentList} for:item="assortment">
+                                        <th key={assortment.Id} class="assortmentTd1 color3"
+                                            colspan="3" style="white-space:unset;">
+                                            <div class="headerTds slds-text-align--center slds-grid"
+                                                style="place-content: center;">
+                                                <a style="place-content: center;color: white" href={assortment.link}
+                                                    target="_blank">
+                                                    {assortment.Name}
+                                                </a>
+                                            </div>
+                                        </th>
+                                    </template>
+                                </tr>
+                                <tr>
+                                    <th class="color1 assortmentTd2" style="z-index: 4;">
+                                    </th>
+                                    <!-- conso fields -->
+                                    <th class="color2 assortmentTd2">
+                                        <div class="headerTds slds-text-align--center">
+                                            {fieldsMap.AssortmentDetail__c.SOSNumberNego__c.label}
+                                        </div>
+                                    </th>
+                                    <th class="color2 medWidth assortmentTd2">
+                                        <div class="headerTds slds-text-align--center">
+                                            {fieldsMap.AssortmentDetail__c.WDChannelBaseNego__c.label}
+                                        </div>
+                                    </th>
+                                    <th class="color2 medWidth assortmentTd2">
+                                        <div class="headerTds slds-text-align--center">
+                                            {fieldsMap.AssortmentDetail__c.WDClientBaseNego__c.label}
+                                        </div>
+                                    </th>
+                                    <!-- Detail Fields -->
+                                    <template for:each={assortmentList} for:item="assortment">
+                                        <!-- conso fields -->
+                                        <th key={assortment.Id} class="color3 assortmentTd2">
+                                            <div class="headerTds slds-text-align--center">
+                                                {fieldsMap.AssortmentDetail__c.SOSNumberNego__c.label}
+                                            </div>
+                                        </th>
+                                        <th key={assortment.Id} class="color3 medWidth assortmentTd2">
+                                            <div class="headerTds slds-text-align--center">
+                                                {fieldsMap.AssortmentDetail__c.WDChannelBaseNego__c.label}
+                                            </div>
+                                        </th>
+                                        <th key={assortment.Id}
+                                            class="color3 medWidth assortmentTd2">
+                                            <div class="headerTds slds-text-align--center">
+                                                {fieldsMap.AssortmentDetail__c.WDClientBaseNego__c.label}
+                                            </div>
+                                        </th>
+                                    </template>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={treeList} for:item="item">
+                                    <template if:true={item.show}>
+                                        <tr key={item.key} aria-expanded={item.ariaExpanded} aria-level={item.level}
+                                            aria-posinset="2" aria-selected="false" aria-setsize="4">
+                                            <th class="slds-tree__item" data-label={item.title} scope="row">
+                                                <template if:true={item.showChevronButton}>
+                                                    <button type="button" onclick={expandAndCollapse}
+                                                        data-recordid={item.key}
+                                                        class="slds-button slds-button_icon slds-button_icon-x-small slds-m-right_x-small">
+                                                        <svg class="slds-button__icon slds-button__icon_small"
+                                                            aria-hidden="true">
+                                                            <use
+                                                                xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#chevronright">
+                                                            </use>
+                                                        </svg>
+                                                    </button>
+                                                </template>
+                                                <template if:false={item.showChevronButton}>
+                                                    <button type="button" onclick={expandAndCollapse}
+                                                        data-recordid={item.key}
+                                                        class="slds-button slds-button_icon slds-button_icon-x-small slds-m-right_x-small slds-hidden">
+                                                        <svg class="slds-button__icon slds-button__icon_small"
+                                                            aria-hidden="true">
+                                                            <use
+                                                                xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#chevronright">
+                                                            </use>
+                                                        </svg>
+                                                    </button>
+                                                </template>
+                                                <div class="slds-truncate" title={item.title}>
+                                                    {item.title}
+                                                </div>
+                                            </th>
+                                            <!-- conso fields -->
+                                            <td class="consoCell slds-text-align--right" scope="row">
+                                                <lightning-formatted-number value={item.consoClientBase} format-style="decimal"
+                                                    maximum-fraction-digits={scale} minimum-fraction-digits={scale}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td class="consoCell slds-text-align--right" scope="row">
+                                                <lightning-formatted-number value={item.consoChannelBase} format-style="decimal"
+                                                    maximum-fraction-digits={scale} minimum-fraction-digits={scale}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td class="consoCell slds-text-align--right" scope="row">
+                                                <lightning-formatted-number value={item.consoSOSNumber} format-style="decimal"
+                                                    maximum-fraction-digits={scale} minimum-fraction-digits={scale}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <template for:each={item.values} for:item="sum">
+                                                <td key={sum} scope="row" data-id={sum.Id} class="slds-text-align--right detailCell">
+                                                    <lightning-formatted-number value={sum.value} format-style="decimal"
+                                                        maximum-fraction-digits={scale} minimum-fraction-digits={scale}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                </template>
+                            </tbody>
+                        </table>
+                    </template>
+                </div>
+            </div>
+            <!-- <div style="position: relative; height: fit-content;background: white;padding: 10px;"
+                class="slds-grid footerDiv slds-border--top">
+                <span style="margin-right: 10px; color: black;">
+                    <lightning-combobox dropdown-alignment="auto" name="pageSelect" value={pageSize}
+                        variant="label-hidden" placeholder="Select Progress" options={pageSizeOptions}
+                        onchange={changePageSizeHandler}></lightning-combobox>
+                </span>
+                <span>
+                    <lightning-button-group>
+                        <lightning-button label={labels.LBL_First} disabled={firstDisabled}
+                            onclick={handleFirst}></lightning-button>
+                        <lightning-button label={labels.LBL_Previous} disabled={previousDisabled}
+                            onclick={handlePrevious}></lightning-button>
+                        <lightning-button label={labels.LBL_Next} disabled={nextDisabled}
+                            onclick={handleNext}></lightning-button>
+                        <lightning-button label={labels.LBL_Last} disabled={lastDisabled}
+                            onclick={handleLast}></lightning-button>
+                    </lightning-button-group>
+                    <span class="slds-p-left_small slds-badge" style="margin-left: 10px;">
+                        {pageRecordCount} {labels.LBL_Of} {noOfRecords}
+                    </span>
+                </span>
+            </div> -->
+        </div>
+    </div>
+</template>

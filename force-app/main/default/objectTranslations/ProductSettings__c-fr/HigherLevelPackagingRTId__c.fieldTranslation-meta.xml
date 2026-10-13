@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Higher Level Packaging Record Type Id --></help>
+    <label><!-- Higher Level Packaging Record Type Id --></label>
+    <name>HigherLevelPackagingRTId__c</name>
+</CustomFieldTranslation>

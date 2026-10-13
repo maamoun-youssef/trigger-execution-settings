@@ -1,0 +1,374 @@
+<template>
+    <div class="c">
+        <div class="flexi-portal g_nm">
+            <div
+                style="height:650px;background:#EDEEF2;border-radius:30px;box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;">
+                <div class="chat-body  p25 m_h m_p0" style="height:100%;overflow-y: auto;">
+                    <div style="background:#E3EAEB;border-radius:30px;height:100%">
+                        <div class="ov l p10 h md_sb" style="background:#E3EAEB;height:70px;border-radius:30px;">
+                            <hr class="ov ta prof">
+                            <div class="g_nm h m_sib  pr10" onclick={handleBackToChats}>
+                                <lightning-icon icon-name='utility:chevronleft' alternative-text='chevronleft'
+                                    size='small' title='chevronleft'></lightning-icon>
+                            </div>
+                            <div class="g_nm vm"
+                                style="width:45px;height:45px;border-radius:50px;background: linear-gradient(90deg, rgb(208, 214, 52), transparent) rgb(12, 180, 187);">
+                                <div class="cov ov" style={otherUser.userPhotoStyle} if:true={isUser}></div>
+                                <div class="cov ov" style={record.userPhotoStyle} if:true={isRecord}></div>
+                            </div>
+                            <div class="g_nm vm ml5 " onclick={handleUserProfile}>
+                                <div class="b fs15" if:true={isUser}>
+                                    <div class="g_nm l vm fs20 m_fs16">
+                                        <template lwc:if={otherUser.firstName}>
+                                            <span id="firstName-mobile"
+                                                style="color:#666667;">{otherUser.firstName}</span>
+                                            &nbsp;
+                                            <span id="lastName-mobile"
+                                                style="color:#666667;">{otherUser.lastName}</span>
+                                        </template>
+                                        <template lwc:else>
+                                            <span id="displayName-mobile"
+                                                style="color:#666667;">{otherUser.displayName}</span>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div if:true={isRecord} class="b fs15" id="record-mobile" style="color:#666667;">
+                                    {record.name}</div>
+                                <div class="fs14">
+                                    <span if:true={otherUser.companyName}>{otherUser.companyName}</span>
+                                    &nbsp;
+                                    <span if:true={otherUser.title}>{otherUser.title}</span>
+                                </div>
+                            </div>
+                            <div class="fs0 h">
+                                <div class="g_nm w25 fs14 vm">
+                                    <div
+                                        style="width:60px;height:60px;border-radius:50px;background: linear-gradient(90deg, rgb(208, 214, 52), transparent) rgb(12, 180, 187);">
+                                        <div class="cov ov" style={otherUser.userPhotoStyle} if:true={isUser}></div>
+                                        <div class="cov ov" style={record.userPhotoStyle} if:true={isRecord}></div>
+                                    </div>
+                                </div>
+                                <div class="g_nm w75  l vm fs20">
+                                    <div if:true={isUser}>
+                                        <template lwc:if={otherUser.firstName}>
+                                            {otherUser.firstName}
+                                        </template>
+                                        <template lwc:else>
+                                            {otherUser.displayName}
+                                        </template>
+                                    </div>
+                                    <div if:true={isRecord}>{record.name}</div>
+                                    <div class="upper b" if:true={isUser}>
+                                        <template lwc:if={otherUser.lastName}>
+                                            {otherUser.lastName}
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='Load-circle' if:true={loadChat}></div>
+                        <div class="ov chat-content" style="overflow-y: auto;border-radius:30px;bottom:60px;"
+                            if:false={loadChat}>
+                            <div class="p15 message-container">
+
+                                <template for:each={chatMessages} for:item="messageItem">
+                                    <div class="fs0 mt10" key={messageItem.id}>
+                                        <div class="slds-text-body_regular slds-text-align_center">
+                                            <template if:true={messageItem.firstInDay}>
+                                                <lightning-formatted-date-time value={messageItem.sentDate} month="long"
+                                                    day="2-digit" weekday="long">
+                                                </lightning-formatted-date-time>
+                                            </template>
+                                        </div>
+                                        <template if:true={messageItem.sameUser}>
+                                            <div class="w90  fs14 g_nm  l r m_w80">
+                                                <div class="cw g_nm"
+                                                    style="background:#5FBCA5;border-radius:20px; padding: 10px;">
+                                                    <div if:true={messageItem.isRecord} class="slds-text-align_right">
+                                                        {messageItem.sender.displayName}
+                                                    </div>
+                                                    <lightning-formatted-rich-text value={messageItem.message}>
+                                                    </lightning-formatted-rich-text>
+                                                    <div class="slds-text-body_small slds-text-align_right"
+                                                        style="font-size: 9px; padding-top: 5px;">
+                                                        <lightning-formatted-date-time value={messageItem.sentDate}
+                                                            hour="2-digit" minute="2-digit">
+                                                        </lightning-formatted-date-time>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="w10  fs14 g_nm vb m_w20">
+                                                <div class="g_nm "
+                                                    style="width:40px;height:40px;border-radius:50px;background: linear-gradient(90deg, rgb(208, 214, 52), transparent) rgb(12, 180, 187);">
+                                                    <div class="cov ov" style={messageItem.userPhotoStyle}></div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                        <template if:true={messageItem.otherUser}>
+                                            <div class="w10  fs14 g_nm vb m_w20">
+                                                <div class="g_nm"
+                                                    style="width:40px;height:40px;border-radius:50px;background: linear-gradient(90deg, rgb(208, 214, 52), transparent) rgb(12, 180, 187);">
+                                                    <div class="cov ov" style={messageItem.userPhotoStyle}></div>
+                                                </div>
+                                            </div>
+                                            <div class="w90  fs14 g_nm l m_w80">
+                                                <div class="g_nm"
+                                                    style="background:white;border-radius:20px;margin-left: 2px; padding: 10px;">
+                                                    <div if:true={messageItem.isRecord} class="slds-text-align_left">
+                                                        {messageItem.sender.displayName}
+                                                    </div>
+                                                    <lightning-formatted-rich-text value={messageItem.message}>
+                                                    </lightning-formatted-rich-text>
+                                                    <div class="slds-text-body_small slds-text-align_left">
+                                                        <lightning-formatted-date-time value={messageItem.sentDate}
+                                                            hour="2-digit" minute="2-digit">
+                                                        </lightning-formatted-date-time>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
+
+                            </div>
+                        </div>
+                        <div class="p10 ov ta send-message-section"
+                            style="background:white;border-radius:0px 0px 20px 20px;box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 2px;z-index:100;">
+                            <div class="fs0">
+                                <div class="w75 g_nm  fs14 vm m_w65">
+                                    <input type="text" class="lh40 w100 ph10 fs16 b current-message-input"
+                                        placeholder="Send a message to..." style="border:none" onkeyup={handleKeyUp} />
+                                </div>
+                                <div class="w25 g_nm fs14 vm r m_w35">
+                                    <div class="flex  ">
+                                        <!-- <div class="slds-col slds-size_1-of-3"><div class="con vm w100 g_nm  chat-Icons" style={ChatterAttach}></div></div> -->
+                                        <div class="con vm w100 g_nm  chat-Icons  " style={ChatterEmoji}
+                                            onclick={emojiMethods.ToggleEmojiPanel}></div>
+                                        <div class="con vm w100 g_nm  chat-Icons" style={ChatterSendMessage}
+                                            onclick={sendMessage}></div>
+                                    </div>
+                                    <template if:true={emojiVisibility}>
+                                        <div class="emoji-panel">
+                                            <!-- Close button -->
+                                            <!-- <div class="emoji-panel-header">
+                                                <span class="close-button" onclick={emoji.emojiPanel.closeEmojiPanel}>×</span>
+                                            </div> -->
+                                            <!-- List of emojis -->
+                                            <div class="emoji-list">
+                                                <template for:each={emojis} for:item="emoji">
+                                                    <span key={emoji} class="emoji select-effect" data-emoji={emoji}
+                                                        onclick={insertEmoji}>
+                                                        {emoji}
+                                                    </span>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ov chat-left-nav p25 ">
+                    <div style="position: sticky;z-index:90;background:#EDEEF2">
+                        <div class="l fs20">
+                            <div class="g_nm  chat-font b vm pr20 m_m_pr10" style="border-right:2px solid #3D3D3D">
+                                <div class="g_nm label active" onclick={handleLabelClick} data-label="all">
+                                    {labels.LBL_All}
+                                </div>
+                            </div>
+                            <div class="g_nm  chat-font b vm ph20 m_m_ph10">
+                                <!-- {labels.LBL_Unread_Conversation} -->
+                                <div class="label" onclick={handleLabelClick} data-label="unread">
+                                    {labels.LBL_Unread_Conversation}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fs0 mt20">
+                            <div class="fs0 w85 g_nm  vm"
+                                style="border-radius:50px;overflow:hidden;background:#F2F2F6;box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;">
+                                <div class="g_nm w15  fs14 vm ">
+                                    <lightning-icon icon-name='utility:search' alternative-text='search' size='small'
+                                        title='search'></lightning-icon>
+                                </div>
+                                <div class="g_nm w85  fs14 vm">
+                                    <input type="text" class="lh30 w100 pr20" style="border:none;background:#F2F2F6"
+                                        placeholder={labels.LBL_Placeholder_Search} oninput={handleSearch}
+                                        value={searchTerm}>
+                                </div>
+                            </div>
+                            <div class="g_nm w15  fs14 vm r m_pl5">
+                                <div class="g_nm vm con w100 " style={MessagesAddIcon} onclick={openNewConversation}>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ov p25 m_p20 m_m_p15" style="overflow-y: scroll;top:120px;bottom:25px;">
+                        <template for:each={conversations} for:item="item">
+                            <div class="fs0 p5 round4x msg-effect new-data" key={item.id} data-id={item.secondUser.id}
+                                onclick={openConversation} data-conversation-id={item.id} if:true={item.isConversation}>
+                                <div class="ov la fs12" style="top:5px;right:10px">
+                                    <lightning-formatted-date-time value={item.lastSentDate} month="short"
+                                        day="2-digit">
+                                    </lightning-formatted-date-time>
+                                </div>
+                                <div class="g_nm w15  fs14 vm m_w10 m_m_w20">
+                                    <div class=""
+                                        style="border-radius:50px;width:40px;height:40px;overflow:hidden;background: linear-gradient(90deg, #D0D634, transparent) #0CB4BB;">
+                                        <div class="cov ov" style={item.userPhotoStyle}></div>
+                                    </div>
+                                </div>
+                                <div class="g_nm w85  fs14 vm l m_w90  m_m_w80 md_pl5">
+                                    <div class="b">{item.secondUser.displayName}</div>
+                                    <template if:true={item.showUnreadBadge}>
+                                        <div>
+                                            <span class="badge">{item.unreadCount}</span>
+                                        </div>
+                                    </template>
+                                    <div class="fs12 lh15 oh" style="height:25px">
+                                        <lightning-formatted-rich-text value={item.latestMessage}>
+                                        </lightning-formatted-rich-text>
+                                    </div>
+                                </div>
+                                <div class="ov" style="background:transparent" onclick={handleSelectConversation}></div>
+                            </div>
+                            <div class="fs0 p5 round4x msg-effect " key={item.id} onclick={openConversation}
+                                data-record-id={item.id} if:true={item.isRecord}>
+                                <div class="ov la fs12" style="top:5px;right:10px">
+                                    <lightning-formatted-date-time value={item.lastSentDate} month="short"
+                                        day="2-digit">
+                                    </lightning-formatted-date-time>
+                                </div>
+                                <div class="g_nm w15  fs14 vm m_w10 m_m_w20">
+                                    <div class=""
+                                        style="border-radius:50px;width:40px;height:40px;overflow:hidden;background: linear-gradient(90deg, #D0D634, transparent) #0CB4BB;">
+                                        <div class="cov ov" style={item.userPhotoStyle}></div>
+                                    </div>
+                                </div>
+                                <div class="g_nm w85  fs14 vm l m_w90  m_m_w80 md_pl5">
+                                    <div class="b" if:true={item.isRecord}>{item.record.name}</div>
+                                    <div class="b" if:true={item.isConversation}>{item.secondUser.displayName}</div>
+                                    <div class="fs12 lh15 oh" style="height:25px">
+                                        <lightning-formatted-rich-text value={item.latestMessage}>
+                                        </lightning-formatted-rich-text>
+                                    </div>
+                                </div>
+                                <div class="ov" style="background:transparent" onclick={handleSelectConversation}></div>
+                            </div>
+                        </template>
+
+                    </div>
+                </div>
+                <div class="ov la chat-right-nav p25 md_h">
+                    <div class="ov la h md_sb " style="right:20px;top:15px" onclick={handleCloseUserProfile}>
+                        <lightning-icon icon-name='utility:close' alternative-text='close' size='small'
+                            title='close'></lightning-icon>
+                    </div>
+                    <div class="mt20">
+                        <div class="fs0">
+                            <div class="g_nm w35 fs18 vm">
+                                <div
+                                    style="width:80px;height:80px;border-radius:50px;background: linear-gradient(90deg, rgb(208, 214, 52), transparent) rgb(12, 180, 187);">
+                                    <div class="cov ov" style={otherUser.userPhotoStyle} if:true={isUser}></div>
+                                    <div class="cov ov" style={record.userPhotoStyle} if:true={isRecord}></div>
+                                </div>
+                            </div>
+                            <div class="g_nm w65 l vm fs22 ">
+                                <div if:true={isUser}>
+                                    <template lwc:if={otherUser.firstName}>
+                                        <span id="firstName" style="color:#5F5E5E;">{otherUser.firstName}</span>
+                                        <div class="upper b700" id="lastName" style="color:#5F5E5E;">
+                                            {otherUser.lastName}
+                                        </div>
+                                    </template>
+                                    <template lwc:else>
+                                        <span id="displayName" style="color:#5F5E5E;">{otherUser.displayName}</span>
+                                    </template>
+                                </div>
+                                <div if:true={isRecord} id="record" style="color:#5F5E5E;">{record.name}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt20" if:true={otherUser.companyName}>
+                        <div class="upper fs20 b m_fs20 i" style="color:#5F5E5E;">{otherUser.companyName}</div>
+                        <!-- <div class="fs18 m_fs15">Directeue des Clients Nationaux</div> -->
+                    </div>
+                    <div class="" if:true={otherUser.title}>
+                        <div class=" mt-20 fs18 b m_fs18 i" style="color:#5F5E5E;">{otherUser.title}</div>
+                        <!-- <div class="fs18 m_fs15">Directeue des Clients Nationaux</div> -->
+                    </div>
+                    <div class="cw b lh40 mt20 fs15" style="background:#5FBCA5;border-radius:50px">
+                        {labels.LBL_Section_Contact_Details} </div>
+                    <div class="pv25  b " style="color:#958F8F">
+                        <template for:each={otherUser.phoneNumbersList} for:item="phone">
+                            <div key={phone.phoneNumber} class="fs0">
+                                <div class="fs14 w15 g_nm vm">
+                                    <div class="con vm w100 g_nm " style={ChatterPhone}></div>
+                                </div>
+                                <div class=" w85 g_nm vm l fs16 m_fs14 i">
+                                    {phone.phoneNumber} <span if:true={phone.label}>({phone.label})</span>
+                                </div>
+                            </div>
+                        </template>
+                        <div class="fs0 mt20" if:true={otherUser.email}>
+                            <div class=" w15 g_nm vm">
+                                <div class="con vm w100 g_nm" style={ChatterMail}></div>
+                            </div>
+                            <div class=" w85 g_nm vm l fs16 m_fs14 i" title={otherUser.email}
+                                style="text-overflow: ellipsis; overflow: hidden;">
+                                {otherUser.email}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Emoji Picker Panel -->
+
+    <template if:true={popUp.newConversation.isOpen}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header ">
+                    <!-- Close Button -->
+                    <lightning-button-icon icon-name="utility:close" onclick={popUp.newConversation.close}
+                        class="slds-modal__close slds-m-right_small slds-button slds-button_neutral slds-text-color_success">
+                    </lightning-button-icon>
+                    <!-- Modal Title -->
+                    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">
+                        {labels.LBL_New_Conversation}
+                    </h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <template for:each={popUp.newConversation.options} for:item="item">
+                        <div class="fs0 p5 round4x msg-effect" key={item.id} data-user-id={item.id}
+                            onclick={popUp.newConversation.pick}>
+                            <div class="ov la fs12" style="top:5px;right:10px">
+                                <!-- <lightning-formatted-date-time value={item.lastSentDate} month="short" day="2-digit">
+                                </lightning-formatted-date-time> -->
+                            </div>
+                            <div class="g_nm w15  fs14 vm m_w10 m_m_w20">
+                                <div class=""
+                                    style="border-radius:50px;width:40px;height:40px;overflow:hidden;background: linear-gradient(90deg, #D0D634, transparent) #0CB4BB;">
+                                    <!-- <div class="cov ov" style={ProfilePic}></div> -->
+                                    <div class="cov ov" style={item.userPhotoStyle}></div>
+                                </div>
+                            </div>
+                            <div class="g_nm w85  fs14 vm l m_w90  m_m_w80 md_pl5">
+                                <div class="b">{item.displayName}</div>
+                                <!-- <div class="fs12 lh15 oh" style="height:30px">
+                                    <lightning-formatted-rich-text value={item.latestMessage}>
+                                    </lightning-formatted-rich-text>
+                                </div> -->
+                            </div>
+                            <div class="ov" style="background:transparent"></div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

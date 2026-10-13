@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>pour tracer la dernière entrée de chaque validation</help>
+    <label>Ligne précédente</label>
+    <name>Last_History__c</name>
+    <relationshipLabel><!-- Assortment BU Details (Last History) --></relationshipLabel>
+</CustomFieldTranslation>

@@ -1,0 +1,512 @@
+<template>
+    <div class="main-container">
+        <div class="mainContainer slds-card wrapper">
+            <div class="settings-header">
+                <lightning-icon icon-name="utility:settings" class="custom-icon-settings"></lightning-icon>
+                <div>
+                    <p class="settings-subtitle">{labels.LBL_BannerSettings}</p>
+                    <h1 class="slds-page-header__title settings-header-title" title={headerTitle}>{headerTitle}</h1>
+                </div>
+                <div class="header-actions">
+                    <template lwc:if={showNewButton}>
+                        <lightning-button class="slds-m-right_x-small connect-new-button" variant="brand"
+                            label={labels.LBL_New} onclick={handleNew}></lightning-button>
+                    </template>
+                    <template lwc:if={shouldShowWorkspace}>
+                        <lightning-button class="slds-m-right_x-small" label={labels.LBL_Cancel} onclick={handleCancelEdit}
+                            disabled={isSaving}></lightning-button>
+                        <lightning-button variant="brand" label={labels.LBL_Save} onclick={handleSave}
+                            disabled={cannotSave}></lightning-button>
+                    </template>
+                </div>
+            </div>
+
+            <div class="slds-grid slds-wrap mainHeight">
+                <template lwc:if={isLoading}>
+                    <div class="slds-spinner_container">
+                        <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+                    </div>
+                </template>
+                <div class="slds-col slds-grid slds-truncate" style="height: -webkit-fill-available;">
+                    <div class="slds-col slds-size_1-of-4 slds-border_right sidebar-shell">
+                        <div class="templatesSplitView slds-split-view_container slds-panel_docked-left slds-is-open">
+                            <div class="slds-panel__header  searchBox" id="filterHeader">
+                                <div>
+                                    <lightning-input type="search" variant="label-hidden" autocomplete="off"
+                                        class="selector-search" placeholder={labels.LBL_Placeholder_Search} value={searchTerm}
+                                        onchange={handleSearchChange} onkeyup={handleSearchChange}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <template lwc:if={filteredSettings.length}>
+                                <div class="slds-scrollable--y selector-results">
+                                    <article aria-hidden="false"
+                                        class="slds-split-view slds-grid slds-grid_vertical slds-scrollable">
+                                        <div class="slds-grid slds-grid_vertical">
+                                            <ul aria-multiselectable="true" class="slds-scrollable_y" role="listbox"
+                                                aria-label="Select a setting">
+                                                <template for:each={filteredSettingsView} for:item="item">
+                                                    <li class="slds-split-view__list-item" role="presentation"
+                                                        key={item.developerName}>
+                                                        <button type="button" class={item.itemClass}
+                                                            data-id={item.developerName} onclick={handleOpenSetting}>
+                                                            <div class="slds-grid slds-wrap">
+                                                                <span
+                                                                    class="slds-truncate saved-item__title">{item.masterLabel}</span>
+                                                            </div>
+                                                            <div class="slds-grid">
+                                                                <span
+                                                                    class="slds-truncate saved-item__subtitle">{item.objectApiName}</span>
+                                                            </div>
+                                                        </button>
+                                                    </li>
+                                                </template>
+                                            </ul>
+                                        </div>
+                                    </article>
+                                </div>
+                            </template>
+                            <template lwc:else>
+                                <div class="slds-align_absolute-center slds-m-vertical_small">
+                                    <span class="slds-truncate">{labels.LBL_NoSettingsFound}</span>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div class="slds-form_stacked slds-col slds-scrollable workspace-shell">
+                        <template lwc:if={shouldShowWorkspace}>
+                            <div class="stickyHeader slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                                <div class="sectionTitle">{labels.LBL_MainInfo}</div>
+                            </div>
+                            <div class="tab-content slds-grid slds-wrap slds-gutters content-grid">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <lightning-input label={fieldLabels.masterLabel} value={form.masterLabel}
+                                        data-field="masterLabel" onchange={handleInputChange}></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <lightning-input label={fieldLabels.developerName} value={form.developerName}
+                                        data-field="developerName" disabled>
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <lightning-combobox label={fieldLabels.objectApiName} value={form.objectApiName}
+                                        options={objectOptions} onchange={handleObjectChange}></lightning-combobox>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <lightning-input type="checkbox" label={fieldLabels.isActive} checked={form.isActive}
+                                        data-field="isActive" onchange={handleInputChange}></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <lightning-input type="color" label={fieldLabels.backgroundColor} value={form.backgroundColor}
+                                        data-field="backgroundColor" onchange={handleInputChange}></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <lightning-input type="color" label={fieldLabels.textColor} value={form.textColor}
+                                        data-field="textColor" onchange={handleInputChange}></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <lightning-combobox label={fieldLabels.titleFieldApiName} value={form.titleFieldApiName}
+                                        options={fieldOptions} data-field="titleFieldApiName"
+                                        onchange={handleInputChange}></lightning-combobox>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <lightning-combobox label={fieldLabels.subtitleFieldApiName} value={form.subtitleFieldApiName}
+                                        options={fieldOptions} data-field="subtitleFieldApiName"
+                                        onchange={handleInputChange}></lightning-combobox>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <lightning-combobox label={fieldLabels.displayMode} value={form.displayMode}
+                                        options={displayModeOptions} data-field="displayMode"
+                                        onchange={handleInputChange}></lightning-combobox>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <lightning-input type="number" min="1"
+                                        label={fieldLabels.numberOfFieldsDisplay} value={form.numberOfFieldsDisplay}
+                                        data-field="numberOfFieldsDisplay"
+                                        onchange={handleInputChange}></lightning-input>
+                                </div>
+                                <div class="slds-grid slds-wrap content-grid slds-size--1-of-2">
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning-combobox label={fieldLabels.iconSource} value={form.iconType}
+                                            options={iconSourceOptions} data-field="iconType"
+                                            onchange={handleInputChange}></lightning-combobox>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2"
+                                        lwc:if={showStandardIconPicker}>
+                                        <div class="slds-grid icon-picker-row">
+                                            <c-neg-optim-searchable-picklist class="slds-col" label={labels.LBL_StandardIcon}
+                                                value={iconPickerValue} options={iconOptions} placeholder={labels.LBL_Placeholder_Search}
+                                                data-field="value" onchange={handleIconPickerChange} enable-list-icons>
+                                            </c-neg-optim-searchable-picklist>
+                                            <div class="slds-grid slds-m-top_large">
+                                                <lightning-button-icon icon-name="utility:loop"
+                                                    alternative-text={labels.LBL_ResetIcon} title={labels.LBL_ResetIcon}
+                                                    onclick={resetIconHandler} class="slds-p-left_x-small">
+                                                </lightning-button-icon>
+                                                <div class="slds-m-left_x-small">
+                                                    <lightning-icon size="medium"
+                                                        icon-name={iconPickerValue}></lightning-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2"
+                                        lwc:if={showStaticResourceInput}>
+                                        <lightning-input label={labels.LBL_StaticResourceURL} value={form.iconValue}
+                                            data-field="iconValue" onchange={handleInputChange}></lightning-input>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2"
+                                        lwc:if={showUploadInput}>
+                                        <lightning-input type="file" accept=".png,.jpg,.jpeg,.gif,.webp,.svg"
+                                            label={labels.LBL_UploadImage} onchange={handleIconUpload}></lightning-input>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                        <lightning-input label={fieldLabels.iconSize} value={form.iconSize}
+                                            data-field="iconSize" placeholder="30px"
+                                            field-level-help="Set the icon size using px units (for example: 20px, 30px, 50px)."
+                                            onchange={handleInputChange}></lightning-input>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="stickyHeader slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-m-top_small">
+                                <span class="sectionTitle">{labels.LBL_DetailFields}</span>
+                            </div>
+                            <div class="tab-content">
+                                <div class="slds-grid">
+                                    <div class="slds-col">
+                                        <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-m-bottom_x-small">
+                                            <div class="slds-text-title_bold">{labels.LBL_Object_Title} : {form.objectApiName}</div>
+                                            <lightning-button label={labels.LBL_Add_Fields} icon-name="utility:add" onclick={addDetailField}>
+                                            </lightning-button>
+                                        </div>
+                                        <div class="slds-m-top_small tableWrapper">
+                                            <table
+                                                class="slds-table slds-table_bordered slds-table_col-bordered slds-border_left slds-border_right slds-no-row-hover slds-scrollable_y">
+                                                <thead>
+                                                    <tr class="stickyHeader flow-header-row">
+                                                        <th>{labels.LBL_Field_Name}</th>
+                                                        <th class="detail-action-col"></th>
+                                                        <th class="detail-action-col"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <template for:each={form.detailFields} for:item="row" for:index="index">
+                                                        <tr key={row.key}>
+                                                            <td>
+                                                                <c-field-selector-input object-name={form.objectApiName}
+                                                                    value={row.fieldApiName} data-index={index}
+                                                                    onfieldselect={handleDetailFieldSelect}>
+                                                                </c-field-selector-input>
+                                                            </td>
+                                                            <td>
+                                                                <lightning-button-icon icon-name="utility:delete"
+                                                                    alternative-text={labels.LBL_Delete} title={labels.LBL_Delete}
+                                                                    data-index={index} onclick={removeDetailField}>
+                                                                </lightning-button-icon>
+                                                            </td>
+                                                            <td>
+                                                                <lightning-button-icon icon-name="utility:settings"
+                                                                    alternative-text={labels.LBL_Style} title={labels.LBL_Style}
+                                                                    data-index={index} onclick={openDetailStyleModal}>
+                                                                </lightning-button-icon>
+                                                            </td>
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="stickyHeader slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-m-top_small">
+                                <div class="sectionTitle">{labels.LBL_Actions}</div>
+                            </div>
+                            <div class="tab-content">
+                                <div class="slds-grid slds-p-around_small">
+                                    <div class="slds-grid slds-wrap slds-grid_align-end custom_slds-grid_align-start slds-p-left_xx-small">
+                                        <div class="slds-col slds-grid slds-wrap slds-grid_align-end custom_slds-grid_align-start">
+                                            <div>
+                                                <div class="slds-text-title_bold">{labels.LBL_Available_Actions}</div>
+                                                <div class="slds-p-right_small slds-p-top_small">
+                                                    <select class="oSelect slds-input" multiple size="7"
+                                                        onchange={handleAvailableActionsSelection}>
+                                                        <template for:each={availableActionOptions} for:item="item">
+                                                            <option key={item.value} value={item.value}>{item.label}</option>
+                                                        </template>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="slds-dueling-list__column slds-p-right_small slds-p-top_x-large slds-col">
+                                                <lightning-button-icon icon-name="utility:right" size="medium" variant="bare"
+                                                    alternative-text={labels.LBL_AddActions} title={labels.LBL_AddActions}
+                                                    onclick={addSelectedActionsHandler}>
+                                                </lightning-button-icon>
+                                                <lightning-button-icon icon-name="utility:left" size="medium" variant="bare"
+                                                    alternative-text={labels.LBL_RemoveAction} title={labels.LBL_RemoveAction}
+                                                    onclick={removeSelectedActionsHandler}>
+                                                </lightning-button-icon>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="slds-text-title_bold">{labels.LBL_Selected_Actions}</div>
+                                            <div class="slds-col slds-grid slds-p-top_small">
+                                                <div class="slds-p-right_small slds-col">
+                                                    <select class="oSelect slds-input" multiple size="7"
+                                                        onchange={handleChosenActionsSelection}>
+                                                        <template for:each={chosenActionOptions} for:item="item">
+                                                            <option key={item.value} value={item.value}>{item.label}</option>
+                                                        </template>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="stickyHeader slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-m-top_small">
+                                    <div class="sectionTitle">{labels.LBL_Redirection}</div>
+                                </div>
+                                <div class="slds-card slds-m-top_small">
+                                    <div class="slds-card__body">
+                                        <div class="cmpHeader slds-m-bottom_small">
+                                            <lightning-button label={labels.LBL_AddRedirection} title={labels.LBL_AddRedirection} onclick={handleAddFlow}
+                                                icon-name="utility:add">
+                                            </lightning-button>
+                                        </div>
+                                        <div class="tableWrapper">
+                                            <table
+                                                class="slds-table slds-table_bordered slds-table_col-bordered slds-border_left slds-border_right slds-no-row-hover slds-scrollable_y">
+                                                <thead>
+                                                    <tr class="stickyHeader flow-header-row">
+                                                        <th>{labels.LBL_PageSettings_Label}</th>
+                                                        <th>{labels.LBL_RedirectionType}</th>
+                                                        <th>{labels.LBL_Redirection}</th>
+                                                        <th>{labels.LBL_DisplayType}</th>
+                                                        <th>{labels.LBL_Icon}</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <template for:each={form.screenFlows} for:item="flow"
+                                                        for:index="index">
+                                                        <tr key={flow.key}>
+                                                            <td>
+                                                                <lightning-input variant="label-hidden"
+                                                                    value={flow.label} data-field="label"
+                                                                    data-index={index} onchange={handleChangeFlow}>
+                                                                </lightning-input>
+                                                            </td>
+                                                            <td>
+                                                                <lightning-combobox variant="label-hidden"
+                                                                    value={flow.redirectionType}
+                                                                    options={redirectionOptions} data-field="redirectionType"
+                                                                    data-index={index} onchange={handleChangeFlow}>
+                                                                </lightning-combobox>
+                                                            </td>
+                                                            <td>
+                                                                <template lwc:if={flow.isURL}>
+                                                                    <lightning-input variant="label-hidden"
+                                                                        value={flow.value} data-field="value"
+                                                                        data-index={index} onchange={handleChangeFlow}>
+                                                                    </lightning-input>
+                                                                </template>
+                                                                <template lwc:else>
+                                                                    <c-neg-optim-searchable-picklist value={flow.value}
+                                                                        options={flow.options} placeholder="Select value"
+                                                                        data-field="value" data-index={index}
+                                                                        onchange={handleChangeFlow}>
+                                                                    </c-neg-optim-searchable-picklist>
+                                                                </template>
+                                                            </td>
+                                                            <td class="alignCenter">
+                                                                <template lwc:if={flow.isFlow}>
+                                                                    <lightning-radio-group variant="label-hidden"
+                                                                        options={displayTypeOptions}
+                                                                        value={flow.displayType} data-index={index}
+                                                                        type="radio" data-field="displayType"
+                                                                        onchange={handleChangeFlow}>
+                                                                    </lightning-radio-group>
+                                                                </template>
+                                                            </td>
+                                                            <td>
+                                                                <template lwc:if={flow.isFlow}>
+                                                                    <template lwc:if={flow.isAction}>
+                                                                        <div
+                                                                            class="slds-grid slds-grid_vertical-align-center">
+                                                                            <c-neg-optim-searchable-picklist
+                                                                                value={flow.icon} options={iconOptions}
+                                                                                placeholder="Search Icons"
+                                                                                data-field="icon" data-index={index}
+                                                                                onchange={handleChangeFlow}
+                                                                                enable-list-icons>
+                                                                            </c-neg-optim-searchable-picklist>
+                                                                            <div class="slds-m-left_x-small">
+                                                                                <template lwc:if={flow.hasImageIcon}>
+                                                                                    <img src={flow.icon} alt="Icon preview"
+                                                                                        class="flow-uploaded-icon" style="max-width:30px;max-height:30px;" />
+                                                                                </template>
+                                                                                <template lwc:else>
+                                                                                    <lightning-icon size="small"
+                                                                                        icon-name={flow.icon}></lightning-icon>
+                                                                                </template>
+                                                                            </div>
+                                                                        </div>
+                                                                    </template>
+                                                                    <template lwc:if={flow.isIcon}>
+                                                                        <div
+                                                                            class="slds-grid slds-grid_vertical-align-center">
+                                                                            <lightning-input type="file"
+                                                                                accept=".png,.jpg,.jpeg,.gif,.webp,.svg"
+                                                                                label="Upload icon"
+                                                                                variant="label-hidden"
+                                                                                data-index={index}
+                                                                                onchange={handleFlowIconUpload}>
+                                                                            </lightning-input>
+                                                                            <template lwc:if={flow.icon}>
+                                                                                <img src={flow.icon}
+                                                                                    alt="Icon preview"
+                                                                                    class="flow-uploaded-icon slds-m-left_x-small"
+                                                                                    style="max-width:30px;max-height:30px;" />
+                                                                            </template>
+                                                                        </div>
+                                                                    </template>
+                                                                </template>
+                                                            </td>
+                                                            <td>
+                                                                <lightning-button-icon icon-name="utility:delete"
+                                                                    alternative-text={labels.LBL_RemoveRedirection}
+                                                                    title={labels.LBL_RemoveRedirection}
+                                                                    data-index={index} onclick={handleDeleteFlow}>
+                                                                </lightning-button-icon>
+                                                            </td>
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        <template lwc:else>
+                            <div class="empty-space"></div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <template lwc:if={showDetailStyleModal}>
+            <section role="dialog" tabindex="-1" aria-labelledby="detail-style-modal-heading" aria-modal="true"
+                class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="detail-style-modal-heading" class="slds-modal__title slds-hyphenate">{labels.LBL_DetailFieldStyle}</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <lightning-combobox label={labels.LBL_DisplayMode} value={detailStyleDraft.labelPosition}
+                                    options={displayOptions} data-field="labelPosition"
+                                    onchange={handleDetailStyleDraftChange}></lightning-combobox>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <lightning-combobox label={labels.LBL_LabelType} value={detailStyleDraft.labelMode}
+                                    options={detailLabelModeOptions} data-field="labelMode"
+                                    onchange={handleDetailStyleDraftChange}></lightning-combobox>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1" lwc:if={showCustomLabelInput}>
+                                <lightning-input label={labels.LBL_CustomLabel} value={detailStyleDraft.customLabel}
+                                    data-field="customLabel" onchange={handleDetailStyleDraftChange}></lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1" lwc:if={showDetailLabelIconPicker}>
+                                <lightning-combobox label={labels.LBL_IconSource} value={detailStyleDraft.labelIconSource}
+                                    options={detailLabelIconSourceOptions} data-field="labelIconSource"
+                                    onchange={handleDetailStyleDraftChange}>
+                                </lightning-combobox>
+                                <c-neg-optim-searchable-picklist label={labels.LBL_Icon} value={detailStyleDraft.labelIcon}
+                                    options={iconOptions} data-field="labelIcon"
+                                    onchange={handleDetailStyleDraftChange} enable-list-icons>
+                                </c-neg-optim-searchable-picklist>
+                                <div class="slds-m-top_x-small slds-grid slds-grid_vertical-align-center">
+                                    <span class="slds-m-right_x-small">Preview:</span>
+                                    <lightning-icon icon-name={detailStyleDraft.labelIcon} size="small"
+                                        alternative-text="Selected label icon">
+                                    </lightning-icon>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1" lwc:if={showDetailLabelImageUpload}>
+                                <lightning-combobox label={labels.LBL_IconSource} value={detailStyleDraft.labelIconSource}
+                                    options={detailLabelIconSourceOptions} data-field="labelIconSource"
+                                    onchange={handleDetailStyleDraftChange}>
+                                </lightning-combobox>
+                                <lightning-input class="slds-m-top_x-small" type="file"
+                                    accept=".png,.jpg,.jpeg,.gif,.webp,.svg"
+                                    label={labels.LBL_UploadImage} onchange={handleDetailLabelIconUpload}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <lightning-input type="color" label={labels.LBL_Color} value={detailStyleDraft.color}
+                                    data-field="color" onchange={handleDetailStyleDraftChange}></lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1">
+                                <div class="slds-grid slds-wrap">
+                                    <lightning-input class="slds-m-right_medium" type="checkbox" label="Bold"
+                                        checked={detailStyleDraft.bold} data-field="bold"
+                                        onchange={handleDetailStyleDraftChange}></lightning-input>
+                                    <lightning-input class="slds-m-right_medium" type="checkbox" label="Italic"
+                                        checked={detailStyleDraft.italic} data-field="italic"
+                                        onchange={handleDetailStyleDraftChange}></lightning-input>
+                                    <lightning-input type="checkbox" label="Underline"
+                                        checked={detailStyleDraft.underline} data-field="underline"
+                                        onchange={handleDetailStyleDraftChange}></lightning-input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button class="slds-m-right_x-small" label={labels.LBL_Cancel} onclick={closeDetailStyleModal}>
+                        </lightning-button>
+                        <lightning-button variant="brand" label={labels.LBL_Apply} onclick={applyDetailStyleDraft}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+        <template lwc:if={showNewBannerModal}>
+            <section role="dialog" tabindex="-1" aria-labelledby="banner-new-modal-heading" aria-modal="true"
+                aria-describedby="banner-new-modal-content" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="banner-new-modal-heading" class="slds-modal__title slds-hyphenate">{labels.LBL_New} {labels.LBL_BannerSettings}
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium slds-grid slds-wrap"
+                        id="banner-new-modal-content" style="overflow: unset;">
+                        <lightning-input class="slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-right_x-small"
+                            label={labels.LBL_Name} value={newBannerDraft.masterLabel} data-field="masterLabel"
+                            max-length="80" onchange={handleNewBannerFieldChange}>
+                        </lightning-input>
+                        <lightning-combobox class="slds-size_1-of-1 slds-m-top_small" label={labels.LBL_Object}
+                            value={newBannerDraft.objectApiName} options={objectOptions}
+                            onchange={handleNewBannerObjectChange}>
+                        </lightning-combobox>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button class="slds-m-right_x-small" label={labels.LBL_Cancel} onclick={cancelNewBannerModal}
+                            disabled={isSaving}></lightning-button>
+                        <lightning-button variant="brand" label={labels.LBL_Save} onclick={confirmNewBannerModal}
+                            disabled={isSaving}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" style="opacity: 0.8;"></div>
+        </template>
+    </div>
+</template>

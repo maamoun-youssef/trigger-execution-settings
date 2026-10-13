@@ -1,0 +1,144 @@
+<template>
+    <template lwc:if={loadingData}>
+        <div class="slds-spinner_container">
+            <div class="slds-spinner_container greyBg">
+                <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+            </div>
+        </div>
+    </template>
+    <template lwc:else>
+        <div class="save-button-container">
+            <lightning-button variant="brand" label={labels.LBL_Save}
+                onclick={handleSaveInvoiceSettings}>
+            </lightning-button>
+        </div>
+        <div class="slds-card main-component">
+            <div>
+                <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                    <div class="sectionTitle">
+                        {labels.LBL_PRD_Stg_General_Settings}
+                    </div>
+                </div>
+                <div class=" section-mt section-m">
+                    <div class="recordTypeContainer slds-m-top_medium">
+                        <ul class="labelList">
+                            <li>
+                                <span class="disk"></span>
+                                {labels.Lbl_Manual}: {labels.Lbl_ManualInvExp}
+                            </li>
+                            <li>
+                                <span class="disk"></span>
+                                {labels.Lbl_Automatic}: {labels.Lbl_AutomaticInvExp}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="section-container slds-m-top_large">
+                        <div class="section-label">
+                            {labels.LBL_InvGenMode}
+                        </div>
+                        <div class="gen-mode-w">
+                            <lightning-combobox class="comboBox" variant="label-hidden" name="defaultUser" label=" "
+                                options={invoiceGenerationModeOptions} onchange={handleChangeGenerationMode}
+                                value={generationMode}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+                    <div class="add-breaks"> </div>
+                </div>
+            </div>
+            <div if:false={loading}>
+                <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                    <div class="sectionTitle">
+                        {labels.LBL_InvConSettings}
+                    </div>
+                </div>
+                <div class="slds-m-vertical_medium section-m">
+                    <div class="section-container slds-m-top_medium">
+                        <div class="section-label">
+                            {labels.LBL_ContractRecordType}
+                        </div>
+                        <div class="dual-box">
+                            <lightning-dual-listbox name="recordTypes" variant="label-hidden"
+                                value={invoiceSettings.contractRecordTypesForGeneration}
+                                source-label={labels.LBL_Available} selected-label={labels.LBL_Selected}
+                                options={contractRecordTypeOptions} onchange={handleFieldEdits}
+                                data-field="contractRecordTypesForGeneration" class="dual-box-w" size="4">
+                            </lightning-dual-listbox>
+                        </div>
+                    </div>
+                    <div class="add-breaks"> </div>
+                    <div class="section-container slds-m-top_medium">
+                        <div class="section-label">
+                            {labels.LBL_ContractStatus}
+                        </div>
+                        <div class="section-contract">
+                            <template for:each={selectedContractStatus} for:item="item">
+                                <div key={item.recordTypeValue} class="contract-container">
+                                    <div>
+                                        {item.recordTypeLabel}
+                                    </div>
+                                    <c-neg-optim-custom-picklist data-type="picklist" options={contractStatusOptions}
+                                        show-all-option="true" data-record-type={item.recordTypeValue} multiple="true"
+                                        selected-values={item.statuses}
+                                        selected-event={Events.handleChangeMultiPicklistValues}
+                                        onhandlechangemultipicklistvalues={handleStatusChange}>
+                                    </c-neg-optim-custom-picklist>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="add-breaks"> </div>
+                </div>
+            </div>
+            <div if:false={loading}>
+                <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                    <div class="sectionTitle">
+                        {labels.LBL_InvConDSettings}
+                    </div>
+                </div>
+                <div class="slds-m-vertical_medium section-m">
+                    <div class="section-container slds-m-top_medium">
+                        <div class="section-label">
+                            {labels.LBL_InvConDNoSettings}
+                        </div>
+                        <div class="toggle-resp">
+                            <lightning-input type="toggle" value={invoiceSettings.generateDiscountsWoSettings}
+                                checked={invoiceSettings.generateDiscountsWoSettings}
+                                data-field="generateDiscountsWoSettings" variant="label-hidden"
+                                onchange={handleFieldEdits}></lightning-input>
+                        </div>
+                    </div>
+                    <div class="add-breaks"> </div>
+                    <template if:false={invoiceSettings.generateDiscountsWoSettings}>
+                        <div class="section-container slds-m-top_medium">
+                            <div class="section-label">
+                                {labels.LBL_InvConDValidated}
+                            </div>
+                            <div class="toggle-resp">
+                                <lightning-input type="toggle" value={invoiceSettings.generateAllValidatedDiscounts}
+                                    checked={invoiceSettings.generateAllValidatedDiscounts}
+                                    data-field="generateAllValidatedDiscounts" variant="label-hidden"
+                                    onchange={handleFieldEdits}></lightning-input>
+                            </div>
+                        </div>
+                        <div class="add-breaks"> </div>
+                        <div class="section-container slds-m-top_medium">
+                            <div class="section-label">
+                                {labels.LBL_ContractDiscountStatus}
+                            </div>
+                            <div class="container-w">
+                                <lightning-dual-listbox name="recordTypes" variant="label-hidden"
+                                    value={invoiceSettings.discountStatusesForGeneration}
+                                    source-label={labels.LBL_Available} selected-label={labels.LBL_Selected}
+                                    options={discountStatusOptions} onchange={handleFieldEdits}
+                                    data-field="discountStatusesForGeneration" class="dual-box-w"
+                                    size="4"></lightning-dual-listbox>
+                            </div>
+                        </div>
+                        <div class="add-breaks"> </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

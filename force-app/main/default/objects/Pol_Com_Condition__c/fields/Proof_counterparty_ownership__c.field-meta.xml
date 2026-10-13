@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Proof_counterparty_ownership__c</fullName>
+    <defaultValue>&quot;Specify here how will honor the counterpart&quot;</defaultValue>
+    <description>Describe the how will exceute &amp; share the counterpart.</description>
+    <inlineHelpText>Describe the how will exceute &amp; share the counterpart.</inlineHelpText>
+    <label>Counterparty Ownership</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

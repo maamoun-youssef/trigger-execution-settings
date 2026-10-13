@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Est le client principal pour le produit</help>
+    <label>Fournisseur principal</label>
+    <name>Product_MasterSupplier__c</name>
+    <relationshipLabel>Produits du fournisseur</relationshipLabel>
+</CustomFieldTranslation>

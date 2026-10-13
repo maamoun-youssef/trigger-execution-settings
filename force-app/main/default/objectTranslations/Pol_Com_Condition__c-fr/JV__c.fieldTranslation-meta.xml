@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- JV --></label>
+    <name>JV__c</name>
+    <picklistValues>
+        <masterLabel>JV1</masterLabel>
+        <translation><!-- JV1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>JV2</masterLabel>
+        <translation><!-- JV2 --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

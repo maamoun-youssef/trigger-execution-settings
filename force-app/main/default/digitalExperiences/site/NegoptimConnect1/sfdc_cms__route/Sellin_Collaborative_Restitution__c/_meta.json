@@ -1,0 +1,5 @@
+{
+  "apiName" : "Sellin_Collaborative_Restitution__c",
+  "type" : "sfdc_cms__route",
+  "path" : "routes"
+}

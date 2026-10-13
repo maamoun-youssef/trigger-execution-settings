@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Sellin Decleration Level --></help>
+    <label>Sell In Declaration Level</label>
+    <name>SellinDeclarationLevel__c</name>
+    <picklistValues>
+        <masterLabel>Advanced Only</masterLabel>
+        <translation>Advanced Only</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>NoSellInDeclaration</masterLabel>
+        <translation>No Sell In Declaration</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Partner Only</masterLabel>
+        <translation>Partner Only</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Yes-wo process</masterLabel>
+        <translation>Yes (without a process)</translation>
+    </picklistValues>
+</CustomFieldTranslation>

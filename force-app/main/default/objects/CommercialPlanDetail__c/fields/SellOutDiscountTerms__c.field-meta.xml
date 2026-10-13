@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SellOutDiscountTerms__c</fullName>
+    <description>par exemple : Remise immédiate / Sous condition de rachat d&apos;un ordinateur…</description>
+    <externalId>false</externalId>
+    <label>Modalités de remise de l&apos;Avantage</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

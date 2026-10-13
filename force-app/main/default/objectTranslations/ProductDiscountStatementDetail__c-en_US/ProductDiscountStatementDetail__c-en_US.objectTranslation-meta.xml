@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Product Discount Statement Detail</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Product Discount Statement Details</value>
+    </caseValues>
+    <layouts>
+        <layout>Product Discount Statement Detail Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>negOptim Product Discount Statement Detail Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Inputs --></label>
+            <section>Inputs</section>
+        </sections>
+        <sections>
+            <label><!-- Product --></label>
+            <section>Product</section>
+        </sections>
+        <sections>
+            <label><!-- Scan / Synchro --></label>
+            <section>Scan / Synchro</section>
+        </sections>
+        <sections>
+            <label><!-- Tarif Conditions --></label>
+            <section>Tarif Conditions</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+    <recordTypes>
+        <label>Other</label>
+        <name>Other</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Penality</label>
+        <name>Penality</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Promo</label>
+        <name>Promo</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Regular</label>
+        <name>Regular</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Stock Compensation</label>
+        <name>StockCompensation</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- ERROR NEGATIVE VALUE --></errorMessage>
+        <name>TEST</name>
+    </validationRules>
+</CustomObjectTranslation>

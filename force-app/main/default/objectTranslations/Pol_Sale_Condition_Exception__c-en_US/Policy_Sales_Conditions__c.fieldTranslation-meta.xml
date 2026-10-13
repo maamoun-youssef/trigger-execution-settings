@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Policy - Sales Conditions --></label>
+    <lookupFilter>
+        <errorMessage><!-- Policy_Sales_Conditions__c - Value does not exist or does not match filter criteria. --></errorMessage>
+    </lookupFilter>
+    <name>Policy_Sales_Conditions__c</name>
+    <relationshipLabel><!-- Sales Conditions Exception --></relationshipLabel>
+</CustomFieldTranslation>

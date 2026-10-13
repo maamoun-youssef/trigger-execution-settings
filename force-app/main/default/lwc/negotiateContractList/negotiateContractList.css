@@ -1,0 +1,4 @@
+table thead td:not(.index-cell):not(.nego-type-cell),
+table thead th:not(.index-cell):not(.nego-type-cell) {
+    height: 80px;
+}

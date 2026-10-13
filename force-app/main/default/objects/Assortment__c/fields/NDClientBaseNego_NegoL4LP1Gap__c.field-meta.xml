@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NDClientBaseNego_NegoL4LP1Gap__c</fullName>
+    <description>Sum of ASD line ND nego gap</description>
+    <externalId>false</externalId>
+    <label>ND Nego vs Nego-1 Gap</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>1</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

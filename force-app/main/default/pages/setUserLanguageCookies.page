@@ -1,0 +1,32 @@
+<apex:page showHeader="false" controller="SetUserLanguageCookiesCtrl">
+    <apex:form >
+        <apex:actionFunction name="finishLoginFlow" action="{!finishLoginFlow}" />
+    </apex:form>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let siteId = `{!JSINHTMLENCODE(siteId)}`;
+            let userLanguage = `{!JSINHTMLENCODE(userLanguage)}`.replace(/-/g, '_');
+            let sitePath = `{!JSINHTMLENCODE(sitePath)}`;
+            var now = new Date();
+            console.log('siteId', siteId);
+            console.log('userLanguage', userLanguage);
+            console.log('sitePath', sitePath);
+            console.log('minutes', 30 * 60 * 100000);
+            now.setDate(now.getDate() + 1); // Add 1 day
+            if (siteId && userLanguage && sitePath) {
+                let delcookiebuilder = 'PreferredLanguage' + siteId + '=';
+                delcookiebuilder += '; max-age=0'
+                delcookiebuilder += '; path=' + sitePath;
+                document.cookie = delcookiebuilder;
+                delcookiebuilder = 'PreferredLanguage' + siteId + '=';
+                delcookiebuilder += '; max-age=0'
+                delcookiebuilder += '; path=/';
+                document.cookie = delcookiebuilder;
+                document.cookie = `PreferredLanguage${siteId}=${userLanguage}; path=${sitePath}; expires=${now.toUTCString()}`;
+                document.cookie = `PreferredLanguage${siteId}=${userLanguage}; path=/; expires=${now.toUTCString()}`;
+                console.log('cookie', `PreferredLanguage${siteId}=${userLanguage}; path=${sitePath}; expires=${now.toUTCString()}`);
+            }
+            finishLoginFlow();
+        }, false);
+    </script>
+</apex:page>

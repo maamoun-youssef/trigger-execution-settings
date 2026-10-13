@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Admin</label>
+    <protected>false</protected>
+    <values>
+        <field>DisplayOrder__c</field>
+        <value xsi:type="xsd:double">5.0</value>
+    </values>
+    <values>
+        <field>IsDeleted__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>SObjectName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>SectionColor__c</field>
+        <value xsi:type="xsd:string">#CC00FF</value>
+    </values>
+    <values>
+        <field>SectionIcon__c</field>
+        <value xsi:type="xsd:string">/sfc/servlet.shepherd/document/download/069QH00000AaNRmYAN</value>
+    </values>
+    <values>
+        <field>SectionSubTitle__c</field>
+        <value xsi:type="xsd:string">Admin</value>
+    </values>
+    <values>
+        <field>SectionTitle__c</field>
+        <value xsi:type="xsd:string">Admin</value>
+    </values>
+    <values>
+        <field>ThemesSettings__c</field>
+        <value xsi:type="xsd:string">[{&quot;themeLabel&quot;:null,&quot;theme&quot;:&quot;Admin&quot;,&quot;smallThemeImage&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH00000AaQCjYAN&quot;,&quot;relatedSection&quot;:&quot;Admin&quot;,&quot;largeThemeImage&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH00000AaQELYA3&quot;,&quot;isPortalDisplayed&quot;:true,&quot;isDisplayed&quot;:true,&quot;isAllowCancelDocInternal&quot;:true,&quot;isAllowCancelDocExternal&quot;:true,&quot;isAllowApproveDocInternal&quot;:true,&quot;isAllowApproveDocExternal&quot;:true,&quot;gridSettingsName&quot;:&quot;Admin_Certification_Grid&quot;,&quot;allowUpload&quot;:true,&quot;allowSharing&quot;:true,&quot;allowReceiptConfirmation&quot;:true,&quot;allowMultipleUpload&quot;:true,&quot;allowedStatusesForUpload&quot;:[&quot;Validated&quot;],&quot;allowedStatusesForShare&quot;:[&quot;Sent&quot;],&quot;allowedStatusesForReceiptConfirmation&quot;:[&quot;Sent&quot;],&quot;allowedStatusesForDelete&quot;:null,&quot;allowDelete&quot;:null},{&quot;themeLabel&quot;:null,&quot;theme&quot;:&quot;facture&quot;,&quot;smallThemeImage&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH00000AakmXYAR&quot;,&quot;relatedSection&quot;:&quot;Admin&quot;,&quot;largeThemeImage&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH00000AajyZYAR&quot;,&quot;isPortalDisplayed&quot;:true,&quot;isDisplayed&quot;:true,&quot;isAllowCancelDocInternal&quot;:true,&quot;isAllowCancelDocExternal&quot;:true,&quot;isAllowApproveDocInternal&quot;:true,&quot;isAllowApproveDocExternal&quot;:true,&quot;gridSettingsName&quot;:&quot;Invoice_Grid_NegOptim&quot;,&quot;allowUpload&quot;:true,&quot;allowSharing&quot;:true,&quot;allowReceiptConfirmation&quot;:true,&quot;allowMultipleUpload&quot;:true,&quot;allowedStatusesForUpload&quot;:[&quot;Validated&quot;],&quot;allowedStatusesForShare&quot;:[&quot;Sent&quot;,&quot;Validated&quot;,&quot;Signed&quot;,&quot;Receipt Confirmed&quot;,&quot;Requested&quot;,&quot;Rejected&quot;,&quot;Cancelled&quot;],&quot;allowedStatusesForReceiptConfirmation&quot;:[&quot;Sent&quot;,&quot;Validated&quot;,&quot;Signed&quot;,&quot;Receipt Confirmed&quot;,&quot;Requested&quot;,&quot;Rejected&quot;,&quot;Cancelled&quot;],&quot;allowedStatusesForDelete&quot;:null,&quot;allowDelete&quot;:null}]</value>
+    </values>
+</CustomMetadata>

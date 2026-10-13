@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>InvoicesToPaid</label>
+    <protected>false</protected>
+    <values>
+        <field>Calendar_Setting__c</field>
+        <value xsi:type="xsd:string">{&quot;startDate&quot;:&quot;&quot;,&quot;endDate&quot;:&quot;&quot;,&quot;pickListValue&quot;:&quot;&quot;,&quot;showCalendarSettings&quot;:false}</value>
+    </values>
+    <values>
+        <field>Columns__c</field>
+        <value xsi:type="xsd:string">[{&quot;label&quot;:&quot;Invoice ID&quot;,&quot;FieldName&quot;:&quot;Name&quot;,&quot;nonConditional&quot;:{&quot;widthStyle&quot;:&quot;&quot;,&quot;width&quot;:&quot;&quot;,&quot;textStyle&quot;:{&quot;style&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;,&quot;isUnderLine&quot;:false,&quot;isStrikeThrought&quot;:false,&quot;isItalic&quot;:false,&quot;isBold&quot;:null,&quot;color&quot;:&quot;&quot;,&quot;align&quot;:&quot;&quot;},&quot;style&quot;:&quot;&quot;,&quot;isAdvanced&quot;:false,&quot;borderStyle&quot;:null,&quot;bgColor&quot;:&quot;&quot;,&quot;advancedStyle&quot;:&quot;&quot;},&quot;headerStyle&quot;:{&quot;style&quot;:&quot;background-color: #0d807d;color: #ffffff;&quot;,&quot;color&quot;:&quot;#ffffff&quot;,&quot;bgColor&quot;:&quot;#0d807d&quot;},&quot;picklistColorsMap&quot;:{},&quot;controllerFieldActions&quot;:[]},{&quot;label&quot;:&quot;Année budget&quot;,&quot;FieldName&quot;:&quot;FiscalYear__c&quot;,&quot;nonConditional&quot;:{&quot;widthStyle&quot;:&quot;&quot;,&quot;width&quot;:&quot;&quot;,&quot;textStyle&quot;:{&quot;style&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;,&quot;isUnderLine&quot;:false,&quot;isStrikeThrought&quot;:false,&quot;isItalic&quot;:false,&quot;isBold&quot;:null,&quot;color&quot;:&quot;&quot;,&quot;align&quot;:&quot;&quot;},&quot;style&quot;:&quot;background-color: #daf2d0;&quot;,&quot;isAdvanced&quot;:false,&quot;borderStyle&quot;:null,&quot;bgColor&quot;:&quot;#daf2d0&quot;,&quot;advancedStyle&quot;:&quot;&quot;},&quot;headerStyle&quot;:{&quot;style&quot;:&quot;background-color: #92d050;color: #ffffff;&quot;,&quot;color&quot;:&quot;#ffffff&quot;,&quot;bgColor&quot;:&quot;#92d050&quot;},&quot;picklistColorsMap&quot;:{},&quot;controllerFieldActions&quot;:[]},{&quot;label&quot;:&quot;Accord&quot;,&quot;FieldName&quot;:&quot;Contract__c&quot;,&quot;nonConditional&quot;:{&quot;widthStyle&quot;:&quot;&quot;,&quot;width&quot;:&quot;&quot;,&quot;textStyle&quot;:{&quot;style&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;,&quot;isUnderLine&quot;:false,&quot;isStrikeThrought&quot;:false,&quot;isItalic&quot;:false,&quot;isBold&quot;:null,&quot;color&quot;:&quot;&quot;,&quot;align&quot;:&quot;&quot;},&quot;style&quot;:&quot;background-color: #daf2d0;&quot;,&quot;isAdvanced&quot;:false,&quot;borderStyle&quot;:null,&quot;bgColor&quot;:&quot;#daf2d0&quot;,&quot;advancedStyle&quot;:&quot;&quot;},&quot;headerStyle&quot;:{&quot;style&quot;:&quot;background-color: #92d050;color: #ffffff;&quot;,&quot;color&quot;:&quot;#ffffff&quot;,&quot;bgColor&quot;:&quot;#92d050&quot;},&quot;picklistColorsMap&quot;:{},&quot;controllerFieldActions&quot;:[]},{&quot;label&quot;:&quot;Fournisseur&quot;,&quot;FieldName&quot;:&quot;SupplierBuyer__c&quot;,&quot;nonConditional&quot;:{&quot;isAdvanced&quot;:false,&quot;advancedStyle&quot;:&quot;&quot;,&quot;textStyle&quot;:{&quot;isItalic&quot;:false,&quot;isCenter&quot;:false,&quot;isUnderLine&quot;:false,&quot;isStrikeThrought&quot;:false,&quot;color&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;,&quot;align&quot;:&quot;&quot;},&quot;bgColor&quot;:&quot;#daf2d0&quot;,&quot;width&quot;:&quot;&quot;,&quot;style&quot;:&quot;background-color: #daf2d0;&quot;,&quot;widthStyle&quot;:&quot;&quot;},&quot;headerStyle&quot;:{&quot;bgColor&quot;:&quot;#92d050&quot;,&quot;color&quot;:&quot;#ffffff&quot;,&quot;style&quot;:&quot;background-color: #92d050;color: #ffffff;&quot;},&quot;picklistColorsMap&quot;:{},&quot;controllerFieldActions&quot;:[]},{&quot;label&quot;:&quot;Numéro de pièce comptable&quot;,&quot;FieldName&quot;:&quot;InvNumber__c&quot;,&quot;nonConditional&quot;:{&quot;widthStyle&quot;:&quot;&quot;,&quot;width&quot;:&quot;&quot;,&quot;textStyle&quot;:{&quot;style&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;,&quot;isUnderLine&quot;:false,&quot;isStrikeThrought&quot;:false,&quot;isItalic&quot;:false,&quot;isBold&quot;:null,&quot;color&quot;:&quot;&quot;,&quot;align&quot;:&quot;&quot;},&quot;style&quot;:&quot;background-color: #f8e4f6;&quot;,&quot;isAdvanced&quot;:false,&quot;borderStyle&quot;:null,&quot;bgColor&quot;:&quot;#f8e4f6&quot;,&quot;advancedStyle&quot;:&quot;&quot;},&quot;headerStyle&quot;:{&quot;style&quot;:&quot;background-color: #e49edd;color: #ffffff;&quot;,&quot;color&quot;:&quot;#ffffff&quot;,&quot;bgColor&quot;:&quot;#e49edd&quot;},&quot;picklistColorsMap&quot;:{},&quot;controllerFieldActions&quot;:[]},{&quot;label&quot;:&quot;Statut&quot;,&quot;FieldName&quot;:&quot;Status__c&quot;,&quot;nonConditional&quot;:{&quot;widthStyle&quot;:&quot;&quot;,&quot;width&quot;:&quot;&quot;,&quot;textStyle&quot;:{&quot;style&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;,&quot;isUnderLine&quot;:false,&quot;isStrikeThrought&quot;:false,&quot;isItalic&quot;:false,&quot;isBold&quot;:null,&quot;color&quot;:&quot;&quot;,&quot;align&quot;:&quot;&quot;},&quot;style&quot;:&quot;background-color: #f8e4f6;&quot;,&quot;isAdvanced&quot;:false,&quot;borderStyle&quot;:null,&quot;bgColor&quot;:&quot;#f8e4f6&quot;,&quot;advancedStyle&quot;:&quot;&quot;},&quot;headerStyle&quot;:{&quot;style&quot;:&quot;background-color: #e49edd;color: #ffffff;&quot;,&quot;color&quot;:&quot;#ffffff&quot;,&quot;bgColor&quot;:&quot;#e49edd&quot;},&quot;picklistColorsMap&quot;:{&quot;Deleted&quot;:&quot;&quot;,&quot;Loosed&quot;:&quot;&quot;,&quot;Gained&quot;:&quot;&quot;,&quot;PartiallyPaid&quot;:&quot;&quot;,&quot;Cancelled&quot;:&quot;&quot;,&quot;Paid&quot;:&quot;&quot;,&quot;Printed&quot;:&quot;&quot;,&quot;ReadyToPrint&quot;:&quot;&quot;,&quot;Validated&quot;:&quot;&quot;,&quot;Generated&quot;:&quot;&quot;},&quot;controllerFieldActions&quot;:[]},{&quot;label&quot;:&quot;Document&quot;,&quot;FieldName&quot;:&quot;AccDoc__c&quot;,&quot;nonConditional&quot;:{&quot;widthStyle&quot;:&quot;&quot;,&quot;width&quot;:&quot;&quot;,&quot;textStyle&quot;:{&quot;style&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;,&quot;isUnderLine&quot;:false,&quot;isStrikeThrought&quot;:false,&quot;isItalic&quot;:false,&quot;isBold&quot;:null,&quot;color&quot;:&quot;&quot;,&quot;align&quot;:&quot;&quot;},&quot;style&quot;:&quot;background-color: #f8e4f6;&quot;,&quot;isAdvanced&quot;:false,&quot;borderStyle&quot;:null,&quot;bgColor&quot;:&quot;#f8e4f6&quot;,&quot;advancedStyle&quot;:&quot;&quot;},&quot;headerStyle&quot;:{&quot;style&quot;:&quot;background-color: #e49edd;color: #ffffff;&quot;,&quot;color&quot;:&quot;#ffffff&quot;,&quot;bgColor&quot;:&quot;#e49edd&quot;},&quot;picklistColorsMap&quot;:{&quot;Accrual_Inv&quot;:&quot;&quot;,&quot;Accrual_CN&quot;:&quot;&quot;,&quot;Balance Credit Note Request&quot;:&quot;&quot;,&quot;Down-payment Invoice&quot;:&quot;&quot;,&quot;Balance Invoice&quot;:&quot;&quot;,&quot;Credit Note&quot;:&quot;&quot;,&quot;Debit Note&quot;:&quot;&quot;,&quot;Invoice&quot;:&quot;&quot;,&quot;Credit Note Request&quot;:&quot;&quot;},&quot;controllerFieldActions&quot;:[]},{&quot;label&quot;:&quot;Date de pièce comptable&quot;,&quot;FieldName&quot;:&quot;InvDate__c&quot;},{&quot;label&quot;:&quot;Total HT&quot;,&quot;FieldName&quot;:&quot;TotalAmount__c&quot;},{&quot;label&quot;:&quot;Total TVA&quot;,&quot;FieldName&quot;:&quot;TotalVATAmount__c&quot;},{&quot;label&quot;:&quot;Total TTC&quot;,&quot;FieldName&quot;:&quot;TotalAmountwVAT__c&quot;}]</value>
+    </values>
+    <values>
+        <field>Compiled_Grid_JSON__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Filters__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Grid_Configuration__c</field>
+        <value xsi:type="xsd:string">{&quot;Default_Page_Size&quot;:&quot;50&quot;,&quot;isShowFilterOnColumnHeader&quot;:false,&quot;overrideFilter&quot;:false,&quot;Quick_Actions&quot;:[]}</value>
+    </values>
+    <values>
+        <field>Grid_Slogan__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">standard:orders</value>
+    </values>
+    <values>
+        <field>Master_Object_Columns__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Master_Object_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Object_Name__c</field>
+        <value xsi:type="xsd:string">Invoice__c</value>
+    </values>
+    <values>
+        <field>ReadOnly_Criteria__c</field>
+        <value xsi:type="xsd:string">{}</value>
+    </values>
+    <values>
+        <field>Relationship_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Time_Line_Settings__c</field>
+        <value xsi:type="xsd:string">{&quot;levelControl&quot;:1,&quot;masterLookup&quot;:&quot;&quot;,&quot;masterLookupParent&quot;:&quot;&quot;,&quot;isTimeLineSettings&quot;:false}</value>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:type="xsd:string">Detail</value>
+    </values>
+</CustomMetadata>

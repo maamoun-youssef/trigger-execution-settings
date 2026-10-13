@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Services_Payment_Term_Abbrev__c</fullName>
+    <externalId>false</externalId>
+    <formula>Text(Services_Payment_Days__c) 
+&amp; 
+Case (text( Services_Payment_Condition__c), 
+&apos;End of The 10th&apos;,&apos;JFDD&apos;,
+&apos;End of Month&apos;,&apos;JFDM&apos;, 
+&apos;Twice the Month&apos;,&apos;JTWM&apos;, 
+&apos;Net&apos;,&apos;JNet&apos;, 
+&apos;The 10&apos;,&apos;JR10&apos;, 
+&apos;The 15&apos;,&apos;JR15&apos;, 
+&apos;The 20&apos;,&apos;JR20&apos;, &apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Payment Term Abbrev. for Rendering Servi</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>productDiscountStatementGrid</label>
+    <protected>false</protected>
+    <values>
+        <field>Configuration__c</field>
+        <value xsi:type="xsd:string">[{&quot;name&quot;: &quot;pdsGridSettingsTemplate&quot;, &quot;label&quot;: &quot;PDS Grid Settings Template&quot;, &quot;type&quot;: &quot;String&quot;, &quot;datasource&quot;: &quot;apex://ProductDiscountStatementDataSource&quot;, &quot;defaultValue&quot;: &quot;&quot;, &quot;description&quot;: null, &quot;required&quot;: &quot;true&quot;}, {&quot;name&quot;: &quot;flowApiName&quot;, &quot;label&quot;: &quot;Flow Api Name&quot;, &quot;type&quot;: &quot;String&quot;, &quot;datasource&quot;: null, &quot;defaultValue&quot;: &quot;&quot;, &quot;description&quot;: null, &quot;required&quot;: &quot;true&quot;}]</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Parent Discount</label>
+    <lookupFilter>
+        <errorMessage><!-- Parent_Discount__c - Value does not exist or does not match filter criteria. --></errorMessage>
+    </lookupFilter>
+    <name>Parent_Discount__c</name>
+    <relationshipLabel><!-- Lignes contrats (Parent Discount) --></relationshipLabel>
+</CustomFieldTranslation>

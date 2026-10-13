@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BRIEF_Give_partner__c</fullName>
+    <description>Success &amp; lost of the position / Submitted counter-position.</description>
+    <inlineHelpText>Success &amp; lost of the position / Submitted counter-position.</inlineHelpText>
+    <label>BRIEF - Give Partner Posture</label>
+    <length>16000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>10</visibleLines>
+</CustomField>

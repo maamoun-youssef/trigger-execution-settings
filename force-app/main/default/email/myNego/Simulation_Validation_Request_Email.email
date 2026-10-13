@@ -1,0 +1,14 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body style="height: auto; min-height: auto;">Bonjour,<br />
+<br />
+Nous vous informons la simulation {{{Contract__c.Name}}} nécessite désormais votre validation.<br />
+<br />
+Pour procéder à cette validation, nous vous prions de bien vouloir cliquer sur le lien ci-dessous, qui vous mènera directement au contrat en question:&nbsp;{{{Contract__c.Link}}}<br />
+<br />
+Nous vous remercions de votre collaboration et restons à votre disposition pour toute question supplémentaire.<br />
+<br />
+Cordialement,</body>
+</html>

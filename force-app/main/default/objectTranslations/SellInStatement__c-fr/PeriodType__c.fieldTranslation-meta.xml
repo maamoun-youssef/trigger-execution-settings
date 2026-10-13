@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Type de période</label>
+    <name>PeriodType__c</name>
+    <picklistValues>
+        <masterLabel>Annual</masterLabel>
+        <translation>Annuelle</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Month</masterLabel>
+        <translation>Mensuelle</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Semester</masterLabel>
+        <translation>Semestrielle</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Trimester</masterLabel>
+        <translation>Trimestrielle</translation>
+    </picklistValues>
+</CustomFieldTranslation>

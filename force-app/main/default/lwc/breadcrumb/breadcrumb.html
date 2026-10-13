@@ -1,0 +1,17 @@
+<template>
+    <template if:true={breadcrumbPath}>
+        <div class="breadcrumb-container">
+            <nav class="breadcrumb">
+                <template for:each={breadcrumbPath} for:item="item">
+                    <div key={item.Id} class={item.cssClass} onclick={openHierarchy} data-id={item.Id}
+                        title={item.Name}>
+                        <span class="breadcrumb-label">{item.Name}</span>
+                    </div>
+                </template>
+            </nav>
+        </div>
+    </template>
+    <template if:true={error}>
+        <p class="error">{error}</p>
+    </template>
+</template>

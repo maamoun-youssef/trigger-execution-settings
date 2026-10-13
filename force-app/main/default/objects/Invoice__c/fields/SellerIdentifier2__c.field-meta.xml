@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SellerIdentifier2__c</fullName>
+    <description>Seller identifier 2 (like VAT number or other identifier of Seller BU)</description>
+    <externalId>false</externalId>
+    <label>Seller identifier 2</label>
+    <length>80</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

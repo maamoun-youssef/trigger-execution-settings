@@ -1,0 +1,53 @@
+:host {
+    --verdigris: #14B2BBff;
+}
+
+.button-container {
+    margin-right: 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+.greyBg {
+    background-color: #f3f3f3;
+}
+
+.stickyHeader {
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    background-color: var(--verdigris);
+    padding-left: 20px;
+    height: 70px;
+}
+
+.sectionTitle {
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+    translate: 0px 7px;
+}
+
+.template-combobox {
+    max-width: 400px;
+}

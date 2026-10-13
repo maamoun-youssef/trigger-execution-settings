@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Parent_Discount__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Parent Discount</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>Parent_Discount__c - Value does not exist or does not match filter criteria.</errorMessage>
+        <filterItems>
+            <field>Contract_Discount__c.RecordType.DeveloperName</field>
+            <operation>notEqual</operation>
+            <value>Sub_Term_Signed</value>
+        </filterItems>
+        <filterItems>
+            <field>Contract_Discount__c.RecordType.Name</field>
+            <operation>notEqual</operation>
+            <value>Sub_Term_To_Be_Signed</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Contract_Discount__c</referenceTo>
+    <relationshipLabel>Lignes contrats (Parent Discount)</relationshipLabel>
+    <relationshipName>Children_Contract_Discount</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

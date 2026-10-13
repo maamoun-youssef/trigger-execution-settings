@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>WDClientBaseNegoL4L__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Calculated only when Weighted Distribution Manual N+1 is filled at Cluster level and the ASD Status is Validated. If the selected cluster is a Complementary cluster, Weighted Distribution Manual N+1 must also be filled for the Assortment’s BU Target.</inlineHelpText>
+    <label>WD Client Nego L4L</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>1</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

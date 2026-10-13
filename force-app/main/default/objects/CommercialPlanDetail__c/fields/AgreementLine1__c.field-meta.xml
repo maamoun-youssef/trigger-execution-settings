@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AgreementLine1__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Ligne de budget promotionnel négocié au niveau de l&apos;accord</description>
+    <label>Agreement Line 1</label>
+    <referenceTo>AgreementLine__c</referenceTo>
+    <relationshipLabel>Commercial Plan Details (Agreement Line 1)</relationshipLabel>
+    <relationshipName>CommercialPlanDetailsAGL1</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

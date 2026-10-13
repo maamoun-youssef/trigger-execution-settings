@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Prepare my Nego</fullName>
+                <default>true</default>
+                <label>Prepare my Nego</label>
+            </value>
+            <value>
+                <fullName>In Nego</fullName>
+                <default>false</default>
+                <label>In Nego</label>
+            </value>
+            <value>
+                <fullName>Closed Nego</fullName>
+                <default>false</default>
+                <label>Closed Nego</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

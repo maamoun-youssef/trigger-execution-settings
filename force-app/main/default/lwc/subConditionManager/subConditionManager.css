@@ -1,0 +1,77 @@
+:host .discountTermsEdit {
+    --sds-c-textarea-sizing-min-height: 24rem;
+}
+
+.main-table thead th {
+    white-space: nowrap;
+}
+
+thead tr td {
+    background-color: white;
+}
+
+/* Draft row styling */
+.draft-row {
+    background-color: rgb(250, 255, 189) !important;
+}
+
+.draft-row:hover {
+    background-color: rgb(245, 250, 184) !important;
+}
+
+/* Invalid row styling */
+.invalid-row {
+    background-color: #F9BBB9 !important;
+}
+
+.invalid-row:hover {
+    background-color: #F7ACAA !important;
+}
+
+/* Blocked row styling */
+.blocked-row {
+    background-color: #ececec !important;
+}
+
+.blocked-row:hover {
+    background-color: #e0e0e0 !important;
+}
+
+/* Draft badge styling */
+lightning-badge[style*="background-color: #FFD803"] {
+    --sds-c-badge-color-background: #FFD803;
+    --sds-c-badge-text-color: #000;
+}
+
+/* Ensure badge stays inline */
+lightning-badge {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Actions column */
+.slds-button-group lightning-button-icon {
+    margin-left: 0.25rem;
+}
+
+/* Action icons styling */
+lightning-button-icon {
+    cursor: pointer;
+}
+
+lightning-button-icon:hover {
+    opacity: 0.7;
+}
+
+.slds-text-color_error {
+    color: #c23934;
+}
+
+/* Popup table row hover styling */
+.slds-modal tbody tr[style*="cursor: pointer"]:hover {
+    background-color: #f3f3f3;
+}
+
+.slds-modal tbody tr[style*="cursor: pointer"]:hover td {
+    background-color: transparent;
+}

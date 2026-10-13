@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>YTDDownPayment__c</fullName>
+    <formula>ROUND(IF(ISPICKVAL(Invoice_base__c,&apos;ActualYTD&apos;), 
+     YTDFact__c,
+     IF(ISPICKVAL(Invoice_base__c,&apos;Negotiated&apos;), 
+          YTD_Nego__c, 
+          YTD_FX__c)
+) * Down_Payment_YE_Coverage__c,2)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>YTDDownPayment</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

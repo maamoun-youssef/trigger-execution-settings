@@ -1,0 +1,108 @@
+<!-- @author ULIT -->
+<!-- @date 12/12/2020 -->
+<!-- @description template for negOptim toggle widget LWC to toggle values on boolean fields in a record page -->
+<template>
+    <!--SLDS CARD-->
+    <article class="slds-card" style={styleDiv}>
+        <!--SLDS CARD HEADER-->
+        <div if:true={title} class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span>{title}</span>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <!--SLDS CARD SUB HEADER DESCRIPTION -->
+        <template if:true={getIsDescriptionPositionTop}>
+            <div if:true={description} class={getDescriptionClass}>
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2>
+                            <span>{description}</span>
+                        </h2>
+                    </div>
+                </header>
+            </div>
+        </template>
+        <!--SLDS CARD BODY-->
+        <div class="slds-card__body slds-card__body_inner">
+            <lightning-spinner if:true={loading} alternative-text={labels.Loading} size="small"></lightning-spinner>
+            <div if:false={loading} class={containerClass}>
+                <template if:true={hasFields} for:each={fields} for:item='field'>
+                    <template if:true={field.isReadable}>
+                        <div key={field.fieldName} class={getColSize} style={field.styleDiv}>
+                            <div class={getGridClass}>
+                                <div>
+                                    <label class={getLabelClass} style="padding-right: 0.4rem !important;">{field.fieldLabel}</label>
+                                    <template if:true={field.hasInlineHelpText}>
+                                        <lightning-helptext content={field.inlineHelpText}></lightning-helptext>
+                                    </template>
+                                </div>
+                                <template if:true={field.isEditable}>
+                                    <lightning-input data-index={field.index} data-apiname={field.fieldName} type="toggle" label={field.fieldLabel}
+                                        variant='label-hidden' class={getInputClass} message-toggle-active={field.messageToggleActive}
+                                        message-toggle-inactive={field.messageToggleInactive} checked={field.checked} onchange={save}>
+                                    </lightning-input>
+                                </template>
+                                <template if:false={field.isEditable}>
+                                    <lightning-input data-index={field.index} data-apiname={field.fieldName} type="toggle" label={field.fieldLabel}
+                                        variant='label-hidden' class={getInputClass} message-toggle-active={field.messageToggleActive}
+                                        message-toggle-inactive={field.messageToggleInactive} checked={field.checked} onchange={save} disabled="disabled">
+                                    </lightning-input>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </div>
+        <!--SLDS CARD SUB HEADER DESCRIPTION -->
+        <template if:false={getIsDescriptionPositionTop}>
+            <div if:true={description} class={getDescriptionClass}>
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2>
+                            <span>{description}</span>
+                        </h2>
+                    </div>
+                </header>
+            </div>
+        </template>
+    </article>
+    <!--CONFIRMATION MODAL-->
+    <template if:true={openModal}>
+        <section id="popup" role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+            aria-describedby="modal-content-id-2" class='slds-modal slds-fade-in-open'>
+            <div style="width: 40% !important" class="slds-modal__container">
+                <!--MODAL HEADER-->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        type="button" onclick={closeModal} title={labels.LBL_Close}>
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                            <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#close">
+                            </use>
+                        </svg>
+                        <span class="slds-assistive-text">{labels.LBL_Close}</span>
+                    </button>
+                    <h2 class="slds-hyphenate slds-modal__title" id="modal-heading-01">{labels.LBL_Warning}</h2>
+                </header>
+                <!--MODAL BODY-->
+                <div class="slds-modal__content slds-p-around_medium slds-text-align_center" id="modal-content-id-1">
+                    {labels.MSG_CONFIRM_SAVE} <span class='slds-p-left_xxx-small'>{currentLabel} =
+                        {currentValue}.</span>
+                </div>
+                <!--MODAL FOOTER-->
+                <footer class="slds-modal__footer">
+                    <button type="button" onclick={closeModal}
+                        class="slds-button slds-button_neutral">{labels.LBL_Cancel}</button>
+                    <button type="button" onclick={confirmModal}
+                        class="slds-button slds-button_brand">{labels.LBL_Confirm}</button>
+                </footer>
+            </div>
+        </section>
+        <!--BACKDROP-->
+        <div id="backdrop2" class='slds-backdrop slds-backdrop_open'></div>
+    </template>
+</template>

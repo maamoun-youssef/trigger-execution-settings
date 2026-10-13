@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scope_BU__c</fullName>
+    <description>List of stores defining the condition scope</description>
+    <label>Scope BU</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>BU</valueSetName>
+    </valueSet>
+    <visibleLines>10</visibleLines>
+</CustomField>

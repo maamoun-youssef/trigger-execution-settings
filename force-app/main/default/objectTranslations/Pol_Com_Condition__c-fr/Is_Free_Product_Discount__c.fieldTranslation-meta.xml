@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>A cocher pour préciser qu&apos;il s&apos;agit d&apos;une remise de type produits gratuits</help>
+    <label>Remise gratuite</label>
+    <name>Is_Free_Product_Discount__c</name>
+</CustomFieldTranslation>

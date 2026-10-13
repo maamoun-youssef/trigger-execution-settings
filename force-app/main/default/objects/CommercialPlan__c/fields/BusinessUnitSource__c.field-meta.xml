@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BusinessUnitSource__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Specify BU origin for the even (Which entity is working on)</description>
+    <label>BU Source</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>The status of BusinessUnitSource (Supplier) should be &apos;Open&apos;</errorMessage>
+        <filterItems>
+            <field>BusinessUnit__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Open</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>BusinessUnit__c</referenceTo>
+    <relationshipLabel>Commercial Plans (BU Source)</relationshipLabel>
+    <relationshipName>CPBusinessUnitSource</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

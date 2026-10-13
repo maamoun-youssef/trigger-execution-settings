@@ -1,0 +1,643 @@
+<template>
+    <div class="mainContainer" style="position: relative;">
+        <div class="slds-card slds-page-header pageHeader">
+            <div class="slds-page-header negoptimHeader">
+                <!-- LAYOUT GRID -->
+                <div class="slds-grid">
+                    <!-- GRID COL FOR ICON AND TITLE -->
+                    <div class="slds-col slds-has-flexi-truncate">
+                        <div class="slds-media slds-no-space slds-grow">
+                            <div class="slds-media__figure">
+                                <lightning-icon icon-name={pageIcon} alternative-text={Labels.LBL_InvoiceManager}
+                                    title={Labels.LBL_InvoiceManager} size="medium"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate"
+                                    title="">
+                                    <template lwc:if={selected}>{selectedInfo.title}</template>
+                                    <template
+                                        lwc:elseif={invoicePayment}>{Labels.LBL_InvoiceMng_PaymentInvoiceTitle}</template>
+                                    <template
+                                        lwc:elseif={massEmail}>{Labels.LBL_InvoiceMng_EmailInvoiceTitle}</template>
+                                    <template
+                                        lwc:elseif={massPrint}>{Labels.LBL_InvoiceMng_PrintInvoiceTitle}</template>
+                                    <template
+                                        lwc:elseif={massCancel}>{Labels.LBL_InvoiceMng_CancelInvoiceTitle}</template>
+                                    <template
+                                        lwc:elseif={massDelete}>{Labels.LBL_InvoiceMng_DeleteInvoiceTitle}</template>
+                                    <template
+                                        lwc:elseif={massDeduct}>{Labels.LBL_InvoiceMng_DeductInvoiceTitle}</template>
+                                    <template
+                                        lwc:elseif={supplierCreditNote}>{Labels.LBL_InvoiceMng_SupplierCreditNoteTitle}</template>
+                                    <template lwc:else>{Labels.LBL_InvoiceManager}</template>
+                                </h1>
+                                <template lwc:if={selected}>
+                                    <template if:false={isLoading}>
+                                        <p>{selectedInfo.subTitle}</p>
+                                    </template>
+                                </template>
+                                <template lwc:else>
+                                    <div class="slds-grid">
+                                        <div style="min-width:66px;">{recordsTotalNumber} {Labels.LBL_Invoice}</div>
+                                        <template if:false={selected}>
+                                            <div lwc:if={filterDescriptions.length}
+                                                class="slds-p-left--xxx-small slds-grid" style="flex-wrap: wrap;">
+                                                - {Labels.LBL_FilteredBy}
+                                                <!-- <div> -->
+                                                <template for:each={filterDescriptions} for:item="field"
+                                                    for:index="index">
+                                                    <div key={field} class="slds-p-left--xx-small">
+                                                        &#8226; {field}
+                                                    </div>
+                                                </template>
+                                                <!-- </div> -->
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- GRID COL FOR ACTIONS -->
+                    <div if:false={isLoading} class="slds-col slds-no-flex slds-grid slds-align-top">
+                        <div class="slds-grid">
+                            <template if:true={newInvoice}>
+                                <lightning-button label={Labels.LBL_New} onclick={handleNewInvoice}
+                                    class="slds-m-right_xx-small" variant="neutral" if:true={showNewButton}>
+                                </lightning-button>
+                            </template>
+                            <!-- back button -->
+                            <lightning-button label={selectedInfo.backButton} class="slds-m-right_xx-small"
+                                onclick={handleBackButton} variant="neutral" lwc:if={selected}>
+                            </lightning-button>
+                            <!-- invoice payment -->
+                            <lightning-button label={Labels.LBL_InvoiceMng_PayInvoice} class="slds-m-right_xx-small"
+                                onclick={handleMassPayment} variant="neutral" lwc:if={invoicePayment}>
+                            </lightning-button>
+                            <!-- mass email -->
+                            <lightning-button label={Labels.LBL_InvoiceMng_EmailInvoice} class="slds-m-right_xx-small"
+                                onclick={handleSendEmail} variant="neutral" lwc:if={massEmail}>
+                            </lightning-button>
+                            <!-- mass print -->
+                            <lightning-button label={Labels.LBL_InvoiceMng_PrintInvoice} class="slds-m-right_xx-small"
+                                onclick={handleMassPrint} variant="neutral" lwc:if={massPrint}>
+                            </lightning-button>
+                            <!-- cancel -->
+                            <template lwc:if={selected}>
+                                <lightning-button label={Labels.LBL_MassCancel_PageNextButton}
+                                    class="slds-m-right_xx-small" onclick={handleCancelInvoice} variant="neutral"
+                                    lwc:if={massCancel}>
+                                </lightning-button>
+                            </template>
+                            <template lwc:else>
+                                <lightning-button label={Labels.LBL_InvoiceMng_CancelInvoice}
+                                    class="slds-m-right_xx-small" onclick={handleCancelInvoice} variant="neutral"
+                                    lwc:if={massCancel}>
+                                </lightning-button>
+                            </template>
+                            <!-- delete -->
+                            <template lwc:if={selected}>
+                                <lightning-button label={Labels.LBL_MassDelete_PageNextButton}
+                                    class="slds-m-right_xx-small" lwc:if={massDelete} onclick={handleDeleteInvoice}
+                                    variant="neutral">
+                                </lightning-button>
+                            </template>
+                            <template lwc:else>
+                                <lightning-button label={Labels.LBL_InvoiceMng_DeleteInvoice}
+                                    class="slds-m-right_xx-small" lwc:if={massDelete} onclick={handleDeleteInvoice}
+                                    variant="neutral">
+                                </lightning-button>
+                            </template>
+                            <!-- massDeduct -->
+                            <template lwc:if={selected}>
+                                <lightning-button label={Labels.LBL_MassDeduct_PageNextButton}
+                                    class="slds-m-right_xx-small" lwc:if={massDeduct} onclick={handleMassDeductInvoice}
+                                    variant="neutral">
+                                </lightning-button>
+                            </template>
+                            <template lwc:else>
+                                <lightning-button label={Labels.LBL_InvoiceMng_InvoiceDeduct}
+                                    class="slds-m-right_xx-small" lwc:if={massDeduct} onclick={handleMassDeductInvoice}
+                                    variant="neutral">
+                                </lightning-button>
+                            </template>
+                            <!-- SupplierCreditNote -->
+                            <lightning-button label={Labels.LBL_AddSupplierCreditNote}
+                                onclick={handleAddSupplierCreditNote} class="slds-m-right_xx-small" variant="neutral"
+                                lwc:if={supplierCreditNote}>
+                            </lightning-button>
+                            <!-- reset -->
+                            <lightning-button label={Labels.LBL_ResetFilters} onclick={resetSessionFilters}
+                                class="slds-m-right_xx-small" variant="neutral" if:false={selected}>
+                            </lightning-button>
+                            <!-- excel -->
+                            <lightning-button-icon icon-name="doctype:excel" onclick={exportExcel}
+                                variant="border-filled" if:false={selected}>
+                            </lightning-button-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-card ">
+            <div class="tableTitle slds-card__header slds-grid" if:true={selected}>
+                <header class=" slds-media--center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2 class="header-title-container">
+                            <span class="slds-card__header-title slds-truncate">
+                                {pageLabel}
+                            </span>
+                        </h2>
+                    </div>
+                </header>
+                <div class="slds-no-flex slds-p-right--x-small">
+                    <lightning-button variant="neutral" label={deleteButtonLabel}
+                        onclick={handleDeleteSelected}></lightning-button>
+                </div>
+            </div>
+            <template lwc:if={isLoading}>
+                <div class="slds-spinner_container spinnerDiv">
+                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </template>
+            <!-- create supplier credit note popup -->
+            <template if:true={createSupplierCreditNotePopup.visibility}>
+                <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container modalwidth">
+                        <header class="slds-modal__header">
+                            <h2 class="slds-modal__title">{createSupplierCreditNotePopup.title}</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium slds-scrollable_y">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label">{supplierBuyerLabel}</label>
+                                <div class="slds-form-element__control">
+                                    <lightning-formatted-text value={supplierCreditNoteMng.selectedSupplierName}>
+                                    </lightning-formatted-text>
+                                </div>
+                            </div>
+                            <div class="slds-grid slds-wrap slds-gutters">
+                                <template for:each={supplierCreditNoteMng.creditNoteFields} for:item="field">
+                                    <div key={field.fieldName} class="slds-col slds-size_1-of-2">
+                                        <div class="slds-m-bottom_x-small">
+                                            <template lwc:if={field.isPicklist}>
+                                                <lightning-combobox options={field.pickListValues}
+                                                    value={field.defaultValue} data-field={field.fieldName}
+                                                    label={field.fieldLabel}
+                                                    onchange={handleFieldEditSupplierCreditNote} required>
+                                                </lightning-combobox>
+                                            </template>
+                                            <template lwc:elseif={field.isDate}>
+                                                <lightning-input type="date" value={field.defaultValue}
+                                                    data-field={field.fieldName} label={field.fieldLabel}
+                                                    onchange={handleFieldEditSupplierCreditNote} required>
+                                                </lightning-input>
+                                            </template>
+                                            <template lwc:elseif={field.isNumberField}>
+                                                <lightning-input type="number" value={field.defaultValue}
+                                                    data-field={field.fieldName} label={field.fieldLabel}
+                                                    onchange={handleFieldEditSupplierCreditNote} required>
+                                                </lightning-input>
+                                            </template>
+                                            <template lwc:elseif={field.isReference}>
+                                                <template if:true={field.isContract}>
+                                                    <c-neg-optim-custom-lookup
+                                                        object-name={API_NAMES.Contract__c.objectApiName}
+                                                        search-fields="['Name']" icon-name="standard:account"
+                                                        is-multi="false" selected-event="contractselected"
+                                                        label={field.fieldLabel} is-required="true"
+                                                        filter-token={supplierCreditNoteMng.contractLookupFiltrBySupplier}
+                                                        oncontractselected={handleFieldEditSupplierCreditNote}>
+                                                    </c-neg-optim-custom-lookup>
+                                                </template>
+                                                <template if:false={field.isContract}>
+                                                    <lightning-input type="text" value={field.defaultValue}
+                                                        data-field={field.fieldName} label={field.fieldLabel}
+                                                        onchange={handleFieldEditSupplierCreditNote} required>
+                                                    </lightning-input>
+                                                </template>
+                                            </template>
+                                            <template lwc:else>
+                                                <lightning-input type="text" value={field.defaultValue}
+                                                    data-field={field.fieldName} label={field.fieldLabel}
+                                                    onchange={handleFieldEditSupplierCreditNote} required>
+                                                </lightning-input>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="slds-m-top_medium">
+                                <p class="slds-text-body_small slds-text-color_weak">
+                                    {createSupplierCreditNotePopup.ENDMsg}
+                                </p>
+                                <p class="slds-text-body_small slds-text-color_weak">
+                                    {createSupplierCreditNotePopup.AllocateMsg}
+                                </p>
+                            </div>
+                            <div>
+                                <template if:true={supplierCreditNoteMng.showValidationError}>
+                                    <p class="slds-text-body_small slds-text-color_error">
+                                        * {Labels.MSG_Fill_Required_Fields}
+                                    </p>
+                                </template>
+                            </div>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning-button-group>
+                                <lightning-button data-action="cancel" label={createSupplierCreditNotePopup.cancelBtn}
+                                    onclick={submitCreditNotePopUp}></lightning-button>
+                                <template if:true={createSupplierCreditNotePopup.isBack}>
+                                    <lightning-button data-action="back" label={createSupplierCreditNotePopup.backBtn}
+                                        onclick={submitCreditNotePopUp}></lightning-button>
+                                </template>
+                                <lightning-button data-action="save" variant="brand"
+                                    label={createSupplierCreditNotePopup.saveBtn}
+                                    onclick={submitCreditNotePopUp}></lightning-button>
+                                <lightning-button data-action="saveAndNew" variant="brand"
+                                    label={createSupplierCreditNotePopup.saveAndNewBtn}
+                                    onclick={submitCreditNotePopUp}></lightning-button>
+                                <lightning-button data-action="saveAndAllocate" variant="brand"
+                                    label={createSupplierCreditNotePopup.saveAndAllocateBtn}
+                                    onclick={submitCreditNotePopUp} disabled></lightning-button>
+                            </lightning-button-group>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+            <template if:true={supplierCreditNoteMng.showSupplierSelectionPopup}>
+                <section tabindex="-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <h2 class="slds-modal__title">{Labels.LBL_CreateSCNAction_PageTitle1}</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium overflow-visible">
+                            <!-- Negoptim Lookup -->
+                            <div class="slds-p-around_medium">
+                                <c-neg-optim-custom-lookup object-name={API_NAMES.Supplier__c.objectApiName}
+                                    field-name={API_NAMES.Supplier__c.Name} search-fields="['Name']"
+                                    icon-name="standard:account" is-multi="false" selected-event="supplierselected"
+                                    filter-token={supplierCreditNoteMng.supplierLookupFilterCondition}
+                                    label={supplierLabel} onsupplierselected={handleSelectedSupplierForNewCreditNote}>
+                                </c-neg-optim-custom-lookup>
+                            </div>
+                        </div>
+                        <footer class="slds-modal__footer slds-text-align_right">
+                            <lightning-button-group>
+                                <lightning-button label={Labels.LBL_MassAction_CancelButton}
+                                    onclick={closeSupplierSelectionSCN}>
+                                </lightning-button>
+                                <lightning-button variant="brand" label={Labels.LBL_MassAction_NextButton}
+                                    title={Labels.LBL_MassAction_NextButton}
+                                    onclick={handleSelectSupplierForNewCreditNote}
+                                    disabled={isNextDisabled}></lightning-button>
+                            </lightning-button-group>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+            <template lwc:if={hasInvoices}>
+                <template if:true={popup.visibility}>
+                    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                        class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <!-- <lightning-button-icon icon-name="utility:close" alternative-text="Cancel and close" size="large"
+                        style="background: white; width: fit-content; margin-bottom: 5px; border-radius: 4px;"
+                        class="dc-modal-close-button-icon" variant="bare" onclick={submitPopUp} data-id="cancel"
+                        ></lightning-button-icon> -->
+                            <div class="slds-modal__header">
+                                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate" tabindex="-1">
+                                    {popup.title}</h1>
+                            </div>
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <p>{popup.body}</p>
+                            </div>
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2"
+                                lwc:if={popup.subBody}>
+                                <p>{popup.subBody}</p>
+                            </div>
+                            <div class="slds-modal__footer">
+                                <button data-id="cancel" class="slds-button slds-button_neutral"
+                                    aria-label="Cancel and close" onclick={submitPopUp}
+                                    lwc:if={popup.cancelBtn}>{popup.cancelBtn}</button>
+                                <button data-id="confirm" class={popup.submitBtnClass}
+                                    onclick={submitPopUp}>{popup.submitBtn}</button>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+                </template>
+                <!-- MassPaymentDefault Popup -->
+                <template if:true={massPaymentDefaultPopup.visibility}>
+                    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                        class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <!-- <lightning-button-icon icon-name="utility:close" alternative-text="Cancel and close" size="large"
+                        style="background: white; width: fit-content; margin-bottom: 5px; border-radius: 4px;"
+                        class="dc-modal-close-button-icon" variant="bare" onclick={submitPopUp} data-id="cancel"
+                        ></lightning-button-icon> -->
+                            <div class="slds-modal__header">
+                                <h1 class="slds-modal__title slds-hyphenate" tabindex="-1">
+                                    {massPaymentDefaultPopup.title}</h1>
+                            </div>
+                            <div class="slds-modal__content slds-p-around_medium">
+                                <p>{massPaymentDefaultPopup.body}</p>
+                            </div>
+                            <div class="slds-modal__content slds-p-around_medium"
+                                if:true={massPaymentDefaultPopup.subBody}>
+                                <p>{massPaymentDefaultPopup.subBody}</p>
+                            </div>
+                            <template for:each={paymentFields} for:item="field" if:true={paymentFields.length}>
+                                <div key={field} style={field.style}>
+                                    <div style="width: 90%;">
+                                        <template lwc:if={field.isPicklist}>
+                                            <lightning-combobox options={field.pickListValues} label={field.fieldLabel}
+                                                required value={field.defaultValue} data-field={field.fieldName}
+                                                onchange={handleMassPaymentDefaultPopup}
+                                                onhandlechangemultipicklistvalues={handleChangePickList}>
+                                            </lightning-combobox>
+
+                                        </template>
+                                        <template lwc:elseif={field.isDate}>
+                                            <lightning-input value={field.defaultValue} type="date"
+                                                label={field.fieldLabel} data-field={field.fieldName}
+                                                onchange={handleMassPaymentDefaultPopup} required></lightning-input>
+                                        </template>
+                                        <template lwc:elseif={field.isNumberField}>
+                                            <lightning-input type='number' label={field.fieldLabel}
+                                                data-field={field.fieldName} value={field.defaultValue}
+                                                onchange={handleMassPaymentDefaultPopup} required>
+                                            </lightning-input>
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+                            <div class="slds-modal__footer">
+                                <button data-id="cancel" class="slds-button slds-button_neutral"
+                                    aria-label="Cancel and close" onclick={submitPopUp}
+                                    if:true={massPaymentDefaultPopup.cancelBtn}>{massPaymentDefaultPopup.cancelBtn}</button>
+                                <button data-id="confirm" class={massPaymentDefaultPopup.submitBtnClass}
+                                    disabled={submitDisabled}
+                                    onclick={submitPopUp}>{massPaymentDefaultPopup.submitBtn}</button>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+                </template>
+
+                <div class="slds-scrollable pageBody scrollBody" onscroll={handleScroll}>
+                    <table
+                        class="slds-table slds-border_left slds-border_right slds-table_bordered slds-table_col-bordered sessionTable">
+                        <thead style="position: sticky; top: 0; z-index: 12;">
+                            <tr>
+                                <th style="background-color: #0d807d;color: #FFFFFF;" if:false={selected} class="main-header">
+                                    <lightning-input type="checkbox" variant="label-hidden" checked={allSelected}
+                                        onchange={handleSelectAll}>
+                                    </lightning-input>
+                                </th>
+                                <template for:each={fields} for:item="field">
+                                    <th style={field.headerStyle.style} key={field.fieldName}>
+                                        <div class="slds-grid">
+                                            <div class="slds-align_absolute-center slds-col_bump-right">
+                                                {field.fieldLabel}
+                                            </div>
+                                            <!-- <template if:true={field.isSearchable}> -->
+                                            <div class="slds-hide slds-dropdown slds-p-around_x-small"
+                                                data-filter-field={field.fieldName}
+                                                style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;top: 100%; z-index:6; position: absolute;min-width: 150px;">
+                                                <span style="position: absolute;right: 0;top: 0; z-index: 7;">
+                                                    <lightning-button-icon variant="container" size="small"
+                                                        icon-name="utility:close" data-field={field.fieldName}
+                                                        onclick={toggleFilterPanel} alternative-text={Labels.LBL_Close}
+                                                        title={Labels.LBL_Close}>
+                                                    </lightning-button-icon>
+                                                </span>
+                                                <ul class="slds-dropdown__list" role="menu" aria-label="Show More">
+                                                    <li class="slds-dropdown__item" role="presentation"
+                                                        style="text-align: left;">
+                                                        <template lwc:if={field.isTextSearch}>
+                                                            <lightning-input name="filter" type="text"
+                                                                class="slds-p-top_medium" variant="label-hidden"
+                                                                value={field.fieldSearchValue}
+                                                                data-field={field.fieldName} data-type="text"
+                                                                onchange={handleChangeFilter}
+                                                                placeholder={Labels.LBL_InputSearch}>
+                                                            </lightning-input>
+                                                        </template>
+                                                        <template lwc:if={field._isNumber}>
+                                                            <lightning-input name="filter" type="number"
+                                                                class="slds-p-top_medium" variant="label-hidden"
+                                                                value={field.fieldSearchValue1} data-number="1"
+                                                                data-field={field.fieldName} data-type="number"
+                                                                onchange={handleChangeFilter}
+                                                                placeholder={Labels.LBL_From}>
+                                                            </lightning-input>
+                                                            <lightning-input name="filter" type="number"
+                                                                value={field.fieldSearchValue2} data-number="2"
+                                                                data-field={field.fieldName} data-type="number"
+                                                                onchange={handleChangeFilter}
+                                                                placeholder={Labels.LBL_InvoiceTO}>
+                                                            </lightning-input>
+                                                        </template>
+                                                        <template lwc:if={field.isDate}>
+                                                            <lightning-input name="filter" type="date"
+                                                                class="slds-p-top_medium" variant="label-hidden"
+                                                                value={field.fieldSearchValue1} data-number="1"
+                                                                data-field={field.fieldName} data-type="date"
+                                                                onchange={handleChangeFilter}
+                                                                placeholder={Labels.LBL_From}>
+                                                            </lightning-input>
+                                                            <lightning-input name="filter" type="date"
+                                                                value={field.fieldSearchValue2} data-number="2"
+                                                                data-field={field.fieldName} data-type="date"
+                                                                onchange={handleChangeFilter}
+                                                                placeholder={Labels.LBL_InvoiceTO}>
+                                                            </lightning-input>
+                                                        </template>
+                                                        <template lwc:if={field.isDateTime}>
+                                                            <lightning-input name="filter" type="date"
+                                                                class="slds-p-top_medium" variant="label-hidden"
+                                                                value={field.fieldSearchValue1} data-number="1"
+                                                                data-field={field.fieldName} data-type="datetime"
+                                                                onchange={handleChangeFilter}
+                                                                placeholder={Labels.LBL_From}>
+                                                            </lightning-input>
+                                                            <lightning-input name="filter" type="date"
+                                                                value={field.fieldSearchValue2} data-number="2"
+                                                                data-field={field.fieldName} data-type="datetime"
+                                                                onchange={handleChangeFilter}
+                                                                placeholder={Labels.LBL_InvoiceTO}>
+                                                            </lightning-input>
+                                                        </template>
+                                                        <template lwc:if={field.isPicklist}>
+                                                            <lightning-checkbox-group name="Checkbox Group"
+                                                                class="slds-p-top_medium " variant="label-hidden"
+                                                                options={field.picklistOptions}
+                                                                data-field={field.fieldName}
+                                                                value={field.selectedValues}
+                                                                onchange={handlePicklistChange}>
+                                                            </lightning-checkbox-group>
+                                                        </template>
+                                                    </li>
+                                                    <li class="slds-has-divider_top-space" role="separator"></li>
+                                                    <div style="width: 100%;">
+                                                        <button type="submit" title={Labels.LBL_Apply}
+                                                            onclick={handleApplyFilters}
+                                                            class="slds-button slds-button_brand" style="width:60%">
+                                                            {Labels.LBL_Apply}
+                                                        </button>
+                                                        <button type="submit" title={Labels.LBL_Apply}
+                                                            onclick={handleResetFiltter} data-field={field.fieldName}
+                                                            class="slds-button slds-button_brand" style="width:40%">
+                                                            {Labels.LBL_Reset}
+                                                        </button>
+                                                    </div>
+                                                </ul>
+                                            </div>
+                                            <template if:false={selected}>
+                                                <template lwc:if={field.isFiltered}>
+                                                    <lightning-button-icon style="margin-left: 6px" variant="brand"
+                                                        size="x-small" icon-name="utility:filterList"
+                                                        data-field={field.fieldName} onclick={toggleFilterPanel}
+                                                        alternative-text={Labels.LBL_Filter} title={Labels.LBL_Filter}>
+                                                    </lightning-button-icon>
+                                                </template>
+                                                <template lwc:else>
+                                                    <lightning-button-icon style="margin-left: 6px"
+                                                        variant="border-filled" size="x-small"
+                                                        icon-name="utility:filterList" data-field={field.fieldName}
+                                                        onclick={toggleFilterPanel} alternative-text={Labels.LBL_Filter}
+                                                        title={Labels.LBL_Filter}>
+                                                    </lightning-button-icon>
+                                                </template>
+                                            </template>
+                                            <!-- </template> -->
+                                        </div>
+                                    </th>
+                                </template>
+                                <th style="color: #FFFFFF;" if:true={selected}></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={invoicesList} for:item="invWrp">
+                                <tr key={invWrp.invoice.Id}>
+                                    <td if:false={selected}>
+                                        <div class="slds-grid">
+                                            <lightning-input type="checkbox" variant="label-hidden"
+                                                checked={invWrp.isSelected} onchange={handleToggleCheckbox}
+                                                data-id={invWrp.invoice.Id}>
+                                            </lightning-input>
+                                            <button lwc:if={singleViewDetails}
+                                                class="slds-button slds-button_icon slds-button_icon-bare slds-p-top_xxx-small"
+                                                onclick={invWrp.openRelated} title={Labels.LBL_OpenRelated}>
+                                                <svg class="slds-button__icon svg1" aria-hidden="true">
+                                                    <use
+                                                        xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#summarydetail">
+                                                    </use>
+                                                </svg>
+                                            </button>
+                                            <template lwc:if={singleDownloadPrintedPdf}>
+                                                <button
+                                                    class="slds-button slds-button_icon slds-button_icon-bare slds-p-top_xxx-small"
+                                                    onclick={invWrp.openFile} if:true={invWrp.hasLink}
+                                                    title={Labels.LBL_Download}>
+                                                    <svg class="slds-button__icon svg2" aria-hidden="true">
+                                                        <use
+                                                            xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#download">
+                                                        </use>
+                                                    </svg>
+                                                </button>
+                                            </template>
+                                            <!-- commented and replaced by Marwa  -->
+                                            <!-- <button
+                                            class="slds-button slds-button_icon slds-button_icon-bare slds-p-top_xxx-small"
+                                            onclick={invWrp.previewFile} if:true={invWrp.hasLink}
+                                            title={Labels.LBL_Preview}>
+                                            <svg class="slds-button__icon svg3" aria-hidden="true">
+                                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#preview">
+                                                </use>
+                                            </svg>
+                                        </button> -->
+                                            <button
+                                                class="slds-button slds-button_icon slds-button_icon-bare slds-p-top_xxx-small"
+                                                onclick={invWrp.previewFile} title={Labels.LBL_Preview}
+                                                lwc:if={singlePreviewPdf}>
+                                                <svg class="slds-button__icon svg3" aria-hidden="true">
+                                                    <use
+                                                        xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#preview">
+                                                    </use>
+                                                </svg>
+                                            </button>
+                                            <!-- <lightning-button-icon icon-name="utility:summarydetail" variant="bare"
+                                            onclick={invWrp.openRelated}>
+                                        </lightning-button-icon> -->
+                                            <!-- <lightning-button-icon icon-name="utility:download" variant="bare"
+                                            onclick={invWrp.openFile} if:true={invWrp.hasLink}>
+                                        </lightning-button-icon> -->
+                                            <!-- <lightning-button-icon icon-name="utility:preview" variant="bare"
+                                            onclick={invWrp.previewFile} if:true={invWrp.hasLink}>
+                                        </lightning-button-icon> -->
+                                        </div>
+                                    </td>
+                                    <template for:each={invWrp.fields} for:item="field">
+                                        <td key={field.fieldName} class={field.class} style={field.style}>
+                                            <template if:true={field.isReference}>
+                                                <a href={field.url} target="_blank">{field.value}</a>
+                                            </template>
+                                            <template if:true={field.isText}>
+                                                {field.value}
+                                            </template>
+                                            <template if:true={field.isPicklist}>
+                                                {field.value}
+                                            </template>
+                                            <lightning-formatted-number minimum-fraction-digits={field.scale}
+                                                maximum-fraction-digits={field.scale} value={field.value}
+                                                if:true={field.isNumber}>
+                                            </lightning-formatted-number>
+                                            <lightning-formatted-number minimum-fraction-digits={field.scale}
+                                                maximum-fraction-digits={field.scale} value={field.value}
+                                                if:true={field.isCurrency}
+                                                currency-code={invWrp.invoice.CurrencyIsoCode} format-style="currency"
+                                                currency-display-as="code">
+                                            </lightning-formatted-number>
+                                            <lightning-formatted-date-time value={field.value} if:true={field._isDate}
+                                                year="numeric" month="2-digit" day="2-digit">
+                                            </lightning-formatted-date-time>
+                                            <template if:true={field.isBoolean}>
+                                                <lightning-input type="checkbox" disabled checked={field.value}
+                                                    if:true={field.value}>
+                                                </lightning-input>
+                                                <lightning-input type="checkbox" disabled if:false={field.value}>
+                                                </lightning-input>
+                                            </template>
+                                        </td>
+                                    </template>
+                                    <td class="slds-text-align--right" if:true={selected}>
+                                        <lightning-button-icon icon-name="utility:delete" onclick={handleDeleteRow}
+                                            data-id={invWrp.invoice.Id} title="Delete"></lightning-button-icon>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </template>
+            <template lwc:else>
+                <div class="slds-align_absolute-center slds-m-around_medium slds-text-title_bold pageBody">
+                    <template if:true={isLoading}>
+                        {Labels.LBL_Loading}
+                    </template>
+                    <template if:false={isLoading}>
+                        {Labels.LBL_No_Item_To_Display}
+                    </template>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BusinessUnitCountryOrigin__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Country of the Business Unit (List / Store / DC / Web)</description>
+    <inlineHelpText>Country of the Business Unit (List / Store / DC / Web)</inlineHelpText>
+    <label>Business UnitCountry origin</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>1 OR (2 AND 3) OR (4 AND 5)</booleanFilter>
+        <errorMessage>BusinessUnitCountryOrigin__c - Value does not exist or does not match filter criteria.</errorMessage>
+        <filterItems>
+            <field>BusinessUnit__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>BU Country</value>
+        </filterItems>
+        <filterItems>
+            <field>BusinessUnit__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>BU Banner</value>
+        </filterItems>
+        <filterItems>
+            <field>$Source.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Assortment Cluster, Assortment Cluster List, Store, Warehouse, Web</value>
+        </filterItems>
+        <filterItems>
+            <field>BusinessUnit__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Region</value>
+        </filterItems>
+        <filterItems>
+            <field>$Source.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Store, Warehouse</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>BusinessUnit__c</referenceTo>
+    <relationshipLabel>Business Units (Business UnitCountry origin)</relationshipLabel>
+    <relationshipName>BUBusinessUnitCountryOrigin</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

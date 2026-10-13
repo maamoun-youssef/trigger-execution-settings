@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- If TRUE, will be monitored and considered in the conso batch. (Trigger make it to TRUE following contract / contract discount update) --></help>
+    <label>Conso est requise</label>
+    <name>Is_Conso_Requiered__c</name>
+</CustomFieldTranslation>

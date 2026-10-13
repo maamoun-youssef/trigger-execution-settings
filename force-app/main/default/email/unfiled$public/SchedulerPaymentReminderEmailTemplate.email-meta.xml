@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Modèle d&apos;e-mail pour rappeler aux clients de payer leur rendez-vous de service.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Planificateur de paiement : e-mail de rappel de paiement du rendez-vous de servi</name>
+    <style>none</style>
+    <subject>Effectuer votre paiement</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

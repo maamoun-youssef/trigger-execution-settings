@@ -1,0 +1,91 @@
+<apex:component controller="AdvancedLookupCtrl">
+    <apex:attribute name="sObjectName" type="String" required="false" description="Sobject name"/>
+    <apex:attribute name="value" type="LookupValue" required="true" description="Lookup field" assignTo="{!valueAttr}"/>
+    <apex:attribute name="searchFields" type="String" required="true" description="Result fields"/>
+    <apex:attribute name="whereClause" type="String" required="false" description=""/>
+    <apex:attribute name="formFields" type="String" required="true" description="New record fields"/>
+    <apex:attribute name="canCreate" type="Boolean" required="true" description="Controls if user can create new records" default="true"/>
+    <apex:attribute name="fieldLabel" type="String" required="false" description="Field used to display record value" default="Name"/>
+    <apex:attribute name="tabIndexLookup" type="Integer" required="false" description="tab index value" default="1"/>
+    <apex:attribute name="multiSelect" type="Boolean" required="true" description="Multi Select Lookup"/>
+    <apex:attribute name="onchange" type="String" required="false" description="Javascript function name"/>
+    <apex:attribute name="onkeypress" type="String" required="false" description="Javascript function name"/>
+	<style>
+		.first-column {
+			text-align: right;
+		}
+		.second-column {
+			text-align: left;
+		}
+		.lookupIcon {
+			cursor: pointer;
+		}
+	</style>
+    <span class="lookupInput">
+        <apex:outputPanel layout="none">
+            <apex:inputText id="lookup_record_name" value="{!valueAttr.label}" onkeypress="return {!ComponentId}onkeypress(event);" onkeydown="{!ComponentId}removeId(this);" tabIndex="{!tabIndexLookup}" />
+            <a onclick="{!ComponentId}openCustomPopup();">
+                <img src="/s.gif" class="lookupIcon" onblur="this.className = 'lookupIcon';" onfocus="this.className = 'lookupIconOn';" onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" />
+            </a>
+        </apex:outputPanel>
+        <apex:inputHidden id="lookup_hidden" value="{!valueAttr.value}" />
+    </span>
+
+	<script type="text/javascript">
+		function {!ComponentId}popupCenter(url, title, w, h) {
+		    var top = (screen.height/2)-(h/2);
+		    return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+		    var left = (screen.width/2)-(w/2);
+		}
+		
+		function {!ComponentId}openCustomPopup(){
+			var recordName = document.getElementById('{!$Component.lookup_record_name}').value;
+            var recordId = document.getElementById('{!$Component.lookup_hidden}').value;
+			var where = '{!whereClause}';
+			var url = '/apex/LookupPopup?sObjectName={!sObjectName}&searchFields={!searchFields}&formFields={!formFields}&componentId={!ComponentId}&canCreate={!canCreate}&fieldLabel={!fieldLabel}&multiSelect={!multiSelect}';
+
+			if (where != null && where != '') {
+				url +=  '&where=' + where;				
+			}
+            if (recordName != null && recordName != '') {
+                url += '&searchTerm=' + recordName;
+            }
+            if (recordId != null && recordId != '') {
+                url += '&selectedIds=' + recordId;
+            }
+			{!ComponentId}popupCenter(url ,'Custom Lookup', 800, 500);
+		}
+
+		window.{!ComponentId}setValue = function (name, id){
+            var hiddenField = document.getElementById('{!$Component.lookup_hidden}');
+            var recordName = document.getElementById('{!$Component.lookup_record_name}');
+            hiddenField.value = id;
+            var lookupname = name.toString();
+            // remove first and last character (/) from name
+            var firstChar = lookupname.charAt(0);
+            var lastChar = lookupname.charAt(lookupname.length - 1);
+            if(firstChar == "/" && lastChar == "/") {
+                lookupname = lookupname.substr(1).slice(0, -1);
+            }
+            recordName.value = lookupname;
+            
+            if ('{!onchange}'){
+                {!onchange}(lookupname, id);
+            }
+		}
+        
+        function {!ComponentId}removeId(e) {
+            var hiddenField = document.getElementById('{!$Component.lookup_hidden}');
+            hiddenField.value = null;
+        };
+
+        function {!ComponentId}onkeypress(e) {
+            if (e.keyCode == 13) {
+                if ('{!onkeypress}'){
+                    {!onkeypress}(e);
+                }
+                return false;
+            }
+        };
+	</script>
+</apex:component>

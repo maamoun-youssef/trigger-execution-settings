@@ -1,0 +1,10 @@
+.child-image {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.sprite-box {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}

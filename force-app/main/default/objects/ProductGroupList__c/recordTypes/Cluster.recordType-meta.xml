@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cluster</fullName>
+    <active>true</active>
+    <label>Cluster (deprecated)</label>
+    <picklistValues>
+        <picklist>ClusterType__c</picklist>
+        <values>
+            <fullName>Cluster1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cluster2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cluster3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OtherCluster</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Close</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In preparation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Open</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

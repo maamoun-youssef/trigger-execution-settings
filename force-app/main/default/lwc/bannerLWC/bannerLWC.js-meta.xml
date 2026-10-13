@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="titleFieldApiName" type="String" label="Title Field API Name" default="Name" description="Field displayed as the main title" />
+            <property name="detailFieldsApiNames" type="String" label="Detail Fields API Names" description="Optional comma-separated fields under title (example: Status__c,Name,Date__c)" />
+            <property name="selectedActionApiNames" type="String" label="Selected Action API Names" description="Optional comma-separated action api names. If empty, all record actions are shown." />
+            <property name="iconName" type="String" label="SLDS Icon Name" default="standard:record" description="Example: standard:account, standard:opportunity" />
+            <property name="showObjectActions" type="Boolean" label="Show Object Actions Menu" default="true" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

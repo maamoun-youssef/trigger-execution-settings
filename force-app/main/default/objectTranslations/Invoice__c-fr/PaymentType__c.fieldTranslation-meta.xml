@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Type de règlement</label>
+    <name>PaymentType__c</name>
+    <picklistValues>
+        <masterLabel>BankingTransfer</masterLabel>
+        <translation><!-- BankingTransfer --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Cheque</masterLabel>
+        <translation><!-- Cheque --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>DebtRephasing</masterLabel>
+        <translation><!-- DebtRephasing --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>DebtRepurchasing</masterLabel>
+        <translation><!-- DebtRepurchasing --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Deduction</masterLabel>
+        <translation><!-- Deduction --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Effect</masterLabel>
+        <translation><!-- Effect --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Gain</masterLabel>
+        <translation><!-- Gain --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Lettering</masterLabel>
+        <translation><!-- Lettering --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Loss</masterLabel>
+        <translation><!-- Loss --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Other</masterLabel>
+        <translation><!-- Other --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>PaymentCancellation</masterLabel>
+        <translation><!-- PaymentCancellation --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

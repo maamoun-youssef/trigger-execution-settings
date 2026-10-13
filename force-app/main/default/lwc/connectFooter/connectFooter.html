@@ -1,0 +1,102 @@
+<template>
+    <div class='' style={CursorIcon}>
+        <div class="cw pv50 c" style="background:#3D3D3D;overflow:hidden;padding:0">
+            <div class="ov la ta" style="bottom:-12px">
+                <div class="con " style={imageUrlHeartIcon}></div>
+            </div>
+            <div class="flexi-portal g_nm">
+                <div class="fs0" style="margin:-10px">
+                    <div class="g_nm fs14 w30  l vt p20 m_w100 md_w20">
+                        <div>
+                            <div class="con vm w100 g_nm " style={imageUrlFooter}></div>
+                            <div class="mt10 fs12 b">
+                                {formattedCopyrightText}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="g_nm fs14 w70  vt l p20 m_w100 md_w80">
+                        <div>
+                            <tbl>
+                                <cl class="w33 vt pr40 m_ph0 ">
+                                    <div class="ov la m_h" style="width:1px;height:100%;background:rgb(242,243,244,.3)">
+                                    </div>
+                                    <div class="b fs16 upper">
+                                        <div class="g_nm vm">
+                                            <div
+                                                style="background:#0CB4BB;width:15px;height:15px;clip-path: polygon(0 0, 100% 0, 100% 30%, 100% 100%, 73% 100%, 62% 100%, 61% 38%, 0 39%);">
+                                            </div>
+                                        </div>
+                                        <div class="g_nm vm pl5">
+                                            {label.LBL_My_Data}
+                                        </div>
+                                    </div>
+                                    <div class="mt10 fs12 lh20">
+                                        <div class="pointer">
+                                            <a href={urls.URL_Cookie_Policy} target="_blank"
+                                                style="color:#cfd0d2">{label.LBL_Cookie_Policy}</a>
+                                        </div>
+                                        <div class="pointer">
+                                            <a href={urls.URL_Confidentiality_Notice} target="_blank"
+                                                style="color:#cfd0d2">{label.LBL_Confidentiality_Notice}</a>
+                                        </div>
+                                    </div>
+                                </cl>
+                                <cl class="w33 vt ph40 m_ph0 m_mt20">
+                                    <div class="ov la m_h" style="width:1px;height:100%;background:rgb(242,243,244,.3)">
+                                    </div>
+                                    <div class="b fs16 upper">
+                                        <div class="g_nm vm">
+                                            <div
+                                                style="background:#0CB4BB;width:15px;height:15px;clip-path: polygon(0 0, 100% 0, 100% 30%, 100% 100%, 73% 100%, 62% 100%, 61% 38%, 0 39%);">
+                                            </div>
+                                        </div>
+                                        <div class="g_nm vm pl5">
+                                            {label.LBL_Useful_Links}
+                                        </div>
+                                    </div>
+                                    <div class="mt10 fs12 lh20" style="color:#cfd0d2">
+                                        <div class="pointer">
+                                            <a href={urls.URL_Ulit} target="_self"
+                                                style="color:#cfd0d2">{label.LBL_ULiT}</a>
+                                        </div>
+                                        <div class="pointer">
+                                            <a href={urls.URL_Technicall_Prerequisites} target="_blank"
+                                                style="color:#cfd0d2">{label.LBL_Technicall_Prerequisites}</a>
+                                        </div>
+                                        <div class="pointer">
+                                            <a href={urls.URL_T_And_C} target="_blank"
+                                                style="color:#cfd0d2">{label.LBL_T_And_C}</a>
+                                        </div>
+                                    </div>
+                                </cl>
+                                <cl class="w33 vt ph40 m_ph0 m_mt20">
+                                    <div class="b fs16 upper">
+                                        <div class="g_nm vm">
+                                            <div
+                                                style="background:#0CB4BB;width:15px;height:15px;clip-path: polygon(0 0, 100% 0, 100% 30%, 100% 100%, 73% 100%, 62% 100%, 61% 38%, 0 39%);">
+                                            </div>
+                                        </div>
+                                        <div class="g_nm vm pl5">
+                                            {label.LBL_Contacts}
+                                        </div>
+                                    </div>
+                                    <div class="mt10 fs12" style="color:#cfd0d2">
+                                        <a href={urls.URL_LinkedIn}>
+                                            <div class="con vm w100 g_nm " style={imageUrlLinkedLink}></div>
+                                        </a>
+                                        <a href={urls.URL_Ulit_Team}>
+                                            <div class="con vm w100 g_nm " style={imageUrlHeartLink}></div>
+                                        </a>
+                                        <a href={urls.URL_appexchange}>
+                                            <div class="con vm w100 g_nm " style={imageUrlSalesForceIcon}></div>
+                                        </a>
+                                    </div>
+                                </cl>
+                            </tbl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

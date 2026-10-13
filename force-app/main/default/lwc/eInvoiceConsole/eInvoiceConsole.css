@@ -1,0 +1,66 @@
+.tab-body {
+    padding: 1rem;
+}
+
+.panel {
+    background: var(--lwc-colorBackgroundAlt, #f3f2f2);
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin: 0.5rem;
+    box-shadow: var(--lwc-shadowDropMedium, 0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.panel-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.panel-header.space-between {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.panel-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.panel-content {
+    min-height: 4rem;
+}
+
+.button-group lightning-button+lightning-button {
+    margin-left: 0.5rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+.ubl-textarea {
+    grid-column: 1 / -1;
+    --sds-c-textarea-sizing-min-height: 240px;
+    --sds-c-textarea-font-family: monospace;
+}
+
+.empty-state {
+    text-align: center;
+    color: var(--lwc-colorTextWeak, #3e3e3c);
+    padding: 2rem;
+}
+
+.panel-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.panel.narrow {
+    max-width: 680px;
+    margin: 0 auto;
+}

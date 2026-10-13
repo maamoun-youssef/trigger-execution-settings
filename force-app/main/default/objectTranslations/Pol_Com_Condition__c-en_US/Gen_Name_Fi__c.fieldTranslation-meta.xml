@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Specify the Generic financial name --></help>
+    <label>Generic Financial Name</label>
+    <name>Gen_Name_Fi__c</name>
+</CustomFieldTranslation>

@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "TEST ContentAssetVSStaticResource",
+  "contentBody" : {
+    "activeViewId" : "TEST_ContentAssetVSStaticResource",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-test-contentassetvsstaticresource",
+    "urlPrefix" : "test-contentassetvsstaticresource"
+  },
+  "urlName" : "test-contentassetvsstaticresource"
+}

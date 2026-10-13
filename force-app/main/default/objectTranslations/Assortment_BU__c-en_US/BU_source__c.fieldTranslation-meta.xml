@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>
+        <!-- For ex.
+Budget = Corporate BU country  /
+Target = Managing channel  = HMSM + DRIVE, PROXI, WEB , CASH &amp; CARRY.  /  
+
+Saisir &apos;..&apos; pour accéder à l&apos;ensemble des BU possibles pour le type de DV choisi. -->
+    </help>
+    <label><!-- BU Source --></label>
+    <name>BU_source__c</name>
+    <relationshipLabel><!-- Assortment BU (BU Source) --></relationshipLabel>
+</CustomFieldTranslation>

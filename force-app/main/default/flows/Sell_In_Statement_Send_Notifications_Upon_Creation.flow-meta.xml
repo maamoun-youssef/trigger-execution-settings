@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Period_Type_Label</name>
+        <label>Period Type Label</label>
+        <locationX>638</locationX>
+        <locationY>1032</locationY>
+        <actionName>NegoptimLabelsInvocable</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Is_User_FR</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>label</name>
+            <value>
+                <elementReference>PeriodTypeFormula</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>language</name>
+            <value>
+                <elementReference>Loop_Connect_Users.LanguageLocaleKey</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>NegoptimLabelsInvocable</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Custom_Notification</name>
+        <label>Send Custom Notification</label>
+        <locationX>638</locationX>
+        <locationY>1656</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <connector>
+            <targetReference>Reset_Recipient_IDs</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>Get_Custom_Notification_Type.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>RecipientIDs</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <elementReference>PushNotificationSubject_Formula</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>PushUpNotificationBody_Formula</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetPageRef</name>
+            <value>
+                <elementReference>CustomNotificationRedirection</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>customNotificationAction</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Request_Email_EN</name>
+        <label>Send Request Email EN</label>
+        <locationX>770</locationX>
+        <locationY>1248</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Set_Recipient_IDs</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>Loop_Connect_Users.Email</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderType</name>
+            <value>
+                <stringValue>DefaultWorkflowUser</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>RequestedEmailNotificationSubject_Formula</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>RequestedEmailNotificationBodyEN</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Request_Email_FR</name>
+        <label>Send Request Email FR</label>
+        <locationX>506</locationX>
+        <locationY>1248</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Set_Recipient_IDs</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>Loop_Connect_Users.Email</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderType</name>
+            <value>
+                <stringValue>DefaultWorkflowUser</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>RequestedEmailNotificationSubject_Formula</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>RequestedEmailNotificationBodyFR</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Request_To_Complete_Task</name>
+        <label>Send Request To Complete Task</label>
+        <locationX>638</locationX>
+        <locationY>1548</locationY>
+        <actionName>NewTask</actionName>
+        <actionType>quickAction</actionType>
+        <connector>
+            <targetReference>Send_Custom_Notification</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>contextId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>Subject</name>
+            <value>
+                <elementReference>TaskSubject_Formula</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>ActivityDate</name>
+            <value>
+                <elementReference>TaskDueDate_Formula</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>WhatId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>OwnerId</name>
+            <value>
+                <elementReference>Loop_Connect_Users.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>Status</name>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>NewTask</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <apiVersion>62.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Reset_Recipient_IDs</name>
+        <label>Reset Recipient IDs</label>
+        <locationX>638</locationX>
+        <locationY>1764</locationY>
+        <assignmentItems>
+            <assignToReference>RecipientIDs</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Connect_Users</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Recipient_IDs</name>
+        <label>Set Recipient IDs</label>
+        <locationX>638</locationX>
+        <locationY>1440</locationY>
+        <assignmentItems>
+            <assignToReference>RecipientIDs</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Connect_Users.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Send_Request_To_Complete_Task</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Are_Connect_Users_Found</name>
+        <label>Are Connect Users Found?</label>
+        <locationX>550</locationX>
+        <locationY>384</locationY>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Connect_Users_exist</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_All_Related_Connect_Users</leftValueReference>
+                <operator>IsEmpty</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Custom_URL</targetReference>
+            </connector>
+            <label>Yes Connect Users exist</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_User_FR</name>
+        <label>Is User FR?</label>
+        <locationX>638</locationX>
+        <locationY>1140</locationY>
+        <defaultConnector>
+            <targetReference>Send_Request_Email_EN</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_User_is_FR</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Loop_Connect_Users.LanguageLocaleKey</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>fr</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Request_Email_FR</targetReference>
+            </connector>
+            <label>Yes User is FR</label>
+        </rules>
+    </decisions>
+    <description>W-008224: Dev Request - SellIn Statement - Close opened task when sell-in statement is validated</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>Client_Logo_Formula</name>
+        <dataType>String</dataType>
+        <expression>LEFT(
+  {!$Api.Partner_Server_URL_630},
+  FIND(&quot;/services&quot;, {!$Api.Partner_Server_URL_630}) - 1
+) &amp; &quot;/servlet/servlet.ImageServer?id=&quot; &amp; {!Get_Client_Logo.Id}  &amp; &quot;&amp;oid=&quot; &amp; {!$Organization.Id}</expression>
+    </formulas>
+    <formulas>
+        <name>DynamicSellInStatementListURL</name>
+        <dataType>String</dataType>
+        <expression>&quot;/sellin-statement-matrix?c__negoScopeId=&quot;&amp;{!$Record.NegoScope__c} &amp;&quot;&amp;c__referenceYear=&quot;&amp;Text({!$Record.ReferenceYear__c}) &amp;&quot;&amp;c__periodType=&quot;&amp;text({!$Record.PeriodType__c}) &amp;&quot;&amp;c__periodNumber=&quot;&amp;text({!$Record.PeriodNumber__c})</expression>
+    </formulas>
+    <formulas>
+        <name>Email_Logo_Formula</name>
+        <dataType>String</dataType>
+        <expression>LEFT(
+  {!$Api.Partner_Server_URL_630},
+  FIND(&quot;/services&quot;, {!$Api.Partner_Server_URL_630}) - 1
+) &amp; &quot;/servlet/servlet.ImageServer?id=&quot; &amp; {!Get_Ulit_Logo.Id}  &amp; &quot;&amp;oid=&quot; &amp; {!$Organization.Id}</expression>
+    </formulas>
+    <formulas>
+        <name>FullSellInStatementURL</name>
+        <dataType>String</dataType>
+        <expression>{!Get_Custom_URL.Domain.Domain}&amp;{!Get_Custom_URL.PathPrefix}&amp;{!DynamicSellInStatementListURL}</expression>
+    </formulas>
+    <formulas>
+        <name>LongNameFormula</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.NegoScope__r.Name}
++ &quot; - &quot;
++   TEXT({!$Record.ReferenceYear__c})
++ &quot; - &quot; +
+IF(
+    TEXT({!Loop_Connect_Users.LanguageLocaleKey}) = &quot;fr&quot;,
+    CASE(
+        TEXT({!$Record.PeriodType__c}),
+        &quot;Month&quot;, &quot;Mensuelle&quot;,
+        &quot;Trimester&quot;, &quot;Trimestrielle&quot;,
+        &quot;Semester&quot;, &quot;Semestrielle&quot;,
+        &quot;Annual&quot;, &quot;Annuelle&quot;,
+        &quot;&quot;
+    ),
+    TEXT({!$Record.PeriodType__c})
+) 
++ &apos; - &apos; +
+CASE(
+    TEXT({!$Record.PeriodType__c}),
+    &quot;Month&quot;, {!Period_Type_Label.value},
+    &quot;Trimester&quot;, {!Period_Type_Label.value} + &quot; &quot; + TEXT( {!$Record.PeriodNumber__c} ),
+    &quot;Semester&quot;, {!Period_Type_Label.value} + &quot; &quot; + TEXT( {!$Record.PeriodNumber__c} ),
+    &quot;Annual&quot;, TEXT( {!$Record.PeriodNumber__c} ),
+     &quot;&quot;
+)
++ &quot; - (&quot; + TEXT( {!$Record.Version__c} ) + &quot;)&quot;</expression>
+    </formulas>
+    <formulas>
+        <name>PeriodTypeFormula</name>
+        <dataType>String</dataType>
+        <expression>CASE(
+    TEXT( {!$Record.PeriodType__c} ),
+    &quot;Month&quot;,
+    CASE(
+        TEXT( {!$Record.PeriodNumber__c} ),
+        &quot;1&quot;, &quot;LBL_January&quot;,
+        &quot;2&quot;, &quot;LBL_February&quot;,
+        &quot;3&quot;, &quot;LBL_March&quot;,
+        &quot;4&quot;, &quot;LBL_April&quot;,
+        &quot;5&quot;, &quot;LBL_May&quot;,
+        &quot;6&quot;, &quot;LBL_June&quot;,
+        &quot;7&quot;, &quot;LBL_July&quot;,
+        &quot;8&quot;, &quot;LBL_August&quot;,
+        &quot;9&quot;, &quot;LBL_September&quot;,
+        &quot;10&quot;, &quot;LBL_October&quot;,
+        &quot;11&quot;, &quot;LBL_November&quot;,
+        &quot;12&quot;, &quot;LBL_December&quot;,
+        &quot;&quot;
+    ),
+    &quot;Trimester&quot;, &quot;LBL_Trimester&quot;,
+    &quot;Semester&quot;, &quot;LBL_Semester&quot;,
+    &quot;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>PushNotificationSubject_Formula</name>
+        <dataType>String</dataType>
+        <expression>IF(TEXT({!Loop_Connect_Users.LanguageLocaleKey})=&quot;fr&quot;,&quot;Nouvelle déclaration de CA à remplir&quot;,&quot;New Sell-In Revenue Statement to complete&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>PushUpNotificationBody_Formula</name>
+        <dataType>String</dataType>
+        <expression>IF(TEXT({!Loop_Connect_Users.LanguageLocaleKey})=&quot;fr&quot;,&quot;Vous avez reçu une nouvelle déclaration de CA à remplir: &quot;&amp;{!$Record.Name}&amp;&quot;. Cliquez ici pour y accéder.&quot;,&quot;You have received a new Sell-In Revenue Statement to complete: &quot;&amp;{!$Record.Name}&amp;&quot;. Click here to access it.&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>RequestedEmailNotificationBody_Formula</name>
+        <dataType>String</dataType>
+        <expression>IF(TEXT({!Loop_Connect_Users.LanguageLocaleKey})=&apos;fr&apos;,{!RequestedEmailNotificationBodyFR},{!RequestedEmailNotificationBodyEN})</expression>
+    </formulas>
+    <formulas>
+        <name>RequestedEmailNotificationSubject_Formula</name>
+        <dataType>String</dataType>
+        <expression>IF(TEXT({!Loop_Connect_Users.LanguageLocaleKey})=&apos;fr&apos;,&quot;Connect - Nouvelle déclaration de CA à remplir&quot;,&quot;Connect - New Sell-In Revenue Statement to complete&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>TaskDescription_Formula</name>
+        <dataType>String</dataType>
+        <expression>IF(TEXT({!Loop_Connect_Users.LanguageLocaleKey})=&apos;fr&apos;,&quot;Action Requise - Merci de remplir votre nouvelle déclaration de CA &quot;&amp;{!$Record.Name},&quot;Required Action - Please be sure to complete the new sell-in revenue statement &quot;&amp;{!$Record.Name})</expression>
+    </formulas>
+    <formulas>
+        <name>TaskDueDate_Formula</name>
+        <dataType>Date</dataType>
+        <expression>{!$Flow.CurrentDate}+2</expression>
+    </formulas>
+    <formulas>
+        <name>TaskSubject_Formula</name>
+        <dataType>String</dataType>
+        <expression>IF(TEXT({!Loop_Connect_Users.LanguageLocaleKey})=&apos;fr&apos;,&quot;Envoyer la déclaration de CA: &quot;&amp;{!$Record.Name},&quot;Submit Sell-In Statement: &quot;&amp;{!$Record.Name})</expression>
+    </formulas>
+    <interviewLabel>Sell-In Statement - Send Notifications Upon Creation {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
+    <label>Sell-In Statement - Send Notifications Upon Creation</label>
+    <loops>
+        <name>Loop_Connect_Users</name>
+        <label>Loop Connect Users</label>
+        <locationX>418</locationX>
+        <locationY>924</locationY>
+        <collectionReference>Get_All_Related_Connect_Users</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Period_Type_Label</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_All_Related_Connect_Users</name>
+        <label>Get All Related Connect Users</label>
+        <locationX>550</locationX>
+        <locationY>276</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Are_Connect_Users_Found</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>UserType</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Standard</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>AccountId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.NegoScope__r.Supplier__r.Account__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>IsActive</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>User</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Client_Logo</name>
+        <label>Get Client Logo</label>
+        <locationX>418</locationX>
+        <locationY>816</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Connect_Users</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Client_Logo</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Document</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Custom_Notification_Type</name>
+        <label>Get Custom Notification Type</label>
+        <locationX>418</locationX>
+        <locationY>600</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Ulit_Logo</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Desktop</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CustomNotificationType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Custom_URL</name>
+        <label>Get Custom URL</label>
+        <locationX>418</locationX>
+        <locationY>492</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Custom_Notification_Type</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>PathPrefix</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>/NegoptimConnect</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>DomainSite</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Ulit_Logo</name>
+        <label>Get Ulit Logo</label>
+        <locationX>418</locationX>
+        <locationY>708</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Client_Logo</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>negOptim_by_ULiT_Logo</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Document</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <object>SellInStatement__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <scheduledPaths>
+            <connector>
+                <targetReference>Get_All_Related_Connect_Users</targetReference>
+            </connector>
+            <pathType>AsyncAfterCommit</pathType>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>CustomNotificationRedirection</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>{   
+
+  &quot;type&quot;: &quot;standard__webPage&quot;,
+
+  &quot;attributes&quot;: {
+
+    &quot;url&quot;: &quot;{!DynamicSellInStatementListURL}&quot;
+
+  }
+
+}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>RequestedEmailNotificationBodyEN</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;img src=&quot;{!Client_Logo_Formula}&quot; alt=&quot;Logo&quot; style=&quot;display: block; margin-top: 10px; width: 200px;&quot; &gt;&lt;strong&gt;Hello {!Loop_Connect_Users.FirstName} &lt;/strong&gt;&lt;strong style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!Loop_Connect_Users.LastName},&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;ℹ️ &lt;/strong&gt;A new Sell-In Revenue statement&lt;strong&gt; &lt;/strong&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!LongNameFormula} has been sent to you by &lt;/span&gt;&lt;strong&gt;{!$Record.NegoScope__r.Owner:User.FirstName} &lt;/strong&gt;&lt;strong style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!$Record.NegoScope__r.Owner:User.LastName}.&lt;/strong&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt; We invite you to complete it from the Connect portal. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;u&gt;➡️ How to proceed?&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;ol&gt;&lt;li&gt;Log in on the Connect Platform: &lt;a href=&quot;{!FullSellInStatementURL}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;click here&lt;/a&gt;&lt;/li&gt;&lt;li&gt;From the statement list, click on the pencil icon next to the statement to complete&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Thank you for your collaboration,&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 18px; color: rgb(128, 107, 191); background-color: rgb(255, 255, 255);&quot;&gt;The Connect team&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;{!Email_Logo_Formula}&quot; alt=&quot;Logo&quot; style=&quot;display: block; margin-top: 10px; width: 200px;&quot; &gt;&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>RequestedEmailNotificationBodyFR</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;img src=&quot;{!Client_Logo_Formula}&quot; alt=&quot;Logo&quot; style=&quot;display: block; margin-top: 10px; width: 200px;&quot; &gt;&lt;strong&gt;Bonjour {!Loop_Connect_Users.FirstName} &lt;/strong&gt;&lt;strong style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;{!Loop_Connect_Users.LastName},&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;ℹ️ Une nouvelle déclaration de CA &lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!LongNameFormula}&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt; vous a été envoyée par &lt;/span&gt;&lt;strong&gt;{!$Record.NegoScope__r.Owner:User.FirstName} &lt;/strong&gt;&lt;strong style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;{!$Record.NegoScope__r.Owner:User.LastName}.&lt;/strong&gt;&lt;span style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt; Nous vous invitons à vous connecter sur le portail Connect afin de procéder à son remplissage. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;u&gt;➡️ Que faire ?&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;ol&gt;&lt;li&gt;Connectez-vous à la plateforme Connect: &lt;a href=&quot;{!FullSellInStatementURL}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;cliquer ici&lt;/a&gt;&lt;/li&gt;&lt;li&gt;Depuis la liste des déclarations, cliquez sur le crayon en face de la déclaration à remplir pour accéder à la matrice&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Merci pour votre collaboration.&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;background-color: rgb(255, 255, 255); color: rgb(128, 107, 191); font-size: 18px;&quot;&gt;L&apos;équipe Connect&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;{!Email_Logo_Formula}&quot; alt=&quot;Logo&quot; style=&quot;display: block; margin-top: 10px; width: 200px;&quot; &gt;&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>SSDTableENRejected</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;html lang=&quot;fr&quot;&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;head&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;meta charset=&quot;UTF-8&quot;&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;title&amp;gt;Tableau Business Unit&amp;lt;/title&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;style&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;table {&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;width: 70%;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;border-collapse: collapse;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;margin: 20px 0;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;th, td {&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;border: 1px solid black;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;padding: 8px;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;th {&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;background-color: #FE5065;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;color: white;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;th, td:nth-child(-n+3) {&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;text-align: left;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;td:nth-child(n+4) {&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;text-align: right;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;/style&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;/head&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;body&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;table&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;tr&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Period Type&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Period Number&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Business Unit&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Regular Discountable Sell-In - Period&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Promo Discountable Sell-In - Period&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Regular Discountable Sell-In - Forecast&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Promo Discountable Sell-In - Forecast&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;/tr&amp;gt;&lt;/p&gt;&lt;p&gt;		{!SSDRowListRejected}&lt;/p&gt;&lt;p&gt;		&amp;lt;/table&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;/html&amp;gt;&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>SSDTableENValidated</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;html lang=&quot;fr&quot;&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;head&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;meta charset=&quot;UTF-8&quot;&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;title&amp;gt;Tableau Business Unit&amp;lt;/title&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;style&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;table {&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;width: 70%;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;border-collapse: collapse;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;margin: 20px 0;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;th, td {&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;border: 1px solid black;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;padding: 8px;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;th {&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;background-color: #8cc58a;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;color: white;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;th, td:nth-child(-n+3) {&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;text-align: left;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;td:nth-child(n+4) {&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;text-align: right;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;/style&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;/head&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;body&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;table&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;tr&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Period Type&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Period Number&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Business Unit&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Regular Discountable Sell-In - Period&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Promo Discountable Sell-In - Period&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Regular Discountable Sell-In - Forecast&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Promo Discountable Sell-In - Forecast&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;/tr&amp;gt;&lt;/p&gt;&lt;p&gt;		{!SSDRowListValidated}&lt;/p&gt;&lt;p&gt;		&amp;lt;/table&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;/html&amp;gt;&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>SSDTableFRRejected</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;html lang=&quot;fr&quot;&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;head&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;meta charset=&quot;UTF-8&quot;&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;title&amp;gt;Tableau Business Unit&amp;lt;/title&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;style&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;table {&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;width: 70%;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;border-collapse: collapse;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;margin: 20px 0;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;th, td {&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;border: 1px solid black;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;padding: 8px;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;th {&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;background-color: #FE5065;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;color: white;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;th, td:nth-child(-n+3) {&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;text-align: left;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;td:nth-child(n+4) {&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;text-align: right;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;/style&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;/head&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;body&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;table&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;tr&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Type de période&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Numéro de période&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;Business Unit&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;CA Régulier - Période&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;CA Promo - Période&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;CA Régulier - Prév&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;th&amp;gt;CA Promo - Prév&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;/tr&amp;gt;&lt;/p&gt;&lt;p&gt;		{!SSDRowListRejected}&lt;/p&gt;&lt;p&gt;		&amp;lt;/table&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;/html&amp;gt;&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>SSDTableFRValidated</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Tableau Business Unit&lt;/title&gt;
+    &lt;style&gt;
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        th {
+            background-color: #8cc58a;
+            color: white;
+        }
+        th, td:nth-child(-n+3) {
+            text-align: left;
+        }
+        td:nth-child(n+4) {
+            text-align: right;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;table&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Type de période&lt;/th&gt;
+            &lt;th&gt;Numéro de période&lt;/th&gt;
+            &lt;th&gt;Business Unit&lt;/th&gt;
+            &lt;th&gt;CA Régulier - Période&lt;/th&gt;
+            &lt;th&gt;CA Promo - Période&lt;/th&gt;
+            &lt;th&gt;CA Régulier - Prév&lt;/th&gt;
+            &lt;th&gt;CA Promo - Prév&lt;/th&gt;
+        &lt;/tr&gt;
+		{!SSDRowListValidated}
+		&lt;/table&gt;
+&lt;/html&gt;</text>
+    </textTemplates>
+    <variables>
+        <name>RecipientIDs</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>SSDRowListRejected</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>SSDRowListValidated</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

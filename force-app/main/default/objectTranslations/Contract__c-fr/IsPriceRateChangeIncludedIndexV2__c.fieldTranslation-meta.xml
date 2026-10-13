@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Is Price Rate Change Included in INDX V2 --></label>
+    <name>IsPriceRateChangeIncludedIndexV2__c</name>
+</CustomFieldTranslation>

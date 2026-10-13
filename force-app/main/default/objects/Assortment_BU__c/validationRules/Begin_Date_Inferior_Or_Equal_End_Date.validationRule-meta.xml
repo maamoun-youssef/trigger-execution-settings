@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Begin_Date_Inferior_Or_Equal_End_Date</fullName>
+    <active>true</active>
+    <description>Validation to restrict error on entering dates, begin date should be inferior or equal the end date of the assortment.</description>
+    <errorConditionFormula>Ass_EDate__c &lt;  Ass_BDate__c</errorConditionFormula>
+    <errorDisplayField>Ass_EDate__c</errorDisplayField>
+    <errorMessage>The End Date should be superior or equal to the Begin Date.</errorMessage>
+</ValidationRule>

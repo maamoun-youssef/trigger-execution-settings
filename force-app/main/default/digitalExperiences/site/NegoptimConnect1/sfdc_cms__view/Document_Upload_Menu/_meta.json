@@ -1,0 +1,5 @@
+{
+  "apiName" : "Document_Upload_Menu",
+  "type" : "sfdc_cms__view",
+  "path" : "views"
+}

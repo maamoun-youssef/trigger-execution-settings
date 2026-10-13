@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Status --></label>
+    <name>Status__c</name>
+    <picklistValues>
+        <masterLabel>Assigned</masterLabel>
+        <translation><!-- Assigned --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Awaiting Quality</masterLabel>
+        <translation><!-- Awaiting Quality --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Cancelled</masterLabel>
+        <translation><!-- Cancelled --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Closed</masterLabel>
+        <translation><!-- Closed --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Closed - Duplicate</masterLabel>
+        <translation><!-- Closed - Duplicate --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Customer Feedback Received</masterLabel>
+        <translation><!-- Customer Feedback Received --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Internal Feedback Received</masterLabel>
+        <translation><!-- Internal Feedback Received --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Open</masterLabel>
+        <translation><!-- Open --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Overdue</masterLabel>
+        <translation><!-- Overdue --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>QA Requested</masterLabel>
+        <translation><!-- QA Requested --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>QA Submitted</masterLabel>
+        <translation><!-- QA Submitted --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Rejected</masterLabel>
+        <translation><!-- Rejected --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Requested</masterLabel>
+        <translation><!-- Requested --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Submitted</masterLabel>
+        <translation><!-- Submitted --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Validated</masterLabel>
+        <translation><!-- Validated --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

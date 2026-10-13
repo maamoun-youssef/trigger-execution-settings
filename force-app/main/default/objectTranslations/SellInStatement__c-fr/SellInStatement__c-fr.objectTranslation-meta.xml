@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Déclaration de CA</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Déclarations de CA</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>negOptim Sell In Statement Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Déclaration de CA</nameFieldLabel>
+    <recordTypes>
+        <description>Le fournisseur déclare le CA obtenu sur une période spécifique. Par exemple, si le type de période est &quot;Mois&quot; et que le numéro de période est 3, le fournisseur déclare le CA généré au mois de Mars.</description>
+        <label>Déclaration Périodique</label>
+        <name>SSPeriod</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Le fournisseur déclare le CA total obtenu entre le début de l&apos;année et la période spécifiée. Par exemple, si le type de période est &quot;Mois&quot; et que le numéro de période est 3, le fournisseur déclare le CA généré entre Janvier et Mars.</description>
+        <label>Déclaration YTD</label>
+        <name>SSYTD</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

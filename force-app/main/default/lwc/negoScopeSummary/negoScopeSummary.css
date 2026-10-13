@@ -1,0 +1,53 @@
+.title-box {
+    color: #58585A !important;
+}
+.mainContainer {
+    padding: 8px;
+}
+
+.element-box {
+    background-color: #61BCA5 !important;
+    border: #C9C9C9 solid 1px !important;
+    color: white !important;
+    align-content: center;
+    border-radius: var(--slds-c-button-radius-border, var(--sds-c-button-radius-border, .25rem)) !important;
+}
+.alignmentClass {
+    text-align: center;
+}
+.element-box a {
+    color: white !important;
+}
+.font-medium {
+    font-size:16px;
+}
+.font-small {
+    font-size:13px;
+}
+.he-box { 
+    width:180px;
+    min-width:180px;
+    max-width:180px;
+    height:75px;
+    min-height:75px;
+    max-height:75px;
+}
+.brand-box { 
+    width:180px;
+    min-width:180px;
+    max-width:180px;
+    height:35px;
+    min-height:35px;
+    max-height:35px;
+}
+.product-box { 
+    width: 400px;
+    min-width: 400px;
+    max-width: 400px;
+    height: 75px;
+    min-height: 75px;
+    max-height: 75px;
+}
+.bold-text {
+    font-weight: bold;
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Banking Transfert</masterLabel>
+        <translation>Virement bancaire</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Cheque</masterLabel>
+        <translation>Chèque</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Debt Rephasing(Créance mobilisée)</masterLabel>
+        <translation>Créance mobilisée</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Debt Repurchasing (Créance rachetée)</masterLabel>
+        <translation>Créance rachetée</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Deduction</masterLabel>
+        <translation>Déduction</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Divers</masterLabel>
+        <translation>Divers</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Effect</masterLabel>
+        <translation>Effet</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

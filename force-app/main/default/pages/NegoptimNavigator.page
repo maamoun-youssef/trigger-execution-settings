@@ -1,0 +1,39 @@
+<apex:page docType="html-5.0" applyHtmlTag="false" applyBodyTag="false" showHeader="false" lightningStylesheets="true" sidebar="false">
+    <html class="slds-scope">
+
+    <head>
+        <apex:slds />
+    </head>
+
+    <body class="slds-brand-band slds-brand-band_large" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+            <span class="slds-assistive-text">Loading</span>
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+        </div>
+        <script>
+            let compDefinition = {
+                componentDef: '',
+                state: {},
+                attributes: {},
+            };
+            for (const entry of new URLSearchParams(window.location.search).entries()) {
+                if (entry[0].startsWith('c__')) {
+                    compDefinition.state[entry[0]] = entry[1];
+                }
+                if (entry[0].startsWith('a__')) {
+                    compDefinition.attributes[entry[0].replace(/^a__/gi, '')] = entry[1];
+                }
+            }
+            if (compDefinition.state.c__componentName.includes(':')) {
+                compDefinition.componentDef = compDefinition.state.c__componentName;
+            } else {
+                compDefinition.componentDef = 'c:' + compDefinition.state.c__componentName;
+            }
+            // Base64 encode the compDefinition JS object
+            window.open('/one/one.app#' + btoa(JSON.stringify(compDefinition)), "_self");
+        </script>
+    </body>
+
+    </html>
+</apex:page>

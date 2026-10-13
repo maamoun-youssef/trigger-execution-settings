@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Sellin Collaborative Restitution",
+  "contentBody" : {
+    "activeViewId" : "Sellin_Collaborative_Restitution",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-sellin-collaborative-restitution",
+    "urlPrefix" : "sellin-collaborative-restitution"
+  },
+  "urlName" : "sellin-collaborative-restitution"
+}

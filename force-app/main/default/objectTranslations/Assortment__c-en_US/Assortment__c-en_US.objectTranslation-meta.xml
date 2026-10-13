@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Assortment</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Assortments</value>
+    </caseValues>
+    <layouts>
+        <layout>Assortment Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+    <quickActions>
+        <label><!-- Update Linked Assortments --></label>
+        <name>UpdateLinkedAssortments</name>
+    </quickActions>
+    <recordTypes>
+        <label>Channel Budget</label>
+        <name>ChannelBudget</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Negociation</label>
+        <name>Negotiation</name>
+    </recordTypes>
+    <recordTypes>
+        <label>On Top Conso</label>
+        <name>OnTopConso</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Simulation</label>
+        <name>Simulation</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Target</label>
+        <name>Target</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Target Conso</label>
+        <name>TargetConso</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- No update of the year can be performed after the assortment creation. --></errorMessage>
+        <name>No_year_update</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- ERROR --></errorMessage>
+        <name>TEST_ERROR</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The Year should be between the Begin Date Year and the End Date Year. --></errorMessage>
+        <name>Year_Between_BDate_Year_EDate_Year</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- PGClientCategoryToASD --></label>
+        <name>PGClientCategoryToASD</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- ProductToASD --></label>
+        <name>ProductToASD</name>
+    </webLinks>
+</CustomObjectTranslation>

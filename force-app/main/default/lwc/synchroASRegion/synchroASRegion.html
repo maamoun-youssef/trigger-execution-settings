@@ -1,0 +1,110 @@
+<template>
+    <div class="slds-card slds-grid">
+        <div class="main-panel slds-col slds-scrollable">
+            <template if:true={loading}>
+                <div class="slds-spinner_container">
+                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </template>
+            <div class="slds-box">
+                <lightning-formatted-rich-text
+                    value={labels.MSG_Synchro_AS_region_Intro_Label}></lightning-formatted-rich-text>
+
+            </div>
+            <div class="slds-scrollable">
+                <table
+                    class="firstTable slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border_right slds-no-row-hover">
+                    <thead>
+                        <tr style="height: 40px;">
+                            <th style="top: 0px; position: sticky; z-index: 2;width:30px;">
+                            </th>
+                            <th style="top: 0px; position: sticky; z-index: 2;">{labels.LBL_BU_Name}
+                            </th>
+                            <th style="top: 0px; position: sticky; z-index: 2;">{labels.LBL_Respect_AS_Region_position}
+                            </th>
+                            <th style="top: 0px; position: sticky; z-index: 2;">{labels.LBL_AS_region_already_exist}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template if:false={loading}>
+                            <template if:false={records.length}>
+                                <tr>
+                                    <td colspan="4">
+                                        <h2
+                                            class="slds-align_absolute-center slds-text-align_center slds-m-around_xx-large slds-card__header-title slds-align-content-center">
+                                            {labels.LBL_No_BU_Region_Found}
+                                        </h2>
+                                    </td>
+                                </tr>
+                            </template>
+                            <template if:true={records.length}>
+                                <template for:each={records} for:item="record" for:index="index">
+                                    <tr key={record.buName}>
+                                        <td style="text-align:center;width:30px;padding:0;">
+                                            <lightning-input type="checkbox" variant="label-hidden" class="input-center"
+                                                data-rowindex={index} data-field="isChecked"
+                                                onchange={handleSelectionBU} checked={record.isChecked}>
+                                            </lightning-input>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <a href={record.linkBU} target="_blank">
+                                                {record.buName}</a>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <lightning-input type="checkbox" variant="label-hidden" class="input-center"
+                                                data-rowindex={index} data-field="isRespectAsRegion"
+                                                onchange={handleSelectionBU} checked={record.isRespectAsRegion}>
+                                            </lightning-input>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <a href={record.linkAssortment} target="_blank" if:true={record.assortment}>
+                                                {assortment.Name}</a>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </template>
+                        </template>
+                    </tbody>
+                    <tfoot if:true={records.length}>
+                        <tr>
+                            <td colspan="4"
+                                style="position:sticky;bottom:0;background-color:white;border-top: 1px solid;text-align: right;">
+                                <lightning-button variant="brand-outline" label={labels.LBL_Confirm}
+                                    onclick={togglePopup} class="slds-m-left_small">
+                                </lightning-button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <template if:true={confirmationPopup}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open slds-modal_large">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-button-icon variant="bare-inverse" size="large" icon-name="utility:close"
+                            onclick={togglePopup}></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__content"
+                        style="overflow: unset !important;overflow-y: unset !important; position:relative; min-height:20vh">
+                        <div class="slds-scrollable" style="height: 100%;">
+                            {labels.MSG_Synchro_AS_Region_Confirmation_Msg}
+                        </div>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" onclick={togglePopup}>{labels.LBL_No}</button>
+                        <button class="slds-button slds-button_brand" onclick={executeSynchro}>{labels.LBL_Yes}</button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+    </div>
+</template>

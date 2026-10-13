@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Statut</label>
+    <name>ActivationStatus__c</name>
+    <picklistValues>
+        <masterLabel>Deactivated</masterLabel>
+        <translation>Désactivé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>In Preparation</masterLabel>
+        <translation>En préparation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Inactive Entry</masterLabel>
+        <translation>Entrée inactive</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Requested Creation</masterLabel>
+        <translation>Création demandée</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Requested Deactivation</masterLabel>
+        <translation>Désactivation demandée</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Requested Modification</masterLabel>
+        <translation>Modification demandée</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Requested Reactivation</masterLabel>
+        <translation>Réactivation demandée</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Validated Entry</masterLabel>
+        <translation>Entrée validée</translation>
+    </picklistValues>
+</CustomFieldTranslation>

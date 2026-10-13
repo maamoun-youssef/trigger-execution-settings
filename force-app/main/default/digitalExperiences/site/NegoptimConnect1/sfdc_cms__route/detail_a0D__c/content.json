@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Accord Détails",
+  "contentBody" : {
+    "activeViewId" : "detail_a0D",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "detail-Contract__c",
+    "urlPrefix" : "contract"
+  },
+  "urlName" : "accord-détails"
+}

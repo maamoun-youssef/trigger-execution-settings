@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Value of percent amount to transfer - - &gt; Null = Total % amount (Value_per__c) of the row --></help>
+    <label>Target To Move (%)</label>
+    <name>TargetToMove_per__c</name>
+</CustomFieldTranslation>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PostNego_Simulation</fullName>
+    <active>true</active>
+    <label>PostNego Simulation</label>
+    <picklistValues>
+        <picklist>Contract_Type__c</picklist>
+        <values>
+            <fullName>Contract</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Simulation</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Target</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>D_N__c</picklist>
+        <values>
+            <fullName>D</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>N</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Offer__c</picklist>
+        <values>
+            <fullName>My Offer</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Their Offer</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Secure_Multiyear__c</picklist>
+        <values>
+            <fullName>1 year</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>2 years</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3 years</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Balanced</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Confirmed by supplier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deleted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Document Printed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In preparation</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Merged</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Published</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request for approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Signed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Updated wAddendum</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Updated woAddendum</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Validated</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>t_invoicingMode__c</picklist>
+        <values>
+            <fullName>InvoiceableAutomatic</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>InvoiceableCounterparty</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>InvoiceableManual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NotInvoiceable</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

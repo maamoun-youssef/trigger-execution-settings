@@ -1,0 +1,105 @@
+<template>
+  <div class="slds-size_medium slds-panel_docked slds-panel_docked-right slds-grid slds-grid_vertical">
+    <div class="slds-panel__header filterPanelHeader">
+      <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate" title={labels.LBL_Filter}>
+        {labels.LBL_Filter}
+      </h2>
+      <lightning-button-icon variant="bare" icon-name="utility:close" onclick={toggleFilter}>
+      </lightning-button-icon>
+    </div>
+    <div class="slds-col slds-scrollable filterPanelBody">
+      <div class="slds-grid slds-wrap slds-p-around_small">
+        <div class="slds-list_vertical slds-list_vertical-space slds-size_1-of-1">
+          <lightning-combobox label={labels.LBL_Number_Of_Fixed_Columns} value={numberOfFixedColumns}
+            options={fixedColumnsOptions} onchange={handleStickycolumnChanged}>
+          </lightning-combobox>
+          <template if:true={fieldsToFilter.length} for:each={fieldsToFilter} for:item="fieldToFilter">
+            <div key={fieldToFilter.fieldName}>
+              <template if:true={fieldToFilter.userFilterable}>
+                <!--text-->
+                <lightning-input if:true={fieldToFilter.isText} name={fieldToFilter.fieldName} data-mode="one"
+                  type="text" label={fieldToFilter.fieldLabel} value={fieldToFilter.value} onchange={setSelectedValues}>
+                </lightning-input>
+                <!--lookup-->
+                <template if:true={fieldToFilter.isReference}>
+                  <lightning-input name={fieldToFilter.fieldName} data-mode="one" type="text"
+                    label={fieldToFilter.fieldLabel} value={fieldToFilter.value} onchange={setSelectedValues}>
+                  </lightning-input>
+                </template>
+                <!--ID-->
+                <lightning-input if:true={fieldToFilter.isId} name={fieldToFilter.fieldName} data-mode="multiple"
+                  type="text" label={fieldToFilter.fieldLabel} value={fieldToFilter.displayVal}
+                  field-level-help={labels.MSG_Filter_On_Id_Help_Text} onchange={setSelectedValues}>
+                </lightning-input>
+                <!--number-->
+                <div if:true={fieldToFilter.isNumber} class="slds-form-element">
+                  <legend class="slds-form-element__label slds-form-element__legend">
+                    {fieldToFilter.fieldLabel}
+                  </legend>
+                  <div class="slds-form-element__control slds-grid slds-gutters">
+                    <lightning-input variant="label-hidden" type="number" class="slds-col"
+                      name={fieldToFilter.fieldName} data-range="value1" value={fieldToFilter.value1}
+                      onchange={setSelectedRangeValue} formatter={fieldToFilter.formatter} step={fieldToFilter.step}>
+                    </lightning-input>
+                    <span class="slds-align-middle">-</span>
+                    <lightning-input variant="label-hidden" type="number" class="slds-col"
+                      name={fieldToFilter.fieldName} data-range="value2" value={fieldToFilter.value2}
+                      onchange={setSelectedRangeValue} formatter={fieldToFilter.formatter} step={fieldToFilter.step}>
+                    </lightning-input>
+                  </div>
+                </div>
+                <!--date-->
+                <div if:true={fieldToFilter.isDate} class="slds-form-element">
+                  <legend class="slds-form-element__label slds-form-element__legend">
+                    {fieldToFilter.fieldLabel}
+                  </legend>
+                  <div class="slds-form-element__control slds-grid slds-gutters">
+                    <lightning-input variant="label-hidden" type="date" class="slds-col" name={fieldToFilter.fieldName}
+                      data-range="value1" value={fieldToFilter.value1} onchange={setSelectedRangeValue}
+                      date-style="short">
+                    </lightning-input>
+                    <span class="slds-align-middle">-</span>
+                    <lightning-input variant="label-hidden" type="date" class="slds-col" name={fieldToFilter.fieldName}
+                      data-range="value2" value={fieldToFilter.value2} onchange={setSelectedRangeValue}
+                      date-style="short">
+                    </lightning-input>
+                  </div>
+                </div>
+                <!--time-->
+                <div if:true={fieldToFilter.isTime} class="slds-form-element">
+                  <legend class="slds-form-element__label slds-form-element__legend">
+                    {fieldToFilter.fieldLabel}
+                  </legend>
+                  <div class="slds-form-element__control slds-grid slds-gutters">
+                    <lightning-input variant="label-hidden" type="time" class="slds-col" name={fieldToFilter.fieldName}
+                      data-range="value1" value={fieldToFilter.value1} onchange={setSelectedRangeValue}>
+                    </lightning-input>
+                    <span class="slds-align-middle">-</span>
+                    <lightning-input variant="label-hidden" type="time" class="slds-col" name={fieldToFilter.fieldName}
+                      data-range="value2" value={fieldToFilter.value2} onchange={setSelectedRangeValue}>
+                    </lightning-input>
+                  </div>
+                </div>
+                <!--checkbox group-->
+                <lightning-checkbox-group if:true={fieldToFilter.isCheckboxGroup} data-name={fieldToFilter.fieldName}
+                  name={fieldToFilter.fieldName} label={fieldToFilter.fieldLabel} options={fieldToFilter.options}
+                  value={fieldToFilter.values} onchange={setSelectedValues}>
+                </lightning-checkbox-group>
+              </template>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+    <div class="slds-card__footer slds-grid slds-m-top_none slds-p-vertical_small filterPanelFooter">
+      <div class="slds-col">
+        <lightning-button onclick={handleReset} label={labels.LBL_Reset}>
+        </lightning-button>
+      </div>
+      <div class="slds-col">
+        <lightning-button onclick={confirmFilter} label={labels.LBL_Apply} variant="brand">
+        </lightning-button>
+      </div>
+    </div>
+  </div>
+</template>

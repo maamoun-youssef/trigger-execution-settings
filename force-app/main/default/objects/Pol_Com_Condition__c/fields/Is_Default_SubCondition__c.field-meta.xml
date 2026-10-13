@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Default_SubCondition__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Sub_Condition is selected by default when a main condition is selected for contract</description>
+    <inlineHelpText>The sub_Condition is selected by default when a main condition is selected for contract</inlineHelpText>
+    <label>Is Default SubCondition</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

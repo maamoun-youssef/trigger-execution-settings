@@ -1,0 +1,138 @@
+<template>
+    <article class="slds-card slds-theme_default mainContainer">
+        <template if:true={isLoading}>
+            <div class="slds-spinner_container">
+                <div class="loader slds-spinner_container slds-align--absolute-center">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </template>
+        <!-- Header -->
+        <div class="slds-card slds-grid slds-p-around_xx-small slds-page-header pageHeader" style="background: white">
+            <div class="slds-col slds-has-flexi-truncate">
+                <div class="slds-media slds-media_center slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small">
+                    <div>
+                        <lightning-icon class="slds-m-right--small" icon-name="standard:delegated_account"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-text-heading_small slds-text-title_bold">All available products</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-no-flex slds-grid slds-align-top slds-p-around_xx-small">
+                <lightning-button label={labels.LBL_Save} title={labels.LBL_Save}
+                    onclick={handleSave} variant="brand" class="slds-m-left_x-small"
+                    disabled={IsIdSelected}>
+                </lightning-button>
+            </div>
+        </div>
+        <template if:true={records.length}>
+            <div class="slds-scrollable_x slds-scrollable_y tableBody" style="overflow:auto">
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_fixed-layout slds-no-row-hover slds-table_col-bordered">
+                    <thead>
+                        <tr class="slds-text-title_caps stickyHeader" style="height: 40px;">
+                            <th class="slds-text-align_center" style="width: 40px;"></th>
+                            <template for:each={displayedFields} for:item="field">
+                                <th key={field.fieldName} title={field.fieldLabel} style={field.headerStyle}>
+                                    <div title={field.fieldLabel}>{field.fieldLabel}</div>
+                                </th>
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template if:true={records.length}>
+                            <template for:each={records} for:item="row">
+                                <tr key={row.Id}>
+                                    <td style={row.firstTdStyle} class="slds-text-align_center slds-p-around--none">
+                                        <lightning-input
+                                            type="checkbox"
+                                            variant="label-hidden"
+                                            data-id={row.Id}
+                                            checked={row.isSelected}
+                                            onchange={handleRowSelect}>
+                                        </lightning-input>
+                                    </td>
+                                    <template for:each={row.values} for:item="field">
+                                        <td key={field.fieldName} style={field.style}>
+                                            <lightning-formatted-number lwc:if={field.isNumberField}
+                                                maximum-fraction-digits={field.scale}
+                                                minimum-fraction-digits={field.scale} value={field.fieldValue}>
+                                            </lightning-formatted-number>
+                                            <template lwc:elseif={field.isText}>
+                                                <template lwc:if={field.isNameField}>
+                                                    <a class="slds-text-link" href={field.link} target="_blank">
+                                                        {field.fieldValue}
+                                                    </a>
+                                                </template>
+                                                <template lwc:elseif={field.isHTMLFormatted}>
+                                                    <lightning-formatted-rich-text value={field.fieldValue}>
+                                                    </lightning-formatted-rich-text>
+                                                </template>
+                                                <template lwc:else>
+                                                    {field.fieldValue}
+                                                </template>
+                                            </template>
+                                            <template lwc:elseif={field.isReference}>
+                                                <a class="slds-text-link" href={field.link} target="_blank">
+                                                    {field.fieldOutputValue}
+                                                </a>
+                                            </template>
+                                            <lightning-input lwc:elseif={field.isBoolean} type="checkbox"
+                                                variant="label-hidden" checked={field.fieldValue} disabled>
+                                            </lightning-input>
+                                            <lightning-formatted-date-time lwc:elseif={field.isDate}
+                                                value={field.fieldValue} year="numeric" month="2-digit" day="2-digit">
+                                            </lightning-formatted-date-time>
+                                            <lightning-formatted-date-time lwc:elseif={field.isDateTime}
+                                                value={field.fieldValue} year="numeric" month="2-digit" day="2-digit"
+                                                hour="2-digit" minute="2-digit">
+                                            </lightning-formatted-date-time>
+                                            <template lwc:elseif={field.isPicklist}>
+                                                {field.fieldOutputValue}
+                                            </template>
+                                            <template lwc:else>
+                                                {field.fieldValue}
+                                            </template>
+                                        </td>
+                                    </template>
+                                </tr>
+                            </template>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+        <template if:false={records.length}>
+            <tr>
+                <td colspan={tableColspan} class="slds-text-align_center slds-p-vertical_medium">
+                    {labels.LBL_No_Item_To_Display}
+                </td>
+            </tr>
+        </template>
+
+        <div if:true={hasPagination}
+            style="position: relative; height: fit-content;background: white;padding: 10px;"
+            class="slds-grid footerDiv">
+            <span style="margin-right: 10px; color: black;">
+                <lightning-combobox dropdown-alignment="auto" name="pageSelect" value={pageSize}
+                    variant="label-hidden" options={pageSizeOptions} onchange={handlePageSize}></lightning-combobox>
+            </span>
+            <span>
+                <lightning-button-group>
+                    <lightning-button label={labels.LBL_First} disabled={previousDisabled} data-type="First"
+                        onclick={handleChangePage}></lightning-button>
+                    <lightning-button label={labels.LBL_Previous} disabled={previousDisabled} data-type="Previous"
+                        onclick={handleChangePage}></lightning-button>
+                    <lightning-button label={labels.LBL_Next} disabled={nextDisabled} data-type="Next"
+                        onclick={handleChangePage}></lightning-button>
+                    <lightning-button label={labels.LBL_Last} disabled={nextDisabled} data-type="Last"
+                        onclick={handleChangePage}></lightning-button>
+                </lightning-button-group>
+                <lightning-badge label={paginationBadge}></lightning-badge>
+            </span>
+        </div>
+    </article>
+</template>

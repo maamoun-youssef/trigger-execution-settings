@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LayerBudgetDisplay__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>The BU Banner be displayed in the Assortment Budget (in the budget matrix)</description>
+    <inlineHelpText>Définit si cette BU et les valeurs de l&apos;assortiment négo doivent être affichés dans la &quot;DV Objectif Circuit&quot; ou non. Ex: je sélectionne Carrefour HM, Leclerc national mais ne sélectionne pas les différentes SCA Leclerc pour éviter une multiplication inutile du nombre de colonnes.</inlineHelpText>
+    <label>Layer Assort Budget Display</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

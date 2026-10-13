@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BusinessUnit__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Reference BU for the NS</description>
+    <label>Master Business Unit</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>BusinessUnit__c.SetNSMasterBU__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>BusinessUnit__c</referenceTo>
+    <relationshipLabel>NegoScopes (Business Unit)</relationshipLabel>
+    <relationshipName>NegoScopesBusinessUnit</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>jana</label>
+    <protected>false</protected>
+    <values>
+        <field>DisplayOrder__c</field>
+        <value xsi:type="xsd:double">2.0</value>
+    </values>
+    <values>
+        <field>IsDeleted__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>SectionColor__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>SectionIcon__c</field>
+        <value xsi:type="xsd:string">/sfc/servlet.shepherd/document/download/069QH000005wvTnYAI</value>
+    </values>
+    <values>
+        <field>SectionSubTitle__c</field>
+        <value xsi:type="xsd:string">jana</value>
+    </values>
+    <values>
+        <field>SectionTitle__c</field>
+        <value xsi:type="xsd:string">jana</value>
+    </values>
+    <values>
+        <field>ThemesSettings__c</field>
+        <value xsi:type="xsd:string">[{&quot;themeLabel&quot;:null,&quot;theme&quot;:&quot;jana&quot;,&quot;smallThemeImage&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH000005wwolYAA&quot;,&quot;relatedSection&quot;:&quot;jana&quot;,&quot;largeThemeImage&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH000005wywzYAA&quot;,&quot;isPortalDisplayed&quot;:true,&quot;isDisplayed&quot;:true,&quot;gridSettingsName&quot;:&quot;Templates_Grid&quot;}]</value>
+    </values>
+</CustomMetadata>

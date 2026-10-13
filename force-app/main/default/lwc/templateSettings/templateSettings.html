@@ -1,0 +1,187 @@
+<template>
+    <template lwc:if={isLoading}>
+        <div class="slds-spinner_container greyBg">
+            <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+        </div>
+    </template>
+    <template lwc:else>
+        <div class="slds-card mainContainer">
+            <div class="settings-header">
+                <lightning-icon icon-name='utility:settings' class="custom-icon-settings">
+                </lightning-icon>
+                <div>
+                    <p class="settings-subtitle">
+                        My
+                    </p>
+                    <h1 class="slds-page-header__title settings-header-title">
+                        Template Settings
+                    </h1>
+                </div>
+            </div>
+            <div class="slds-grid slds-grid_align-end">
+                <div class="slds-col save-button-container">
+                    <lightning-button class="slds-button slds-m-right_x-small" disabled={saveStatus} variant="brand"
+                        label={labels.LBL_Save} onclick={handleSave}>
+                    </lightning-button>
+                </div>
+            </div>
+            <lightning-tabset variant="vertical" class="tab-set-style slds-m-bottom_x-small mainHeight"
+                active-tab-value="1">
+                <template if:true={popup.visibility}>
+                    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                        class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <div class="slds-modal__header">
+                                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate" tabindex="-1">
+                                    Portal publish settings</h1>
+                            </div>
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <p>Document Classification</p>
+                            </div>
+                            <div class="slds-modal__footer">
+                                <button data-id="cancel" class="slds-button slds-button_neutral"
+                                    aria-label="Cancel and close"
+                                    onclick={handlePopupAction}>{labels.LBL_Cancel}</button>
+                                <button data-id="confirm" class="slds-button slds-button_destructive"
+                                    onclick={handlePopupAction}>{labels.LBL_Delete}</button>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+                </template>
+                <lightning-tab value="1" tabindex="-1" label={labels.Section_general_informations}
+                    class="slds-scrollable_y">
+                    <div style={mainPanelHeight}>
+                        <div>
+                            <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                                <div class="sectionTitle">
+                                    Portal publish settings
+                                </div>
+                            </div>
+                            <div class="slds-grid slds-p-bottom_xx-small">
+                                <div class="slds-col slds-has-flexi-truncate">
+                                    <div class="slds-media slds-no-space slds-grow">
+                                        <div class="label">
+                                            Document Classification
+                                        </div>
+                                    </div>
+                                </div>
+                                <lightning-button label='{labels.LBL_FileDirectoryAddSection}'
+                                    class="slds-m-around_xx-small slds-button button-mt" onclick={handleAddSection}
+                                    icon-name="utility:add" icon-position="left">
+                                </lightning-button>
+                            </div>
+                            <div class="negoptim-tablesection">
+                                <table>
+                                    <tr class="table-header">
+                                        <th class="table-th td-5"></th>
+                                        <th class="table-th">Field Set
+                                        </th>
+                                        <!-- Arrow icon -->
+                                        <td class="table-td" style="width: 30px; padding: 0;"> <lightning-icon
+                                                icon-name="utility:forward" variant="success"
+                                                size="small"></lightning-icon> </td>
+                                        <th class="table-th">
+                                            Object
+                                        </th>
+                                        <th class="table-th">
+                                            Field
+                                        </th>
+
+                                    </tr>
+                                    <tbody>
+                                        <template for:each={settingsList} for:item="setting" for:index="index">
+                                            <tr key={setting.id} style="text-align: center;">
+                                                <td class="table-td">
+                                                    <div class="slds-icon_container custom-icon-delete edit-icon">
+                                                        <lightning-icon icon-name='utility:delete' size="x-small"
+                                                            data-id="largeThemeImage" data-index={index}
+                                                            data-cell="section" onclick={deleteItem}
+                                                            class="delete-trans"> </lightning-icon>
+                                                    </div>
+                                                </td>
+                                                <!-- Field Set -->
+                                                <td class="table-td" style="padding: 0 4px;"> <lightning-combobox
+                                                        data-id="FieldSetName" value={setting.FieldSetName}
+                                                        name="FieldSetName" placeholder="Select a subtype"
+                                                        options={FieldSetOptions} data-index={index}
+                                                        onchange={handleFieldSetChange}> </lightning-combobox> </td>
+                                                <!-- Arrow icon -->
+                                                <td class="table-td" style="width: 30px; padding: 0;"> <lightning-icon
+                                                        icon-name="utility:forward" variant="success"
+                                                        size="small"></lightning-icon> </td>
+                                                <td class="table-td" style="padding: 0 4px;"> <lightning-combobox
+                                                        data-id="ObjectName" value={setting.ObjectName}
+                                                        name="ObjectName" placeholder="Select an object"
+                                                        options={ObjectOptions} data-index={index}
+                                                        onchange={handleObjectChange}> </lightning-combobox> </td>
+                                                <!-- Field -->
+                                                <td class="table-td" style="padding: 0 4px;"> <lightning-combobox
+                                                        data-id="FieldName" value={setting.FieldName}
+                                                        name="FieldName" placeholder="Select a record type"
+                                                        options={setting.fieldsArray} data-index={index}
+                                                        onchange={handleFieldChange}> </lightning-combobox> </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+
+                                    <template if:true={isPopupOpen}>
+                                        <div class="slds-modal slds-fade-in-open">
+                                            <div class="slds-modal__container" style="width: 65%; max-width: none;">
+                                                <header class="slds-modal__header">
+                                                    <button
+                                                        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                                        title="Close" onclick={closePopup}>
+                                                        <lightning-icon icon-name="utility:close"
+                                                            alternative-text="close" size="small"></lightning-icon>
+                                                        <span class="slds-assistive-text">Close</span>
+                                                    </button>
+                                                    <h2 class="slds-text-heading_small">Insert Merge Field</h2>
+                                                </header>
+                                                <div class="slds-modal__content slds-p-around_medium">
+                                                    <!-- Horizontal scroll wrapper -->
+                                                    <div class="popup-columns-wrapper"
+                                                        style="display: flex; overflow-x: auto; gap: 1rem; padding-bottom: 1rem;">
+                                                        <template for:each={popupColumns} for:item="col">
+                                                            <div key={col.index}
+                                                                style="flex: 0 0 auto; min-width: 200px;">
+                                                                <h3>{col.sObjectApiName}</h3>
+                                                                <select multiple size="8" data-index={col.index}
+                                                                    onchange={handlePopupFieldSelect}
+                                                                    class="slds-select">
+                                                                    <template for:each={col.fields} for:item="field">
+                                                                        <option key={field.value} value={field.value}>
+                                                                            {field.label}
+                                                                        </option>
+                                                                    </template>
+                                                                </select>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                                <footer class="slds-modal__footer">
+                                                    <lightning-button label="Insert"
+                                                        onclick={insertSelectedFields}></lightning-button>
+                                                    <lightning-button label="Cancel"
+                                                        onclick={closePopup}></lightning-button>
+                                                </footer>
+                                            </div>
+                                        </div>
+                                    </template>
+
+
+                                </table>
+                            </div>
+                            <div>
+
+                            </div>
+                        </div>
+                    </div>
+                </lightning-tab>
+<lightning-tab value="2" label="Template Editor" class="slds-scrollable_y">
+    <c-mini-Html-editor onsavecontent={handleEditorSave}></c-mini-Html-editor>
+</lightning-tab>
+            </lightning-tabset>
+        </div>
+    </template>
+</template>

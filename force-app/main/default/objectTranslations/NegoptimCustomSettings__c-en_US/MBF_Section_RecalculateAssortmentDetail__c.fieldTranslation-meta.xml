@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Display the section of Recalculate Assortment Detail --></help>
+    <label><!-- Section - Recalculate Assortment Detail --></label>
+    <name>MBF_Section_RecalculateAssortmentDetail__c</name>
+</CustomFieldTranslation>

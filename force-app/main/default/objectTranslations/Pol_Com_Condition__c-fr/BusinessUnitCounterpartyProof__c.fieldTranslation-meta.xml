@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Busniess Unit that will execute the counterparts --></help>
+    <label>Business Unit de la contrepartie</label>
+    <name>BusinessUnitCounterpartyProof__c</name>
+    <relationshipLabel><!-- Policy - Tariff Conditions --></relationshipLabel>
+</CustomFieldTranslation>

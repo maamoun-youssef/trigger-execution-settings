@@ -1,0 +1,62 @@
+<template>
+  <div class="main-container">
+    <div class={leftPanelClass}>
+      <lightning-card title="Static Resource">
+        <div class="slds-p-horizontal_medium slds-p-vertical_small">
+          <lightning-input type="search" label="Search Images" value={searchTerm} onchange={onSearchChange}>
+          </lightning-input>
+        </div>
+        <div class="slds-p-horizontal_medium slds-p-top_small slds-scrollable--y"
+          style="max-height: 60vh; height: 60vh;">
+          <template if:true={filteredImages.length}>
+            <div class="image-grid">
+              <template for:each={filteredImages} for:item="img">
+                <div key={img.id} class={img.cssClass} onclick={handleImageClick}>
+                  <img src={img.url} alt={img.name} class="preview-image" />
+                  <div class="image-label">{img.name}</div>
+                </div>
+              </template>
+            </div>
+          </template>
+          <template if:false={filteredImages.length}>
+            <p>No images found.</p>
+          </template>
+        </div>
+      </lightning-card>
+    </div>
+    <template if:true={selectedImage}>
+      <div class="right-panel">
+        <lightning-card title="Selected Image Code">
+          <div div class="slds-p-horizontal_medium slds-p-top_small slds-scrollable--y"
+            style="max-height: 72vh; height: 72vh;">
+            <p>Below is the selected image: <strong>{selectedImage.name}</strong></p>
+            <div class="example-preview">
+              <img src={selectedImage.url} alt={selectedImage.name} class="example-image" />
+            </div>
+            <section class="code-section">
+              <div class="section-header">
+                <h3 class="section-title">HTML Code</h3>
+                <lightning-button variant="brand-outline" label="Copy HTML" onclick={copyHtml}></lightning-button>
+              </div>
+              <lightning-formatted-rich-text class="code-block" value={dynamicHtml}></lightning-formatted-rich-text>
+            </section>
+            <section class="code-section">
+              <div class="section-header">
+                <h3 class="section-title">JavaScript Code</h3>
+                <lightning-button variant="brand-outline" label="Copy JS" onclick={copyJs}></lightning-button>
+              </div>
+              <lightning-formatted-rich-text class="code-block" value={dynamicJs}></lightning-formatted-rich-text>
+            </section>
+            <section class="code-section">
+              <div class="section-header">
+                <h3 class="section-title">CSS Code</h3>
+                <lightning-button variant="brand-outline" label="Copy CSS" onclick={copyCss}></lightning-button>
+              </div>
+              <lightning-formatted-rich-text class="code-block" value={dynamicCss}></lightning-formatted-rich-text>
+            </section>
+          </div>
+        </lightning-card>
+      </div>
+    </template>
+  </div>
+</template>

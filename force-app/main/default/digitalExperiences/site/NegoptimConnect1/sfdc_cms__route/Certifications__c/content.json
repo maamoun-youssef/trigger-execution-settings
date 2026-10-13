@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Certifications",
+  "contentBody" : {
+    "activeViewId" : "Certifications",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-certifications",
+    "urlPrefix" : "certifications"
+  },
+  "urlName" : "certifications"
+}

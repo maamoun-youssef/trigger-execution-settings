@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Import Settings Plugin</masterLabel>
+    <description>Standalone mass import component. Select an Import Settings template to render the corresponding import UI with file upload, field mapping, and batch processing.</description>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage, lightning__HomePage, lightning__RecordPage">
+            <property name="templateName" type="String" label="Import Settings Template" required="true"
+                      datasource="apex://ImportSettingsPluginDataSource" default=""
+                      description="Select the Import Settings template defined in Import Settings Manager." />
+            <property name="reminderMessage" type="String" label="Reminder Message"
+                      description="Optional reminder/instructions displayed above the file upload area. Supports a plain text value or a Salesforce Custom Label name." />
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" type="String" label="Record Id"
+                      description="Id of the current record. Bind this to a record variable in Experience Builder to enable record-page context. Should be set to {!recordId}" />
+            <property name="templateName" type="String" label="Import Settings Template" required="true"
+                      datasource="apex://ImportSettingsPluginDataSource" default="" />
+            <property name="reminderMessage" type="String" label="Reminder Message"
+                      description="Optional reminder/instructions displayed above the file upload area. Supports a plain text value or a Salesforce Custom Label name." />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

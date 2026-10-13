@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>SalesTerms</label>
+    <protected>false</protected>
+    <values>
+        <field>AddFrameworkAgreementTemplate__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>AddPurchasingTerms__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>AllowSelfSubmit__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>AnnualClosingDay__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>AnnualClosingMonth__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>AutoPublishDay__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>AutoPublishMonth__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>CreationFlow__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>DescriptionEN__c</field>
+        <value xsi:type="xsd:string">TEST</value>
+    </values>
+    <values>
+        <field>DescriptionFR__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>GenerationMode__c</field>
+        <value xsi:type="xsd:string">Manual</value>
+    </values>
+    <values>
+        <field>IsNSLevel__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>ProcessName__c</field>
+        <value xsi:type="xsd:string">SalesTerms</value>
+    </values>
+    <values>
+        <field>ReminderFlow__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ReminderRule__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>RequestedDocuments__c</field>
+        <value xsi:type="xsd:string">[{&quot;isMandatory&quot;:true,&quot;documentType&quot;:&quot;Marketing&quot;,&quot;documentSubType&quot;:&quot;Addendum&quot;,&quot;documentName&quot;:&quot;document1&quot;}]</value>
+    </values>
+    <values>
+        <field>SubmissionFlow__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ValidationFlow__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

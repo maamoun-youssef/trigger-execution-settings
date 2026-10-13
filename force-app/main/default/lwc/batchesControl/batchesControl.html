@@ -1,0 +1,469 @@
+<template>
+    <article class="slds-card slds-m-bottom_x-small mainContainer" style={mainTableInlineCss}>
+        <div class="headerDiv">
+            <header class="slds-card__header slds-grid">
+                <div class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body slds-truncate">
+                        <h2>
+                            <b>
+                                <span class="slds-text-heading_small">
+                                    <lightning-icon icon-name="utility:settings" size="small"
+                                        class="slds-p-right_small"></lightning-icon>
+                                    {Label.LBL_Batches_Control}
+                                </span>
+                            </b>
+                        </h2>
+                    </div>
+
+                </div>
+            </header>
+            <template if:true={showLoadingSpinner}>
+                <lightning-spinner variant="brand" size="large" class="slds-align_absolute-center">
+                </lightning-spinner>
+            </template>
+            <div class="slds-grid slds-p-right--medium slds-p-left--medium">
+
+                <template if:false={isMatrix}>
+                    <!-- <div
+                    class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-around_x-small"> -->
+
+                    <div class="slds-col slds-size_3-of-12 slds-p-around_x-small">
+                        <lightning-combobox name="Profiles" placeholder={Label.LBL_Profile} value={selectedProfileId}
+                            onchange={handleProfileChange} options={profileOptions} variant="label-hidden">
+                        </lightning-combobox>
+                    </div>
+                </template>
+                <template if:false={isMatrix}>
+                    <!-- <div
+                        class="slds-col slds-size_5-of-12 slds-small-size_5-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-vertical_x-small"> -->
+                    <div class="slds-col slds-size_4-of-12 slds-p-vertical_x-small">
+
+                        <lightning-input type="search" value={searchTerm} onchange={handleSearchChange}
+                            variant="label-hidden" placeholder={Label.LBL_Search}></lightning-input>
+                    </div>
+                </template>
+                <template if:true={isMatrix}>
+                    <!-- <div class="slds-col slds-size_10-of-12 slds-p-vertical_x-small slds-p-left_x-small"> -->
+                    <div class="slds-col slds-size_4-of-12 slds-p-vertical_x-small slds-p-left_x-small">
+                        <lightning-input type="search" value={searchTerm} onchange={handleSearchChange}
+                            variant="label-hidden" placeholder={Label.LBL_Search}></lightning-input>
+                    </div>
+                </template>
+                <div class="rightControlsClass">
+                    <div class="slds-p-around_small">
+                        <lightning-input type="toggle" label="Matrix View" name="input1" value={isMatrix}
+                            message-toggle-active="" message-toggle-inactive="" style="float:right;"
+                            onchange={switchToMatrix}></lightning-input>
+                    </div>
+                    <div>
+                        <div class="slds-page-header__col-actions slds-p-vertical_x-small">
+                            <div class="slds-page-header__controls">
+                                <div class="slds-page-header__control">
+                                    <ul class="slds-button-group-list">
+                                        <li>
+                                            <div class="slds-dropdown-trigger slds-dropdown-trigger_click"
+                                                onclick={toggleMenu} if:false={showMenu}>
+                                                <div class="slds-button slds-button_neutral slds-button_icon slds-p-around_x-small"
+                                                    aria-haspopup="true">
+                                                    <lightning-icon icon-name="utility:settings" size="x-small"
+                                                        class="slds-p-right_x-small"></lightning-icon>
+                                                    <lightning-icon icon-name="utility:down"
+                                                        size="x-small"></lightning-icon>
+                                                </div>
+                                            </div>
+                                            <div class="slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open"
+                                                onclick={toggleMenu} if:true={showMenu}>
+                                                <div class="slds-button slds-button_neutral slds-button_icon slds-p-around_x-small"
+                                                    aria-haspopup="true">
+                                                    <lightning-icon icon-name="utility:settings" size="x-small"
+                                                        class="slds-p-right_x-small"></lightning-icon>
+                                                    <lightning-icon icon-name="utility:down"
+                                                        size="x-small"></lightning-icon>
+                                                </div>
+                                                <div class="slds-dropdown slds-dropdown_right slds-dropdown_small">
+                                                    <ul class="slds-dropdown__list" role="menu" aria-label="Show More">
+                                                        <li class="slds-dropdown__item slds-is-selected slds-buttons"
+                                                            role="presentation" onclick={handleActivateSelected}>
+                                                            <a role="menuitem">
+                                                                <span class="slds-truncate">
+                                                                    <lightning-icon
+                                                                        icon-name="utility:multi_select_checkbox"
+                                                                        class="slds-m-right_small" size="x-small">
+                                                                    </lightning-icon>
+                                                                    {Label.LBL_Activate_All}
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="slds-dropdown__item slds-is-selected slds-buttons"
+                                                            role="presentation" onclick={handleDeactivateSelected}>
+                                                            <a role="menuitem">
+                                                                <span class="slds-truncate">
+                                                                    <lightning-icon
+                                                                        icon-name="utility:multi_select_checkbox"
+                                                                        class="slds-m-right_small" size="x-small">
+                                                                    </lightning-icon>
+                                                                    {Label.LBL_Deactivate_All}
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="slds-dropdown__item slds-is-selected slds-buttons slds-border_top"
+                                                            role="presentation" onclick={handleAllowEmailSelected}>
+                                                            <a role="menuitem">
+                                                                <span class="slds-truncate">
+                                                                    <lightning-icon icon-name="utility:email"
+                                                                        class="slds-m-right_small" size="x-small">
+                                                                    </lightning-icon>
+                                                                    {Label.LBL_Allow_Sending_Email}
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="slds-dropdown__item slds-is-selected slds-buttons"
+                                                            role="presentation" onclick={handleDisallowEmailSelected}>
+                                                            <a role="menuitem">
+                                                                <span class="slds-truncate">
+                                                                    <lightning-icon icon-name="utility:clear"
+                                                                        class="slds-m-right_small" size="x-small">
+                                                                    </lightning-icon>
+                                                                    {Label.LBL_Disallow_Sending_Email}
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="slds-dropdown__item slds-is-selected slds-buttons slds-border_top"
+                                                            role="presentation" onclick={handleAllowEmailSelectedDev}>
+                                                            <a role="menuitem">
+                                                                <span class="slds-truncate">
+                                                                    <lightning-icon icon-name="utility:email"
+                                                                        class="slds-m-right_small" size="x-small">
+                                                                    </lightning-icon>
+                                                                    {Label.LBL_Allow_Sending_Email_Technical}
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="slds-dropdown__item slds-is-selected slds-buttons"
+                                                            role="presentation"
+                                                            onclick={handleDisallowEmailSelectedDev}>
+                                                            <a role="menuitem">
+                                                                <span class="slds-truncate">
+                                                                    <lightning-icon icon-name="utility:clear"
+                                                                        class="slds-m-right_small" size="x-small">
+                                                                    </lightning-icon>
+                                                                    {Label.LBL_Disallow_Sending_Email_Technical}
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="slds-dropdown__item slds-is-selected slds-buttons slds-border_top"
+                                                            role="presentation"
+                                                            onclick={handleAllowSendingNotification}>
+                                                            <a role="menuitem">
+                                                                <span class="slds-truncate">
+                                                                    <lightning-icon icon-name="utility:email"
+                                                                        class="slds-m-right_small" size="x-small">
+                                                                    </lightning-icon>
+                                                                    {Label.LBL_Allow_Sending_Notification}
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="slds-dropdown__item slds-is-selected slds-buttons"
+                                                            role="presentation"
+                                                            onclick={handleDisallowSendingNotification}>
+                                                            <a role="menuitem">
+                                                                <span class="slds-truncate">
+                                                                    <lightning-icon icon-name="utility:clear"
+                                                                        class="slds-m-right_small" size="x-small">
+                                                                    </lightning-icon>
+                                                                    {Label.LBL_Disallow_Sending_Notification}
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="slds-dropdown__item slds-is-selected slds-buttons slds-border_top"
+                                                            role="presentation" onclick={handleSave}>
+                                                            <template if:true={isMatrix}>
+                                                                <a role="menuitem">
+                                                                    <span class="slds-truncate">
+                                                                        <lightning-icon icon-name="utility:save"
+                                                                            class="slds-m-right_small" size="x-small">
+                                                                        </lightning-icon>
+                                                                        {Label.LBL_Save}
+                                                                    </span>
+                                                                </a>
+                                                            </template>
+                                                        </li>
+                                                        <li class="slds-dropdown__item slds-is-selected slds-buttons"
+                                                            role="presentation" onclick={handleCancel}>
+                                                            <template if:true={isMatrix}>
+                                                                <a role="menuitem">
+                                                                    <span class="slds-truncate">
+                                                                        <lightning-icon icon-name="utility:refresh"
+                                                                            class="slds-m-right_small" size="x-small">
+                                                                        </lightning-icon>
+                                                                        {Label.LBL_Reset}
+                                                                    </span>
+                                                                </a>
+                                                            </template>
+                                                        </li>
+                                                        <li class="slds-dropdown__item slds-is-selected slds-buttons slds-border_top"
+                                                            role="presentation" onclick={handleOpenCopyMetadataModel}>
+                                                            <a role="menuitem">
+                                                                <span class="slds-truncate">
+                                                                    <lightning-icon icon-name="utility:copy"
+                                                                        class="slds-m-right_small" size="x-small">
+                                                                    </lightning-icon>
+                                                                    Copy Metadata From a Profile
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <template if:false={isMatrix}>
+            <div style="background-color:white;" class="tableDiv slds-m-top--medium">
+                <div class="slds-item dataTableDivContent slds-scrollable ">
+                    <article class="slds-tile  slds-thuncate">
+                        <div class="slds-scrollable_y slds-size_1-of-1" style={tableHeightInlineCss}>
+                            <lightning-datatable data={classes} columns={columns} key-field="DeveloperName"
+                                show-row-number-column onrowselection={getSelectedRecords} draft-values={draftValues}
+                                onsave={save} oncellchange={genericChangeHandler} sorted-by={sortBy}
+                                sorted-direction={sortDirection} onsort={handleSortdata} oncancel={reset}
+                                data-recordid="datatable" enable-infinite-loading
+                                onrowaction={handleOpenChooseSenderModel}>
+                            </lightning-datatable>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </template>
+        <template if:true={isMatrix}>
+            <div style="background-color:white;" class="tableDiv slds-m-top--medium">
+                <div class="slds-item">
+                    <article class="slds-tile slds-thuncate">
+                        <div class="slds-scrollable slds-size_1-of-1 tableDivContent" >
+                            <table id="Table" data-name="Table"
+                                class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="stickyCol slds-border_left"></th>
+                                        <template for:each={profileOptions} for:item="profile">
+                                            <th colspan="4" key={profile.Id} scope="col" class="slds-border_left">
+                                                <div class="slds-align_absolute-center slds-truncate"
+                                                    style="white-space: nowrap;">{profile.label}</div>
+                                            </th>
+                                        </template>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" class="stickyCol slds-border_left">
+                                            <div class="slds-align_absolute-center slds-truncate"
+                                                style="white-space: nowrap;">{Label.LBL_Batch_Name}</div>
+                                        </th>
+                                        <template for:each={profileOptions} for:item="incol">
+                                            <th class="slds-border_left" key={incol.value}>
+                                                <div class="slds-align_absolute-center slds-truncate">{activeLabel}
+                                                </div>
+                                            </th>
+                                            <th key={incol.value}>
+                                                <div class="slds-align_absolute-center slds-truncate"
+                                                    style="white-space: nowrap;">{allowEmailLabel}</div>
+                                            </th>
+                                            <th key={incol.value}>
+                                                <div class="slds-align_absolute-center slds-truncate"
+                                                    style="white-space: nowrap;">{allowEmailTechnicalLabel}</div>
+                                            </th>
+                                            <th key={incol.value}>
+                                                <div class="slds-align_absolute-center slds-truncate"
+                                                    style="white-space: nowrap;">{allowSendingNotificationLabel}</div>
+                                            </th>
+                                        </template>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template iterator:it1={classesMatrix}>
+                                        <tr key={it1.value.key}>
+                                            <td class="slds-border_left stickyCol" style='background-color: white;'>
+                                                <!--if:true={it1.first}-->
+                                                <div class="slds-truncate" style="white-space: nowrap;">
+                                                    <lightning-input type="checkbox" label={it1.value.key}
+                                                        data-recordid={it1.value.key} oninput={onchangeChecked}>
+                                                    </lightning-input>
+                                                </div>
+                                            </td>
+                                            <!--template iterator:it={it1.value.value}>-->
+                                            <template iterator:it={it1.value.value}>
+                                                <!--   </div>-->
+                                                <td class="slds-border_left" key={it.value.DeveloperName}>
+                                                    <div class="slds-align_absolute-center slds-truncate">
+                                                        <lightning-input type="checkbox" checked={it.value.Active}
+                                                            data-recordid={it.value.DeveloperName}
+                                                            id={it.value.DeveloperName} oninput={onchangeActiveChecked}>
+                                                        </lightning-input>
+                                                    </div>
+                                                </td>
+                                                <td key={it.value.DeveloperName}>
+                                                    <div class="slds-align_absolute-center slds-truncate">
+                                                        <lightning-input type="checkbox"
+                                                            checked={it.value.AllowSendingEmail}
+                                                            data-recordid={it.value.DeveloperName}
+                                                            id={it.value.DeveloperName} oninput={onchangeEmailChecked}>
+                                                        </lightning-input>
+                                                    </div>
+                                                </td>
+                                                <td key={it.value.DeveloperName}>
+                                                    <div class="slds-align_absolute-center slds-truncate">
+                                                        <lightning-input type="checkbox"
+                                                            checked={it.value.AllowSendingEmailTechnical}
+                                                            data-recordid={it.value.DeveloperName}
+                                                            id={it.value.DeveloperName}
+                                                            oninput={onchangeEmailTechnicalChecked}>
+                                                        </lightning-input>
+                                                    </div>
+                                                </td>
+                                                <td key={it.value.DeveloperName}>
+                                                    <div class="slds-align_absolute-center slds-truncate">
+                                                        <lightning-input type="checkbox"
+                                                            checked={it.value.AllowSendingNotification}
+                                                            data-recordid={it.value.DeveloperName}
+                                                            id={it.value.DeveloperName}
+                                                            oninput={onchangeSendingNotificationChecked}>
+                                                        </lightning-input>
+                                                    </div>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                        <footer if:true={controlChanges} class="slds-docked-composer__footer slds-shrink-none">
+                            <div class="slds-align_absolute-center">
+                                <button type="button" onclick={handleCancel}
+                                    class="slds-button slds-button_neutral">Cancel</button>
+                                <button type="button" onclick={handleSave}
+                                    class="slds-button slds-button_brand">Save</button>
+                            </div>
+                        </footer>
+                    </article>
+                </div>
+                <div class="slds-grid slds-m-vertical_x-small paginationDiv">
+                    <lightning-combobox options={limitOptions} variant="label-hidden"
+                        class="slds-size_xx-small slds-p-horizontal_x-small" value={selectedLimit}
+                        onchange={handleLimit}>
+                    </lightning-combobox>
+                    <lightning-button-group class="slds-p-right_x-small">
+                        <lightning-button disabled={isFirstDisabled} data-recordid="First" label="First"
+                            onclick={handleFirst}></lightning-button>
+                        <lightning-button disabled={isPreviousDisabled} data-recordid="Previous"
+                            label={Label.LBL_Previous} onclick={handlePrevious}></lightning-button>
+                        <lightning-button disabled={isNextDisabled} data-recordid="Next" label={Label.LBL_Next}
+                            onclick={handleNext}>
+                        </lightning-button>
+                        <lightning-button disabled={isLastDisabled} data-recordid="Last" label={Label.LBL_Last}
+                            onclick={handleLast}>
+                        </lightning-button>
+                    </lightning-button-group>
+                    <div class="slds-badge">
+                        <span>{message}</span>
+                    </div>
+                </div>
+            </div>
+            <!--
+                <div class="slds-align_absolute-center slds-m-bottom_x-small">
+                
+                </div>
+            -->
+
+
+        </template>
+        <template if:true={openCopyMetadataModel}>
+            <div class="demo-only slds-truncate">
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                title="Close" onclick={closeCopyMetadataModel}>
+                                <lightning-icon icon-name="utility:close" size="medium">
+                                </lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Copy Batch
+                                Settings From Profile</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1"
+                            style="height: 50vh;">
+                            <h2><b>Choose the profiles you want to copy</b></h2><br />
+                            <lightning-layout>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <lightning-combobox name="copyFrom" placeholder="Copy From"
+                                        value={selectedProfileId} onchange={handleCopyFromSelected}
+                                        options={profileOptions} variant="label-hidden">
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <lightning-combobox name="copyTo" value={value} placeholder="Copy To"
+                                        options={profileOptions} onchange={handleCopyToSelected} variant="label-hidden">
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning-button label={Label.LBL_Cancel} variant="neutral"
+                                onclick={closeCopyMetadataModel}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <lightning-button label={Label.LBL_Save} variant="brand" onclick={saveCopyMetadata}>
+                            </lightning-button>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </div>
+        </template>
+        <template if:true={openChooseSenderModel}>
+            <div class="demo-only slds-truncate">
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                title="Close" onclick={closeChooseSender}>
+                                <lightning-icon icon-name="utility:close" size="medium">
+                                </lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Choose the sender
+                                email</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2"
+                            style="height: 50vh;">
+                            <div>
+                                <lightning-combobox name="Sender email" value={chosenEmail} placeholder="Sender email"
+                                    options={senderOptions} onchange={handleSenderEmailSelected} variant="label-hidden">
+                                </lightning-combobox>
+                            </div>
+                            <div>
+                                <lightning-input name="Email Subject" label='Email Subject' value={emailSubjectMsg}
+                                    onchange={handleEmailSubjectChanged}></lightning-input>
+                            </div>
+                            <div class="slds-m-top_small">
+                                <lightning-input name="ApplyToAll" label="Apply To All Profile" type="toggle"
+                                    onchange={handleApplyMailSettingsToAllProfile}></lightning-input>
+                            </div>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning-button label={Label.LBL_Cancel} variant="neutral" onclick={closeChooseSender}>
+                            </lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <lightning-button label={Label.LBL_Save} variant="brand" onclick={saveEmailMetadata}>
+                            </lightning-button>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </div>
+        </template>
+    </article>
+</template>

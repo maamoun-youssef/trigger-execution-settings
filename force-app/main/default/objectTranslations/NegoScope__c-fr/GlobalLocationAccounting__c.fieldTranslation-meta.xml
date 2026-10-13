@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Lieu-fonction compta</label>
+    <name>GlobalLocationAccounting__c</name>
+    <relationshipLabel>Nego Scopes (Lieu-fonction compta)</relationshipLabel>
+</CustomFieldTranslation>

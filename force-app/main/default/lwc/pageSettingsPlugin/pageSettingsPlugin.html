@@ -1,0 +1,138 @@
+<template>
+
+    <div style="background-color: #F0F0F3;">
+        <!-- BUTTONS RIBBON -->
+        <div class="dc-header slds-m-bottom_x-large header">
+            <div if:true={useBackgroundDiv} class="dc-header-img background-style"></div>
+
+            <div if:false={useBackgroundDiv} class="dc-header-img">
+                <img src={headerImageUrl} style="width: 100%; height:150px;" />
+            </div>
+            <div class="header-block">
+                <div class="header-img">
+                    <img src={pageSettings.icon} />
+                </div>
+                <div class="header-line">
+                </div>
+                <div class="header-word">{selectedMenu}
+                </div>
+            </div>
+        </div>
+        <template if:true={pageSettings.flowSettings}>
+            <template if:true={pageSettings.flowSettings.name}>
+                <div class="dc-container">
+                    <div class="dc-upload-container">
+                        <div class="slds-form-element slds-m-bottom_x-large">
+                            <span class="slds-form-element__label dc-inherit-font dc-12px-font" id="flow-setting-label">
+                                {pageSettings.flowSettings.flowLabel}
+                            </span>
+                            <div class="centered-control">
+                                <div class="slds-file-selector slds-file-selector_files">
+                                    <div class="slds-file-selector__dropzone">
+                                        <input class="slds-file-selector__input slds-assistive-text"
+                                            id="flow-setting-input"
+                                            aria-labelledby="flow-setting-label flow-setting-secondary-label"
+                                            onclick={toggleModal} />
+                                        <label for="flow-setting-input" id="flow-setting-secondary-label">
+                                            <span
+                                                class="slds-file-selector__button slds-button slds-button_neutral dc-inherit-font dc-13px-font">
+                                                <img src={pageSettings.flowSettings.buttonIcon} alt="Flow Icon"
+                                                    style="width: 1rem; height: 1rem; margin-right: 0.25rem;" />
+                                                {pageSettings.flowSettings.buttonLabel}
+                                            </span>
+                                            <span class="slds-file-selector__text slds-medium-show dc-13px-font"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template if:true={isModalOpen}>
+                <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                    class="slds-modal slds-fade-in-open slds-modal_small">
+                    <div class="slds-modal__container">
+                        <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                            <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                                onclick={toggleModal}></lightning-button-icon>
+                        </div>
+                        <div class="slds-modal__content"
+                            style="overflow: unset !important;overflow-y: unset !important; position: relative;">
+                            <lightning-flow flow-api-name={pageSettings.flowSettings.name}
+                                flow-input-variables={flowInputVariables} onstatuschange={handleExitFlow}>
+                            </lightning-flow>
+                        </div>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+            </template>
+        </template>
+        <template if:true={showSectionButtons}>
+            <div class="dc-buttons-container slds-p-horizontal_xx-large">
+                <template for:each={sortedSections} for:item="section" for:index="sectionIndex">
+                    <button if:true={section.isActive} key={section} data-section-index={sectionIndex}
+                        data-theme-index={themeIndex} onclick={GoToSection}
+                        class="dc-section-button slds-p-horizontal_large slds-p-vertical_small slds-m-vertical_small btn-header">
+                        {section.title}
+                    </button>
+                </template>
+            </div>
+        </template>
+
+        <!-- SECTIONS -->
+        <template for:each={pageSettings.sections} for:item="section" for:index="sectionIndex">
+            <div key={section} class="main-container slds-p-around_xx-large" data-section-target-index={sectionIndex}
+                lwc:if={section.isActive}>
+                <div class="flex-container">
+                    <!-- ICON -->
+                    <div class="icon-container">
+                        <img src={section.icon} alt="section-icon" class="section-icon" />
+                    </div>
+                    <!-- TITLE + SUB-TITLE -->
+                    <div class="description-container">
+                        <p class="section-title slds-text-heading_large">{section.title}</p>
+                        <p class="section-sub-title slds-text-heading_small slds-p-top_medium">{section.subTitle}
+                        </p>
+                    </div>
+                    <!-- FILET -->
+                    <div class="filet-container">
+                        <div style="height: 2px; background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));"
+                            class="connect-filet">
+                        </div>
+                    </div>
+                    <!-- THEMES -->
+                    <div class="theme-flex-container">
+                        <template for:each={section.themes} for:item="theme" for:index="themeIndex">
+                            <div class="theme-container" key={theme.label} data-section-index={sectionIndex}
+                                data-theme-index={themeIndex} onclick={handleThemeClick}>
+                                <!-- THEME -->
+                                <div class="theme" onmouseenter={handleMouseEnterTheme}
+                                    onmouseleave={handleMouseLeaveTheme} data-section-index={sectionIndex}
+                                    data-theme-index={themeIndex}>
+                                    <img src={theme.icon} class="theme-image card" data-section-index={sectionIndex}
+                                        data-theme-index={themeIndex} />
+                                    <div class="theme-title-overlay" style={theme.overlayStyle}
+                                        data-section-index={sectionIndex} data-theme-index={themeIndex}>
+                                        <p data-section-index={sectionIndex} data-theme-index={themeIndex}
+                                            class="theme-title">{theme.label}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template if:true={showScrollToTopButton}>
+            <div class="scroll-to-top-button-container">
+                <button class="slds-button slds-button_icon slds-button_icon-inverse slds-m-around_medium"
+                    onclick={scrollToTop}>
+                    <lightning-icon icon-name="utility:jump_to_top" size="large"
+                        alternative-text="Scroll to top"></lightning-icon>
+                    <span class="slds-assistive-text">Scroll to top</span>
+                </button>
+            </div>
+        </template>
+    </div>
+</template>

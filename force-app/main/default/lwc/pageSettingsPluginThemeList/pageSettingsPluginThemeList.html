@@ -1,0 +1,61 @@
+<template>
+    <template lwc:if={isLoading}>
+        <div class="slds-spinner_container">
+            <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+        </div>
+    </template>
+    <template lwc:elseif={currentSectionSettings}>
+        <div class="slds-card">
+            <div class="header headerClass">
+                <div class="slds-media slds-no-space slds-grow settings-header">
+                    <div class="slds-p-around_xx-small slds-m-top_xx-small slds-m-left_x-small slds-icon_container">
+                        <div class="icon-container">
+                            <img src={currentSectionSettings.icon} alt="section-icon" class="section-icon" />
+                        </div>
+                    </div>
+                    <div class="slds-media__body slds-p-around_x-small slds-align-middle">
+                        <h1
+                            class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate headerClass">
+                            {currentSectionSettings.title}
+                        </h1>
+                        <p class="slds-text-title slds-line-height_reset headerClass">
+                            {currentSectionSettings.subTitle}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- ACTION BUTTONS -->
+            <div class="slds-col slds-no-flex slds-grid  slds-icon_container">
+            </div>
+            <div class="main-panel slds-col slds-scrollable">
+                <lightning-tabset variant="vertical" class="tab-set-style slds-m-bottom_x-small mainHeight"
+                    active-tab-value={activeTheme}>
+                    <template for:each={currentSectionSettings.themes} for:item="theme" for:index="themeIndex">
+                        <lightning-tab lwc:if={theme.isActive} key={theme} tabindex="-1" label={theme.label}
+                            data-index={themeIndex} class="slds-scrollable_y" onactive={handleChangeActiveTab}
+                            icon-name={theme.icon} value={themeIndex}>
+                            <div style={mainPanelHeight}>
+                                <template if:true={theme.lwcCmp}>
+                                    <template if:true={theme.cmpIsReady}>
+                                        <lwc:component lwc:is={theme.cmp} lwc:spread={theme.props}></lwc:component>
+                                    </template>
+                                </template>
+                                <template if:true={theme.isURL}>
+                                    <a href={theme.redirection} target="_blank"> {theme.redirection}</a>
+                                </template>
+                                <template if:true={theme.isFlow}>
+                                    <template if:true={theme.flowInfoIsReady}>
+                                        <lightning-flow flow-api-name={theme.redirection}
+                                            flow-input-variables={theme.flowVariables}
+                                            onstatuschange={handleFlowStatusChange} flow-finish-behavior="NONE">
+                                        </lightning-flow>
+                                    </template>
+                                </template>
+                            </div>
+                        </lightning-tab>
+                    </template>
+                </lightning-tabset>
+            </div>
+        </div>
+    </template>
+</template>

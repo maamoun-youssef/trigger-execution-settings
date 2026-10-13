@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>DV minimale pour l&apos;atteinte des QEL</help>
+    <label><!-- WD Marketbased Low Limit --></label>
+    <name>WD_Marketbased_Low_Limit__c</name>
+</CustomFieldTranslation>

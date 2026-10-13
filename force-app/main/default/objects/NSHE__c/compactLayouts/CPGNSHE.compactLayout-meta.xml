@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPGNSHE</fullName>
+    <fields>Name</fields>
+    <fields>NegoScope__c</fields>
+    <fields>Hierarchy__c</fields>
+    <fields>Choice__c</fields>
+    <label>negOptim CPG NS HE</label>
+</CompactLayout>

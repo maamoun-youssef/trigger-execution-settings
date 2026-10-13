@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Nego Scope of reference for the plan --></help>
+    <label><!-- Nego Scope --></label>
+    <name>Nego_Scope__c</name>
+    <relationshipLabel><!-- Nego Plans --></relationshipLabel>
+</CustomFieldTranslation>

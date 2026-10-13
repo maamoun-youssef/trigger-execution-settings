@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract_DiscountSellOut1__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Contract Discount SellOut 1</label>
+    <referenceTo>Contract_Discount__c</referenceTo>
+    <relationshipLabel>CPD (Contract Discount SellOut 1)</relationshipLabel>
+    <relationshipName>CPDContract_DiscountSellout1</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

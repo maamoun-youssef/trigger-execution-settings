@@ -1,0 +1,918 @@
+<template>
+    <div class="slds-is-relative" style="min-height: 70vh;">
+        <template if:true={instance.readyToDisplay}>
+            <div class="header slds-page-header" if:true={instance.loadingSelection}>
+                <!-- LAYOUT GRID -->
+                <div class="slds-grid">
+                    <!-- GRID COL -->
+                    <div class="slds-col slds-has-flexi-truncate">
+                        <div class="slds-media slds-no-space slds-grow">
+                            <div class="slds-media__figure">
+                                <lightning-icon icon-name="standard:report"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <p class="slds-text-title slds-line-height_reset">
+                                </p>
+                                <h1
+                                    class="slds-page-header__title slds-var-m-right_small slds-align-middle slds-truncate">
+                                    {Label.Negotiate}
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-page-header__detail-row">
+                    <div class="slds-col slds-grid slds-grid_align-end slds-gutters_direct-x-small slds-align_absolute-center"
+                        style="justify-content: flex-start;">
+                        <div class="slds-col">
+                            <lightning-combobox options={instance.negoYearOptions} value={instance.negoYear}
+                                onchange={instance.handleYearChange} class="slds-var-p-left_xx-small"
+                                label={Label.SelectNegoYear} onkeydown={blockSubmit}>
+                            </lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-border_left">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-combobox_container">
+                                        <div
+                                            class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+                                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                                role="none">
+                                                <lightning-input value={instance.supplier.searchTerm}
+                                                    onchange={instance.supplier.getData} label={Label.SelectSupplier}
+                                                    placeholder={Label.EnterCodeOrName} type="search"
+                                                    onkeydown={blockSubmit}></lightning-input>
+                                            </div>
+                                            <div class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid slds-align_absolute-center"
+                                                style="z-index: 10;" role="listbox"
+                                                if:true={instance.supplier.hasSearchTerm}>
+                                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                                    <template for:each={instance.supplier.data} for:item='item'>
+                                                        <li role="presentation" class="slds-listbox__item slds-truncate"
+                                                            key={item.Id}>
+                                                            <div class="slds-truncate" title={item.Name}>
+                                                                <div data-id={item.Id}
+                                                                    class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                                                                    role="option"
+                                                                    onclick={instance.supplier.setCurrentItem}>
+                                                                    <span class="slds-media__body"
+                                                                        data-id={item.Id}>{item.Name}</span>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </template>
+                                                </ul>
+                                            </div>
+                                            <div class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid slds-align_absolute-center"
+                                                role="listbox" if:true={instance.supplier.isNoItemToDisplay}>
+                                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                                    <li role="presentation" class="slds-listbox__item slds-truncate">
+                                                        <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                                                            role="option">
+                                                            <span
+                                                                class="slds-media__body">{Label.LBL_No_Item_To_Display}</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col">
+                            {Label.LBL_Or}
+                        </div>
+                        <div class="slds-col">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-combobox_container">
+                                        <div
+                                            class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+                                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                                role="none">
+                                                <lightning-input value={instance.negoscope.searchTerm}
+                                                    onchange={instance.negoscope.getData} label={Label.SelectNegoscope}
+                                                    placeholder={Label.EnterCodeOrName} type="search"
+                                                    onkeydown={blockSubmit}></lightning-input>
+                                            </div>
+                                            <div class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid slds-align_absolute-center"
+                                                style="z-index: 10;" role="listbox"
+                                                if:true={instance.negoscope.hasSearchTerm}>
+                                                <ul class="slds-listbox slds-listbox_vertical " role="presentation">
+                                                    <template for:each={instance.negoscope.data} for:item='item'>
+                                                        <li role="presentation" class="slds-listbox__item slds-truncate"
+                                                            key={item.Id}>
+                                                            <div class="slds-truncate" title={item.Name}>
+                                                                <div data-id={item.Id}
+                                                                    class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                                                                    role="option"
+                                                                    onclick={instance.negoscope.setCurrentItem}>
+                                                                    <span class="slds-media__body"
+                                                                        data-id={item.Id}>{item.Name}</span>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </template>
+                                                </ul>
+                                            </div>
+                                            <div class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid slds-align_absolute-center"
+                                                role="listbox" if:true={instance.negoscope.isNoItemToDisplay}>
+                                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                                    <li role="presentation" class="slds-listbox__item slds-truncate">
+                                                        <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                                                            role="option">
+                                                            <span
+                                                                class="slds-media__body">{Label.LBL_No_Item_To_Display}</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class={headerClass} if:false={instance.loadingSelection}>
+                <!-- LAYOUT GRID -->
+                <div class="slds-grid">
+                    <!-- GRID COL -->
+                    <div class="slds-col slds-has-flexi-truncate">
+                        <div class="slds-media slds-no-space slds-grow">
+                            <div class="slds-media__figure">
+                                <lightning-icon icon-name="standard:report"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <p class="slds-text-title slds-line-height_reset">
+                                    {Label.Negotiate}
+                                </p>
+                                <h1
+                                    class="slds-page-header__title slds-var-m-right_small slds-align-middle slds-truncate">
+                                    <a href={instance.negoscope.url} target="_blank">
+                                        {instance.supplier.oInstance.Name} - {instance.negoYear} >
+                                        {instance.negoscope.oInstance.Name}
+                                    </a>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-button-group">
+                        <a if:false={instance.hasBackUrl} href={instance.negoscope.url}>
+                            <lightning-button label={Label.Cancel} class="slds-p-left_xx-small">
+                            </lightning-button>
+                        </a>
+                        <a if:true={instance.hasBackUrl} href={instance.backUrl}>
+                            <lightning-button label={Label.Cancel} class="slds-p-left_xx-small">
+                            </lightning-button>
+                        </a>
+                        <!-- <lightning-button label={Label.Cancel} onclick={instance.cancelSelectNegoscope}
+                            class="slds-p-left_xx-small">
+                        </lightning-button> -->
+                        <template if:true={instance.hasData}>
+                            <template if:false={loadingLockedActions}>
+                                <lightning-button label={Label.LBL_Save} onclick={instance.save}
+                                    class="slds-p-left_xx-small" variant="brand" if:false={lockedActions}>
+                                </lightning-button>
+                            </template>
+                            <template if:false={Loading}>
+                                <lightning-button-menu icon-name="utility:lightning_extension" menu-alignment="right"
+                                    nubbin class="slds-p-left_x-small" if:true={instance.displayMenuItem}>
+                                    <template for:each={instance.menuItems} for:item="menuItem">
+                                        <lightning-menu-divider key={menuItem} variant="compact"
+                                            if:true={menuItem.showDivider}>
+                                        </lightning-menu-divider>
+                                        <lightning-menu-item key={menuItem} value={menuItem.label}
+                                            label={menuItem.label} prefix-icon-name={menuItem.icon_Name}
+                                            onclick={menuItem.action}>
+                                        </lightning-menu-item>
+                                    </template>
+                                </lightning-button-menu>
+                            </template>
+                            <lightning-button-icon-stateful icon-name="utility:filterList" class="slds-p-left_xx-small"
+                                variant="border-filled" selected={instance.showSideBar} onclick={instance.toggleSideBar}
+                                if:false={instance.loadingSelection}>
+                            </lightning-button-icon-stateful>
+                        </template>
+                    </div>
+                </div>
+                <!--div class="headerDetail slds-grid slds-p-right_xxx-small slds-p-vertical_xxx-small slds-page-header__detail-row"
+                    id="headerDetail" if:true={instance.showHeader}>
+                    <div class="slds-col slds-grid slds-wrap">
+                        <div class="slds-grid slds-size_1-of-1 slds-gutters_direct-xx-small">
+                            <div class="slds-col slds-size_1-of-8">
+                                <lightning-record-edit-form record-id={instance.negoPlan.oInstance.Id}
+                                    object-api-name={API_NAMES.Nego_Plan__c.objectApiName}>
+                                    <lightning-output-field class="slds-m-around_none"
+                                        field-name={API_NAMES.Nego_Plan__c.NEGO_Depreciation_Rate_Validated__c}>
+                                    </lightning-output-field>
+                                </lightning-record-edit-form>
+                            </div>
+                            <div class="slds-col slds-size_1-of-8">
+                                <lightning-record-edit-form record-id={instance.negoPlan.oInstance.Id}
+                                    object-api-name={API_NAMES.Nego_Plan__c.objectApiName}>
+                                    <lightning-output-field class="slds-m-around_none"
+                                        field-name={API_NAMES.Nego_Plan__c.NEGO_Depreciation_Rate_Date__c}>
+                                    </lightning-output-field>
+                                </lightning-record-edit-form>
+                            </div>
+                            <div class="slds-col slds-size_1-of-8">
+                                <lightning-record-edit-form record-id={instance.negoPlan.oInstance.Id}
+                                    object-api-name={API_NAMES.Nego_Plan__c.objectApiName}>
+                                    <lightning-output-field class="slds-m-around_none"
+                                        field-name={API_NAMES.Nego_Plan__c.NEGO_Rise_Rate_Requested__c}>
+                                    </lightning-output-field>
+                                </lightning-record-edit-form>
+                            </div>
+                            <div class="slds-col slds-size_1-of-8">
+                                <lightning-record-edit-form record-id={instance.negoPlan.oInstance.Id}
+                                    object-api-name={API_NAMES.Nego_Plan__c.objectApiName}>
+                                    <lightning-output-field class="slds-m-around_none"
+                                        field-name={API_NAMES.Nego_Plan__c.NEGO_Rise_Rate_IsoPartner__c}>
+                                    </lightning-output-field>
+                                </lightning-record-edit-form>
+                            </div>
+                            <div class="slds-col slds-size_1-of-8">
+                                <lightning-record-edit-form record-id={instance.negoPlan.oInstance.Id}
+                                    object-api-name={API_NAMES.Nego_Plan__c.objectApiName}>
+                                    <lightning-output-field class="slds-m-around_none"
+                                        field-name={API_NAMES.Nego_Plan__c.NEGO_Rise_Rate_Negotiated_OnTop__c}>
+                                    </lightning-output-field>
+                                </lightning-record-edit-form>
+                            </div>
+                            <div class="slds-col slds-size_1-of-8">
+                                <lightning-record-edit-form record-id={instance.negoPlan.oInstance.Id}
+                                    form-class="slds-grid" object-api-name={API_NAMES.Nego_Plan__c.objectApiName}>
+                                    <lightning-output-field class="slds-m-around_none slds-size_1-of-2 NegoRiseRate"
+                                        title={Label.MSG_Corrected_HMP}
+                                        field-name={API_NAMES.Nego_Plan__c.NEGO_Rise_Rate_Validated__c}
+                                        if:true={instance.negoPlan.wrapper.isCorrectedRate}>
+                                    </lightning-output-field>
+                                    <lightning-helptext content={Label.MSG_Corrected_HMP}
+                                        title={Label.MSG_Corrected_HMP}
+                                        if:true={instance.negoPlan.wrapper.isCorrectedRate}>
+                                    </lightning-helptext>
+                                    <lightning-output-field class="slds-m-around_none"
+                                        field-name={API_NAMES.Nego_Plan__c.NEGO_Rise_Rate_Validated__c}
+                                        if:false={instance.negoPlan.wrapper.isCorrectedRate}>
+                                    </lightning-output-field>
+                                </lightning-record-edit-form>
+                            </div>
+                            <div class="slds-col slds-size_1-of-8">
+                                <lightning-record-edit-form record-id={instance.negoPlan.oInstance.Id}
+                                    object-api-name={API_NAMES.Nego_Plan__c.objectApiName}>
+                                    <lightning-output-field class="slds-m-around_none"
+                                        field-name={API_NAMES.Nego_Plan__c.NEGO_Rise_Rate_Status__c}>
+                                    </lightning-output-field>
+                                </lightning-record-edit-form>
+                            </div>
+                            <div class="slds-col slds-size_1-of-8">
+                                <lightning-record-edit-form record-id={instance.negoPlan.oInstance.Id}
+                                    object-api-name={API_NAMES.Nego_Plan__c.objectApiName}>
+                                    <lightning-output-field class="slds-m-around_none"
+                                        field-name={API_NAMES.Nego_Plan__c.NEGO_Rise_Rate_Date__c}>
+                                    </lightning-output-field>
+                                </lightning-record-edit-form>
+                            </div>
+                        </div>
+                    </div>
+                </div-->
+            </div>
+            <div if:false={instance.loadingSelection}>
+                <div class="slds-grid">
+                    <!-- <c-negotiate-contract-list data-id="negotiate-contracts-cmp" contract-ids={instance.contractIds} -->
+                    <c-negotiate-contract-list nonce={nonce} data-id="negotiate-contracts-cmp"
+                        nego-discount-type-labels-map={instance.negoDiscountTypeLabelsMap}
+                        index-labels-map={instance.indexLabelsMap} slabs-method-map={instance.slabsMethodMap}
+                        nego-year={instance.negoYear} negoscope-id={instance.selectedNegoScopeId}
+                        available-pol-coms={instance.validTariff}
+                        has-top-not-simulation={instance.hasTopNotSimulation} translation={translation}
+                        has-pe={instance.hasPE} has-pe-signed={instance.hasPeSigned} class="slds-size_full"
+                        if:true={instance.hasData} locked-actions={lockedActions}
+                        contract-r-t-n1-settings={instance.contractRTN1Settings} current-url={instance.currentUrl} header-height={headerHeight}>
+                    </c-negotiate-contract-list>
+                    <div data-id="side-bar" class="slds-grid_vertical slds-m-top_small slds-hide"
+                        if:true={instance.hasData}>
+                        <div class="slds-card slds-m-left_small slds-p-around_xx-small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-combobox_container">
+                                        <div
+                                            class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+                                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                                role="none">
+                                                <lightning-input variant="label-hidden"
+                                                    placeholder={Label.SelectNegoscope}
+                                                    onclick={instance.showNegoscopesList}
+                                                    onblur={instance.hideNegoscopesList} type="search">
+                                                </lightning-input>
+                                            </div>
+                                            <div class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid slds-align_absolute-center"
+                                                if:true={instance.displayNegoscopesList} style="z-index: 10;"
+                                                role="listbox">
+                                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                                    <template for:each={instance.negoScopes} for:item='item'>
+                                                        <li role="presentation" class="slds-listbox__item slds-truncate"
+                                                            key={item.Id}>
+                                                            <div class="slds-truncate" title={item.Name}>
+                                                                <div data-id={item.Id}
+                                                                    class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                                                                    role="option"
+                                                                    onclick={instance.negoscope.setCurrentItem}>
+                                                                    <span class="slds-media__body"
+                                                                        data-id={item.Id}>{item.Name}</span>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </template>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-m-top_xx-small">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-combobox_container">
+                                        <div
+                                            class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+                                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                                role="none">
+                                                <lightning-input variant="label-hidden"
+                                                    placeholder={Label.LBL_Filter_Contracts}
+                                                    onclick={instance.showContractsList}
+                                                    onmouseleave={instance.hideContractsList} type="search">
+                                                </lightning-input>
+                                            </div>
+                                            <div class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid slds-align_absolute-center"
+                                                if:true={instance.displayContractsList} style="z-index: 10;"
+                                                role="listbox" onmouseenter={instance.clearHideContractsList}
+                                                onmouseleave={instance.hideContractsList}>
+                                                <ul class="slds-listbox slds-listbox_vertical slds-p-left_xx-small"
+                                                    role="presentation">
+                                                    <template for:each={instance.contractsOptions} for:item='item'
+                                                        for:index="index">
+                                                        <li role="presentation" class={item.class} key={item.value}>
+                                                            <lightning-input type="checkbox" label={item.label}
+                                                                title={item.label} checked={item.checked}
+                                                                disabled={item.disabled}
+                                                                onchange={instance.toggleShowContract}
+                                                                onkeydown={blockSubmit} data-index={index}>
+                                                            </lightning-input>
+                                                        </li>
+                                                    </template>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-m-top_xx-small slds-grid">
+                                <lightning-input class="slds-p-right_small" type="toggle" variant="label-hidden"
+                                    onchange={instance.toggleBrief} onkeydown={blockSubmit} checked
+                                    message-toggle-active={Label.LBL_Hide_Brief} if:true={instance.showBrief}
+                                    message-toggle-inactive={Label.LBL_Show_Brief}>
+                                </lightning-input>
+                                <lightning-input class="slds-p-right_small" type="toggle" variant="label-hidden"
+                                    onchange={instance.toggleBrief} onkeydown={blockSubmit}
+                                    message-toggle-active={Label.LBL_Hide_Brief} if:false={instance.showBrief}
+                                    message-toggle-inactive={Label.LBL_Show_Brief}>
+                                </lightning-input>
+                                <lightning-input class="slds-p-right_small" type="toggle" variant="label-hidden"
+                                    onchange={instance.toggleHeader} onkeydown={blockSubmit} checked
+                                    message-toggle-active={Label.LBL_Hide_Header} if:true={instance.showHeader}
+                                    message-toggle-inactive={Label.LBL_Show_Header}>
+                                </lightning-input>
+                                <lightning-input class="slds-p-right_small" type="toggle" variant="label-hidden"
+                                    onchange={instance.toggleHeader} onkeydown={blockSubmit}
+                                    message-toggle-active={Label.LBL_Hide_Header} if:false={instance.showHeader}
+                                    message-toggle-inactive={Label.LBL_Show_Header}>
+                                </lightning-input>
+                            </div>
+                            <div class="negoPlanTable slds-m-top_xx-small slds-scrollable" style="z-index: 3;"
+                                if:false={negoPlanTableLoading}>
+                                <table class="slds-no-row-hover slds-table slds-table_bordered slds-table_edit">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                            </td>
+                                            <td>{Label.LBL_3Net}</td>
+                                            <td>
+                                                {Label.LBL_4Net}
+                                            </td>
+                                            <td>
+                                                {Label.LBL_5Net}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <div class="slds-p-right_x-small">
+                                                    {Label.LBL_Nego_Intro}
+                                                </div>
+                                            </th>
+                                            <td class="negoPlanRow1 slds-text-align_right">
+                                                <lightning-formatted-number
+                                                    value={instance.negoPlan.wrapper.NEGO_NegoIntro_2_3Net_Prog_Last}
+                                                    maximum-fraction-digits="2" minimum-fraction-digits="2">
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td class="negoPlanRow2-3 slds-text-align_right">
+                                                <lightning-formatted-number
+                                                    value={instance.negoPlan.wrapper.NEGO_NegoIntro_4Net_Prog_val_Last}
+                                                    maximum-fraction-digits="0" minimum-fraction-digits="0">
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td class="negoPlanRow2-3 slds-text-align_right">
+                                                <lightning-formatted-number
+                                                    value={instance.negoPlan.wrapper.NEGO_NegoIntro_5Net_Prog_val_Last}
+                                                    maximum-fraction-digits="0" minimum-fraction-digits="0">
+                                                </lightning-formatted-number>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <div class="slds-p-right_x-small">
+                                                    {Label.LBL_Plan}
+                                                </div>
+                                            </th>
+                                            <td class="negoPlanRow1 slds-text-align_right">
+                                                <!-- <lightning-formatted-number
+                                                    value={instance.negoPlan.wrapper.PLAN_Target_2_3_4Net_Prog}
+                                                    maximum-fraction-digits="2" minimum-fraction-digits="2">
+                                                </lightning-formatted-number> -->
+                                                <lightning-formatted-number
+                                                    value={instance.negoPlan.wrapper.PLAN_Target_2_3Net_Prog}
+                                                    maximum-fraction-digits="2" minimum-fraction-digits="2">
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td class="negoPlanRow2-3 slds-text-align_right">
+                                                <lightning-formatted-number
+                                                    value={instance.negoPlan.wrapper.PLAN_Target_Index4_Nego_val}
+                                                    maximum-fraction-digits="0" minimum-fraction-digits="0">
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td class="negoPlanRow2-3 slds-text-align_right">
+                                                <lightning-formatted-number
+                                                    value={instance.negoPlan.wrapper.PLAN_Target_Index5_Nego_val}
+                                                    maximum-fraction-digits="0" minimum-fraction-digits="0">
+                                                </lightning-formatted-number>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <div class="slds-p-right_x-small">
+                                                    Obtenu
+                                                </div>
+                                            </th>
+                                            <td class="negoPlanRow1 slds-text-align_right">
+                                                <lightning-formatted-number
+                                                    value={instance.negoPlan.wrapper.negoBaseInitFormula1}
+                                                    maximum-fraction-digits="2" minimum-fraction-digits="2"
+                                                    format-style="percent-fixed">
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td class="negoPlanRow2-3 slds-text-align_right">
+                                                <!-- <lightning-formatted-number
+                                                    value={instance.negoPlan.wrapper.negoBaseInitFormula2}
+                                                    maximum-fraction-digits="2" minimum-fraction-digits="2">
+                                                </lightning-formatted-number> -->
+                                                <lightning-formatted-number
+                                                    value={instance.negoPlan.wrapper.negoBaseInit_valeurReelle_index4}
+                                                    maximum-fraction-digits="0" minimum-fraction-digits="0">
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td class="negoPlanRow2-3 slds-text-align_right">
+                                                <lightning-formatted-number
+                                                    value={instance.negoPlan.wrapper.negoBaseInitFormula3}
+                                                    maximum-fraction-digits="0" minimum-fraction-digits="0">
+                                                </lightning-formatted-number>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <div class="slds-p-right_x-small">
+                                                    {Label.LBL_GAP_per}
+                                                </div>
+                                            </th>
+                                            <td class="negoPlanRow1 slds-text-align_right">
+                                                <!-- <lightning-formatted-number
+                                                    value={instance.negoPlan.wrapper.gap_2_3_4net_perc}
+                                                    format-style="percent-fixed" maximum-fraction-digits="2"
+                                                    minimum-fraction-digits="2">
+                                                </lightning-formatted-number> -->
+                                                <div class={instance.negoPlan.wrapper.gap_2_3net_perc_class}>
+                                                    <lightning-formatted-number
+                                                        value={instance.negoPlan.wrapper.gap_2_3net_perc}
+                                                        format-style="percent-fixed" maximum-fraction-digits="2"
+                                                        minimum-fraction-digits="2">
+                                                    </lightning-formatted-number>
+                                                </div>
+                                            </td>
+                                            <td class="negoPlanRow2-3 slds-text-align_right">
+                                                <lightning-formatted-number
+                                                    value={instance.negoPlan.wrapper.gap_4net_perc}
+                                                    format-style="percent-fixed" maximum-fraction-digits="2"
+                                                    minimum-fraction-digits="2">
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td class="negoPlanRow2-3 slds-text-align_right">
+                                                <lightning-formatted-number
+                                                    value={instance.negoPlan.wrapper.gap_5net_perc}
+                                                    format-style="percent-fixed" maximum-fraction-digits="2"
+                                                    minimum-fraction-digits="2">
+                                                </lightning-formatted-number>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <div class="slds-p-right_x-small">
+                                                    {Label.LBL_GAP_val}
+                                                </div>
+                                            </th>
+                                            <td class="negoPlanRow1 slds-text-align_right">
+                                                <!-- <lightning-formatted-number
+                                                    value={instance.negoPlan.wrapper.sGap_2_3_4net}
+                                                    maximum-fraction-digits="2" minimum-fraction-digits="2">
+                                                </lightning-formatted-number> -->
+                                                <lightning-formatted-number
+                                                    value={instance.negoPlan.wrapper.sGap_2_3net}
+                                                    maximum-fraction-digits="0" minimum-fraction-digits="0">
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td class="negoPlanRow2-3 slds-text-align_right">
+                                                <lightning-formatted-number value={instance.negoPlan.wrapper.sGap_4net}
+                                                    maximum-fraction-digits="0" minimum-fraction-digits="0">
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td class="negoPlanRow2-3 slds-text-align_right">
+                                                <lightning-formatted-number value={instance.negoPlan.wrapper.sGap_5net}
+                                                    maximum-fraction-digits="0" minimum-fraction-digits="0">
+                                                </lightning-formatted-number>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                <lightning-record-edit-form record-id={instance.negoPlan.oInstance.Id}
+                                                    object-api-name={API_NAMES.Nego_Plan__c.objectApiName}>
+                                                    <lightning-output-field
+                                                        class="slds-grid slds-grid_align-spread slds-m-around_none"
+                                                        field-name={API_NAMES.Nego_Plan__c.NEGO_NegoIntro_Posted_Date_Last__c}>
+                                                    </lightning-output-field>
+                                                </lightning-record-edit-form>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="slds-p-top_x-small">{Label.LBL_Legend}</div>
+                            <div class="slds-p-top_x-small slds-grid slds-wrap slds-scrollable_y"
+                                style="max-height: 36.5vh;">
+                                <div class="slds-grid slds-wrap slds-size_1-of-1">
+                                    <template for:each={contractRecordTypes} for:item='recordType'>
+                                        <div key={recordType} class={recordType.class} title={recordType.label}
+                                            if:true={recordType.show}>
+                                            <!-- <lightning-icon icon-name="utility:routing_offline" size="small">
+                                        </lightning-icon> -->
+                                            <lightning-icon icon-name="utility:stop" size="small">
+                                            </lightning-icon>
+                                            <div class="slds-truncate">
+                                                {recordType.label}
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                                <div class="slds-grid slds-wrap slds-size_1-of-1 slds-p-top_medium">
+                                    <div class="slds-p-left_xx-small slds-grid slds-size_1-of-2"
+                                        title={Label.LBL_Executive_Summary}>
+                                        <lightning-icon icon-name="utility:approval" size="x-small">
+                                        </lightning-icon>
+                                        <div class="slds-truncate">
+                                            {Label.LBL_Executive_Summary}
+                                        </div>
+                                    </div>
+                                    <div class="slds-p-left_xx-small slds-grid slds-size_1-of-2"
+                                        title={Label.LBL_Update_Contract_BDate}>
+                                        <lightning-icon icon-name="utility:date_input" size="x-small">
+                                        </lightning-icon>
+                                        <div class="slds-truncate">
+                                            {Label.LBL_Update_Contract_BDate}
+                                        </div>
+                                    </div>
+                                    <div class="slds-p-left_xx-small slds-grid slds-size_1-of-2"
+                                        title={Label.LBL_Is_OnTop_Simulation}>
+                                        <lightning-icon icon-name="utility:trail" size="x-small">
+                                        </lightning-icon>
+                                        <div class="slds-truncate">
+                                            {Label.LBL_Is_OnTop_Simulation}
+                                        </div>
+                                    </div>
+                                    <template if:false={canUserModifyAll}>
+                                        <template if:true={lockedByApprovalProcess}>
+                                            <div class="slds-p-left_xx-small slds-grid slds-size_1-of-2"
+                                                title={Label.LBL_Locked_By_Approval_Process}>
+                                                <lightning-icon icon-name="utility:lock" size="x-small">
+                                                </lightning-icon>
+                                                <div class="slds-truncate">
+                                                    {Label.LBL_Locked_By_Approval_Process}
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </template>
+                                    <template if:true={canUserModifyAll}>
+                                        <template if:true={lockedByApprovalProcess}>
+                                            <div class="slds-p-left_xx-small slds-grid slds-size_1-of-2"
+                                                title={Label.LBL_Unlock}>
+                                                <lightning-icon icon-name="utility:unlock" size="x-small">
+                                                </lightning-icon>
+                                                <div class="slds-truncate">
+                                                    {Label.LBL_Unlock}
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </template>
+                                    <div class="slds-p-left_xx-small slds-grid slds-size_1-of-2" title={Label.Delete}>
+                                        <lightning-icon icon-name="utility:delete" size="x-small">
+                                        </lightning-icon>
+                                        <div class="slds-truncate">
+                                            {Label.Delete}
+                                        </div>
+                                    </div>
+                                    <div class="slds-p-left_xx-small slds-grid slds-size_1-of-2"
+                                        title={Label.LBL_Add_Condition}>
+                                        <lightning-icon icon-name="utility:add" size="x-small">
+                                        </lightning-icon>
+                                        <div class="slds-truncate">
+                                            {Label.LBL_Add_Condition}
+                                        </div>
+                                    </div>
+                                    <div class="slds-p-left_xx-small slds-grid slds-size_1-of-2"
+                                        title={Label.Conditions_not_diffused_country_level}>
+                                        <lightning-icon icon-name="utility:home" size="x-small">
+                                        </lightning-icon>
+                                        <div class="slds-truncate">
+                                            {Label.Conditions_not_diffused_country_level}
+                                        </div>
+                                    </div>
+                                    <div class="slds-p-left_xx-small slds-grid slds-size_1-of-2"
+                                        title={Label.LBL_Conditions_not_default_negoscope}>
+                                        <lightning-icon icon-name="utility:bookmark" size="x-small">
+                                        </lightning-icon>
+                                        <div class="slds-truncate">
+                                            {Label.LBL_Conditions_not_default_negoscope}
+                                        </div>
+                                    </div>
+                                    <!-- <div class="slds-grid slds-size_1-of-2" title={instance.Labels.LBL_Duplicate_Contracts}>
+                                    <lightning-icon icon-name="utility:copy" size="x-small">
+                                    </lightning-icon>
+                                    <ul>
+                                        <li title={instance.Labels.createSimulFromNegoBaseLabel} class="slds-truncate">{instance.Labels.createSimulFromNegoBaseLabel}</li>
+                                        <li title={instance.Labels.createSafeBalanceFromNegoBaseLabel} class="slds-truncate">{instance.Labels.createSafeBalanceFromNegoBaseLabel}</li>
+                                        <li title={instance.Labels.createSimulFromSafeBalanceLabel} class="slds-truncate">{instance.Labels.createSimulFromSafeBalanceLabel}</li>
+                                        <li title={instance.Labels.createSimulFromSimulLabel} class="slds-truncate">{instance.Labels.createSimulFromSimulLabel}</li>
+                                        <li title={instance.Labels.duplicateNegoBasetoPE} class="slds-truncate">{instance.Labels.duplicateNegoBasetoPE}</li>
+                                        <li title={instance.Labels.duplicateSafeBalanceToPE} class="slds-truncate">{instance.Labels.duplicateSafeBalanceToPE}</li>
+                                    </ul>
+                                    <div class="slds-truncate">
+                                        {instance.Labels.LBL_Duplicate_Contracts}
+                                    </div>
+                                </div> -->
+                                    <div class="slds-p-left_xx-small slds-grid slds-size_1-of-2"
+                                        title={Label.LBL_Duplicate_Contract}>
+                                        <lightning-icon icon-name="utility:copy" size="x-small"></lightning-icon>
+                                        <div class="slds-truncate">{Label.LBL_Duplicate_Contract}
+                                        </div>
+                                    </div>
+                                    <div class="slds-p-left_xx-small slds-grid slds-size_1-of-2"
+                                        title={Label.LBL_Index_V2_Helper_Text}>
+                                        <span style="color: red;">
+                                            ( &alpha; )&nbsp;
+                                        </span>
+                                        <div class="slds-truncate">{Label.LBL_Index_V2_Helper_Text}
+                                        </div>
+                                    </div>
+                                    <!-- <div class="slds-p-left_xx-small slds-grid slds-size_1-of-2"
+                                        title={instance.Labels.createSimulFromNegoBaseLabel}>
+                                        <lightning-icon icon-name="utility:copy" size="x-small"></lightning-icon>
+                                        <div class="slds-truncate">{instance.Labels.createSimulFromNegoBaseLabel}</div>
+                                    </div>
+                                    <div class="slds-p-left_xx-small slds-grid slds-size_1-of-2"
+                                        title={instance.Labels.createSafeBalanceFromNegoBaseLabel}>
+                                        <lightning-icon icon-name="utility:copy" size="x-small"></lightning-icon>
+                                        <div class="slds-truncate">{instance.Labels.createSafeBalanceFromNegoBaseLabel}
+                                        </div>
+                                    </div>
+                                    <div class="slds-p-left_xx-small slds-grid slds-size_1-of-2"
+                                        title={instance.Labels.createSimulFromSafeBalanceLabel}>
+                                        <lightning-icon icon-name="utility:copy" size="x-small"></lightning-icon>
+                                        <div class="slds-truncate">{instance.Labels.createSimulFromSafeBalanceLabel}
+                                        </div>
+                                    </div>
+                                    <div class="slds-p-left_xx-small slds-grid slds-size_1-of-2"
+                                        title={instance.Labels.createSimulFromSimulLabel}>
+                                        <lightning-icon icon-name="utility:copy" size="x-small"></lightning-icon>
+                                        <div class="slds-truncate">{instance.Labels.createSimulFromSimulLabel}</div>
+                                    </div>
+                                    <div class="slds-p-left_xx-small slds-grid slds-size_1-of-2"
+                                        title={instance.Labels.duplicateNegoBasetoPE}>
+                                        <lightning-icon icon-name="utility:copy" size="x-small"></lightning-icon>
+                                        <div class="slds-truncate">{instance.Labels.duplicateNegoBasetoPE}</div>
+                                    </div> -->
+                                    <!-- <div class="slds-p-left_xx-small slds-grid slds-size_1-of-1"
+                                    title={instance.Labels.duplicateSafeBalanceToPE}>
+                                    <lightning-icon icon-name="utility:copy" size="x-small"></lightning-icon>
+                                    <div class="slds-truncate">{instance.Labels.duplicateSafeBalanceToPE}</div>
+                                </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class={instance.briefClass} if:false={instance.loadingSelection}>
+                <c-negotiate-nego-plan nonce={nonce} data-id="negotiate-nego-plan-cmp" nego-year={instance.negoYear}
+                    onnegoplanloadready={instance.negoplanReadyHandler} ready-event="negoplanloadready"
+                    negoscope-id={instance.selectedNegoScopeId} locked-actions={lockedActions}
+                    contract-r-t-n1-settings={instance.contractRTN1Settings}>
+                </c-negotiate-nego-plan>
+            </div>
+            <div if:true={instance.supplier.displayNegoscopePopup}>
+                <div role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small"
+                    aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                onclick={instance.supplier.cancelSelectNegoscope}>
+                                <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
+                                </svg>
+                            </button>
+                            <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">
+                                {Label.SelectNegoscope}
+                            </h2>
+                        </header>
+                        <div class="slds-modal__content slds-var-p-around_medium slds-scrollable"
+                            style="max-height: 60vh;" id="modal-content-id-1">
+                            <ul class="slds-has-dividers_top slds-has-block-links_space">
+                                <template for:each={instance.supplier.negoscopes} for:item="item">
+                                    <li class="slds-item" data-id={item.Id} key={item}>
+                                        <a href="#" onclick={instance.negoscope.setCurrentItem}
+                                            data-id={item.Id}>{item.Name}</a>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <button class="slds-button slds-button_neutral"
+                                onclick={instance.supplier.cancelSelectNegoscope}>{Label.Cancel}</button>
+                        </footer>
+                    </div>
+                </div>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </div>
+        </template>
+        <lightning-spinner variant="brand" size="large" if:false={instance.readyToDisplay}></lightning-spinner>
+        <lightning-spinner variant="brand" size="large" if:true={Loading}></lightning-spinner>
+    </div>
+    <section class="slds-nubbin_bottom slds-p-bottom_none slds-popover slds-popover_walkthrough" data-id="walkthrough"
+        role="dialog" if:true={displayFirstMessage} style={walkthroughStyle}>
+        <button
+            class="slds-button slds-button_icon slds-button_icon-small slds-float_right slds-popover__close slds-button_icon-inverse"
+            onclick={closeDisplayFirstMessage} title="Close dialog">
+            <svg class="slds-button__icon" aria-hidden="true">
+                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close">
+                </use>
+            </svg>
+        </button>
+        <div class="slds-popover__body">
+            <div class="slds-media">
+                <div class="slds-media__body">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container" title="description of icon when needed">
+                                <svg class="slds-icon slds-icon_small slds-icon-text-default" aria-hidden="true">
+                                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#touch_action">
+                                    </use>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="slds-media__body" style="white-space: pre-wrap;">
+                            <p>{Label.MSG_Start_Your_Negotiate}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div if:true={instance.unableToLockUnlockPopUp.isOpen}>
+        <div role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small"
+            aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        onclick={instance.supplier.cancelSelectNegoscope}
+                        disabled={instance.unableToLockUnlockPopUp.disableButton}>
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
+                        </svg>
+                    </button>
+                    <h2 class="slds-modal__title slds-hyphenate">
+                        {Label.MSG_Error_Lock}
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-var-p-around_medium slds-scrollable" style="max-height: 60vh;">
+                    {Label.MSG_Retry_Save_Or_Reset_Changes}
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label={Label.Cancel} onclick={instance.unableToLockUnlockPopUp.cancel}
+                        class="slds-p-left_xx-small" variant="neutral" if:false={lockedActions}
+                        disabled={instance.unableToLockUnlockPopUp.disableButton}>
+                    </lightning-button>
+                    <lightning-button label={Label.LBL_Save} onclick={instance.save} class="slds-p-left_xx-small"
+                        variant="brand" if:false={lockedActions}
+                        disabled={instance.unableToLockUnlockPopUp.disableButton}>
+                    </lightning-button>
+                </footer>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+    <!-- <div if:false={instance.unableToLockUnlockPopUp.isOpen}>
+        <div if:true={requireConso}>
+            <section class="slds-modal slds-fade-in-open slds-modal_prompt">
+                <div class="slds-modal__container">
+                    <div class="slds-modal__header slds-theme_warning slds-theme_alert-texture">
+                        <h1 class="slds-text-heading_medium">{Label.LBL_Warning}</h1>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <p>{Label.MSG_Conso_Required}</p>
+                    </div>
+                    <div class="slds-modal__footer slds-theme_default">
+                        <lightning-button label={Label.LBL_Consolidate_Contracts} onclick={instance.consolidateContract}
+                            class="slds-p-left_xx-small" variant="neutral" if:false={consoRunning}>
+                        </lightning-button>
+                        <lightning-button label={Label.LBL_Consolidate_Contracts} class="slds-p-left_xx-small"
+                            variant="neutral" disabled if:true={consoRunning}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </div>
+    </div> -->
+    <div if:false={lockedActions}>
+        <div if:true={instance.executiveSummaryPopUp.isOpen}>
+            <div role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small"
+                aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-modal__title slds-hyphenate">
+                            {currentStatusMSG}
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-var-p-around_medium slds-is-relative"
+                        if:false={instance.executiveSummaryPopUp.buttonsFlag}>
+                        <div class="slds-p-around_large">
+                            <!-- <lightning-spinner alternative-text="Loading" variant='brand'></lightning-spinner> -->
+                            <lightning-spinner alternative-text={currentStatusMSG} variant="brand"></lightning-spinner>
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer" if:true={instance.executiveSummaryPopUp.buttonsFlag}>
+                        <lightning-button label={Label.Cancel} onclick={instance.executiveSummaryPopUp.cancel}
+                            class="slds-p-left_xx-small" variant="neutral">
+                        </lightning-button>
+                        <lightning-button label={Label.LBL_Discard_And_Proceed}
+                            onclick={instance.executiveSummaryPopUp.discardAndProceed} class="slds-p-left_xx-small"
+                            variant="neutral">
+                        </lightning-button>
+                        <lightning-button label={Label.LBL_Save} onclick={instance.save} class="slds-p-left_xx-small"
+                            variant="brand">
+                        </lightning-button>
+                    </footer>
+                </div>
+            </div>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </div>
+    <div if:true={savePopUp}>
+        <div role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small"
+            aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-modal__title slds-hyphenate">
+                        {currentStatusMSG}
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-var-p-around_medium slds-is-relative">
+                    <div class="slds-p-around_large">
+                        <!-- <lightning-spinner alternative-text="Loading" variant='brand'> </lightning-spinner>-->
+                        <lightning-spinner alternative-text={currentStatusMSG} variant="brand"></lightning-spinner>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+</template>

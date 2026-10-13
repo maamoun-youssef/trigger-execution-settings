@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <masterLabel>Product Discount Statement Actions</masterLabel>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="recordsIds" type="String" label="Records ids" description="Product Discount Statement Details records ids" default=""/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

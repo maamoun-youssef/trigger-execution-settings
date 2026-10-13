@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Specify the Type of Offer/Assortment managing for the Client/Supplier for the linked agreement --></help>
+    <label>Collection Type</label>
+    <name>CollectionType__c</name>
+</CustomFieldTranslation>

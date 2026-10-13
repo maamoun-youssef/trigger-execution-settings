@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Down</masterLabel>
+        <translation>Inférieur</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Half Down</masterLabel>
+        <translation>Moitié inférieur</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Half Up</masterLabel>
+        <translation>Moitié supérieur</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Up</masterLabel>
+        <translation>Supérieur</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

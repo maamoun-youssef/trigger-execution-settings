@@ -1,0 +1,252 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "File Directory",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "{\"url\":\"/sfsites/c/cms/delivery/media/MCRIOI7HLIPRE7XEWA5JIIFZFIXE?lastModifiedDate=Thu Sep 26 15:10:44 GMT 2024&height=144&width=192\",\"contentKey\":\"MCRIOI7HLIPRE7XEWA5JIIFZFIXE\",\"altText\":\"\",\"contentType\":\"sfdc_cms__image\",\"bgPosition\":\"center center\",\"bgSizeOrRepeat\":\"/cover\"}",
+            "backgroundImageOverlay" : "rgba(37, 141, 121, 0.88)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"c5fbe5c0-2340-422d-bc9a-6f91b3f50d9f\",\"columns\":[{\"UUID\":\"b120e94c-107e-458b-8012-945488081265\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "dxpStyle" : {
+                  "padding" : {
+                    "bottom" : "15px",
+                    "left" : "15px",
+                    "right" : "15px",
+                    "top" : "15px"
+                  }
+                },
+                "imageInfos" : "",
+                "richTextValue" : "<p style=\"text-align: center;\"><strong style=\"font-size: 36px; color: rgb(255, 255, 255);\">Bibliothèque des conditions</strong></p><p style=\"text-align: center;\"><span style=\"color: rgb(255, 255, 255); font-size: 22px;\">La bibliothèque des conditions vous donne accès à l'ensemble des conditions tarifaires / codes juridiques utilisés par votre interlocuteur dans le cadre de la négociation des contrats, ainsi qu'à leurs définitions</span></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><span style=\"color: rgb(255, 255, 255); font-size: 22px;\">﻿. </span></p><p style=\"text-align: center;\">&nbsp;</p>"
+              },
+              "definition" : "community_builder:richTextEditor",
+              "id" : "e95ad5ae-4b0a-4ecc-b67c-5dd2d1f536c8",
+              "type" : "component"
+            }, {
+              "attributes" : {
+                "activeTabBackgroundColor" : "rgb(189, 210, 90)",
+                "activeTabBorderHighlightWeight" : "0px",
+                "activeTabTextAlignment" : "center",
+                "activeTabTextColor" : "rgb(255, 255, 255)",
+                "activeTabTextEmphasis" : "{\"bold\":true}",
+                "activeTabTextStyle" : "{\"textStyle\":\"heading-large\",\"headingTag\":\"h2\"}",
+                "backgroundColor" : "rgba(31, 78, 68, 0.23)",
+                "borderColor" : "rgb(31, 78, 68)",
+                "borderRadius" : "0px",
+                "borderWeight" : "0px",
+                "dxpStyle" : { },
+                "enableOverflowMenu" : false,
+                "imageFit" : "cover",
+                "imageInfo" : "{\"imageInfoV1\":{\"url\":\"\",\"altText\":\"\",\"contentKey\":\"\",\"contentType\":null}}",
+                "imagePosition" : "center left",
+                "overflowIconColor" : "rgb(116,116,116)",
+                "overflowIconStyle" : "menu-icon-horizontal",
+                "overflowMenuLabel" : "Test",
+                "tabAlignment" : "center",
+                "tabBorderColor" : "",
+                "tabBorderRadius" : "0px",
+                "tabBorderWeight" : "0px",
+                "tabHeight" : "50px",
+                "tabHoverBackgroundColor" : "rgba(31, 78, 68, 0.48)",
+                "tabHoverBorderHighlightColor" : "rgb(189, 210, 90)",
+                "tabHoverBorderHighlightWeight" : "0px",
+                "tabHoverTextAlignment" : "center",
+                "tabHoverTextColor" : "rgb(255, 255, 255)",
+                "tabHoverTextEmphasis" : "{\"bold\":false,\"italic\":true}",
+                "tabLayout" : "horizontal",
+                "tabPadding" : "",
+                "tabTextAlignment" : "center",
+                "tabTextBackgroundColor" : "rgb(31, 78, 68)",
+                "tabTextColor" : "rgb(255, 255, 255)",
+                "tabTextEmphasis" : "{\"bold\":false,\"italic\":true}",
+                "tabTextStyle" : "{\"textStyle\":\"heading-large\",\"headingTag\":\"p\"}",
+                "tabWidth" : "100px",
+                "tabsetConfig" : "{\"UUID\":\"835ef888-ab16-409b-b4a3-39f2be94ee0b\",\"activeTab\":null,\"useOverflowMenu\":null,\"tabs\":[{\"UUID\":\"9561e6d2-7b39-47d3-862e-3454f2c1394d\",\"tabName\":\"Remise sur factures\",\"tabKey\":\"tab1\",\"locked\":false,\"allowGuestUser\":false},{\"UUID\":\"aae8bf6c-6404-45e4-9fc6-2c46693ef2de\",\"tabName\":\"Services\",\"tabKey\":\"tab2\",\"locked\":false,\"allowGuestUser\":false},{\"UUID\":\"84012244-e032-4d29-a5d0-d94237ac5b5c\",\"tabName\":\"NIP\",\"tabKey\":\"tab3\",\"locked\":false,\"allowGuestUser\":false}]}",
+                "width" : "100%"
+              },
+              "children" : [ {
+                "children" : [ {
+                  "attributes" : {
+                    "allowDelete" : false,
+                    "allowExport" : false,
+                    "allowFilter" : false,
+                    "allowImport" : false,
+                    "displayCloneButton" : false,
+                    "displayNewInlineButton" : false,
+                    "displayShowHideColumns" : false,
+                    "dxpStyle" : { },
+                    "filterOnNoneDisplayedFields" : false,
+                    "isReadOnly" : true,
+                    "labelNewInlineButton" : "New inline row",
+                    "nameAsURL" : false,
+                    "numberFixedColumns" : 0,
+                    "partialSave" : false,
+                    "quickActions" : "",
+                    "readOnly" : false,
+                    "refreshViewAfterSave" : false,
+                    "showCurrency" : false,
+                    "showCurrencyAsSymbol" : false,
+                    "showSubTotal" : false,
+                    "templateName" : "Remises_sur_facture",
+                    "useRecordIsoCurrency" : false
+                  },
+                  "definition" : "c:gridSettingsPlugin",
+                  "id" : "b4f06030-3765-4951-b57a-8aa090ba4b34",
+                  "type" : "component"
+                } ],
+                "id" : "9561e6d2-7b39-47d3-862e-3454f2c1394d",
+                "name" : "tab1",
+                "title" : "Remise sur factures",
+                "type" : "region"
+              }, {
+                "children" : [ {
+                  "attributes" : {
+                    "allowDelete" : false,
+                    "allowExport" : false,
+                    "allowFilter" : false,
+                    "allowImport" : false,
+                    "displayCloneButton" : false,
+                    "displayNewInlineButton" : false,
+                    "displayShowHideColumns" : false,
+                    "dxpStyle" : { },
+                    "filterOnNoneDisplayedFields" : false,
+                    "isReadOnly" : true,
+                    "labelNewInlineButton" : "New inline row",
+                    "nameAsURL" : false,
+                    "numberFixedColumns" : 0,
+                    "partialSave" : false,
+                    "quickActions" : "",
+                    "readOnly" : false,
+                    "refreshViewAfterSave" : false,
+                    "showCurrency" : false,
+                    "showCurrencyAsSymbol" : false,
+                    "showSubTotal" : false,
+                    "templateName" : "Services",
+                    "useRecordIsoCurrency" : false
+                  },
+                  "definition" : "c:gridSettingsPlugin",
+                  "id" : "6998729f-84be-4fb9-b227-ababf3f04854",
+                  "type" : "component"
+                } ],
+                "id" : "aae8bf6c-6404-45e4-9fc6-2c46693ef2de",
+                "name" : "tab2",
+                "title" : "Services",
+                "type" : "region"
+              }, {
+                "children" : [ {
+                  "attributes" : {
+                    "allowDelete" : false,
+                    "allowExport" : false,
+                    "allowFilter" : false,
+                    "allowImport" : false,
+                    "displayCloneButton" : false,
+                    "displayNewInlineButton" : false,
+                    "displayShowHideColumns" : false,
+                    "dxpStyle" : { },
+                    "filterOnNoneDisplayedFields" : false,
+                    "isReadOnly" : true,
+                    "labelNewInlineButton" : "New inline row",
+                    "nameAsURL" : false,
+                    "numberFixedColumns" : 0,
+                    "partialSave" : false,
+                    "quickActions" : "",
+                    "readOnly" : false,
+                    "refreshViewAfterSave" : false,
+                    "showCurrency" : false,
+                    "showCurrencyAsSymbol" : false,
+                    "showSubTotal" : false,
+                    "templateName" : "FID_NIP",
+                    "useRecordIsoCurrency" : false
+                  },
+                  "definition" : "c:gridSettingsPlugin",
+                  "id" : "5ab3f46a-0aa3-428e-ab5e-aee749790294",
+                  "type" : "component"
+                } ],
+                "id" : "84012244-e032-4d29-a5d0-d94237ac5b5c",
+                "name" : "tab3",
+                "title" : "NIP",
+                "type" : "region"
+              } ],
+              "definition" : "dxp_layout:tabs",
+              "id" : "835ef888-ab16-409b-b4a3-39f2be94ee0b",
+              "type" : "component"
+            } ],
+            "id" : "b120e94c-107e-458b-8012-945488081265",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "c5fbe5c0-2340-422d-bc9a-6f91b3f50d9f",
+          "type" : "component"
+        }, {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"d5add6f8-7344-40ed-9eb8-67ab773d791a\",\"columns\":[{\"UUID\":\"00cbda7a-56c1-41f0-8788-0990a4f918b8\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "id" : "00cbda7a-56c1-41f0-8788-0990a4f918b8",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "d5add6f8-7344-40ed-9eb8-67ab773d791a",
+          "type" : "component"
+        } ],
+        "id" : "ad16299a-4d75-40b2-aef9-544da3be25e4",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "dxpStyle" : { },
+            "pageTitle" : "File Directory",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "6e80cc68-4f11-4dd2-a6e8-69f8f16d0164",
+          "type" : "component"
+        } ],
+        "id" : "dde1d033-66ee-4a46-8345-7f4926db8c76",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "a95db5eb-0ce7-4d00-8a35-d5f68d3e1d87",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-file-directory"
+  },
+  "urlName" : "file-directory"
+}

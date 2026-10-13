@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GlobalLocationPayee__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Location of invoice payee (Factoring company for instance)</description>
+    <label>Payee Location</label>
+    <referenceTo>GlobalLocation__c</referenceTo>
+    <relationshipName>INVGlobalLocationPayee</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

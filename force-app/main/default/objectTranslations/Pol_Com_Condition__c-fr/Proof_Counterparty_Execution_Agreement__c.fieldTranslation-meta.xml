@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Sélectionnez si un contrat d&apos;exécution est obligatoire (contrat d&apos;application, contrat de mandat ou aucun)</help>
+    <label>Exécution de la contrepartie</label>
+    <name>Proof_Counterparty_Execution_Agreement__c</name>
+    <picklistValues>
+        <masterLabel>Application</masterLabel>
+        <translation>Contrat d&apos;application</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Mandat</masterLabel>
+        <translation>Contrat de mandat</translation>
+    </picklistValues>
+</CustomFieldTranslation>

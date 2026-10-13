@@ -1,0 +1,24 @@
+{
+  "type" : "sfdc_cms__trustedSites",
+  "title" : "trustedSites",
+  "contentBody" : {
+    "trustedSites" : [ {
+      "isActive" : true,
+      "source" : "https://login.my.salesforce.com",
+      "sourceName" : "NegoptimConnect2"
+    }, {
+      "isActive" : true,
+      "source" : "https://login.my.site.com",
+      "sourceName" : "Site"
+    }, {
+      "isActive" : true,
+      "source" : "https://cdnjs.cloudflare.com",
+      "sourceName" : "CDN"
+    }, {
+      "isActive" : true,
+      "source" : "https://login.file.force.com",
+      "sourceName" : "internal files"
+    } ]
+  },
+  "urlName" : "trustedsites"
+}

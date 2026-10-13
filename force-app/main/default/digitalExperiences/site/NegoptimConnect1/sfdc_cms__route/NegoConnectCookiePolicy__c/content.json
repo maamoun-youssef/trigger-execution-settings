@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "cookie-policy",
+  "contentBody" : {
+    "activeViewId" : "cookie_policy",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-cookie-policy",
+    "urlPrefix" : "cookie-policy"
+  },
+  "urlName" : "cookie-policy"
+}

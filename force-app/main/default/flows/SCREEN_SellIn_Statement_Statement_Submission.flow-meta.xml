@@ -1,0 +1,1936 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Get_Base_URL</name>
+        <label>Get Base URL</label>
+        <locationX>1260</locationX>
+        <locationY>4430</locationY>
+        <actionName>GetBaseURLInvocable</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Get_Ulit_Logo</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <nameSegment>GetBaseURLInvocable</nameSegment>
+        <offset>0</offset>
+        <outputParameters>
+            <assignToReference>BaseURL</assignToReference>
+            <name>output</name>
+        </outputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Email_Notification_EN</name>
+        <label>Send Email Notification EN</label>
+        <locationX>1656</locationX>
+        <locationY>4970</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Check_the_closed_sellin</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Fault_Screen6</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>RecipientEmail</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>Connect - New Sell-In Revenue Statement Received</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>EmailNotificationBodyEN</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Email_Notification_FR</name>
+        <label>Send Email Notification FR</label>
+        <locationX>864</locationX>
+        <locationY>4970</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Check_the_closed_sellin</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Fault_Screen8</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>RecipientEmail</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>Connect - Nouvelle déclaration de CA reçue </stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>EmailNotificationBodyFR</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Push_Up_Notification_EN</name>
+        <label>Send Push-Up Notification EN</label>
+        <locationX>1656</locationX>
+        <locationY>4862</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <connector>
+            <targetReference>Send_Email_Notification_EN</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Fault_Screen5</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>Get_Custom_Notification.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>RecipientIDs</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <stringValue>Connect - New Sell-In Revenue Statement Received</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>PushUpNotificationBodyEN</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetPageRef</name>
+            <value>
+                <elementReference>CustomNotificationRedirection</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>customNotificationAction</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Push_Up_Notification_FR</name>
+        <label>Send Push-Up Notification FR</label>
+        <locationX>864</locationX>
+        <locationY>4862</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <connector>
+            <targetReference>Send_Email_Notification_FR</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Fault_Screen7</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>Get_Custom_Notification.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>RecipientIDs</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <stringValue>Connect - Nouvelle déclaration de CA reçue</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>PushUpNotificationBodyFR</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetPageRef</name>
+            <value>
+                <elementReference>CustomNotificationRedirection</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>customNotificationAction</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <apiVersion>62.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Connect_Setting</name>
+        <label>Connect Setting</label>
+        <locationX>1150</locationX>
+        <locationY>1466</locationY>
+        <assignmentItems>
+            <assignToReference>ConnectSetting</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>GetConnectSetting</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>InitRemainingOptionsString</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Increment_Body_Index</name>
+        <label>Increment Body Index</label>
+        <locationX>3394</locationX>
+        <locationY>3338</locationY>
+        <assignmentItems>
+            <assignToReference>Index</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>SellInListDetailsRow</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>SellInDetailsSelectedRows</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_SellIn_Body</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Increment_Header_Index</name>
+        <label>Increment Header Index</label>
+        <locationX>2074</locationX>
+        <locationY>2306</locationY>
+        <assignmentItems>
+            <assignToReference>Index</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>SSDHEADER</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>SellInStatementDetailHeaderFormula</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_SellIn_Headers</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>InitRemainingOptionsString</name>
+        <label>InitRemainingOptionsString</label>
+        <locationX>1018</locationX>
+        <locationY>1766</locationY>
+        <assignmentItems>
+            <assignToReference>RemainingOptionsString</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ConnectSettingsCleanedString</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Through_Options</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>ResetIndex</name>
+        <label>ResetIndex</label>
+        <locationX>1986</locationX>
+        <locationY>1982</locationY>
+        <assignmentItems>
+            <assignToReference>Index</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_SellIn_Headers</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>ResetIndex1</name>
+        <label>ResetIndex1</label>
+        <locationX>3306</locationX>
+        <locationY>3014</locationY>
+        <assignmentItems>
+            <assignToReference>Index</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>SellInListDetailsRow</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_SellIn_Body</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Prefix_Connect_Setting</name>
+        <label>Set Prefix Connect Setting</label>
+        <locationX>886</locationX>
+        <locationY>1574</locationY>
+        <assignmentItems>
+            <assignToReference>ConnectSetting</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>GetConnectSettingPrefix</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>InitRemainingOptionsString</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Recipient_ID</name>
+        <label>Set Recipient ID</label>
+        <locationX>1260</locationX>
+        <locationY>4322</locationY>
+        <assignmentItems>
+            <assignToReference>RecipientIDs</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_Related_SellInStatement.NegoScope__r.Owner:User.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>RecipientEmail</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Related_SellInStatement.NegoScope__r.Owner:User.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_Base_URL</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_record_IDs</name>
+        <label>Set record IDs</label>
+        <locationX>1953</locationX>
+        <locationY>242</locationY>
+        <assignmentItems>
+            <assignToReference>recordIds</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_record_Ids</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Remaining_Option</name>
+        <label>Set Remaining Option</label>
+        <locationX>50</locationX>
+        <locationY>2090</locationY>
+        <assignmentItems>
+            <assignToReference>RemainingOptionsString</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>RemainingOptions</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Loop_Through_Options</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Sell_In_Statement_Collection</name>
+        <label>Set Sell-In Statement Collection</label>
+        <locationX>2349</locationX>
+        <locationY>758</locationY>
+        <assignmentItems>
+            <assignToReference>SellInStatementCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_Related_SellInStatement</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_record_Ids</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_SellIn_Options</name>
+        <label>Set SellIn Options</label>
+        <locationX>50</locationX>
+        <locationY>1982</locationY>
+        <assignmentItems>
+            <assignToReference>Index</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>SellInOptions</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>CurrentOption</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_Remaining_Option</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_SellIn_Statement_Details_Variables</name>
+        <label>Set SellIn Statement Details Variables</label>
+        <locationX>3306</locationX>
+        <locationY>3614</locationY>
+        <assignmentItems>
+            <assignToReference>Loop_SellIn_Statement_Details.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Submitted</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>SellInStatementDetailsCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_SellIn_Statement_Details</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>SSDRowList</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>SellInStatementDetailRowFormula</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_SellIn_Statement_Details</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_SellIn_Statement_Variables</name>
+        <label>Set SellIn Statement Variables</label>
+        <locationX>2866</locationX>
+        <locationY>2798</locationY>
+        <assignmentItems>
+            <assignToReference>Loop_SellIn_Statement_Collection.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Submitted</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>SellInStatementToUpdate</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_SellIn_Statement_Collection</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>SubmitedSellInIdSet</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_SellIn_Statement_Collection.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_SellIn_Statement_Details</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Check_if_single_record</name>
+        <label>Check if single record</label>
+        <locationX>2085</locationX>
+        <locationY>134</locationY>
+        <defaultConnector>
+            <targetReference>Loop_record_Ids</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>is_single_record</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>recordId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>recordId</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_record_IDs</targetReference>
+            </connector>
+            <label>is single record</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_the_closed_sellin</name>
+        <label>Check the closed sellin</label>
+        <locationX>1986</locationX>
+        <locationY>5486</locationY>
+        <defaultConnector>
+            <targetReference>Final_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>SubmitedSellIns</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SubmitedSellInIdSet</leftValueReference>
+                <operator>IsEmpty</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Assigned_Tasks</targetReference>
+            </connector>
+            <label>SubmitedSellIns</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>ConnectSettingNull</name>
+        <label>ConnectSettingNull</label>
+        <locationX>1018</locationX>
+        <locationY>1358</locationY>
+        <defaultConnector>
+            <targetReference>Connect_Setting</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>IsNull</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>GetConnectSetting</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>GetConnectSetting</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>GetConnectSettingPrefix</targetReference>
+            </connector>
+            <label>IsNull</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_NS_Owner_FR_or_EN</name>
+        <label>Is NS Owner FR or EN ?</label>
+        <locationX>1260</locationX>
+        <locationY>4754</locationY>
+        <defaultConnector>
+            <targetReference>Send_Push_Up_Notification_EN</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>EN</defaultConnectorLabel>
+        <rules>
+            <name>FR</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Related_SellInStatement.NegoScope__r.Owner:User.LanguageLocaleKey</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>fr</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Push_Up_Notification_FR</targetReference>
+            </connector>
+            <label>FR</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_Owner_active</name>
+        <label>Is Negoscope Owner active?</label>
+        <locationX>1986</locationX>
+        <locationY>4106</locationY>
+        <defaultConnector>
+            <targetReference>Check_the_closed_sellin</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_NS_Owner_is_active</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Related_SellInStatement.NegoScope__r.Owner:User.IsActive</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Custom_Notification</targetReference>
+            </connector>
+            <label>Yes NS Owner is active</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_Sell_In_Statement_already_validated</name>
+        <label>Is Sell-In Statement already validated?</label>
+        <locationX>2261</locationX>
+        <locationY>650</locationY>
+        <defaultConnector>
+            <targetReference>Set_Sell_In_Statement_Collection</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_statement_is_validated</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Related_SellInStatement.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Closed</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_record_Ids</targetReference>
+            </connector>
+            <label>Yes statement is validated</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_there_a_sell_in_statement_to_submit</name>
+        <label>Is there a sell-in statement to submit?</label>
+        <locationX>2085</locationX>
+        <locationY>1034</locationY>
+        <defaultConnector>
+            <targetReference>No_Sell_In_Statement_to_Submit</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_there_is_a_sell_in_statement_to_submit</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SellInStatementCollection</leftValueReference>
+                <operator>IsEmpty</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Submission_Confirmation_Screen</targetReference>
+            </connector>
+            <label>Yes there is a sell-in statement to submit</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>IsValidBody</name>
+        <label>IsValidBody</label>
+        <locationX>3526</locationX>
+        <locationY>3230</locationY>
+        <defaultConnector>
+            <targetReference>Get_SellIn_Body</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Valid_Body</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Index</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <numberValue>4.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Increment_Body_Index</targetReference>
+            </connector>
+            <label>Valid Body</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>IsValidHeader</name>
+        <label>IsValidHeader</label>
+        <locationX>2206</locationX>
+        <locationY>2198</locationY>
+        <defaultConnector>
+            <targetReference>Get_SellIn_Headers</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Valid_Header</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Index</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <numberValue>4.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Increment_Header_Index</targetReference>
+            </connector>
+            <label>Valid Header</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Loop_Through_Options</name>
+        <label>Loop Through Options</label>
+        <locationX>1018</locationX>
+        <locationY>1874</locationY>
+        <defaultConnector>
+            <targetReference>ResetIndex</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Increment_Connect_Setting</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ConnectSettingsIndex</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <elementReference>Index</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_SellIn_Options</targetReference>
+            </connector>
+            <label>Increment Connect Setting</label>
+        </rules>
+    </decisions>
+    <description>W-008503: Dev Request - negOptim 2.0 - Connect - Sellin tasks closing</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>filter passed to page sellinCollaborativeRestitution</description>
+        <name>appliedfilters</name>
+        <dataType>String</dataType>
+        <expression>&quot;\&quot;[\&quot;NegoScope__c IN (&apos;&quot;&amp;{!Get_Related_SellInStatement.NegoScope__c}&amp;&quot;&apos;)\&quot;,\&quot;ReferenceYear__c = &quot;&amp;Text({!Get_Related_SellInStatement.ReferenceYear__c})&amp;&quot;\&quot;,\&quot;PeriodType__c IN (&apos;&quot;&amp;Text({!Get_Related_SellInStatement.PeriodType__c})&amp;&quot;&apos;)\&quot;]\&quot;&quot;</expression>
+    </formulas>
+    <formulas>
+        <name>Client_Logo_Formula</name>
+        <dataType>String</dataType>
+        <expression>LEFT(
+  {!$Api.Partner_Server_URL_630},
+  FIND(&quot;/services&quot;, {!$Api.Partner_Server_URL_630}) - 1
+) &amp; &quot;/servlet/servlet.ImageServer?id=&quot; &amp; {!Get_Client_Logo.Id}  &amp; &quot;&amp;oid=&quot; &amp; {!$Organization.Id}</expression>
+    </formulas>
+    <formulas>
+        <name>ConnectSettingsCleanedString</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!ConnectSetting.SellInRevenueOptions__c}, &apos;[&quot;&apos;, &apos;&apos;), &apos;&quot;]&apos;, &apos;&apos;), &apos;\&quot;&apos;, &apos;&apos;)</expression>
+    </formulas>
+    <formulas>
+        <name>ConnectSettingsIndex</name>
+        <dataType>Number</dataType>
+        <expression>(LEN({!ConnectSetting.SellInRevenueOptions__c}) - LEN(SUBSTITUTE({!ConnectSetting.SellInRevenueOptions__c}, &quot;,&quot;, &quot;&quot;))) +1</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>CurrentOption</name>
+        <dataType>String</dataType>
+        <expression>IF(CONTAINS({!RemainingOptionsString}, &quot;,&quot;), 
+   LEFT({!RemainingOptionsString}, FIND(&quot;,&quot;, {!RemainingOptionsString}) - 1), 
+   {!RemainingOptionsString})</expression>
+    </formulas>
+    <formulas>
+        <name>CurrentUserIsFR</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(TEXT({!$User.LanguageLocaleKey})=&apos;fr&apos;,TRUE,FALSE)</expression>
+    </formulas>
+    <formulas>
+        <name>CustomNotificationRedirection_formula</name>
+        <dataType>String</dataType>
+        <expression>&apos;{ &quot;type&quot;: &quot;standard__webPage&quot;, &quot;attributes&quot;: { &quot;url&quot;: &quot;&apos; &amp; {!BaseURL} &amp; &apos;/lightning/n/sellinCollaborativeRestitution?c__appliedfilters=[\&quot;NegoScope__c IN (&apos; &amp; {!Get_Related_SellInStatement.NegoScope__c} &amp; &apos;)\&quot;,\&quot;ReferenceYear__c = &apos; &amp; TEXT({!Get_Related_SellInStatement.ReferenceYear__c}) &amp; &apos;\&quot;,\&quot;PeriodType__c IN (&apos; &amp; TEXT({!Get_Related_SellInStatement.PeriodType__c}) &amp; &apos;)\&quot;]\&quot; } }&apos;</expression>
+    </formulas>
+    <formulas>
+        <name>Email_Logo_Formula</name>
+        <dataType>String</dataType>
+        <expression>LEFT(
+  {!$Api.Partner_Server_URL_630},
+  FIND(&quot;/services&quot;, {!$Api.Partner_Server_URL_630}) - 1
+) &amp; &quot;/servlet/servlet.ImageServer?id=&quot; &amp; {!Get_Ulit_Logo.Id}  &amp; &quot;&amp;oid=&quot; &amp; {!$Organization.Id}</expression>
+    </formulas>
+    <formulas>
+        <name>PeriodType_Formula</name>
+        <dataType>String</dataType>
+        <expression>IF(TEXT({!Get_Related_SellInStatement.NegoScope__r.Owner:User.LanguageLocaleKey})=&quot;fr&quot;,
+CASE(TEXT({!Loop_SellIn_Statement_Collection.PeriodType__c}),
+&quot;Month&quot;,&quot;Mois&quot;,
+&quot;Trimester&quot;,&quot;Trimestre&quot;,
+&quot;Semester&quot;,&quot;Semestre&quot;,
+&quot;Annual&quot;,&quot;Année&quot;,
+null),
+TEXT({!Loop_SellIn_Statement_Collection.PeriodType__c}))</expression>
+    </formulas>
+    <formulas>
+        <name>RemainingOptions</name>
+        <dataType>String</dataType>
+        <expression>IF(CONTAINS({!RemainingOptionsString}, &quot;,&quot;), 
+   RIGHT({!RemainingOptionsString}, LEN({!RemainingOptionsString}) - FIND(&quot;,&quot;, {!RemainingOptionsString})), 
+   &quot;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>SellInDetailsHeaders</name>
+        <dataType>String</dataType>
+        <expression>&quot;&quot;</expression>
+    </formulas>
+    <formulas>
+        <name>SellInDetailsSelectedRows</name>
+        <dataType>String</dataType>
+        <expression>CASE({!Get_SellIn_Body},
+            &quot;LBL_Connect_RegularDiscountableRevenue&quot;,
+            &quot;&lt;td style=\&quot;text-align:right;\&quot;&gt;&quot; &amp;
+              TEXT({!Loop_SellIn_Statement_Details.SellInDiscRegularP__c}) &amp;
+            &quot;&lt;/td&gt;&quot;,
+          &quot;LBL_Connect_PromoDiscountableRevenue&quot;,
+            &quot;&lt;td style=\&quot;text-align:right;\&quot;&gt;&quot; &amp;
+              TEXT({!Loop_SellIn_Statement_Details.SellInDiscPromoP__c}) &amp;
+            &quot;&lt;/td&gt;&quot;,
+          &quot;LBL_Connect_TotalDiscountableRevenue&quot;,
+            &quot;&lt;td style=\&quot;text-align:right;\&quot;&gt;&quot; &amp;
+              TEXT({!Loop_SellIn_Statement_Details.SellInDiscTotalP__c}) &amp;
+            &quot;&lt;/td&gt;&quot;,
+          &quot;LBL_Connect_NonDiscountableRevenue&quot;,
+            &quot;&lt;td style=\&quot;text-align:right;\&quot;&gt;&quot; &amp;
+              TEXT({!Loop_SellIn_Statement_Details.SellInNonDiscP__c}) &amp;
+            &quot;&lt;/td&gt;&quot;,
+            &quot;LBL_Connect_RegularDiscountableQuantity&quot;,
+              &quot;&lt;td style=\&quot;text-align:right;\&quot;&gt;&quot; &amp;
+                TEXT({!Loop_SellIn_Statement_Details.SellInDiscRegularQtyP__c}) &amp;
+              &quot;&lt;/td&gt;&quot;,
+          &quot;LBL_Connect_PromoDiscountableQuantity&quot;,
+              &quot;&lt;td style=\&quot;text-align:right;\&quot;&gt;&quot; &amp;
+                TEXT({!Loop_SellIn_Statement_Details.SellInDiscPromoQtyP__c}) &amp;
+              &quot;&lt;/td&gt;&quot;,
+          &quot;LBL_Connect_TotalDiscountableQuantity&quot;,
+              &quot;&lt;td style=\&quot;text-align:right;\&quot;&gt;&quot; &amp;
+                TEXT({!Loop_SellIn_Statement_Details.SellInDiscTotalQtyP__c}) &amp;
+              &quot;&lt;/td&gt;&quot;,
+          &quot;LBL_Connect_NonDiscountableQuantity&quot;,
+              &quot;&lt;td style=\&quot;text-align:right;\&quot;&gt;&quot; &amp;
+                TEXT({!Loop_SellIn_Statement_Details.SellInNonDiscQtyP__c}) &amp;
+              &quot;&lt;/td&gt;&quot;,
+          &quot;&quot;
+          )</expression>
+    </formulas>
+    <formulas>
+        <name>SellInStatementDetailHeaderFormula</name>
+        <dataType>String</dataType>
+        <expression>CASE({!Get_SellIn_Headers},
+            &quot;LBL_Connect_RegularDiscountableRevenue&quot;,
+                &quot;&lt;th style=\&quot;text-align:center;\&quot;&gt;&quot; &amp;
+                  {!$Label.LBL_ConnectSellInPeriod} &amp; &quot; - &quot; &amp; {!$Label.LBL_RegularDisc} &amp;
+                &quot;&lt;/th&gt;&quot;,
+              
+            &quot;LBL_Connect_PromoDiscountableRevenue&quot;,
+                &quot;&lt;th style=\&quot;text-align:center;\&quot;&gt;&quot; &amp;
+                  {!$Label.LBL_ConnectSellInPeriod} &amp; &quot; - &quot; &amp; {!$Label.LBL_PromoDisc} &amp;
+                &quot;&lt;/th&gt;&quot;,
+            
+            &quot;LBL_Connect_TotalDiscountableRevenue&quot;,
+                &quot;&lt;th style=\&quot;text-align:center;\&quot;&gt;&quot; &amp;
+                  {!$Label.LBL_ConnectSellInPeriod} &amp; &quot; - &quot; &amp; {!$Label.LBL_TotalDisc} &amp;
+                &quot;&lt;/th&gt;&quot;,
+            
+            &quot;LBL_Connect_NonDiscountableRevenue&quot;,
+                &quot;&lt;th style=\&quot;text-align:center;\&quot;&gt;&quot; &amp;
+                  {!$Label.LBL_ConnectSellInPeriod} &amp; &quot; - &quot; &amp; {!$Label.LBL_NonDisc} &amp;
+                &quot;&lt;/th&gt;&quot;,
+            
+            &quot;LBL_Connect_RegularDiscountableQuantity&quot;,
+                &quot;&lt;th style=\&quot;text-align:center;\&quot;&gt;&quot; &amp;
+                  {!$Label.LBL_ConnectSellInQtyPeriod} &amp; &quot; - &quot; &amp; {!$Label.LBL_RegularDisc} &amp;
+                &quot;&lt;/th&gt;&quot;,
+            
+            &quot;LBL_Connect_PromoDiscountableQuantity&quot;,
+                &quot;&lt;th style=\&quot;text-align:center;\&quot;&gt;&quot; &amp;
+                  {!$Label.LBL_ConnectSellInQtyPeriod} &amp; &quot; - &quot; &amp; {!$Label.LBL_PromoDisc} &amp;
+                &quot;&lt;/th&gt;&quot;,
+            
+            &quot;LBL_Connect_TotalDiscountableQuantity&quot;,
+                &quot;&lt;th style=\&quot;text-align:center;\&quot;&gt;&quot; &amp;
+                  {!$Label.LBL_ConnectSellInQtyPeriod} &amp; &quot; - &quot; &amp; {!$Label.LBL_TotalDisc} &amp;
+                &quot;&lt;/th&gt;&quot;,
+            
+            &quot;LBL_Connect_NonDiscountableQuantity&quot;,
+                &quot;&lt;th style=\&quot;text-align:center;\&quot;&gt;&quot; &amp;
+                  {!$Label.LBL_ConnectSellInQtyPeriod} &amp; &quot; - &quot; &amp; {!$Label.LBL_NonDisc} &amp;
+                &quot;&lt;/th&gt;&quot;,
+             &quot;&quot;
+            )</expression>
+    </formulas>
+    <formulas>
+        <name>SellInStatementDetailRowFormula</name>
+        <dataType>String</dataType>
+        <expression>&quot;&lt;tr&gt;&quot; &amp;
+  /* First three always-on cells */
+  &quot;&lt;td style=\&quot;text-align:center;font-weight:bold;\&quot;&gt;&quot; &amp;
+    {!PeriodType_Formula} &amp;
+  &quot;&lt;/td&gt;&quot; &amp;
+  &quot;&lt;td style=\&quot;text-align:center;font-weight:bold;\&quot;&gt;&quot; &amp;
+    TEXT({!Loop_SellIn_Statement_Collection.PeriodNumber__c}) &amp;
+  &quot;&lt;/td&gt;&quot; &amp;
+  &quot;&lt;td style=\&quot;text-align:center;\&quot;&gt;&quot; &amp;
+    {!Loop_SellIn_Statement_Details.BusinessUnit__r.Name} &amp;
+  &quot;&lt;/td&gt;&quot; &amp;
+{!SellInListDetailsRow}
+&amp;
+&quot;&lt;/tr&gt;&quot;</expression>
+    </formulas>
+    <formulas>
+        <name>SellInStatementURL_Formula</name>
+        <dataType>String</dataType>
+        <expression>{!BaseURL}&amp;&quot;/lightning/n/sellinCollaborativeRestitution?c__negoScopeId=&quot;&amp;{!Get_Related_SellInStatement.NegoScope__c}
+&amp;&quot;&amp;c__referenceYear=&quot;&amp;Text({!Get_Related_SellInStatement.ReferenceYear__c})
+&amp;&quot;&amp;c__periodType=&quot;&amp;text({!Get_Related_SellInStatement.PeriodType__c})</expression>
+    </formulas>
+    <interviewLabel>SCREEN - SellIn Statement - Statement Submission {!$Flow.CurrentDateTime}</interviewLabel>
+    <isOverridable>true</isOverridable>
+    <label>SCREEN - SellIn Statement - Statement Submission</label>
+    <loops>
+        <name>Get_SellIn_Body</name>
+        <label>Get SellIn Body</label>
+        <locationX>3306</locationX>
+        <locationY>3122</locationY>
+        <collectionReference>SellInOptions</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>IsValidBody</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Set_SellIn_Statement_Details_Variables</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Get_SellIn_Headers</name>
+        <label>Get SellIn Headers</label>
+        <locationX>1986</locationX>
+        <locationY>2090</locationY>
+        <collectionReference>SellInOptions</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>IsValidHeader</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Loop_SellIn_Statement_Collection</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Loop_record_Ids</name>
+        <label>Loop record Ids</label>
+        <locationX>2085</locationX>
+        <locationY>434</locationY>
+        <collectionReference>recordIds</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Get_Related_SellInStatement</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Is_there_a_sell_in_statement_to_submit</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Loop_SellIn_Statement_Collection</name>
+        <label>Loop SellIn Statement Collection</label>
+        <locationX>1986</locationX>
+        <locationY>2582</locationY>
+        <collectionReference>SellInStatementCollection</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Get_Related_SellIn_Statement_Details</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Update_SellIn_Statement_Collection</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Loop_SellIn_Statement_Details</name>
+        <label>Loop SellIn Statement Details</label>
+        <locationX>2866</locationX>
+        <locationY>2906</locationY>
+        <collectionReference>Get_Related_SellIn_Statement_Details</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>ResetIndex1</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Loop_SellIn_Statement_Collection</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <name>Get_Client_Logo</name>
+        <label>Get Client Logo</label>
+        <locationX>1260</locationX>
+        <locationY>4646</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Is_NS_Owner_FR_or_EN</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Client_Logo</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Document</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Custom_Notification</name>
+        <label>Get Custom Notification</label>
+        <locationX>1260</locationX>
+        <locationY>4214</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Recipient_ID</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Fault_Screen4</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Desktop</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CustomNotificationType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Related_SellIn_Statement_Details</name>
+        <label>Get Related SellIn Statement Details</label>
+        <locationX>2866</locationX>
+        <locationY>2690</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_SellIn_Statement_Variables</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Fault_Screen2</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SellInStatement__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Loop_SellIn_Statement_Collection.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Validated</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>SellInStatementDetail__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Related_SellInStatement</name>
+        <label>Get Related Sell-In Statement</label>
+        <locationX>2261</locationX>
+        <locationY>542</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Is_Sell_In_Statement_already_validated</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Fault_Screen1</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Loop_record_Ids</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>SellInStatement__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Ulit_Logo</name>
+        <label>Get Ulit Logo</label>
+        <locationX>1260</locationX>
+        <locationY>4538</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Client_Logo</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>negOptim_by_ULiT_Logo</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Document</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>GetConnectSetting</name>
+        <label>GetConnectSetting</label>
+        <locationX>1018</locationX>
+        <locationY>1250</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>ConnectSettingNull</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>NamespacePrefix</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>ConnectSettings__mdt</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>GetConnectSettingPrefix</name>
+        <label>GetConnectSettingPrefix</label>
+        <locationX>886</locationX>
+        <locationY>1466</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Prefix_Connect_Setting</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>NamespacePrefix</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>ConnectSettings__mdt</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Assigned_Tasks</name>
+        <label>Update Assigned Tasks</label>
+        <locationX>1854</locationX>
+        <locationY>5594</locationY>
+        <connector>
+            <targetReference>Final_Screen</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>WhatId</field>
+            <operator>In</operator>
+            <value>
+                <elementReference>SubmitedSellInIdSet</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Completed</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Completed</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_SellIn_Statement_Collection</name>
+        <label>Update SellIn Statement Collection</label>
+        <locationX>1986</locationX>
+        <locationY>3890</locationY>
+        <connector>
+            <targetReference>Update_SellIn_Statement_Details</targetReference>
+        </connector>
+        <inputReference>SellInStatementToUpdate</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_SellIn_Statement_Details</name>
+        <label>Update SellIn Statement Details</label>
+        <locationX>1986</locationX>
+        <locationY>3998</locationY>
+        <connector>
+            <targetReference>Is_Owner_active</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Fault_Screen3</targetReference>
+        </faultConnector>
+        <inputReference>SellInStatementDetailsCollection</inputReference>
+    </recordUpdates>
+    <runInMode>SystemModeWithoutSharing</runInMode>
+    <screens>
+        <name>Fault_Screen1</name>
+        <label>Fault Screen</label>
+        <locationX>2613</locationX>
+        <locationY>650</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>FaultMsg</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(254, 1, 0);&quot;&gt;{!$Flow.FaultMessage}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Fault_Screen2</name>
+        <label>Fault Screen</label>
+        <locationX>3130</locationX>
+        <locationY>2798</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Copy_1_of_FaultMsg</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(254, 1, 0);&quot;&gt;{!$Flow.FaultMessage}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Fault_Screen3</name>
+        <label>Fault Screen</label>
+        <locationX>2888</locationX>
+        <locationY>4106</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Copy_1_of_Copy_1_of_FaultMsg</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(254, 1, 0);&quot;&gt;{!$Flow.FaultMessage}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Fault_Screen4</name>
+        <label>Fault Screen</label>
+        <locationX>2448</locationX>
+        <locationY>4322</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Copy_2_of_Copy_1_of_FaultMsg</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(254, 1, 0);&quot;&gt;{!$Flow.FaultMessage}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Fault_Screen5</name>
+        <label>Fault Screen</label>
+        <locationX>2184</locationX>
+        <locationY>4970</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Copy_1_of_Copy_2_of_Copy_1_of_FaultMsg</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(254, 1, 0);&quot;&gt;{!$Flow.FaultMessage}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Fault_Screen6</name>
+        <label>Fault Screen</label>
+        <locationX>1920</locationX>
+        <locationY>5078</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Copy_2_of_Copy_2_of_Copy_1_of_FaultMsg</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(254, 1, 0);&quot;&gt;{!$Flow.FaultMessage}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Fault_Screen7</name>
+        <label>Fault Screen</label>
+        <locationX>1392</locationX>
+        <locationY>4970</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Copy_3_of_Copy_2_of_Copy_1_of_FaultMsg</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(254, 1, 0);&quot;&gt;{!$Flow.FaultMessage}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Fault_Screen8</name>
+        <label>Fault Screen</label>
+        <locationX>1128</locationX>
+        <locationY>5078</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Copy_4_of_Copy_2_of_Copy_1_of_FaultMsg</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(254, 1, 0);&quot;&gt;{!$Flow.FaultMessage}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Final_Screen</name>
+        <label>Final Screen</label>
+        <locationX>1986</locationX>
+        <locationY>5786</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Final_DisplayTextFR</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 18px;&quot;&gt;Envoyé avec succès&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;Votre interlocuteur a été notifié &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>CurrentUserIsFR</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Final_DisplayTextEN</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 18px;&quot;&gt;Succesfully sent&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;Your contact person has been notified of your submission&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>CurrentUserIsFR</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>false</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>No_Sell_In_Statement_to_Submit</name>
+        <label>No Sell-In Statement to Submit</label>
+        <locationX>3152</locationX>
+        <locationY>1142</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>NoSellInStatement_DisplayTextFR</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 18px;&quot;&gt;Il n&apos;y a pas de nouvelle déclaration à envoyer &lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;Vous ne pouvez envoyer de nouvelles modifications que si les déclarations n&apos;ont pas encore été validées &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>CurrentUserIsFR</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>NoSellInStatement_DisplayTextEN</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 18px;&quot;&gt;There is no new statement to submit &lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;You can only submit modifications if the statement has not been validated yet &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>CurrentUserIsFR</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>false</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>Submission_Confirmation_Screen</name>
+        <label>Submission Confirmation Screen</label>
+        <locationX>1018</locationX>
+        <locationY>1142</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <backButtonLabel>Abandonner</backButtonLabel>
+        <connector>
+            <targetReference>GetConnectSetting</targetReference>
+        </connector>
+        <fields>
+            <name>SubmissionConfirmation_DisplayTextFR</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 18px;&quot;&gt;Envoi de la déclaration de CA à votre interlocuteur &lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;Vous êtes sur le point d&apos;envoyer les informations suivantes à {!Get_Related_SellInStatement.NegoScope__r.Owner:User.FirstName} &lt;/span&gt;&lt;span style=&quot;font-size: 16px; color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;{!Get_Related_SellInStatement.NegoScope__r.Owner:User.LastName}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>CurrentUserIsFR</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>SubmissionConfirmation_DisplayTextEN</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 18px;&quot;&gt;Revenue statement submission &lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;You are about to send the below information to  {!Get_Related_SellInStatement.NegoScope__r.Owner:User.FirstName} &lt;/span&gt;&lt;span style=&quot;font-size: 16px; background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!Get_Related_SellInStatement.NegoScope__r.Owner:User.LastName}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>CurrentUserIsFR</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>false</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>SellInStatement_DataTable</name>
+            <dataTypeMappings>
+                <typeName>T</typeName>
+                <typeValue>SellInStatement__c</typeValue>
+            </dataTypeMappings>
+            <extensionName>flowruntime:datatable</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Déclarations concernées:</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>selectionMode</name>
+                <value>
+                    <stringValue>NO_SELECTION</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>minRowSelection</name>
+                <value>
+                    <numberValue>0.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>tableData</name>
+                <value>
+                    <elementReference>SellInStatementCollection</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>maxRowSelection</name>
+                <value>
+                    <numberValue>0.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>columns</name>
+                <value>
+                    <stringValue>[{&quot;apiName&quot;:&quot;Name&quot;,&quot;guid&quot;:&quot;column-3bb7&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;{!$Label.LBL_Connect_SellInStatementName}&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;label&quot;:&quot;Sell In Statement Name&quot;,&quot;type&quot;:&quot;text&quot;}]</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>shouldDisplayLabel</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <nextOrFinishButtonLabel>Confirmer</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <start>
+        <locationX>1959</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_if_single_record</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>CustomNotificationRedirection</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>{   
+
+  &quot;type&quot;: &quot;standard__webPage&quot;,
+
+  &quot;attributes&quot;: {
+
+    &quot;url&quot;: &quot;{!SellInStatementURL_Formula}&quot;
+
+  }
+
+}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>EmailNotificationBodyEN</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;img src=&quot;{!Client_Logo_Formula}&quot; alt=&quot;Logo&quot; style=&quot;display: block; margin-top: 10px; width: 200px;&quot;/&gt;
+&lt;p&gt;Hello &lt;strong&gt;{!Get_Related_SellInStatement.NegoScope__r.Owner:User.FirstName} &lt;/strong&gt;&lt;strong style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!Get_Related_SellInStatement.NegoScope__r.Owner:User.LastName}&lt;/strong&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;,&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;ℹ️ Your supplier &lt;/span&gt;&lt;strong style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!Get_Related_SellInStatement.Supplier__r.Name}&lt;/strong&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt; has sent you a sell-in revenue statement for negoscope  &lt;/span&gt;&lt;strong style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!Get_Related_SellInStatement.NegoScope__r.Name}&lt;/strong&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt; - reference year &lt;/span&gt;&lt;strong style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!Get_Related_SellInStatement.ReferenceYear__c} &lt;/strong&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;via the Connect Portal. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;background-color: rgb(255, 255, 255); color: rgb(78, 194, 169);&quot;&gt;&lt;u&gt;📶 See the details below:&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!SSDTableEN}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;➡️ Feel free to  &lt;a href=&quot;{!SellInStatementURL_Formula}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;click here&lt;/a&gt; to view this statement on negOptim. &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Best regards,&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;color: rgb(128, 107, 191); font-size: 18px;&quot;&gt;The Connect team&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;{!Email_Logo_Formula}&quot; alt=&quot;Logo&quot; style=&quot;display: block; margin-top: 10px; width: 200px;&quot;/&gt;
+&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>EmailNotificationBodyFR</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;img src=&quot;{!Client_Logo_Formula}&quot; alt=&quot;Logo&quot; style=&quot;display: block; margin-top: 10px; width: 200px;&quot;/&gt;
+&lt;p&gt;Bonjour &lt;strong&gt;{!Get_Related_SellInStatement.NegoScope__r.Owner:User.FirstName} &lt;/strong&gt;&lt;strong style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;{!Get_Related_SellInStatement.NegoScope__r.Owner:User.LastName}&lt;/strong&gt;&lt;span style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;,&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;ℹ️ Votre fournisseur &lt;/span&gt;&lt;strong style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;{!Get_Related_SellInStatement.Supplier__r.Name}&lt;/strong&gt;&lt;span style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt; vous a envoyé une nouvelle déclaration de CA pour le négoscope &lt;/span&gt;&lt;strong style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;{!Get_Related_SellInStatement.NegoScope__r.Name}&lt;/strong&gt;&lt;span style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt; - année de référence &lt;/span&gt;&lt;strong style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;{!Get_Related_SellInStatement.ReferenceYear__c} &lt;/strong&gt;&lt;span style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;via le portail Connect.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;color: rgb(78, 194, 169); background-color: rgb(255, 255, 255);&quot;&gt;&lt;u&gt;📶 En voici les détails:&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;{!SSDTableFR}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;➡️ Vous pouvez &lt;a href=&quot;{!SellInStatementURL_Formula}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;cliquer ici&lt;/a&gt; pour consulter cette déclaration sur negOptim.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Cordialement,&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 18px; color: rgb(128, 107, 191);&quot;&gt;L&apos;équipe Connect&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;{!Email_Logo_Formula}&quot; alt=&quot;Logo&quot; style=&quot;display: block; margin-top: 10px; width: 200px;&quot;/&gt;&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>PushUpNotificationBodyEN</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>{!$User.FirstName} {!$User.LastName} on behalf of {!Get_Related_SellInStatement.Supplier__r.Name} has sent you a new sell-in revenue statement for negoscope {!Get_Related_SellInStatement.NegoScope__r.Name} - reference year  {!Get_Related_SellInStatement.ReferenceYear__c}. Click here to view the details.</text>
+    </textTemplates>
+    <textTemplates>
+        <name>PushUpNotificationBodyFR</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>{!$User.FirstName} {!$User.LastName} chez votre fournisseur {!Get_Related_SellInStatement.Supplier__r.Name} vous a envoyé une nouvelle déclaration de CA pour le négoscope {!Get_Related_SellInStatement.NegoScope__r.Name}, année de référence {!Get_Related_SellInStatement.ReferenceYear__c}. Cliquez ici pour la consulter.</text>
+    </textTemplates>
+    <textTemplates>
+        <name>SellInStatementDetailRowTemplate</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;tr&gt;
+    &lt;td style=&quot;text-align: center; font-weight: bold;&quot;&gt;{!PeriodType_Formula}&lt;/td&gt;
+    &lt;td style=&quot;text-align: center; font-weight: bold;&quot;&gt;{!Loop_SellIn_Statement_Collection.PeriodNumber__c}&lt;/td&gt;
+    &lt;td style=&quot;text-align: center;&quot;&gt;{!Loop_SellIn_Statement_Details.BusinessUnit__r.Name}&lt;/td&gt;
+    &lt;td style=&quot;text-align: right;&quot;&gt;{!Loop_SellIn_Statement_Details.SellInDiscRegularP__c}&lt;/td&gt;
+ &lt;td style=&quot;text-align: right;&quot;&gt;{!Loop_SellIn_Statement_Details.SellInDiscPromoP__c}&lt;/td&gt;
+ &lt;td style=&quot;text-align: right;&quot;&gt;{!Loop_SellIn_Statement_Details.SellInDiscRegularSFx__c}&lt;/td&gt;
+ &lt;td style=&quot;text-align: right;&quot;&gt;{!Loop_SellIn_Statement_Details.SellInDiscPromoSFx__c}&lt;/td&gt;
+  &lt;/tr&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>SSDTableEN</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Tableau Business Unit&lt;/title&gt;
+    &lt;style&gt;
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        th {
+            background-color: #4ec2a9;
+            color: white;
+        }
+        th, td:nth-child(-n+3) {
+            text-align: left;
+        }
+        td:nth-child(n+4) {
+            text-align: right;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;table&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Period Type&lt;/th&gt;
+            &lt;th&gt;PeriodNumber&lt;/th&gt;
+            &lt;th&gt;Business Unit&lt;/th&gt;
+            {!SSDHEADER}
+        &lt;/tr&gt;
+		{!SSDRowList}
+		&lt;/table&gt;
+&lt;/html&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>SSDTableFR</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Tableau Business Unit&lt;/title&gt;
+    &lt;style&gt;
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        th {
+            background-color: #4ec2a9;
+            color: white;
+        }
+        th, td:nth-child(-n+3) {
+            text-align: left;
+        }
+        td:nth-child(n+4) {
+            text-align: right;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;table&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Type de période&lt;/th&gt;
+            &lt;th&gt;Numéro de période&lt;/th&gt;
+            &lt;th&gt;Business Unit&lt;/th&gt;
+             {!SSDHEADER}
+        &lt;/tr&gt;
+		{!SSDRowList}
+		&lt;/table&gt;
+&lt;/html&gt;</text>
+    </textTemplates>
+    <variables>
+        <name>BaseURL</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ConnectSetting</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>ConnectSettings__mdt</objectType>
+    </variables>
+    <variables>
+        <name>Index</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+    </variables>
+    <variables>
+        <name>RecipientEmail</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>RecipientIDs</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>recordIds</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>RemainingOptionsString</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>SellInListDetailsRow</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>SellInOptions</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>SellInStatementCollection</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>SellInStatement__c</objectType>
+    </variables>
+    <variables>
+        <name>SellInStatementDetailsCollection</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>SellInStatementDetail__c</objectType>
+    </variables>
+    <variables>
+        <name>SellInStatementToUpdate</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>SellInStatement__c</objectType>
+    </variables>
+    <variables>
+        <name>SSDHEADER</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>SSDRowList</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>SubmitedSellInIdSet</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

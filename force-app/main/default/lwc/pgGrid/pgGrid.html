@@ -1,0 +1,508 @@
+<template>
+    <div class="mainContainer">
+        <template if:true={isLoading}>
+            <!-- <lightning-spinner variant="brand" size="large"></lightning-spinner> -->
+            <div class="slds-spinner_container spinnerDiv">
+                <div class="loader slds-spinner_container slds-align--absolute-center">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </template>
+        <template if:false={isLoading}>
+            <div class="slds-card slds-grid slds-p-around_xx-small slds-page-header pageHeader">
+                <div class="slds-col slds-has-flexi-truncate">
+                    <!-- HEADING AREA -->
+                    <!-- MEDIA OBJECT = FIGURE + BODY -->
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div
+                            class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                            <lightning-icon icon-name="standard:report">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small">
+                            <p class="slds-text-title slds-line-height_reset">
+                                <template lwc:if={isGlobal}>
+                                    {labels.LBL_Global_PG_Grid_SubTitle}
+                                </template>
+                                <template lwc:else>
+                                    {labels.LBL_PG_Grid_SubTitle}
+                                </template>
+                            </p>
+                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+
+                                <template lwc:if={isGlobal}>
+                                    {labels.LBL_Global_PG_Grid_Title}
+                                </template>
+                                <template lwc:else>
+                                    {labels.LBL_PG_Grid_Title}
+                                </template>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <lightning-input type="search" onblur={handleSearchPG} onkeypress={handleEnterKeyPress}
+                        class="slds-m-top--x-small" variant="label-hidden" placeholder={labels.Search}
+                        onchange={handleChangeSearch} value={filters.globalSearchValue} data-field="globalSearchValue">
+                    </lightning-input>
+                    <lightning-button-icon icon-name="utility:filterList" alternative-text="Filter"
+                        variant="border-filled" class="slds-button slds-button-icon slds-m-horizontal--xx-small"
+                        onclick={toggleFilter} if:true={fieldsToFilter.length}>
+                    </lightning-button-icon>
+                    <template lwc:if={isEditMode}>
+                        <lightning-button class="slds-button slds-m-horizontal--xx-small" label={labels.LBL_Cancel}
+                            onclick={handleCancelEditMode}></lightning-button>
+                        <lightning-button class="slds-button slds-m-horizontal--xx-small" label={labels.LBL_Save}
+                            variant="brand" onclick={handleSave}></lightning-button>
+                    </template>
+                    <template lwc:else>
+                        <lightning-button-icon icon-name="utility:edit" alternative-text={labels.LBL_Edit}
+                            variant="border-filled" class="slds-button slds-button-icon slds-m-horizontal--xx-small"
+                            onclick={toggleEditMode}>
+                        </lightning-button-icon>
+                    </template>
+                </div>
+            </div>
+            <div class="slds-card" style="margin-top: 0;
+                border-top: 0;">
+                <div class="slds-grid">
+                    <div class="pageBody tableDiv slds-scrollable">
+                        <table
+                            class="slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border_right slds-no-row-hover">
+                            <thead>
+                                <tr>
+                                    <template for:each={displayedFields} for:item="field">
+                                        <th key={field.fieldName} title={field.fieldLabel} style={field.headerStyle}
+                                            class="rowspanHeightTh slds-text-align_center" if:false={field.isSortable}>
+                                            {field.fieldLabel}
+                                        </th>
+                                        <th key={field.fieldName} title={field.fieldLabel} style={field.headerStyle}
+                                            class="rowspanHeightTh slds-text-align_center" data-field={field.fieldName}
+                                            onclick={handleChangeSortField} if:true={field.isSortable}>
+                                            {field.fieldLabel}
+                                            <template if:true={field.sortedField}>
+                                                <lightning-icon icon-name="utility:arrowdown" size="xx-small"
+                                                    class="sortSelected-icon slds-m-left--xxx-small"
+                                                    data-field={field.fieldName} if:false={isSortASC}>
+                                                </lightning-icon>
+                                                <lightning-icon icon-name="utility:arrowup" size="xx-small"
+                                                    class="sortSelected-icon slds-m-left--xxx-small"
+                                                    data-field={field.fieldName} if:true={isSortASC}>
+                                                </lightning-icon>
+                                            </template>
+                                            <template if:false={field.sortedField}>
+                                                <lightning-icon icon-name="utility:arrowup" size="xx-small"
+                                                    class="white-icon slds-m-left--xxx-small"
+                                                    data-field={field.fieldName}>
+                                                </lightning-icon>
+                                            </template>
+                                        </th>
+                                    </template>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template lwc:if={records.length} for:each={records} for:item="pg" for:index="index">
+                                    <tr key={pg.Id} class="trHeight">
+                                        <template for:each={pg.values} for:item="field" for:index="fieldIndex">
+                                            <td key={field.fieldName} style={field.style} class="slds-truncate">
+                                                <template if:true={field.first}>
+                                                    <template lwc:if={pg.hasHistories}>
+                                                        <lightning-icon icon-name="utility:chevronright" size="xx-small"
+                                                            if:false={pg.showHistories} class="slds-m-right--xx-small"
+                                                            data-index={index} onclick={showHistories}>
+                                                        </lightning-icon>
+                                                        <lightning-icon icon-name="utility:chevrondown" size="xx-small"
+                                                            if:true={pg.showHistories} class="slds-m-right--xx-small"
+                                                            data-index={index} onclick={showHistories}>
+                                                        </lightning-icon>
+                                                    </template>
+                                                    <template lwc:else>
+                                                        <lightning-icon size="xx-small" class="slds-m-right--xx-small">
+                                                        </lightning-icon>
+                                                    </template>
+                                                </template>
+                                                <template lwc:if={isEditMode}>
+                                                    <template if:true={field.isInputField}>
+                                                        <lightning-input lwc:if={field.isNameField} data-id={pg.Id}
+                                                            data-field={field.fieldName} onchange={handleFieldEdits}
+                                                            label={field.fieldLabel} variant="label-hidden"
+                                                            value={field.fieldValue}>
+                                                        </lightning-input>
+                                                        <lightning-input lwc:elseif={field.isText} data-id={pg.Id}
+                                                            data-field={field.fieldName} onchange={handleFieldEdits}
+                                                            label={field.fieldLabel} variant="label-hidden"
+                                                            value={field.fieldValue}>
+                                                        </lightning-input>
+                                                        <lightning-textarea lwc:elseif={field.isTextarea}
+                                                            data-id={pg.Id} data-field={field.fieldName}
+                                                            onchange={handleFieldEdits} variant="label-hidden"
+                                                            value={field.fieldValue}>
+                                                        </lightning-textarea>
+                                                        <lightning-input lwc:elseif={field.isNumberField} type="number"
+                                                            data-id={pg.Id} data-field={field.fieldName}
+                                                            onchange={handleFieldEdits} variant="label-hidden"
+                                                            step={field.step} value={field.fieldValue}
+                                                            class="input-right">
+                                                        </lightning-input>
+                                                        <lightning-record-edit-form lwc:elseif={field.isReference}
+                                                            object-api-name={API_NAMES.PG__c.objectApiName}
+                                                            record-id={pg.Id}>
+                                                            <lightning-input-field field-name={field.fieldName}
+                                                                if:false={field.isOwner} data-id={pg.Id}
+                                                                data-field={field.fieldName} onchange={handleFieldEdits}
+                                                                label={field.fieldLabel} variant="label-hidden"
+                                                                value={field.fieldValue}>
+                                                            </lightning-input-field>
+                                                        </lightning-record-edit-form>
+                                                        <lightning-input lwc:elseif={field.isBoolean} type="checkbox"
+                                                            variant="label-hidden" data-id={pg.Id}
+                                                            data-field={field.fieldName} onchange={handleFieldEdits}
+                                                            checked={field.fieldValue}>
+                                                        </lightning-input>
+                                                        <template lwc:elseif={field.isPicklist}>
+                                                            <select onchange={handleFieldEdits} data-id={pg.Id}
+                                                                data-field={field.fieldName}>
+                                                                <template for:each={field.picklistOptions}
+                                                                    for:item="option">
+                                                                    <template lwc:if={option.isDisabled}>
+                                                                        <option key={option.value} value={option.value}
+                                                                            selected={option.isSelected} disabled>
+                                                                            {option.label}
+                                                                        </option>
+                                                                    </template>
+                                                                    <template lwc:else>
+                                                                        <option key={option.value} value={option.value}
+                                                                            selected={option.isSelected}>
+                                                                            {option.label}
+                                                                        </option>
+                                                                    </template>
+                                                                </template>
+                                                            </select>
+                                                        </template>
+                                                        <lightning-input lwc:elseif={field.isDate} type="date"
+                                                            data-id={pg.Id} data-field={field.fieldName}
+                                                            onchange={handleFieldEdits} variant="label-hidden"
+                                                            value={field.fieldValue}>
+                                                        </lightning-input>
+                                                        <lightning-input lwc:elseif={field.isDateTime} type="datetime"
+                                                            data-id={pg.Id} data-field={field.fieldName}
+                                                            onchange={handleFieldEdits} variant="label-hidden"
+                                                            value={field.fieldValue}>
+                                                        </lightning-input>
+                                                    </template>
+                                                    <template if:false={field.isInputField}>
+                                                        <template lwc:if={field.isNameField}>
+                                                            <a href={field.link} target="_blank">
+                                                                {field.fieldValue}</a>
+                                                        </template>
+                                                        <lightning-formatted-number lwc:elseif={field.isNumberField}
+                                                            maximum-fraction-digits={field.scale}
+                                                            minimum-fraction-digits={field.scale}
+                                                            value={field.fieldValue} variant="label-hidden">
+                                                        </lightning-formatted-number>
+                                                        <template lwc:elseif={field.isText}>
+                                                            <template lwc:if={field.isHTMLFormatted}>
+                                                                <lightning-formatted-rich-text value={field.fieldValue}
+                                                                    variant="label-hidden">
+                                                                </lightning-formatted-rich-text>
+                                                            </template>
+                                                            <template lwc:else>
+                                                                {field.fieldValue}
+                                                            </template>
+                                                        </template>
+                                                        <template lwc:elseif={field.isReference}>
+                                                            <a href={field.link} target="_blank">
+                                                                {field.fieldValue}</a>
+                                                        </template>
+                                                        <lightning-input lwc:elseif={field.isBoolean} type="checkbox"
+                                                            class="input-center" variant="label-hidden"
+                                                            checked={field.fieldValue} disabled>
+                                                        </lightning-input>
+                                                        <lightning-formatted-date-time lwc:elseif={field.isDate}
+                                                            value={field.fieldValue} year="numeric" month="2-digit"
+                                                            day="2-digit"></lightning-formatted-date-time>
+                                                        <lightning-formatted-date-time lwc:elseif={field.isDateTime}
+                                                            value={field.fieldValue} year="numeric" month="2-digit"
+                                                            day="2-digit" hour="2-digit"
+                                                            minute="2-digit"></lightning-formatted-date-time>
+                                                        <template lwc:elseif={field.isPicklist}>
+                                                            {field.fieldValue}
+                                                        </template>
+                                                    </template>
+                                                </template>
+                                                <template lwc:else>
+                                                    <template lwc:if={field.isNameField}>
+                                                        <a href={field.link} target="_blank">
+                                                            {field.fieldValue}</a>
+                                                    </template>
+                                                    <lightning-formatted-number lwc:elseif={field.isNumberField}
+                                                        maximum-fraction-digits={field.scale}
+                                                        minimum-fraction-digits={field.scale} value={field.fieldValue}
+                                                        variant="label-hidden">
+                                                    </lightning-formatted-number>
+                                                    <template lwc:elseif={field.isText}>
+                                                        <template lwc:if={field.isHTMLFormatted}>
+                                                            <lightning-formatted-rich-text value={field.fieldValue}
+                                                                variant="label-hidden">
+                                                            </lightning-formatted-rich-text>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            {field.fieldValue}
+                                                        </template>
+                                                    </template>
+                                                    <template lwc:elseif={field.isReference}>
+                                                        <a href={field.link} target="_blank">
+                                                            {field.fieldValue}</a>
+                                                    </template>
+                                                    <lightning-input lwc:elseif={field.isBoolean} type="checkbox"
+                                                        class="input-center" variant="label-hidden"
+                                                        checked={field.fieldValue} disabled>
+                                                    </lightning-input>
+                                                    <lightning-formatted-date-time lwc:elseif={field.isDate}
+                                                        value={field.fieldValue} year="numeric" month="2-digit"
+                                                        day="2-digit"></lightning-formatted-date-time>
+                                                    <lightning-formatted-date-time lwc:elseif={field.isDateTime}
+                                                        value={field.fieldValue} year="numeric" month="2-digit"
+                                                        day="2-digit" hour="2-digit"
+                                                        minute="2-digit"></lightning-formatted-date-time>
+                                                    <template lwc:elseif={field.isPicklist}>
+                                                        {field.fieldOutputValue}
+                                                    </template>
+                                                </template>
+                                            </td>
+                                        </template>
+                                    </tr>
+                                    <template lwc:if={pg.showHistories} for:each={pg.histories} for:item="history"
+                                        for:index="histoIndex">
+                                        <tr key={history.Id} class="history trHeight">
+                                            <template for:each={history.values} for:item="field" for:index="fieldIndex">
+                                                <td key={field.fieldName} style={field.style} class="slds-truncate">
+                                                    <template lwc:if={field.isNameField}>
+                                                        <a href={field.link} target="_blank">
+                                                            {field.fieldValue}</a>
+                                                    </template>
+                                                    <lightning-formatted-number lwc:elseif={field.isNumberField}
+                                                        maximum-fraction-digits={field.scale}
+                                                        minimum-fraction-digits={field.scale} value={field.fieldValue}
+                                                        variant="label-hidden">
+                                                    </lightning-formatted-number>
+                                                    <template lwc:elseif={field.isText}>
+                                                        <template lwc:if={field.isHTMLFormatted}>
+                                                            <lightning-formatted-rich-text value={field.fieldValue}
+                                                                variant="label-hidden">
+                                                            </lightning-formatted-rich-text>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            {field.fieldValue}
+                                                        </template>
+                                                    </template>
+                                                    <template lwc:elseif={field.isReference}>
+                                                        <a href={field.link} target="_blank">
+                                                            {field.fieldValue}</a>
+                                                    </template>
+                                                    <lightning-input lwc:elseif={field.isBoolean} type="checkbox"
+                                                        class="input-center" variant="label-hidden"
+                                                        checked={field.fieldValue} disabled>
+                                                    </lightning-input>
+                                                    <lightning-formatted-date-time lwc:elseif={field.isDate}
+                                                        value={field.fieldValue} year="numeric" month="2-digit"
+                                                        day="2-digit">
+                                                    </lightning-formatted-date-time>
+                                                    <lightning-formatted-date-time lwc:elseif={field.isDateTime}
+                                                        value={field.fieldValue} year="numeric" month="2-digit"
+                                                        day="2-digit" hour="2-digit" minute="2-digit">
+                                                    </lightning-formatted-date-time>
+                                                    <template lwc:elseif={field.isPicklist}>
+                                                        {field.fieldOutputValue}
+                                                    </template>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                </template>
+                                <template lwc:else>
+                                    <tr class="trHeight">
+                                        <td colspan="18" class="slds-text-align--center">
+                                            {labels.LBL_No_Record_To_Display}
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div lwc:if={isFilterOpen} class="filter-section slds-col" style="float: right; z-index:7;">
+                        <div id="filter-panel" class="slds-grid slds-no-flex">
+                            <div class="slds-panel slds-size_medium slds-panel_docked slds-panel_docked-right slds-grid slds-grid_vertical"
+                                style="overflow: unset;">
+                                <div class="slds-panel__header filterPanelHeader">
+                                    <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate"
+                                        title={labels.LBL_Filter}>
+                                        {labels.LBL_Filter}
+                                    </h2>
+                                    <lightning-button-icon variant="bare" icon-name="utility:close"
+                                        onclick={toggleFilter}>
+                                    </lightning-button-icon>
+                                </div>
+                                <div class="slds-col slds-scrollable filterPanelBody">
+                                    <div class="slds-grid slds-wrap slds-p-around_small">
+                                        <div class="slds-list_vertical slds-list_vertical-space slds-size_1-of-1">
+                                            <div>
+                                                <lightning-combobox label={labels.LBL_Record_Type}
+                                                    value={filters.productRT} options={productRTs}
+                                                    onchange={handleChangeSearch}
+                                                    data-field="productRT"></lightning-combobox>
+                                            </div>
+                                            <template if:true={fieldsToFilter.length} for:each={fieldsToFilter}
+                                                for:item="fieldToFilter">
+                                                <div key={fieldToFilter.fieldName}>
+                                                    <template if:true={fieldToFilter.userFilterable}>
+                                                        <!--text-->
+                                                        <lightning-input if:true={fieldToFilter.isText}
+                                                            name={fieldToFilter.fieldName} data-mode="one" type="text"
+                                                            label={fieldToFilter.fieldLabel} value={fieldToFilter.value}
+                                                            onchange={setSelectedValues}>
+                                                        </lightning-input>
+                                                        <!--lookup-->
+                                                        <template if:true={fieldToFilter.isReference}>
+                                                            <lightning-input name={fieldToFilter.fieldName}
+                                                                data-mode="one" type="text"
+                                                                label={fieldToFilter.fieldLabel}
+                                                                value={fieldToFilter.value}
+                                                                onchange={setSelectedValues}>
+                                                            </lightning-input>
+                                                        </template>
+                                                        <!--ID-->
+                                                        <lightning-input if:true={fieldToFilter.isId}
+                                                            name={fieldToFilter.fieldName} data-mode="multiple"
+                                                            type="text" label={fieldToFilter.fieldLabel}
+                                                            value={fieldToFilter.displayVal}
+                                                            field-level-help={labels.MSG_Filter_On_Id_Help_Text}
+                                                            onchange={setSelectedValues}>
+                                                        </lightning-input>
+                                                        <!--number-->
+                                                        <div if:true={fieldToFilter.isNumber} class="slds-form-element">
+                                                            <legend
+                                                                class="slds-form-element__label slds-form-element__legend">
+                                                                {fieldToFilter.fieldLabel}
+                                                            </legend>
+                                                            <div
+                                                                class="slds-form-element__control slds-grid slds-gutters">
+                                                                <lightning-input variant="label-hidden" type="number"
+                                                                    class="slds-col" name={fieldToFilter.fieldName}
+                                                                    data-range="value1" value={fieldToFilter.value1}
+                                                                    onchange={setSelectedRangeValue}
+                                                                    formatter={fieldToFilter.formatter}
+                                                                    step={fieldToFilter.step}>
+                                                                </lightning-input>
+                                                                <span class="slds-align-middle">-</span>
+                                                                <lightning-input variant="label-hidden" type="number"
+                                                                    class="slds-col" name={fieldToFilter.fieldName}
+                                                                    data-range="value2" value={fieldToFilter.value2}
+                                                                    onchange={setSelectedRangeValue}
+                                                                    formatter={fieldToFilter.formatter}
+                                                                    step={fieldToFilter.step}>
+                                                                </lightning-input>
+                                                            </div>
+                                                        </div>
+                                                        <!--date-->
+                                                        <div if:true={fieldToFilter.isDate} class="slds-form-element">
+                                                            <legend
+                                                                class="slds-form-element__label slds-form-element__legend">
+                                                                {fieldToFilter.fieldLabel}
+                                                            </legend>
+                                                            <div
+                                                                class="slds-form-element__control slds-grid slds-gutters">
+                                                                <lightning-input variant="label-hidden" type="date"
+                                                                    class="slds-col" name={fieldToFilter.fieldName}
+                                                                    data-range="value1" value={fieldToFilter.value1}
+                                                                    onchange={setSelectedRangeValue} date-style="short">
+                                                                </lightning-input>
+                                                                <span class="slds-align-middle">-</span>
+                                                                <lightning-input variant="label-hidden" type="date"
+                                                                    class="slds-col" name={fieldToFilter.fieldName}
+                                                                    data-range="value2" value={fieldToFilter.value2}
+                                                                    onchange={setSelectedRangeValue} date-style="short">
+                                                                </lightning-input>
+                                                            </div>
+                                                        </div>
+                                                        <!--time-->
+                                                        <div if:true={fieldToFilter.isTime} class="slds-form-element">
+                                                            <legend
+                                                                class="slds-form-element__label slds-form-element__legend">
+                                                                {fieldToFilter.fieldLabel}
+                                                            </legend>
+                                                            <div
+                                                                class="slds-form-element__control slds-grid slds-gutters">
+                                                                <lightning-input variant="label-hidden" type="time"
+                                                                    class="slds-col" name={fieldToFilter.fieldName}
+                                                                    data-range="value1" value={fieldToFilter.value1}
+                                                                    onchange={setSelectedRangeValue}>
+                                                                </lightning-input>
+                                                                <span class="slds-align-middle">-</span>
+                                                                <lightning-input variant="label-hidden" type="time"
+                                                                    class="slds-col" name={fieldToFilter.fieldName}
+                                                                    data-range="value2" value={fieldToFilter.value2}
+                                                                    onchange={setSelectedRangeValue}>
+                                                                </lightning-input>
+                                                            </div>
+                                                        </div>
+                                                        <!--checkbox group-->
+                                                        <lightning-checkbox-group
+                                                            if:true={fieldToFilter.isCheckboxGroup}
+                                                            data-name={fieldToFilter.fieldName}
+                                                            name={fieldToFilter.fieldName}
+                                                            label={fieldToFilter.fieldLabel}
+                                                            options={fieldToFilter.options} value={fieldToFilter.values}
+                                                            onchange={setSelectedValues}>
+                                                        </lightning-checkbox-group>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="slds-card__footer slds-grid slds-m-top_none slds-p-vertical_small filterPanelFooter">
+                                    <div class="slds-col">
+                                        <lightning-button onclick={handleReset} label={labels.LBL_Reset}>
+                                        </lightning-button>
+                                    </div>
+                                    <div class="slds-col">
+                                        <lightning-button onclick={confirmFilter} label={labels.Search} variant="brand">
+                                        </lightning-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="position: relative; height: fit-content;background: white;padding: 10px;"
+                    class="slds-grid footerDiv">
+                    <span style="margin-right: 10px; color: black;">
+                        <lightning-combobox dropdown-alignment="auto" name="pageSelect" value={pageSize}
+                            variant="label-hidden" placeholder="Select Progress" options={pageSizeOptions}
+                            onchange={changePageSizeHandler}></lightning-combobox>
+                    </span>
+                    <span>
+                        <lightning-button-group>
+                            <lightning-button label={labels.LBL_First} disabled={firstDisabled}
+                                onclick={handleFirst}></lightning-button>
+                            <lightning-button label={labels.LBL_Previous} disabled={previousDisabled}
+                                onclick={handlePrevious}></lightning-button>
+                            <lightning-button label={labels.LBL_Next} disabled={nextDisabled}
+                                onclick={handleNext}></lightning-button>
+                            <lightning-button label={labels.LBL_Last} disabled={lastDisabled}
+                                onclick={handleLast}></lightning-button>
+                        </lightning-button-group>
+                        <span class="slds-p-left_small slds-badge" style="margin-left: 10px;">
+                            {pageRecordCount} {labels.LBL_Of} {noOfRecords}
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>KG</fullName>
+        <default>false</default>
+        <label>KG</label>
+    </customValue>
+    <customValue>
+        <fullName>UC</fullName>
+        <default>true</default>
+        <label>UC</label>
+    </customValue>
+    <customValue>
+        <fullName>Col</fullName>
+        <default>false</default>
+        <label>Col</label>
+    </customValue>
+    <customValue>
+        <fullName>Colis</fullName>
+        <default>false</default>
+        <label>Colis</label>
+    </customValue>
+    <customValue>
+        <fullName>Piece</fullName>
+        <default>false</default>
+        <label>Pieces</label>
+    </customValue>
+    <customValue>
+        <fullName>L</fullName>
+        <default>false</default>
+        <label>Litres</label>
+    </customValue>
+    <customValue>
+        <fullName>T</fullName>
+        <default>false</default>
+        <label>Tonnes</label>
+    </customValue>
+    <customValue>
+        <fullName>G</fullName>
+        <default>false</default>
+        <label>Grammes</label>
+    </customValue>
+    <customValue>
+        <fullName>Box</fullName>
+        <default>false</default>
+        <label>Box</label>
+    </customValue>
+    <customValue>
+        <fullName>HL</fullName>
+        <default>false</default>
+        <label>HL</label>
+    </customValue>
+    <customValue>
+        <fullName>M2</fullName>
+        <default>false</default>
+        <label>M2</label>
+    </customValue>
+    <customValue>
+        <fullName>M3</fullName>
+        <default>false</default>
+        <label>M3</label>
+    </customValue>
+    <customValue>
+        <fullName>Roller</fullName>
+        <default>false</default>
+        <label>Rollers</label>
+    </customValue>
+    <customValue>
+        <fullName>Meter</fullName>
+        <default>false</default>
+        <label>Meters</label>
+    </customValue>
+    <customValue>
+        <fullName>Palette</fullName>
+        <default>false</default>
+        <label>Palette</label>
+    </customValue>
+    <customValue>
+        <fullName>1/2 palette</fullName>
+        <default>false</default>
+        <label>1/2 palette</label>
+    </customValue>
+    <customValue>
+        <fullName>BIB</fullName>
+        <default>false</default>
+        <label>BIB</label>
+    </customValue>
+    <customValue>
+        <fullName>ML</fullName>
+        <default>false</default>
+        <label>ML</label>
+    </customValue>
+    <customValue>
+        <fullName>M</fullName>
+        <default>false</default>
+        <label>M</label>
+    </customValue>
+    <customValue>
+        <fullName>Nombre de pièces</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Nombre de pièces</label>
+    </customValue>
+    <customValue>
+        <fullName>Nombre de lavages</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Nombre de lavages</label>
+    </customValue>
+    <description>Product Unit</description>
+    <masterLabel>Unit Fac</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,96 @@
+<template>
+    <div class="">
+        <div class="slds-form-element mainContainer">
+            <div class="slds-form-element__control ">
+                <div class="slds-combobox_container">
+                    <div class={txtclassname} data-id="resultBox" aria-expanded="false" aria-haspopup="listbox"
+                        role="combobox">
+                        <!-- <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none"> -->
+                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left-right"
+                            style={hideSearch} role="none">
+                            <template if:true={hasLabel}>
+                                <lightning-input if:true={multiSelect} required={isRequired} type="search"
+                                    placeholder={placeHolder} data-id="userinput" label={label} name="searchText"
+                                    onblur={handleblur} onfocus={searchField} onchange={searchField}
+                                    class="leftspace comboboxInput" autocomplete="off" aria-autocomplete="off"
+                                    variant={labelVariant}></lightning-input>
+                                <lightning-input if:false={multiSelect} required={isRequired} type="search"
+                                    placeholder={placeHolder} data-id="userinput" label={label} name="searchText"
+                                    onblur={handleblur} onfocus={searchField} onchange={searchField}
+                                    class="leftspace comboboxInput" value={searchTerm} autocomplete="off"
+                                    aria-autocomplete="off" variant={labelVariant}></lightning-input>
+                            </template>
+                            <template if:false={hasLabel}>
+                                <lightning-input if:true={multiSelect} required={isRequired} type="search"
+                                    placeholder={placeHolder} data-id="userinput" variant="label-hidden"
+                                    name="searchText" onblur={handleblur} onfocus={searchField} onchange={searchField}
+                                    class="leftspace comboboxInput" autocomplete="off"
+                                    aria-autocomplete="off"></lightning-input>
+                                <lightning-input if:false={multiSelect} required={isRequired} type="search"
+                                    placeholder={placeHolder} data-id="userinput" variant="label-hidden"
+                                    name="searchText" onblur={handleblur} onfocus={searchField} onchange={searchField}
+                                    class="leftspace comboboxInput" value={searchTerm} autocomplete="off"
+                                    aria-autocomplete="off"></lightning-input>
+                            </template>
+
+                        </div>
+                        <!-- Second part display result -->
+                        <div style={customPaddingStyle}>
+                            <div id="listbox-id-1"
+                                class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid dropDownList"
+                                style={customStyle} role="listbox">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={searchRecords} for:item="serecord">
+                                        <li role="presentation" class="slds-listbox__item" key={serecord.recId}>
+                                            <div data-id={serecord.recId} data-name={serecord.recName}
+                                                onmousedown={setSelectedRecord}
+                                                class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                role="option">
+                                                <span if:true={hasIcon} class="slds-media__figure">
+                                                    <span class="slds-icon_container slds-icon-standard-account">
+                                                        <lightning-icon icon-name={iconName}
+                                                            size="x-small"></lightning-icon>
+                                                    </span>
+                                                </span>
+                                                <span class="slds-media__body">
+                                                    <span
+                                                        class="slds-listbox__option-text slds-listbox__option-text_entity">{serecord.recName}</span>
+                                                    <!-- <span class="slds-listbox__option-meta slds-listbox__option-meta_entity">{objectName} • {serecord.recName}</span>-->
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                    <li class="slds-listbox__item" role="presentation" if:true={messageFlag}>
+                                        <div class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                            role="option">
+                                            <span class="slds-media__body">
+                                                <span
+                                                    class="slds-listbox__option-text slds-listbox__option-text_entity">{labels.LBL_No_Items_Found}</span>
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div if:true={loadingText}>
+                            Loading...
+                        </div>
+                        <!--PILLs-->
+                    </div>
+                </div>
+                <div if:true={multiSelect}
+                    class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right"
+                    role="none">
+                    <template for:each={selectedRecords} for:item="serecord">
+                        <span key={serecord.recId}>
+                            <lightning-pill label={serecord.recName} name={serecord.recId} onremove={removeRecord}>
+                                <lightning-icon if:true={hasIcon} icon-name={iconName} variant="circle"
+                                    alternative-text={serecord.recName}></lightning-icon>
+                            </lightning-pill>
+                        </span>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

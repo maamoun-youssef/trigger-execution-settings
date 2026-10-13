@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ConditionManagerPageConfiguration__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>The Condition Manager page uses grid settings to display the wanted columns. You can choose to have 1 Grid Settings template to be used for all contract record type, or choose different template for each record type. 
+Note: if you don&apos;t choose a grid settings template for a record type, then the default template will be applied.</inlineHelpText>
+    <label>Condition Manager Page Configuration</label>
+    <length>32768</length>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

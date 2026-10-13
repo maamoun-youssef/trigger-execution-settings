@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Keynote / Marketing plan deal with the supplier --></help>
+    <label><!-- NEGO - Keynote Marketing Plan --></label>
+    <name>NEGO_Keynote_Marketing_Plan__c</name>
+</CustomFieldTranslation>

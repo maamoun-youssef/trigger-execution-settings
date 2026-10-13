@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SlabBaseTONego__c</fullName>
+    <description>Negotiated based TO for the condition line (should be equal to Contract TO if condition scope = contract scope)</description>
+    <inlineHelpText>Negotiated based TO for the condition line (should be equal to Contract TO if condition scope = contract scope)</inlineHelpText>
+    <label>Slab Base TO Nego</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

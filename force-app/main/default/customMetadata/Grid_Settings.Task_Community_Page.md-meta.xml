@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Task Community Page</label>
+    <protected>false</protected>
+    <values>
+        <field>Calendar_Setting__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Columns__c</field>
+        <value xsi:type="xsd:string">[{&quot;label&quot;:&quot;Call Object Identifier&quot;,&quot;FieldName&quot;:&quot;CallObject&quot;},{&quot;label&quot;:&quot;Due Date Only&quot;,&quot;FieldName&quot;:&quot;ActivityDate&quot;},{&quot;label&quot;:&quot;Status&quot;,&quot;FieldName&quot;:&quot;Status&quot;},{&quot;label&quot;:&quot;Priority&quot;,&quot;FieldName&quot;:&quot;Priority&quot;},{&quot;label&quot;:&quot;Description&quot;,&quot;FieldName&quot;:&quot;Description&quot;}]</value>
+    </values>
+    <values>
+        <field>Compiled_Grid_JSON__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Filters__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Grid_Configuration__c</field>
+        <value xsi:type="xsd:string">{&quot;Default_Page_Size&quot;:&quot;25&quot;}</value>
+    </values>
+    <values>
+        <field>Grid_Slogan__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">standard:orders</value>
+    </values>
+    <values>
+        <field>Master_Object_Columns__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Master_Object_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Object_Name__c</field>
+        <value xsi:type="xsd:string">Task</value>
+    </values>
+    <values>
+        <field>ReadOnly_Criteria__c</field>
+        <value xsi:type="xsd:string">{}</value>
+    </values>
+    <values>
+        <field>Relationship_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Time_Line_Settings__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:type="xsd:string">Detail</value>
+    </values>
+</CustomMetadata>

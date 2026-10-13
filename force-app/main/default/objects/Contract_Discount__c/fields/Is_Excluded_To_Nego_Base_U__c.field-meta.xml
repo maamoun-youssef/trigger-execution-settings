@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Excluded_To_Nego_Base_U__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>exclusion for unit amount contract row</description>
+    <label>Is Excluded to Nego Base U</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

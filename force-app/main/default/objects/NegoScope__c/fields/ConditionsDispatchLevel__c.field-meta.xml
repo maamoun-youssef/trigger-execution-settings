@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ConditionsDispatchLevel__c</fullName>
+    <inlineHelpText>Les conditions saisies sont-elles diffusées sur les niveaux partenaires pour les accords de ce NS. &lt;br/&gt;• Aucun : pas de diffusion. &lt;br/&gt;• Toutes les saisies : toutes les conditions saisies sont diffusées sur les niveaux partenaires. &lt;br/&gt;• Décision de l&apos;utilisateur : doit faire l&apos;objet d&apos;un choix de diffusion systématique de l&apos;utilisateur.</inlineHelpText>
+    <label>Conditions Dispatch Level</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>UserDecision</fullName>
+                <default>false</default>
+                <label>User Decision</label>
+            </value>
+            <value>
+                <fullName>AdvancedToPartner</fullName>
+                <default>false</default>
+                <label>Advanced To Partner</label>
+            </value>
+            <value>
+                <fullName>PartnerToAdvanced</fullName>
+                <default>false</default>
+                <label>Partner To Advanced</label>
+            </value>
+            <value>
+                <fullName>Bidirectional</fullName>
+                <default>false</default>
+                <label>Bidirectional</label>
+            </value>
+            <value>
+                <fullName>AllCapturedConditions</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>AllCapturedConditions</label>
+            </value>
+            <value>
+                <fullName>test</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>test</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

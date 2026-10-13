@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GlobalLocationSummary__c</fullName>
+    <description>Summary of related contact&apos;s workplace address: Global Location Number, Name, Functions, Full Address</description>
+    <externalId>false</externalId>
+    <formula>&quot;Company Name: &quot;&amp; GlobalLocation__r.CompanyName__c</formula>
+    <label>Global Location Summary</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

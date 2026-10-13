@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Test Search détail</label>
+    <protected>false</protected>
+    <values>
+        <field>Calendar_Setting__c</field>
+        <value xsi:type="xsd:string">{&quot;startDate&quot;:&quot;&quot;,&quot;endDate&quot;:&quot;&quot;,&quot;pickListValue&quot;:&quot;&quot;,&quot;showCalendarSettings&quot;:false}</value>
+    </values>
+    <values>
+        <field>Columns__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Compiled_Grid_JSON__c</field>
+        <value xsi:type="xsd:string">{&quot;WARNINGS&quot;:[&quot;Template Has No Fields&quot;],&quot;USERFILTERS&quot;:[],&quot;TIME_LINE_SETTINGS&quot;:{&quot;masterLookupParent&quot;:&quot;&quot;,&quot;masterLookup&quot;:&quot;&quot;,&quot;levelControl&quot;:1,&quot;isTimeLineSettings&quot;:false},&quot;STATIC_FIELDS&quot;:&quot;&quot;,&quot;SEARCHABLE_FIELDS&quot;:null,&quot;relationName&quot;:null,&quot;readOnlyCriteria&quot;:null,&quot;Quick_Actions&quot;:[],&quot;picklistValuesMap&quot;:{},&quot;overrideFilter&quot;:false,&quot;objectReferenceMap&quot;:{&quot;LastModifiedById&quot;:&quot;User&quot;,&quot;CreatedById&quot;:&quot;User&quot;,&quot;EventId&quot;:&quot;Event&quot;,&quot;RelationId&quot;:&quot;Calendar&quot;},&quot;OBJECT_NAME&quot;:&quot;AcceptedEventRelation&quot;,&quot;Master_OBJECT_STATIC_FIELDS&quot;:&quot;&quot;,&quot;Master_OBJECT_NAME&quot;:&quot;&quot;,&quot;layoutLabel&quot;:&quot;Test Search détail&quot;,&quot;isShowFilterOnColumnHeader&quot;:false,&quot;isReadOnly&quot;:true,&quot;Include_In_List_View&quot;:false,&quot;iconSection&quot;:&quot;standard&quot;,&quot;iconName&quot;:&quot;orders&quot;,&quot;iconClass&quot;:&quot;slds-icon-standard-orders&quot;,&quot;hasMaster&quot;:false,&quot;gridLayout&quot;:{&quot;attributes&quot;:{&quot;type&quot;:&quot;Grid_Settings__mdt&quot;,&quot;url&quot;:&quot;/services/data/v64.0/sobjects/Grid_Settings__mdt/m01QH00001wF9ZLYA0&quot;},&quot;Id&quot;:&quot;m01QH00001wF9ZLYA0&quot;,&quot;Calendar_Setting__c&quot;:&quot;{\&quot;startDate\&quot;:\&quot;\&quot;,\&quot;endDate\&quot;:\&quot;\&quot;,\&quot;pickListValue\&quot;:\&quot;\&quot;,\&quot;showCalendarSettings\&quot;:false}&quot;,&quot;Time_Line_Settings__c&quot;:&quot;{\&quot;levelControl\&quot;:1,\&quot;masterLookup\&quot;:\&quot;\&quot;,\&quot;masterLookupParent\&quot;:\&quot;\&quot;,\&quot;isTimeLineSettings\&quot;:false}&quot;,&quot;DeveloperName&quot;:&quot;Test_Search&quot;,&quot;MasterLabel&quot;:&quot;Test Search détail&quot;,&quot;Columns__c&quot;:&quot;[]&quot;,&quot;Object_Name__c&quot;:&quot;AcceptedEventRelation&quot;,&quot;Master_Object_Columns__c&quot;:&quot;[]&quot;,&quot;Icon__c&quot;:&quot;standard:orders&quot;,&quot;Filters__c&quot;:&quot;[]&quot;,&quot;ReadOnly_Criteria__c&quot;:&quot;{}&quot;,&quot;Type__c&quot;:&quot;Detail&quot;,&quot;Grid_Configuration__c&quot;:&quot;{\&quot;actions\&quot;:{\&quot;quickActions\&quot;:[],\&quot;screenFlows\&quot;:[]},\&quot;Quick_Actions\&quot;:[],\&quot;overrideFilter\&quot;:false,\&quot;isShowFilterOnColumnHeader\&quot;:false,\&quot;Default_Page_Size\&quot;:\&quot;50\&quot;}&quot;},&quot;GRID_FIELDS&quot;:[],&quot;FILTERS&quot;:[],&quot;FILTER_FIELDS&quot;:[],&quot;ERRORS&quot;:[],&quot;Display_Order&quot;:null,&quot;Default_Page_Size&quot;:50,&quot;CALENDAR_SETTINGS&quot;:{&quot;startDate&quot;:&quot;&quot;,&quot;showCalendarSettings&quot;:false,&quot;pickListValue&quot;:&quot;&quot;,&quot;endDate&quot;:&quot;&quot;},&quot;BANNER_FIELDS&quot;:[],&quot;ALL_FIELDS&quot;:[&quot;id&quot;],&quot;ALL_BANNER_FIELDS&quot;:[&quot;id&quot;],&quot;actions&quot;:{&quot;screenFlows&quot;:[],&quot;quickActions&quot;:[]}}</value>
+    </values>
+    <values>
+        <field>Filters__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Grid_Configuration__c</field>
+        <value xsi:type="xsd:string">{&quot;actions&quot;:{&quot;quickActions&quot;:[],&quot;screenFlows&quot;:[]},&quot;Quick_Actions&quot;:[],&quot;overrideFilter&quot;:false,&quot;isShowFilterOnColumnHeader&quot;:false,&quot;Default_Page_Size&quot;:&quot;50&quot;}</value>
+    </values>
+    <values>
+        <field>Grid_Slogan__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">standard:orders</value>
+    </values>
+    <values>
+        <field>Master_Object_Columns__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Master_Object_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Object_Name__c</field>
+        <value xsi:type="xsd:string">AcceptedEventRelation</value>
+    </values>
+    <values>
+        <field>ReadOnly_Criteria__c</field>
+        <value xsi:type="xsd:string">{}</value>
+    </values>
+    <values>
+        <field>Relationship_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Time_Line_Settings__c</field>
+        <value xsi:type="xsd:string">{&quot;levelControl&quot;:1,&quot;masterLookup&quot;:&quot;&quot;,&quot;masterLookupParent&quot;:&quot;&quot;,&quot;isTimeLineSettings&quot;:false}</value>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:type="xsd:string">Detail</value>
+    </values>
+</CustomMetadata>

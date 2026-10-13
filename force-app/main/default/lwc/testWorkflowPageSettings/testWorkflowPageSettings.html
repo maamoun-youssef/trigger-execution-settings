@@ -1,0 +1,173 @@
+<template>
+    <div class="main-container mainContainer">
+        <div class="slds-is-relative">
+            <template if:true={Loading}>
+                <!-- <lightning-spinner variant="brand" size="large"></lightning-spinner> -->
+                <div class="slds-spinner_container">
+                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </template>
+            <div class="pageHeader negoptimHeader slds-page-header">
+                <!-- LAYOUT GRID -->
+                <div class="header ">
+                    <div class="slds-grid slds-show_small">
+                        <!-- GRID COL -->
+                        <div class="slds-col">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <lightning-icon icon-name="utility:matrix"></lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                    <p class="slds-line-height_reset">{Label.LBL_PageLayoutSettings}</p>
+                                    <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate"
+                                        title={Label.LBl_LayoutPageSettings_Subtitle}>
+                                        <div class="slds-grid">
+                                            <div>{Label.LBl_LayoutPageSettings_Subtitle}</div>
+                                        </div>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <lightning-button value={Label.LBL_Close} label={Label.LBL_Close} onclick={cancelBtnHandler}
+                            class="slds-p-right--xx-small slds-button_text-destructive" if:true={instance.showButtons}>
+                        </lightning-button>
+                        <lightning-button label={Label.LBL_Customize_List_View_Order} if:false={instance.showButtons}
+                            variant="success" class="slds-p-right--xx-small" onclick={openListViewPopup}>
+                        </lightning-button> -->
+                        <!-- <template if:false={showTemplate}>
+                            <lightning-button value={Label.LBL_New} label={Label.LBL_New}
+                                onclick={handleNew} class="slds-p-right--xxx-small">
+                            </lightning-button>
+                        </template>
+                        <template if:true={showTemplate}>
+                            <lightning-button onclick={handleCancel} label={Label.LBL_Close}
+                                class="slds-p-right--xx-small slds-button_text-destructive">
+                            </lightning-button>
+                            <lightning-button variant="brand" label={Label.LBL_Save} onclick={handleSave}>
+                            </lightning-button>
+                            <lightning-button-menu icon-name="utility:connected_apps" menu-alignment="right" nubbin
+                                class="slds-p-left--xxx-small" if:false={disableSaveAs}>
+                                <lightning-menu-item onclick={openSaveAsPopup} label={Label.LBL_Save_As}
+                                    prefix-icon-name="utility:save">
+                                </lightning-menu-item>
+                            </lightning-button-menu>
+                        </template> -->
+                    </div>
+                    <div class="slds-grid slds-wrap slds-hide_small">
+                        <div class="slds-size_1-of-1">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <lightning-icon icon-name="utility:settings"></lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                    <p class="slds-line-height_reset">
+                                        {Label.LBL_PageLayoutSettings}
+                                    </p>
+                                    <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate"
+                                        title={Label.LBl_LayoutPageSettings_Subtitle}>
+                                        <div class="slds-grid">
+                                            <div>{Label.LBl_LayoutPageSettings_Subtitle}</div>
+                                           
+                                        </div>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-1 slds-grid slds-p-top_x-small">
+                            <!-- sidebar toggle is now pinned to the sidebar edge -->
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-page-header__detail-row slds-grid slds-wrap pageBody" style="padding: 0; position: relative;">
+                    <template if:false={isSidebarOpen}>
+                        <div class="sidebarToggleAnchor sidebarToggleAnchor_closed">
+                            <lightning-button-icon icon-name={sidebarToggleIcon} alternative-text={sidebarToggleTitle}
+                                title={sidebarToggleTitle} onclick={handleToggleSidebar}
+                                variant="bare" class="sidebarToggleButton">
+                            </lightning-button-icon>
+                        </div>
+                    </template>
+                    <div class="slds-col slds-grid slds-truncate" style="height: -webkit-fill-available;">
+                        <div class={sidebarClass} style="background-color: white; height: inherit; position: relative;">
+                            <template if:true={isSidebarOpen}>
+                                <div class="sidebarToggleAnchor sidebarToggleAnchor_open">
+                                    <lightning-button-icon icon-name={sidebarToggleIcon} alternative-text={sidebarToggleTitle}
+                                        title={sidebarToggleTitle} onclick={handleToggleSidebar}
+                                        variant="bare" class="sidebarToggleButton">
+                                    </lightning-button-icon>
+                                </div>
+                            </template>
+                            <div class="templatesSplitView slds-split-view_container slds-panel_docked-left slds-is-open" style="height: -webkit-fill-available;">
+                                <div class="slds-panel__header slds-p-around_x-small searchBox" id="filterHeader">
+                                    <div style="padding: 0; margin-bottom: 0.75rem;" class="slds-page-header__col-details">
+                                        <lightning-input type="search" data-form="first" variant="label-hidden"
+                                            autocomplete="off" onfocus={focusTemplateInput} onchange={searchTemplate}
+                                            onblur={closeDropdownTemplate} onkeyup={searchTemplate}
+                                            onkeydown={searchTemplate} value={searchTermTemplate}>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                                <template if:false={hasLayouts}>
+                                    <div class="slds-align_absolute-center slds-m-vertical_small">
+                                        <span class="slds-truncate" title={Label.LBL_No_Item_To_Display}>
+                                            {Label.LBL_No_Item_To_Display}
+                                        </span>
+                                    </div>
+                                </template>
+                                <div class="slds-scrollable--y" if:true={hasLayouts}>
+                                    <article aria-hidden="false" id="split-view-id" class="slds-split-view slds-grid slds-grid_vertical slds-scrollable">
+                                        <div class="slds-grid slds-grid_vertical">
+                                            <ul aria-multiselectable="true" class="slds-scrollable_y" role="listbox"
+                                                aria-label="Select an item to open it in a new workspace tab.">
+                                                <template if:true={hasLayouts} for:each={layouts} for:item="layout">
+                                                    <li class={layout.listItemClass} role="presentation"
+                                                        key={layout.value} data-id={layout.value}
+                                                        onclick={TemplateChangeHandler}>
+                                                        <a href="#" role="option" data-id={layout.value}
+                                                            class="menuItem slds-split-view__list-item-action slds-grow slds-has-flexi-truncate"
+                                                            tabindex="0">
+                                                            <div class="slds-grid slds-wrap">
+                                                                <b>
+                                                                    <span
+                                                                        class="slds-truncate slds-text-body_regular slds-text-color_default"
+                                                                        title={layout.label}>{layout.label}</span>
+                                                                </b>
+                                                                <span class="slds-truncate slds-col_bump-left"
+                                                                    title="packageIcon">
+                                                                    <lightning-icon if:true={layout.namespacePrefix}
+                                                                        icon-name="utility:package" size="xx-small">
+                                                                    </lightning-icon>
+                                                                </span>
+                                                            </div>
+                                                            <div class="slds-grid">
+                                                                <span class="slds-truncate"
+                                                                    title={layout.currentObject}>{layout.currentObject}
+                                                                </span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </template>
+                                            </ul>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                        <div class={tabContainerClass}>
+                            <template if:true={showTemplate}>
+                                <c-workflow-page-Settings template-developer-name={selectedTemplateName} body-size={bodySize} onsave={handleSave}>
+                                </c-workflow-page-Settings>
+                                <div style="padding:15px;"></div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

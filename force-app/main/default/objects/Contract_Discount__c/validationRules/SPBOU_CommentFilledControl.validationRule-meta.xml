@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SPBOU_CommentFilledControl</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR( ISBLANK (commercial_reference__c), ISNULL(commercial_reference__c))</errorConditionFormula>
+    <errorMessage>Certaines des lignes d&apos;accord saisies nécessitent obligatoirement une référence commerciale.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>List_Clusters_FR</fullName>
+    <columns>Logo__c</columns>
+    <columns>NAME</columns>
+    <columns>SiteOfSalesNumber__c</columns>
+    <columns>SiteOfSalesNumberP1__c</columns>
+    <columns>SiteOfSalesNumberN1__c</columns>
+    <columns>Code__c</columns>
+    <columns>WeightedDistributionManual__c</columns>
+    <columns>NumericDistribution__c</columns>
+    <columns>SellOutFact__c</columns>
+    <columns>BusinessUnitCountryOrigin__c</columns>
+    <columns>ClosingDate__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>BusinessUnit__c.AssortmentCluster</value>
+    </filters>
+    <label>5. Les Strates</label>
+</ListView>

@@ -1,0 +1,194 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Accounting Collabs",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "{\"url\":\"/sfsites/c/cms/delivery/media/MC4CFSE2TNVBEKDAOOYN7MIVQEUI?lastModifiedDate=Tue Oct 08 11:19:06 GMT 2024&height=144&width=192\",\"contentKey\":\"MC4CFSE2TNVBEKDAOOYN7MIVQEUI\",\"altText\":\"\",\"contentType\":\"sfdc_cms__image\",\"bgPosition\":\"center center\",\"bgSizeOrRepeat\":\"/cover\"}",
+            "backgroundImageOverlay" : "rgba(0, 0, 0, 0.34)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"7600da79-c155-4c01-abee-18f0af2b3cc0\",\"columns\":[{\"UUID\":\"cca5a0f8-ed0a-4f78-b8e2-5ad82a4c0bd7\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "235px",
+            "sectionVerticalAlign" : "center"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "dxpStyle" : { },
+                "imageInfos" : "",
+                "richTextValue" : "<p style=\"text-align: center;\"><strong style=\"font-size: 72px; color: rgb(255, 255, 255);\">Collabs Center\t</strong></p>"
+              },
+              "definition" : "community_builder:richTextEditor",
+              "id" : "953b8632-d6e8-455a-bdc6-d06ef7c37f1f",
+              "type" : "component",
+              "variations" : [ {
+                "attributes" : {
+                  "dxpStyle" : { },
+                  "imageInfos" : "",
+                  "richTextValue" : "<p style=\"text-align: center;\"><strong style=\"font-size: 72px; color: rgb(255, 255, 255);\">Centre de collaborations\t</strong></p>"
+                },
+                "definition" : "community_builder:richTextEditor",
+                "id" : "572815ee-e9ad-4b14-8424-3e0040ecb4b2",
+                "title" : "FR",
+                "type" : "mutationComponent"
+              } ]
+            } ],
+            "id" : "cca5a0f8-ed0a-4f78-b8e2-5ad82a4c0bd7",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "7600da79-c155-4c01-abee-18f0af2b3cc0",
+          "type" : "component"
+        }, {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"dbbc2b50-eded-438f-8b17-78346fabfa7f\",\"columns\":[{\"UUID\":\"781c88db-68f8-4124-af1b-7f731baf999c\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "32px",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "id" : "781c88db-68f8-4124-af1b-7f731baf999c",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "dbbc2b50-eded-438f-8b17-78346fabfa7f",
+          "type" : "component"
+        }, {
+          "attributes" : {
+            "backgroundImageConfig" : "{\"url\":\"/sfsites/c/cms/delivery/media/MCRASYMLSKPVEATOTFQMASQC4Z3U?lastModifiedDate=Mon Oct 14 15:48:38 GMT 2024&height=144&width=192\",\"contentKey\":\"MCRASYMLSKPVEATOTFQMASQC4Z3U\",\"altText\":\"\",\"contentType\":\"sfdc_cms__image\",\"bgPosition\":\"center center\",\"bgSizeOrRepeat\":\"/cover\"}",
+            "backgroundImageOverlay" : "rgba(56, 79, 55, 0.64)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "1200px",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"b6665eca-a184-421d-9efc-8a81f9f92789\",\"columns\":[{\"UUID\":\"1dffeb63-7a5a-44ef-b0f7-c903b6fa827c\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "800px",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "dxpStyle" : { },
+                "imageInfos" : "",
+                "richTextValue" : "<p><strong style=\"color: rgb(255, 255, 255); font-size: 26px;\">3. Accounting Collabs</strong></p><p><span style=\"color: rgb(255, 255, 255); font-size: 16px;\">Find all of your accounting collaboration processes here.&nbsp;</span></p>"
+              },
+              "definition" : "community_builder:richTextEditor",
+              "id" : "90f7c579-9fd0-4fb1-b352-24fce4ba7379",
+              "type" : "component",
+              "variations" : [ {
+                "attributes" : {
+                  "dxpStyle" : { },
+                  "imageInfos" : "",
+                  "richTextValue" : "<p><strong style=\"font-size: 26px; color: rgb(255, 255, 255);\">3. Collaborations financières</strong></p><p><span style=\"font-size: 16px; color: rgb(255, 255, 255);\">Retrouvez ici l'ensemble de vos processus de collaboration financière.</span></p><p><strong style=\"font-size: 26px; color: rgb(255, 255, 255);\">&nbsp;</strong></p>"
+                },
+                "definition" : "community_builder:richTextEditor",
+                "id" : "227b85c0-9d03-4463-9337-78a74897fd1b",
+                "title" : "FR",
+                "type" : "mutationComponent"
+              } ]
+            }, {
+              "attributes" : {
+                "bannerBackgroundColor" : "rgb(140, 197, 138)",
+                "bannerPosition" : "top",
+                "bannerSizePercent" : 35,
+                "borderRadius" : 20,
+                "boxShadow" : true,
+                "dxpStyle" : { },
+                "haveBanner" : false,
+                "iconBackgroundColor" : "rgb(255,255,255)",
+                "iconSize" : "medium",
+                "noImageColor" : "rgb(116,116,116)",
+                "overlay" : "rgba(0,0,0,0.01)",
+                "templateType" : "default",
+                "tileMenuEditor" : "Collabs_Center_Accounting_Collabs",
+                "titleColor" : "",
+                "titleFontSize" : "medium",
+                "titleHorizontalAlign" : "center"
+              },
+              "definition" : "community_navigation:tileMenu",
+              "id" : "5f2ae15e-ee04-4940-b186-2c6e8ea078fb",
+              "type" : "component"
+            } ],
+            "id" : "1dffeb63-7a5a-44ef-b0f7-c903b6fa827c",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "b6665eca-a184-421d-9efc-8a81f9f92789",
+          "type" : "component"
+        } ],
+        "id" : "3042825e-f58e-41e4-a254-69286aa66483",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "dxpStyle" : { },
+            "pageTitle" : "Accounting Collabs",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "8df6fcda-0a71-4599-bdbf-f34ce9629349",
+          "type" : "component"
+        } ],
+        "id" : "5560736c-bdd5-4d0c-bb82-6672370a9a83",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "598ddb91-983e-4671-af34-d30d5698c547",
+      "type" : "component"
+    },
+    "contentOperations" : {
+      "operations" : [ {
+        "targetId" : "953b8632-d6e8-455a-bdc6-d06ef7c37f1f",
+        "ruleToVariationList" : [ {
+          "variationId" : "572815ee-e9ad-4b14-8424-3e0040ecb4b2",
+          "rule" : {
+            "name" : "409ba702-b33a-4beb-8236-15d9357a0780",
+            "description" : "",
+            "criteriaType" : "AllCriteriaMatch",
+            "expressionCriteria" : [ {
+              "resource" : "User.Record.LocaleSidKey",
+              "operator" : "Equal",
+              "value" : "fr",
+              "criterionNumber" : 1
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-accounting-collabs"
+  },
+  "urlName" : "accounting-collabs"
+}

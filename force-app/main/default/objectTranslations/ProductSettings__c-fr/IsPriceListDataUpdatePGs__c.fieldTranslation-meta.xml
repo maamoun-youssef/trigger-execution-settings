@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Lorsque cette option est activée, les données des listes de prix sont synchronisées avec les PG de type tarif (PriceList). Activez-la uniquement si votre organisation n&apos;utilise pas le processus descente tarifaire (PWF)</help>
+    <label>Synchro des listes des prix dans PG</label>
+    <name>IsPriceListDataUpdatePGs__c</name>
+</CustomFieldTranslation>

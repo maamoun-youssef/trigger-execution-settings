@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Duplication Discount Mapping</label>
+    <name>Duplication_Discount_Mapping__c</name>
+    <relationshipLabel><!-- Conditions Tarifaires (Duplication Discount Mapping) --></relationshipLabel>
+</CustomFieldTranslation>

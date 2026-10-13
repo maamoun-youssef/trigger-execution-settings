@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Delimiter used in uploaded CSV files --></help>
+    <label><!-- CSV Delimiter --></label>
+    <name>CSV_Delimiter__c</name>
+</CustomFieldTranslation>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProductLifeStatusAss__c</fullName>
+    <label>Product Life Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Keep</fullName>
+                <default>false</default>
+                <label>Keep</label>
+            </value>
+            <value>
+                <fullName>Delist</fullName>
+                <default>false</default>
+                <label>Delist</label>
+            </value>
+            <value>
+                <fullName>New</fullName>
+                <default>false</default>
+                <label>New</label>
+            </value>
+            <value>
+                <fullName>Increase</fullName>
+                <default>false</default>
+                <label>Increase</label>
+            </value>
+            <value>
+                <fullName>Decrease</fullName>
+                <default>false</default>
+                <label>Decrease</label>
+            </value>
+            <value>
+                <fullName>Substitute</fullName>
+                <default>false</default>
+                <label>Substitute</label>
+            </value>
+            <value>
+                <fullName>Probably deleted</fullName>
+                <default>false</default>
+                <label>Probably deleted</label>
+            </value>
+            <value>
+                <fullName>Opportunity</fullName>
+                <default>false</default>
+                <label>Opportunity</label>
+            </value>
+            <value>
+                <fullName>Complement</fullName>
+                <default>false</default>
+                <label>Complement</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,206 @@
+<template>
+    <template if:true={isReady}>
+    <div class="mainContainer fullheight relativeDiv slds-card" style="overflow: unset;">
+        <div class="slds-card slds-page-header pageHeader">
+            <!-- LAYOUT  -->
+            <div class="slds-grid">
+                <!-- TITLE -->
+                <div class="slds-has-flexi-truncate">
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div class="slds-media__body ">
+                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate"
+                                title="">
+                                {labels.LBL_SellIn_Mass_Update}
+                            </h1>
+                            <!--  COL FOR FILTER -->
+                            <div class="slds-grid " if:false={isLoading}>
+                                <ul class="slds-grid">
+                                    <li class="">
+                                        <div class="slds-text-title filterInput" title={labels.LBL_SellIn_ContractStatus}>
+                                            <c-neg-optim-custom-picklist selected-values={stringifiedSelectedStatus}
+                                                options={negoscopeStatusOptions} selected-event={Events.handleChangeMultiPicklistValues}
+                                                data-field={API_NAMES.NegoScope__c.Status__c} onhandlechangemultipicklistvalues={handleChangeMultiPicklistValues}
+                                                label={labels.LBL_SellIn_ContractStatus} data-filter-name="status">
+                                            </c-neg-optim-custom-picklist>
+                                        </div>
+                                    </li>
+                                    <li class="slds-m-left--medium">
+                                        <div class="slds-text-title filterInput" title={labels.ContractSellin__c.year}>
+                                            <c-neg-optim-custom-picklist selected-values={stringifiedSelectedYears}
+                                                options={yearOptions} selected-event={Events.handleChangeMultiPicklistValues}
+                                                data-field={API_NAMES.ContractSellin__c.Year__c} onhandlechangemultipicklistvalues={handleChangeMultiPicklistValues}
+                                                label={labels.ContractSellin__c.year} data-filter-name="year">
+                                            </c-neg-optim-custom-picklist>
+                                        </div>
+                                    </li>
+                                    <li class="slds-m-left--medium">
+                                        <c-neg-optim-custom-lookup search-term="" object-name={API_NAMES.Supplier__c.objectApiName} data-field="lookupField"
+                                        is-multi="true" icon-name="" selected-event={Events.handleChangeMultiPicklistValues} value={stringifiedSelectedSupplier}
+                                        search-fields='Name' data-search="true" onhandlechangemultipicklistvalues={handleChangeMultiPicklistValues}
+                                        label={labels.NegoScope__c.supplier} data-filter-name="supplier"></c-neg-optim-custom-lookup>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- COL FOR ACTIONS -->
+                <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                    <div class="slds-grid">
+                    <!-- BACK -->
+                        <lightning-button label={labels.LBL_Cancel} onclick={handleReset}
+                            class="slds-m-right_x-small"></lightning-button>
+                        <!-- SAVE -->
+                        <lightning-button variant="brand" label={labels.LBL_Save} onclick={handleSave}
+                            class="slds-m-right_x-small"></lightning-button>
+                        <!-- DROPDOWN MENU -->
+                        <lightning-button-menu icon-name="utility:connected_apps" menu-alignment="right" nubbin
+                            class="slds-m-right_x-small">
+                            <!-- EXPORT EXCEL -->
+                            <lightning-menu-item prefix-icon-name="doctype:excel" label={labels.LBL_Export}
+                                onclick={exportExcel}>
+                            </lightning-menu-item>
+                            <!-- IMPORT EXCEL -->
+                            <lightning-menu-item prefix-icon-name="utility:upload" label={labels.LBL_Import}
+                                onclick={handleOpenImport}></lightning-menu-item>
+                            </lightning-button-menu>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bodyDiv">
+            <div class="negoptim-tablesection slds-scrollable relativeDiv scrollBody" style="height:100%" onscroll={handleScroll}>
+                <!-- LOADING SPINNER -->
+                <template lwc:if={isLoading}>
+                    <div class="slds-spinner_container greyBg">
+                        <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+                    </div>
+                </template>
+                <!-- TABLE BLOCK -->
+                <table
+                    class="pageBody no-help-text slds-scrollable_y slds-table slds-table_bordered slds-table_col-bordered slds-border_left slds-no-row-hover slds-border_right"
+                    style="width:100%;">
+                    <thead class="tableHeader">
+                        <!-- TABLE HEADER -->
+                        <tr style="position: sticky; top: 0; z-index: 12;">
+                            <template for:each={fieldsWrapperList} for:item="field" for:index="index">
+                                <th rowspan="2" key={field.Id} style={field.headerStyle}
+                                    class="centerText relativeDiv">
+                                    <div >
+                                        {field.fieldLabel}
+                                    </div>
+                                    <div class="icons-container slds-grid slds-m-right--xxx-small">
+                                        <div if:true={field.fieldHelpText}>
+                                            <lightning-icon class="white-icon" if:true={field.fieldHelpText}
+                                                size="xx-small" icon-name="utility:info"
+                                                title={field.fieldHelpText}>
+                                            </lightning-icon>
+                                        </div>
+                                    </div>
+                                </th>
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- TABLE BODY -->
+                        <template for:each={contractSellInList} for:item="contractSellInWrp" for:index="recordIndex" lwc:if={contractSellInList.length}>
+                            <tr key={contractSellInWrp.contractSellIn.Id}>
+                                <template for:each={contractSellInWrp.fields} for:item="field" for:index="fieldIndex">
+                                    <td key={field.fieldName} class={field.class} style={field.bodyStyle}>
+                                        <!-- IMPUT FIELDS -->
+                                        <template lwc:if={field.isInput}>
+                                            <template lwc:if={field.isNumber}>
+                                                <lightning-input type='number' variant="label-hidden"
+                                                    data-index={recordIndex} value={field.value} data-field-index={fieldIndex}
+                                                    data-field={field.fieldName} onblur={handleFieldEdits}>
+                                                </lightning-input>
+                                            </template>
+                                        </template>
+                                        <!-- DISPLAY FIELDS -->
+                                        <template lwc:else>
+                                            <template lwc:if={field.isReference}>
+                                                <a href={field.url} target="_blank">{field.value}</a>
+                                            </template>
+                                            <template lwc:elseif={field.isPicklist}>
+                                                {field.value}
+                                            </template>
+                                            <template lwc:elseif={field.isPercent}>
+                                                <lightning-formatted-number
+                                                format-style="percent-fixed" value={field.value}
+                                                maximum-fraction-digits="0"
+                                                minimum-fraction-digits="0"></lightning-formatted-number>
+                                            </template>
+                                            <lightning-formatted-number minimum-fraction-digits={field.scale}
+                                                maximum-fraction-digits={field.scale} value={field.value}
+                                                lwc:elseif={field.isNumber}>
+                                            </lightning-formatted-number>
+                                            <lightning-formatted-number minimum-fraction-digits={field.scale}
+                                                maximum-fraction-digits={field.scale} value={field.value}
+                                                lwc:elseif={field.isCurrency}
+                                                currency-code={invWrp.invoice.CurrencyIsoCode} format-style="currency"
+                                                currency-display-as="code">
+                                            </lightning-formatted-number>
+                                            <lightning-formatted-date-time value={field.value} lwc:elseif={field._isDate}
+                                                year="numeric" month="2-digit" day="2-digit">
+                                            </lightning-formatted-date-time>
+                                            <template lwc:elseif={field.isBoolean}>
+                                                <lightning-input type="checkbox" disabled checked={field.value}
+                                                    if:true={field.value}>
+                                                </lightning-input>
+                                                <lightning-input type="checkbox" disabled if:false={field.value}>
+                                                </lightning-input>
+                                            </template>
+                                            <template lwc:elseif={field.isText}>
+                                                {field.value}
+                                            </template>
+                                        </template>
+                                    </td>
+                                </template>
+                            </tr>
+                        </template>
+                        <!-- HANDLE NULL DATA -->
+                        <template lwc:else>
+                            <div style="width: 400px; left: 50%; position: sticky;">
+                                <p>{labels.LBL_No_Item_To_Display}</p>
+                            </div>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </template>
+    <!-- POPUP LAYOUT -->
+    <div if:true={openImportPopup}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                onclick={handleCloseImportPopup}>
+                <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
+                </svg>
+                <span class="slds-assistive-text">{labels.LBL_Cancel}</span>
+                </button>
+                <div class="slds-modal__header">
+                <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate">{labels.LBL_Import}</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <lightning-input type="file" label="Attachment" accept={acceptedFormats} onchange={handleFileSelect}>
+                </lightning-input>
+                <div class="slds-text-body_small">
+                    {fileName}
+                </div>
+                </div>
+                <!-- POPUP ACTIONS -->
+                <div class="slds-modal__footer">
+                <lightning-button label={labels.LBL_Cancel} variant="neutral" onclick={handleCloseImportPopup}
+                    class="slds-m-right_x-small"></lightning-button>
+                <lightning-button label={labels.LBL_Ok} variant="brand" onclick={handleConfirmImport}></lightning-button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+  </div>
+</template>

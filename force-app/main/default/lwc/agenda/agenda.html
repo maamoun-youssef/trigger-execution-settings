@@ -1,0 +1,297 @@
+<template>
+  <div class="negoptim-agenda">
+    <div class="main-agenda">
+      <div if:true={Agenda} class="negoptim-calendar">
+        <div class="l" onmouseleave={closeyouroption}>
+          <div class="negoptim-cyear" style="padding-left: 10px; padding-top:10px">{currentDate}</div>
+          <div class="negoptim-chevyear" style="color:#00B7BC; position: relative;">
+            <lightning-icon icon-name='utility:chevrondown' alternative-text='chevrondown' size='meduim'
+              title='chevrondown' class="slds-current-color " onclick={toggleYearDropdown}></lightning-icon>
+            <template if:true={showYearDropdown}>
+              <div onclick={handleYearChange} class="option">
+                <template for:each={yearOptions} for:item="option">
+                  <option key={option} value={option} class="year-option">{option}</option>
+                </template>
+              </div>
+            </template>
+          </div>
+        </div>
+        <div class="negoptim-cmonth">
+          <div class="negoptim-parent ">
+            <div class="negoptim-icon" style="color:#00B7BC">
+              <lightning-icon icon-name='utility:chevronleft' alternative-text='chevronleft' size='meduim'
+                title='chevronleft' class="slds-current-color pointer" data-id="calendar-prev"
+                onclick={handleChangeMonth}>
+              </lightning-icon>
+              <div class="negoptim-zeroo" style="background:transparent"></div>
+            </div>
+            <div class="negoptim-months  negoptim-parent ">
+              <div class="negoptim-wmonths">
+                <div class="negoptim-upper" style="color:#8B8B8B">
+                  {previousMonth}
+                  <div class="h" style="height:2px;"></div>
+                </div>
+              </div>
+              <div class="negoptim-mbetween">
+                <div class="negoptim-supper">
+                  {currentMonth}
+                  <div style="height:2px;background:#00B7BC"></div>
+                </div>
+              </div>
+              <div class="negoptim-mbetween">
+                <div class="negoptim-supper" style="color:#8B8B8B">
+                  {nextMonth}
+                  <div class="h" style="height:2px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="negoptim-change" style="color:#00B7BC">
+              <lightning-icon icon-name='utility:chevronright' alternative-text='chevronright' size='meduim'
+                title='chevronright' class="slds-current-color pointer" data-id="calendar-next"
+                onclick={handleChangeMonth}>
+              </lightning-icon>
+              <div class="negoptim-zeroo" style="background:transparent"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="calendar-body" style="translate: -1%; margin-top: 10px;">
+          <div class="calendar-weekdays negoptim-parent  negoptim-days">
+            <div class="day-week">{label.LBL_Sunday}</div>
+            <div class="day-week">{label.LBL_Monday}</div>
+            <div class="day-week">{label.LBL_Tuesday}</div>
+            <div class="day-week">{label.LBL_Wednesday}</div>
+            <div class="day-week">{label.LBL_Thursday}</div>
+            <div class="day-week">{label.LBL_Friday}</div>
+            <div class="day-week">{label.LBL_Saturday}</div>
+          </div>
+          <div class=" calendar-dates" style="font-size: 0px;">
+            <div for:each={calenderDates} for:item="calender" for:index="index" key={calender}
+              style="text-align:center; display: inline-block; width:14%;padding-top:18px;padding-bottom:18px;">
+              <div class={calender.parentClasses} onclick={handleDateClick} data-day={calender.nb}>
+                <div class="negoptim-numtranslate">{calender.nb}</div>
+              </div>
+              <div class="negoptim-zeroo" style="background:transparent" onclick={handleChangeDay}
+                data-full={calender.full} data-nb={calender.nb} data-weekend={calender.weekend}
+                data-open={calender.openDates} data-holiday={calender.holiday}></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="negoptim-maintasks">
+        <div class="negoptim-taskportion">
+          <div class="negoptim-tasklabel" style="color:#00B7BC">
+            <!-- Liste des tâches à venir  -->
+            {label.LBL_Upcoming_Tasks_List}
+          </div>
+          <!-- <div class="negoptim-taskadd">
+            <div class="pointer negoptim-taskaddwhite">
+              <div class="negoptim-whitecolor negoptim-taskaddblue">
+                <lightning-icon icon-name='utility:add' alternative-text='add' size='meduim' title='add'
+                  class="slds-current-color negoptim-addtranslate"></lightning-icon>
+              </div>
+            </div>
+          </div> -->
+        </div>
+
+        <div class="negoptim-search">
+          <div class="negoptim-parent  "
+            style="border-radius:50px;overflow:hidden;background:white;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; text-align: center;">
+            <div class="negoptim-searchicons">
+              <lightning-icon icon-name='utility:search' alternative-text='search' size='small'
+                title='search'></lightning-icon>
+            </div>
+            <div class="negoptim-searchbar">
+              <input type="text" class="negoptim-placeholder" style="border:none" placeholder={label.LBL_Placeholder}
+                onchange={handleSearch}>
+            </div>
+            <div class="negoptim-searchicons">
+              <div class="negoptim-filter" style={FilterIcon} onclick={toggleFilterOptions}></div>
+            </div>
+          </div>
+        </div>
+        <div class="negoptim-filterdays">
+          <div class={filterDropdownClass} onclick={handleFilterOptionSelect}>
+            <div data-filter="Next7Days" style="margin-bottom: 5px;">{label.LBL_Due_Next_Seven_Days}</div>
+            <div data-filter="Next30Days" style="margin-bottom: 5px;">{label.LBL_Due_Next_Thirty_Days}</div>
+            <div data-filter="Next90Days" style="margin-bottom: 5px;">{label.LBL_Due_Next_Ninty_Days}</div>
+            <div data-filter="DueImmediately" style="margin-bottom: 5px;">{label.LBL_Due_Immediatly}</div>
+            <div data-filter="AllTasks">{label.LBL_All_Tasks}</div>
+          </div>
+        </div>
+
+        <div class="negoptim-message">
+          <template if:false={showSelectedDayMessage}>
+            <template if:true={showCustomMessage}>
+              <div class="negoptim-messagelabel" style="color:#8B8B8B">
+                {customMessage}
+              </div>
+            </template>
+            <template if:false={showCustomMessage}>
+              <div class="negoptim-messagelabel" style="color:#8B8B8B">
+                {label.LBL_Show_List}
+              </div>
+              <div class="negoptim-filternum">
+                <div class="pointer">
+                  <div class=" negoptim-whitecolor negoptim-bluecircle" style="color: #00B7BC;">
+                    {filterDay}
+                  </div>
+                </div>
+              </div>
+              <div class="negoptim-messagelabel" style="color:#8B8B8B">
+                {label.LBL_Upcoming_Days}
+              </div>
+            </template>
+          </template>
+          <template if:true={showSelectedDayMessage}>
+
+            <div class="negoptim-selecteddaymessage" style="color:#8B8B8B">
+              {label.LBL_Show_Selected_Task}
+            </div>
+            <div class="negoptim-selectedactivityday" style="color:#8B8B8B;">
+              <lightning-formatted-date-time value={SelectedActivityDate} day="2-digit" month="2-digit" year="numeric">
+              </lightning-formatted-date-time>
+            </div>
+
+          </template>
+        </div>
+
+        <div class="slds-p-around_large task-section">
+          <template for:each={TaskInfoList} for:item="task">
+            <div key={task.Id}>
+              <div class="negoptim-container slds-grid slds-grid_vertical-align-start" onclick={handleActiveClass}>
+                <div class="slds-col slds-size_2-of-12 ">
+                  <div class="checkbox-container">
+                    <template if:true={task.IsCompleted}>
+                      <input class="check-css" type="checkbox" checked disabled></input>
+                    </template>
+                    <template if:false={task.IsCompleted}>
+                      <input class="check-css" type="checkbox" disabled></input>
+                    </template>
+                  </div>
+                </div>
+                <div class="slds-col slds-size_8-of-12 slds-text-align_left" onclick={handleTaskDetailsClick}
+                  data-id={task.Id}>
+                  <!-- When task is completed -->
+                  <template if:true={task.IsCompleted}>
+                    <span class="completed-task small task-title">
+                      <lightning-formatted-date-time value={task.ActivityDate} day="2-digit" month="2-digit"
+                        year="numeric">
+                      </lightning-formatted-date-time>: {task.Subject}
+                    </span>
+
+                  </template>
+
+                  <!-- When task is not completed -->
+                  <template if:false={task.IsCompleted}>
+                    <span class="task-items text-grey small task-title">
+                      <div>
+                        <lightning-formatted-date-time class="text-grey" value={task.ActivityDate} day="2-digit"
+                          month="2-digit" year="numeric">
+                        </lightning-formatted-date-time>:
+                      </div>
+                      <div class="task-lil">{task.Subject}</div>
+                    </span>
+                  </template>
+
+                  <span class="slds-col text-blue task-title">{task.CallObject}</span>
+                </div>
+                <div class="slds-col slds-size_2-of-12 slds-text-align_center">
+                  <template if:true={task.IsCompleted}>
+                    <div class="negoptim-contact slds-align_absolute-center" style={ContactIcon}></div>
+                  </template>
+                  <template if:false={task.IsCompleted}>
+                    <div class="negoptim-contact slds-align_absolute-center" style={ContactIconBlue}></div>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </template>
+
+        </div>
+
+      </div>
+
+      <div class="negoptim-mainprof">
+        <template if:true={showProfileUser}>
+          <div class="negoptim-parent " style="padding: 15px; margin-bottom: 10px;">
+            <div class="negoptim-profpos">
+              <div class="negoptim-profborder">
+                <div class="negoptim-image negoptim-zeroo" style={displayedTask.ProfilePic}></div>
+              </div>
+            </div>
+            <div class="negoptim-profinfo">
+              <div class="user-info">{displayedTask.ownerName}</div>
+              <div class="negoptim-account user-info">{displayedTask.accountName}</div>
+              <div class="user-info negoptim-account">{displayedTask.ownerTitle}</div>
+            </div>
+          </div>
+          <div class="negoptim-whitecolor negoptim-priority"
+            style="background:#00B7BC;border-radius:50px; width: 80%; text-align: center; margin: auto;">
+            {label.LBL_Priority}
+          </div>
+          <div class="negoptim-proflabel" style="text-align: center; margin: 10px;">{displayedTask.Priority}</div>
+          <div class="negoptim-whitecolor negoptim-profsizes"
+            style="background:#00B7BC;border-radius:50px; width: 80%; text-align: center; margin: auto;">
+            {label.LBL_Status}
+          </div>
+          <div class="negoptim-proflabel" style="text-align: center; margin: 10px;">{displayedTask.Status}</div>
+          <div class="negoptim-whitecolor negoptim-profbsize"
+            style="background:white; border-radius:20px; width: 80%; text-align: left; margin: auto; color:#8B8B8B; min-height:70px; margin-bottom: 10px; padding: 10px; line-height: 13px; word-break: break-word;">
+            {displayedTask.Description}
+          </div>
+        </template>
+
+        <template if:false={showProfileUser}>
+
+          <div class="negoptim-falseprofsection">
+            <div class="negoptim-todo">
+              {label.LBL_To_Do}
+            </div>
+            <div class="negoptim-linescheck">
+              <div class="negoptim-checktrue">
+                <input class="check-css" type="checkbox" style="top:5px" checked></input>
+              </div>
+              <div class="negoptim-blocklines">
+                <div style="height: 2px; background-color:rgb(0, 183, 188); margin-bottom: 10px;"></div>
+                <div style="height: 2px; background-color:rgb(0, 183, 188); margin-bottom: 10px;"></div>
+                <div style="height: 2px; background-color:rgb(0, 183, 188); margin-bottom: 0px;"></div>
+              </div>
+            </div>
+
+            <div class="negoptim-linescheck1">
+              <div class="negoptim-checktrue">
+                <input class="check-css" type="checkbox" style="top:5px" checked></input>
+              </div>
+              <div class="negoptim-blocklines1">
+                <div style="height: 2px; background-color:rgb(0, 183, 188); margin-bottom: 10px;"></div>
+                <div style="height: 2px; background-color:rgb(0, 183, 188); margin-bottom: 10px;"></div>
+                <div style="height: 2px; background-color:rgb(0, 183, 188); margin-bottom: 0px;"></div>
+              </div>
+            </div>
+
+            <div class="negoptim-linescheck2">
+              <div class="negoptim-checktrue">
+                <input class="check-nowhite" type="checkbox" style="top:5px"></input>
+              </div>
+              <div class="negoptim-blocklines2">
+                <div style="height: 2px; background-color:rgb(0, 183, 188); margin-bottom: 10px;"></div>
+                <div style="height: 2px; background-color:rgb(0, 183, 188); margin-bottom: 10px;"></div>
+                <div style="height: 2px; background-color:rgb(0, 183, 188); margin-bottom: 0px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="negoptim-descfalse">
+            {label.LBL_Click_To_View_Details}
+          </div>
+
+        </template>
+
+      </div>
+
+    </div>
+  </div>
+</template>

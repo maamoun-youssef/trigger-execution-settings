@@ -1,0 +1,388 @@
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1.2rem;
+  padding-top: 12px;
+}
+
+.image-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /*added*/
+ 
+ 
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(70, 79, 99, 0.25);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 20px rgba(50, 60, 75, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.image-item.selected {
+  border: 2px solid #009688;
+  box-shadow: 0 0 10px rgba(0, 150, 136, 0.6);
+  transform: scale(1.05);
+  z-index: 1;
+  
+}
+
+.image-item:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(31, 58, 147, 0.15);
+}
+/*
+.image-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}*/
+
+.preview-image {
+  max-width: 150px;
+  max-height: 150px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  height: 100px;
+}
+
+.image-item:hover .preview-image {
+  transform: scale(1.05);
+}
+
+.image-label {
+  position: absolute;
+  bottom: 10px;
+  background: #009688;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(50, 50, 50, 0.12);
+  white-space: nowrap;
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.image-item.selected::after {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  border-radius: 16px;
+  background: rgba(0, 150, 136, 0.12);
+  animation: pulseGlow 2s infinite;
+  z-index: 0;
+}
+
+
+.example-preview {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+
+  gap: 1rem;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+
+.sprite-preview {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.code-section {
+  width: 100%;
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-left: 4px solid #009688;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 10px rgba(31, 58, 147, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.code-section:hover {
+  box-shadow: 0 4px 16px rgba(31, 58, 147, 0.1);
+}
+
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #009688;
+  margin: 0;
+}
+
+.code-block {
+  background-color: #f4f6f8;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.85rem;
+  color: #2e3b4e;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+.logo-class {
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.left-panel {
+  transition: width 0.3s ease;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: 65%;
+}
+
+.right-panel {
+  width: 35%;
+  padding-left: 0.5rem;
+  animation: fadeInRight 0.3s ease-in-out;
+  position: relative;
+}
+
+.example-preview img {
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  transition: border-color 0.3s ease, transform 0.2s ease;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+.sprite-preview img {
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 6px;
+}
+
+.example-preview img:hover {
+  transform: scale(1.05);
+}
+
+.example-preview img.selected-size {
+  border: 2px solid #009688 !important;
+  box-shadow: 0 0 10px rgba(0, 150, 136, 0.6) !important;
+}
+
+/* Sizes */
+.example-preview img.small {
+  width: 50px !important;
+  height: 50px!important;
+  object-fit: contain;
+}
+
+.example-preview img.medium {
+  width: 100px !important;
+  height: 100px !important;
+  object-fit: contain;
+}
+
+.example-preview img.large {
+  width: 150px !important;
+  height: 150px !important;
+  object-fit: contain;
+}
+
+.sticky-preview {
+  position: relative;
+  top: 0;
+  background: #fefefe;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #dcdcdc;
+  z-index: 10;
+}
+
+.sticky-preview p {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 0.75rem;
+}
+
+.sticky-bar {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 20;
+}
+
+.loader {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+  animation: animate 1.2s linear infinite;
+}
+
+.variant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader span {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+
+.loader:after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  background: #f1f1f1;
+  border-radius: 50%;
+}
+
+.preview-sprite {
+  width: 100%;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: 0 0;
+  object-fit: contain;
+}
+
+.full-sprite-image {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sprite-image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.selection-marker {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.closebutton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+    background: transparent;
+ 
+
+}
+
+
+
+
+
+.closebutton:hover lightning-icon {
+    
+    --slds-c-icon-color-foreground: var(--slds-g-color-brand-base-30, #0070D2);
+    
+}
+
+/* Optional: To prevent a blue background from appearing behind the icon,
+   you can set the icon's background to transparent on hover. */
+.closebutton:hover lightning-icon {
+    --slds-c-icon-color-background: transparent;
+}
+
+
+
+.hidden{
+  display: none;
+}
+
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+}

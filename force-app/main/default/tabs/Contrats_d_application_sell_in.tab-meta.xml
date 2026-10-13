@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <frameHeight>600</frameHeight>
+    <hasSidebar>false</hasSidebar>
+    <label>Contrats d&apos;application sell in</label>
+    <motif>Custom24: Building</motif>
+    <url>https://negoptim2-Dev4-dev-ed.develop.lightning.force.com/lightning/n/PromoAgreementsGrid?c__promoAgreementTypes=%27SellIn%27&amp;c__year=2025&amp;c__status=&amp;c__selectedSuppliers=%5B%5D&amp;c__selectedNegoScopes=%5B%5D&amp;c__selectedCommercialPlans=%5B%5D&amp;c__hasSearched=true</url>
+    <urlEncodingKey>UTF-8</urlEncodingKey>
+</CustomTab>

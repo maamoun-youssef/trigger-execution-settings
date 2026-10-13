@@ -1,0 +1,235 @@
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+.cl-layout {
+    display: flex;
+    align-items: stretch;
+}
+
+.cl-ribbon {
+    width: 28px;
+    background: linear-gradient(0deg, #ffffff -20%, var(--cl-ribbon-bg, #0cb4ba) 75%);
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cl-ribbon>span {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    color: var(--cl-ribbon-ink, #fff);
+    font-weight: 700;
+    letter-spacing: .5px;
+    /* font-size: .9rem; */
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .2);
+    padding: 8px 0;
+}
+
+.cl-main {
+    flex: 1;
+    background: #fff;
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+    overflow: hidden;
+}
+
+.cl-container {
+    padding: 0;
+}
+
+.cl-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+}
+
+.cl-header {
+    background: var(--cl-header-bg, #0cb4ba);
+    color: var(--cl-header-ink, #ffffff);
+    height: 40px;
+    /* text-align: left; */
+    /* font-weight: 600; */
+}
+
+.cl-header>th {
+    padding: 1px 0px 1px 5px;
+    font-size: 9pt;
+    position: relative;
+}
+
+.cl-header>th:last-child {
+    border-right: none;
+}
+
+.cl-header>th + th::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.85);
+    pointer-events: none;
+}
+
+.cl-row td {
+    padding: 1px 0px 1px 5px;
+    font-size: 9pt;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.cl-header>td:last-child {
+    padding: 1px 5px 1px 5px;
+}
+
+.cl-row:last-child td {
+    border-bottom: 0;
+}
+
+.cl-footer {
+    display: flex;
+}
+
+.cl-link {
+    color: var(--cl-link, #0b5cab);
+    text-decoration: none;
+}
+
+.cl-link:hover {
+    text-decoration: underline;
+}
+
+.cl-empty {
+    padding: 12px 10px;
+    color: #666;
+}
+
+.theme-default {
+    --cl-header-bg: var(--c-default-header-color-background, #0cb4ba);
+    --cl-header-ink: var(--c-default-header-color-text, #ffffff);
+    --cl-ribbon-bg: var(--c-default-index-color-background, #0cb4ba);
+    --cl-ribbon-ink: var(--c-default-index-color-text, #ffffff);
+}
+.theme-simulation {
+    --cl-header-bg: var(--c-simulation-header-color-background, #0cb4ba);
+    --cl-header-ink: var(--c-simulation-header-color-text, #ffffff);
+    --cl-ribbon-bg: var(--c-simulation-index-color-background, #0cb4ba);
+    --cl-ribbon-ink: var(--c-simulation-index-color-text, #ffffff);
+}
+.theme-signed {
+    --cl-header-bg: var(--c-signed-header-color-background, #0cb4ba);
+    --cl-header-ink: var(--c-signed-header-color-text, #ffffff);
+    --cl-ribbon-bg: var(--c-signed-index-color-background, #0cb4ba);
+    --cl-ribbon-ink: var(--c-signed-index-color-text, #ffffff);
+}
+.theme-to-be-signed {
+    --cl-header-bg: var(--c-target-header-color-background, #0cb4ba);
+    --cl-header-ink: var(--c-target-header-color-text, #ffffff);
+    --cl-ribbon-bg: var(--c-target-index-color-background, #0cb4ba);
+    --cl-ribbon-ink: var(--c-target-index-color-text, #ffffff);
+}
+.theme-on-top {
+    --cl-header-bg: var(--c-on-top-header-color-background, #0cb4ba);
+    --cl-header-ink: var(--c-on-top-header-color-text, #ffffff);
+    --cl-ribbon-bg: var(--c-on-top-index-color-background, #0cb4ba);
+    --cl-ribbon-ink: var(--c-on-top-index-color-text, #ffffff);
+}
+.theme-period-extension {
+    --cl-header-bg: var(--c-period-extension-header-color-background, #0cb4ba);
+    --cl-header-ink: var(--c-period-extension-header-color-text, #ffffff);
+    --cl-ribbon-bg: var(--c-period-extension-index-color-background,#0cb4ba);
+    --cl-ribbon-ink: var(--c-period-extension-index-color-text, #ffffff);
+}
+.theme-nego-base {
+    --cl-header-bg: var(--c-nego-base-header-color-background, #0cb4ba);
+    --cl-header-ink: var(--c-nego-base-header-color-text, #ffffff);
+    --cl-ribbon-bg: var(--c-nego-base-index-color-background, #0cb4ba);
+    --cl-ribbon-ink: var(--c-nego-base-index-color-text, #ffffff);
+}
+.theme-safe-balance {
+    --cl-header-bg: var(--c-safe-balance-header-color-background, #0cb4ba);
+    --cl-header-ink: var(--c-safe-balance-header-color-text, #ffffff);
+    --cl-ribbon-bg: var(--c-safe-balance-index-color-background, #0cb4ba);
+    --cl-ribbon-ink: var(--c-safe-balance-index-color-text, #ffffff);
+}
+.theme-proposal {
+    --cl-header-bg: var(--c-proposal-header-color-background, #0cb4ba);
+    --cl-header-ink: var(--c-proposal-header-color-text, #ffffff);
+    --cl-ribbon-bg: var(--c-proposal-index-color-background, #0cb4ba);
+    --cl-ribbon-ink: var(--c-proposal-index-color-text, #ffffff);
+}
+.theme-target {
+    --cl-header-bg: var(--c-target-header-color-background, #0cb4ba);
+    --cl-header-ink: var(--c-target-header-color-text, #ffffff);
+    --cl-ribbon-bg: var(--c-target-index-color-background, #0cb4ba);
+    --cl-ribbon-ink: var(--c-target-index-color-text, #ffffff);
+}
+.theme-landing {
+    --cl-header-bg: var(--c-landing-header-color-background, #0cb4ba);
+    --cl-header-ink: var(--c-landing-header-color-text, #ffffff);
+    --cl-ribbon-bg: var(--c-landing-index-color-background, #0cb4ba);
+    --cl-ribbon-ink: var(--c-landing-index-color-text, #ffffff);
+}
+.theme-nego-base-exit {
+    --cl-header-bg: var(--c-nego-base-exit-header-color-background, #0cb4ba);
+    --cl-header-ink: var(--c-nego-base-exit-header-color-text, #ffffff);
+    --cl-ribbon-bg: var(--c-nego-base-exit-index-color-background, #0cb4ba);
+    --cl-ribbon-ink: var(--c-nego-base-exit-index-color-text, #ffffff);
+}
+.theme-nego-base-init {
+    --cl-header-bg: var(--c-nego-base-init-header-color-background, #0cb4ba);
+    --cl-header-ink: var(--c-nego-base-init-header-color-text, #ffffff);
+    --cl-ribbon-bg: var(--c-nego-base-init-index-color-background, #0cb4ba);
+    --cl-ribbon-ink: var(--c-nego-base-init-index-color-text, #ffffff);
+}
+.theme-postnego-simulation {
+    --cl-header-bg: var(--c-postnego-simulation-header-color-background, #0cb4ba);
+    --cl-header-ink: var(--c-postnego-simulation-header-color-text, #ffffff);
+    --cl-ribbon-bg: var(--c-postnego-simulation-index-color-background, #0cb4ba);
+    --cl-ribbon-ink: var(--c-postnego-simulation-index-color-text, #ffffff);
+}
+.theme-signed-copy {
+    --cl-header-bg: var(--c-signed-copy-header-color-background, #0cb4ba);
+    --cl-header-ink: var(--c-signed-copy-header-color-text, #ffffff);
+    --cl-ribbon-bg: var(--c-signed-copy-index-color-background, #0cb4ba);
+    --cl-ribbon-ink: var(--c-signed-copy-index-color-text, #ffffff);
+}

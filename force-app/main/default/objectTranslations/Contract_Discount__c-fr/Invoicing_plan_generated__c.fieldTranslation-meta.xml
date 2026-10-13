@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Give info if the planning of invoice has been generated for the condition. If the user will chek, automatic planning of invoicing will be generated based on the condition invoicing criteria --></help>
+    <label>Plan de facturation générer</label>
+    <name>Invoicing_plan_generated__c</name>
+</CustomFieldTranslation>

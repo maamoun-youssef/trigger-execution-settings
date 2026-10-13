@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Status</label>
+    <name>Status__c</name>
+    <picklistValues>
+        <masterLabel>Closed</masterLabel>
+        <translation>Closed</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Diffused</masterLabel>
+        <translation><!-- Diffused --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>In preparation</masterLabel>
+        <translation>In preparation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Live</masterLabel>
+        <translation><!-- Live --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Printed</masterLabel>
+        <translation><!-- Printed --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Request for approval</masterLabel>
+        <translation>Request for approval</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Request for approval Fact</masterLabel>
+        <translation><!-- Request for approval Fact --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Revue budg. déc.</masterLabel>
+        <translation><!-- Revue budg. déc. --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Revue budg. juin.</masterLabel>
+        <translation><!-- Revue budg. juin. --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Revue budg. mars.</masterLabel>
+        <translation><!-- Revue budg. mars. --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Revue budg. sept.</masterLabel>
+        <translation><!-- Revue budg. sept. --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Update with fact data</masterLabel>
+        <translation><!-- Update with fact data --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Validate with fact data</masterLabel>
+        <translation><!-- Validate with fact data --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Validated</masterLabel>
+        <translation>Validated</translation>
+    </picklistValues>
+</CustomFieldTranslation>

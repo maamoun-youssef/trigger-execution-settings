@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NetPriceRegular__c</fullName>
+    <description>PAN HT en cours pour le produit. Il est remplis automatiquement au moment de la création de la ligne (Depuis l&apos;objet PG ou PWF).</description>
+    <label>Regular Purchase NetPrice</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>3</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

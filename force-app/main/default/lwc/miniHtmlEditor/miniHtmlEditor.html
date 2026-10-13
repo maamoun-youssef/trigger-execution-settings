@@ -1,0 +1,198 @@
+<template>
+    <!-- Main editor container -->
+    <div class="editor-container">
+        
+        <!-- Toolbar (top of the editor) -->
+        <div class="toolbar">
+            
+            <!-- Group 1: Text formatting (bold, italic, underline) -->
+            <div class="group">
+                <button data-cmd="bold" onclick={boldText} style="width:32px;font-weight: bold">B</button>
+                <button data-cmd="italic" onclick={italicText} style="width:32px"><i>I</i></button>
+                <button data-cmd="underline" onclick={underlineText} style="width:32px"><u>U</u></button>
+            </div>
+
+            <!-- Group 2: Headings, font family, font size, colors -->
+            <div class="group">
+                <!-- Dropdown for headings -->
+                <select onchange={changeHeading} class="heading-select">
+                    <option value="P" class="opt-paragraph">Paragraph</option>
+                    <option value="H1" class="opt-h1">Heading 1</option>
+                    <option value="H2" class="opt-h2">Heading 2</option>
+                    <option value="H3" class="opt-h3">Heading 3</option>
+                    <option value="H4" class="opt-h4">Heading 4</option>
+                    <option value="H5" class="opt-h5">Heading 5</option>
+                    <option value="H6" class="opt-h6">Heading 6</option>
+                    <option value="BLOCKQUOTE" class="opt-blockquote">Blockquote</option>
+                </select>
+
+                <!-- Dropdown for font family -->
+                <select onchange={changeFontFamily} class="font-family-select">
+                    <option value="Arial" style="font-family: Arial, sans-serif;">Arial</option>
+                    <option value="Times New Roman" style="font-family: 'Times New Roman', serif;">Times New Roman</option>
+                    <option value="Courier New" style="font-family: 'Courier New', monospace;">Courier New</option>
+                    <option value="Verdana" style="font-family: Verdana, sans-serif;">Verdana</option>
+                    <option value="Georgia" style="font-family: Georgia, serif;">Georgia</option>
+                    <option value="Trebuchet MS" style="font-family: 'Trebuchet MS', sans-serif;">Trebuchet MS</option>
+                    <option value="Comic Sans MS" style="font-family: 'Comic Sans MS', cursive;">Comic Sans</option>
+                    <option value="Impact" style="font-family: Impact, sans-serif;">Impact</option>
+                    <option value="Lucida Console" style="font-family: 'Lucida Console', monospace;">Lucida Console</option>
+                </select>
+
+                <!-- Dropdown for font size -->
+                <select onchange={changeFontSize}  class="font-size-select">    
+                    <option value="1" style="font-size:8px;">8</option>
+                    <option value="2" style="font-size:10px;">10</option> 
+                    <option value="3" style="font-size:12px;">12</option>             
+                    <option value="4" style="font-size:14px;">14</option>
+                    <option value="5" style="font-size:18px;">18</option>
+                    <option value="6" style="font-size:24px;">24</option>
+                    <option value="7" style="font-size:32px;">32</option>
+                </select>
+
+<div class="color-controls">
+    <label class="color-picker">
+<lightning-icon
+    class="slds-m-right_x-small slds-icon-utility-text-color slds-icon_container"
+    size="small"
+    icon-name="utility:text_color"
+    style={textColorStyle}>
+</lightning-icon>
+
+        <input type="color" onmousedown={saveSelection} onchange={changeTextColor}>
+    </label>
+
+    <label class="color-picker">
+        <lightning-icon 
+            icon-name="utility:highlight"
+            alternative-text="Background Color"
+            size="small"
+            class="slds-m-right_x-small"
+            style={backgroundColorStyle}>
+        </lightning-icon>
+        <input type="color" onmousedown={saveSelection} onchange={changeBackgroundColor}>
+    </label>
+</div>
+
+
+
+
+            </div>
+
+            <!-- Group 3: Lists (numbered and bulleted) -->
+            <div class="group">
+                <button title="Numbered List" data-cmd="insertOrderedList" onclick={numberedList}>
+                    <lightning-icon icon-name="utility:richtextnumberedlist" size="x-small" variant="brand"></lightning-icon>
+                </button>
+                <button title="Bulleted List" data-cmd="insertUnorderedList" onclick={bulletedList}>
+                    <lightning-icon icon-name="utility:richtextbulletedlist" size="x-small"></lightning-icon>
+                </button>
+            </div>
+
+            <!-- Group 4: Insert link -->
+            <div class="group">
+                <button title="Insert Link" onclick={insertLink}>
+                    <lightning-icon icon-name="utility:link" size="x-small"></lightning-icon>
+                </button>
+            </div>
+
+            <!-- Group 5: Undo/Redo -->
+            <div class="group">
+                <button title="Undo" onclick={undo}>
+                    <lightning-icon icon-name="utility:undo" size="x-small"></lightning-icon>
+                </button>
+                <button title="Redo" onclick={redo}>
+                    <lightning-icon icon-name="utility:redo" size="x-small"></lightning-icon>
+                </button>
+            </div>
+
+            <!-- Group 6: View HTML source code -->
+            <div class="group">
+                <button title="View HTML Source" onclick={toggleSource}>HTML</button>
+            </div>
+        </div>
+
+        <!-- Editable content area -->
+        <div class="editor" contenteditable="true" lwc:dom="manual" oninput={handleContentChange}></div>
+    </div>
+
+    <!-- Source Code Modal (opens when user clicks "HTML") -->
+    <template if:true={showSource}>
+        <div class="source-modal-backdrop" onclick={handleSourceBackdropClick}></div>
+        <div class="source-modal">
+            
+            <!-- Modal header -->
+            <div class="source-header">
+                <span>Edit HTML Source</span>
+                <button class="close-btn" onclick={cancelSource}>×</button>
+            </div>
+
+            <!-- Modal body: line numbers + textarea -->
+            <div class="editor-wrapper">
+                <!-- Line numbers -->
+                <div class="line-numbers">
+                    <template for:each={lineNumbers} for:item="line">
+                        <div key={line}>{line}</div>
+                    </template>
+                </div>
+                <!-- Source code textarea -->
+                <textarea 
+                    class="source-textarea" 
+                    oninput={handleSourceInput} 
+                    onscroll={handleTextareaScroll}
+                             >{sourceCode}
+                </textarea>
+            </div>
+
+            <!-- Modal footer: save & cancel buttons -->
+            <div class="source-footer">
+                <button class="btn-save" onclick={saveSource}>Save</button>
+                <button class="btn-cancel" onclick={cancelSource}>Cancel</button>
+            </div>
+        </div>
+    </template>
+
+    <!-- Floating Link Balloon (appears when inserting/editing links) -->
+    <template if:true={showLinkBalloon}>
+        <div class="link-balloon" data-arrow={arrowPhase} style={linkBalloonStyle} onclick={handleBalloonClick}>
+            <div class="link-balloon-header">Link</div>
+            <!-- Text input bound to selectedText -->
+            <input type="text" placeholder="Text" class="link-text" value={selectedText} />
+            <input type="text" class="link-url"  value={preFilledURL} placeholder="Enter link URL" />
+            <div class="link-buttons">
+                <button onclick={handleConfirmLink}>Insert</button>
+                <button onclick={closeLinkBalloon}>Cancel</button>
+            </div>
+        </div>
+    </template>
+
+    <!-- Floating Balloon Toolbar (contextual formatting toolbar) -->
+    <template if:true={showBalloon}>
+        <div class="toolbar-balloon" data-arrow={arrowPhase} style={balloonStyle}>
+            
+            <!-- Inline formatting buttons -->
+            <div class="button-group">
+                <button class={boldClass} data-cmd="bold" style="width:32px;font-weight: bold" onclick={boldText}>B</button>
+                <button class={italicClass} data-cmd="italic" style="width:32px" onclick={italicText}><i>I</i></button>
+                <button class={underlineClass} data-cmd="underline" style="width:32px" onclick={underlineText}><u>U</u></button>
+            </div>
+
+            <!-- Insert link button -->
+            <div class="button-group">
+                <button title="Insert Link" onclick={insertLink}>
+                    <lightning-icon icon-name="utility:link" size="x-small"></lightning-icon>
+                </button>
+            </div>
+
+            <!-- List buttons (ordered/unordered) -->
+            <div class="button-group">
+                <button title="Numbered List" class={olButtonClass} data-cmd="insertOrderedList" onclick={numberedList}>
+                    <lightning-icon icon-name="utility:richtextnumberedlist" size="x-small" variant="brand"></lightning-icon>
+                </button>
+                <button title="Bulleted List" class={ulButtonClass} data-cmd="insertUnorderedList" onclick={bulletedList}>
+                    <lightning-icon icon-name="utility:richtextbulletedlist" size="x-small"></lightning-icon>
+                </button>
+            </div>
+        </div>
+    </template>
+</template>

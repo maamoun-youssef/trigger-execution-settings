@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Invoicing_plan_generated__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Give info if the planning of invoice has been generated for the condition. If the user will chek, automatic planning of invoicing will be generated based on the condition invoicing criteria</description>
+    <inlineHelpText>Give info if the planning of invoice has been generated for the condition. If the user will chek, automatic planning of invoicing will be generated based on the condition invoicing criteria</inlineHelpText>
+    <label>Invoicing Plan Generated</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

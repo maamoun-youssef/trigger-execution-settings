@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Guide_Test</label>
+    <protected>false</protected>
+    <values>
+        <field>Description__c</field>
+        <value xsi:type="xsd:string">Guide Test Description</value>
+    </values>
+    <values>
+        <field>FlowSettings__c</field>
+        <value xsi:type="xsd:string">{&quot;name&quot;:&quot;Sell_In_Statement_Send_Validation_Rejection_Notifications&quot;,&quot;flowLabel&quot;:&quot;Sell-In Statement - Send Validation &amp; Rejection Notifications&quot;,&quot;buttonLabel&quot;:&quot;flow button&quot;,&quot;buttonIcon&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH0000081rbxYAA&quot;}</value>
+    </values>
+    <values>
+        <field>HeaderBackground__c</field>
+        <value xsi:type="xsd:string">/resource/1746800143000/ConnectHeaderAvatar</value>
+    </values>
+    <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">/sfc/servlet.shepherd/document/download/069QH000008Px8RYAS</value>
+    </values>
+    <values>
+        <field>Name__c</field>
+        <value xsi:type="xsd:string">Guide Test</value>
+    </values>
+    <values>
+        <field>Sections__c</field>
+        <value xsi:type="xsd:string">[{&quot;title&quot;:&quot;Guide section&quot;,&quot;subTitle&quot;:&quot;Guide section sub&quot;,&quot;order&quot;:1,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/resource/1747040114000/ConnectSectionAvatar&quot;,&quot;color&quot;:&quot;#862424&quot;},{&quot;title&quot;:&quot;Guide section second&quot;,&quot;subTitle&quot;:&quot;Guide section sub  second&quot;,&quot;order&quot;:2,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/resource/1747040114000/ConnectSectionAvatar&quot;,&quot;color&quot;:&quot;#C72BC7&quot;}]</value>
+    </values>
+    <values>
+        <field>Themes__c</field>
+        <value xsi:type="xsd:string">[{&quot;sectionIndex&quot;:0,&quot;redirectionType&quot;:&quot;Page&quot;,&quot;redirection&quot;:&quot;myCashSettings&quot;,&quot;params&quot;:null,&quot;label&quot;:&quot;Guide theme&quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/resource/1747038985000/ConnectThemeAvatar&quot;},{&quot;sectionIndex&quot;:1,&quot;redirectionType&quot;:&quot;Page&quot;,&quot;redirection&quot;:&quot;buClustering&quot;,&quot;params&quot;:null,&quot;label&quot;:&quot;Guide theme second&quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/resource/1747038985000/ConnectThemeAvatar&quot;}]</value>
+    </values>
+    <values>
+        <field>isActive__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>isDeleted__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+</CustomMetadata>

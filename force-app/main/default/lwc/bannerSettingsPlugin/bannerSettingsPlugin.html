@@ -1,0 +1,164 @@
+<template>
+    <div>
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative slds-p-vertical_medium">
+                <lightning-spinner size="small" alternative-text="Loading banner"></lightning-spinner>
+            </div>
+        </template>
+        <template lwc:else>
+            <template lwc:if={shouldRenderBanner}>
+            <header class="slds-page-header slds-page-header_record-home slds-p-around_small" style={headerStyle}>
+                <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread slds-wrap">
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div class="slds-media__figure">
+                            <template lwc:if={isCustomIcon}>
+                                <img src={iconName} alt="Record icon" style={mainIconImageStyle} />
+                            </template>
+                            <template lwc:else>
+                                <span style={mainIconWrapperStyle}>
+                                    <lightning-icon icon-name={resolvedIconName} size="small" style={mainIconScaleStyle}
+                                        alternative-text="Record icon"></lightning-icon>
+                                </span>
+                            </template>
+                        </div>
+                        <div class="slds-media__body">
+                            <p class="slds-page-header__name-meta">{objectLabel}</p>
+                            <h1 class="slds-page-header__title slds-truncate" title={titleValue}>{titleValue}</h1>
+                            <template lwc:if={hasSubtitle}>
+                                <div class="slds-text-body_regular slds-text-color_weak slds-m-top_xx-small" style={subtitleField.style}>
+                                    <template lwc:if={subtitleField.hasLink}>
+                                        <a href={subtitleField.recordUrl}>{subtitleField.value}</a>
+                                    </template>
+                                    <template lwc:else>
+                                        <span>{subtitleField.value}</span>
+                                    </template>
+                                </div>
+                            </template>
+                            <template lwc:if={hasDetailFields}>
+                                <div class="slds-m-top_x-small">
+                                    <template for:each={detailFieldRows} for:item="row">
+                                        <ul key={row.key} class="slds-list_horizontal slds-wrap slds-m-bottom_x-small">
+                                            <template for:each={row.fields} for:item="field">
+                                                <li key={field.apiName} class="slds-item slds-m-right_large slds-m-bottom_x-small">
+                                                    <template lwc:if={field.isInline}>
+                                                        <div style={field.style}>
+                                                            <template lwc:if={field.useIconLabel}>
+                                                                <template lwc:if={field.useImageLabel}>
+                                                                    <img src={field.labelIcon} alt="Field icon"
+                                                                        style="width:0.875rem;height:0.875rem;object-fit:contain;vertical-align:middle;margin-right:0.25rem;" />
+                                                                </template>
+                                                                <template lwc:else>
+                                                                    <lightning-icon icon-name={field.labelIcon} size="xx-small"
+                                                                        alternative-text="Field icon" class="slds-m-right_xx-small">
+                                                                    </lightning-icon>
+                                                                </template>
+                                                            </template>
+                                                            <template lwc:else>
+                                                                <span class="slds-text-title_caps slds-text-color_weak">{field.displayLabel}: </span>
+                                                            </template>
+                                                            <template lwc:if={field.hasLink}>
+                                                                <a href={field.recordUrl}>{field.value}</a>
+                                                            </template>
+                                                            <template lwc:else>
+                                                                <span>{field.value}</span>
+                                                            </template>
+                                                        </div>
+                                                    </template>
+                                                    <template lwc:else>
+                                                        <template lwc:if={field.useIconLabel}>
+                                                            <div class="slds-m-bottom_xx-small">
+                                                                <template lwc:if={field.useImageLabel}>
+                                                                    <img src={field.labelIcon} alt="Field icon"
+                                                                        style="width:0.875rem;height:0.875rem;object-fit:contain;vertical-align:middle;" />
+                                                                </template>
+                                                                <template lwc:else>
+                                                                    <lightning-icon icon-name={field.labelIcon} size="xx-small"
+                                                                        alternative-text="Field icon">
+                                                                    </lightning-icon>
+                                                                </template>
+                                                            </div>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            <div class="slds-text-title_caps slds-text-color_weak">{field.displayLabel}</div>
+                                                        </template>
+                                                        <template lwc:if={field.hasLink}>
+                                                            <a href={field.recordUrl} style={field.style}>{field.value}</a>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            <div style={field.style}>{field.value}</div>
+                                                        </template>
+                                                    </template>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <template lwc:if={hasActions}>
+                        <div class="slds-col slds-grid slds-grid_vertical-align-center" style="column-gap:0.35rem;">
+                            <template for:each={iconActions} for:item="action">
+                                <div key={action.key} class="slds-col">
+                                    <template lwc:if={action.iconUrl}>
+                                        <button class="slds-button slds-button_icon"
+                                                title={action.label}
+                                                aria-label={action.label}
+                                                data-action-key={action.key}
+                                                onclick={handleIconActionClick}>
+                                            <span class="slds-assistive-text">{action.label}</span>
+                                            <img src={action.iconUrl}
+                                                 alt={action.label}
+                                                 style={action.iconImageStyle} />
+                                        </button>
+                                    </template>
+                                    <template lwc:else>
+                                        <button class="slds-button slds-button_icon"
+                                                title={action.label}
+                                                aria-label={action.label}
+                                                data-action-key={action.key}
+                                                onclick={handleIconActionClick}>
+                                            <span class="slds-assistive-text">{action.label}</span>
+                                            <lightning-icon icon-name={action.iconName}
+                                                            size={action.iconSize}
+                                                            alternative-text={action.label}>
+                                            </lightning-icon>
+                                        </button>
+                                    </template>
+                                </div>
+                            </template>
+                            <template for:each={primaryActions} for:item="action">
+                                <div key={action.key} class="slds-col">
+                                    <lightning-button
+                                        label={action.label}
+                                        variant="neutral"
+                                        data-action-key={action.key}
+                                        onclick={handlePrimaryActionClick}>
+                                    </lightning-button>
+                                </div>
+                            </template>
+                            <template lwc:if={hasOverflowActions}>
+                                <div class="slds-col">
+                                    <lightning-button-menu
+                                        alternative-text="More actions"
+                                        icon-name="utility:down"
+                                        onselect={handleActionSelect}
+                                        menu-alignment="right">
+                                        <template for:each={bannerActions} for:item="action">
+                                            <lightning-menu-item
+                                                key={action.value}
+                                                value={action.value}
+                                                label={action.label}>
+                                            </lightning-menu-item>
+                                        </template>
+                                    </lightning-button-menu>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </header>
+            </template>
+        </template>
+    </div>
+</template>

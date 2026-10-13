@@ -1,0 +1,5 @@
+{
+  "apiName" : "confidentiality_notice",
+  "type" : "sfdc_cms__view",
+  "path" : "views"
+}

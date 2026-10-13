@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Page_setting_hb</label>
+    <protected>false</protected>
+    <values>
+        <field>Description__c</field>
+        <value xsi:type="xsd:string">test 1</value>
+    </values>
+    <values>
+        <field>FlowSettings__c</field>
+        <value xsi:type="xsd:string">{&quot;name&quot;:&quot;&quot;,&quot;flowLabel&quot;:&quot;&quot;,&quot;buttonLabel&quot;:&quot;&quot;,&quot;buttonIcon&quot;:&quot;&quot;}</value>
+    </values>
+    <values>
+        <field>HeaderBackground__c</field>
+        <value xsi:type="xsd:string">/sfc/servlet.shepherd/document/download/069QH000007epJ9YAI</value>
+    </values>
+    <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">/sfc/servlet.shepherd/document/download/069QH000007enCWYAY</value>
+    </values>
+    <values>
+        <field>Name__c</field>
+        <value xsi:type="xsd:string">Page setting hb</value>
+    </values>
+    <values>
+        <field>Sections__c</field>
+        <value xsi:type="xsd:string">[{&quot;title&quot;:&quot;Title 1 &quot;,&quot;subTitle&quot;:&quot;Sub-Title 1 &quot;,&quot;order&quot;:1,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH000007gfndYAA&quot;,&quot;color&quot;:&quot;#F18E06&quot;},{&quot;title&quot;:&quot;Title 1 &quot;,&quot;subTitle&quot;:&quot;Sub-Title 1 &quot;,&quot;order&quot;:1,&quot;isActive&quot;:false,&quot;icon&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH000007grezYAA&quot;,&quot;color&quot;:&quot;#0DDA88&quot;}]</value>
+    </values>
+    <values>
+        <field>Themes__c</field>
+        <value xsi:type="xsd:string">[{&quot;sectionIndex&quot;:0,&quot;redirectionType&quot;:&quot;URL&quot;,&quot;redirection&quot;:&quot;wdwewedwed&quot;,&quot;params&quot;:null,&quot;label&quot;:&quot;Title1 label 1&quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH000007gp5LYAQ&quot;},{&quot;sectionIndex&quot;:1,&quot;redirectionType&quot;:&quot;Grid&quot;,&quot;redirection&quot;:&quot;AssortmentMatrixBudget&quot;,&quot;params&quot;:null,&quot;label&quot;:&quot;label test 2 &quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH000007gqnnYAA&quot;}]</value>
+    </values>
+    <values>
+        <field>isActive__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>isDeleted__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+</CustomMetadata>

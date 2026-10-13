@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SPSellin_del__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+ISPICKVAL(ProductLifeStatusAss__c ,&quot;New&quot;),
+
+52 * SPWSHtech__c * SOSNumberNego_NegoL4LP1Gap__c * Product__r.TotalKWeight__c
+,
+
+IF(
+ISPICKVAL(ProductLifeStatusAss__c ,&quot;Delist&quot;),
+
+0,
+
+IF(
+OR(
+ISPICKVAL(ProductLifeStatusAss__c ,&quot;Decrease&quot;),
+ISPICKVAL(ProductLifeStatusAss__c ,&quot;Increase&quot;)
+),
+
+
+SellInBudget__c / WDClientBaseFact__c *
+WDClientBaseNego__c ,
+
+SellInBudget__c
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>SPSellin</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

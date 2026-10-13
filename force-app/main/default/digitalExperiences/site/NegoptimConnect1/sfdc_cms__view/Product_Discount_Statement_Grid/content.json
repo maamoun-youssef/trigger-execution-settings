@@ -1,0 +1,73 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Product Discount Statement Grid",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"001ba502-5d94-4fd8-9b08-f5065052a616\",\"columns\":[{\"UUID\":\"c6edcb12-c828-4b78-b114-fc5b0df6d0df\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "dxpStyle" : { },
+                "flowApiName" : "SCREEN_Product_Discount_Statement_Creation ",
+                "pdsGridSettingsTemplate" : "ProductDiscountStatementPortalListView"
+              },
+              "definition" : "c:productDiscountStatementGrid",
+              "id" : "b8236353-f95a-40f5-ac80-9c582414cf73",
+              "type" : "component"
+            } ],
+            "id" : "c6edcb12-c828-4b78-b114-fc5b0df6d0df",
+            "name" : "col1",
+            "title" : "Colonne 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "001ba502-5d94-4fd8-9b08-f5065052a616",
+          "type" : "component"
+        } ],
+        "id" : "e148b32a-6bc7-4b51-9c0a-342236c18c0d",
+        "name" : "content",
+        "title" : "Contenu",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "dxpStyle" : { },
+            "pageTitle" : "Product Discount Statement Grid",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "763ad231-3fc0-4e09-95be-f89652cc4add",
+          "type" : "component"
+        } ],
+        "id" : "87afc682-f7c1-41d7-a8a9-51928d52c4b9",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "a655e903-e8c0-48c9-b305-85352b88c8fd",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-product-discount-statement-grid"
+  },
+  "urlName" : "product-discount-statement-grid"
+}

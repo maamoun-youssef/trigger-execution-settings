@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Market Position</label>
+    <name>MarketPosition__c</name>
+    <picklistValues>
+        <masterLabel>In Decline</masterLabel>
+        <translation>In Decline</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Key Player</masterLabel>
+        <translation>Key Player</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Leader</masterLabel>
+        <translation>Leader</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Local Player</masterLabel>
+        <translation>Local Player</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Major Player</masterLabel>
+        <translation>Major Player</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Newcomer</masterLabel>
+        <translation>Newcomer</translation>
+    </picklistValues>
+</CustomFieldTranslation>

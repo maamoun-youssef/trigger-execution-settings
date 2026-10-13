@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Administrative</masterLabel>
+        <translation>Administrative</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Deliver By</masterLabel>
+        <translation>Deliver By</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Deliver To</masterLabel>
+        <translation>Deliver To</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Invoice By</masterLabel>
+        <translation>Invoice By</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Invoice To</masterLabel>
+        <translation>Invoice To</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Order By</masterLabel>
+        <translation>Order By</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Order To</masterLabel>
+        <translation>Order To</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Paid By</masterLabel>
+        <translation>Paid By</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Paid To</masterLabel>
+        <translation>Paid To</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

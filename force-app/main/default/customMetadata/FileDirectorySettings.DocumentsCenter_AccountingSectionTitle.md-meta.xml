@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>DocumentsCenter_AccountingSectionTitle</label>
+    <protected>false</protected>
+    <values>
+        <field>DisplayOrder__c</field>
+        <value xsi:type="xsd:double">4.0</value>
+    </values>
+    <values>
+        <field>IsDeleted__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>SObjectName__c</field>
+        <value xsi:type="xsd:string">Account</value>
+    </values>
+    <values>
+        <field>SectionColor__c</field>
+        <value xsi:type="xsd:string">#8894BC</value>
+    </values>
+    <values>
+        <field>SectionIcon__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>SectionSubTitle__c</field>
+        <value xsi:type="xsd:string">{!$Label.LBL_DocumentsCenter_AccountingSectionSubTitle}</value>
+    </values>
+    <values>
+        <field>SectionTitle__c</field>
+        <value xsi:type="xsd:string">{!$Label.LBL_DocumentsCenter_AccountingSectionTitle}</value>
+    </values>
+    <values>
+        <field>ThemesSettings__c</field>
+        <value xsi:type="xsd:string">[{&quot;themeLabel&quot;:null,&quot;theme&quot;:&quot;{!$Label.LBL_FileDirectoryAccountStatusTheme}&quot;,&quot;smallThemeImage&quot;:&quot;&quot;,&quot;relatedSection&quot;:&quot;{!$Label.LBL_DocumentsCenter_AccountingSectionTitle}&quot;,&quot;largeThemeImage&quot;:&quot;&quot;,&quot;isPortalDisplayed&quot;:true,&quot;isDisplayed&quot;:true,&quot;isAllowCancelDocInternal&quot;:null,&quot;isAllowCancelDocExternal&quot;:null,&quot;isAllowApproveDocInternal&quot;:null,&quot;isAllowApproveDocExternal&quot;:null,&quot;gridSettingsName&quot;:&quot;FileDirectory__c&quot;,&quot;allowUpload&quot;:null,&quot;allowSharing&quot;:null,&quot;allowReceiptConfirmation&quot;:null,&quot;allowMultipleUpload&quot;:null,&quot;allowedStatusesForUpload&quot;:null,&quot;allowedStatusesForShare&quot;:null,&quot;allowedStatusesForReceiptConfirmation&quot;:null,&quot;allowedStatusesForDelete&quot;:null,&quot;allowDelete&quot;:null},{&quot;themeLabel&quot;:null,&quot;theme&quot;:&quot;{!$Label.LBL_FileDirectoryCreditNoteTheme}&quot;,&quot;smallThemeImage&quot;:&quot;&quot;,&quot;relatedSection&quot;:&quot;{!$Label.LBL_DocumentsCenter_AccountingSectionTitle}&quot;,&quot;largeThemeImage&quot;:&quot;&quot;,&quot;isPortalDisplayed&quot;:true,&quot;isDisplayed&quot;:true,&quot;isAllowCancelDocInternal&quot;:null,&quot;isAllowCancelDocExternal&quot;:null,&quot;isAllowApproveDocInternal&quot;:null,&quot;isAllowApproveDocExternal&quot;:null,&quot;gridSettingsName&quot;:&quot;Credit_Note_Grid&quot;,&quot;allowUpload&quot;:null,&quot;allowSharing&quot;:null,&quot;allowReceiptConfirmation&quot;:null,&quot;allowMultipleUpload&quot;:null,&quot;allowedStatusesForUpload&quot;:null,&quot;allowedStatusesForShare&quot;:null,&quot;allowedStatusesForReceiptConfirmation&quot;:null,&quot;allowedStatusesForDelete&quot;:null,&quot;allowDelete&quot;:null},{&quot;themeLabel&quot;:null,&quot;theme&quot;:&quot;{!$Label.LBL_FileDirectoryInvoiceTheme}&quot;,&quot;smallThemeImage&quot;:&quot;&quot;,&quot;relatedSection&quot;:&quot;{!$Label.LBL_DocumentsCenter_AccountingSectionTitle}&quot;,&quot;largeThemeImage&quot;:&quot;&quot;,&quot;isPortalDisplayed&quot;:true,&quot;isDisplayed&quot;:true,&quot;isAllowCancelDocInternal&quot;:null,&quot;isAllowCancelDocExternal&quot;:null,&quot;isAllowApproveDocInternal&quot;:null,&quot;isAllowApproveDocExternal&quot;:null,&quot;gridSettingsName&quot;:&quot;Invoice_portal&quot;,&quot;allowUpload&quot;:true,&quot;allowSharing&quot;:true,&quot;allowReceiptConfirmation&quot;:true,&quot;allowMultipleUpload&quot;:true,&quot;allowedStatusesForUpload&quot;:[&quot;Sent&quot;,&quot;Validated&quot;,&quot;Signed&quot;,&quot;Receipt Confirmed&quot;,&quot;Requested&quot;,&quot;Rejected&quot;,&quot;Cancelled&quot;],&quot;allowedStatusesForShare&quot;:[&quot;Sent&quot;,&quot;Validated&quot;,&quot;Signed&quot;,&quot;Receipt Confirmed&quot;,&quot;Requested&quot;,&quot;Rejected&quot;,&quot;Cancelled&quot;],&quot;allowedStatusesForReceiptConfirmation&quot;:[&quot;Sent&quot;,&quot;Validated&quot;,&quot;Signed&quot;,&quot;Receipt Confirmed&quot;,&quot;Requested&quot;,&quot;Rejected&quot;,&quot;Cancelled&quot;],&quot;allowedStatusesForDelete&quot;:null,&quot;allowDelete&quot;:null},{&quot;themeLabel&quot;:null,&quot;theme&quot;:&quot;{!$Label.LBL_FileDirectoryPaymentTheme}&quot;,&quot;smallThemeImage&quot;:&quot;&quot;,&quot;relatedSection&quot;:&quot;{!$Label.LBL_DocumentsCenter_AccountingSectionTitle}&quot;,&quot;largeThemeImage&quot;:&quot;&quot;,&quot;isPortalDisplayed&quot;:true,&quot;isDisplayed&quot;:true,&quot;isAllowCancelDocInternal&quot;:null,&quot;isAllowCancelDocExternal&quot;:null,&quot;isAllowApproveDocInternal&quot;:null,&quot;isAllowApproveDocExternal&quot;:null,&quot;gridSettingsName&quot;:&quot;Payment_Grid&quot;,&quot;allowUpload&quot;:null,&quot;allowSharing&quot;:null,&quot;allowReceiptConfirmation&quot;:null,&quot;allowMultipleUpload&quot;:null,&quot;allowedStatusesForUpload&quot;:null,&quot;allowedStatusesForShare&quot;:null,&quot;allowedStatusesForReceiptConfirmation&quot;:null,&quot;allowedStatusesForDelete&quot;:null,&quot;allowDelete&quot;:null},{&quot;themeLabel&quot;:null,&quot;theme&quot;:&quot;{!$Label.LBL_FileDirectoryPenaltyTheme}&quot;,&quot;smallThemeImage&quot;:&quot;&quot;,&quot;relatedSection&quot;:&quot;{!$Label.LBL_DocumentsCenter_AccountingSectionTitle}&quot;,&quot;largeThemeImage&quot;:&quot;&quot;,&quot;isPortalDisplayed&quot;:true,&quot;isDisplayed&quot;:true,&quot;isAllowCancelDocInternal&quot;:null,&quot;isAllowCancelDocExternal&quot;:null,&quot;isAllowApproveDocInternal&quot;:null,&quot;isAllowApproveDocExternal&quot;:null,&quot;gridSettingsName&quot;:&quot;Penalty_Grid&quot;,&quot;allowUpload&quot;:true,&quot;allowSharing&quot;:true,&quot;allowReceiptConfirmation&quot;:true,&quot;allowMultipleUpload&quot;:true,&quot;allowedStatusesForUpload&quot;:[&quot;Sent&quot;,&quot;Validated&quot;,&quot;Signed&quot;,&quot;Receipt Confirmed&quot;,&quot;Requested&quot;,&quot;Rejected&quot;,&quot;Cancelled&quot;],&quot;allowedStatusesForShare&quot;:[&quot;Sent&quot;,&quot;Validated&quot;,&quot;Signed&quot;,&quot;Receipt Confirmed&quot;,&quot;Requested&quot;,&quot;Rejected&quot;,&quot;Cancelled&quot;],&quot;allowedStatusesForReceiptConfirmation&quot;:[&quot;Sent&quot;,&quot;Validated&quot;,&quot;Signed&quot;,&quot;Receipt Confirmed&quot;,&quot;Requested&quot;,&quot;Rejected&quot;,&quot;Cancelled&quot;],&quot;allowedStatusesForDelete&quot;:[&quot;Sent&quot;,&quot;Validated&quot;,&quot;Signed&quot;,&quot;Receipt Confirmed&quot;,&quot;Requested&quot;,&quot;Rejected&quot;,&quot;Cancelled&quot;],&quot;allowDelete&quot;:true}]</value>
+    </values>
+</CustomMetadata>

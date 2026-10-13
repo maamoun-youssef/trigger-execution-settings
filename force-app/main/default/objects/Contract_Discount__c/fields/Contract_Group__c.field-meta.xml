@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract_Group__c</fullName>
+    <description>Field if coming for Group Contract download</description>
+    <inlineHelpText>Field if coming for Group Contract download</inlineHelpText>
+    <label>Contract Group Reference</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

@@ -1,0 +1,1579 @@
+<template>
+    <lightning-card>
+        <!-- ============== FULL PAGE LOADING ============== -->
+        <template lwc:if={isLoading}>
+            <div class="greyBg loading-container">
+                <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+            </div>
+        </template>
+
+        <template if:false={isLoading}>
+            <!-- ============== STANDARD MODE HEADER ============== -->
+            <template if:false={isPortalUser}>
+                <div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-p-around_xx-small slds-has-flexi-truncate">
+                            <div class="slds-media slds-no-space slds-grow">
+                                <!-- ICON LEFT -->
+                                <div
+                                    class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                                    <img src={ICONS.illustrationUrl}
+                                        style="width: 160px; height: 160px;border-radius: 10%;"
+                                        class="custom-icon slds-m-right_xxx-small" />
+                                </div>
+                                <!-- CONTENT RIGHT -->
+                                <div class="header-content slds-p-left--x-small">
+                                    <!-- TITLE + INFO -->
+                                    <div class="header-text">
+                                        <h1 class="header-title">
+                                            {legalDoc.Name}
+                                        </h1>
+                                        <div class="slds-grid slds-gutters_small slds-m-top--xx-small slds-m-left--none  slds-p-top--xx-small"
+                                            style="gap:15px">
+                                            <!-- Left Column -->
+                                            <div class="slds-col">
+                                                <p class="info-row-detail">
+                                                    <span
+                                                        class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.Year__c}:</span>
+                                                    <span class="info-value">{legalDoc._Year__c}</span>
+                                                </p>
+                                                <p class="info-row-detail">
+                                                    <span
+                                                        class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.Language__c}:</span>
+                                                    <span class="info-value">{legalDocLanguage}</span>
+                                                </p>
+                                                <p class="info-row-detail">
+                                                    <span
+                                                        class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.Type__c}:</span>
+                                                    <span class="info-value">{legalDocType}</span>
+                                                </p>
+                                                <p class="info-row-detail">
+                                                    <span
+                                                        class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.Market__c}:</span>
+                                                    <span class="info-value">{legalDocMarket}</span>
+                                                </p>
+                                                <div class="info-row slds-grid ">
+                                                    <span
+                                                        class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.HasNoSalesTerms__c}:</span>
+                                                    <span class="info-value">
+
+                                                        <lightning-input if:true={legalDoc._HasNoSalesTerms__c}
+                                                            type="checkbox" disabled checked></lightning-input>
+                                                        <lightning-input if:false={legalDoc._HasNoSalesTerms__c}
+                                                            type="checkbox" disabled></lightning-input>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                            <!-- Left Column -->
+                                            <div class="slds-col">
+                                                <div class="info-row slds-grid ">
+                                                    <span
+                                                        class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.CreatedById}:</span>
+                                                    <a class="info-value" href={legalDoc.createdByLink}
+                                                        target="_blank">{legalDoc.CreatedBy.Name}</a>
+                                                </div>
+                                                <div class="info-row slds-grid ">
+                                                    <span
+                                                        class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.CreatedDate}:</span>
+                                                    <span class="info-value">
+                                                        <lightning-formatted-date-time value={legalDoc.CreatedDate}
+                                                            year="numeric" month="2-digit" day="2-digit" hour="2-digit"
+                                                            minute="2-digit"
+                                                            hour12="true"></lightning-formatted-date-time>
+                                                    </span>
+                                                </div>
+                                                <template if:true={hasSupplier}>
+                                                    <template if:true={isLegal}>
+                                                        <template if:true={legalDoc._LegalLastPublishDate__c}>
+                                                            <p class="info-row-detail"><span class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.LegalLastPublishDate__c}:</span>
+                                                                <span class="info-value">
+                                                                    <lightning-formatted-date-time
+                                                                        value={legalDoc._LegalLastPublishDate__c}
+                                                                        year="numeric" month="2-digit" day="2-digit"
+                                                                        hour="2-digit" minute="2-digit"
+                                                                        hour12="true"></lightning-formatted-date-time>
+                                                                </span>
+                                                            </p>
+                                                        </template>
+                                                        <template if:true={legalDoc._LegalLastModifyDate__c}>
+                                                            <p class="info-row-detail"><span class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.LegalLastModifyDate__c}:</span>
+                                                                <span class="info-value">
+                                                                    <lightning-formatted-date-time
+                                                                        value={legalDoc._LegalLastModifyDate__c}
+                                                                        year="numeric" month="2-digit" day="2-digit"
+                                                                        hour="2-digit" minute="2-digit"
+                                                                        hour12="true"></lightning-formatted-date-time>
+                                                                </span>
+                                                            </p>
+                                                        </template>
+                                                        <template if:true={legalDoc._LegalValidateDate__c}>
+                                                            <div class="info-row slds-grid ">
+                                                                <span class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.LegalValidateDate__c}:</span>
+                                                                <span class="info-value">
+                                                                    <lightning-formatted-date-time
+                                                                        value={legalDoc._LegalValidateDate__c}
+                                                                        year="numeric" month="2-digit" day="2-digit"
+                                                                        hour="2-digit" minute="2-digit"
+                                                                        hour12="true"></lightning-formatted-date-time>
+                                                                </span>
+                                                            </div>
+                                                        </template>
+                                                        <template if:true={legalDoc._LegalApproveDate__c}>
+                                                            <div class="info-row slds-grid ">
+                                                                <span class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.LegalApproveDate__c}:</span>
+                                                                <span class="info-value">
+                                                                    <lightning-formatted-date-time
+                                                                        value={legalDoc._LegalApproveDate__c}
+                                                                        year="numeric" month="2-digit" day="2-digit"
+                                                                        hour="2-digit" minute="2-digit"
+                                                                        hour12="true"></lightning-formatted-date-time>
+                                                                </span>
+                                                            </div>
+                                                        </template>
+                                                    </template>
+                                                    <!-- <template if:false={isPortalUser}>
+                                                        <template if:true={legalDoc._BusinessOwnerValidateDate__c}>
+                                                            <div class="info-row slds-grid ">
+                                                                <span
+                                                                    class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.BusinessOwnerValidateDate__c}:</span>
+                                                                <span class="info-value">
+                                                                    <lightning-formatted-date-time
+                                                                        value={legalDoc._BusinessOwnerValidateDate__c}
+                                                                        year="numeric" month="2-digit"
+                                                                        day="2-digit" hour="2-digit" minute="2-digit" hour12="true"</lightning-formatted-date-time>
+                                                                </span>
+                                                            </div>
+                                                        </template>
+                                                        <template if:true={legalDoc._BusinessOwnerApproveDate__c}>
+                                                            <div class="info-row slds-grid ">
+                                                                <span
+                                                                    class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.BusinessOwnerApproveDate__c}:</span>
+                                                                <span class="info-value">
+                                                                    <lightning-formatted-date-time
+                                                                        value={legalDoc._BusinessOwnerApproveDate__c}
+                                                                        year="numeric" month="2-digit"
+                                                                        day="2-digit" hour="2-digit" minute="2-digit" hour12="true"></lightning-formatted-date-time>
+                                                                </span>
+                                                            </div>
+                                                        </template> 
+                                                    </template> -->
+                                                </template>
+
+                                            </div>
+                                            <!-- Right Column -->
+                                            <div class="slds-col">
+                                                <template if:true={isLegal}>
+                                                    <template if:true={hasSupplier}>
+                                                        <span class="info-label slds-m-right_xx-small">{Labels.LBL_LegalDocument_SuppliersContact}:</span>
+                                                        <a label="Contacts" variant="neutral"
+                                                            onclick={openContactModal}> 👤 ({allContacts.length})
+                                                        </a>
+                                                    </template>
+                                                </template>
+                                                <template if:true={hasSupplier}>
+                                                    <p class="info-row-detail">
+                                                        <span
+                                                            class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.DateSentToSupplier__c}:</span>
+                                                        <span class="info-value">
+                                                            <lightning-formatted-date-time
+                                                                value={legalDoc._DateSentToSupplier__c} year="numeric"
+                                                                month="2-digit" day="2-digit" hour="2-digit"
+                                                                minute="2-digit" hour12="true">
+                                                            </lightning-formatted-date-time>
+                                                        </span>
+                                                    </p>
+                                                    <template if:false={isBOUser}>
+                                                        <!-- <template if:true={legalDoc._PartnerLastModifyDate__c}>
+                                                            <p class="info-row-detail">
+                                                                <span class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.PartnerLastModifyDate__c}:</span>
+                                                                <span class="info-value">
+                                                                    <lightning-formatted-date-time
+                                                                        value={legalDoc._PartnerLastModifyDate__c}
+                                                                        year="numeric" month="2-digit"
+                                                                        day="2-digit" hour="2-digit"
+                                                                        minute="2-digit"
+                                                                        hour12="true">
+                                                                    </lightning-formatted-date-time>
+                                                                </span>
+                                                            </p>
+                                                        </template> -->
+                                                        <template if:true={legalDoc._PartnerLastPublishDate__c}>
+                                                            <p class="info-row-detail">
+                                                                <span
+                                                                    class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.PartnerLastPublishDate__c}:</span>
+                                                                <span class="info-value">
+                                                                    <lightning-formatted-date-time
+                                                                        value={legalDoc._PartnerLastPublishDate__c}
+                                                                        year="numeric" month="2-digit" day="2-digit"
+                                                                        hour="2-digit" minute="2-digit" hour12="true">
+                                                                    </lightning-formatted-date-time>
+                                                                </span>
+                                                            </p>
+                                                        </template>
+                                                        <template if:true={legalDoc._PartnerValidateDate__c}>
+                                                            <!-- <div class="info-row slds-grid "> -->
+                                                            <p class="info-row-detail"><span
+                                                                    class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.PartnerValidateDate__c}:</span>
+                                                                <span class="info-value">
+                                                                    <lightning-formatted-date-time
+                                                                        value={legalDoc._PartnerValidateDate__c}
+                                                                        year="numeric" month="2-digit" day="2-digit"
+                                                                        hour="2-digit" minute="2-digit"
+                                                                        hour12="true"></lightning-formatted-date-time>
+                                                                </span>
+                                                            </p>
+                                                            <!-- </div> -->
+                                                        </template>
+                                                    </template>
+                                                </template>
+                                            </div>
+                                            <!-- Right Column -->
+                                            <div class="slds-col" style="border-right: none !important">
+                                                <!-- Supplier Who Info -->
+                                                <template if:true={hasSupplier}>
+                                                    <template if:true={legalDoc._WhoValidated__c}>
+                                                        <div class="info-row slds-grid ">
+                                                            <span
+                                                                class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.WhoValidated__c} :
+                                                            </span>
+                                                            <a class="info-value" href={legalDoc.whoValidateLink}
+                                                                target="_blank">{legalDoc._WhoValidatedName__c}</a>
+                                                        </div>
+                                                    </template>
+                                                    <!-- <template if:true={legalDoc.WhoApproved__c}>
+                                                        <div class="info-row slds-grid ">
+                                                            <span
+                                                                class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.WhoApproved__c}
+                                                                :
+                                                            </span>
+                                                            <template if:false={acceptedByTwo}>
+                                                                <template if:true={legalDoc.WhoApproved__c}>
+                                                                    <a class="info-value"
+                                                                        href={legalDoc.whoApprovedLink}
+                                                                        target="_blank">{legalDoc.WhoApproved__r.Name}</a>
+                                                                </template>
+                                                            </template>
+                                                            <template if:true={acceptedByTwo}>
+                                                                {Labels.LBL_LD_SuppAcceptedByTwo}
+                                                            </template>
+
+                                                        </div>
+                                                    </template> -->
+                                                    <template if:false={isPortalUser}>
+                                                        <template if:true={legalDoc._BusinessOwnerLastModifyDate__c}>
+                                                            <p class="portal-detail">
+                                                                <span
+                                                                    class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.BusinessOwnerLastModifyDate__c}:</span>
+                                                                <span class="info-value">
+                                                                    <lightning-formatted-date-time
+                                                                        value={legalDoc._BusinessOwnerLastModifyDate__c}
+                                                                        year="numeric" month="2-digit" day="2-digit"
+                                                                        hour="2-digit" minute="2-digit"
+                                                                        hour12="true"></lightning-formatted-date-time>
+                                                                </span>
+                                                            </p>
+                                                        </template>
+                                                        <template if:true={legalDoc._BusinessOwnerLastPublishDate__c}>
+                                                            <p class="portal-detail">
+                                                                <span
+                                                                    class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.BusinessOwnerLastPublishDate__c}:</span>
+                                                                <span class="info-value">
+                                                                    <lightning-formatted-date-time
+                                                                        value={legalDoc._BusinessOwnerLastPublishDate__c}
+                                                                        year="numeric" month="2-digit" day="2-digit"
+                                                                        hour="2-digit" minute="2-digit"
+                                                                        hour12="true"></lightning-formatted-date-time>
+                                                                </span>
+                                                            </p>
+                                                        </template>
+                                                    </template>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- ACTIONS BELOW INFO -->
+                                    <div class="slds-grid slds-grid_align-start ">
+                                        <template if:true={isLegal}>
+                                            <template if:true={isMyTurn}>
+                                                <button class="header-action-btn " title={Labels.LBL_AddClause}
+                                                    onclick={handleAddClause}>
+                                                    <img src={ICONS.addIconUrl} data-flow-type="add"
+                                                        class="header-action-icon" alt="Add" />
+                                                </button>
+                                            </template>
+                                            <template if:false={hasSupplier}>
+                                                <button class="header-action-btn  " title={Labels.LBL_SendToSupplier}
+                                                    onclick={handleLoadSuppliers}>
+                                                    <img src={ICONS.sendIconUrl} class="header-action-icon"
+                                                        alt="Send" />
+                                                </button>
+                                            </template>
+                                            <template if:true={showBusinessOwnerButton}>
+                                                <button class="header-action-btn  " title={Labels.LBL_LD_SendToBO}
+                                                    onclick={sendReminderToBusinessOwner}>
+                                                    <img src={ICONS.bellIcon} class="header-action-icon"
+                                                        alt="envoyer au propriétaire d'entreprise" />
+                                                </button>
+                                            </template>
+                                        </template>
+                                        <!-- Preview PDF Button -->
+                                        <!-- <template if:false={hasSupplier}> -->
+                                        <button class="header-action-btn  " title={Labels.LBL_LD_PdfPreview}
+                                            onclick={handlePdfPreview}>
+                                            <!-- <img src={ICONS.previewIconUrl}
+                                                        class="header-action-icon header-action-icon--large viewBtn" /> -->
+                                            <lightning-icon icon-name="doctype:pdf" size="small"
+                                                alternative-text="Internal Comment"></lightning-icon>
+                                        </button>
+                                        <!-- </template> -->
+                                        <!-- Preview PDF Button -->
+                                        <!-- <template if:false={hasSupplier}> -->
+                                        <!-- <button class="header-action-btn  " title="Exporter en Word"
+                                                    onclick={handleExportWord}>
+                                                    <img src={ICONS.wordIconUrl}
+                                                        class="header-action-icon header-action-icon--large wordBtn" />
+                                                </button> -->
+                                        <button class="header-action-btn" title={Labels.LBL_LD_ExportToWord}
+                                            onclick={handleExportWord}>
+                                            <lightning-icon icon-name="doctype:word" size="small"
+                                                alternative-text="Internal Comment"></lightning-icon>
+                                        </button>
+                                        <template lwc:if={canEditGlobalVariables}>
+                                            <button class="header-action-btn slds-p-around_xx-small slds-m-left_x-small" 
+                                                title={Labels.LBL_LD_GlobalVariables} onclick={handleShowGlobalVariablesPopup}>
+                                                <lightning-icon icon-name="utility:sync" alternative-text={Labels.LBL_Close} size="small"></lightning-icon>
+                                            </button>
+                                        </template>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Global Action Buttons - Right Side -->
+                    <div
+                        class="slds-m-right--medium slds-col slds-grow-none slds-grid slds-grid_align-end slds-grid_vertical-align-end slds-p-around_small">
+                        <template if:true={showPublishDraftBOChatter}>
+                            <lightning-button variant="brand" label={Labels.LBL_LD_PublishAllBOComments}
+                                onclick={handlePublishAllBoCmnts} icon-name="utility:upload" class="slds-m-left_x-small"
+                                title={Labels.LBL_LD_PublishAllBOComments}>
+                            </lightning-button>
+                        </template>
+                        <template if:true={showPublishCmntsAndDrafts}>
+                            <lightning-button variant="brand" label={Labels.LBL_LD_PublishAll}
+                                onclick={publishAllClauses} icon-name="utility:upload" class="slds-m-left_x-small"
+                                title={Labels.LBL_LD_PublishAll}>
+                            </lightning-button>
+                        </template>
+                        <template if:true={showValidateAllButton}>
+                            <lightning-button variant="brand" label={Labels.LBL_LD_ValidateAll}
+                                onclick={ValidateClauses} icon-name="utility:check" class="slds-m-left_x-small" data-type="validateall"
+                                title={Labels.LBL_LD_AcceptClauses}>
+                            </lightning-button>
+                        </template>
+                        <template if:true={showApproveAllButton}>
+                            <lightning-button variant="success" label={Labels.LBL_LD_ApproveAll}
+                                onclick={handleApproveAll} icon-name="utility:approval" class="slds-m-left_x-small"
+                                title={Labels.LBL_LD_ApproveClauses}>
+                            </lightning-button>
+                        </template>
+                        <template if:true={hasSupplier}>
+                            <lightning-combobox style="min-width:200px" class="slds-m-left_x-small" placeholder={Labels.LBL_None}
+                                label={fieldLabels.LegalDocClause__c.Status__c} value={pageFilters.statusFilter} data-type="statusFilter"
+                                options={statusOptions} onchange={handlePageFiltersChange}>
+                            </lightning-combobox>
+                            <lightning-combobox style="min-width:250px" class="slds-m-left_x-small" placeholder={Labels.LBL_None}
+                                label={Labels.LBL_LDComment} value={pageFilters.commentFilter} options={commentFilterOptions} data-type="commentFilter"
+                                onchange={handlePageFiltersChange}>
+                            </lightning-combobox>
+                        </template>
+                        <template if:false={isLegal}>
+                            <lightning-input type="checkbox" class="slds-m-left_x-small"
+                                label={Labels.LBL_LD_BOFilterLabel} checked={pageFilters.ownedByUser} data-type="ownedByUser"
+                                onchange={handlePageFiltersChange}>
+                            </lightning-input>
+                        </template>
+                    </div>
+                </div>
+            </template>
+
+            <!-- ============== PORTAL MODE HEADER ============== -->
+            <template if:true={isPortalUser}>
+                <div class="portal-header slds-p-around_medium">
+                    <!-- Top: Image and Basic Info -->
+                    <div class="slds-grid slds-grid_vertical-align-center slds-m-bottom_medium">
+                        <div class="slds-shrink-none ">
+                            <img src={ICONS.illustrationUrl} alt="Legal Doc" class="portal-illustration" />
+                        </div>
+                        <div class="slds-col slds-grow slds-p-left_medium">
+                            <h1 class="portal-title">{legalDoc.Name}</h1>
+                            <p class="portal-detail"><strong>{fieldLabels.LegalDoc__c.Year__c}:</strong>
+                                {legalDoc._Year__c}</p>
+                            <p class="portal-detail"><strong>{fieldLabels.LegalDoc__c.DateSentToSupplier__c}:</strong>
+                                <lightning-formatted-date-time value={legalDoc._DateSentToSupplier__c} year="numeric"
+                                    month="2-digit" day="2-digit" hour="2-digit" minute="2-digit"
+                                    hour12="true"></lightning-formatted-date-time>
+                            </p>
+                            <p class="portal-detail"><strong>{fieldLabels.LegalDoc__c.Language__c}:</strong>
+                                {legalDocLanguage}</p>
+                            <p class="portal-detail"><strong>{fieldLabels.LegalDoc__c.Market__c}:</strong>
+                                {legalDocMarket}</p>
+                            <p class="portal-detail slds-grid" style="align-items:center;">
+                                <strong>{fieldLabels.LegalDoc__c.HasNoSalesTerms__c}:</strong>
+                                <lightning-input class="slds-p-left--xx-small" if:true={legalDoc._HasNoSalesTerms__c}
+                                    type="checkbox" disabled checked></lightning-input>
+                                <lightning-input class="slds-p-left--xx-small" if:false={legalDoc._HasNoSalesTerms__c}
+                                    type="checkbox" disabled></lightning-input>
+                            </p><!-- Preview PDF Button -->
+                            <!-- <template if:false={hasSupplier}> -->
+                            <button class="header-action-btn" title={Labels.LBL_LD_PdfPreview}
+                                onclick={handlePdfPreview}>
+                                <!-- <img src={ICONS.previewIconUrl}
+                                                        class="header-action-icon header-action-icon--large viewBtn" /> -->
+                                <lightning-icon icon-name="doctype:pdf" size="small"
+                                    alternative-text="Internal Comment"></lightning-icon>
+                            </button>
+                            <!-- </template> -->
+                            <!-- Preview PDF Button -->
+                            <!-- <template if:false={hasSupplier}> -->
+                            <!-- <button class="header-action-btn  " title="Exporter en Word"
+                                                    onclick={handleExportWord}>
+                                                    <img src={ICONS.wordIconUrl}
+                                                        class="header-action-icon header-action-icon--large wordBtn" />
+                                                </button> -->
+                            <button class="header-action-btn" title={Labels.LBL_LD_ExportToWord}
+                                onclick={handleExportWord}>
+                                <lightning-icon icon-name="doctype:word" size="small"
+                                    alternative-text="Internal Comment"></lightning-icon>
+                            </button>
+                            <template if:true={isMyTurn}>
+
+                                <button if:true={hasSupplier}
+                                    class="header-action-btn slds-p-around_xx-small slds-m-left_x-small"
+                                    title={Labels.LBL_LD_GlobalVariables} onclick={handleShowGlobalVariablesPopup}>
+                                    <lightning-icon icon-name="utility:sync" alternative-text={Labels.LBL_Close}
+                                        size="small">
+                                    </lightning-icon>
+                                </button>
+                            </template>
+                        </div>
+
+                        <div class="slds-col">
+                            <!-- Supplier Who Info -->
+                            <template if:true={hasSupplier}>
+                                <!-- <template if:true={legalDoc.PartnerLastModifyDate__c}>
+                                    <p class="portal-detail"><span class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.PartnerLastModifyDate__c}:</span>
+                                        <lightning-formatted-date-time value={legalDoc.PartnerLastModifyDate__c}
+                                            year="numeric" month="2-digit" day="2-digit" hour="2-digit" minute="2-digit" hour12="true"></lightning-formatted-date-time>
+                                    </p>
+                                </template> -->
+                                <template if:true={legalDoc._PartnerLastPublishDate__c}>
+                                    <p class="portal-detail"><span
+                                            class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.PartnerLastPublishDate__c}:</span>
+                                        <lightning-formatted-date-time value={legalDoc._PartnerLastPublishDate__c}
+                                            year="numeric" month="2-digit" day="2-digit" hour="2-digit" minute="2-digit"
+                                            hour12="true"></lightning-formatted-date-time>
+                                    </p>
+                                </template>
+                                <template if:true={legalDoc._PartnerValidateDate__c}>
+                                    <div class="info-row slds-grid ">
+                                        <span class="info-label slds-m-right_xx-small">
+                                            {fieldLabels.LegalDoc__c.PartnerValidateDate__c} :
+                                        </span>
+                                        <lightning-formatted-date-time value={legalDoc._PartnerValidateDate__c}
+                                            year="numeric" month="2-digit" day="2-digit" hour="2-digit" minute="2-digit"
+                                            hour12="true"></lightning-formatted-date-time>
+                                    </div>
+                                </template>
+                                <template if:true={legalDoc._WhoValidated__c}>
+                                    <div class="info-row slds-grid ">
+                                        <span
+                                            class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.WhoValidated__c}
+                                            :
+                                        </span>
+                                        <a class="info-value" href={legalDoc._WhoValidated__c}
+                                            target="_blank">{legalDoc._WhoValidatedName__c}</a>
+                                    </div>
+                                </template>
+                                <!-- <template if:true={legalDoc.WhoApproved__c}>
+                                    <div class="info-row slds-grid ">
+                                        <span class="info-label slds-m-right_xx-small">{fieldLabels.LegalDoc__c.WhoApproved__c} :
+                                        </span>
+                                        <template if:false={acceptedByTwo}>
+                                            <template if:true={legalDoc.WhoApproved__c}>
+                                                <a class="info-value" href={legalDoc.whoApprovedLink}
+                                                    target="_blank">{legalDoc.WhoApproved__r.Name}</a>
+                                            </template>
+                                        </template>
+                                        <template if:true={acceptedByTwo}>
+                                            {Labels.LBL_LD_SuppAcceptedByTwo}
+                                        </template>
+                                    </div>
+                                </template> -->
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Progress Path - Standard Salesforce Component -->
+                    <div class="path-container slds-m-bottom_medium">
+                        <lightning-progress-indicator current-step={legalDoc._Status__c} type="path" variant="base">
+                            <template for:each={legalDocStatusSteps} for:item="step">
+                                <lightning-progress-step key={step.value} label={step.label} value={step.value}>
+                                </lightning-progress-step>
+                            </template>
+                        </lightning-progress-indicator>
+                    </div>
+
+                    <!-- Info Cards: Fournisseur & Juridique -->
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <!-- Fournisseur Card -->
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="info-card slds-box">
+                                <div
+                                    class="info-card-header slds-grid slds-grid_vertical-align-center slds-p-around_small">
+                                    <img src={ICONS.previewIconUrl} alt="Fournisseur"
+                                        class="info-icon-img slds-m-right_x-small" />
+                                    <h3 class="info-card-title slds-text-title_caps">{Labels.LBL_LD_SupplierCardTitle}
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Juridique Card -->
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="info-card slds-box">
+                                <div
+                                    class="info-card-header slds-grid slds-grid_vertical-align-center slds-p-around_small">
+                                    <img src={ICONS.validationIconUrl} alt="Juridique"
+                                        class="info-icon-img slds-m-right_x-small" />
+                                    <h3 class="info-card-title slds-text-title_caps">{Labels.LBL_LD_LegalCardTitle}</h3>
+                                </div>
+                                <div class="slds-p-around_small">
+                                    <template if:true={legalDoc._LegalApproveDate__c}>
+                                        <p class="info-line slds-text-body_small">
+                                            <strong>{fieldLabels.LegalDoc__c.LegalApproveDate__c}:</strong>
+                                            <lightning-formatted-date-time value={legalDoc._LegalApproveDate__c}
+                                                year="numeric" month="2-digit" day="2-digit" hour="2-digit"
+                                                minute="2-digit" hour12="true">
+                                            </lightning-formatted-date-time>
+                                        </p>
+                                    </template>
+                                    <template if:true={legalDoc._LegalValidateDate__c}>
+                                        <p class="info-line slds-text-body_small">
+                                            <strong>{fieldLabels.LegalDoc__c.LegalValidateDate__c}:</strong>
+                                            <lightning-formatted-date-time value={legalDoc._LegalValidateDate__c}
+                                                year="numeric" month="2-digit" day="2-digit" hour="2-digit"
+                                                minute="2-digit" hour12="true">
+                                            </lightning-formatted-date-time>
+                                        </p>
+                                    </template>
+                                    <template if:true={legalDoc._LegalLastPublishDate__c}>
+                                        <p class="info-line slds-text-body_small">
+                                            <strong>{fieldLabels.LegalDoc__c.LegalLastPublishDate__c}:</strong>
+                                            <lightning-formatted-date-time value={legalDoc._LegalLastPublishDate__c}
+                                                year="numeric" month="2-digit" day="2-digit" hour="2-digit"
+                                                minute="2-digit" hour12="true">
+                                            </lightning-formatted-date-time>
+                                        </p>
+                                    </template>
+                                    <template if:true={legalDoc._LegalLastModifyDate__c}>
+                                        <p class="info-line slds-text-body_small">
+                                            <strong>{fieldLabels.LegalDoc__c.LegalLastModifyDate__c}:</strong>
+                                            <lightning-formatted-date-time value={legalDoc._LegalLastModifyDate__c}
+                                                year="numeric" month="2-digit" day="2-digit" hour="2-digit"
+                                                minute="2-digit" hour12="true">
+                                            </lightning-formatted-date-time>
+                                        </p>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Global Action Buttons for Portal -->
+                    <div
+                        class="portal-actions slds-m-top--large slds-text-align_right slds-grid slds-grid_align-end slds-grid_vertical-align-end">
+                        <div class="slds-form-element slds-m-right_small slds-text-align_left"
+                            style="max-width:200px;min-width:200px;">
+                            <span class="slds-form-element__label">
+                                {fieldLabels.LegalDocClause__c.Status__c}
+                            </span>
+                            <lightning-combobox label={fieldLabels.LegalDocClause__c.Status__c}
+                                variant="label-hidden" placeholder={Labels.LBL_None}
+                                value={pageFilters.statusFilter} data-type="statusFilter"
+                                options={statusOptions} onchange={handlePageFiltersChange}>
+                            </lightning-combobox>
+                        </div>
+                        <div class="slds-form-element slds-m-right_small slds-text-align_left"
+                            style="max-width:250px;min-width:250px;">
+                            <span class="slds-form-element__label">{Labels.LBL_LDComment}</span>
+                            <lightning-combobox label={Labels.LBL_LDComment}
+                                variant="label-hidden" placeholder={Labels.LBL_None}
+                                value={pageFilters.commentFilter} data-type="commentFilter"
+                                options={commentFilterOptions} onchange={handlePageFiltersChange}>
+                            </lightning-combobox>
+                        </div>
+                        <!-- <template if:true={showPublishCommentsBtn}>
+                            <lightning-button variant="brand" label={Labels.LBL_LDPublishAllComments}
+                                onclick={handlePublishComments} icon-name="utility:upload"
+                                class="slds-m-left_x-small slds-m-right_x-small"
+                                title={Labels.LBL_LDPublishAllComments}>
+                            </lightning-button>
+                        </template> -->
+                        <template if:true={showPublishCmntsAndDrafts}>
+                            <lightning-button variant="brand" label={Labels.LBL_LD_PublishAll}
+                                onclick={handlePublishAllCmntsAndDrafts} icon-name="utility:upload"
+                                class="slds-m-right_small" title={Labels.LBL_LD_PublishDraftClauses}>
+                            </lightning-button>
+                        </template>
+
+                        <template if:true={showValidateAllButton}>
+                            <lightning-button variant="brand" label={Labels.LBL_LD_ValidateAll}
+                                onclick={ValidateClauses} icon-name="utility:check" class="slds-m-right_small" data-type="validateall"
+                                title={Labels.LBL_LD_AcceptClauses}>
+                            </lightning-button>
+                        </template>
+                    </div>
+                </div>
+            </template>
+
+            <!-- ============== CLAUSES SECTION (Both Modes) ============== -->
+            <!-- <lightning-accordion allow-multiple-sections-open active-section-name="clauses">
+                    <lightning-accordion-section name="clauses" label={Labels.LBL_OverviewLegalClauses}> -->
+            <div class="clauses-section slds-p-around--medium">
+                <template if:true={clauses.length}>
+                    <!-- Save Order Button - Only for non-portal mode when order changed -->
+                    <template if:false={isPortalUser}>
+                        <template if:true={hasOrderChanged}>
+                            <div class="slds-m-bottom_small slds-text-align_right">
+                                <lightning-button variant="brand" label={Labels.LBL_SaveOrder} onclick={handleSaveOrder}
+                                    icon-name="utility:save" title={Labels.MSG_SaveNewOrder}>
+                                </lightning-button>
+                            </div>
+                        </template>
+                    </template>
+                    <!-- Flat Clauses List (No Grouping) -->
+                    <div class={clausesListClass}>
+                        <template for:each={displayClauses} for:item="clause" for:index="index">
+                            <div key={clause.Id} class={clause.itemClass} data-id={clause.Id} data-index={index}
+                                draggable={isDraggable} ondragstart={handleDragStart} ondragover={handleDragOver}
+                                ondragenter={handleDragEnter} ondragleave={handleDragLeave} ondrop={handleDrop}
+                                ondragend={handleDragEnd}>
+                                <!-- Normal Clause Row -->
+                                <template if:false={clause.isExpanded}>
+                                    <div class="clause-item-enhanced slds-p-around_medium slds-grid" data-id={clause.Id}
+                                        data-index={index} style="min-height:80px;"
+                                        data-disabled={clause.isNotNegotiable}>
+                                        <!-- onmouseenter={showClausebtnActions} onmouseleave={hideClausebtnActions} -->
+                                        <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread slds-p-left--small"
+                                            style="width:100%">
+                                            <!-- Left side: Drag Handle and Content -->
+                                            <div class="slds-col  slds-large-size_4-of-5  slds-size--3-of-4 slds-grow">
+                                                <div class="slds-grid slds-grid_vertical-align-center"
+                                                    style="width:100%">
+                                                    <!-- Drag Handle - Only for non-portal mode -->
+                                                    <template if:false={isPortalUser}>
+                                                        <div if:true={clause.showActions} class="clause-drag-handle">
+                                                            <lightning-icon icon-name="utility:drag_and_drop"
+                                                                size="x-small"
+                                                                class="drag-icon slds-m-right_xx-small"></lightning-icon>
+                                                        </div>
+                                                        <div if:false={clause.showActions} class="clause-drag-handle">
+                                                            <lightning-icon icon-name="" size="x-small"
+                                                                class="drag-icon slds-m-right_xx-small"></lightning-icon>
+                                                        </div>
+                                                    </template>
+                                                    <template if:false={isPortalUser}>
+                                                            <span class="display-order">{clause._DisplayOrder__c}</span>
+                                                    </template>
+                                                    <!-- Clause content -->
+                                                    <div class={clauseContentClass} style="width:100%">
+                                                        <div class={clause.clauseTypeClass} style="width:80%">
+                                                            <template if:true={clause._Clause__c}>
+                                                                <lightning-formatted-rich-text
+                                                                    value={clause._Clause__c}></lightning-formatted-rich-text>
+                                                            </template>
+                                                            <template if:false={clause._Clause__c}>
+                                                                <span
+                                                                    class="clause-type-label-placeholder">{clause.clauseTypeLabel}</span>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Status Badge Inside Clause (Right Side) -->
+                                            <!-- <template if:false={clause.showActions}> -->
+                                            <div class="slds-col slds-large-size_1-of-5 slds-size_1-of-4  slds-p-right--x-small slds-p-vertical--small"
+                                                style="justify-content: flex-end;  display: flex; flex-direction: column;align-items: flex-end;">
+                                                <div class="slds-grid slds-col actions slds-grid_vertical-align-center "
+                                                    style="justify-content: flex-end;width:100%;">
+                                                    <template if:true={clause.showActions}>
+                                                        <template if:true={hasSupplier}>
+                                                            <button if:true={showBOCommentIcon}
+                                                                disabled={clause.boCommentDisabled}
+                                                                class={clause.boCommentIconClass}
+                                                                onclick={handleAddComment} data-type="bo"
+                                                                data-id={clause.Id} data-index={index}
+                                                                title={Labels.LBL_LD_CommentToBO}>
+                                                                <lightning-icon icon-name="utility:comments" size="x-small"
+                                                                    alternative-text="Internal Comment"></lightning-icon>
+                                                            </button>
+                                                            <button if:true={showSupCommentIcon}
+                                                                disabled={clause.isCommentDisabled}
+                                                                class={clause.supplierCommentIconClass}
+                                                                onclick={handleAddComment} data-type="supplier"
+                                                                data-id={clause.Id} data-index={index}
+                                                                title={Labels.LBL_LD_CommentToSupp}>
+                                                                <lightning-icon icon-name="utility:chat" size="x-small"
+                                                                    alternative-text="Supplier Comment"></lightning-icon>
+                                                            </button>
+                                                        </template>
+
+                                                        <!-- Edit Clause -->
+                                                        <button class="edit-btn" onclick={handleEditClause}
+                                                            data-id={clause.Id} disabled={clause.isNotNegotiable}
+                                                            title={Labels.LBL_Edit}>
+                                                            <lightning-icon icon-name="utility:edit" size="x-small"
+                                                                alternative-text="Edit"></lightning-icon>
+                                                        </button>
+
+                                                        <!-- Delete Clause -->
+                                                        <template lwc:if={showDeleteClauseButton}>
+                                                            <button class="edit-btn" onclick={openDeletePopUp}
+                                                                data-id={clause.Id} title={Labels.LBL_Delete}
+                                                                disabled={clause.isNotNegotiable}>
+                                                                <lightning-icon icon-name="utility:delete" size="x-small"
+                                                                    alternative-text="Delete"></lightning-icon>
+                                                            </button>
+                                                        </template>
+                                                        <!-- Validate Clause -->
+                                                        <template if:true={clause.showValidatedButton}>
+                                                            <button class="edit-btn" onclick={ValidateClauses} data-type="singlevalidate"
+                                                                disabled={clause.isNotNegotiable} data-id={clause.Id}
+                                                                title={Labels.LBL_LD_ValidClause}>
+                                                                <lightning-icon icon-name="utility:check" size="x-small"
+                                                                    data-id={clause.Id}
+                                                                    alternative-text="Validate"></lightning-icon>
+                                                            </button>
+                                                        </template>
+
+                                                    </template>
+                                                </div>
+                                                <!-- <div if:true={showEditButton} class="slds-grid clause-status-inside  "
+                                                    style="justify-content:end;width:100%">
+                                                    <lightning-badge lwc:if={clause._Status__c}
+                                                        label={clause.statusLabel} class={clause.statusClass}
+                                                        data-id={clause.Id} data-status={clause._Status__c}>
+                                                    </lightning-badge>
+                                                </div> -->
+                                                <div if:true={showEditButton} class="slds-grid slds-grid_vertical clause-status-inside "
+                                                    style="justify-content:flex-end;align-items:flex-end;justify-content:end;width:100%">
+                                                    <lightning-badge lwc:if={clause._Status__c}
+                                                        label={clause.statusLabel} class={clause.statusClass}
+                                                        data-id={clause.Id} data-status={clause._Status__c}>
+                                                    </lightning-badge>
+                                                    <template lwc:if={clause.showlegalPublishDate}>
+                                                        <span class={clause.legalPublishDateClass} style="border-radius:6px;padding:6px;margin-top:4px;font-weight:bold;">
+                                                            <lightning-formatted-date-time
+                                                            value={clause._LegalLastPublishDate__c}
+                                                            year="numeric" month="2-digit" day="2-digit"
+                                                            hour="2-digit" minute="2-digit"
+                                                            hour12="true"></lightning-formatted-date-time>
+                                                        </span>
+                                                    </template>
+                                                    <template lwc:if={clause.showSupplierPublishDate}>
+                                                        <span class={clause.supplierPublishDateClass} style="border-radius:6px;padding:6px;margin-top:4px;font-weight:bold;">
+                                                            <lightning-formatted-date-time
+                                                            value={clause._SupplierLastPublishDate__c}
+                                                            year="numeric" month="2-digit" day="2-digit"
+                                                            hour="2-digit" minute="2-digit"
+                                                            hour12="true"></lightning-formatted-date-time>
+                                                        </span>
+                                                    </template>
+                                                </div>
+                                                <template if:false={isPortalUser}><div style={ICONS.boIconStyle} title={clause.BusinessOwnersLabel}></div></template>
+                                                <!-- <div if:true={isLegal} class="slds-grid "
+                                                    style="justify-content: flex-end; width:100%">
+                                                    <div class="slds-grid slds-m-top--small slds-wrap "
+                                                        style="gap:10px 0">
+                                                        <template for:each={clause.businessOwnerList} for:item="val">
+                                                            <lightning-badge key={val} label={val}></lightning-badge>
+                                                        </template>
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                            <!-- </template> -->
+                                            <!-- HERE  marwa -->
+                                            <!-- END -->
+                                        </div>
+                                        <template if:true={hasSupplier}>
+                                            <template if:true={clause.showSUPCommentSection}>
+                                                <div class="chatterDiv slds-size--1-of-3">
+                                                    <div class="comment-header"> {Labels.LBL_LD_CommentToSupp}
+                                                    </div>
+                                                    <c-comment-manager record-id={clause.Id} islegal={isLegal}
+                                                        isbo={isBOUser} isportal={isPortalUser} type="portal"
+                                                        track-action-records={clause.relatedActivities}
+                                                        user={currentUser} account={supplierAccount}
+                                                        ontrackactioncreated={handleTrackActionCreated}
+                                                        ontrackactionupdated={handleTrackActionUpdated}
+                                                        onresolve={handleResolveComments} read-only={readOnlyChat}
+                                                        onedit={handleEditComments}></c-comment-manager>
+                                                </div>
+                                            </template>
+                                            <template if:true={clause.showBOCommentSection}>
+                                                <div class="chatterDiv slds-size--1-of-3">
+                                                    <div class="comment-header">{Labels.LBL_LD_CommentToBO}
+                                                    </div>
+                                                    <c-comment-manager record-id={clause.Id} islegal={isLegal}
+                                                        isbo={isBOUser} isportal={isPortalUser} type="nonportal"
+                                                        track-action-records={clause.relatedActivities}
+                                                        user={currentUser} account={supplierAccount}
+                                                        ontrackactioncreated={handleTrackActionCreated}
+                                                        ontrackactionupdated={handleTrackActionUpdated} read-only={readOnlyChat}
+                                                        onresolve={handleResolveComments}></c-comment-manager>
+                                                </div>
+                                            </template>
+                                        </template>
+                                    </div>
+                                </template>
+                                <!-- Expanded View - Simple EditEdit (No Supplier) OR Comparison View (With Supplier) -->
+                                <template if:true={clause.isExpanded}>
+                                    <!-- Simple Text Edit (No Supplier, Non-Portal Mode) -->
+                                    <template if:true={clause.showSimpleEdit}>
+                                        <div class="simple-edit-inline slds-box slds-theme_shade greyBackground">
+                                            <!-- <div class="simple-edit-header slds-p-around_small"> -->
+                                            <div class="slds-grid slds-grid_vertical-align-center">
+                                                <!-- <div class="slds-col slds-grow">
+                                                                <h3 class="simple-edit-title">{Labels.LBL_Edit}</h3>
+                                                            </div> -->
+                                                <div class="slds-col slds-shrink-none slds-text-align--right">
+                                                    <template if:true={isMyTurn}>
+                                                        <lightning-button if:false={hasSupplier}
+                                                            label={Labels.LBL_Insert_Merge_Field} variant="neutral"
+                                                            data-id={clause.Id} onclick={openMergeFieldModal}
+                                                            class="slds-m-right--large">
+                                                        </lightning-button>
+                                                    </template>
+                                                    <lightning-button-icon icon-name="utility:close"
+                                                        alternative-text="Fermer" variant="bare"
+                                                        onclick={handleCloseInlineEdit} data-id={clause.Id}
+                                                        class="close-inline-btn" title={Labels.LBL_Close}
+                                                        data-type="simple">
+                                                    </lightning-button-icon>
+                                                </div>
+                                                <!-- </div> -->
+                                            </div>
+                                            <div class="simple-edit-content slds-p-around_medium">
+                                                <lightning-input-rich-text 
+                                                    onchange={handleEditClauseChange}
+                                                    data-id={clause.Id}
+                                                    data-field={LegalDocClause_API.Clause__c}
+                                                    value={clause.editingClause._Clause__c}
+                                                    class="simple-edit-editor">
+                                                </lightning-input-rich-text>
+                                                <div class="slds-m-top_small">
+                                                    <lightning-input type="checkbox"
+                                                        label={fieldLabels.LegalDocClause__c.IsNegotiable__c}
+                                                        checked={clause.editingClause._IsNegotiable__c}
+                                                        onchange={handleEditClauseChange}
+                                                        data-id={clause.Id}
+                                                        data-field={LegalDocClause_API.IsNegotiable__c}>
+                                                    </lightning-input>
+                                                </div>
+                                                <template if:false={hasSupplier}>
+                                                    <div class="slds-col slds-size_1-of-1 slds-m-bottom_small">
+                                                        <lightning-dual-listbox
+                                                            label={fieldLabels.LegalDocClause__c.BusinessOwners__c}
+                                                            source-label={Labels.LBL_Available}
+                                                            selected-label={Labels.LBL_Select}
+                                                            options={businessOwnerOptions}
+                                                            value={selectedBusinessOwners} data-id={clause.Id}
+                                                            onchange={handleEditClauseChange}
+                                                            data-field={LegalDocClause_API.BusinessOwners__c}>
+                                                        </lightning-dual-listbox>
+                                                    </div>
+                                                </template>
+                                            </div>
+
+                                            <div class="simple-edit-footer slds-p-around_small">
+                                                <div class="slds-grid slds-grid_align-end">
+                                                    <lightning-button label={Labels.LBL_Cancel}
+                                                        onclick={handleCloseInlineEdit} data-id={clause.Id}
+                                                        class="slds-m-right_x-small" data-type="simple">
+                                                    </lightning-button>
+                                                    <lightning-button variant="brand" label={Labels.LBL_Save} data-type="simple"
+                                                        data-id={clause.Id} onclick={handleSaveClause}>
+                                                    </lightning-button>
+                                                </div>
+                                            </div>
+                                            <template if:true={hasSupplier}>
+                                                <template if:true={isPortalUser}>
+                                                    <c-comment-manager record-id={clause.Id} islegal={isLegal}
+                                                        isbo={isBOUser} isportal={isPortalUser} type="portal"
+                                                        track-action-records={clause.relatedActivities}
+                                                        user={currentUser} account={supplierAccount}
+                                                        ontrackactioncreated={handleTrackActionCreated}
+                                                        ontrackactionupdated={handleTrackActionUpdated} read-only={readOnlyChat}
+                                                        onresolve={handleResolveComments}></c-comment-manager>
+                                                </template>
+                                                <template if:false={isPortalUser}>
+                                                    <div class="comment-header">{Labels.LBL_LD_CommentToSupp}</div>
+                                                    <c-comment-manager record-id={clause.Id} islegal={isLegal}
+                                                        isbo={isBOUser} isportal={isPortalUser} type="portal"
+                                                        track-action-records={clause.relatedActivities}
+                                                        user={currentUser} account={supplierAccount}
+                                                        ontrackactioncreated={handleTrackActionCreated}
+                                                        ontrackactionupdated={handleTrackActionUpdated} read-only={readOnlyChat}
+                                                        onresolve={handleResolveComments}></c-comment-manager>
+                                                    <div class="comment-header">{Labels.LBL_LD_CommentToBO}</div>
+                                                    <c-comment-manager record-id={clause.Id} islegal={isLegal}
+                                                        isbo={isBOUser} isportal={isPortalUser} type="nonportal"
+                                                        track-action-records={clause.relatedActivities}
+                                                        user={currentUser} account={supplierAccount} read-only={readOnlyChat}
+                                                        ontrackactioncreated={handleTrackActionCreated}
+                                                        ontrackactionupdated={handleTrackActionUpdated}
+                                                        onresolve={handleResolveComments}></c-comment-manager>
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </template>
+
+                                    <!-- Comparison View (With Supplier OR Portal Mode) -->
+                                    <template if:false={clause.showSimpleEdit}>
+                                        <div class="comparison-inline slds-box slds-theme_shade">
+                                            <!-- Comparison Header -->
+                                            <!-- <div class="comparison-header slds-p-around_small"> -->
+                                            <div class="slds-grid slds-grid_vertical-align-center">
+                                                <!-- <div class="slds-col slds-grow">
+                                                                <h3 class="comparison-title">
+                                                                    {Labels.LBL_VersionComparison}</h3>
+                                                            </div> -->
+                                                <div class="slds-col slds-shrink-none slds-flip--horizontal">
+                                                    <lightning-button-icon icon-name="utility:close"
+                                                        alternative-text="Fermer" variant="bare"
+                                                        onclick={handleCloseInlineEdit} data-id={clause.Id}
+                                                        class="close-inline-btn" title={Labels.LBL_Close}
+                                                        data-type="full">
+                                                    </lightning-button-icon>
+                                                </div>
+                                                <!-- </div> -->
+                                            </div>
+
+                                            <!-- 3 Columns Comparison -->
+                                            <div class="slds-grid slds-gutters slds-p-around_small comparison-columns"
+                                                style="gap:5px;">
+                                                <!-- Past Version (Display Only) -->
+                                                <div class="slds-grid slds-grid--vertical slds-size_1-of-3">
+
+                                                    <div class="version-header past-header slds-grid">
+                                                        <h4 class="version-title slds-col slds-m-vertical--medium">
+                                                            {Labels.LBL_PastVersion}</h4>
+                                                        <!-- Only show dropdown if there are other versions to compare -->
+                                                        <template if:true={clause.hasVersionsToCompare}>
+                                                            <lightning-combobox value={clause.selectedCompareVersionId}
+                                                                options={clause.compareVersionOptions}
+                                                                onchange={handleCompareVersionChange}
+                                                                data-id={clause.Id} variant="label-hidden"
+                                                                class="version-selector slds-col slds-m-vertical--small"
+                                                                dropdown-alignment="left">
+                                                            </lightning-combobox>
+                                                        </template>
+                                                    </div>
+                                                    <div class="slds-col  version-column">
+
+                                                        <div class="version-content past-content">
+                                                            <lightning-formatted-rich-text
+                                                                value={clause.pastVersionContent} class="version-text">
+                                                            </lightning-formatted-rich-text>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Current Version (Display Only with Track Changes) -->
+                                                <div class="slds-grid slds-grid--vertical slds-size_1-of-3">
+                                                    <div class="version-header current-header slds-grid">
+                                                        <h4 class="version-title slds-col slds-m-vertical--medium">
+                                                            {Labels.LBL_CurrentVersion}
+                                                        </h4>
+                                                    </div>
+                                                    <div class="slds-col  version-column">
+                                                        <lightning-formatted-rich-text
+                                                            value={clause.currentVersionContent} class="version-text">
+                                                        </lightning-formatted-rich-text>
+                                                    </div>
+                                                </div>
+
+                                                <!-- New Version (Editable) -->
+                                                <div class="slds-grid slds-grid--vertical slds-size_1-of-3">
+                                                    <div class="version-header new-header slds-grid">
+                                                        <h4 class="version-title slds-col slds-m-vertical--medium">
+                                                            {Labels.LBL_NewVersion}</h4>
+                                                        <lightning-button-icon icon-name="utility:edit"
+                                                            alternative-text={Labels.LBL_Edit} variant="bare"
+                                                            onclick={handleToggleEditMode} data-id={clause.Id}
+                                                            class="edit-version-btn slds-col slds-m-vertical--small slds-x-small-size_xxx-small"
+                                                            title={Labels.LBL_Edit}>
+                                                        </lightning-button-icon>
+                                                    </div>
+                                                    <div class="slds-col  version-column ">
+                                                        <template if:false={clause.isEditingNewVersion}>
+                                                            <lightning-formatted-rich-text
+                                                                value={clause.newVersionContent} class="version-text">
+                                                            </lightning-formatted-rich-text>
+                                                        </template>
+                                                        <template if:true={clause.isEditingNewVersion}>
+                                                            <lightning-input-rich-text
+                                                                value={clause.editingClause._Clause__c} data-field={LegalDocClause_API.Clause__c}
+                                                                onchange={handleEditClauseChange} data-id={clause.Id}
+                                                                class="new-version-editor version-content">
+                                                            </lightning-input-rich-text>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Options Row - Non-portal only -->
+                                            <template if:true={isLegal}>
+                                                <div class="slds-p-horizontal_small slds-p-bottom_small">
+                                                    <lightning-input type="checkbox"
+                                                        label={fieldLabels.LegalDocClause__c.IsNegotiable__c}
+                                                        checked={clause.editingClause._IsNegotiable__c}
+                                                        onchange={handleEditClauseChange}
+                                                        data-id={clause.Id}
+                                                        data-field={LegalDocClause_API.IsNegotiable__c}>
+                                                    </lightning-input>
+                                                </div>
+                                            </template>
+                                            <!-- Action Buttons -->
+                                            <div class="comparison-footer slds-p-around_small">
+                                                <div class="slds-grid slds-grid_align-end">
+                                                    <!-- Cancel - Always visible -->
+                                                    <lightning-button label={Labels.LBL_Cancel}
+                                                        onclick={handleCloseInlineEdit} data-id={clause.Id}
+                                                        class="slds-m-right_x-small" data-type="full">
+                                                    </lightning-button>
+                                                    <!-- Save Draft - Always visible -->
+                                                    <lightning-button variant="brand" label={Labels.LBL_Save}
+                                                        class="slds-m-right_x-small" data-id={clause.Id} data-type="full"
+                                                        onclick={handleSaveClause}>
+                                                    </lightning-button>
+                                                </div>
+                                            </div>
+                                            <!-- <c-comment-manager ...> -->
+                                            <template if:true={hasSupplier}>
+                                                <template if:true={isPortalUser}>
+                                                    <c-comment-manager record-id={clause.Id} islegal={isLegal}
+                                                        isbo={isBOUser} isportal={isPortalUser} type="portal"
+                                                        track-action-records={clause.relatedActivities}
+                                                        user={currentUser} account={supplierAccount}
+                                                        ontrackactioncreated={handleTrackActionCreated}
+                                                        ontrackactionupdated={handleTrackActionUpdated} read-only={readOnlyChat}
+                                                        onresolve={handleResolveComments}></c-comment-manager>
+                                                </template>
+                                                <template if:false={isPortalUser}>
+                                                    {Labels.LBL_LD_CommentToSupp}:
+                                                    <c-comment-manager record-id={clause.Id} islegal={isLegal}
+                                                        isbo={isBOUser} isportal={isPortalUser} type="portal"
+                                                        track-action-records={clause.relatedActivities}
+                                                        user={currentUser} account={supplierAccount}
+                                                        ontrackactioncreated={handleTrackActionCreated}
+                                                        ontrackactionupdated={handleTrackActionUpdated} read-only={readOnlyChat}
+                                                        onresolve={handleResolveComments}></c-comment-manager>
+                                                    {Labels.LBL_LD_CommentToBO}:
+                                                    <c-comment-manager record-id={clause.Id} islegal={isLegal}
+                                                        isbo={isBOUser} isportal={isPortalUser} type="nonportal"
+                                                        track-action-records={clause.relatedActivities}
+                                                        user={currentUser} account={supplierAccount}
+                                                        ontrackactioncreated={handleTrackActionCreated}
+                                                        ontrackactionupdated={handleTrackActionUpdated} read-only={readOnlyChat}
+                                                        onresolve={handleResolveComments}></c-comment-manager>
+                                                </template>
+                                            </template>
+
+                                        </div>
+
+                                    </template>
+                                </template>
+                            </div>
+                            <div key={clause.Id} class="separator slds-m-around--xx-small"></div>
+                        </template>
+                    </div>
+                </template>
+
+                <template if:true={noRecordsToDisplay}>
+                    <div class="slds-align_absolute-center slds-p-around_large no-clauses">
+                        <div class="slds-text-align_center">
+                            <lightning-icon icon-name="utility:info" size="large"
+                                class="slds-m-bottom_small"></lightning-icon>
+                            <p class="slds-text-heading_small">{Labels.LBL_LD_NoLegalClause}</p>
+                            <p if:true={isLegal} class="slds-text-body_small slds-m-top_x-small">
+                                {Labels.LBL_LD_AccordionNoClauseBody}</p>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Inline Add New Clause (no popup, no chatter, clause type only when adding) -->
+                <template if:true={isAddingNewClause}>
+                    <div class={clausesListClass}>
+                        <div class="clause-item-wrapper clause-new-inline">
+                            <div class="simple-edit-inline slds-box slds-theme_shade greyBackground new-clause-inline">
+                                <div class="slds-grid slds-grid_vertical-align-center">
+                                    <div class="slds-col slds-shrink-none slds-text-align--right">
+                                        <template if:true={isMyTurn}>
+                                            <lightning-button if:false={hasSupplier}
+                                                label={Labels.LBL_Insert_Merge_Field} variant="neutral" data-id=""
+                                                onclick={openMergeFieldModal} class="slds-m-right--large">
+                                            </lightning-button>
+                                        </template>
+                                        <lightning-button-icon icon-name="utility:close" alternative-text="Fermer"
+                                            variant="bare" onclick={handleCancelNewClauseInline}
+                                            title={Labels.LBL_Close} class="close-inline-btn">
+                                        </lightning-button-icon>
+                                    </div>
+                                </div>
+                                <div class="simple-edit-content slds-p-around_medium">
+                                    <div class="slds-m-bottom_small">
+                                        <label class="slds-form-element__label"><abbr class="slds-required">*</abbr>
+                                            {fieldLabels.LegalDocClause__c.Clause__c}</label>
+                                        <lightning-input-rich-text value={newClause._Clause__c}
+                                            onchange={handleNewClauseFieldChange}
+                                            data-field={LegalDocClause_API.Clause__c}
+                                            placeholder={Labels.LBL_LD_EnterTextOfClause}
+                                            class="clause-rich-text-editor new-clause-editor">
+                                        </lightning-input-rich-text>
+                                    </div>
+                                    <div class="slds-grid slds-wrap slds-gutters slds-m-bottom_small">
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <lightning-input type="number"
+                                                label={fieldLabels.LegalDocClause__c.DisplayOrder__c}
+                                                value={newClause._DisplayOrder__c} onchange={handleNewClauseFieldChange}
+                                                data-field={LegalDocClause_API.DisplayOrder__c}
+                                                data-wrapper="displayOrder" disabled>
+                                            </lightning-input>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <lightning-combobox label={fieldLabels.LegalDocClause__c.ClauseType__c}
+                                                value={newClause._ClauseType__c}
+                                                options={clauseTypeOptions}
+                                                onchange={handleNewClauseFieldChange}
+                                                data-field={LegalDocClause_API.ClauseType__c} data-wrapper="clauseType"
+                                                required>
+                                            </lightning-combobox>
+                                        </div>
+                                    </div>
+                                    <div class="slds-m-bottom_small">
+                                        <lightning-input type="checkbox"
+                                            label={fieldLabels.LegalDocClause__c.IsNegotiable__c}
+                                            checked={newClause._IsNegotiable__c}
+                                            onchange={handleNewClauseFieldChange}
+                                            data-field={LegalDocClause_API.IsNegotiable__c} data-wrapper="isNegotiable">
+                                        </lightning-input>
+                                    </div>
+                                    <div class="slds-m-bottom_small">
+                                        <lightning-dual-listbox label={fieldLabels.LegalDocClause__c.BusinessOwners__c}
+                                            source-label={Labels.LBL_Available} selected-label={Labels.LBL_Select}
+                                            options={businessOwnerOptions}
+                                            value={selectedBusinessOwners}
+                                            onchange={handleNewClauseFieldChange}
+                                            data-field={LegalDocClause_API.BusinessOwners__c}>
+                                        </lightning-dual-listbox>
+                                    </div>
+                                </div>
+                                <div class="simple-edit-footer slds-p-around_small">
+                                    <div class="slds-grid slds-grid_align-end">
+                                        <lightning-button label={Labels.LBL_Cancel}
+                                            onclick={handleCancelNewClauseInline} class="slds-m-right_x-small">
+                                        </lightning-button>
+                                        <lightning-button variant="brand" label={Labels.LBL_Add}
+                                            onclick={handleSaveNewClause}>
+                                        </lightning-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+            <!-- </lightning-accordion-section>
+                </lightning-accordion> -->
+        </template>
+    </lightning-card>
+
+    <!-- Supplier Selection Modal (Standard Mode Only) -->
+    <template if:true={showSupplierModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        onclick={handleCloseSupplierModal} title={Labels.LBL_Close}>
+                        <lightning-icon icon-name="utility:close" alternative-text={Labels.LBL_Close} size="small">
+                        </lightning-icon>
+                    </button>
+
+                    <h2 class="slds-text-heading_medium slds-hyphenate">
+                        {Labels.LBL_SendToSupplier}
+                    </h2>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium supplier-modal-content">
+                    <!-- Header with count on left and search on right -->
+                    <div class="slds-grid slds-grid_align-spread slds-m-bottom_small">
+                        <div class="slds-col">
+                            <p class="slds-text-body_small slds-text-color_weak">
+                                {headerCountLabel}
+                            </p>
+                        </div>
+                        <div class="slds-col slds-size_4-of-12">
+                            <lightning-input type="search" placeholder={Labels.LBL_Placeholder_Search}
+                                value={supplierSearchTerm} onchange={handleSupplierSearch} variant="label-hidden">
+                            </lightning-input>
+                        </div>
+                    </div>
+
+                    <template lwc:if={isLoadingSuppliers}>
+                        <div class=" greyBg">
+                            <div class="loader slds-spinner_container slds-align_absolute-center">
+                            </div>
+                        </div>
+                    </template>
+                    <!-- Supplier Table - Dynamic Grid -->
+                    <template if:false={isLoadingSuppliers}>
+                        <div class="supplier-table-container">
+                            <table
+                                class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered supplier-table">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th scope="col" class="checkbox-col">
+                                            <lightning-input type="checkbox" checked={isAllSuppliersSelected}
+                                                onchange={handleSelectAllSuppliers} variant="label-hidden">
+                                            </lightning-input>
+                                        </th>
+                                        <template for:each={supplierGridFields} for:item="field">
+                                            <th key={field.fieldName} scope="col" style={field.headerStyle}>
+                                                <div title={field.fieldLabel}>{field.fieldLabel}</div>
+                                            </th>
+                                        </template>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template if:true={filteredSuppliers.length}>
+                                        <template for:each={filteredSuppliers} for:item="supplier">
+                                            <tr key={supplier.Id} class={supplier.rowClass}>
+                                                <td class="checkbox-col" title={supplier.disabledTooltip}>
+                                                    <lightning-input type="checkbox" checked={supplier.isSelected}
+                                                        data-id={supplier.Id} onchange={handleSupplierCheckboxChange}
+                                                        variant="label-hidden" label={Labels.LBL_Select}
+                                                        disabled={supplier.isDisabled}>
+                                                    </lightning-input>
+                                                </td>
+                                                <template for:each={supplier.values} for:item="val">
+                                                    <td key={val.fieldName} style={val.style}>
+                                                        <template if:true={val.isReference}>
+                                                            <div class="slds-truncate" title={val.fieldOutputValue}>
+                                                                <a href={val.link} target="_blank"
+                                                                    class="supplier-link">{val.fieldOutputValue}</a>
+                                                            </div>
+                                                        </template>
+                                                        <template if:true={val.isText}>
+                                                            <div class="slds-truncate" title={val.fieldOutputValue}>
+                                                                {val.fieldOutputValue}</div>
+                                                        </template>
+                                                        <template if:true={val.isPicklist}>
+                                                            <div class="slds-truncate" title={val.fieldOutputValue}>
+                                                                {val.fieldOutputValue}</div>
+                                                        </template>
+                                                        <template if:true={val.isDate}>
+                                                            <lightning-formatted-date-time value={val.fieldValue}
+                                                                year="numeric" month="2-digit"
+                                                                day="2-digit"></lightning-formatted-date-time>
+                                                        </template>
+                                                        <template if:true={val.isBoolean}>
+                                                            <lightning-input type="checkbox" checked={val.fieldValue}
+                                                                disabled variant="label-hidden"
+                                                                label="value"></lightning-input>
+                                                        </template>
+                                                        <template if:true={val.isNumber}>
+                                                            <div class="slds-truncate slds-text-align_right"
+                                                                title={val.fieldOutputValue}>{val.fieldOutputValue}
+                                                            </div>
+                                                        </template>
+                                                    </td>
+                                                </template>
+                                            </tr>
+                                        </template>
+                                    </template>
+                                    <template if:false={filteredSuppliers.length}>
+                                        <tr>
+                                            <td colspan="9" class="slds-text-align_center slds-p-around_medium">
+                                                <p class="slds-text-color_weak">{Labels.LBL_No_Item_To_Display}</p>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </template>
+                </div>
+                <footer class="slds-modal__footer slds-grid slds-grid_align-end">
+                    <lightning-button label={Labels.LBL_Close} onclick={handleCloseSupplierModal}>
+                    </lightning-button>
+
+                    <lightning-button class="slds-m-left_small" variant="brand" label={Labels.LBL_Next}
+                        onclick={handleSendToSuppliers} disabled={isSendDisabled}>
+                    </lightning-button>
+                </footer>
+
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!-- Contacts Modal -->
+    <template if:true={showContactModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <!-- Header -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        onclick={handleCloseContactModal} title={Labels.LBL_Close}>
+                        <lightning-icon icon-name="utility:close" alternative-text={Labels.LBL_Close} size="small">
+                        </lightning-icon>
+                    </button>
+
+                    <h2 class="slds-text-heading_medium slds-hyphenate">
+                        {Labels.LBL_LD_ContactModalTitle}
+                    </h2>
+                </header>
+                <!-- Content -->
+                <div class="slds-modal__content slds-p-around_medium">
+                    <!-- Search -->
+                    <div class="slds-grid slds-grid_align-end slds-m-bottom_small">
+                        <div class="slds-col slds-size_4-of-12 ">
+                            <lightning-input type="search" placeholder={Labels.LBL_Placeholder_Search}
+                                value={contactSearchTerm} onchange={handleContactSearch} variant="label-hidden">
+                            </lightning-input>
+                        </div>
+                    </div>
+                    <div class="supplier-table-container">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                            <thead>
+                                <tr>
+                                    <template for:each={contactGridFields} for:item="field">
+                                        <th key={field.fieldName} style={field.headerStyle}>
+                                            {field.fieldLabel}
+                                        </th>
+                                    </template>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template if:true={filteredContacts.length}>
+                                    <template for:each={filteredContacts} for:item="contact">
+                                        <tr key={contact.Id}>
+                                            <template for:each={contact.values} for:item="val">
+                                                <td key={val.fieldName} style={val.style}>
+                                                    <template if:true={val.isReference}>
+                                                        <a href={val.link} target="_blank">
+                                                            {val.fieldOutputValue}
+                                                        </a>
+                                                    </template>
+                                                    <template if:true={val.isText}>
+                                                        {val.fieldOutputValue}
+                                                    </template>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                </template>
+                                <template if:false={filteredContacts.length}>
+                                    <tr>
+                                        <td colspan="3" class="slds-text-align_center slds-p-around_medium">
+                                            {Labels.LBL_LD_NoContacts}
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Footer -->
+                <footer class="slds-modal__footer slds-grid slds-grid_align-end">
+                    <lightning-button label={Labels.LBL_Close} onclick={handleCloseContactModal}>
+                    </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <template if:true={modalConfig.isOpen}>
+        <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container" style="max-width: 40rem; width: 100%;">
+                <header class="slds-modal__header slds-theme_info">
+                    <h2 class="slds-text-heading_medium">
+                        {modalConfig.title}
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <p class="slds-text-align_center">
+                        {modalConfig.message}
+                    </p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeModal}>
+                        {Labels.LBL_Cancel}
+                    </button>
+                    <button class="slds-button slds-button_brand slds-m-left_small" onclick={handleConfirm}>
+                        {modalConfig.confirmLabel}
+                    </button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <template if:true={isMergeFieldModalOpen}>
+        <section role="dialog" class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon icon-name="utility:close" class="slds-modal__close"
+                        onclick={closeMergeFieldModal}></lightning-button-icon>
+                    <h2 class="slds-text-heading_medium">{Labels.LBL_Insert_Merge_Field}</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_2-of-3">
+                            <lightning-combobox label={Labels.LBL_Select_Object} options={objectOptions}
+                                value={selectedObject} onchange={handleObjectChange}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+
+                    <div class="slds-grid slds-gutters slds-m-top_medium">
+                        <div class="slds-col slds-size_2-of-3">
+                            <lightning-combobox label={Labels.LBL_Select_Field} options={fieldOptions}
+                                value={selectedField} onchange={handleFieldChange} disabled={isFieldDisabled}>
+                            </lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3 slds-m-top_large">
+                            <template if:true={selectedFieldInfo}>
+                                <p class="slds-text-body_small"><strong>{Labels.LBL_LDLabel}:</strong>
+                                    {selectedFieldInfo.fieldLabel}
+                                </p>
+                                <p class="slds-text-body_small" style="word-break: break-word;">
+                                    <strong>{Labels.LBL_LDAPI}:</strong>
+                                    {selectedFieldInfo.fieldValue}
+                                </p>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label={Labels.LBL_Close} onclick={closeMergeFieldModal}></lightning-button>
+                    <lightning-button class="slds-m-left--small" variant="brand" label={Labels.LBL_Insert}
+                        onclick={insertSelectedMergeFields}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Confirmation Modal for Save Global Variables -->
+    <template if:true={showSaveConfirmationModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-save" aria-modal="true"
+            aria-describedby="modal-content-save" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container" style="max-width: 60rem; width: 100%;">
+                <header class="slds-modal__header slds-theme--info">
+                    <h2 id="modal-heading-saveGl" class="slds-text-heading_medium slds-hyphenate">
+                        {Labels.LBL_Confirm}
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-saveGL">
+                    <p class="slds-align_absolute-center">{Labels.LBL_LD_confirmationMessage}</p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button class="slds-m-right--small" label={Labels.LBL_Close}
+                        onclick={closeSaveConfirmationModal}></lightning-button>
+                    <lightning-button variant="brand" label={Labels.LBL_Save}
+                        onclick={confirmSaveGlobalVariables}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <template if:true={showGlobalVariablesPopup}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-delete" aria-modal="true"
+            aria-describedby="modal-content-delete" class="slds-modal slds-fade-in-open">
+
+            <div class="slds-modal__container" style="max-width: 60rem; width: 100%;">
+
+                <!-- Header -->
+                <header class="slds-modal__header ">
+                    <h2 id="modal-heading-variables" class="slds-text-heading_medium slds-hyphenate">
+                        {Labels.LBL_LD_GlobalVariables}
+                    </h2>
+                </header>
+
+                <!-- Body -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-variables">
+
+                    <template for:each={mergeObjects} for:item="section">
+                        <div key={section.fieldValue} class="slds-m-bottom_medium">
+
+                            <h3 class="slds-text-heading_small slds-m-bottom_x-small">
+                                {section.fieldLabel}
+                            </h3>
+
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="font-weight:bold;">{Labels.LBL_LDLabel}</th>
+                                        <th style="font-weight:bold;">API</th>
+                                        <th style="font-weight:bold;">{Labels.LBL_Value}</th>
+                                        <th style="font-weight:bold;">{Labels.LBL_New}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template for:each={section.wFieldWrapperList} for:item="field">
+                                        <tr key={field.fieldValue}>
+                                            <td class="slds-size--1-of-4" style="font-weight:bold;">{field.fieldLabel}
+                                            </td>
+                                            <td class="slds-size--1-of-4">{field.fieldAPI}</td>
+                                            <td class="slds-size--1-of-4">{field.fieldOrgValue}</td>
+                                            <td class="slds-size--1-of-4">
+                                                <lightning-input type="text" placeholder='' value={field.overrideValue}
+                                                    data-field-key={field.fieldValue}
+                                                    data-original-value={field.fieldOrgValue}
+                                                    onchange={handleGlobalVariableChange} variant="label-hidden"
+                                                    disabled={field.isDisabled}>
+                                                </lightning-input>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </template>
+
+                </div>
+                <!-- Footer -->
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={handleCloseGlobalVariablesPopup}>
+                        {Labels.LBL_Cancel}
+                    </button>
+
+                    <button class="slds-button slds-button_brand slds-m-left_small" onclick={confirmSaveGlobalVariables}
+                        disabled={isGlobalVariablesSaveDisabled}>
+                        {Labels.LBL_Save}
+                    </button>
+                </footer>
+
+            </div>
+        </section>
+
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

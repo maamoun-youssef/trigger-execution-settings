@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_NetPrice_Statement_Requested__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Check is starting the NetPrice Discount Statement Initialization process</description>
+    <label>Is NetPrice Statement Requested</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

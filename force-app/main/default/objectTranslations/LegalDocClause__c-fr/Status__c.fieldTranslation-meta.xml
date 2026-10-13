@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Statut</label>
+    <name>Status__c</name>
+    <picklistValues>
+        <masterLabel>Approved</masterLabel>
+        <translation>Accepté</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Business owner publishing</masterLabel>
+        <translation>Publié Resp. métier</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Draft</masterLabel>
+        <translation>Draft</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Open</masterLabel>
+        <translation>Ouvert</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Rejected</masterLabel>
+        <translation>Rejeté</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Updated</masterLabel>
+        <translation>Modifié</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Validated</masterLabel>
+        <translation>Validé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>legal publishing</masterLabel>
+        <translation>Publié client (Boulanger)</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>published</masterLabel>
+        <translation>Publié four.</translation>
+    </picklistValues>
+</CustomFieldTranslation>

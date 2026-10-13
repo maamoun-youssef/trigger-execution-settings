@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FRSummary__c</fullName>
+    <description>French summary of the information declared by the supplier. This field stores a human-readable version of the statement content, intended for French-speaking users.</description>
+    <label>FR Summary</label>
+    <length>32768</length>
+    <trackTrending>false</trackTrending>
+    <type>Html</type>
+    <visibleLines>25</visibleLines>
+</CustomField>

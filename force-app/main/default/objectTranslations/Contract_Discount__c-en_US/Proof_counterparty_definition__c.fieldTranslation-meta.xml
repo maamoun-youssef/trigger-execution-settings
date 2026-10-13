@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Display the counterparty definition specified for the selected condition. --></help>
+    <label>Counterparty Definition</label>
+    <name>Proof_counterparty_definition__c</name>
+</CustomFieldTranslation>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Conso_Requiered__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If TRUE, will be monitored and considered in the conso batch. (Trigger make it to TRUE following contract / contract discount update)</description>
+    <inlineHelpText>If TRUE, will be monitored and considered in the conso batch. (Trigger make it to TRUE following contract / contract discount update)</inlineHelpText>
+    <label>Is Conso Requiered</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

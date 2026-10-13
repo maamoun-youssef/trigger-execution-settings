@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>PG</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>PGs</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>negOptim PG</layout>
+        <sections>
+            <label><!-- Charges --></label>
+            <section>Charges</section>
+        </sections>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+        <sections>
+            <label><!-- Prices --></label>
+            <section>Prices</section>
+        </sections>
+        <sections>
+            <label><!-- Rounding --></label>
+            <section>Rounding</section>
+        </sections>
+        <sections>
+            <label><!-- Taxes --></label>
+            <section>Taxes</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Nom</nameFieldLabel>
+    <recordTypes>
+        <label>Tarif</label>
+        <name>PriceList</name>
+    </recordTypes>
+    <recordTypes>
+        <label>PG de référence</label>
+        <name>Regular</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

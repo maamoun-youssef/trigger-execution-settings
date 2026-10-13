@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BusinessUnitMaster__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <label>Business Unit Master</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>1 OR 2 OR 3 OR 4 OR 5 OR 6</booleanFilter>
+        <filterItems>
+            <field>BusinessUnit__c.DeveloperNameRT__c</field>
+            <operation>equals</operation>
+            <value>List</value>
+        </filterItems>
+        <filterItems>
+            <field>BusinessUnit__c.DeveloperNameRT__c</field>
+            <operation>equals</operation>
+            <value>Group</value>
+        </filterItems>
+        <filterItems>
+            <field>BusinessUnit__c.DeveloperNameRT__c</field>
+            <operation>equals</operation>
+            <value>Region</value>
+        </filterItems>
+        <filterItems>
+            <field>BusinessUnit__c.DeveloperNameRT__c</field>
+            <operation>equals</operation>
+            <value>Country</value>
+        </filterItems>
+        <filterItems>
+            <field>BusinessUnit__c.DeveloperNameRT__c</field>
+            <operation>equals</operation>
+            <value>Banner</value>
+        </filterItems>
+        <filterItems>
+            <field>BusinessUnit__c.DeveloperNameRT__c</field>
+            <operation>equals</operation>
+            <value>AssortmentCluster</value>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>BusinessUnit__c</referenceTo>
+    <relationshipLabel>BU Link (Business Unit Master)</relationshipLabel>
+    <relationshipName>BULNKBusinessUnitMaster</relationshipName>
+    <required>true</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

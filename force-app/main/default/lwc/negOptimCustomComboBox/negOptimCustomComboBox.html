@@ -1,0 +1,47 @@
+<template>
+    <div class="slds-form-element">
+        <template if:false={isLabelHidden}>
+            <label class="slds-form-element__label" for="combobox-id-2" id="combobox-label-id-2">{label}</label>
+        </template>
+        <div class="slds-form-element__control">
+            <div class="slds-combobox_container">
+                <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none"
+                        onclick={toggleVisibility}>
+                        <!-- search bar -->
+                        <input type='text' oninput={handleFilterOptions} placeholder={searchField}
+                            class="search slds-input">
+                        <span class="arrow">
+                            <lightning-icon size="x-small" icon-name='utility:down' alternative-text='arrow'>
+                            </lightning-icon>
+                        </span>
+                    </div>
+                    <template if:true={displayFeilds}>
+                        <div id="listbox-id-4" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                            role="listbox" tabindex="0" aria-busy="false">
+                            <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                <template lwc:if={options.length}>
+                                    <!-- options -->
+                                    <template for:each={options} for:item="option">
+                                        <li role="presentation" class="slds-listbox__item" key={option.value}>
+                                            <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small slds-text-align_center"
+                                                role="option" onclick={handleInputChange} data-value={option.value}>
+                                                <span class="slds-media__body">
+                                                    <span class="slds-truncate" title="Reports">{option.label}</span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </template>
+                                <template lwc:else>
+                                    <!-- handle no options -->
+                                    <div class="item-not-found">{labels.LBL_No_Items_Found}</div>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

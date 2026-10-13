@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>First Price</masterLabel>
+        <translation>1er Prix</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>National Brand</masterLabel>
+        <translation>Marque nationale</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Other</masterLabel>
+        <translation>Autre</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Private Brand</masterLabel>
+        <translation>Marque de distributeur</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Private Brand 2</masterLabel>
+        <translation>Marque de distributeur 2</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MBF_Section_LastActiveContractProcedure__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Mass Batch Form - display the section of Last Active Contract Procedure</description>
+    <inlineHelpText>Display the section of Last Active Contract Procedure</inlineHelpText>
+    <label>Section - Last Active Contract Procedure</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

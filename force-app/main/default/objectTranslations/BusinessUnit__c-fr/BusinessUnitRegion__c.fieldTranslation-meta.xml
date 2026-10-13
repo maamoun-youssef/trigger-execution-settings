@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>La zone géographique de la BU</help>
+    <label>BU Région</label>
+    <lookupFilter>
+        <errorMessage>Région - La valeur n&apos;existe pas ou ne correspond pas aux critères de filtre.</errorMessage>
+    </lookupFilter>
+    <name>BusinessUnitRegion__c</name>
+    <relationshipLabel><!-- Business Units (Region) --></relationshipLabel>
+</CustomFieldTranslation>

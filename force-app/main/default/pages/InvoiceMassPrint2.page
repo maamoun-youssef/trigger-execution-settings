@@ -1,0 +1,375 @@
+<apex:page standardController="Invoice__c" recordSetVar="recSetVar" extensions="InvoiceMassPrintCtrlExt" tabStyle="Invoice__c"
+           id="thePage" action="{!ctrl.pageAction}" lightningStylesheets="true" applyHtmlTag="false" applyBodyTag="false" showHeader="false" docType="html-5.0" setup="false" >
+    <html class="slds-scope" >
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <!-- Import the Design System style sheet -->
+            <apex:slds />
+            <apex:stylesheet value="{!URLFOR($Resource.nTemplate__Assets, 'assets/css/app.css')}" />
+            <style>
+                .stickyHead thead {
+                    position: sticky !important;
+                    top: 0 !important;
+                    z-index: 5 !important;
+                }
+                .default-template {
+                    float: right;
+                    background: #ece6e6;
+                    border: #dcdcdc 1px solid;
+                    border-radius: 50px;
+                    padding: 2px;
+                }
+                .mysticky{
+                    z-index: 99;
+                    position: -webkit-sticky;
+                    position: sticky;
+                    top: 0;
+                    -webkit-transition: all 0.1s linear;
+                    -moz-transition: all 0.1s linear;
+                    -o-transition: all 0.1s linear;
+                    transition: all 0.1s linear;
+                }
+                .sticky {
+                    margin-left: 0 !important;
+                    margin-right: 0 !important;
+                    border-radius: 0 !important;
+                }
+            </style>
+        </head>
+        <body class="slds-brand-band slds-brand-band_large">
+            <apex:form id="theForm" >
+                <div id="msg">
+                    <apex:pageMessages id="pageMessages"/>
+                </div>
+                <!-- Page Header -->
+                <div class="slds-page-header slds-m-left--medium slds-m-right--medium slds-m-top--medium mysticky slds-m-bottom--medium" id="pageHeader">
+                    <!-- LAYOUT GRID -->
+                    <div class="slds-grid">
+                        <!-- GRID COL -->
+                        <div class="slds-col slds-has-flexi-truncate">
+                            <div class="slds-media slds-no-space slds-grow">
+                                <div class="slds-media__figure">
+                                    <svg class="slds-icon slds-icon-standard-contact" aria-hidden="true">
+                                        <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/standard-sprite/svg/symbols.svg#template')}"/>
+                                    </svg>
+                                </div>
+                                <div class="slds-media__body">
+                                    <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                        <apex:outputText value="{!$Label.LBL_MassPrint_PageTitle}" />
+                                    </h1>
+                                    <p title="{!$Label.LBL_MassPrint_PageSubTitle}">
+                                        <apex:outputText value="{!$Label.LBL_MassPrint_PageSubTitle}" />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <apex:outputPanel rendered="{!!ctrl.isFastPrint}" layout="block">
+                            <apex:commandLink value="{!$Label.nTemplate__LBL_Cancel}"
+                                              action="{!ctrl.cancel}"
+                                              styleClass="slds-button slds-button_neutral slds-m-left_xx-small"
+                                              oncomplete="setDivSize();" />
+                            <!-- <apex:commandLink styleClass="slds-button slds-button_neutral slds-m-left_xx-small" value="{!$Label.nTemplate__LBL_MassPrint_PageNextButton}" action="{!print}" id="printBtn" status="globalloading"
+                                                rendered="false" disabled="{!printingInProgress}"
+                                                reRender="printBtn, combineBtn, printStatusActionPoller, templatesPageBlockTable, pageMessages" oncomplete="setDivSize();" />
+                            <apex:commandLink styleClass="slds-button slds-button_neutral slds-m-left_xx-small" value="{!$Label.ntemplate__LBL_Combine_Printed_Files}" action="{!combine}" id="combineBtn" status="globalloading"
+                                                rendered="false" disabled="{!printingInProgress}"
+                                                reRender="printStatusActionPoller, templatesPageBlockTable, Messages" oncomplete="setDivSize();" />
+                            <apex:commandLink styleClass="slds-button slds-button_neutral slds-m-left_xx-small" value="Go To Email Page" action="{!redirectToMailingPage}" id="mailBtn" status="globalloading"
+                                                rendered="false" disabled="{!printingInProgress}" oncomplete="setDivSize();" />
+                            <apex:commandLink styleClass="slds-button slds-button_neutral slds-m-left_xx-small" value="{!$Label.ntemplate__LBL_Print_And_Combine}" action="{!printAndCombine}" id="printAndCombineBtn" status="globalloading"
+                                                rendered="false" disabled="{!printingInProgress}"
+                                                reRender="printBtn, combineBtn, printStatusActionPoller, templatesPageBlockTable, pageMessages" oncomplete="setDivSize();" /> 
+                            <apex:commandLink styleClass="slds-button slds-button_neutral slds-m-left_xx-small" value="{!$Label.nTemplate__LBL_MassPrint_PageNextButton}" reRender="modalPanel" Id="headerPrintBtn" action="{!openPopup}" />-->
+                            <apex:commandButton styleClass="slds-button slds-button_neutral slds-m-left_xx-small" value="{!$Label.nTemplate__LBL_MassPrint_PageNextButton}" id="headerPrintBtn" reRender="modalPanel" action="{!ctrl.openPopup}" disabled="{!OR(ISNULL(ctrl.RecordList), ctrl.RecordList.size = 0)}" />
+                        </apex:outputPanel>
+                    </div>
+                </div>
+                <apex:outputPanel id="modalPanel" layout="block">
+                    <apex:outputPanel layout="block" rendered="{!ctrl.popup}">
+                        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+                            <div class="slds-modal__container">
+                                <!-- Header -->
+                                <div class="slds-modal__header">
+                                    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">
+                                        {!$Label.LBL_MassPrint_PopupTitle}
+                                    </h1>
+                                </div>
+                                <!-- Content Sections -->
+                                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                    <p>{!$Label.LBL_MassPrint_PopupWarningMsg}</p>
+                                </div>
+                                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                                    <p>{!$Label.LBL_MassPrint_PopupNextMsg}</p>
+                                </div>
+                                <!-- Footer with buttons -->
+                                <div class="slds-modal__footer">
+                                    <apex:commandLink value="{!$Label.LBL_MassAction_CancelButton}" styleClass="slds-button slds-button_neutral" 
+                                         action="{!ctrl.closePopup}" reRender="modalPanel" oncomplete="setDivSize();"/>
+                                    
+                                    <apex:commandLink styleClass="slds-button slds-button_brand slds-m-left_xx-small " value="{!$Label.nTemplate__LBL_MassPrint_PopupNextButton}"
+                                        action="{!ctrl.print}" id="printBtn2" status="globalloading"
+                                        reRender="printBtn2, combineBtn, printStatusActionPoller, templatesPageBlockTable, pageMessages, modalPanel"
+                                        oncomplete="setDivSize(); openConfirmationPopup();"/>
+                                    <!-- <apex:commandButton styleClass="slds-button slds-button_neutral slds-m-left_xx-small" value="{!$Label.LBL_MassPrint_PopupNextButton}" action="{!combine}" id="combineBtn" status="globalloading"
+                                                    rendered="false" disabled="{!printingInProgress}"
+                                                    reRender="printStatusActionPoller, templatesPageBlockTable, Messages, modalPanel" oncomplete="setDivSize();" />
+
+                                                    <apex:commandButton styleClass="slds-button slds-button--brand slds-m-left_xx-small" value="{!$Label.LBL_MassPrint_PopupNextButton}" action="{!printAndCombine}" id="printAndCombineBtn" status="globalloading"
+                                                    rendered="false" disabled="{!printingInProgress}"
+                                                    reRender="printBtn2, combineBtn, printStatusActionPoller, templatesPageBlockTable, pageMessages, modalPanel" oncomplete="setDivSize();" /> -->
+
+                                    <!-- <apex:commandButton value="{!$Label.LBL_MassPrint_PopupNextButton}"
+                                                        styleClass="slds-button slds-button_destructive" reRender="modalPanel"/> -->
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Backdrop -->
+                        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <div id="confirmModal" class="slds-hide">
+                    <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <!-- Header -->
+                            <div class="slds-modal__header">
+                                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">
+                                    {!$Label.nTemplate__LBL_MassPrint_ConfirmTitle}
+                                </h1>
+                            </div>
+                            <!-- Content Sections -->
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <p id="confirmBody">{!$Label.nTemplate__LBL_MassPrint_ConfirmMessage}</p>
+                            </div>
+                            <!-- Footer with buttons -->
+                            <div class="slds-modal__footer">
+                                <button type="button" class="slds-button slds-button_brand" onclick="javascript:window.open('/', '_self');">
+                                     {!$Label.nTemplate__LBL_MassAction_ConfirmButton}
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Backdrop -->
+                    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+                </div>
+                <!-- Page Body -->
+                <div class="slds-p-horizontal_small content">
+                    <!-- Available Templates Card -->
+                    <apex:outputPanel rendered="{!!ctrl.isFastPrint}">
+                        <article class="slds-card slds-m-bottom--medium" style="background: rgb(243, 242, 242);" id="availabletemplates">
+                            <!-- Available Templates Card Header -->
+                            <div class="slds-card__header slds-grid">
+                                <header class=" slds-media--center slds-has-flexi-truncate">
+                                    <div class="slds-media__body">
+                                        <h2 class="header-title-container">
+                                            <span class="slds-card__header-title slds-truncate">
+                                                {!$Label.nTemplate__LBL_MassPrint_PageTemplateGridTitle}
+                                            </span>
+                                        </h2>
+                                    </div>
+                                </header>
+                            </div>
+                            <!-- Available Templates Card Body -->
+                            <div class="slds-card__body slds-scrollable" style="max-height: 25vh;">
+                                <apex:outputPanel id="templatesPageBlockTable">
+                                    <table class="slds-table slds-table--bordered">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>{!$ObjectType.nTemplate__Template__c.fields.Name.label}</th>
+                                                <th>{!$ObjectType.nTemplate__Template__c.fields.nTemplate__Description__c.label}</th>
+                                                <th>{!$ObjectType.nTemplate__Template__c.fields.nTemplate__MassPrintOrderByField__c.label}</th>
+                                                <th>{!$ObjectType.nTemplate__Template__c.fields.nTemplate__SendEmailWhenPrinting__c.label}</th>
+                                                <th>{!$Label.nTemplate__LBL_AllowPortalPublishUponPrinting}</th>
+                                                <th>{!$Label.nTemplate__LBL_Template_Print_Status}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <apex:repeat value="{!ctrl.wAvailableTemplates}" var="item">
+                                                <tr>
+                                                    <td><apex:inputCheckbox style="cursor: pointer;" value="{!item.isSelected}" /></td>
+                                                    <td>
+                                                        <apex:outputField value="{!item.template.Name}"/>
+                                                    </td>
+                                                    <td>{!item.template.nTemplate__Description__c}</td>
+                                                    <td>{!item.template.nTemplate__MassPrintOrderByField__c}</td>
+                                                    <td>
+                                                        <apex:inputField value="{!item.template.nTemplate__SendEmailWhenPrinting__c}" rendered="{!item.template.nTemplate__DocumentRecipient__c!=null}" />
+                                                        <apex:outputField value="{!item.template.nTemplate__SendEmailWhenPrinting__c}" rendered="{!item.template.nTemplate__DocumentRecipient__c==null}" />
+                                                    </td>
+                                                    <td>
+                                                        <apex:inputField value="{!item.template.nTemplate__IsFileShared__c}" />
+                                                    </td>
+                                                    <td>{!item.status}</td>
+                                                </tr>
+                                            </apex:repeat>
+                                        </tbody>
+                                    </table>
+                                </apex:outputPanel>
+                            </div>
+                        </article>
+                        <article class="slds-card slds-m-bottom_x-small" style="background: rgb(243, 242, 242);">
+                            <!-- Records To Print Card Header -->
+                            <div class="slds-card__header slds-grid">
+                                <header class=" slds-media--center slds-has-flexi-truncate">
+                                    <div class="slds-media__body">
+                                        <h2 class="header-title-container">
+                                            <span class="slds-card__header-title slds-truncate">
+                                                {!$Label.LBL_MassPrint_PageGridTitle}
+                                            </span>
+                                        </h2>
+                                    </div>
+                                </header>
+                                <div class="slds-no-flex slds-p-right--x-small">
+                                    <apex:commandButton value="{!$Label.LBL_MassAction_MassRemove}" action="{!ctrl.ClearSelected}" reRender="recordsTable,headerPrintBtn" oncomplete="setDivSize();" />
+                                </div>
+                            </div>
+                            <!-- Records To Print Card Body -->
+                            <div class="slds-card__body slds-card__footer" style="padding : 0">
+                                <apex:outputPanel id="recordsSection">
+                                    <apex:outputPanel id="recordsTable">
+                                        <div class="slds-scrollable" style="max-height: 25vh;">
+                                            <table class="slds-table slds-table_bordered stickyHead content-table">
+                                                <thead>
+                                                    <tr>
+                                                        <apex:repeat value="{!ctrl.ojectTypeFieldLabels}" var="field">
+                                                            <th>{!field}</th>
+                                                        </apex:repeat>
+                                                        <th >
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <apex:repeat value="{!ctrl.RecordList}" var="item">
+                                                        <tr>
+                                                            <apex:repeat value="{!ctrl.objectTypeFields}" var="field">
+                                                            <td>
+                                                                <apex:outputLink value="/{!item.Id}" target="_blank" rendered="{!field == 'Name'}">
+                                                                    <apex:outputText value="{!item['Name']}" />
+                                                                </apex:outputLink>
+                                                                <apex:outputField value="{!item[field]}" rendered="{!field != 'Name'}"/>
+                                                            </td>
+                                                            </apex:repeat>
+                                                            <td class="slds-text-align--right">
+                                                                <apex:commandLink action="{!ctrl.removeRow}" reRender="recordsTable" status="globalloading" oncomplete="setDivSize();" styleClass="slds-button slds-button_neutral slds-p-around--x-small">
+                                                                    <svg class="slds-button__icon" aria-hidden="true" style="color: gray;">
+                                                                        <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                             xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#delete')}"/>
+                                                                    </svg>
+                                                                    <apex:param assignTo="{!toRemoveRecordId}" value="{!item.Id}" name="toRemoveRecordId" />
+                                                                </apex:commandLink>
+                                                            </td>
+                                                        </tr>
+                                                    </apex:repeat>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="slds-p-top--medium slds-p-left--x-small slds-text-align--left">
+                                            <apex:outputPanel rendered="{!AND(NOT(ISNULL(ctrl.recordsStdSetCtrl)), ctrl.noOfRecords > 0)}">
+                                                <apex:commandButton value="{!$Label.nTemplate__LBL_First_Page}" action="{!ctrl.recordsStdSetCtrl.first}" reRender="recordsTable"
+                                                                disabled="{!!ctrl.recordsStdSetCtrl.HasPrevious}" oncomplete="setDivSize();" />
+                                                <apex:commandButton value="{!$Label.nTemplate__LBL_Previous_Page}" action="{!ctrl.recordsStdSetCtrl.previous}" reRender="recordsTable"
+                                                                disabled="{!!ctrl.recordsStdSetCtrl.HasPrevious}" oncomplete="setDivSize();" />
+                                                <apex:commandButton value="{!$Label.nTemplate__LBL_Next_Page}" action="{!ctrl.recordsStdSetCtrl.next}" reRender="recordsTable"
+                                                                disabled="{!!ctrl.recordsStdSetCtrl.HasNext}" oncomplete="setDivSize();" />
+                                                <apex:commandButton value="{!$Label.nTemplate__LBL_Last_Page}" action="{!ctrl.recordsStdSetCtrl.last}" reRender="recordsTable"
+                                                                disabled="{!!ctrl.recordsStdSetCtrl.HasNext}" oncomplete="setDivSize();" />
+                                                <apex:outputText rendered="{!ctrl.noOfRecords > 0}" style="text-align: right" >
+                                                    {!(ctrl.recordsStdSetCtrl.pageNumber * ctrl.size)+1-ctrl.size}-{!IF((ctrl.recordsStdSetCtrl.pageNumber * ctrl.size)>ctrl.noOfRecords, ctrl.noOfRecords,
+                                                    (ctrl.recordsStdSetCtrl.pageNumber * ctrl.size))} of {!ctrl.noOfRecords}
+                                                </apex:outputText>
+                                            </apex:outputPanel>
+                                        </div>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                            </div>
+                        </article>
+                    </apex:outputPanel>
+                </div>
+                <apex:actionStatus id="globalloading">
+                    <apex:facet name="start">
+                        <div class="slds-spinner_container" style="position: fixed;">
+                            <div role="status" class="slds-spinner slds-spinner_large">
+                                <span class="slds-assistive-text">{!$Label.nTemplate__LBL_Loading}</span>
+                                <div class="slds-spinner__dot-a"></div>
+                                <div class="slds-spinner__dot-b"></div>
+                            </div>
+                        </div>
+                    </apex:facet>
+                </apex:actionStatus>
+                <!-- <apex:actionPoller id="printStatusActionPoller" oncomplete="setDivSize();" action="{!pollerAction}" interval="5" enabled="{!printingInProgress}" reRender="templatesPageBlockTable, printBtn, combineBtn, pageMessages" /> -->
+
+                <script>
+                function openConfirmationPopup() {
+                    try {
+                        let confirmBody = document.querySelector(`#confirmBody`);
+                        if (confirmBody) {
+                            confirmBody.textContent = `{!$Label.nTemplate__LBL_MassPrint_ConfirmMessage}`.replace('{0}', `{!$ObjectType.Invoice__c.labelplural}`.toLowerCase());
+                        }
+                        let modalPanel = document.querySelector(`[id='{!$Component.thePage.theForm.modalPanel}']`);
+                        if (modalPanel) {
+                            modalPanel.classList.toggle('slds-hide');
+                        }
+                        let confirmModal = document.querySelector('#confirmModal');
+                        if (confirmModal) {
+                            confirmModal.classList.toggle('slds-hide');
+                        }
+                    } catch(error) {
+                        console.log(error);
+                    }
+                }
+                function setDivSize() {
+                    try{
+                        var clientHeight = document.documentElement.clientHeight;
+                        var pageHeader = document.getElementById("pageHeader").offsetHeight;
+                        var availabletemplates = document.getElementById("availabletemplates").offsetHeight;
+                        var msg = document.getElementById("msg").offsetHeight;
+                        height = clientHeight - 2 * (pageHeader + availabletemplates + msg);
+                        let tablecontainer = document.getElementById("tablecontainer");
+                        if (tablecontainer) {
+                            document.getElementById("tablecontainer").style.height = height + "px";
+                        }
+                        let hrefs = document.querySelectorAll('.content-table a');
+                        for (let it of hrefs) {
+                            it.target = '_blank';
+                        }
+                        setSticky();
+                    } catch (error) {
+
+                    }
+                }
+                function setSticky() {
+                    let trs = document.querySelectorAll('.content-table thead tr');
+                    for (let tr of trs) {
+                        let left = 0;
+                        for (let index = 0; index < tr.children.length && index < 2; index++) {
+                            tr.children[index].style.position = 'sticky';
+                            tr.children[index].style.zIndex = 5;
+                            tr.children[index].style.left = left + 'px';
+                            left += +tr.children[index].offsetWidth;
+                        }
+                    }
+                    trs = document.querySelectorAll('.content-table tbody tr');
+                    for (let tr of trs) {
+                        let left = 0;
+                        for (let index = 0; index < tr.children.length && index < 2; index++) {
+                            tr.children[index].style.position = 'sticky';
+                            tr.children[index].style.zIndex = 3;
+                            tr.children[index].style.left = left + 'px';
+                            tr.children[index].style.backgroundColor = 'white';
+                            left += +tr.children[index].offsetWidth;
+                        }
+                    }
+                }
+                addEventListener("DOMContentLoaded", (event) => {
+                    setDivSize();
+                    window.onresize = setDivSize;
+                });
+
+                </script>
+            </apex:form>
+        </body>
+    </html>
+</apex:page>

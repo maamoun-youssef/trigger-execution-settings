@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>In_Exception</fullName>
+    <active>true</active>
+    <description>Sales Conditions are confirmed in exception for the contract</description>
+    <label>In Exception</label>
+    <picklistValues>
+        <picklist>Buying_Payment_Condition__c</picklist>
+        <values>
+            <fullName>End of Month</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>End of Month%2C the 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Net</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Buying_Payment_Condition_exc1__c</picklist>
+        <values>
+            <fullName>End of Month</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>End of Month%2C the 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Net</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>The 10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>The 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>The 20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Twice the Month</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Buying_Payment_Condition_exc2__c</picklist>
+        <values>
+            <fullName>End of Month</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>End of Month%2C the 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Net</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>The 10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>The 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>The 20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Twice the Month</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Buying_Payment_Days_Exc1__c</picklist>
+        <values>
+            <fullName>0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>120</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>14</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>30</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>45</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>60</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>90</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Buying_Payment_Days_Exc2__c</picklist>
+        <values>
+            <fullName>0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>120</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>14</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>30</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>45</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>60</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>90</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Buying_Payment_Days__c</picklist>
+        <values>
+            <fullName>120</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>14</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>45</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>60</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>90</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Delivery_Chain1_Incoterm__c</picklist>
+        <values>
+            <fullName>CFR %E2%80%93 Cost And Freight</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIF %E2%80%93 Cost Insurance and Freight</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIP %E2%80%93 Carriage and Insurance Paid To</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPT %E2%80%93 Carriage Paid To</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DAP %E2%80%93 Delivered At Place</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DAT %E2%80%93 Delivered At Terminal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DDP %E2%80%93 Delivered Duty Paid</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>EXW %E2%80%93 Ex Works</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FAS %E2%80%93 Free Alongside Ship</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FCA %E2%80%93 Free Carrier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FOB %E2%80%93 Free On Board</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Delivery_Chain1__c</picklist>
+        <values>
+            <fullName>Direct to Consumer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Direct to Store</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mixte</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>To Warehouse</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Delivery_Chain1_planning__c</picklist>
+        <values>
+            <fullName>Ad%27hoc</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Every 2 days</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Every 2 weeks</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Once a day</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Once a week</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Others</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Delivery_Chain2_Incoterm__c</picklist>
+        <values>
+            <fullName>CFR %E2%80%93 Cost And Freight</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIF %E2%80%93 Cost Insurance and Freight</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIP %E2%80%93 Carriage and Insurance Paid To</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPT %E2%80%93 Carriage Paid To</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DAP %E2%80%93 Delivered At Place</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DAT %E2%80%93 Delivered At Terminal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DDP %E2%80%93 Delivered Duty Paid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EXW %E2%80%93 Ex Works</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FAS %E2%80%93 Free Alongside Ship</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FCA %E2%80%93 Free Carrier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FOB %E2%80%93 Free On Board</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Delivery_Chain2__c</picklist>
+        <values>
+            <fullName>Direct to Consumer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Direct to Store</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mixte</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>To Warehouse</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Delivery_Chain2_planning__c</picklist>
+        <values>
+            <fullName>Ad%27hoc</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Every 2 days</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Every 2 weeks</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Once a day</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Once a week</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Others</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Invoice_Rounding_Level_Rebate__c</picklist>
+        <values>
+            <fullName>-1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>-2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>-3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>-4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Invoice_Rounding_Level_Service__c</picklist>
+        <values>
+            <fullName>-1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>-2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>-3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>-4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Invoice_Rounding_Method__c</picklist>
+        <values>
+            <fullName>Down</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Half_Down</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Half_Up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Up</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Merchandiser_Authorization__c</picklist>
+        <values>
+            <fullName>NO</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>YES</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Return_Authorization1__c</picklist>
+        <values>
+            <fullName>Any products</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Any products%2C except promo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No return</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Only seasonal product</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Services_Payment_Condition__c</picklist>
+        <values>
+            <fullName>End of Month</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>End of Month%2C the 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Net</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Services_Payment_Days__c</picklist>
+        <values>
+            <fullName>0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>120</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>14</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>45</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>60</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>90</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Services_Payment_Type__c</picklist>
+        <values>
+            <fullName>Banking_Transfert</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Cheque</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Debt_Rephasing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Debt_Repurchasing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deduction</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Divers</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Effect</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

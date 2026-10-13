@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>-4</fullName>
+        <default>false</default>
+        <label>10000 Unit</label>
+    </customValue>
+    <customValue>
+        <fullName>-3</fullName>
+        <default>false</default>
+        <label>1000 Unit</label>
+    </customValue>
+    <customValue>
+        <fullName>-2</fullName>
+        <default>false</default>
+        <label>100 Unit</label>
+    </customValue>
+    <customValue>
+        <fullName>-1</fullName>
+        <default>false</default>
+        <label>10 Unit</label>
+    </customValue>
+    <customValue>
+        <fullName>0</fullName>
+        <default>false</default>
+        <label>Unit</label>
+    </customValue>
+    <customValue>
+        <fullName>1</fullName>
+        <default>false</default>
+        <label>1 Decimal</label>
+    </customValue>
+    <customValue>
+        <fullName>2</fullName>
+        <default>false</default>
+        <label>2 Decimals</label>
+    </customValue>
+    <customValue>
+        <fullName>3</fullName>
+        <default>false</default>
+        <label>3 Decimals</label>
+    </customValue>
+    <customValue>
+        <fullName>4</fullName>
+        <default>false</default>
+        <label>4 Decimals</label>
+    </customValue>
+    <description>List of possible rounding  (Million, Thousand, Hundred, Ten, Unit, Decimal(s))</description>
+    <masterLabel>Rounding Scale</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

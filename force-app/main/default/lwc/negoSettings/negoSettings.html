@@ -1,0 +1,1358 @@
+<template>
+    <template if:true={loading}>
+        <div class="slds-spinner_container">
+            <div class="loader slds-spinner_container slds-align_absolute-center">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </template>
+    <div class="slds-card">
+        <div class="settings-header">
+            <lightning-icon icon-name='utility:settings' class="custom-icon-settings">
+            </lightning-icon>
+            <div>
+                <p class="settings-subtitle">
+                    {labels.LBL_myNego}
+                </p>
+                <h1 class="slds-page-header__title settings-header-title">
+                    {labels.LBL_Nego_Settings}
+                </h1>
+            </div>
+        </div>
+        <div class="main-panel slds-col">
+            <lightning-tabset variant="vertical" class="tab-set-style slds-m-bottom_x-small mainHeight">
+                <lightning-tab label={labels.LBL_Nego_Stg_ContractDuplicationConfig_Title} class="slds-scrollable_y">
+                    <div style={mainPanelHeight}>
+                        <div>
+                            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                <div class="sectionTitle slds-media__body">
+                                    {labels.LBL_Nego_Stg_ContractDuplicationConfig_Title}
+                                </div>
+                                <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                    label={labels.LBL_Save} onclick={handleSave}>
+                                </lightning-button>
+                            </div>
+                            <div class="label">
+                                {labels.NegoSettings__mdt.contractDuplicationConfigurationHelpText}
+                            </div>
+                            <div class="slds-grid slds-p-bottom_xx-small">
+                                <div class="slds-col slds-has-flexi-truncate">
+                                </div>
+                                <lightning-button label={labels.LBL_Add} onclick={handleAddSourceContractDuplication}
+                                    variant="brand" class="slds-float_right add-m">
+                                </lightning-button>
+                            </div>
+                            <table
+                                class="slds-table slds-table_bordered slds-border--left slds-border--right slds-no-row-hover slds-scrollable_y">
+                                <thead>
+                                    <tr class="table-header">
+                                        <th class="table-th th-w ">{labels.LBL_Nego_Stg_Source_Contract_Col_Header}
+                                        </th>
+                                        <th class="table-th th-w ">{labels.LBL_Nego_Stg_Target_Contract_Col_Header}
+                                        </th>
+                                        <th class="table-th th-wid"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template lwc:if={hasContractDuplicationConfigurationLines}
+                                        for:each={contractDuplicationConfigurationLines} for:item="sourceLine"
+                                        for:index="index">
+                                        <tr key={sourceLine.Id}>
+                                            <td>
+                                                <div class={sourceLine.getClass}>
+                                                    <div class="slds-grid">
+                                                        <div class="slds-col slds-size--1-of-2">
+                                                            <lightning-combobox options={contractRecordTypesOptions}
+                                                                dropdown-alignment="auto" value={sourceLine.recordType}
+                                                                label={labels.RecordType.objectLabel}
+                                                                data-field="recordType"
+                                                                onchange={sourceLine.handleChange}>
+                                                            </lightning-combobox>
+                                                        </div>
+                                                        <div class="slds-col slds-size--1-of-2 slds-p-left--small">
+                                                            <lightning-combobox options={contractSourceStatusOptions}
+                                                                dropdown-alignment="auto" value={sourceLine.status}
+                                                                label={labels.Contract__c.Status__c} data-field="status"
+                                                                onchange={sourceLine.handleChange}>
+                                                            </lightning-combobox>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <template for:each={sourceLine.targetContractDuplications}
+                                                    for:item="targetLine" for:index="targetIndex">
+                                                    <div class={targetLine.getClass} key={targetLine.getId}>
+                                                        <div class="targetContractTypesContainer">
+                                                            <div>
+                                                                <lightning-combobox
+                                                                    options={targetLine.targetAvailableRTs}
+                                                                    dropdown-alignment="auto"
+                                                                    label={labels.RecordType.objectLabel}
+                                                                    data-field="recordType"
+                                                                    value={targetLine.recordType}
+                                                                    onchange={targetLine.handleChange}>
+                                                                </lightning-combobox>
+                                                            </div>
+                                                            <div class="slds-p-left--small">
+                                                                <lightning-combobox
+                                                                    options={contractTargetStatusOptions}
+                                                                    label={labels.Contract__c.Status__c}
+                                                                    dropdown-alignment="auto" value={targetLine.status}
+                                                                    data-field="status"
+                                                                    onchange={targetLine.handleChange}></lightning-combobox>
+                                                            </div>
+                                                            <div
+                                                                class="slds-icon_container custom-icon-delete edit-icon trans-del">
+                                                                <lightning-icon size="x-small" class="delete-trans"
+                                                                    icon-name="utility:delete" dropdown-alignment="auto"
+                                                                    data-index={index} data-target-index={targetIndex}
+                                                                    onclick={handleDeleteTargetContractDuplication}>
+                                                                </lightning-icon>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </td>
+                                            <td>
+                                                <div class="slds-col slds-align--absolute-center">
+                                                    <div class="slds-icon_container custom-icon-add edit-icon">
+                                                        <lightning-icon icon-name="utility:add" size="xx-small"
+                                                            variant="brand" dropdown-alignment="auto" data-index={index}
+                                                            class="add-trans" onclick={addTargetContractDuplicationRow}>
+                                                        </lightning-icon>
+                                                    </div>
+                                                    <div class="slds-icon_container custom-icon-delete edit-icon">
+                                                        <lightning-icon size="x-small" class="delete-trans"
+                                                            icon-name="utility:delete" dropdown-alignment="auto"
+                                                            data-index={index}
+                                                            onclick={handleDeleteContractDuplication}>
+                                                        </lightning-icon>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                    <template lwc:else>
+                                        <tr>
+                                            <td colspan="3">
+                                                <div class="slds-text-align_center">
+                                                    <p>{labels.LBL_No_Item_To_Display}</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                            <div class="label">
+                                {labels.LBL_Nego_Stg_ContractDuplicationConfig_Unavailable_Source_RT} :
+                                {UnavailableSourceRTs}
+                            </div>
+                            <div class="label">
+                                {labels.LBL_Nego_Stg_ContractDuplicationConfig_Unavailable_Target_RT} :
+                                {UnavailableTargetRTs}
+                            </div>
+                            <div class="add-padding"></div>
+
+                        </div>
+                    </div>
+                </lightning-tab>
+                <lightning-tab label={labels.LBL_Nego_Stg_ContractNameConfig_Title} class="slds-scrollable_y">
+                    <div style={mainPanelHeight}>
+                        <div>
+                            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                <div class="sectionTitle slds-media__body">
+                                    {labels.LBL_Nego_Stg_ContractNameConfig_Title}
+                                </div>
+                                <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                    label={labels.LBL_Save} onclick={handleSave}>
+                                </lightning-button>
+                            </div>
+                            <div class="label">
+                                {labels.NegoSettings__mdt.contractNameConfigurationHelpText}
+                            </div>
+                            <div class="slds-card__header slds-grid">
+                                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                    <div class="slds-media__body">
+                                        <div class="slds-m-top--small"> {labels.LBL_Default_Name_Model}
+                                            <div class="contractDefaultContainer"
+                                                lwc:if={isDefaultContractModelEditMode}>
+                                                <lightning-input lwc:if={contractNameConfigurations.DEFAULT} label=" "
+                                                    variant="label-hidden"
+                                                    value={contractNameConfigurations.DEFAULT.template}
+                                                    onchange={handleChangeContractDefaultModel}>
+                                                </lightning-input>
+                                                <lightning-icon size="xx-small"
+                                                    class="pointer slds-icon slds-input__icon_right slds-icon-text-default slds-align_absolute-center slds-button--icon-border slds-m-left--medium"
+                                                    icon-name="utility:close" onclick={toggleDefaultContractEditMode}>
+                                                </lightning-icon>
+                                            </div>
+                                            <div class="contractDefaultContainer" lwc:else>
+                                                <lightning-input lwc:if={contractNameConfigurations.DEFAULT} label=" "
+                                                    variant="label-hidden"
+                                                    value={contractNameConfigurations.DEFAULT.template}
+                                                    onchange={handleChangeContractDefaultModel} disabled>
+                                                </lightning-input>
+                                                <lightning-icon size="xx-small"
+                                                    class="pointer slds-icon slds-input__icon_right slds-icon-text-default slds-align_absolute-center slds-button--icon-border slds-m-left--medium"
+                                                    icon-name="utility:edit" onclick={toggleDefaultContractEditMode}>
+                                                </lightning-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </header>
+                                <div class="showRecordTypeConfigContainer">
+                                    <div class="slds-m-horizontal--medium" style="width: fit-content;">
+                                        <lightning-button if:false={showRecordTypeConfig}
+                                            label={labels.LBL_Nego_Stg_ConfigNameModels}
+                                            onclick={handleShowRecordTypeConfig} variant="brand"
+                                            class="slds-col_bump-left slds-p-top_small">
+                                        </lightning-button>
+                                        <lightning-button-icon if:true={showRecordTypeConfig} icon-name="utility:add"
+                                            onclick={addContractNameConfig} variant="brand"
+                                            class="slds-col_bump-left slds-p-top_small">
+                                        </lightning-button-icon>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-card  slds-p-bottom--medium">
+                                <div lwc:if={showRecordTypeConfig} class="slds-card__body slds-card__body_inner">
+                                    <div class="main-container">
+                                        <table
+                                            class="slds-table slds-table_bordered slds-border--left slds-border_right slds-no-row-hover table-w">
+                                            <thead>
+                                                <tr class="table-header">
+                                                    <th class="table-th">
+                                                        {labels.RecordType.objectLabel}
+                                                        ({labels.Contract__c.objectLabel})
+                                                    </th>
+                                                    <th class="table-th th-w-container">
+                                                        {labels.LBL_Nego_Stg_Name_Model_Col_Header}
+                                                    </th>
+                                                    <th class="table-th">
+                                                        {labels.LBL_Nego_Stg_Allow_Name_Update_Col_Header}
+                                                    </th>
+                                                    <th class="table-th">
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template lwc:if={nameConfigurationsList.length}
+                                                    for:each={nameConfigurationsList} for:item="item">
+                                                    <tr key={item.recordType}>
+                                                        <td>
+                                                            {item.label}
+                                                        </td>
+                                                        <td>
+                                                            <lightning-textarea onchange={handleOnChangeModel}
+                                                                variant="label-hidden" value={item.template}
+                                                                data-record-type={item.recordType}>
+                                                            </lightning-textarea>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-disp">
+                                                                <lightning-input type="toggle"
+                                                                    checked={item.allowUpdate} variant="label-hidden"
+                                                                    data-record-type={item.recordType}
+                                                                    onchange={handleOnChangeAllowNameUpdate}>
+                                                                </lightning-input>
+                                                            </div>
+                                                        </td>
+                                                        <td class="alignCenter">
+                                                            <div
+                                                                class="slds-icon_container custom-icon-delete edit-icon">
+                                                                <lightning-icon size="x-small" class="delete-trans"
+                                                                    icon-name="utility:delete"
+                                                                    data-record-type={item.recordType}
+                                                                    onclick={handleDeleteContractNameConfig}>
+                                                                </lightning-icon>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                                <template lwc:if={newNameConfigurationsList.length}
+                                                    for:each={newNameConfigurationsList} for:item="item"
+                                                    for:index="index">
+                                                    <tr class="newRow" key={item.recordType}>
+                                                        <td>
+                                                            <lightning-combobox options={item.contractRecordTypeOptions}
+                                                                class="input" value={item.recordType} label=" "
+                                                                variant="label-hidden" data-index={index}
+                                                                dropdown-alignment="auto"
+                                                                onchange={handleNewContractNameOnChangeRT} required>
+                                                            </lightning-combobox>
+                                                        </td>
+                                                        <td>
+                                                            <lightning-textarea onchange={handleNewOnChangeModel}
+                                                                data-index={index} class="input" variant="label-hidden"
+                                                                value={item.template}
+                                                                data-record-type={item.recordType}>
+                                                            </lightning-textarea>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-disp">
+                                                                <lightning-input type="toggle"
+                                                                    checked={item.allowUpdate} data-index={index}
+                                                                    class="input" variant="label-hidden"
+                                                                    data-record-type={item.recordType}
+                                                                    onchange={handleNewOnChangeAllowNameUpdate}>
+                                                                </lightning-input>
+                                                            </div>
+                                                        </td>
+                                                        <td class="alignCenter">
+                                                            <div
+                                                                class="slds-icon_container custom-icon-delete edit-icon">
+                                                                <lightning-icon size="xx-small" class="delete-trans"
+                                                                    icon-name="utility:delete" data-index={index}
+                                                                    onclick={handleDeleteNewContractNameConfig}>
+                                                                </lightning-icon>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                                <template lwc:if={contractNameConfigurationHasNoData}>
+                                                    <tr>
+                                                        <td colspan="3">
+                                                            <div class="slds-text-align_center">
+                                                                <p>{labels.LBL_No_Item_To_Display}</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-tab>
+                <!-- ConditionManagerPage Configuration Section -->
+                <lightning-tab label={labels.LBL_Nego_Stg_CM_Config_Title} class="slds-scrollable_y">
+                    <div class="" style={mainPanelHeight}>
+                        <div>
+                            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                <div class="sectionTitle slds-media__body">
+                                    {labels.LBL_Nego_Stg_CM_Config_Title}
+                                </div>
+                                <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                    label={labels.LBL_Save} onclick={handleSave}>
+                                </lightning-button>
+                            </div>
+                            <div class="label">
+                                {labels.LBL_Nego_Stg_CM_HelpText}
+                            </div>
+                            <div class="section-m">
+                                <div class="slds-m-top_large label-link label">
+                                    {labels.LBL_Nego_Stg_Grid_Settings_Phrase} <a href={gridSettingsLink}
+                                        target="_blank">{labels.LBL_Grid_Settings}</a>
+                                </div>
+                            </div>
+                            <div class="section-m">
+                                <div class="label-link label">
+                                    {labels.LBL_Nego_Stg_CM_DefaultConfiguration}
+                                </div>
+                            </div>
+                            <div class="section-container slds-m-top_medium">
+                                <div class="section-label">
+                                    {labels.LBL_Nego_Stg_CM_MainGridSettings}
+                                </div>
+                                <lightning-combobox lwc:if={conditionManagerPageConfigurations.DEFAULT}
+                                    name="conditionManagerPageConfigurationDefaultGrid" variant="label-hidden"
+                                    dropdown-alignment="auto" data-type="DEFAULT" data-field="mainGridSettings"
+                                    value={conditionManagerPageConfigurations.DEFAULT.mainGridSettings}
+                                    options={discountGridOptions} onchange={handleChangeConditionManagerPageGrid}
+                                    class="input-w">
+                                </lightning-combobox>
+                            </div>
+                            <div class="section-container slds-m-top_medium">
+                                <div class="section-label">
+                                    {labels.LBL_Nego_Stg_CM_SubDiscGridSettings}
+                                </div>
+                                <lightning-combobox lwc:if={conditionManagerPageConfigurations.DEFAULT}
+                                    name="conditionManagerPageConfigurationDefaultGrid" variant="label-hidden"
+                                    dropdown-alignment="auto" data-type="DEFAULT" data-field="subDiscountGridSettings"
+                                    value={conditionManagerPageConfigurations.DEFAULT.subDiscountGridSettings}
+                                    options={discountGridOptions} onchange={handleChangeConditionManagerPageGrid}
+                                    class="input-w">
+                                </lightning-combobox>
+                            </div>
+                            <div class="section-container slds-m-top_medium">
+                                <div class="section-label">
+                                    {labels.LBL_Nego_Stg_CM_SetDisplaySubDiscColumn}
+                                </div>
+                                <lightning-input lwc:if={conditionManagerPageConfigurations.DEFAULT} type="toggle"
+                                    data-type="DEFAULT" data-field="showSubDiscountColumn" variant="label-hidden"
+                                    checked={conditionManagerPageConfigurations.DEFAULT.showSubDiscountColumn}
+                                    onchange={handleChangeConditionManagerPageGrid}>
+                                </lightning-input>
+                            </div>
+                            <div class="add-space"></div>
+                            <div class="showRecordTypeConfigContainer">
+                                <div class="slds-m-horizontal--medium" style="width: fit-content;">
+                                    <lightning-button-icon icon-name="utility:add"
+                                        onclick={addConditionManagerPageConfig} variant="brand"
+                                        class="slds-col_bump-left slds-p-top_small"
+                                        title={labels.LBL_Nego_Stg_CM_ConfigGSTemplates}>
+                                    </lightning-button-icon>
+                                </div>
+                            </div>
+                            <div class="slds-card  slds-p-bottom--medium">
+                                <div class="slds-card__body slds-card__body_inner">
+                                    <div class="main-container">
+                                        <table
+                                            class="slds-table slds-table_bordered slds-border--left slds-border_right slds-no-row-hover table-w">
+                                            <thead>
+                                                <tr class="table-header">
+                                                    <th class="table-th-third">
+                                                        {labels.RecordType.objectLabel}
+                                                        ({labels.Contract__c.objectLabel})
+                                                    </th>
+                                                    <th class="table-th-third" style="width: 60%;">
+                                                        {labels.LBL_Nego_Stg_CM_GSTemplate_Name_Col_Header}
+                                                    </th>
+                                                    <th class="table-th-third">
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template lwc:if={conditionManagerPageConfigurations.list.length}
+                                                    for:each={conditionManagerPageConfigurations.list} for:item="item"
+                                                    for:index="index">
+                                                    <tr key={item.recordType}>
+                                                        <td>
+                                                            <div lwc:if={item.label}>
+                                                                {item.label}
+                                                            </div>
+                                                            <div lwc:else>
+                                                                <lightning-combobox
+                                                                    options={item.contractRecordTypeOptions}
+                                                                    data-type="list" data-field="recordType"
+                                                                    class="input" value={item.recordType} label=" "
+                                                                    variant="label-hidden" data-index={index}
+                                                                    dropdown-alignment="auto"
+                                                                    onchange={handleChangeConditionManagerPageGrid}
+                                                                    required>
+                                                                </lightning-combobox>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="section-container slds-m-top_medium">
+                                                                <div class="table-section-label">
+                                                                    {labels.LBL_Nego_Stg_CM_MainGridSettings}
+                                                                </div>
+                                                                <lightning-combobox variant="label-hidden"
+                                                                    dropdown-alignment="auto"
+                                                                    value={item.mainGridSettings} data-type="list"
+                                                                    data-field="mainGridSettings" data-index={index}
+                                                                    options={discountGridOptions}
+                                                                    onchange={handleChangeConditionManagerPageGrid}
+                                                                    data-record-type={item.recordType}>
+                                                                </lightning-combobox>
+                                                            </div>
+                                                            <div class="section-container slds-m-top_medium">
+                                                                <div class="table-section-label">
+                                                                    {labels.LBL_Nego_Stg_CM_SubDiscGridSettings}
+                                                                </div>
+                                                                <lightning-combobox variant="label-hidden"
+                                                                    dropdown-alignment="auto" data-type="list"
+                                                                    value={item.subDiscountGridSettings}
+                                                                    data-field="subDiscountGridSettings"
+                                                                    data-index={index} options={discountGridOptions}
+                                                                    onchange={handleChangeConditionManagerPageGrid}
+                                                                    data-record-type={item.recordType}>
+                                                                </lightning-combobox>
+                                                            </div>
+                                                            <div class="section-container slds-m-top_medium">
+                                                                <div class="table-section-label">
+                                                                    {labels.LBL_Nego_Stg_CM_SetDisplaySubDiscColumn}
+                                                                </div>
+                                                                <lightning-input type="toggle" variant="label-hidden"
+                                                                    data-type="list" data-field="showSubDiscountColumn"
+                                                                    data-index={index}
+                                                                    checked={item.showSubDiscountColumn}
+                                                                    onchange={handleChangeConditionManagerPageGrid}>
+                                                                </lightning-input>
+                                                            </div>
+                                                        </td>
+                                                        <td class="alignCenter">
+                                                            <div
+                                                                class="slds-icon_container custom-icon-delete edit-icon delete-pos">
+                                                                <lightning-icon size="xx-small" class="delete-trans"
+                                                                    icon-name="utility:delete"
+                                                                    data-record-type={item.recordType}
+                                                                    data-index={index}
+                                                                    onclick={handleDeleteConditionManagerPageConfig}>
+                                                                </lightning-icon>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                                <template lwc:else>
+                                                    <tr>
+                                                        <td colspan="3">
+                                                            <div class="slds-text-align_center">
+                                                                <p>{labels.LBL_No_Item_To_Display}</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-tab>
+                <!-- ProductDiscountStatement Configuration Section -->
+                <lightning-tab label={labels.LBL_Nego_Stg_PDS_Config_Title} class="slds-scrollable_y">
+                    <div style={mainPanelHeight}>
+                        <div>
+                            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                <div class="sectionTitle slds-media__body">
+                                    {labels.LBL_Nego_Stg_PDS_Config_Title}
+                                </div>
+                                <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                    label={labels.LBL_Save} onclick={handleSave}>
+                                </lightning-button>
+                            </div>
+
+                            <!-- Product Discount Statement Name template -->
+                            <div class="slds-card__header slds-grid slds-m-top_medium">
+                                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                    <div class="slds-media__body">
+                                        <div class="slds-m-top--small"> {labels.LBL_Default_Name_Model}
+                                            <div class="contractDefaultContainer" lwc:if={isDefaultPDSModelEditMode}>
+                                                <lightning-input lwc:if={pdsNameConfigurations.DEFAULT} label=" "
+                                                    variant="label-hidden"
+                                                    value={pdsNameConfigurations.DEFAULT.template}
+                                                    onchange={handleChangePDSDefaultModel}>
+                                                </lightning-input>
+                                                <lightning-icon size="xx-small"
+                                                    class="pointer slds-icon slds-input__icon_right slds-icon-text-default slds-align_absolute-center slds-button--icon-border slds-m-left--medium"
+                                                    icon-name="utility:close" onclick={toggleDefaultPDSEditMode}>
+                                                </lightning-icon>
+                                            </div>
+                                            <div class="contractDefaultContainer" lwc:else>
+                                                <lightning-input lwc:if={pdsNameConfigurations.DEFAULT} label=" "
+                                                    variant="label-hidden"
+                                                    value={pdsNameConfigurations.DEFAULT.template}
+                                                    onchange={handleChangePDSDefaultModel} disabled>
+                                                </lightning-input>
+                                                <lightning-icon size="xx-small"
+                                                    class="pointer slds-icon slds-input__icon_right slds-icon-text-default slds-align_absolute-center slds-button--icon-border slds-m-left--medium"
+                                                    icon-name="utility:edit" onclick={toggleDefaultPDSEditMode}>
+                                                </lightning-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </header>
+                                <div class="showRecordTypeConfigContainer">
+                                    <div class="slds-m-horizontal--medium" style="width: fit-content;">
+                                        <lightning-button if:false={showPDSRecordTypeConfig}
+                                            label={labels.LBL_Nego_Stg_ConfigNameModels}
+                                            onclick={handleShowPDSRecordTypeConfig} variant="brand"
+                                            class="slds-col_bump-left slds-p-top_small">
+                                        </lightning-button>
+                                        <lightning-button-icon if:true={showPDSRecordTypeConfig} icon-name="utility:add"
+                                            onclick={addPDSNameConfig} class="slds-col_bump-left slds-p-top_small">
+                                        </lightning-button-icon>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-card slds-p-bottom--medium" lwc:if={showPDSRecordTypeConfig}>
+                                <div class="slds-card__body slds-card__body_inner">
+                                    <div class="main-container">
+                                        <table
+                                            class="slds-table slds-table_bordered slds-border--left slds-border_right slds-no-row-hover table-w">
+                                            <thead>
+                                                <tr class="table-header">
+                                                    <th class="table-th">
+                                                        {labels.RecordType.objectLabel}
+                                                        <template
+                                                            if:true={labels.ProductDiscountStatement__c.objectLabel}>
+                                                            &nbsp;({labels.ProductDiscountStatement__c.objectLabel})
+                                                        </template>
+                                                    </th>
+                                                    <th class="table-th th-w-container">
+                                                        {labels.LBL_Nego_Stg_Name_Model_Col_Header}</th>
+                                                    <th class="table-th">
+                                                        {labels.LBL_Nego_Stg_Allow_Name_Update_Col_Header}</th>
+                                                    <th class="table-th"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template lwc:if={pdsNameConfigurationsList.length}
+                                                    for:each={pdsNameConfigurationsList} for:item="item">
+                                                    <tr key={item.recordType}>
+                                                        <td>{item.label}</td>
+                                                        <td>
+                                                            <lightning-textarea onchange={handlePDSOnChangeModel}
+                                                                variant="label-hidden" value={item.template}
+                                                                data-record-type={item.recordType}>
+                                                            </lightning-textarea>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-disp">
+                                                                <lightning-input type="toggle"
+                                                                    checked={item.allowUpdate} variant="label-hidden"
+                                                                    data-record-type={item.recordType}
+                                                                    onchange={handlePDSOnChangeAllowNameUpdate}>
+                                                                </lightning-input>
+                                                            </div>
+                                                        </td>
+                                                        <td class="alignCenter">
+                                                            <div
+                                                                class="slds-icon_container custom-icon-delete edit-icon">
+                                                                <lightning-icon size="x-small" class="delete-trans"
+                                                                    icon-name="utility:delete"
+                                                                    data-record-type={item.recordType}
+                                                                    onclick={handleDeletePDSNameConfig}>
+                                                                </lightning-icon>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                                <template lwc:if={newPDSNameConfigurationsList.length}
+                                                    for:each={newPDSNameConfigurationsList} for:item="item"
+                                                    for:index="index">
+                                                    <tr class="newRow" key={item.uid}>
+                                                        <td>
+                                                            <lightning-combobox options={item.pdsRecordTypeOptions}
+                                                                class="input" value={item.recordType} label=" "
+                                                                variant="label-hidden" data-index={index}
+                                                                dropdown-alignment="auto"
+                                                                onchange={handleNewPDSOnChangeRT} required>
+                                                            </lightning-combobox>
+                                                        </td>
+                                                        <td>
+                                                            <lightning-textarea onchange={handleNewPDSOnChangeModel}
+                                                                data-index={index} class="input" variant="label-hidden"
+                                                                value={item.template}>
+                                                            </lightning-textarea>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-disp">
+                                                                <lightning-input type="toggle"
+                                                                    checked={item.allowUpdate} data-index={index}
+                                                                    class="input" variant="label-hidden"
+                                                                    onchange={handleNewPDSOnChangeAllowNameUpdate}>
+                                                                </lightning-input>
+                                                            </div>
+                                                        </td>
+                                                        <td class="alignCenter">
+                                                            <div
+                                                                class="slds-icon_container custom-icon-delete edit-icon">
+                                                                <lightning-icon size="xx-small" class="delete-trans"
+                                                                    icon-name="utility:delete" data-index={index}
+                                                                    onclick={handleDeleteNewPDSNameConfig}>
+                                                                </lightning-icon>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                                <template lwc:if={pdsNameConfigurationHasNoData}>
+                                                    <tr>
+                                                        <td colspan="4">
+                                                            <div class="slds-text-align_center">
+                                                                <p>{labels.LBL_No_Item_To_Display}</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-Container slds-m-top_medium">
+                                <div class="label-toggle">
+                                    {labels.NegoSettings__mdt.productDiscountsConfigurationHelpText}
+                                </div>
+                            </div>
+                            <!-- Add New Line Button -->
+                            <div class="slds-grid slds-p-around_small slds-grid_align-end">
+                                <lightning-button label={labels.LBL_Add_New_Line} variant="brand"
+                                    onclick={handleTogglePDSConfigModal} disabled={isAddPDSConfigDisabled}
+                                    class="add-new-line-btn">
+                                </lightning-button>
+                            </div>
+                            <!-- Dynamic Table for PDS Grid/Import Settings -->
+                            <div class="negoptim-tablesection">
+                                <table>
+                                    <thead>
+                                        <tr class="table-header">
+                                            <th class="table-th">
+                                                {labels.RecordType.objectLabel}
+                                            </th>
+                                            <th class="table-th" style="width: 40%;">
+                                                {labels.LBL_Grid_Settings_Template}
+                                            </th>
+                                            <th class="table-th" style="width: 40%;">
+                                                Community {labels.LBL_Grid_Settings_Template}
+                                            </th>
+                                            <th class="table-th" style="width: 40%;">
+                                                {labels.LBL_Data_Import_Settings}
+                                            </th>
+                                            <th class="table-th" style="width: 40%;">
+                                                Community Data Import Settings
+                                            </th>
+                                            <th class="table-th" style="width: 40%;">
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template lwc:if={productDiscountsConfigurationsList.length}
+                                            for:each={productDiscountsConfigurationsList} for:item="item"
+                                            for:index="index">
+                                            <tr key={item.recordType}>
+                                                <td style="padding: 10px;">
+                                                    {item.label}
+                                                </td>
+                                                <td style="padding: 10px;">
+                                                    <lightning-combobox variant="label-hidden" dropdown-alignment="auto"
+                                                        value={item.gridSettings} options={GridOptionsPDSD}
+                                                        onchange={handleChangeProductDiscountStatementConfigurations}
+                                                        data-field="gridSettings" data-index={index}>
+                                                    </lightning-combobox>
+                                                </td>
+                                                <td style="padding: 10px;">
+                                                    <lightning-combobox variant="label-hidden" dropdown-alignment="auto"
+                                                        value={item.communityGridSettings} options={GridOptionsPDSD}
+                                                        onchange={handleChangeProductDiscountStatementConfigurations}
+                                                        data-field="communityGridSettings" data-index={index}>
+                                                    </lightning-combobox>
+                                                </td>
+                                                <td style="padding: 10px;" class="alignCenter">
+                                                    <lightning-combobox variant="label-hidden" dropdown-alignment="auto"
+                                                        value={item.importSettings} options={importSettingsOptionsPDSD}
+                                                        onchange={handleChangeProductDiscountStatementConfigurations}
+                                                        data-field="importSettings" data-index={index}>
+                                                    </lightning-combobox>
+                                                </td>
+                                                <td style="padding: 10px;" class="alignCenter">
+                                                    <lightning-combobox variant="label-hidden" dropdown-alignment="auto"
+                                                        value={item.communityImportSettings}
+                                                        options={importSettingsOptionsPDSD}
+                                                        onchange={handleChangeProductDiscountStatementConfigurations}
+                                                        data-field="communityImportSettings" data-index={index}>
+                                                    </lightning-combobox>
+                                                </td>
+                                                <td style="padding: 10px;" class="alignCenter">
+                                                    <div class="slds-icon_container custom-icon-delete edit-icon">
+                                                        <lightning-icon size="x-small" class="delete-trans"
+                                                            icon-name="utility:delete" data-index={index}
+                                                            onclick={handleDeleteProductDiscountConfiguration}>
+                                                        </lightning-icon>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                        <template lwc:else>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <div class="slds-text-align_center slds-p-around_medium">
+                                                        <p>{labels.LBL_No_Item_To_Display}</p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- Modal for Adding PDS Configuration -->
+                            <template if:true={showPDSConfigModal}>
+                                <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open"
+                                    aria-labelledby="pds-config-modal" aria-describedby="pds-config-content">
+                                    <div class="slds-modal__container">
+                                        <div class="slds-button slds-button_icon slds-modal__close">
+                                            <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                                                onclick={handleTogglePDSConfigModal}></lightning-button-icon>
+                                        </div>
+                                        <header class="slds-modal__header">
+                                            <h2 class="slds-text-heading_medium slds-hyphenate">
+                                                {labels.LBL_Add_New_Line}</h2>
+                                        </header>
+                                        <div class="slds-modal__content slds-p-around_medium" id="pds-config-content">
+                                            <!-- Record Type Selection -->
+                                            <div class="slds-form-element slds-m-bottom_medium">
+                                                <lightning-combobox data-field="recordType"
+                                                    label={labels.LBL_Select_Record_Type}
+                                                    value={newPDSConfig.recordType}
+                                                    options={availablePDSRecordTypesForModal}
+                                                    onchange={handleChangePDSConfig} required>
+                                                </lightning-combobox>
+                                            </div>
+                                            <template if:true={isPdsConfigModalPromoRecordType}>
+                                                <!-- Promo Statement Type Selection -->
+                                                <div class="slds-form-element slds-m-bottom_medium">
+                                                    <lightning-combobox data-field="promoStatementType"
+                                                        label={labels.LBL_Promo_Statement_Type}
+                                                        value={newPDSConfig.promoStatementType}
+                                                        options={availablePromoStatementTypeOptions}
+                                                        onchange={handleChangePDSConfig} required>
+                                                    </lightning-combobox>
+                                                </div>
+                                                <!-- Promo Agreement Type Selection -->
+                                                <div class="slds-form-element slds-m-bottom_medium">
+                                                    <lightning-combobox data-field="promoAgreementType"
+                                                        label={labels.LBL_Promo_Agreement_Type}
+                                                        value={newPDSConfig.promoAgreementType}
+                                                        options={availablePromoAgreementTypeOptions}
+                                                        onchange={handleChangePDSConfig} required>
+                                                    </lightning-combobox>
+                                                </div>
+                                            </template>
+                                        </div>
+                                        <div class="slds-modal__footer">
+                                            <lightning-button label={labels.LBL_Cancel}
+                                                onclick={handleTogglePDSConfigModal} class="slds-m-right_xx-small">
+                                            </lightning-button>
+                                            <lightning-button label={labels.LBL_Confirm} variant="brand"
+                                                onclick={handleConfirmPDSConfigModal}
+                                                disabled={isPDSConfigModalConfirmDisabled}>
+                                            </lightning-button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <div class="slds-backdrop slds-backdrop_open"></div>
+                            </template>
+                            <div class="section-Container slds-m-top_medium">
+                                <div class="section-label disp">
+                                    {labels.ProductDiscountStatement__c.LoadPreferencePromoStatement__c}
+                                    <div class="infoIconWrapper disp">
+                                        <lightning-icon icon-name="utility:info_alt" size="xx-small"
+                                            class="lightningIcon"
+                                            onclick={handleToggleLoadPreferencePromoStatementInfo}>
+                                        </lightning-icon>
+                                        <template if:true={loadPreferencePromoStatementInfoOpen}>
+                                            <section aria-describedby="dialog-body-id-110" aria-label="Dialog Title"
+                                                class="infoPopover slds-popover slds-nubbin_left-top" role="dialog"
+                                                style="font-size: 12px;">
+                                                <div class="slds-popover__body" id="dialog-body-id-110">
+                                                    <div class="slds-media">
+                                                        <div class="slds-media__body">
+                                                            <p>
+                                                                <lightning-formatted-rich-text
+                                                                    value={labels.LBL_Nego_Stg_LoadPreferencePromoStatement_HelpText}
+                                                                    variant="label-hidden">
+                                                                </lightning-formatted-rich-text>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="disp" style="width: 30%; margin-left: 10%;">
+                                    <lightning-combobox if:true={negoSettings.productDiscountsConfiguration}
+                                        variant="label-hidden" dropdown-alignment="auto"
+                                        value={negoSettings.productDiscountsConfiguration.loadPreferencePromoStatement}
+                                        options={loadPreferencePromoStatementOptions}
+                                        onchange={handleChangeProductDiscountStatement}
+                                        data-field="loadPreferencePromoStatement">
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+                            <div class="add-breaks"></div>
+                            <div class="section-Container slds-m-top_medium">
+                                <div class="section-label disp">
+                                    {labels.LBL_Nego_Stg_communityPDSMatrixURL}
+                                </div>
+                                <div class="disp" style="width: 30%; margin-left: 10%;">
+                                    <lightning-input if:true={negoSettings.productDiscountsConfiguration}
+                                        variant="label-hidden"
+                                        value={negoSettings.productDiscountsConfiguration.communityPDSMatrixURL}
+                                        onchange={handleChangeProductDiscountStatement}
+                                        data-field="communityPDSMatrixURL">
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <div class="add-breaks"></div>
+                            <template if:true={negoSettings.productDiscountsConfiguration}>
+                                <div class="section-container slds-m-top_medium">
+                                    <div class="section-label">
+                                        {labels.LBL_Nego_Stg_ShowScanButton}
+                                    </div>
+                                    <lightning-input type="toggle" variant="label-hidden"
+                                        class="slds-m-horizontal_small slds-m-top--small" data-field="showScanButton"
+                                        checked={negoSettings.productDiscountsConfiguration.showScanButton}
+                                        onchange={handleToggleProductDiscountsConfig}>
+                                    </lightning-input>
+                                </div>
+                                <div class="add-breaks"></div>
+                                <div class="section-container slds-m-top_medium">
+                                    <div class="section-label">
+                                        {labels.LBL_Nego_Stg_ShowSynchroButton}
+                                    </div>
+                                    <lightning-input type="toggle" variant="label-hidden"
+                                        class="slds-m-horizontal_small slds-m-top--small" data-field="showSynchroButton"
+                                        checked={negoSettings.productDiscountsConfiguration.showSynchroButton}
+                                        onchange={handleToggleProductDiscountsConfig}>
+                                    </lightning-input>
+                                </div>
+                                <div class="add-breaks"></div>
+                                <div class="section-container slds-m-top_medium">
+                                    <div class="section-label">
+                                        {labels.LBL_Nego_Stg_EnableContractReferenceUpdate}
+                                    </div>
+                                    <lightning-input type="toggle" variant="label-hidden"
+                                        class="slds-m-horizontal_small slds-m-top--small"
+                                        data-field="enableContractReferenceUpdate"
+                                        checked={negoSettings.productDiscountsConfiguration.enableContractReferenceUpdate}
+                                        onchange={handleToggleProductDiscountsConfig}>
+                                    </lightning-input>
+                                </div>
+                                <div class="add-breaks"></div>
+
+                                <div class="section-container slds-m-top_medium">
+                                    <div class="section-label">
+                                        {labels.LBL_Nego_Stg_EnableNegoScopeReferenceUpdate}
+                                    </div>
+                                    <lightning-input type="toggle" variant="label-hidden"
+                                        class="slds-m-horizontal_small slds-m-top--small"
+                                        data-field="enableNegoScopeReferenceUpdate"
+                                        checked={negoSettings.productDiscountsConfiguration.enableNegoScopeReferenceUpdate}
+                                        onchange={handleToggleProductDiscountsConfig}>
+                                    </lightning-input>
+                                </div>
+                                <div class="add-breaks"></div>
+                            </template>
+                            <div class="slds-m-top--small">
+                                <div class="slds-m-vertical--small" style="display:none;">
+                                    <a href={gridSettingsLink} target="_blank">{labels.LBL_Show_Advanced_Settings}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-tab>
+                <!-- PriceListStatement Configuration Section -->
+                <lightning-tab label={labels.NegoSettings__mdt.priceListStatementsConfigurationLabel}
+                    class="slds-scrollable_y">
+                    <div style={mainPanelHeight}>
+                        <div>
+                            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                <div class="sectionTitle slds-media__body">
+                                    {labels.NegoSettings__mdt.priceListStatementsConfigurationLabel}
+                                </div>
+                                <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                    label={labels.LBL_Save} onclick={handleSave}></lightning-button>
+                            </div>
+                            <!-- Price List Statement Name Template section -->
+                            <div class="slds-card slds-p-bottom--medium">
+                                <div class="slds-card__header slds-grid">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__body">
+                                            <div class="slds-m-top--small"> {labels.LBL_Default_Name_Model}
+                                                <div class="contractDefaultContainer"
+                                                    lwc:if={isDefaultPLSModelEditMode}>
+                                                    <lightning-input lwc:if={plsNameConfigurations.DEFAULT} label=" "
+                                                        variant="label-hidden"
+                                                        value={plsNameConfigurations.DEFAULT.template}
+                                                        onchange={handleChangePLSDefaultModel}>
+                                                    </lightning-input>
+                                                    <lightning-icon size="xx-small"
+                                                        class="pointer slds-icon slds-input__icon_right slds-icon-text-default slds-align_absolute-center slds-button--icon-border slds-m-left--medium"
+                                                        icon-name="utility:close" onclick={toggleDefaultPLSEditMode}>
+                                                    </lightning-icon>
+                                                </div>
+                                                <div class="contractDefaultContainer" lwc:else>
+                                                    <lightning-input lwc:if={plsNameConfigurations.DEFAULT} label=" "
+                                                        variant="label-hidden"
+                                                        value={plsNameConfigurations.DEFAULT.template}
+                                                        onchange={handleChangePLSDefaultModel} disabled>
+                                                    </lightning-input>
+                                                    <lightning-icon size="xx-small"
+                                                        class="pointer slds-icon slds-input__icon_right slds-icon-text-default slds-align_absolute-center slds-button--icon-border slds-m-left--medium"
+                                                        icon-name="utility:edit" onclick={toggleDefaultPLSEditMode}>
+                                                    </lightning-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </header>
+                                    <div class="showRecordTypeConfigContainer">
+                                        <div class="slds-m-horizontal--medium" style="width: fit-content;">
+                                            <lightning-button if:false={showPLSRecordTypeConfig}
+                                                label={labels.LBL_Nego_Stg_ConfigNameModels}
+                                                onclick={handleShowPLSRecordTypeConfig} variant="brand"
+                                                class="slds-col_bump-left slds-p-top_small">
+                                            </lightning-button>
+                                            <lightning-button-icon if:true={showPLSRecordTypeConfig}
+                                                icon-name="utility:add" onclick={addPLSNameConfig}
+                                                class="slds-col_bump-left slds-p-top_small">
+                                            </lightning-button-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-card__body slds-card__body_inner" lwc:if={showPLSRecordTypeConfig}>
+                                    <div class="main-container">
+                                        <table
+                                            class="slds-table slds-table_bordered slds-border--left slds-border_right slds-no-row-hover table-w">
+                                            <thead>
+                                                <tr class="table-header">
+                                                    <th class="table-th">
+                                                        {labels.RecordType.objectLabel}
+                                                        <template if:true={labels.PriceListStatement__c.objectLabel}>
+                                                            &nbsp;({labels.PriceListStatement__c.objectLabel})
+                                                        </template>
+                                                    </th>
+                                                    <th class="table-th th-w-container">
+                                                        {labels.LBL_Nego_Stg_Name_Model_Col_Header}</th>
+                                                    <th class="table-th">
+                                                        {labels.LBL_Nego_Stg_Allow_Name_Update_Col_Header}</th>
+                                                    <th class="table-th"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template lwc:if={plsNameConfigurationsList.length}
+                                                    for:each={plsNameConfigurationsList} for:item="item">
+                                                    <tr key={item.recordType}>
+                                                        <td>{item.label}</td>
+                                                        <td>
+                                                            <lightning-textarea onchange={handlePLSOnChangeModel}
+                                                                variant="label-hidden" value={item.template}
+                                                                data-record-type={item.recordType}>
+                                                            </lightning-textarea>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-disp">
+                                                                <lightning-input type="toggle"
+                                                                    checked={item.allowUpdate} variant="label-hidden"
+                                                                    data-record-type={item.recordType}
+                                                                    onchange={handlePLSOnChangeAllowNameUpdate}>
+                                                                </lightning-input>
+                                                            </div>
+                                                        </td>
+                                                        <td class="alignCenter">
+                                                            <div
+                                                                class="slds-icon_container custom-icon-delete edit-icon">
+                                                                <lightning-icon size="x-small" class="delete-trans"
+                                                                    icon-name="utility:delete"
+                                                                    data-record-type={item.recordType}
+                                                                    onclick={handleDeletePLSNameConfig}>
+                                                                </lightning-icon>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                                <template lwc:if={newPLSNameConfigurationsList.length}
+                                                    for:each={newPLSNameConfigurationsList} for:item="item"
+                                                    for:index="index">
+                                                    <tr class="newRow" key={item.uid}>
+                                                        <td>
+                                                            <lightning-combobox options={item.plsRecordTypeOptions}
+                                                                class="input" value={item.recordType} label=" "
+                                                                variant="label-hidden" data-index={index}
+                                                                dropdown-alignment="auto"
+                                                                onchange={handleNewPLSOnChangeRT} required>
+                                                            </lightning-combobox>
+                                                        </td>
+                                                        <td>
+                                                            <lightning-textarea onchange={handleNewPLSOnChangeModel}
+                                                                data-index={index} class="input" variant="label-hidden"
+                                                                value={item.template}>
+                                                            </lightning-textarea>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-disp">
+                                                                <lightning-input type="toggle"
+                                                                    checked={item.allowUpdate} data-index={index}
+                                                                    class="input" variant="label-hidden"
+                                                                    onchange={handleNewPLSOnChangeAllowNameUpdate}>
+                                                                </lightning-input>
+                                                            </div>
+                                                        </td>
+                                                        <td class="alignCenter">
+                                                            <div
+                                                                class="slds-icon_container custom-icon-delete edit-icon">
+                                                                <lightning-icon size="xx-small" class="delete-trans"
+                                                                    icon-name="utility:delete" data-index={index}
+                                                                    onclick={handleDeleteNewPLSNameConfig}>
+                                                                </lightning-icon>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                                <template lwc:if={plsNameConfigurationHasNoData}>
+                                                    <tr>
+                                                        <td colspan="4">
+                                                            <div class="slds-text-align_center">
+                                                                <p>{labels.LBL_No_Item_To_Display}</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section-Container slds-m-top_medium">
+                                <div class="label-toggle">
+                                    {labels.NegoSettings__mdt.priceListStatementsConfigurationHelpText}
+                                </div>
+                            </div>
+                            <div class="negoptim-tablesection">
+                                <table>
+                                    <thead>
+                                        <tr class="table-header">
+                                            <th class="table-th">{labels.RecordType.objectLabel}</th>
+                                            <th class="table-th" style="width: 40%;">{labels.LBL_Grid_Settings_Template}
+                                            </th>
+                                            <th class="table-th" style="width: 40%;">Community
+                                                {labels.LBL_Grid_Settings_Template}</th>
+                                            <th class="table-th" style="width: 40%;">{labels.LBL_Data_Import_Settings}
+                                            </th>
+                                            <th class="table-th" style="width: 40%;">Community Data Import Settings</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template lwc:if={priceListStatementsConfigurationsList.length}
+                                            for:each={priceListStatementsConfigurationsList} for:item="item"
+                                            for:index="index">
+                                            <tr key={item.recordType}>
+                                                <td style="padding: 10px;">{item.label}</td>
+                                                <td style="padding: 10px;">
+                                                    <lightning-combobox variant="label-hidden" dropdown-alignment="auto"
+                                                        value={item.gridSettings} options={GridOptionsPLSD}
+                                                        onchange={handleChangePriceListStatementsConfigurations}
+                                                        data-field="gridSettings"
+                                                        data-index={index}></lightning-combobox>
+                                                </td>
+                                                <td style="padding: 10px;">
+                                                    <lightning-combobox variant="label-hidden" dropdown-alignment="auto"
+                                                        value={item.communityGridSettings} options={GridOptionsPLSD}
+                                                        onchange={handleChangePriceListStatementsConfigurations}
+                                                        data-field="communityGridSettings"
+                                                        data-index={index}></lightning-combobox>
+                                                </td>
+                                                <td style="padding: 10px;" class="alignCenter">
+                                                    <lightning-combobox variant="label-hidden" dropdown-alignment="auto"
+                                                        value={item.importSettings} options={importSettingsOptionsPLSD}
+                                                        onchange={handleChangePriceListStatementsConfigurations}
+                                                        data-field="importSettings"
+                                                        data-index={index}></lightning-combobox>
+                                                </td>
+                                                <td style="padding: 10px;" class="alignCenter">
+                                                    <lightning-combobox variant="label-hidden" dropdown-alignment="auto"
+                                                        value={item.communityImportSettings}
+                                                        options={importSettingsOptionsPLSD}
+                                                        onchange={handleChangePriceListStatementsConfigurations}
+                                                        data-field="communityImportSettings"
+                                                        data-index={index}></lightning-combobox>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-tab>
+                <!-- SellInSettings Configuration Section -->
+                <lightning-tab label={labels.LBL_Nego_Stg_ContractSellInConfig_Title} class="slds-scrollable_y">
+                    <div style={mainPanelHeight}>
+                        <div>
+                            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                <div class="sectionTitle slds-media__body">
+                                    {labels.LBL_Nego_Stg_ContractSellInConfig_Title}
+                                </div>
+                                <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                    label={labels.LBL_Save} onclick={handleSave}>
+                                </lightning-button>
+                            </div>
+                            <div class="section-Container slds-m-top_medium">
+                                <div class="label-toggle">
+                                    {labels.LBL_Nego_Stg_ContractSellInConfig_HelpText}
+                                </div>
+                            </div>
+                            <div class="negoptim-tablesection">
+                                <table>
+                                    <tr class="table-header">
+                                        <th class="table-th th-w7">
+                                            {labels.LBL_Nego_Stg_ContractSellInConfig_DisplayOrder_Col_Header}</th>
+                                        <th class="table-th">
+                                            {labels.LBL_Nego_Stg_ContractSellInConfig_SellInType_Col_Header}</th>
+                                        <th class="table-th">
+                                            {labels.LBL_Nego_Stg_ContractSellInConfig_DisplaySellIn_Col_Header}</th>
+                                        <th class="table-th">
+                                            {labels.LBL_Nego_Stg_ContractSellInConfig_EditSellIn_Col_Header}</th>
+                                    </tr>
+                                    <template lwc:if={sellInConfiguration} for:each={sellInConfiguration}
+                                        for:item="item" for:index="index">
+                                        <tr key={item.sellInKey} lwc:if={item.sellInName}>
+                                            <td class="table-td sellInconfiguration-col slds-text-align--center">
+                                                {item.colNumber}</td>
+                                            <td class="table-td sellInconfiguration-col slds-text-align--left">
+                                                {item.name}</td>
+                                            <td class="table-td sellInconfiguration-col slds-text-align--center">
+                                                <label class="switch">
+                                                    <input type="checkbox" checked={item.isActive}
+                                                        data-field={item.sellInKey} data-index={index}
+                                                        onchange={handleSellInConfigurationActivation} />
+                                                    <span class="slider">
+                                                    </span>
+                                                </label>
+                                            </td>
+                                            <td class="table-td sellInconfiguration-col slds-text-align--center">
+                                                <label class="switch">
+                                                    <input type="checkbox" checked={item.isEdit}
+                                                        data-field={item.sellInKey} data-index={index}
+                                                        onchange={handleSellInConfigurationEdit} />
+                                                    <span class="slider">
+                                                    </span>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-tab>
+                <!-- ContractConsolidationConfiguration Configuration Section -->
+                <lightning-tab label={labels.NegoSettings__mdt.contractConsolidationConfigurationLabel}
+                    class="slds-scrollable_y">
+                    <div style={mainPanelHeight}>
+                        <div>
+                            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                <div class="sectionTitle slds-media__body">
+                                    {labels.NegoSettings__mdt.contractConsolidationConfigurationLabel}
+                                </div>
+                                <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                    label={labels.LBL_Save} onclick={handleSave}>
+                                </lightning-button>
+                            </div>
+                            <div class="section-Container slds-m-top_medium">
+                                <div class="label-toggle">
+                                    <!-- {labels.NegoSettings__mdt.contractConsolidationConfigurationHelpText} -->
+                                    <lightning-formatted-rich-text
+                                        value={labels.NegoSettings__mdt.contractConsolidationConfigurationHelpText}
+                                        variant="label-hidden">
+                                    </lightning-formatted-rich-text>
+                                </div>
+                            </div>
+                            <div class="add-breaks"> </div>
+                            <template if:true={contractConsolidationConfigurationList}>
+                                <div>
+                                    <template for:each={contractConsolidationConfigurationList} for:item="config">
+                                        <div key={config.recordType} class="slds-wrap slds-m-bottom_small">
+                                            <div class="disp section-label-year w18">
+                                                {config.label}
+                                            </div>
+                                            <div class="disp w18" style="translate: 0px 20px;">
+                                                <lightning-input type="toggle" label=""
+                                                    data-recordtype={config.recordType} checked={config.isActive}
+                                                    onchange={handleToggle}>
+                                                </lightning-input>
+                                            </div>
+                                            <div class="disp section-label-year" style="padding-right: 20px">
+                                                {labels.LBL_Nego_Stg_Conso_Available_From}
+                                            </div>
+                                            <div class="disp w18">
+                                                <!-- <lightning-input type="date" label="" value={config.executionDate}
+                                                    data-recordtype={config.recordType} onchange={handleDateChange}>
+                                                </lightning-input> -->
+                                                <div style="width: 100%; padding:5px; border-radius: 5px; border: 1px solid black;"
+                                                    class="custom-date-picker-container">
+                                                    <div class="date-display disp">
+                                                        {config.formattedDate}
+                                                    </div>
+                                                    <div class="icon-container disp" style="float: inline-end;">
+                                                        <lightning-icon icon-name="utility:event" size="x-small"
+                                                            alternative-text="Open Calendar" onclick={handleIconClick}
+                                                            data-recordtype={config.recordType}>
+                                                        </lightning-icon>
+                                                    </div>
+                                                    <input type="date" class="hidden-date-input"
+                                                        data-recordtype={config.recordType} value={config.executionDate}
+                                                        onchange={handleDateChange} />
+                                                </div>
+                                            </div>
+                                            <div class="disp section-label-year">
+                                                {labels.LBL_Nego_Stg_Conso_Of_Each_Year}</div>
+                                            <div class="add-breaks"> </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </lightning-tab>
+                <!-- Negotiate Page Configuration Section -->
+                <lightning-tab label={labels.LBL_Nego_Stg_NegotiatePageConfig_Title} class="slds-scrollable_y"
+                    value="negotiatePage" onactive={handleActive}>
+                    <div style={mainPanelHeight}>
+                        <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                            <div class="sectionTitle slds-media__body">
+                                {labels.LBL_Nego_Stg_NegotiatePageConfig_HelpText}
+                            </div>
+                            <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                label={labels.LBL_Save} onclick={handleSave}>
+                            </lightning-button>
+                        </div>
+
+                        <!-- Annual negotiations -->
+                        <div class="section-label slds-m-top_large" style="font-size: large;">
+                            {labels.LBL_Nego_Stg_NegotiatePageConfig_AnnualNegotiations}</div>
+                        <div class="slds-m-top_medium section-m slds-grid slds-gutters">
+                            <div class="slds-col slds-size--1-of-8">
+                                <span>{labels.LBL_Nego_Stg_NegotiatePageConfig_PreviousYearContracts}</span>
+                            </div>
+                            <div class="slds-col">
+                                <lightning-dual-listbox source-label={labels.LBL_Available}
+                                    selected-label={labels.LBL_Selected} options={contractRecordTypesOptions}
+                                    value={negotiateConfig.annualNegotiationRTs.current}
+                                    data-target-config="annualNegotiationRTs" data-target-year="current"
+                                    onchange={handleNegotiateConfigChange}>
+                                </lightning-dual-listbox>
+                            </div>
+                            <div class="slds-col slds-size--1-of-8"><span>{labels.LBL_Nego_Stg_NegotiatePageConfig_NegoYearContracts}</span>
+                            </div>
+                            <div class="slds-col">
+                                <lightning-dual-listbox source-label={labels.LBL_Available}
+                                    selected-label={labels.LBL_Selected} options={contractRecordTypesOptions}
+                                    value={negotiateConfig.annualNegotiationRTs.next}
+                                    data-target-config="annualNegotiationRTs" data-target-year="next"
+                                    onchange={handleNegotiateConfigChange}>
+                                </lightning-dual-listbox>
+                            </div>
+                        </div>
+                        <!-- Addendum negotiations -->
+                        <div class="section-label slds-m-top_large" style="font-size: large;">
+                            {labels.LBL_Nego_Stg_NegotiatePageConfig_AddendumNegotiations}</div>
+                        <div class="slds-m-top_large section-m slds-grid slds-gutters slds-p-bottom--large">
+                            <div class="slds-col slds-size--1-of-8">
+                                <span>{labels.LBL_Nego_Stg_NegotiatePageConfig_PreviousYearContracts}</span>
+                            </div>
+                            <div class="slds-col">
+                                <lightning-dual-listbox source-label={labels.LBL_Available}
+                                    selected-label={labels.LBL_Selected} options={contractRecordTypesOptions}
+                                    value={negotiateConfig.addendumNegotiationRTs.current}
+                                    data-target-config="addendumNegotiationRTs" data-target-year="current"
+                                    onchange={handleNegotiateConfigChange}>
+                                </lightning-dual-listbox>
+                            </div>
+                            <div class="slds-col slds-size--1-of-8"><span>{labels.LBL_Nego_Stg_NegotiatePageConfig_NegoYearContracts}</span>
+                            </div>
+                            <div class="slds-col">
+                                <lightning-dual-listbox source-label={labels.LBL_Available}
+                                    selected-label={labels.LBL_Selected} options={contractRecordTypesOptions}
+                                    value={negotiateConfig.addendumNegotiationRTs.next}
+                                    data-target-config="addendumNegotiationRTs" data-target-year="next"
+                                    onchange={handleNegotiateConfigChange}>
+                                </lightning-dual-listbox>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-tab>
+            </lightning-tabset>
+        </div>
+    </div>
+</template>

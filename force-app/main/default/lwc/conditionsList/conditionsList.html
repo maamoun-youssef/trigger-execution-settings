@@ -1,0 +1,102 @@
+<template>
+  <lightning-card class="cl-card" variant="base">
+    <div class="cl-layout">
+      <div class="cl-ribbon">
+        <span>{labels.LBL_Conditions_List}</span>
+      </div>
+      <div class="cl-main">
+        <div class="cl-container">
+          <template if:true={isLoading}>
+            <div class="cl-empty">Loading…</div>
+          </template>
+          <template if:true={hasData}>
+            <table class="cl-table" role="grid" aria-label="Liste des Conditions">
+              <thead>
+                <tr class="cl-header">
+                  <template for:each={displayedFields} for:item="field">
+                    <th key={field.fieldName} 
+                        title={field.fieldLabel}
+                        style={field.headerStyle}>
+                      <div class="slds-truncate">{field.fieldLabel}</div>
+                    </th>
+                  </template>
+                </tr>
+              </thead>
+              <tbody>
+                <template for:each={records} for:item="rec">
+                  <tr key={rec._key} class="cl-row">
+                    <template for:each={rec.values} for:item="field">
+                      <td key={field.key} 
+                          style={field.style} 
+                          class={field.className}>
+                        <div>
+                          <template lwc:if={field.isNumberField}>
+                            <lightning-formatted-number 
+                              minimum-fraction-digits={field.scale}
+                              maximum-fraction-digits={field.scale} 
+                              value={field.fieldValue}>
+                            </lightning-formatted-number>
+                          </template>
+                          <template lwc:elseif={field.isReference}>
+                            <template lwc:if={field.link}>
+                              <a href={field.link} target="_blank">
+                                {field.fieldValue}
+                              </a>
+                            </template>
+                            <template lwc:else>
+                              {field.fieldValue}
+                            </template>
+                          </template>
+                          <lightning-input lwc:elseif={field.isBoolean} 
+                            type="checkbox"
+                            class="input-center" 
+                            variant="label-hidden" 
+                            checked={field.fieldValue}
+                            disabled>
+                          </lightning-input>
+                          <lightning-formatted-date-time lwc:elseif={field.isDate} 
+                            value={field.fieldValue}
+                            year="numeric" 
+                            month="2-digit" 
+                            day="2-digit">
+                          </lightning-formatted-date-time>
+                          <lightning-formatted-date-time lwc:elseif={field.isDateTime} 
+                            value={field.fieldValue}
+                            year="numeric" 
+                            month="2-digit" 
+                            day="2-digit" 
+                            hour="2-digit" 
+                            minute="2-digit">
+                          </lightning-formatted-date-time>
+                          <template lwc:elseif={field.isPicklist}>
+                            {field.fieldOutputValue}
+                          </template>
+                          <template lwc:else>
+                            {field.fieldValue}
+                          </template>
+                        </div>
+                      </td>
+                    </template>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </template>
+          <template if:false={hasData}>
+            <template if:false={isLoading}>
+              <div class="cl-empty slds-p-vertical_small">Aucune condition à afficher.</div>
+            </template>
+          </template>
+          <div class="cl-footer">
+            <a class="cl-link" href="javascript:void(0)" onclick={navigateToConditionManager}>
+              Ouvrir Condition Manager
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <template if:true={isLoading}>
+      <lightning-spinner alternative-text="Loading"></lightning-spinner>
+    </template>
+  </lightning-card>
+</template>

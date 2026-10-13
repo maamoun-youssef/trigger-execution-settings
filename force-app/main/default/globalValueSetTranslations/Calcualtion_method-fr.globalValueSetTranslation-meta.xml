@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Promo purchases w/o VAT (Delivery Date)</masterLabel>
+        <translation>Achats Promo HT (date livraison)</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Purchases w/o Return (Delivery date)</masterLabel>
+        <translation>Achats HT sans Retour (date livraison)</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Purchases w/o VAT (Delivery date)</masterLabel>
+        <translation>Achats HT (date livraison)</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Purchases w/o VAT (Order date)</masterLabel>
+        <translation>Achats HT (date commande)</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Purchases w/o VAT (Payment date)</masterLabel>
+        <translation>Achats HT (date paiement)</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

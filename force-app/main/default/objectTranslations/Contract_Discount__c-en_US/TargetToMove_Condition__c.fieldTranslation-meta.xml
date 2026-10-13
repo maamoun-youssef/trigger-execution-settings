@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Select Tariff condition (from Pol_Com_Condition__c) where the row will be moved --></help>
+    <label>Target To Move Condition</label>
+    <name>TargetToMove_Condition__c</name>
+    <relationshipLabel><!-- Lignes contrats (Move to Nego Base Condition) --></relationshipLabel>
+</CustomFieldTranslation>

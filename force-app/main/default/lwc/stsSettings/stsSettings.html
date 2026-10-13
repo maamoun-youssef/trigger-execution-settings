@@ -1,0 +1,256 @@
+<template>
+  <template if:true={loading}>
+    <div class="slds-spinner_container greyBg">
+      <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+    </div>
+  </template>
+  <div if:true={mainData.stsSettings}>
+    <!-- ========== Section 1 ========== -->
+    <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+      <div class="sectionTitle slds-media__body">
+        {labels.LBL_Connect_SellInStatementInitializationParameters}
+      </div>
+      <lightning-button class="slds-button slds-m-right_x-small" variant="brand" label={labels.LBL_Save}
+        onclick={handleSave}>
+      </lightning-button>
+    </div>
+
+    <!-- FULL-WIDTH explanatory sentences -->
+    <div class="ml20 slds-m-top_small">
+      <div class="label" style="padding-left:0;">
+        {labels.LBL_Connect_SellInStatementInitializationDescription}
+      </div>
+      <div class="slds-m-top_x-small">
+        <lightning-formatted-rich-text value={labels.LBL_ConnectSettings_SalesTermsStatementGenerationDescription}
+          class="lh15">
+        </lightning-formatted-rich-text>
+      </div>
+      <div class="slds-m-top_x-small">
+        <lightning-formatted-rich-text value={labels.LBL_ConnectSettings_SalesTermsStatementGenerationNote}
+          class="italic lh15">
+        </lightning-formatted-rich-text>
+      </div>
+    </div>
+
+    <!-- Statement Generation Mode (grid row) -->
+    <div class="section-Container slds-m-top_medium">
+      <!-- <div class="section-label disp">Modalités de génération des déclarations</div> -->
+      <div class="section-label disp">{labels.STS__mdt.salesTermsGenerationModeLabel}</div>
+      <div class="info-container-w">
+        <lightning-combobox class="comboBox" variant="label-hidden" options={genModeOptions}
+          value={mainData.stsSettings.salesTermsGenerationMode} data-field="salesTermsGenerationMode"
+          onchange={handleFieldEdits}>
+        </lightning-combobox>
+      </div>
+    </div>
+
+    <!-- Auto specific content -->
+    <template if:true={isAuto}>
+      <!-- FULL-WIDTH light-info bar: mandatory parameters -->
+      <div class="slds-m-top_small slds-p-vertical_x-small slds-p-horizontal_small ml20"
+        style="background:#d9f3f6;border-radius:4px;max-width:calc(100% - 40px);">
+        <lightning-formatted-rich-text value={labels.LBL_ConnectSettings_SalesTermsSelfPublishWarning} class="lh15">
+        </lightning-formatted-rich-text>
+      </div>
+
+      <!-- Auto-send date (required) -->
+      <div class="section-Container slds-m-top_medium">
+        <div class="section-label disp">
+          Date de publication annuelle de la demande de déclaration
+          <span class="slds-required" style="margin-left:4px;">*</span>
+        </div>
+        <div class="info-container-w">
+          <div class="slds-grid slds-wrap slds-gutters">
+            <div class="slds-col slds-size_1-of-6">
+              <lightning-input type="number" min="1" max="31" variant="label-hidden"
+                value={mainData.stsSettings.salesTermsAutoPublishDay} data-field="salesTermsAutoPublishDay"
+                onchange={handleFieldEdits}>
+              </lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-6">
+              <lightning-combobox variant="label-hidden" options={monthOptions}
+                value={mainData.stsSettings.salesTermsAutoPublishMonth} data-field="salesTermsAutoPublishMonth"
+                onchange={handleFieldEdits}>
+              </lightning-combobox>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <!-- Toggles -->
+    <div class="section-Container slds-m-top_medium">
+      <div class="section-label disp">{labels.STS__mdt.isSalesTermsNSLevelLabel}</div>
+      <div class="info-container-w">
+        <lightning-input class="connect-toggle" type="toggle" variant="label-hidden"
+          checked={mainData.stsSettings.isSalesTermsNSLevel} data-field="isSalesTermsNSLevel"
+          onchange={handleFieldEdits}>
+        </lightning-input>
+      </div>
+    </div>
+
+    <div class="section-Container slds-m-top_medium">
+      <div class="section-label disp">{labels.STS__mdt.allowSalesTermsSelfSubmitLabel}</div>
+      <div class="info-container-w">
+        <lightning-input class="connect-toggle" type="toggle" variant="label-hidden"
+          checked={mainData.stsSettings.allowSalesTermsSelfSubmit} data-field="allowSalesTermsSelfSubmit"
+          onchange={handleFieldEdits}>
+        </lightning-input>
+      </div>
+    </div>
+
+    <!-- Descriptions with placeholders -->
+    <div class="section-Container slds-m-top_medium">
+      <div class="section-label disp">{labels.STS__mdt.salesTermsDescriptionFRLabel}</div>
+      <div class="info-container-w">
+        <div class="w36">
+          <lightning-textarea variant="label-hidden" value={mainData.stsSettings.salesTermsDescriptionFR}
+            data-field="salesTermsDescriptionFR" onchange={handleFieldEdits}>
+          </lightning-textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-Container slds-m-top_medium">
+      <div class="section-label disp">{labels.STS__mdt.salesTermsDescriptionENLabel}</div>
+      <div class="info-container-w">
+        <div class="w36">
+          <lightning-textarea variant="label-hidden" value={mainData.stsSettings.salesTermsDescriptionEN}
+            data-field="salesTermsDescriptionEN" onchange={handleFieldEdits}>
+          </lightning-textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="add-breaks"></div>
+
+    <!-- ========== Section 2 ========== -->
+    <!-- <div class="slds-media__body slds-p-around_x-small stickyHeaderSts isSub">
+        <div class="sectionTitle">{labels.LBL_ConnectSettings_SalesTermsSubmissionRulesSectionTitle}</div>
+    </div> -->
+    <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+      <div class="sectionTitle slds-media__body">
+        {labels.LBL_ConnectSettings_SalesTermsSubmissionRulesSectionTitle}
+      </div>
+    </div>
+
+
+    <!-- FULL-WIDTH helper sentence -->
+    <div class="ml20 slds-m-top_small">
+      <div class="label" style="padding-left:0;">
+        {labels.LBL_ConnectSettings_SalesTermsSubmissionRulesSectionSubTitle}
+      </div>
+      <div class="slds-m-top_x-small">
+        <lightning-formatted-rich-text value={labels.LBL_ConnectSettings_SalesTermsSubmissionRulesDescription}
+          class="lh15">
+        </lightning-formatted-rich-text>
+      </div>
+    </div>
+
+    <!-- Closing date -->
+    <div class="section-Container slds-m-top_medium">
+      <div class="section-label disp">Date de clôture</div>
+      <div class="info-container-w">
+        <div class="slds-grid slds-wrap slds-gutters">
+          <div class="slds-col slds-size_1-of-6">
+            <lightning-input type="number" min="1" max="31" variant="label-hidden"
+              value={mainData.stsSettings.salesTermsAnnualClosingDay} data-field="salesTermsAnnualClosingDay"
+              onchange={handleFieldEdits}>
+            </lightning-input>
+          </div>
+          <div class="slds-col slds-size_1-of-6">
+            <lightning-combobox variant="label-hidden" options={monthOptions}
+              value={mainData.stsSettings.salesTermsAnnualClosingMonth} data-field="salesTermsAnnualClosingMonth"
+              onchange={handleFieldEdits}>
+            </lightning-combobox>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Supplier submission flow -->
+    <div class="section-Container slds-m-top_medium">
+      <div class="section-label disp">Flux de soumission de la réponse Four.</div>
+      <div class="info-container-w">
+        <lightning-combobox class="comboBox" variant="label-hidden" name="submissionFlow"
+          placeholder="Select an active Screen Flow" options={flows}
+          value={mainData.stsSettings.salesTermsSubmissionFlow} data-field="salesTermsSubmissionFlow"
+          onchange={handleFieldEdits}>
+        </lightning-combobox>
+      </div>
+    </div>
+
+    <!-- ========= Requested Documents (FULL-WIDTH) ========= -->
+    <!-- Mini header + add button -->
+    <!-- <div class="slds-m-top_medium slds-p-vertical_x-small slds-p-horizontal_small ml20"
+         style="background:#d9f3f6;border-radius:4px;max-width:calc(100% - 40px);">
+      <div class="slds-grid slds-grid_align-spread">
+        <div class="slds-text-title_bold">{labels.LBL_RequestedDocuments}</div>
+        <lightning-button-icon icon-name="utility:add"
+                               alternative-text="+ Ajouter un document"
+                               onclick={handleAddDoc}
+                               title="+ Ajouter un document">
+        </lightning-button-icon>
+      </div>
+    </div> -->
+
+    <!-- ========= Requested Documents (FULL-WIDTH) ========= -->
+    <!-- Mini header + add button -->
+    <div class="slds-m-top_medium slds-p-vertical_x-small slds-p-horizontal_small ml20"
+      style="background:#d9f3f6;border-radius:4px;max-width:calc(100% - 40px);">
+      <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+        <div class="slds-text-title_bold">{labels.LBL_RequestedDocuments}</div>
+        <lightning-button-icon icon-name="utility:add" alternative-text="+ Ajouter un document"
+          onclick={addRequestedDoc} title="+ Ajouter un document">
+        </lightning-button-icon>
+      </div>
+    </div>
+
+    <!-- Column headers (full width) -->
+    <div class="ml20 slds-p-horizontal_small slds-m-top_small" style="max-width:calc(100% - 40px);">
+      <div class="slds-grid slds-gutters slds-m-bottom_x-small">
+        <div class="slds-col slds-size_3-of-12 slds-text-title_caps slds-text-color_weak">TYPE</div>
+        <div class="slds-col slds-size_3-of-12 slds-text-title_caps slds-text-color_weak">SOUS-TYPE</div>
+        <div class="slds-col slds-size_4-of-12 slds-text-title_caps slds-text-color_weak">NOM DU DOCUMENT</div>
+        <div class="slds-col slds-size_1-of-12 slds-text-title_caps slds-text-color_weak slds-text-align_center">
+          OBLIGATOIRE ?</div>
+        <div class="slds-col slds-size_1-of-12 slds-text-title_caps slds-text-color_weak"></div>
+      </div>
+    </div>
+
+    <!-- Rows (full width, dynamic) -->
+    <template for:each={requestedDocs} for:item="doc" for:index="index">
+      <div key={doc.uid} class="ml20 slds-p-horizontal_small slds-m-bottom_x-small"
+        style="max-width:calc(100% - 40px);">
+        <div class="slds-grid slds-wrap slds-gutters slds-grid_vertical-align-center">
+          <div class="slds-col slds-size_3-of-12">
+            <lightning-input required variant="label-hidden" label="Type" value={doc.type} data-idx={index}
+              data-field="type" onchange={handleDocInput}>
+            </lightning-input>
+          </div>
+          <div class="slds-col slds-size_3-of-12">
+            <lightning-input required variant="label-hidden" label="Sous-Type" value={doc.subType} data-idx={index}
+              data-field="subType" onchange={handleDocInput}>
+            </lightning-input>
+          </div>
+          <div class="slds-col slds-size_4-of-12">
+            <lightning-input required variant="label-hidden" label="Nom du document" value={doc.name} data-idx={index}
+              data-field="name" onchange={handleDocInput}>
+            </lightning-input>
+          </div>
+          <div class="slds-col slds-size_1-of-12 slds-align_absolute-center">
+            <lightning-input class="connect-toggle" type="toggle" variant="label-hidden" message-toggle-active="Oui"
+              message-toggle-inactive="Non" checked={doc.mandatory} data-idx={index} data-field="mandatory"
+              onchange={handleDocInput}>
+            </lightning-input>
+          </div>
+          <div class="slds-col slds-size_1-of-12 slds-align_absolute-center">
+            <lightning-button-icon icon-name="utility:delete" alternative-text="Supprimer" title="Supprimer"
+              data-idx={index} onclick={deleteRequestedDoc}>
+            </lightning-button-icon>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+</template>

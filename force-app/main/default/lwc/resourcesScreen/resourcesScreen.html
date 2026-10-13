@@ -1,0 +1,144 @@
+<template>
+  <template lwc:if={loadingData}>
+    <div class="slds-spinner_container">
+      <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+    </div>
+  </template>
+  <template lwc:else>
+    <div class="main-container">
+      <div class={leftPanelClass}>
+        <lightning-card title="iconResources ZIP Images" style="color: #009688;">
+          <div class="slds-p-horizontal_medium slds-scrollable--y" style={mainPanelHeight}>
+            <div class="sticky-bar slds-p-horizontal_medium slds-p-vertical_small slds-grid slds-gutters">
+              <div class="slds-col slds-size_2-of-3">
+                <lightning-input type="search" label="Search Images" value={iconSearchTerm}
+                  onchange={onIconSearchChange}>
+                  
+                </lightning-input>
+              </div>
+              <div class="slds-col slds-size_1-of-3">
+                <lightning-combobox name="folderFilter" label="Folder" value={selectedIconFolder}
+                  options={iconFolderOptions} onchange={onIconFolderChange}>
+                </lightning-combobox>
+              </div>
+            </div>
+            <template if:true={filteredIconImages.length}>
+              <div class="image-grid">
+                <template for:each={filteredIconImages} for:item="img">
+                  <div key={img.id} class={img.cssClass} onclick={handleImageClick}>
+                    <img src={img.url} alt={img.name} class="preview-image" />
+                    <div class="image-label">{img.name}</div>
+                  </div>
+                </template>
+              </div>
+            </template>
+            <template if:false={filteredIconImages.length}>
+              <p>No images found in iconResources.</p>
+            </template>
+          </div>
+        </lightning-card>
+      </div>
+      <template if:true={selectedImage}>
+        <div class="right-panel" data-id="right-panel">
+          <lightning-card title="Selected Image Code" style="color: #009688;">
+           
+<button
+    class="slds-button slds-button_icon slds-modal__close slds-button_icon
+    closebutton"
+    title="Close"
+    onclick={handleexit}>
+    <lightning-icon
+        icon-name="utility:close"
+        alternative-text="Close"
+        size="x-small"
+        variant="bare"
+        class="slds-button__icon clsbtn">
+    </lightning-icon>
+    <span class="slds-assistive-text">Close</span>
+</button>
+
+
+
+
+
+            <div class="slds-p-horizontal_medium slds-scrollable--y" style={mainPanelHeight}>
+              <div class="sticky-preview">
+                <p style="color: #009688;">Below is the selected image: <strong>{selectedImage.name}</strong></p>
+                <template if:false={isSpriteImage}>
+                  <div class="example-preview">
+                  
+<template for:each={imageSizeVariants} for:item="variant">
+ 
+                  <div key={variant.id} class="image-item" onclick={handleSizeClick}  data-name={variant.name} data-size={variant.size}>
+                    <img src={variant.url} alt={variant.name} class={variant.cssClass} />
+                    
+                  </div>
+                </template>
+              
+
+
+
+                  </div>
+                </template>
+                <template if:true={isSpriteImage}>
+                  <div class="sprite-preview">
+                    <div class="sprite-image-wrapper" onclick={handleSpriteClick}>
+                      <img src={selectedImage.url} alt={selectedImage.name} class="full-sprite-image"
+                        onload={captureImageDimensions} />
+                      <div class="selection-marker" style={selectionMarkerStyle}></div>
+                    </div>
+                  </div>
+                </template>
+              </div>
+              <section class="code-section">
+                <div class="section-header">
+                  <h3 class="section-title">Formula Field Code</h3>
+                  <lightning-button variant="brand-outline" label="Copy Formula"
+                    onclick={copyFormula}></lightning-button>
+                </div>
+                <lightning-formatted-rich-text class="code-block"
+                  value={dynamicFormula}></lightning-formatted-rich-text>
+              </section>
+              <section class="code-section">
+                <div class="section-header">
+                  <h3 class="section-title">Import Code Dynamically</h3>
+                  <lightning-button variant="brand-outline" label="Copy" onclick={copyRendererTag}></lightning-button>
+                </div>
+                <lightning-formatted-rich-text class="code-block"
+                  value={dynamicRendererTag}></lightning-formatted-rich-text>
+              </section>
+              <template if:true={isSpriteImage}>
+                <section class="code-section">
+                  <div class="section-header">
+                    <h3 class="section-title">Sprite Image Controls</h3>
+                  </div>
+                  <div class="slds-grid slds-wrap slds-gutters">
+                    <div class="slds-col slds-size_1-of-2">
+                      <lightning-input type="number" label="Width (px)" name="width" value={spriteWidth}
+                        onchange={handleSpriteInputChange}></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                      <lightning-input type="number" label="Height (px)" name="height" value={spriteHeight}
+                        onchange={handleSpriteInputChange}></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                      <lightning-input type="number" label="Background X (px)" name="posX" value={spritePosX}
+                        onchange={handleSpriteInputChange}></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                      <lightning-input type="number" label="Background Y (px)" name="posY" value={spritePosY}
+                        onchange={handleSpriteInputChange}></lightning-input>
+                    </div>
+                  </div>
+                  <div class="example-preview" style="margin-top: 1rem;">
+                    <div class="preview-sprite" style={spriteStyle}></div>
+                  </div>
+                </section>
+              </template>
+            </div>
+          </lightning-card>
+        </div>
+      </template>
+    </div>
+  </template>
+</template>

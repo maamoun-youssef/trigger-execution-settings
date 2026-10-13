@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Accounting</masterLabel>
+        <translation>Comptabilité</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>AfterSales</masterLabel>
+        <translation>SAV</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Buyer</masterLabel>
+        <translation>Leader en négo</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Compliance</masterLabel>
+        <translation>Compliance</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Legal</masterLabel>
+        <translation>Juridique</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Marketing</masterLabel>
+        <translation>Marketing</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Offer</masterLabel>
+        <translation>Appro</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Quality</masterLabel>
+        <translation>Qualité</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>SupplyChain</masterLabel>
+        <translation>Supply</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

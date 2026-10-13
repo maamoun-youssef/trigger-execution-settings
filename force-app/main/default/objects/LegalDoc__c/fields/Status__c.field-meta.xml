@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <label>Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>InPreparation</fullName>
+                <default>false</default>
+                <label>InPreparation</label>
+            </value>
+            <value>
+                <fullName>Open</fullName>
+                <default>false</default>
+                <label>Open</label>
+            </value>
+            <value>
+                <fullName>Supplier publishing</fullName>
+                <default>false</default>
+                <label>Supplier publishing</label>
+            </value>
+            <value>
+                <fullName>Legal publishing</fullName>
+                <default>false</default>
+                <label>Legal publishing</label>
+            </value>
+            <value>
+                <fullName>Validated by legal</fullName>
+                <default>false</default>
+                <label>Validated by legal</label>
+            </value>
+            <value>
+                <fullName>Validated by supplier</fullName>
+                <default>false</default>
+                <label>Validated by supplier</label>
+            </value>
+            <value>
+                <fullName>Validated</fullName>
+                <default>false</default>
+                <label>Validated</label>
+            </value>
+            <value>
+                <fullName>Approved</fullName>
+                <default>false</default>
+                <label>Approved</label>
+            </value>
+            <value>
+                <fullName>Deleted</fullName>
+                <default>false</default>
+                <label>Deleted</label>
+            </value>
+            <value>
+                <fullName>Closed</fullName>
+                <default>false</default>
+                <label>Closed</label>
+            </value>
+            <value>
+                <fullName>Opened</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Opened</label>
+            </value>
+            <value>
+                <fullName>Validate by legal</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Validate by legal</label>
+            </value>
+            <value>
+                <fullName>Validate by supplier</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Validate by supplier</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

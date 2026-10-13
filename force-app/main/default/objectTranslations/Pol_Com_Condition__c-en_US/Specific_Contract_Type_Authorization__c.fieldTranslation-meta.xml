@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Specific Contract Type Authorization --></label>
+    <name>Specific_Contract_Type_Authorization__c</name>
+    <picklistValues>
+        <masterLabel>All - Amendment</masterLabel>
+        <translation><!-- All - Amendment --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Amendment</masterLabel>
+        <translation><!-- Amendment --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Negotiation</masterLabel>
+        <translation><!-- Negotiation --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Negotiation + Amendment</masterLabel>
+        <translation><!-- Negotiation + Amendment --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Period Extension</masterLabel>
+        <translation><!-- Period Extension --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Proposal</masterLabel>
+        <translation><!-- Proposal --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Simulation</masterLabel>
+        <translation><!-- Simulation --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

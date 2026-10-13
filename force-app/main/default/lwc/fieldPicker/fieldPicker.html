@@ -1,0 +1,30 @@
+<template>
+    <!-- <template if:true={loading}>
+        <div class="spinner-container">
+            <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+        </div>
+    </template> -->
+    <div class="main">
+        <div class="scrollable-container"
+            style="display: flex; overflow-x: auto; gap: 1rem; padding-bottom: 1rem;">
+            <template for:each={objectFieldsArray} for:item="objectFields">
+                <div key={objectFields.index}
+                    style="flex: 0 0 auto; min-width: 200px;">
+                    <span class="slds-truncate slds-page-header__title">{objectFields.objectApiName}</span>
+                    <select multiple size="8" data-index={objectFields.index}
+                        onchange={handlePopupFieldSelect}
+                        class="slds-select slds-m-top_small">
+                        <template for:each={objectFields.fields} for:item="field">
+                            <option key={field.fieldApiName} value={field.fieldApiName} data-field={field.fieldApiName}
+                                data-reference={field.isReference} data-reference-to ={field.referenceTo} data-input-type={field.inputType}
+                                data-is-picklist={field.isPicklist} data-options={field.options} data-index={objectFields.index} data-label={field.label}
+                                onclick={handleFieldSelection}>
+                                {field.label} <span if:true={field.isReference}>&gt;</span>
+                            </option>
+                        </template>
+                    </select>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

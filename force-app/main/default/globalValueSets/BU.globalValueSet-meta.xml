@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Format - Galeries Lafayette</fullName>
+        <default>false</default>
+        <label>Format - Galeries Lafayette</label>
+    </customValue>
+    <customValue>
+        <fullName>Format - BHV</fullName>
+        <default>false</default>
+        <label>Format - BHV</label>
+    </customValue>
+    <customValue>
+        <fullName>Canal - Entrepots</fullName>
+        <default>false</default>
+        <label>Canal - Entrepots</label>
+    </customValue>
+    <customValue>
+        <fullName>Canal - Magasins</fullName>
+        <default>false</default>
+        <label>Canal - Magasins</label>
+    </customValue>
+    <customValue>
+        <fullName>Canal - Web</fullName>
+        <default>false</default>
+        <label>Canal - Web</label>
+    </customValue>
+    <customValue>
+        <fullName>Region</fullName>
+        <default>false</default>
+        <label>Region</label>
+    </customValue>
+    <description>List of stores</description>
+    <masterLabel>BU</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

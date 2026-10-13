@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GrossPricewNetTax__c</fullName>
+    <externalId>false</externalId>
+    <formula>GrossPrice__c
++
+IF (CONTAINS(t_NetPriceTaxes__c,&apos;N1/&apos;), Tax1__c,0)
++ IF (CONTAINS(t_NetPriceTaxes__c,&apos;N2/&apos;), Tax2__c,0)
++ IF (CONTAINS(t_NetPriceTaxes__c,&apos;N3/&apos;), Tax3__c,0)
++ IF (CONTAINS(t_NetPriceTaxes__c,&apos;N4/&apos;),Tax4__c,0)
++ IF (CONTAINS(t_NetPriceTaxes__c,&apos;N5/&apos;),Tax5__c,0)
++ IF (CONTAINS(t_NetPriceTaxes__c,&apos;N6/&apos;),Tax6__c,0)
++ IF (CONTAINS(t_NetPriceTaxes__c,&apos;N7/&apos;),Tax7__c,0)
++ IF (CONTAINS(t_NetPriceTaxes__c,&apos;N8/&apos;),Tax8__c,0)
++ IF (CONTAINS(t_NetPriceTaxes__c,&apos;N9/&apos;),Tax9__c,0)
++ IF (CONTAINS(t_NetPriceTaxes__c,&apos;N10/&apos;),Tax10__c,0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Gross Price wNetTax</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

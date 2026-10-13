@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Accord Liste associée",
+  "contentBody" : {
+    "activeViewId" : "relatedlist_a0D",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "relatedlist-Contract__c",
+    "urlPrefix" : "contract"
+  },
+  "urlName" : "accord-liste-associée"
+}

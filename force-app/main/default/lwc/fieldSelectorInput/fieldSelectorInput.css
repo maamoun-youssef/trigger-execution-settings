@@ -1,0 +1,8 @@
+.frp-dropdown {
+    display: block;
+    z-index: 9001;
+}
+
+.frp-pill {
+    --slds-c-pill-text-color: #0070d2;
+}

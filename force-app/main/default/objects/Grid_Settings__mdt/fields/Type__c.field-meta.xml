@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Type de configuration du tableau : contrôle le comportement et le mode d’affichage (ex. Détail, Maître, Maître‑Détail).</inlineHelpText>
+    <label>Type</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Detail</fullName>
+                <default>true</default>
+                <label>Detail</label>
+            </value>
+            <value>
+                <fullName>Master</fullName>
+                <default>false</default>
+                <label>Master</label>
+            </value>
+            <value>
+                <fullName>Master-Detail</fullName>
+                <default>false</default>
+                <label>Master-Detail</label>
+            </value>
+            <value>
+                <fullName>None-Master-Detail</fullName>
+                <default>false</default>
+                <label>None-Master-Detail</label>
+            </value>
+            <value>
+                <fullName>Master-Detail-Lookup</fullName>
+                <default>false</default>
+                <label>Master-Detail-Lookup</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

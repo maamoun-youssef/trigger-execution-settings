@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Client_WD_ClientBased_Net_Pts__c</fullName>
+    <externalId>false</externalId>
+    <formula>If( CONTAINS(Client_Name__c, &apos;National&apos;), New_Client_WD_ClientBased__c/16,
+  If( CONTAINS(Client_Name__c, &apos;Intermarché&apos;), New_Client_WD_ClientBased__c/4, New_Client_WD_ClientBased__c ))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>New Client WD ClientBased Net (Pts)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>1</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

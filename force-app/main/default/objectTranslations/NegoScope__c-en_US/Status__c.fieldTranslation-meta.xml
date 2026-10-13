@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>
+        <!-- Specify the status of the nego scope.
+
+If Inactive, the nego scope will not be proposed to the owner for its contract -->
+    </help>
+    <label>Status</label>
+    <name>Status__c</name>
+    <picklistValues>
+        <masterLabel>Active</masterLabel>
+        <translation>Active</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>In Preparation</masterLabel>
+        <translation>In Preparation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Inactive</masterLabel>
+        <translation>Inactive</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Request For Approval</masterLabel>
+        <translation>Request for Approval</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Request For Stop</masterLabel>
+        <translation>Request for Stop</translation>
+    </picklistValues>
+</CustomFieldTranslation>

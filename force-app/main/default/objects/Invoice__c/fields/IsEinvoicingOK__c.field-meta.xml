@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsEinvoicingOK__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Flag to indicate if all criteria are filled in for e invoicing</description>
+    <label>Is e-invoicing OK</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,30 @@
+<apex:page showHeader="false" controller="SetUserLangCookiesCtrlExt">
+    <apex:form >
+        <apex:actionFunction name="finishLoginFlow" action="{!finishLoginFlow}"/>
+    </apex:form>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let siteId = `{!JSINHTMLENCODE(siteId)}`;
+            let sitePath = `{!JSINHTMLENCODE(sitePath)}`;
+            var userLanguage = '{!JSINHTMLENCODE(userLanguage)}';
+            var now = new Date();
+            now.setTime(now.getTime() + 30 * 60 * 1000);
+            var expires = now.toUTCString();
+            if (siteId && userLanguage && sitePath) {
+                let delcookiebuilder = 'PreferredLanguage' + siteId + '=';
+                delcookiebuilder += '; max-age=0'
+                delcookiebuilder += '; path=' + sitePath;
+                document.cookie = delcookiebuilder;
+                delcookiebuilder = 'PreferredLanguage' + siteId + '=';
+                delcookiebuilder += '; max-age=0'
+                delcookiebuilder += '; path=/';
+                document.cookie = delcookiebuilder;
+                document.cookie = `PreferredLanguage${siteId}=${encodeURIComponent(userLanguage)}; path=${sitePath}; expires=${expires}`;
+                document.cookie = `PreferredLanguage${siteId}=${encodeURIComponent(userLanguage)}; path=/; expires=${expires}`;
+            }
+            setTimeout(() => {
+                finishLoginFlow();
+            }, 0);
+        }, false);
+    </script>
+</apex:page>

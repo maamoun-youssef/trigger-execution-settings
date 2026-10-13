@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Condition_Duplication_Block_NegValue__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If True, only positive value should be considered during the duplication</description>
+    <inlineHelpText>If True, only positive value should be considered during the duplication (negative one should not duplicate).
+If False, all values are considered</inlineHelpText>
+    <label>Condition Duplication Block NegValue</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

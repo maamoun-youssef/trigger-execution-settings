@@ -1,0 +1,45 @@
+<table border="0" cellpadding="5" width="600" cellspacing="5" height="400">
+    <tr valign="top" height="50">
+        <td tEditID="c1r1"
+            style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;"
+            aEditID="c1r1" locked="0">
+            <![CDATA[<span style="font-family: &quot;Times New Roman&quot;; font-size: medium;">{!$Label.LBL_Connect_Email_Greeting} {!Receiving_User.FirstName} {!Receiving_User.LastName},</span>]]>
+        </td>
+    </tr>
+    <tr valign="top" height="300">
+        <td tEditID="c1r2"
+            style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;"
+            aEditID="c1r2" locked="0">
+            <![CDATA[<div>
+                <span style="font-family: &quot;Times New Roman&quot;; font-size: medium;">
+                    {!Log__c.Summary_Header__c}
+                </span>
+                </div>
+                <br/>
+                <div>
+                    <span style="font-family: &quot;Times New Roman&quot;; font-size: medium;">
+                        {!Log__c.00NQH00000L2y0p}
+                    </span>
+                    <span style="font-family: &quot;Times New Roman&quot;; font-size: medium;">
+                        {!Log__c.00NQH00000L2yLl}
+                    </span>
+                </div>
+                <div>
+                    <span style="font-family: &quot;Times New Roman&quot;; font-size: medium;"><br>
+                    </span>
+                </div>
+                <div>
+                    <span style="font-size: medium; font-family: &quot;Times New Roman&quot;;">{!$Label.LBL_Best_Regards},</span>
+                    <br />
+                    <span style="font-size: medium; font-family: &quot;Times New Roman&quot;;">{!$Label.LBL_Negoptim_Team}</span>
+                </div>]]>
+        </td>
+    </tr>
+    <tr valign="top" height="50">
+        <td tEditID="c1r3"
+            style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;"
+            aEditID="c1r3" locked="0">
+            <![CDATA[]]>
+        </td>
+    </tr>
+</table>

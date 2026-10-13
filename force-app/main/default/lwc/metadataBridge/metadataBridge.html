@@ -1,0 +1,254 @@
+<template>
+    <div class="header slds-page-header slds-page-header_record-home" id='pageHeader'>
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="utility:record_collection" size="medium"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h1>
+                            <div class="slds-page-header__title slds-var-m-right_small slds-align-middle"
+                                style="padding-left: 3px;">{Labels.LBL_Metadata_Bridge}</div>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slds-card slds-m-top--small">
+        <lightning-tabset>
+            <lightning-tab label="Import">
+                <template if:true={showImportPopup}>
+                    <section class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <header class="slds-modal__header">
+                                <h2 class="slds-text-heading_medium">{Labels.LBL_Import}</h2>
+                            </header>
+                            <div class="slds-modal__content slds-p-around_medium">
+                                <p>{Labels.LBL_Import_File}</p>
+                                <p>{Labels.LBL_Selected_Templates}:</p>
+                                <ul>
+                                    <template for:each={fileName} for:item="file">
+                                        <li key={file}>
+                                            {file}
+                                        </li>
+                                    </template>
+                                </ul>
+                                <lightning-combobox label="Prefixes" options={prefixOptions} value={prefixValue}
+                                    required onchange={prefixChangeHandler} style="width: 200px;"></lightning-combobox>
+                            </div>
+                            <footer class="slds-modal__footer">
+                                <lightning-button label={Labels.LBL_Cancel} class="slds-p-right--x-small"
+                                    onclick={handleCancel}></lightning-button>
+                                <lightning-button label={Labels.LBL_Import} variant="brand"
+                                    onclick={handleImport}></lightning-button>
+                            </footer>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </template>
+
+                <lightning-input type="file" label={Labels.LBL_Upload_File}
+                    class="slds-m-bottom--small slds-m-left--small" multiple
+                    onchange={handleFileChange}></lightning-input>
+
+
+                <c-static-resource-selection label="Search static resources..." value={selectedStaticResource}
+                    onoptionselect={handleStaticResourceChange} is-explorer></c-static-resource-selection>
+            </lightning-tab>
+            <lightning-tab label="Export">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                            <div class="slds-media__body">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title slds-grid">
+                                        <div class="slds-truncate slds-var-p-top_small">
+                                            <div class="slds-col slds-align-bottom">
+                                                <div class="slds-text-body_small slds-p-top--large slds-p-left--small">
+                                                    {selectedBadge}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-page-header__col-actions">
+                        <div class="slds-page-header__controls">
+                            <div class="slds-page-header__control">
+                                <div class="slds-grid">
+                                    <lightning-input variant="label-hidden" label={Labels.LBL_Search}
+                                        placeholder={Labels.LBL_Search} onchange={changeSearchInputHandler}
+                                        oncommit={searchInputChangeHandler} onkeypress={submitSearchKeyPressHandler}
+                                        type="search" class="slds-p-right--xx-small slds-p-top--large">
+                                    </lightning-input>
+                                    <lightning-button label="Mass Export"
+                                        class="slds-p-right--xx-small slds-p-top--large"
+                                        onclick={massExport}></lightning-button>
+                                    <lightning-button-icon-stateful class="slds-p-right--xx-small slds-p-top--large"
+                                        icon-name="utility:filterList" selected={filterState}
+                                        onclick={toggleFilter}></lightning-button-icon-stateful>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-scrollable" style={tableStyle}>
+                        <lightning-spinner variant="brand" size="medium" if:true={isLoading}></lightning-spinner>
+                        <table
+                            class="initial-table slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered"
+                            if:false={isLoading}>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <lightning-input type="checkbox" checked={isAllSelected}
+                                            onchange={toggleAllSelected}></lightning-input>
+                                    </th>
+                                    <template for:each={fieldWrapper} for:item="item">
+                                        <th key={item.fieldName}>{item.fieldLabel}</th>
+                                    </template>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr if:false={hasData}>
+                                    <td colspan={fieldWrapper.length}>
+                                        <div class="slds-text-align_center">{Labels.LBL_No_Item_To_Display}</div>
+                                    </td>
+                                </tr>
+                                <!-- <template for:each={displayedTemplates} for:item="template">
+                                    <tr key={template.Id}>
+                                        <template for:each={template.gridList} for:item="grid">
+                                            <td key={grid.Id}>
+                                                <lightning-input type="checkbox" if:false={grid.isSelected}
+                                                    data-gridname={grid.templateName} value={grid.isSelected}
+                                                    onchange={toggleSelectedTemplates}></lightning-input>
+                                                <lightning-input type="checkbox" checked if:true={grid.isSelected}
+                                                    data-gridname={grid.templateName} value={grid.isSelected}
+                                                    onchange={toggleSelectedTemplates}></lightning-input>
+                                            </td>
+                                            <template for:each={grid.values} for:item="value">
+                                                <td key={value.fieldIndex}>{value.fieldValue}</td>
+                                            </template>
+                                            <td key={grid.Id}>
+                                                <lightning-icon icon-name="utility:download" size="x-small"
+                                                    data-templatename={grid.templateName} onclick={singleExport}
+                                                    style="cursor: pointer;"
+                                                    title="Export as XML File"></lightning-icon>
+                                            </td>
+                                        </template>
+                                    </tr>
+                                </template> -->
+                                <!-- Proper keys and structure: one <tr> per grid entry -->
+                                <template for:each={displayedTemplates} for:item="template">
+                                    <template for:each={template.gridList} for:item="grid">
+                                        <tr key={grid.templateName}>
+                                            <td>
+                                                <lightning-input type="checkbox"
+                                                    data-gridname={grid.templateName}
+                                                    checked={grid.isSelected}
+                                                    onchange={toggleSelectedTemplates}>
+                                                </lightning-input>
+                                            </td>
+                                            <template for:each={grid.values} for:item="value">
+                                                <td key={value.fieldName}>{value.fieldValue}</td>
+                                            </template>
+                                            <td>
+                                                <lightning-icon icon-name="utility:download" size="x-small"
+                                                    data-templatename={grid.templateName} onclick={singleExport}
+                                                    style="cursor: pointer;" title="Export as XML File">
+                                                </lightning-icon>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Filter Panel Section -->
+                    <div if:true={isFilterOpen} style="z-index: 7;">
+                        <div class="slds-grid slds-grid_vertical slds-panel slds-panel_docked slds-panel_docked-right"
+                            style={filterPanelStyle}>
+                            <div class="slds-panel__header slds-grid slds-grid_align-spread">
+                                <h2>{Labels.LBL_Filter}</h2>
+                                <lightning-button-icon variant="bare" icon-name="utility:close"
+                                    onclick={toggleFilter}></lightning-button-icon>
+                            </div>
+                            <div class="slds-col slds-scrollable">
+                                <div class="slds-grid slds-wrap slds-p-around_small">
+                                    <div class="slds-list_vertical slds-list_vertical-space slds-size_1-of-1">
+                                        <div class="">
+                                            <div class="slds-col slds-wrap slds-m-around_small">
+                                                <lightning-combobox label={Labels.LBL_Select_Object}
+                                                    value={filters.objectName} options={objects}
+                                                    onchange={handleObjectChange}></lightning-combobox>
+                                                <lightning-combobox label={Labels.LBL_Type} value={filters.type}
+                                                    options={types} onchange={handleTypeChange}></lightning-combobox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-card__footer slds-grid slds-m-top_none slds-p-vertical_small">
+                                <lightning-button class="slds-template__container" variant="neutral"
+                                    label={Labels.LBL_Reset} onclick={resetFilter}
+                                    style="padding-left: 5px;"></lightning-button>
+                                <lightning-button class="slds-template__container" variant="brand"
+                                    label={Labels.LBL_Apply} onclick={applyChanges}
+                                    style="padding-left: 5px;"></lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-grid slds-var-p-around_small slds-size_1-of-1 slds-align-bottom">
+                    <lightning-combobox options={pageSizeOptions} value={pageSize} onchange={handlePageSize}
+                        dropdown-alignment="bottom-left" variant="label-hidden"
+                        class="slds-size_xx-small slds-var-p-right_small">
+                    </lightning-combobox>
+                    <lightning-button-group class="slds-var-p-right_small">
+                        <lightning-button label="First" disabled={previousDisabled} data-type="First" onclick={handleChangePage}></lightning-button>
+                        <lightning-button label="Previous" data-type="Previous" disabled={previousDisabled}
+                            onclick={handleChangePage}></lightning-button>
+                        <lightning-button label="Next" disabled={nextDisabled} data-type="Next" onclick={handleChangePage}></lightning-button>
+                        <lightning-button label="Last" disabled={nextDisabled} data-type="Last" onclick={handleChangePage}></lightning-button>
+                    </lightning-button-group>
+                    <lightning-badge label={paginationBadge}></lightning-badge>
+                </div>
+                <template if:true={showExportPopup}>
+                    <section class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <header class="slds-modal__header">
+                                <h2 class="slds-text-heading_medium">{Labels.LBL_Export}</h2>
+                            </header>
+                            <div class="slds-modal__content slds-p-around_medium">
+                                <p>{Labels.LBL_Export_File}</p>
+                                <p>{Labels.LBL_Selected_Templates}:</p>
+                                <ul>
+                                    <template for:each={selectedTemplates} for:item="template">
+                                        <li key={template}>
+                                            {template}
+                                        </li>
+                                    </template>
+                                </ul>
+                                <lightning-combobox label="Prefixes" options={prefixOptions} value={prefixValue}
+                                    required onchange={prefixChangeHandler} style="width: 200px;"></lightning-combobox>
+                            </div>
+                            <footer class="slds-modal__footer">
+                                <lightning-button label={Labels.LBL_Cancel} class="slds-p-right--x-small"
+                                    onclick={handleCancel}></lightning-button>
+                                <lightning-button label={Labels.LBL_Export} variant="brand"
+                                    onclick={handleExport}></lightning-button>
+                            </footer>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </template>
+            </lightning-tab>
+        </lightning-tabset>
+    </div>
+</template>

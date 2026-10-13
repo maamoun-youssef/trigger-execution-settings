@@ -1,0 +1,68 @@
+/* First comment: Copy + Edit in top-right of header */
+.comment-manager .comment-post-header {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+
+.comment-manager .comment-header-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.25rem;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+/* Footer action buttons on one line */
+.comment-manager .slds-post__footer .comment-footer-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Comment list item: align delete/copy/edit on same line */
+.comment-item-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.25rem;
+    margin-left: auto;
+}
+
+.comment-item-article {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+}
+
+.comment-item-article .comment-item-media-body {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Text area / publisher full width */
+.comment-manager-publisher {
+    width: 100%;
+}
+
+.comment-manager-publisher .comment-input-field,
+.comment-manager-publisher textarea.slds-publisher__input {
+    width: 100%;
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Lightning textarea wrapper full width */
+.comment-manager-publisher lightning-textarea {
+    display: block;
+    width: 100%;
+}
+
+/* Let media body take full width so publisher can expand */
+.comment-manager .slds-post .slds-media__body,
+.comment-manager .comment-item-article .comment-item-media-body {
+    min-width: 0;
+    flex: 1;
+}

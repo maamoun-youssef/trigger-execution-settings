@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Display the section of  Sell In Procedure --></help>
+    <label><!-- Section  - Sell In Procedure --></label>
+    <name>MBF_Section_SellInProcedure__c</name>
+</CustomFieldTranslation>

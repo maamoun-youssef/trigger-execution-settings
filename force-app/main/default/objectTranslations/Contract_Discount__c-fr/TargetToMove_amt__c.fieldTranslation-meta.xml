@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Value of fix amount to transfert - - &gt; Null = Total Fix amount (Value_amt__c) of the row --></help>
+    <label>Transfert (€)</label>
+    <name>TargetToMove_amt__c</name>
+</CustomFieldTranslation>

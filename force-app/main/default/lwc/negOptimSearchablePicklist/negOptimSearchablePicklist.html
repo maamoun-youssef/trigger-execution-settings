@@ -1,0 +1,49 @@
+<template>
+    <div class="slds-combobox_container">
+        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open"
+            role="combobox" aria-expanded={isDropdownOpen} aria-haspopup="listbox" style="min-width: 200px;">
+            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                <lightning-input label={label} field-level-help={helpText} variant={labelVariant} data-id="myInput" type="search" value={searchInput}
+                    disabled={disabled} required={required} class="comboboxInput" autocomplete="off"
+                    onfocus={handleSearchInput} onkeyup={handleSearchInput} onblur={handleBlur} onclick={handleSearchInput}  onchange={handleSearchInput}>
+                </lightning-input>
+            </div>
+            <div if:true={isDropdownOpen}>
+                <div class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid dropDownList"
+                    role="listbox" onpointerdown={handleDropdownPointerDown} onpointerup={handleDropdownPointerUp}>
+                    <ul class="slds-listbox slds-listbox_vertical slds-text-align_left" role="presentation">
+                        <template for:each={displayOptions} for:item="option">
+                            <li key={option.value} role="presentation" class="slds-listbox__item">
+                                <div data-value={option.value} data-label={option.label}
+                                    class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                    role="option" onmousedown={selectOption}>
+                                    <template if:true={option.iconName}>
+                                        <span class="slds-media__figure slds-listbox__option-icon slds-m-right_small">
+                                            <lightning-icon icon-name={option.iconName} size="x-small"></lightning-icon>
+                                        </span>
+                                    </template>
+                                    <template if:true={option.imgURL}>
+                                        <span class="slds-media__figure slds-listbox__option-icon slds-m-right_small">
+                                            <img src={option.imgURL} alt="" class="picklist-img">
+                                        </span>
+                                    </template>
+                                    <span class="slds-media__body">
+                                        <span class="slds-listbox__option-text slds-listbox__option-text_entity">{option.label}</span>
+                                    </span>
+                                </div>
+                            </li>
+                        </template>
+                        <li if:false={displayOptions.length} class="slds-listbox__item" role="presentation">
+                            <div class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                role="option">
+                                <span class="slds-media__body">
+                                    <span class="slds-listbox__option-text slds-listbox__option-text_entity">{labels.LBL_No_Items_Found}</span>
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

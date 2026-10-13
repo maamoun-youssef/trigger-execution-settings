@@ -1,0 +1,131 @@
+<template>
+    <div class="tile slds-p-around_medium" data-index={index}>
+        <div data-index={index} style="overflow: hidden;">
+            <div data-index={index} class="tile-image" style={imageUrl}>
+            </div>
+            <div data-index={index}>
+                <div data-index={index} class="slds-m-bottom_small slds-grid slds-wrap" style="float:left;width:55%;">
+                    <div class="slds-size_1-of-1" data-index={index}>
+                        <p data-index={index} class="tile-Name slds-truncate" title={sticker.Name}>{sticker.Name}</p>
+                    </div>
+
+                    <div data-index={contactIndex} class="slds-grid slds-p-top_xx-small">
+                        <!-- <div class="slds-grid slds-grid--align-end stickerView1 slds-p-top_small"> -->
+                        <template for:each={sticker.functionColorList} for:item="item" for:index="index">
+                            <div key={item} style={item.divStyle}
+                                class="slds-badge functionDiv slds-p-horizontal--medium">
+                                {item.functionText}
+                            </div>
+                        </template>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-index={index}>
+
+            <template for:each={sticker.stickersSettingsData} for:item="pair">
+                <div key={pair} class="slds-grid">
+                    <template for:each={pair} for:item="field">
+                        <div class="slds-col" style="width:50%" key={field.fieldName}>
+                            <!-- <div class="slds-grid">
+                                <div class="slds-size--1-of-3 slds-form-element__label">{obj.label}
+                                </div>
+                                <div class="slds-size--2-of-3 valueDiv">{obj.value}</div>
+                            </div> -->
+                            <div class="slds-m-bottom_xx-small " data-index={index}>
+                                <span data-index={index}>
+                                    <template lwc:if={field.hasField}>
+                                        <template lwc:if={field.isEmail}>
+                                            <img src={icons.emailIcon} data-index={index} alt="Email Icon"
+                                                class="custom-icon" />
+                                        </template>
+                                        <template lwc:elseif={field.isPhone}>
+                                            <img src={icons.telephoneIcon} data-index={index} alt="Telephone Icon"
+                                                class="custom-icon" />
+                                        </template>
+                                        <template lwc:elseif={field.isBoolean}>
+                                            <div class="slds-checkbox" style="width:fit-content" data-index={index}>
+                                                <input type="checkbox" value={field.fieldValue}
+                                                    checked={field.fieldValue} data-index={index} />
+                                                <label class="slds-checkbox__label" data-index={index}>
+                                                    <span class="slds-checkbox_faux" data-index={index}></span>
+                                                </label>
+                                            </div>
+                                        </template>
+                                        <template lwc:else>
+                                            <img src={icons.infoIcon} data-index={index} alt="Info Icon"
+                                                class="custom-icon" />
+                                        </template>
+
+                                    </template>
+                                    <span data-index={index} class="slds-p-left_x-small tile-Summary">
+                                        <span if:true={field.hasField} style="font-weight: bold;"
+                                            class="slds-m-right_xx-small">
+                                            {field.fieldLabel}
+                                        </span>
+                                        <lightning-formatted-number lwc:if={field.isNumberField}
+                                            maximum-fraction-digits={field.scale} value={field.fieldValue}>
+                                        </lightning-formatted-number>
+                                        <template lwc:elseif={field.isReference}>
+                                            {field.fieldValue}</template>
+                                        <span lwc:elseif={field.isBoolean} data-index={index}>
+                                            {field.fieldLabel}
+                                        </span>
+                                        <lightning-formatted-date-time lwc:elseif={field.isDate}
+                                            value={field.fieldValue} year="numeric" month="2-digit"
+                                            day="2-digit"></lightning-formatted-date-time>
+                                        <template lwc:elseif={field.isPicklist}>
+                                            {field.fieldOutputValue}
+                                        </template>
+                                        <template lwc:else>
+                                            {field.fieldValue}
+                                        </template>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+        <div data-index={index} class="tile-icons-container">
+            <template if:true={editMode}>
+                <div class="icon-container slds-m-right_small" data-index={index} data-stickerid={sticker.Id}
+                    data-currentstatus={sticker.currentstatus} onclick={handleEditSticker}>
+                    <img src={icons.previewIcon} data-index={index} data-stickerid={sticker.Id}
+                        data-currentstatus={sticker.currentstatus} class="custom-icon" />
+                </div>
+                <!-- Lock Icon with green background and green outline -->
+                <div class="icon-container green-background  slds-m-right_small" if:true={sticker.isActivated}
+                    data-index={index} data-stickerid={sticker.Id} data-currentstatus={sticker.currentstatus}
+                    onclick={switchStickerStatus}>
+                    <img src={icons.activeProtalIcon} data-index={index} data-stickerid={sticker.Id}
+                        data-currentstatus={sticker.currentstatus} class="custom-icon green" />
+                </div>
+                <!-- Unlock Icon with red background and red outline -->
+                <div class="icon-container red-background  slds-m-right_small" if:false={sticker.isActivated}
+                    data-index={index} data-stickerid={sticker.Id} data-currentstatus={sticker.currentstatus}
+                    onclick={switchStickerStatus}>
+                    <img src={icons.inactiveProtalIcon} data-index={index} data-stickerid={sticker.Id}
+                        data-currentstatus={sticker.currentstatus} class="custom-icon red" />
+                </div>
+            </template>
+            <template if:false={editMode}>
+                <!-- Lock Icon with green background and green outline -->
+                <div class="icon-container green-background  slds-m-right_small" if:true={sticker.isActivated}>
+                    <img src={icons.activeProtalIcon} class="custom-icon green" />
+                </div>
+                <!-- Unlock Icon with red background and red outline -->
+                <div class="icon-container red-background  slds-m-right_small" if:false={sticker.isActivated}>
+                    <img src={icons.inactiveProtalIcon} class="custom-icon red" />
+                </div>
+            </template>
+            <template if:true={selectMode}>
+                <lightning-input class="slds-p-around--x-small" type="checkbox-button" checked={isChecked}
+                    data-id={sticker.Id} onchange={handleSelectGL} disabled={isDisabled}>
+                </lightning-input>
+            </template>
+        </div>
+    </div>
+</template>

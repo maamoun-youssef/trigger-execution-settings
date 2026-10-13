@@ -1,0 +1,1939 @@
+<template>
+<div class="mainContainer" id="main-page">
+<div class="slds-page-header slds-m-bottom_small loadingScreen" if:true={loading}>
+<div class="slds-col slds-has-flexi-truncate">
+<div class="slds-media slds-no-space slds-grow">
+<div class="slds-media__figure">
+<div class="slds-avatar">
+<c-negoptim-stencil circle="true" height="50" width="50"></c-negoptim-stencil>
+</div>
+</div>
+<div class="slds-media__body">
+<p class="slds-line-height_reset" style="font-size: var(--lwc-fontSize2,0.75rem);">
+<c-negoptim-stencil width="200"></c-negoptim-stencil>
+</p>
+<h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+<c-negoptim-stencil width="400"></c-negoptim-stencil>
+</h1>
+</div>
+</div>
+</div>
+</div>
+<template if:true={isDeleteRow}>
+<div class="slds-backdrop slds-backdrop_open">
+<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+class="slds-modal slds-fade-in-open slds-modal_small">
+<div class="slds-modal__container deletePopUp">
+<div class="slds-modal__header">
+<h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate">
+{labels.LBL_Confirm}
+</h1>
+</div>
+<div class="slds-modal__content slds-text-align_center slds-p-around_x-small"
+id="modal-content-id-4">
+<div class="slds-modal__content slds-text-align_center slds-p-around_x-small"
+id="modal-content-id-2">
+<h4 class="slds-hyphenate">{labels.MSG_Confirm_Delete}</h4>
+</div>
+</div>
+<div class="slds-modal__footer">
+<lightning-button label={labels.LBL_Cancel} variant="neutral"
+onclick={handleCPDDeleteCancel} class="slds-m-right_x-small"></lightning-button>
+<lightning-button label={labels.LBL_Delete} variant="brand" onclick={handleCPDDelete}>
+</lightning-button>
+</div>
+</div>
+</section>
+</div>
+</template>
+<div class="slds-page-header slds-m-bottom_small slds-grid pageHeader" id='pageHeader' if:false={loading}>
+<!-- LAYOUT GRID -->
+<!-- GRID COL -->
+<div class="slds-col slds-has-flexi-truncate">
+<!-- HEADING AREA -->
+<!-- MEDIA OBJECT = FIGURE + BODY -->
+<div class="slds-media slds-no-space slds-grow">
+<div class="slds-media__body">
+<p class="slds-line-height_reset" style="font-size: var(--lwc-fontSize2,0.75rem);">
+Commercial Plan Simulation Matrix
+</p>
+<h1 class="slds-page-header__title slds-m-right_small slds-p-around_xx-small slds-align-middle slds-truncate"
+title="">
+{currentCommercialPlan.Name}
+</h1>
+</div>
+</div>
+<!-- / MEDIA OBJECT -->
+<!-- /HEADING AREA -->
+</div>
+<div class="slds-col slds-no-flex slds-grid slds-align-top">
+<div class="slds-grid">
+<lightning-button label={labels.LBL_Cancel} title={labels.LBL_Cancel} onclick={handleCancel}
+class="slds-m-left_x-small header_button">
+</lightning-button>
+<lightning-button label={labels.LBL_New} title={labels.LBL_New} onclick={createNewCPD}
+class="slds-m-left_x-small header_button">
+</lightning-button>
+<lightning-button label={labels.LBL_Save} title={labels.LBL_Save} onclick={saveSimulation}
+variant="brand" class="slds-m-left_x-small header_button">
+</lightning-button>
+<lightning-button-menu menu-alignment="right" alternative-text="Show menu" variant="border-filled"
+onselect={showFieldManagerHandler} icon-name="utility:connected_apps"
+class="slds-m-left_x-small header_button">
+<lightning-menu-item value="fieldManager" icon-name="utility:freeze_column"
+label={labels.LBL_Show_Hide_Columns}></lightning-menu-item>
+<lightning-menu-item value="exportExcel" icon-name="utility:download" label={labels.LBL_Export}>
+</lightning-menu-item>
+</lightning-button-menu>
+<lightning-button-icon-stateful style="margin-left: 10px;" icon-name="utility:filterList"
+onclick={toggleFilter} variant="border-filled" class="filterBtn slds-var-p-right_x-small">
+</lightning-button-icon-stateful>
+
+</div>
+</div>
+</div>
+<div id="mainTable" class="slds-grid slds-card tableBody mainTable">
+<div class="slds-col slds-scrollable" style={tableStyle}>
+<!-- commecialPlan TABLE -->
+<div class="tableContainer" if:false={Loading}>
+<template if:true={tableLoading}>
+<lightning-spinner variant="brand" size="large"></lightning-spinner>
+</template>
+<table
+class="initial-table no-help-text main-table slds-scrollable slds-scrollable_y slds-table slds-table_bordered slds-table_cell-buffer slds-border_left slds-border_right">
+<!-- HEADER -->
+<thead>
+<tr style="height: 50px" class="mainTableHeader">
+<th style="padding-left:0px;position: sticky; z-index: 6; left: 0;" class={tableHeader}
+rowspan="2"></th>
+<template for:each={displayedFields} for:item="displayedField"
+for:index="displayedFieldIndex">
+<th class="slds-text-align_center" rowspan="2" style={displayedField.thStyle}
+key={displayedField.key}>
+<div class="slds-grid slds-align-content-center slds-truncate">
+<div>
+{displayedField.fieldLabel}
+</div>
+<template if:true={displayHelpText}>
+<template if:true={displayedField.helpText}>
+<lightning-helptext class="slds-p-left_small"
+content={displayedField.helpText}></lightning-helptext>
+</template>
+</template>
+<template if:true={displayedField.isShowFilterOnColumnHeader}>
+<lightning-button-icon-stateful
+style="right: 0px;top:0;position:absolute;"
+icon-name="utility:filterList" onclick={toggleDropDownFilter}
+selected={displayedField.hasFilter} variant="border-filled"
+size="x-small" class="filter-btn"
+data-field={displayedField.fieldName}
+data-button-field={displayedField.fieldName}>
+</lightning-button-icon-stateful>
+
+<div class="slds-hide slds-scrollable headerFilterSection slds-dropdown slds-p-around_x-small slds-dropdown_left"
+data-filter-field={displayedField.fieldName}
+style={displayedField.divStyle}>
+<span style="position: absolute;right: 0;top: 0; z-index: 7;">
+<lightning-button-icon variant="container" size="small"
+icon-name="utility:close"
+data-field={displayedField.fieldName}
+onclick={toggleDropDownFilter} alternative-text='close'>
+</lightning-button-icon>
+</span>
+<div class="slds-scrollable" style="overflow:visible;">
+<ul class="slds-dropdown__list" role="menu"
+aria-label="Show More">
+<li class="slds-dropdown__item" role="presentation"
+style="text-align: left;">
+<template if:true={displayedField.isSearchBar}>
+<lightning-input name={displayedField.fieldName}
+data-mode="one" type='text'
+data-header-filter={displayedField.fieldName}
+class="dataFilter"
+label={displayedField.fieldLabel}
+onchange={setSelectedValues}>
+</lightning-input>
+</template>
+<template if:true={displayedField.isRange}>
+<div class='slds-form-element'>
+<legend
+class="slds-form-element__label slds-form-element__legend">
+{displayedField.fieldLabel}
+</legend>
+<div
+class="slds-form-element__control slds-grid slds-gutters">
+<lightning-input
+type={displayedField.dataType}
+label={labels.LBL_Minimum}
+class='slds-col dataFilter'
+name={displayedField.fieldName}
+data-header-filter={displayedField.fieldName}
+step={displayedField.stepHtml}
+data-range='value1'
+onchange={setSelectedRangeValue}>
+</lightning-input>
+<span style='margin-top: 1.75rem;'>-</span>
+<lightning-input
+type={displayedField.dataType}
+data-header-filter={displayedField.fieldName}
+label={labels.LBL_Maximum}
+step={displayedField.stepHtml}
+class='slds-col dataFilter'
+name={displayedField.fieldName}
+data-range='value2'
+onchange={setSelectedRangeValue}>
+</lightning-input>
+</div>
+</div>
+</template>
+<template if:true={displayedField.isPicklist}>
+<lightning-checkbox-group
+if:true={displayedField.isPicklist}
+data-name={displayedField.fieldName}
+class="dataFilter"
+data-header-filter={displayedField.fieldName}
+name={displayedField.fieldName}
+label={displayedField.fieldLabel}
+options={displayedField.pickListValues}
+value={displayedField.values}
+onchange={setSelectedValues}>
+</lightning-checkbox-group>
+</template>
+</li>
+<li class="slds-has-divider_top-space" role="separator">
+</li>
+<div style="width: max-content;"
+class="slds-align_absolute-center slds-grid">
+<div class="slds-col slds-var-p-right_xx-large">
+<button type="submit" title={labels.LBL_Reset}
+data-field={displayedField.fieldName}
+onclick={reset} data-type="filter"
+class="slds-button slds-button_neutral">
+{labels.LBL_Reset}
+</button>
+<button type="submit" title={labels.LBL_Search}
+data-field={displayedField.fieldName}
+onclick={toggleDropDownFilter}
+data-actiontype="search"
+class="slds-button slds-button_brand">
+{labels.LBL_Search}
+</button>
+</div>
+<!--div class="slds-col">
+<button type="submit" title={labels.LBL_Search}
+data-field={displayedField.fieldName} onclick={toggleDropDownFilter}
+data-actiontype="search" class="slds-button slds-button_brand">
+{labels.LBL_Search}
+</button>
+</div-->
+</div>
+</ul>
+</div>
+</div>
+</template>
+<template if:true={displayedField.isMassUpdate}>
+<lightning-button-icon variant="container" size="small"
+icon-name="utility:edit" data-field={displayedField.fieldName}
+onclick={toggleMassUpdatePanel}
+alternative-text={labels.LBL_Mass_update}
+title={labels.LBL_Mass_update} class="massUpdateBtn">
+</lightning-button-icon>
+<template if:true={displayedField.displayMassUpdate}>
+<div class="slds-dropdown slds-p-around_x-small"
+data-updatefield={displayedField.fieldName}
+style="width: 255px;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;top: 100%; z-index:6;">
+<span style="position: absolute;right: 0;top: 0; z-index: 5;">
+<lightning-button-icon variant="container" size="small"
+icon-name="utility:close"
+data-field={displayedField.fieldName}
+onclick={toggleMassUpdatePanel} alternative-text="Close"
+title="Close">
+</lightning-button-icon>
+</span>
+<ul class="slds-dropdown__list slds-p-top--medium" role="menu"
+aria-label="Show More">
+<li class="slds-dropdown__item" role="presentation"
+style="text-align: left;">
+<template if:true={displayedField.isNumberField}>
+<lightning-input variant="label-hidden"
+data-field-name={displayedField.fieldName}
+onchange={massUpdateHandler}
+data-index={displayedFieldIndex}
+value={displayedField.massUpdateValue}>
+</lightning-input>
+</template>
+<template if:true={displayedField.isReference}>
+<template lwc:if={displayedField.isCategory}>
+<lightning-input
+data-index={displayedFieldIndex}
+data-field-name={displayedField.fieldName}
+data-popup="category"
+onchange={massUpdateHandler}
+onclick={loadPopupHandler}
+variant="label-hidden"
+value={displayedField.massUpdateLabel}>
+</lightning-input>
+</template>
+<template lwc:elseif={displayedField.isProduct}>
+<lightning-input
+data-index={displayedFieldIndex}
+data-field-name={displayedField.fieldName}
+onclick={loadPopupHandler}
+data-popup="product"
+onchange={massUpdateHandler}
+variant="label-hidden"
+value={displayedField.massUpdateLabel}>
+</lightning-input>
+</template>
+<template lwc:elseif={displayedField.isBU}>
+<lightning-input
+data-index={displayedFieldIndex}
+data-field-name={displayedField.fieldName}
+data-popup="bu" onclick={loadPopupHandler}
+onchange={massUpdateHandler}
+variant="label-hidden"
+value={displayedField.massUpdateLabel}>
+</lightning-input>
+</template>
+<template lwc:else>
+<lightning-record-edit-form
+object-api-name={CommercialPlanDetailObject}
+class="lookup">
+<lightning-input-field
+variant="label-hidden"
+field-name={displayedField.fieldName}
+value={displayedField.massUpdateValue}
+data-field-name={displayedField.fieldName}
+onchange={massUpdateHandler}
+data-index={displayedFieldIndex}>
+</lightning-input-field>
+</lightning-record-edit-form>
+</template>
+</template>
+<template if:true={displayedField.isDate}>
+<lightning-input variant="label-hidden" type="date"
+value={displayedField.massUpdateValue}
+data-field-name={displayedField.fieldName}
+onchange={massUpdateHandler}
+data-index={displayedFieldIndex}>
+</lightning-input>
+</template>
+<template if:true={displayedField.isString}>
+<lightning-input variant="label-hidden"
+value={displayedField.massUpdateValue}
+data-field-name={displayedField.fieldName}
+onchange={massUpdateHandler}
+data-index={displayedFieldIndex}>
+</lightning-input>
+</template>
+<template if:true={displayedField.isPicklist}>
+<template
+if:false={displayedField.hasDependentPicklist}>
+<select onchange={massUpdateHandler}
+data-field-name={displayedField.fieldName}
+data-index={displayedFieldIndex}>
+<template
+for:each={displayedField.pickListValues}
+for:item="option">
+<option key={option.value}
+value={option.value}
+selected={option.isSelected}>
+{option.label}</option>
+</template>
+</select>
+</template>
+<template
+if:true={displayedField.hasDependentPicklist}>
+<template
+for:each={displayedField.dependentPicklist}
+for:item="dependentPicklist"
+for:index="depIndex">
+{dependentPicklist.fieldLabel}
+<select key={dependentPicklist.fieldName}
+data-field-name={dependentPicklist.fieldName}
+onchange={massUpdateHandler}
+data-index={dependentPicklist.fieldIndex}
+data-depindex={depIndex}
+data-parentindex={displayedFieldIndex}
+disabled={dependentPicklist.disabled}>
+<template
+for:each={dependentPicklist.pickListValues}
+for:item="option">
+<option key={option.value}
+value={option.value}
+selected={option.isSelected}>
+{option.label}</option>
+</template>
+</select>
+</template>
+</template>
+</template>
+</li>
+<li class="slds-dropdown__item" role="presentation"
+style="text-align: left;">
+{getMassUpdateLines}
+</li>
+<li class="slds-has-divider_top-space" role="separator">
+</li>
+<div>
+<button type="submit" title={labels.LBL_Apply}
+style="width: 100%;" onclick={handleApplyMassUpdate}
+class="slds-button slds-button_brand">
+{labels.LBL_Apply}
+</button>
+</div>
+</ul>
+</div>
+</template>
+</template>
+</div>
+</th>
+</template>
+<th rowspan="2" style="z-index: 6;position: sticky; right: 0;" if={isDisplayLastTD}>
+</th>
+</tr>
+</thead>
+<tbody>
+<template if:false={Loading}>
+<template if:true={isEmpty}>
+<tr>
+<td colspan={displayedFields.length}>
+<h2
+class="slds-align_absolute-center slds-text-align_center slds-m-around_xx-large slds-card__header-title slds-align-content-center">
+{labels.LBL_No_Item_To_Display}
+</h2>
+</td>
+</tr>
+</template>
+</template>
+<template if:false={isEmpty}>
+<template if:false={tableLoading} for:each={wCPDJSList}
+for:item="commercialPlanDetailWrapper" for:index="CPDindex">
+<tr key={commercialPlanDetailWrapper.commercialPlanDetail.Id}
+style="border-collapse: collapse !important;">
+<td style={commercialPlanDetailWrapper.firstTdStyle}
+onclick={handleClickDetail}>
+<div if:false={commercialPlanDetailWrapper.isNew}
+class="slds-form-element__row slds-grid">
+<lightning-input type="checkbox"
+checked={commercialPlanDetailWrapper.isSelected}
+variant="label-hidden" data-id={commercialPlanDetailWrapper.id}
+data-cpd-index={CPDindex} onchange={toggleRecordSelect}
+if:true={enableMassUpdate}></lightning-input>
+<template if:true={commercialPlanDetailWrapper.hasChildren}>
+<div class="slds-form-element__control">
+<lightning-button-icon
+icon-name={commercialPlanDetailWrapper.iconName}
+alternative-text="Children" variant="bare"
+onclick={toggleChildren} data-index={CPDindex}
+data-id={commercialPlanDetailWrapper.id}
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+<div class="slds-form-element__control" style="visibility: hidden;">
+<lightning-button-icon icon-name="utility:chevronright"
+alternative-text="Open" variant="bare"
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+</template>
+<div class="slds-form-element__control" style="margin-left: 10px;">
+<lightning-button-icon icon-name="utility:copy"
+alternative-text="Clone" variant="bare" onclick={cloneCPD}
+data-rowindex={commercialPlanDetailWrapper.index}
+data-id={commercialPlanDetailWrapper.id}
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+<template if:true={displayAddChildrenLine}>
+<div class="slds-form-element__control" style="margin-left: 10px;">
+<lightning-button-icon icon-name="utility:add"
+alternative-text="Add" variant="bare"
+onclick={createNewCPDChild}
+data-index={commercialPlanDetailWrapper.index}
+data-id={commercialPlanDetailWrapper.id}
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+</template>
+<template if:true={displayCloneForMultipleProducts}>
+<div class="slds-form-element__control" style="margin-left: 10px;">
+<lightning-button-icon icon-name="utility:multi_select_checkbox"
+alternative-text={labels.LBL_Multi_Product_Selection}
+variant="bare" onclick={createCloneForMultipleProducts}
+data-index={commercialPlanDetailWrapper.index}
+data-rowindex={CPDindex}
+data-id={commercialPlanDetailWrapper.id}
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+</template>
+</div>
+<div if:true={commercialPlanDetailWrapper.isNew}
+class="slds-form-element__row slds-grid">
+<template if:true={commercialPlanDetailWrapper.hasChildren}>
+<div class="slds-form-element__control">
+<lightning-button-icon
+icon-name={commercialPlanDetailWrapper.iconName}
+alternative-text="Children" variant="bare"
+onclick={toggleChildren} data-index={CPDindex}
+data-id={commercialPlanDetailWrapper.id}
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+</template>
+<template if:false={commercialPlanDetailWrapper.hasChildren}>
+<div class="slds-form-element__control" style="visibility: hidden;">
+<lightning-button-icon icon-name="utility:chevronright"
+alternative-text="Open" variant="bare" disabled
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+</template>
+<div class="slds-form-element__control" style="margin-left: 10px;">
+<lightning-button-icon icon-name="utility:copy"
+alternative-text="Clone" variant="bare" disabled
+data-rowindex={commercialPlanDetailWrapper.index}
+data-id={commercialPlanDetailWrapper.id}
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+<template if:true={displayAddChildrenLine}>
+<div class="slds-form-element__control" style="margin-left: 10px;">
+<lightning-button-icon icon-name="utility:add"
+alternative-text="Add" variant="bare"
+onclick={createNewCPDChild} disabled
+data-index={commercialPlanDetailWrapper.index}
+data-id={commercialPlanDetailWrapper.id}
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+</template>
+<template if:true={displayCloneForMultipleProducts}>
+<div class="slds-form-element__control" style="margin-left: 10px;">
+<lightning-button-icon icon-name="utility:multi_select_checkbox"
+alternative-text={labels.LBL_Multi_Product_Selection}
+variant="bare" onclick={createCloneForMultipleProducts}
+data-index={commercialPlanDetailWrapper.index}
+data-rowindex={CPDindex}
+data-id={commercialPlanDetailWrapper.id}
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+</template>
+</div>
+</td>
+<template for:each={commercialPlanDetailWrapper.values}
+for:item="commercialPlanDetailField" for:index="fieldindex">
+<template if:false={commercialPlanDetailField.isHidden}>
+<td key={commercialPlanDetailField.fieldApiName}
+onclick={handleClickDetail}
+style={commercialPlanDetailField.tdStyle}>
+<template if:false={commercialPlanDetailField.isInput}>
+<template if:true={commercialPlanDetailField.isNumberField}>
+<lightning-formatted-number
+maximum-fraction-digits={commercialPlanDetailField.scale}
+value={commercialPlanDetailField.fieldValue}>
+</lightning-formatted-number>
+</template>
+<template if:true={commercialPlanDetailField.isText}>
+<template
+if:true={commercialPlanDetailField.isHTMLFormatted}>
+<lightning-formatted-rich-text
+value={commercialPlanDetailField.fieldOutputValue}>
+</lightning-formatted-rich-text>
+</template>
+<template
+if:false={commercialPlanDetailField.isHTMLFormatted}>
+{commercialPlanDetailField.fieldOutputValue}
+</template>
+</template>
+<template if:true={commercialPlanDetailField.isReference}>
+<a href={commercialPlanDetailField.link} target="_blank">
+{commercialPlanDetailField.fieldOutputValue}</a>
+</template>
+<template if:true={commercialPlanDetailField.isBoolean}>
+<lightning-input class="slds-p-left_xx-large"
+type="checkbox" variant="label-hidden"
+checked={commercialPlanDetailField.fieldValue} disabled>
+</lightning-input>
+</template>
+<template if:true={commercialPlanDetailField.isDate}>
+<lightning-formatted-date-time
+value={commercialPlanDetailField.fieldValue}
+year="numeric" month="2-digit"
+day="2-digit"></lightning-formatted-date-time>
+</template>
+</template>
+<template if:true={commercialPlanDetailField.isInput}>
+<template if:true={commercialPlanDetailField.isText}>
+<lightning-input data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-id={commercialPlanDetailWrapper.id}
+data-field={commercialPlanDetailField.fieldApiName}
+onchange={handleFieldEdits} variant="label-hidden"
+value={commercialPlanDetailField.fieldValue}>
+</lightning-input>
+</template>
+<template if:true={commercialPlanDetailField.isNumberField}>
+<lightning-input data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-id={commercialPlanDetailWrapper.id}
+data-field={commercialPlanDetailField.fieldApiName}
+data-isnumber="true" type="number"
+onchange={handleFieldEdits} variant="label-hidden"
+formatter="decimal"
+step={commercialPlanDetailField.step}
+value={commercialPlanDetailField.fieldValue}>
+</lightning-input>
+</template>
+<template if:true={commercialPlanDetailField.isReference}>
+<template lwc:if={commercialPlanDetailField.isCategory}>
+<lightning-input data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-id={commercialPlanDetailWrapper.id}
+data-field={commercialPlanDetailField.fieldApiName}
+data-popup="category" onchange={handleFieldEdits}
+onclick={loadPopupHandler} variant="label-hidden"
+value={commercialPlanDetailField.fieldOutputValue}>
+</lightning-input>
+</template>
+<template lwc:elseif={commercialPlanDetailField.isProduct}>
+<lightning-input data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-id={commercialPlanDetailWrapper.id}
+data-field={commercialPlanDetailField.fieldApiName}
+onclick={loadPopupHandler} data-popup="product"
+onchange={handleFieldEdits} variant="label-hidden"
+value={commercialPlanDetailField.fieldOutputValue}>
+</lightning-input>
+</template>
+<template lwc:elseif={commercialPlanDetailField.isBU}>
+<lightning-input data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-id={commercialPlanDetailWrapper.id}
+data-field={commercialPlanDetailField.fieldApiName}
+data-popup="bu" onclick={loadPopupHandler}
+onchange={handleFieldEdits} variant="label-hidden"
+value={commercialPlanDetailField.fieldOutputValue}>
+</lightning-input>
+</template>
+<template lwc:else>
+<lightning-record-edit-form
+object-api-name={CommercialPlanDetailObject}
+record-id={commercialPlanDetailWrapper.id}>
+<lightning-input-field
+field-name={commercialPlanDetailField.fieldApiName}
+data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-id={commercialPlanDetailWrapper.id}
+data-field={commercialPlanDetailField.fieldApiName}
+onchange={handleFieldEdits}
+variant="label-hidden"
+value={commercialPlanDetailField.fieldOutputValue}>
+</lightning-input-field>
+</lightning-record-edit-form>
+</template>
+</template>
+<template if:true={commercialPlanDetailField.isBoolean}>
+<lightning-layout>
+<lightning-layout-item>
+<lightning-input class="slds-p-left_xx-large"
+type="checkbox" data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-id={commercialPlanDetailWrapper.id}
+data-field={commercialPlanDetailField.fieldApiName}
+onchange={handleFieldEdits}
+checked={commercialPlanDetailField.fieldValue}>
+</lightning-input>
+</lightning-layout-item>
+</lightning-layout>
+</template>
+<template if:true={commercialPlanDetailField.isDate}>
+<lightning-input type="date" data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-id={commercialPlanDetailWrapper.id}
+id={commercialPlanDetailWrapper.id}
+data-field={commercialPlanDetailField.fieldApiName}
+onchange={handleFieldEdits} variant="label-hidden"
+value={commercialPlanDetailField.fieldOutputValue}>
+</lightning-input>
+</template>
+<template if:true={commercialPlanDetailField.isPicklist}>
+<template
+if:false={commercialPlanDetailField.controllerName}>
+<select onchange={handleFieldEdits}
+data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-index={commercialPlanDetailWrapper.index}
+data-id={commercialPlanDetailWrapper.id}
+data-field={commercialPlanDetailField.fieldApiName}>
+<template
+for:each={commercialPlanDetailField.picklistOptions}
+for:item="option">
+<option key={option.value} value={option.value}
+selected={option.isSelected}>
+{option.label}
+</option>
+</template>
+</select>
+</template>
+<template
+if:true={commercialPlanDetailField.controllerName}>
+<template
+if:false={commercialPlanDetailField.controllerValue}>
+<select onchange={handleFieldEdits}
+data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-index={commercialPlanDetailWrapper.index}
+data-id={commercialPlanDetailWrapper.id}
+data-field={commercialPlanDetailField.fieldApiName}
+disabled>
+<template
+for:each={commercialPlanDetailField.picklistOptions}
+for:item="option">
+<option key={option.value}
+value={option.value}
+selected={option.isSelected}>
+{option.label}</option>
+</template>
+</select>
+</template>
+<template
+if:true={commercialPlanDetailField.controllerValue}>
+<select onchange={handleFieldEdits}
+data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-index={commercialPlanDetailWrapper.index}
+data-id={commercialPlanDetailWrapper.id}
+data-field={commercialPlanDetailField.fieldApiName}>
+<template
+for:each={commercialPlanDetailField.picklistOptions}
+for:item="option">
+<option key={option.value}
+value={option.value}
+selected={option.isSelected}>
+{option.label}</option>
+</template>
+</select>
+</template>
+</template>
+</template>
+<template if:true={commercialPlanDetailField.isMultiPicklist}>
+<c-neg-optim-custom-picklist data-rowindex={CPDindex}
+data-index={commercialPlanDetailWrapper.index}
+data-field={commercialPlanDetailField.fieldApiName}
+selected-values={commercialPlanDetailField.stringifiedFieldOutputValue}
+options={commercialPlanDetailField.stringifiedPicklistOptions}
+selected-event={Events.handleChangeMultiPicklistValues}
+onhandlechangemultipicklistvalues={handleChangeMultiPicklistValues}>
+>
+</c-neg-optim-custom-picklist>
+</template>
+<template if:true={commercialPlanDetailField.isURL}>
+<!-- <span style="white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important;"> -->
+<a href={commercialPlanDetailField.fieldValue}
+target="_blank" class="truncate-link">
+{commercialPlanDetailField.fieldValue}</a>
+<!-- </span>     -->
+<template if:true={commercialPlanDetailField.isEmptyAndURL}>
+<span style="color:red;"> Pièce jointe manquante </span>
+</template>
+<lightning-button-icon icon-name="utility:upload"
+alternative-text="upload" variant="bare"
+onclick={openFileUploadPopup}
+data-fieldindex={fieldindex} data-rowindex={CPDindex}
+data-id={commercialPlanDetailWrapper.id}
+data-field={commercialPlanDetailField.fieldApiName}
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+<template
+if:false={commercialPlanDetailField.isEmptyAndURL}>
+<lightning-button-icon icon-name="utility:delete"
+alternative-text="delete" variant="bare"
+onclick={handleDeleteFile}
+data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-id={commercialPlanDetailWrapper.id}
+data-field={commercialPlanDetailField.fieldApiName}
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</template>
+</template>
+</template>
+</td>
+</template>
+<template if:true={commercialPlanDetailField.isHidden}>
+<td style={commercialPlanDetailField.tdStyle}
+key={commercialPlanDetailField.fieldApiName}>
+
+</td>
+</template>
+</template>
+<td style="position: sticky; z-index: 3; right: 0;background: white;"
+if:true={isDisplayLastTD}>
+<!-- <template if:true={commercialPlanDetailWrapper.deleteAllowed}> -->
+<lightning-button-icon icon-name="utility:delete" if:true={allowDelete}
+onclick={handleCPDDeletePopUp} data-index={CPDindex}
+data-rowindex={CPDindex} data-id={commercialPlanDetailWrapper.id}
+variant="border-filled" class="slds-m-left_xx-small">
+</lightning-button-icon>
+<template if:false={commercialPlanDetailWrapper.isNew}>
+<lightning-button-icon icon-name="utility:threedots"
+class="slds-m-left_xx-small" onclick={openCPD}
+data-id={commercialPlanDetailWrapper.id} if:true={allowOpenRecord}>
+</lightning-button-icon>
+</template>
+</td>
+</tr>
+<template if:true={commercialPlanDetailWrapper.hasChildrenAndOpened}>
+<template for:each={commercialPlanDetailWrapper.children}
+for:item="childWrapper" for:index="childIndex">
+<tr key={childWrapper.commercialPlanDetail.id}
+style="border-collapse: collapse !important;">
+<td style={childWrapper.firstTdStyle} onclick={handleClickDetail}>
+<div class="slds-form-element__row slds-grid"
+if:false={childWrapper.isNew}>
+<div class="slds-form-element__control"
+style="visibility: hidden;">
+<lightning-button-icon icon-name="utility:chevronright"
+alternative-text="Clone" variant="bare"
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+<div class="slds-form-element__control"
+style="margin-left: 10px;visibility: hidden;">
+<lightning-button-icon icon-name="utility:add"
+alternative-text="Add" variant="bare"
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+<div class="slds-form-element__control"
+style="margin-left: 10px;">
+<lightning-button-icon icon-name="utility:copy"
+alternative-text="Clone" variant="bare"
+onclick={cloneCPD} data-index={childWrapper.index}
+data-childindex={childIndex} data-id={childWrapper.id}
+data-rowindex={CPDindex} class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+<div class="slds-form-element__control"
+style="margin-left: 10px;visibility: hidden;">
+<lightning-button-icon icon-name="utility:add"
+alternative-text="Add" variant="bare"
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+</div>
+<div class="slds-form-element__row slds-grid"
+if:true={childWrapper.isNew}>
+<div class="slds-form-element__control"
+style="visibility: hidden;">
+<lightning-button-icon icon-name="utility:chevronright"
+alternative-text="Clone" variant="bare"
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+<div class="slds-form-element__control"
+style="margin-left: 10px;visibility: hidden;">
+<lightning-button-icon icon-name="utility:add"
+alternative-text="Add" variant="bare"
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+<div class="slds-form-element__control"
+style="margin-left: 10px;">
+<lightning-button-icon icon-name="utility:copy"
+alternative-text="Clone" variant="bare"
+data-index={childWrapper.index}
+data-childindex={childIndex} data-id={childWrapper.id}
+data-rowindex={CPDindex} disabled
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</div>
+<div class="slds-form-element__control"
+style="margin-left: 10px;">
+</div>
+</div>
+</td>
+<template for:each={childWrapper.values}
+for:item="commercialPlanDetailField" for:index="fieldindex">
+<template if:false={commercialPlanDetailField.isHidden}>
+<td key={commercialPlanDetailField.fieldApiName}
+onclick={handleClickDetail}
+style={commercialPlanDetailField.tdStyle}>
+<template if:false={commercialPlanDetailField.isInput}>
+<template
+if:true={commercialPlanDetailField.isNumberField}>
+<lightning-formatted-number
+maximum-fraction-digits={commercialPlanDetailField.scale}
+value={commercialPlanDetailField.fieldOutputValue}>
+</lightning-formatted-number>
+</template>
+<template if:true={commercialPlanDetailField.isText}>
+<template
+if:true={commercialPlanDetailField.isHTMLFormatted}>
+<lightning-formatted-rich-text
+value={commercialPlanDetailField.fieldOutputValue}>
+</lightning-formatted-rich-text>
+</template>
+<template
+if:false={commercialPlanDetailField.isHTMLFormatted}>
+{commercialPlanDetailField.fieldOutputValue}
+</template>
+</template>
+<template
+if:true={commercialPlanDetailField.isReference}>
+<a href={commercialPlanDetailField.link}
+target="_blank">
+{commercialPlanDetailField.fieldOutputValue}</a>
+</template>
+<template if:true={commercialPlanDetailField.isBoolean}>
+<lightning-input class="slds-p-left_xx-large"
+type="checkbox"
+checked={commercialPlanDetailField.fieldValue}
+disabled>
+</lightning-input>
+</template>
+</template>
+<template if:true={commercialPlanDetailField.isInput}>
+<template if:true={commercialPlanDetailField.isText}>
+<lightning-input data-index={childIndex}
+data-rowindex={CPDindex}
+data-id={childWrapper.id}
+data-parentindex={childWrapper.parentIndex}
+data-field={commercialPlanDetailField.fieldApiName}
+onchange={handleFieldEdits}
+variant="label-hidden"
+value={commercialPlanDetailField.fieldValue}>
+</lightning-input>
+</template>
+<template
+if:true={commercialPlanDetailField.isNumberField}>
+<lightning-input data-index={childIndex}
+value={commercialPlanDetailField.fieldValue}
+data-rowindex={CPDindex}
+data-id={childWrapper.id}
+data-parentindex={childWrapper.parentIndex}
+data-field={commercialPlanDetailField.fieldApiName}
+data-isnumber="true" type="number"
+onchange={handleFieldEdits}
+variant="label-hidden" formatter="decimal"
+step={commercialPlanDetailField.step}>
+</lightning-input>
+</template>
+<template
+if:true={commercialPlanDetailField.isReference}>
+<template
+lwc:if={commercialPlanDetailField.isCategory}>
+<lightning-input data-childindex={childIndex}
+data-rowindex={CPDindex}
+data-id={childWrapper.id}
+data-parentindex={childWrapper.parentIndex}
+data-field={commercialPlanDetailField.fieldApiName}
+data-popup="category"
+onclick={loadPopupHandler}
+onchange={handleFieldEdits}
+variant="label-hidden"
+value={commercialPlanDetailField.fieldOutputValue}>
+</lightning-input>
+</template>
+<template
+lwc:elseif={commercialPlanDetailField.isProduct}>
+<lightning-input data-childindex={childIndex}
+data-rowindex={CPDindex}
+data-id={childWrapper.id}
+data-parentindex={childWrapper.parentIndex}
+data-field={commercialPlanDetailField.fieldApiName}
+data-popup="product"
+onclick={loadPopupHandler}
+onchange={handleFieldEdits}
+variant="label-hidden"
+value={commercialPlanDetailField.fieldOutputValue}>
+</lightning-input>
+</template>
+<template
+lwc:elseif={commercialPlanDetailField.isBU}>
+<lightning-input data-childindex={childIndex}
+data-rowindex={CPDindex}
+data-id={childWrapper.id}
+data-parentindex={childWrapper.parentIndex}
+data-field={commercialPlanDetailField.fieldApiName}
+data-popup="bu" onclick={loadPopupHandler}
+onchange={handleFieldEdits}
+variant="label-hidden"
+value={commercialPlanDetailField.fieldOutputValue}>
+</lightning-input>
+</template>
+<template lwc:else>
+<lightning-record-edit-form
+object-api-name={CommercialPlanDetailObject}
+record-id={childWrapper.id}>
+<lightning-input-field
+field-name={commercialPlanDetailField.fieldApiName}
+data-childindex={childIndex}
+data-rowindex={CPDindex}
+data-id={childWrapper.id}
+data-parentindex={childWrapper.parentIndex}
+data-field={commercialPlanDetailField.fieldApiName}
+onchange={handleFieldEdits}
+variant="label-hidden"
+value={commercialPlanDetailField.fieldOutputValue}>
+</lightning-input-field>
+</lightning-record-edit-form>
+</template>
+</template>
+<template
+if:true={commercialPlanDetailField.isPicklist}>
+<template
+if:false={commercialPlanDetailField.controllerName}>
+<select onchange={handleFieldEdits}
+data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-index={childIndex}
+data-id={childWrapper.id}
+data-field={commercialPlanDetailField.fieldApiName}>
+<template
+for:each={commercialPlanDetailField.picklistOptions}
+for:item="option">
+<option key={option.value}
+value={option.value}
+selected={option.isSelected}>
+{option.label}</option>
+</template>
+</select>
+</template>
+<template
+if:true={commercialPlanDetailField.controllerName}>
+<template
+if:false={commercialPlanDetailField.controllerValue}>
+<select onchange={handleFieldEdits}
+data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-index={childIndex}
+data-id={childWrapper.id}
+data-field={commercialPlanDetailField.fieldApiName}
+disabled>
+<template
+for:each={commercialPlanDetailField.picklistOptions}
+for:item="option">
+<option key={option.value}
+value={option.value}
+selected={option.isSelected}>
+{option.label}</option>
+</template>
+</select>
+</template>
+<template
+if:true={commercialPlanDetailField.controllerValue}>
+<select onchange={handleFieldEdits}
+data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-index={childIndex}
+data-id={childWrapper.id}
+data-field={commercialPlanDetailField.fieldApiName}>
+<template
+for:each={commercialPlanDetailField.picklistOptions}
+for:item="option">
+<option key={option.value}
+value={option.value}
+selected={option.isSelected}>
+{option.label}</option>
+</template>
+</select>
+</template>
+</template>
+</template>
+<template
+if:true={commercialPlanDetailField.isMultiPicklist}>
+<c-neg-optim-custom-picklist
+data-rowindex={CPDindex} data-index={childIndex}
+data-id={childWrapper.id}
+data-parentindex={childWrapper.parentIndex}
+data-field={commercialPlanDetailField.fieldApiName}
+selected-values={commercialPlanDetailField.stringifiedFieldOutputValue}
+options={commercialPlanDetailField.stringifiedPicklistOptions}
+selected-event={Events.handleChangeMultiPicklistValues}
+onhandlechangemultipicklistvalues={handleChangeMultiPicklistValues}>
+</c-neg-optim-custom-picklist>
+</template>
+<template if:true={commercialPlanDetailField.isBoolean}>
+<lightning-layout>
+<lightning-layout-item>
+<lightning-input
+if:true={commercialPlanDetailField.fieldValue}
+class="slds-p-left_xx-large"
+type="checkbox" data-rowindex={CPDindex}
+data-id={childWrapper.id}
+data-parentindex={childWrapper.parentIndex}
+data-index={childIndex}
+data-boolean="true"
+data-field={commercialPlanDetailField.fieldApiName}
+onchange={handleFieldEdits}
+checked="checked">
+</lightning-input>
+<lightning-input
+if:false={commercialPlanDetailField.fieldValue}
+class="slds-p-left_xx-large"
+type="checkbox" data-rowindex={CPDindex}
+data-id={childWrapper.id}
+data-parentindex={childWrapper.parentIndex}
+data-index={childIndex}
+data-boolean="true"
+data-field={commercialPlanDetailField.fieldApiName}
+onchange={handleFieldEdits}>
+</lightning-input>
+</lightning-layout-item>
+</lightning-layout>
+</template>
+<template if:true={commercialPlanDetailField.isDate}>
+<lightning-formatted-date-time
+value={commercialPlanDetailField.fieldValue}
+data-index={childIndex}
+data-id={commercialPlanDetailWrapper.id}
+year="numeric" month="numeric" day="numeric">
+</lightning-formatted-date-time>
+</template>
+<template if:true={commercialPlanDetailField.isURL}>
+<a href={commercialPlanDetailField.fieldValue}
+target="_blank" class="truncate-link">
+{commercialPlanDetailField.fieldValue}
+</a>
+<template
+if:true={commercialPlanDetailField.isEmptyAndURL}>
+<span style="color:red;"> Pièce jointe manquante
+</span>
+</template>
+<lightning-button-icon icon-name="utility:upload"
+alternative-text="upload" variant="bare"
+onclick={openFileUploadPopup}
+data-childindex={childIndex}
+data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-id={childWrapper.id}
+data-parentindex={childWrapper.parentIndex}
+data-field={commercialPlanDetailField.fieldApiName}
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+<template
+if:false={commercialPlanDetailField.isEmptyAndURL}>
+<lightning-button-icon
+icon-name="utility:delete"
+alternative-text="delete" variant="bare"
+onclick={handleDeleteFile}
+data-childindex={childIndex}
+data-fieldindex={fieldindex}
+data-rowindex={CPDindex}
+data-id={childWrapper.id}
+data-parentindex={childWrapper.parentIndex}
+data-field={commercialPlanDetailField.fieldApiName}
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+</template>
+</template>
+</template>
+</td>
+</template>
+<template if:true={commercialPlanDetailField.isHidden}>
+<td style={commercialPlanDetailField.tdStyle}
+key={commercialPlanDetailField.fieldApiName}>
+
+</td>
+</template>
+</template>
+<td style="position: sticky; z-index: 3; right: 0;background: white;"
+if:true={isDisplayLastTD}>
+<lightning-button-icon icon-name="utility:delete"
+if:true={allowDelete} onclick={handleCPDDeletePopUp}
+data-childindex={childIndex} data-rowindex={CPDindex}
+data-id={commercialPlanDetailWrapper.id} variant="border-filled"
+class="slds-m-left_xx-small">
+</lightning-button-icon>
+<template if:false={commercialPlanDetailWrapper.isNew}>
+<lightning-button-icon icon-name="utility:threedots"
+class="slds-m-left_xx-small" onclick={openCPD}
+data-id={childWrapper.id} if:true={allowOpenRecord}>
+</lightning-button-icon>
+</template>
+</td>
+</tr>
+</template>
+</template>
+</template>
+</template>
+</tbody>
+</table>
+</div>
+</div>
+<div class="filter-panel slds-hide" style={tableStyle}>
+<div class="slds-panel slds-panel_docked slds-panel_docked-right slds-size_medium slds-grid slds-grid_vertical"
+style="z-index: 1;">
+<div class="slds-panel__header">
+<h2 class="slds-panel__header-title slds-text-heading_small slds-truncate"
+title={labels.LBL_Filter}>{labels.LBL_Filter}</h2>
+<button type="button"
+class="slds-button slds-button_icon slds-button_icon-small slds-panel__close"
+title="Collapse Panel Header">
+
+<span class="slds-assistive-text">Collapse Panel Header</span>
+</button>
+</div>
+<div class="slds-col slds-scrollable_y" if:false={loading}>
+<div id="filterPanelBody" class="slds-panel__body">
+<div class="slds-filters">
+<lightning-combobox label={labels.LBL_Number_Of_Fixed_Columns}
+options={fixedColumnsOptions} value={nbOfFixedColumns}
+onchange={setnumberOfFixedColumns} required>
+</lightning-combobox>
+</div>
+</div>
+<div class="slds-m-horizontal_small">
+<lightning-input name="Search" placeholder={cpdFields.global.label}
+label={labels.LBL_Search} type="search" onchange={setSearchValue} class="dataFilter"
+value={filters.searchValue}></lightning-input>
+</div>
+<template if:true={hasFields} for:each={fieldsToFilter} for:item='fieldToFilter'>
+<div key={fieldToFilter.fieldName} class="slds-m-horizontal_small">
+<template if:true={fieldToFilter.userFilterable}>
+<!--text-->
+<lightning-input if:true={fieldToFilter.isText} name={fieldToFilter.fieldName}
+data-mode="one" type='text' label={fieldToFilter.fieldLabel}
+value={fieldToFilter.value} class="dataFilter" onchange={setSelectedValues}>
+</lightning-input>
+<!--lookup-->
+<template if:true={fieldToFilter.isReference}>
+<lightning-record-edit-form if:true={isBigObject} object-api-name={objectName}>
+<lightning-input-field data-mode="one" name={fieldToFilter.fieldName}
+field-name={fieldToFilter.fieldName} class="dataFilter"
+onchange={setSelectedValues} value={fieldToFilter.value}>
+</lightning-input-field>
+</lightning-record-edit-form>
+<lightning-input if:false={isBigObject} name={fieldToFilter.fieldName}
+data-mode="one" class="dataFilter" type='text'
+label={fieldToFilter.fieldLabel} value={fieldToFilter.value}
+onchange={setSelectedValues}>
+</lightning-input>
+</template>
+<!--ID-->
+<lightning-input if:true={fieldToFilter.isId} class="dataFilter"
+name={fieldToFilter.fieldName} data-mode='multiple' type='text'
+label={fieldToFilter.fieldLabel} value={fieldToFilter.displayVal}
+field-level-help={labels.MSG_Filter_On_Id_Help_Text}
+onchange={setSelectedValues}>
+</lightning-input>
+<!--number-->
+<div if:true={fieldToFilter.isNumber} class='slds-form-element'>
+<legend class="slds-form-element__label slds-form-element__legend">
+{fieldToFilter.fieldLabel}
+</legend>
+<div class="slds-form-element__control slds-grid slds-gutters">
+<lightning-input type="number" label={labels.LBL_Minimum}
+class='slds-col dataFilter' name={fieldToFilter.fieldName}
+data-range='value1' value={fieldToFilter.value1}
+onchange={setSelectedRangeValue} formatter={fieldToFilter.formatter}
+step={fieldToFilter.step}>
+</lightning-input>
+<span style='margin-top: 1.75rem;'>-</span>
+<lightning-input type="number" label={labels.LBL_Maximum}
+class='slds-col dataFilter' name={fieldToFilter.fieldName}
+data-range='value2' value={fieldToFilter.value2}
+onchange={setSelectedRangeValue} formatter={fieldToFilter.formatter}
+step={fieldToFilter.step}>
+</lightning-input>
+</div>
+</div>
+<!--date-->
+<div if:true={fieldToFilter.isDate} class='slds-form-element'>
+<legend class="slds-form-element__label slds-form-element__legend">
+{fieldToFilter.fieldLabel}
+</legend>
+<div class="slds-form-element__control slds-grid slds-gutters">
+<lightning-input type="date" label={labels.LBL_Start}
+class='slds-col dataFilter' name={fieldToFilter.fieldName}
+data-range='value1' value={fieldToFilter.value1}
+onchange={setSelectedRangeValue}>
+</lightning-input>
+<span style='margin-top: 1.75rem;'>-</span>
+<lightning-input type="date" label={labels.LBL_End}
+class='slds-col dataFilter' name={fieldToFilter.fieldName}
+data-range='value2' value={fieldToFilter.value2}
+onchange={setSelectedRangeValue}>
+</lightning-input>
+</div>
+</div>
+<!--time-->
+<div if:true={fieldToFilter.isTime} class='slds-form-element'>
+<legend class="slds-form-element__label slds-form-element__legend">
+{fieldToFilter.fieldLabel}
+</legend>
+<div class="slds-form-element__control slds-grid slds-gutters">
+<lightning-input type="time" label={labels.LBL_Start}
+class='slds-col dataFilter' name={fieldToFilter.fieldName}
+data-range='value1' value={fieldToFilter.value1}
+onchange={setSelectedRangeValue}>
+</lightning-input>
+<span style='margin-top: 1.75rem;'>-</span>
+<lightning-input type="time" label={labels.LBL_End}
+class='slds-col dataFilter' name={fieldToFilter.fieldName}
+data-range='value2' value={fieldToFilter.value2}
+onchange={setSelectedRangeValue}>
+</lightning-input>
+</div>
+</div>
+<!--checkbox group-->
+<lightning-checkbox-group if:true={fieldToFilter.isCheckboxGroup} class="dataFilter"
+data-name={fieldToFilter.fieldName} name={fieldToFilter.fieldName}
+label={fieldToFilter.fieldLabel} options={fieldToFilter.options}
+value={fieldToFilter.values} onchange={setSelectedValues}>
+</lightning-checkbox-group>
+</template>
+</div>
+</template>
+<!--MultiLevel-->
+<div if:true={hasAdvancedFields} class='slds-m-horizontal_small slds-has-divider_top-space'>
+<lightning-accordion allow-multiple-sections-open>
+<lightning-accordion-section label={labels.LBL_Advanced} class='slds-p-bottom_none'>
+<template for:each={multilevelFields} for:item='multilevelField'>
+<div key={multilevelField.fieldName} class="slds-m-around--small">
+<template if:true={fieldToFilter.userFilterable}>
+<!--isText: value, isNumber, isDate, isTime: value1,value2, isCheckboxGroup: values-->
+<!--text-->
+<lightning-input if:true={multilevelField.isText} type='text'
+name={multilevelField.fieldName} data-mode='one' class="dataFilter"
+label={multilevelField.fieldLabel} value={multilevelField.value}
+onchange={setSelectedValues}>
+</lightning-input>
+<!--id-->
+<lightning-input if:true={multilevelField.isId}
+key={multilevelField.fieldName} type='text dataFilter'
+data-mode='multiple' name={multilevelField.fieldName}
+label={multilevelField.fieldLabel}
+value={multilevelField.displayVal}
+field-level-help={labels.MSG_Filter_On_Id_Help_Text}
+onchange={setSelectedValues}>
+</lightning-input>
+<!--number-->
+<div if:true={multilevelField.isNumber} class='slds-form-element'>
+<legend class="slds-form-element__label slds-form-element__legend">
+{multilevelField.fieldLabel}
+</legend>
+<div class="slds-form-element__control slds-grid slds-gutters">
+<lightning-input type="number" label={labels.LBL_Minimum}
+class='slds-col dataFilter' name={multilevelField.fieldName}
+data-range='value1' value={multilevelField.value1}
+onchange={setSelectedRangeValue}
+formatter={multilevelField.formatter}
+step={multilevelField.step}>
+</lightning-input>
+<span style='margin-top: 1.75rem;'>-</span>
+<lightning-input type="number" label={labels.LBL_Maximum}
+class='slds-col dataFilter' name={multilevelField.fieldName}
+data-range='value2' value={multilevelField.value2}
+onchange={setSelectedRangeValue}
+formatter={multilevelField.formatter}
+step={multilevelField.step}>
+</lightning-input>
+</div>
+</div>
+<!--date-->
+<div if:true={multilevelField.isDate} class='slds-form-element'>
+<legend class="slds-form-element__label slds-form-element__legend">
+{multilevelField.fieldLabel}
+</legend>
+<div class="slds-form-element__control slds-grid slds-gutters">
+<lightning-input type="date" label={labels.LBL_Start}
+class='slds-col dataFilter' name={multilevelField.fieldName}
+data-range='value1' value={multilevelField.value1}
+onchange={setSelectedRangeValue}>
+</lightning-input>
+<span style='margin-top: 1.75rem;'>-</span>
+<lightning-input type="date" label={labels.LBL_End}
+class='slds-col dataFilter' name={multilevelField.fieldName}
+data-range='value2' value={multilevelField.value2}
+onchange={setSelectedRangeValue}>
+</lightning-input>
+</div>
+</div>
+<!--time-->
+<div if:true={multilevelField.isTime} class='slds-form-element'>
+<legend class="slds-form-element__label slds-form-element__legend">
+{multilevelField.fieldLabel}
+</legend>
+<div class="slds-form-element__control slds-grid slds-gutters">
+<lightning-input type="time" label={labels.LBL_Start}
+class='slds-col dataFilter' name={multilevelField.fieldName}
+data-range='value1' value={multilevelField.value1}
+onchange={setSelectedRangeValue}>
+</lightning-input>
+<span style='margin-top: 1.75rem;'>-</span>
+<lightning-input type="time" label={labels.LBL_End}
+class='slds-col dataFilter' name={multilevelField.fieldName}
+data-range='value2' value={multilevelField.value2}
+onchange={setSelectedRangeValue}>
+</lightning-input>
+</div>
+</div>
+<!--checkbox group-->
+<lightning-checkbox-group if:true={multilevelField.isCheckboxGroup}
+data-name={multilevelField.fieldName} class="dataFilter"
+name={multilevelField.fieldName} label={multilevelField.fieldLabel}
+options={multilevelField.options} value={multilevelField.values}
+onchange={setSelectedValues}>
+</lightning-checkbox-group>
+</template>
+</div>
+</template>
+</lightning-accordion-section>
+</lightning-accordion>
+</div>
+</div>
+<div class="slds-card__footer slds-grid slds-m-top_none">
+<div class="slds-col slds-var-p-right_xx-large">
+<lightning-button variant="neutral" label={labels.LBL_Reset} data-type="normal"
+title={labels.LBL_Reset} onclick={reset}></lightning-button>
+</div>
+<div class="slds-col">
+<lightning-button variant="brand" label={labels.LBL_Search} title={labels.LBL_Search}
+onclick={search}></lightning-button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="height: fit-content;background: white;padding: 10px;" class="slds-grid tableControl">
+<span style="margin-right: 10px;">
+<lightning-combobox dropdown-alignment="auto" name="pageSelect" value={pageSize} variant="label-hidden"
+placeholder="Select Progress" options={pageSizeOptions} onchange={changePageSizeHandler}>
+</lightning-combobox>
+</span>
+<span>
+<lightning-button-group>
+<lightning-button label={labels.LBL_Previous} disabled={previousDisabled} data-type="Previous"
+onclick={handleChangePage}>
+</lightning-button>
+<lightning-button label={labels.LBL_Next} disabled={nextDisabled} data-type="Next"
+onclick={handleChangePage}>
+</lightning-button>
+</lightning-button-group>
+<span class="slds-p-left_small slds-p-right_small slds-badge" style="margin-left: 10px;">
+{pageNumber} - {totalpagesCount}
+</span>
+</span>
+</div>
+</div>
+<template if:true={showProductSelection}>
+<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+class="slds-modal slds-fade-in-open">
+<div class="slds-modal__container">
+<div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+<lightning-button-icon variant="bare-inverse" size="large" icon-name="utility:close"
+onclick={closeproductSelection}></lightning-button-icon>
+</div>
+<div class="slds-modal__header">
+<div class="slds-grid">
+<div class="slds-col">
+<h1 id="modal-heading-36" class="slds-modal__title slds-hyphenate">
+<template lwc:if={showMultipleProductsPopUp}>
+{labels.LBL_Multi_Product_Selection}
+</template>
+<template lwc:else>
+{labels.LBL_Single_Product_Selection}
+</template>
+</h1>
+</div>
+<!--template if:true={showMultipleProductsPopUp}-->
+<div class="filter-panel slds-col slds-no-flex" style="float:right">
+<lightning-button-icon-stateful icon-name="utility:filterList"
+selected={displayProductsFilter}
+onclick={productFilterHandler}></lightning-button-icon-stateful>
+</div>
+<!--/template-->
+</div>
+</div>
+<div class="slds-modal__content" style="overflow: unset !important;overflow-y: unset !important;">
+<!--template if:false={showMultipleProductsPopUp}>
+<lightning-layout class="slds-m-bottom_medium slds-m-around_medium">
+<lightning-layout-item class="slds-size_11-of-12 slds-p-right_x-small">
+<input type="text" class="slds-input" value={productSearch} data-id="productInput"
+onkeypress={filterProducts}></input>
+</lightning-layout-item>
+<lightning-layout-item class="slds-size_1-of-12">
+<button class="slds-button slds-button_neutral" onclick={filterProducts} data-button=true
+type="button">{labels.LBL_Search}</button>
+</lightning-layout-item>
+</lightning-layout>
+</template-->
+<div class="slds-grid">
+<div class="slds-scrollable slds-card slds-border_bottom body slds-col" style="height:65vh;">
+<template if:false={productsLoaded}>
+<lightning-spinner variant="brand" size="large"></lightning-spinner>
+</template>
+<template if:true={productsLoaded}>
+<table class="slds-table">
+<thead>
+<tr>
+<template if:true={showMultipleProductsPopUp}>
+<th class="slds-align_absolute-center"
+style="text-align:left;top: 0px; position: sticky; z-index: 2;">
+<lightning-input type="checkbox"
+onchange={selectAllProducts}></lightning-input>
+</th>
+</template>
+<template for:each={productsFieldsInfo} for:item="field">
+<th key={field.fieldName}
+style="text-align:left;top: 0px; position: sticky; z-index: 2;">
+{field.fieldLabel}
+</th>
+</template>
+</tr>
+</thead>
+<tbody>
+<template if:false={filteredProducts.length}>
+<tr>
+<td colspan="7">
+<h2
+class="slds-align_absolute-center slds-text-align_center slds-m-around_xx-large slds-card__header-title slds-align-content-center">
+{labels.LBL_No_Item_To_Display}
+</h2>
+</td>
+</tr>
+</template>
+<template if:true={filteredProducts.length}>
+<template for:each={filteredProducts} for:item="product" for:index="index">
+<tr key={product.Id}>
+<template if:true={showMultipleProductsPopUp}>
+<td style="text-align:left" class="slds-align_absolute-center">
+<lightning-input type="checkbox"
+onchange={handleProductsCheckboxChange}
+data-index={index} data-type="productCheckbox"
+data-id={product.Id}
+checked={product.isChecked}></lightning-input>
+</td>
+</template>
+<template for:each={product.values} for:item="field">
+<td key={field}>
+<template if:true={field.isNumberField}>
+<lightning-formatted-number
+maximum-fraction-digits={field.scale}
+value={field.fieldValue}>
+</lightning-formatted-number>
+</template>
+<template if:true={field.isText}>
+{field.fieldValue}
+</template>
+<template if:true={field.isReference}>
+<template if:true={showMultipleProductsPopUp}>
+<a href={field.link} target="_blank">
+{field.fieldValue}</a>
+</template>
+<template if:false={showMultipleProductsPopUp}>
+<template if:true={field.isName}>
+<a data-id={product.Id} data-index={index}
+onclick={handleProductSelection}>{field.fieldValue}</a>
+</template>
+<template if:false={field.isName}>
+<a href={field.link} target="_blank">
+{field.fieldValue}</a>
+</template>
+</template>
+</template>
+<template if:true={field.isBoolean}>
+<lightning-input class="slds-p-left_xx-large"
+type="checkbox" variant="label-hidden"
+checked={field.fieldValue} disabled>
+</lightning-input>
+</template>
+</td>
+</template>
+</tr>
+</template>
+</template>
+</tbody>
+</table>
+</template>
+</div>
+<div class="filter-panel slds-col slds-grid slds-no-flex slds-border_left slds-border_bottom slds-border_top slds-border--right"
+if:true={displayProductsFilter} style="height:65vh;">
+<div class="slds-panel slds-grid slds-grid_vertical slds-size_medium">
+<div class="slds-panel__header">
+<h2 class="slds-panel__header-title slds-text-heading_small slds-truncate"
+title={labels.LBL_Filter}>
+{labels.LBL_Filter}
+</h2>
+<div class="slds-panel__header-actions">
+<button class="slds-button slds-button_icon" onclick={productFilterHandler}
+title={labels.LBL_Close}>
+<lightning-icon icon-name="utility:close" size="x-small">
+</lightning-icon>
+</button>
+</div>
+</div>
+<div class="slds-col slds-scrollable" style="height: 55vh;">
+<div class="slds-grid slds-wrap slds-p-around_small">
+<div class="slds-list_vertical slds-list_vertical-space slds-size_1-of-1">
+<div class="slds-item slds-is-relative" style="min-height: 50px">
+<lightning-input type="text" label={labels.LBL_Search}
+value={productFilterWrapper.generalSearch} data-name="generalSearch"
+onchange={fillFilterList}>
+</lightning-input>
+</div>
+<template if:true={isShowCategory}>
+<div class="slds-item slds-is-relative" style="min-height: 50px">
+<lightning-record-edit-form object-api-name="Product2">
+<lightning-input-field field-name={productFields.category.name}
+data-name="Category" onchange={fillFilterList}
+label={productFields.category.label}
+value={selectedCategory}>
+</lightning-input-field>
+</lightning-record-edit-form>
+<template for:each={selectedCategories} for:item="category">
+<lightning-pill key={category.id} data-id={category.id}
+data-name="Category" label={category.name}
+onremove={handleRemove}
+class="slds-m-bottom_xx-small slds-m-right_xx-small"
+style="display: inline-grid;">
+</lightning-pill>
+</template>
+</div>
+<div class="slds-item slds-is-relative" style="min-height: 50px">
+<lightning-record-edit-form object-api-name="Product2">
+<lightning-input-field field-name={productFields.brand.name}
+data-name="Brand" onchange={fillFilterList}
+label={productFields.brand.label} value={selectedBrand}>
+</lightning-input-field>
+</lightning-record-edit-form>
+<template for:each={selectedBrands} for:item="brand">
+<lightning-pill key={brand.id} data-id={brand.id}
+data-name="Brand" label={brand.name} onremove={handleRemove}
+class="slds-m-bottom_xx-small slds-m-right_xx-small"
+style="display: inline-grid;">
+</lightning-pill>
+</template>
+</div>
+</template>
+<!--div class="slds-item slds-is-relative" style="min-height: 50px">
+<lightning-record-edit-form object-api-name="Product2">
+<lightning-input-field field-name={productFields.market.name}
+data-name="market" onchange={fillFilterList}
+label={productFields.market.label}
+value={productFilterWrapper.market}>
+</lightning-input-field>
+</lightning-record-edit-form>
+</div-->
+<div class="slds-item slds-is-relative" style="min-height: 50px">
+<lightning-record-edit-form object-api-name="Product2">
+<lightning-input-field field-name={productFields.family.name}
+data-name="family" onchange={fillFilterList}
+label={productFields.family.label}
+value={productFilterWrapper.family}>
+</lightning-input-field>
+</lightning-record-edit-form>
+</div>
+<div class="slds-item slds-is-relative" style="min-height: 50px">
+<lightning-record-edit-form object-api-name="Product2">
+<lightning-input-field field-name={productFields.animation.name}
+data-name="animation" onchange={fillFilterList}
+label={productFields.animation.label}
+value={productFilterWrapper.animation}>
+</lightning-input-field>
+</lightning-record-edit-form>
+</div>
+<c-neg-optim-custom-picklist label={productFields.recordType.label}
+data-name="recordType"
+selected-values={productFilterWrapper.StringifiedSelectedRecordType}
+options={recordTypesOptions} selected-event={Events.handleChangeMultiRT}
+onhandlechangemultirt={handleChangeMultiRT}>
+</c-neg-optim-custom-picklist>
+</div>
+</div>
+</div>
+<div
+class="slds-filters__footer slds-grid slds-shrink-none slds-card__footer slds-grid slds-m-top_none">
+<lightning-button label={labels.LBL_Reset} variant="neutral"
+class="slds-m-right_xxx-small slds-align_absolute-center"
+onclick={resetProductScreen}>
+</lightning-button>
+<lightning-button label={labels.LBL_Search} variant="brand"
+onclick={handleProductSearch} class="slds-align_absolute-center">
+</lightning-button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="slds-modal__footer">
+<div class="slds-grid">
+<span style="margin-right: 10px;">
+<lightning-combobox dropdown-alignment="auto" name="pageSelect" value={productsPageSize}
+variant="label-hidden" options={productsPageSizeOptions}
+onchange={changeProductsPageSizeHandler}>
+</lightning-combobox>
+</span>
+<span>
+<lightning-button-group>
+<lightning-button label={labels.LBL_Previous} disabled={previousProductsDisabled}
+data-type="Previous" onclick={handleChangePageProducts}>
+</lightning-button>
+<lightning-button label={labels.LBL_Next} disabled={nextProductsDisabled}
+data-type="Next" onclick={handleChangePageProducts}>
+</lightning-button>
+</lightning-button-group>
+<span class="slds-p-left_small slds-p-right_small slds-badge" style="margin-left: 10px;">
+{productsPageNumber} - {totalProductsPagesCount}
+</span>
+</span>
+<span class="slds-col" style="float: right;">
+<button class="slds-button slds-button_neutral"
+onclick={closeproductSelection}>{labels.LBL_Cancel}</button>
+<template if:true={showMultipleProductsPopUp}>
+<button class="slds-button slds-button_brand"
+onclick={confirmMultipleProductsCloneCreation}>{labels.LBL_Confirm}</button>
+</template>
+</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+</template>
+<template if:true={showBUSelection}>
+<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+class="slds-modal slds-fade-in-open">
+<div class="slds-modal__container">
+<div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+<lightning-button-icon variant="bare-inverse" size="large" icon-name="utility:close"
+onclick={closeBUSelection}></lightning-button-icon>
+</div>
+<div class="slds-modal__header">
+<h1 id="modal-heading-34" class="slds-modal__title slds-hyphenate">{labels.LBL_Single_BU_Selection}
+</h1>
+</div>
+<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-112">
+<lightning-layout class="slds-m-bottom_medium">
+<lightning-layout-item class="slds-size_10-of-12 slds-p-right_x-small">
+<input type="text" class="slds-input" value={BUSearch} data-id="BUInput"
+onkeypress={filterBUs}></input>
+</lightning-layout-item>
+<lightning-layout-item class="slds-size_1-of-12">
+<button class="slds-button slds-button_neutral" data-button=true onclick={filterBUs}
+type="button">{labels.LBL_Search}</button>
+</lightning-layout-item>
+</lightning-layout>
+<table class="slds-table">
+<thead>
+<tr>
+<template for:each={labels.BUFieldLabels} for:item="label">
+<th key={label} style="text-align:left;top: 0px; position: sticky; z-index: 2;">
+{label}
+</th>
+</template>
+</tr>
+</thead>
+<tbody>
+<template if:true={BUsLoaded}>
+<template for:each={BUsForSelection} for:item="BU" for:index="index">
+<tr key={BU.Id}>
+<td style="text-align:left">
+<a value={BU.Id} data-id={BU.Id} data-index={index}
+onclick={handleBUSelection}>{BU.Name}</a>
+</td>
+<td style="text-align:left">{BU.Code__c}
+</td>
+</tr>
+</template>
+</template>
+</tbody>
+</table>
+</div>
+<div class="slds-modal__footer">
+<button class="slds-button slds-button_neutral"
+onclick={closeBUSelection}>{labels.LBL_Cancel}</button>
+</div>
+</div>
+</div>
+</section>
+<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+</template>
+<template if:true={showCDSelection}>
+<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+class="slds-modal slds-fade-in-open">
+<div class="slds-modal__container" style="max-width: 60%;">
+<div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+<lightning-button-icon variant="bare-inverse" size="large" icon-name="utility:close"
+onclick={closeCDSelection}></lightning-button-icon>
+</div>
+<div class="slds-modal__header">
+<h1 class="slds-modal__title slds-hyphenate">{labels.LBL_Single_Selection}</h1>
+</div>
+<div class="slds-modal__content slds-p-around_medium">
+<lightning-layout class="slds-m-bottom_medium">
+<lightning-layout-item class="slds-size_10-of-12 slds-p-right_x-small">
+<input type="text" class="slds-input" value={CDSearch} data-id="CDInput"
+onkeypress={filterCDs}></input>
+</lightning-layout-item>
+<lightning-layout-item class="slds-size_1-of-12">
+<button class="slds-button slds-button_neutral" data-button=true onclick={filterCDs}
+type="button"> Search</button>
+</lightning-layout-item>
+</lightning-layout>
+<table class="slds-table">
+<thead>
+<tr>
+<template for:each={labels.CDFieldLabels} for:item="label">
+<th key={label} style="text-align:left;top: 0px; position: sticky; z-index: 2;">
+{label}
+</th>
+</template>
+</tr>
+</thead>
+<tbody>
+<template if:true={CDsLoaded}>
+<template for:each={CDsForSelection} for:item="CD" for:index="index">
+<tr key={CD.Id}>
+<td style="text-align:left">
+<a value={CD.Id} data-id={CD.Id} data-index={index}
+onclick={handleCDSelection}>{CD.Name}</a>
+</td>
+<td style="text-align:left"> {CD.Condition_Type__r.Name}
+</td>
+<td style="text-align:left">
+<lightning-formatted-number value={CD.Value_per__c} format-style="percent"
+minimum-fraction-digits={discountPercentScale}
+maximum-fraction-digits={discountPercentScale}>
+</lightning-formatted-number>
+
+</td>
+<td style="text-align:left">{CD.Value_amt__c}
+</td>
+<td style="text-align:left">{CD.Disc_BDate__c}
+</td>
+<td style="text-align:left">{CD.Disc_EDate__c}
+</td>
+</tr>
+</template>
+</template>
+</tbody>
+</table>
+</div>
+<div class="slds-modal__footer">
+<button class="slds-button slds-button_neutral"
+onclick={closeCDSelection}>{labels.LBL_Cancel}</button>
+</div>
+</div>
+</div>
+</section>
+<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+</template>
+<template if:true={showCategorySelection}>
+<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+class="slds-modal slds-fade-in-open">
+<div class="slds-modal__container">
+<div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+<lightning-button-icon variant="bare-inverse" size="large" icon-name="utility:close"
+onclick={closeCategorySelection}></lightning-button-icon>
+</div>
+<div class="slds-modal__header">
+<h1 id="modal-heading-35" class="slds-modal__title slds-hyphenate">
+{labels.LBL_Single_Hierarchy_Selection}</h1>
+</div>
+<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-113">
+<lightning-layout class="slds-m-bottom_medium">
+<lightning-layout-item class="slds-size_10-of-12 slds-p-right_x-small">
+<input type="text" class="slds-input" value={categorySearch} data-id="categoryInput"
+onkeypress={filterCategories}></input>
+</lightning-layout-item>
+<lightning-layout-item class="slds-size_1-of-12">
+<button class="slds-button slds-button_neutral" data-button=true onclick={filterCategories}
+type="button">{labels.LBL_Search}</button>
+</lightning-layout-item>
+</lightning-layout>
+<table class="slds-table">
+<thead>
+<tr>
+<template for:each={labels.categoryFieldLabels} for:item="label">
+<th key={label} style="text-align:left;top: 0px; position: sticky; z-index: 2;">
+{label}
+</th>
+</template>
+</tr>
+</thead>
+<tbody>
+<template if:true={categoriesLoaded}>
+<template for:each={categoriesForSelection} for:item="category" for:index="index">
+<tr key={category.Id}>
+<td style="text-align:left">
+<a value={category.Id} data-id={category.Id} data-categoryindex={index}
+onclick={handleCategorySelection}>{category.Name}</a>
+</td>
+<td style="text-align:left">
+{category.Code__c}
+</td>
+<td style="text-align:left">
+{category.LongName__c}
+</td>
+</tr>
+</template>
+</template>
+</tbody>
+</table>
+</div>
+<div class="slds-modal__footer">
+<button class="slds-button slds-button_neutral"
+onclick={closeCategorySelection}>{labels.LBL_Cancel}</button>
+</div>
+</div>
+</div>
+</section>
+<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+</template>
+<template if:true={showFieldManager}>
+<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+class="slds-modal slds-fade-in-open">
+<div class="slds-modal__container">
+<div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+<lightning-button-icon variant="bare-inverse" size="large" icon-name="utility:close"
+onclick={closeFieldManagerHandler}></lightning-button-icon>
+</div>
+<div class="slds-modal__header">
+<h1 class="slds-modal__title slds-hyphenate">{labels.LBL_Show_Hide_Columns}</h1>
+</div>
+<div class="slds-modal__content slds-p-around_medium">
+<lightning-dual-listbox name="Fields" label="Select Desired Fields" source-label="Hidden"
+selected-label="Shown" field-level-help="Select your preferred fields" options={fieldOptions}
+value={selectedFields} onchange={handleDisplayedFieldsChange}></lightning-dual-listbox>
+</div>
+<div class="slds-modal__footer">
+<button class="slds-button slds-button_neutral"
+onclick={closeFieldManagerHandler}>{labels.LBL_Cancel}</button>
+</div>
+</div>
+</section>
+<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+</template>
+<template if:true={showFileUploadPopup}>
+<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+class="slds-modal slds-fade-in-open">
+<div class="slds-modal__container" style="width: 50rem;">
+<div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+<lightning-button-icon variant="bare-inverse" size="large" icon-name="utility:close"
+onclick={closeFileUploadPopup}></lightning-button-icon>
+</div>
+<div class="slds-modal__header">
+<h1 class="slds-modal__title slds-hyphenate">{labels.LBL_Upload_File}</h1>
+</div>
+<div class="slds-modal__content slds-p-around_large">
+<lightning-file-upload name="fileUploader"
+record-id={currentAPEXCommercialPlanDetail.commercialPlanDetail.Id} accept={acceptedFormats}
+onuploadfinished={handleUploadFinished}>
+</lightning-file-upload>
+</div>
+<div class="slds-modal__footer">
+<button class="slds-button slds-button_neutral"
+onclick={closeFileUploadPopup}>{labels.LBL_Cancel}</button>
+</div>
+</div>
+</section>
+<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+</template>
+</template>

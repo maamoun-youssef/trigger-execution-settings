@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- VAT to apply to services invoicing process (synchronized with Default Sales Policy and sales policy exception) --></help>
+    <label>Taux TVA service</label>
+    <name>VAT_Service_Rate__c</name>
+</CustomFieldTranslation>

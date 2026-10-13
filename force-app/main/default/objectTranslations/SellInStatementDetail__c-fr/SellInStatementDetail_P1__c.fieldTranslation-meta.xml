@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Ligne de déclaration de CA (Année-1)</label>
+    <name>SellInStatementDetail_P1__c</name>
+    <relationshipLabel>Lignes de CA déclaré (Année précédente)</relationshipLabel>
+</CustomFieldTranslation>

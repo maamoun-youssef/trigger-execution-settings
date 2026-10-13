@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Un indicateur pour identifier les enregistrements marqués pour retrait mais qui n’ont pas encore été retirés. Un enregistrement retiré peut être soit définitivement supprimé de la base de données, soit archivé.</help>
+    <label>Retrait programmée</label>
+    <name>ScheduledForWithdrawal__c</name>
+</CustomFieldTranslation>

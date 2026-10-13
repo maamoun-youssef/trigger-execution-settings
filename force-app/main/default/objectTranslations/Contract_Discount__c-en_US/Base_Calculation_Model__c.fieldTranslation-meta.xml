@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>
+        <!-- TO w/o VAT (Order)  Regular purchases with return without VAT (Order date)
+TO w/o VAT (Deliv.) - Regular purchases with return without VAT (Delivery date)
+TO w/o Return (Deliv) - Regular purchases without return without VAT (Delivery date) -->
+    </help>
+    <label>Base Calculation Model</label>
+    <name>Base_Calculation_Model__c</name>
+</CustomFieldTranslation>

@@ -1,0 +1,1033 @@
+<template>
+    <lightning-card>
+        <!-- ============== FULL PAGE LOADING ============== -->
+        <template if:true={isLoading}>
+            <div class="loading-container">
+                <lightning-spinner alternative-text="Chargement..." size="large"></lightning-spinner>
+                <p class="loading-text">Chargement des données...</p>
+            </div>
+        </template>
+
+        <template if:false={isLoading}>
+            <!-- ============== STANDARD MODE HEADER ============== -->
+            <template if:false={isPortalUser}>
+                <div class="header">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-p-around_xx-small slds-has-flexi-truncate">
+                            <div class="slds-media slds-no-space slds-grow">
+                                <!-- ICON LEFT -->
+                                <div
+                                    class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                                    <img src={illustrationUrl} style="width: 190px; height: 190px;border-radius: 10%;"
+                                        class="custom-icon slds-m-right_xxx-small" />
+                                </div>
+                                <!-- CONTENT RIGHT -->
+                                <div class="header-content-enhanced slds-p-left--x-small">
+                                    <!-- TITLE + INFO -->
+                                    <div class="header-text-enhanced">
+                                        <h1 class="header-title-enhanced">
+                                            {legalDoc.Name}
+                                        </h1>
+                                        <div class="header-info-grid">
+                                            <div class="info-grid-item">
+                                                <span class="info-label-enhanced">{fieldLabels.Year__c}</span>
+                                                <span class="info-value-enhanced">{legalDoc.Year__c}</span>
+                                            </div>
+                                            <div if:true={hasSupplier} class="info-grid-item">
+                                                <span class="info-label-enhanced">{fieldLabels.DateSentToSupplier__c}</span>
+                                                <span class="info-value-enhanced">
+                                                    <lightning-formatted-date-time
+                                                        value={legalDoc.DateSentToSupplier__c} year="numeric"
+                                                        month="2-digit" day="2-digit"></lightning-formatted-date-time>
+                                                </span>
+                                            </div>
+                                            <div class="info-grid-item">
+                                                <span class="info-label-enhanced">{fieldLabels.Language__c}</span>
+                                                <span class="info-value-enhanced">{legalDocLanguage}</span>
+                                            </div>
+                                            <div class="info-grid-item">
+                                                <span class="info-label-enhanced">{fieldLabels.Type__c}</span>
+                                                <span class="info-value-enhanced">{legalDocType}</span>
+                                            </div>
+                                            <div class="info-grid-item">
+                                                <span class="info-label-enhanced">{fieldLabels.CreatedDate}</span>
+                                                <span class="info-value-enhanced">
+                                                    <lightning-formatted-date-time value={legalDoc.CreatedDate}
+                                                        year="numeric" month="2-digit"
+                                                        day="2-digit"></lightning-formatted-date-time>
+                                                </span>
+                                            </div>
+                                            <div class="info-grid-item">
+                                                <span class="info-label-enhanced">{fieldLabels.CreatedById}</span>
+                                                <a class="info-value-enhanced" href={legalDoc.createdByLink}
+                                                    target="_blank">{legalDoc.CreatedBy.Name}</a>
+                                            </div>
+                                            <div class="info-grid-item">
+                                                <span class="info-label-enhanced">{fieldLabels.LastModifiedDate}</span>
+                                                <span class="info-value-enhanced">
+                                                    <lightning-formatted-date-time value={legalDoc.LastModifiedDate}
+                                                        year="numeric" month="2-digit"
+                                                        day="2-digit"></lightning-formatted-date-time>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- ACTIONS BELOW INFO -->
+                                    <div class="header-actions-enhanced">
+                                        <div class="header-actions-group-modern">
+                                            <button class="header-action-btn-modern" title={Labels.LBL_AddClause}
+                                                onclick={handleAddClause}>
+                                                <img src={addIconUrl} data-flow-type="add" class="header-action-icon-modern"
+                                                    alt="Add" />
+                                            </button>
+
+                                            <button if:true={showFlowButton} class="header-action-btn-modern"
+                                                title={Labels.LBL_SendToSupplier} onclick={handleExecuteFlow}>
+                                                <img src={sendIconUrl} class="header-action-icon-modern" alt="Refresh" />
+                                            </button>
+                                            
+                                            <!-- Modern Filters - Far Right -->
+                                            <div class="modern-filters-group">
+                                                <lightning-combobox 
+                                                    label="Status" 
+                                                    value={selectedStatusFilter}
+                                                    options={statusFilterOptions}
+                                                    onchange={handleStatusFilterChange}
+                                                    variant="label-hidden"
+                                                    placeholder="All Statuses"
+                                                    class="modern-filter-dropdown">
+                                                </lightning-combobox>
+                                                <lightning-combobox 
+                                                    label="Type" 
+                                                    value={selectedClauseTypeFilter}
+                                                    options={clauseTypeFilterOptions}
+                                                    onchange={handleClauseTypeFilterChange}
+                                                    variant="label-hidden"
+                                                    placeholder="All Types"
+                                                    class="modern-filter-dropdown">
+                                                </lightning-combobox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Header Add Clause Tabs -->
+                                    <template if:true={showHeaderAddTabs}>
+                                        <div class="header-add-clause-tabs slds-m-top_small">
+                                            <div class="clause-type-tabs-enhanced">
+                                                <div class="tab-button-enhanced tab-title"
+                                                    onclick={handleHeaderSelectClauseType}
+                                                    data-type="Title">
+                                                    <lightning-icon icon-name="utility:approval"
+                                                        size="x-small"
+                                                        class="tab-icon"></lightning-icon>
+                                                    <span>Chapter</span>
+                                                </div>
+                                                <div class="tab-button-enhanced tab-subtitle"
+                                                    onclick={handleHeaderSelectClauseType}
+                                                    data-type="Subtitle">
+                                                    <lightning-icon icon-name="utility:approval"
+                                                        size="x-small"
+                                                        class="tab-icon"></lightning-icon>
+                                                    <span>Article</span>
+                                                </div>
+                                                <div class="tab-button-enhanced tab-body"
+                                                    onclick={handleHeaderSelectClauseType}
+                                                    data-type="Body">
+                                                    <lightning-icon icon-name="utility:approval"
+                                                        size="x-small"
+                                                        class="tab-icon"></lightning-icon>
+                                                    <span>Clause</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </template>
+
+            <!-- ============== PORTAL MODE HEADER ============== -->
+            <template if:true={isPortalUser}>
+                <div class="portal-header slds-p-around_medium">
+                    <!-- Top: Image and Basic Info -->
+                    <div class="slds-grid slds-grid_vertical-align-center slds-m-bottom_medium">
+                        <div class="slds-shrink-none ">
+                            <img src={illustrationUrl} alt="Legal Doc" class="portal-illustration" />
+                        </div>
+                        <div class="slds-col slds-grow slds-p-left_medium">
+                            <h1 class="portal-title">{legalDocName}</h1>
+                            <p class="portal-detail"><strong>{labelYear}:</strong> {legalDocYear}</p>
+                            <p class="portal-detail"><strong>{labelSendDate}:</strong> {sendDate}</p>
+                            <p class="portal-detail"><strong>{labelLanguage}:</strong> {legalDocLanguage}</p>
+                        </div>
+                    </div>
+
+                    <!-- Progress Path - Standard Salesforce Component -->
+                    <div class="path-container slds-m-bottom_medium">
+                        <lightning-progress-indicator current-step={currentStatusValue} type="path" variant="base">
+                            <template for:each={legalDocStatusSteps} for:item="step">
+                                <lightning-progress-step key={step.value} label={step.label} value={step.value}>
+                                </lightning-progress-step>
+                            </template>
+                        </lightning-progress-indicator>
+                    </div>
+
+                    <!-- Info Cards: Fournisseur & Juridique -->
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <!-- Fournisseur Card -->
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="info-card">
+                                <div class="info-card-header">
+                                    <img src={viewIconUrl} alt="Fournisseur" class="info-icon-img" />
+                                    <h3 class="info-card-title">FOURNISSEUR</h3>
+                                </div>
+                                <div class="info-card-body">
+                                    <p class="info-line"><strong>{Labels.LBL_LatestSupplierComments}</strong>
+                                        {partnerComment}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Juridique Card -->
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="info-card">
+                                <div class="info-card-header">
+                                    <img src={validationIconUrl} alt="Juridique" class="info-icon-img" />
+                                    <h3 class="info-card-title">JURIDIQUE</h3>
+                                </div>
+                                <div class="info-card-body">
+                                    <p class="info-line">{legalStatusText}</p>
+                                    <p class="info-line"><strong>{Labels.LBL_DateOFLegalValidation}</strong>
+                                        {legalValidationDate}</p>
+                                    <p class="info-line"><strong>{Labels.LBL_LatestCommentsLegal}</strong>
+                                        {legalComment}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <!-- ============== CLAUSES SECTION (Both Modes) ============== -->
+            <div class="clauses-section slds-p-horizontal_medium slds-p-bottom_medium">
+                <lightning-accordion allow-multiple-sections-open active-section-name="clauses">
+                    <lightning-accordion-section name="clauses" label={Labels.LBL_OverviewLegalClauses}>
+                        <template if:true={hasClauses}>
+                            <!-- Save Order Button -->
+                            <template if:false={isPortalUser}>
+                                <template if:true={hasOrderChanged}>
+                                    <div class="slds-m-bottom_small slds-text-align_right">
+                                        <lightning-button variant="brand" label={Labels.LBL_SaveOrder}
+                                            onclick={handleSaveOrder} icon-name="utility:save"
+                                            title={Labels.MSG_SaveNewOrder}>
+                                        </lightning-button>
+                                    </div>
+                                </template>
+                            </template>
+
+                            <!-- Flat Clauses List (No Grouping) -->
+                            <div class="clauses-list">
+                                <template for:each={paginatedClauses} for:item="clause">
+                                    <div key={clause.Id} class={clause.itemClass} data-id={clause.Id}
+                                        draggable={isDraggable} ondragstart={handleDragStart}
+                                        ondragover={handleDragOver} ondragenter={handleDragEnter}
+                                        ondragleave={handleDragLeave} ondrop={handleDrop} ondragend={handleDragEnd}>
+                                        <!-- Normal Clause Row -->
+                                        <template if:false={clause.isExpanded}>
+                                            <div class="clause-item-enhanced slds-p-around_medium" onclick={handleEditClause}
+                                                data-id={clause.Id} data-disabled={clause.isNotNegotiable}
+                                                title={clause.editTooltip}>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread">
+
+                                                    <!-- Left side: Drag Handle and Content -->
+                                                    <div class="slds-col slds-grow">
+                                                        <div class="slds-grid slds-grid_vertical-align-center">
+                                                            <!-- Drag Handle - Only for non-portal mode -->
+                                                            <template if:false={isPortalUser}>
+                                                                <div class="clause-drag-handle" onclick={handleDragHandleClick}>
+                                                                    
+                                                                </div>
+                                                            </template>
+                                                            <template if:false={isPortalUser}>
+                                                                <div class="clause-display" onclick={handleDragHandleClick}>
+                                                                    <span class="display-order">{clause.DisplayOrder__c}</span>
+                                                                </div>
+                                                            </template>
+
+                                                            <!-- Clause content -->
+                                                            <div class={clauseContentClass}>
+                                                                <div class={clause.clauseTypeClass}>
+                                                                    <template if:true={clause.Clause__c}>
+                                                                        <lightning-formatted-rich-text
+                                                                            value={clause.Clause__c}></lightning-formatted-rich-text>
+                                                                    </template>
+                                                                    <template if:false={clause.Clause__c}>
+                                                                        <span
+                                                                            class="clause-type-label-placeholder">{clause.clauseTypeLabel}</span>
+                                                                    </template>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!-- Right Side: Status Badge and Action Buttons -->
+                                                    <div class="slds-col slds-shrink-none clause-right-actions">
+                                                        <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-end slds-gutters_small">
+                                                            <!-- Status Badge -->
+                                                            <template if:true={showEditButton}>
+                                                                <div class="slds-col clause-status-inside">
+                                                                    <lightning-badge 
+                                                                        label={clause.statusLabel}
+                                                                        class={clause.statusClass}
+                                                                        onclick={handleStatusBadgeClick}
+                                                                        data-id={clause.Id}
+                                                                        data-status={clause.Status__c}>
+                                                                    </lightning-badge>
+                                                                </div>
+                                                            </template>
+                                                            <!-- Action Buttons: Edit, Delete, Chatter -->
+                                                            <div class="slds-col clause-action-buttons">
+                                                                <div class="action-buttons-group" onclick={handleActionButtonsClick}>
+                                                                    <button class="action-btn" onclick={handleEditClause}
+                                                                        data-id={clause.Id} disabled={clause.isNotNegotiable}
+                                                                        title={clause.editTooltip}>
+                                                                        <lightning-icon icon-name="utility:edit" size="x-small" 
+                                                                            class="action-icon"></lightning-icon>
+                                                                    </button>
+                                                                    <button class="action-btn" onclick={handleDeleteClause}
+                                                                        data-id={clause.Id} title="Supprimer">
+                                                                        <lightning-icon icon-name="utility:delete" size="x-small" 
+                                                                            class="action-icon"></lightning-icon>
+                                                                    </button>
+                                                                    <button class="action-btn chatter-btn {clause.chatterActiveClass}" onclick={handleOpenChatter}
+                                                                        data-id={clause.Id} title="Chatter">
+                                                                        <lightning-icon icon-name="utility:chat" size="x-small" 
+                                                                            class="action-icon"></lightning-icon>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+
+                                        <template if:true={clause.isExpanded}>
+                                            <template if:true={clause.showSimpleEdit}>
+                                                <div class="simple-edit-inline slds-box slds-theme_shade {clause.modalClass}"
+                                                    data-clause-modal-id={clause.Id}>
+                                                    <div class="simple-edit-header" style="padding: 0.75rem 1rem;">
+                                                        <div class="slds-grid slds-grid_vertical-align-center">
+                                                            <div class="slds-col slds-grow">
+                                                            </div>
+                                                            <!-- Action Icons and Close Button -->
+                                                            <div class="slds-col slds-shrink-none header-actions-group">
+                                                                <lightning-button-icon icon-name="utility:copy"
+                                                                    alternative-text="Dupliquer" variant="bare"
+                                                                    onclick={handleDuplicateClause} data-id={clause.Id}
+                                                                    class="modal-action-icon" title="Dupliquer"
+                                                                    size="medium">
+                                                                </lightning-button-icon>
+                                                                <lightning-button-icon icon-name="utility:delete"
+                                                                    alternative-text="Supprimer" variant="bare"
+                                                                    onclick={handleDeleteClause} data-id={clause.Id}
+                                                                    class="modal-action-icon" title="Supprimer"
+                                                                    size="medium">
+                                                                </lightning-button-icon>
+                                                                <lightning-button-icon icon-name="utility:down"
+                                                                    alternative-text="Déplacer vers le bas"
+                                                                    variant="bare" onclick={handleMoveDownClause}
+                                                                    data-id={clause.Id}
+                                                                    class="modal-action-icon modal-arrow-icon"
+                                                                    title="Déplacer vers le bas" size="medium">
+                                                                </lightning-button-icon>
+                                                                <lightning-button-icon icon-name="utility:up"
+                                                                    alternative-text="Déplacer vers le haut"
+                                                                    variant="bare" onclick={handleMoveUpClause}
+                                                                    data-id={clause.Id}
+                                                                    class="modal-action-icon modal-arrow-icon"
+                                                                    title="Déplacer vers le haut" size="medium">
+                                                                </lightning-button-icon>
+                                                                <lightning-button-icon icon-name="utility:close"
+                                                                    alternative-text="Fermer" variant="bare"
+                                                                    onclick={handleCloseInlineEdit} data-id={clause.Id}
+                                                                    class="modal-close-icon" title="Fermer"
+                                                                    size="medium">
+                                                                </lightning-button-icon>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Editor Layout: Single Column -->
+                                                    <div class="editor-layout-container">
+                                                        <!-- Editor -->
+                                                        <div class="editor-column-left">
+                                                            <div class="simple-edit-content-enhanced slds-p-around_medium">
+                                                                <lightning-input-rich-text
+                                                                    value={clause.editingClause.Clause__c}
+                                                                    onchange={handleNewVersionChange} data-id={clause.Id}
+                                                                    class="simple-edit-editor-enhanced">
+                                                                </lightning-input-rich-text>
+                                                            </div>
+                                                            <div class="simple-edit-footer slds-p-around_small">
+                                                                <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread">
+                                                                    <div class="slds-col slds-shrink-none">
+                                                                        <div class="slds-grid slds-grid_vertical-align-center slds-gutters">
+                                                                            <!-- IsNegotiable toggle -->
+                                                                            <div class="slds-col">
+                                                                        <div class="custom-toggle-wrapper">
+                                                                            <label class="custom-toggle-label">Négociable</label>
+                                                                            <div class="custom-toggle-container">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-toggle-input"
+                                                                                    checked={clause.editingClause.IsNegotiable__c}
+                                                                                    onchange={handleEditingClauseNegotiableChange}
+                                                                                    data-id={clause.Id}
+                                                                                    data-field="IsNegotiable__c">
+                                                                                <label class="custom-toggle-switch"
+                                                                                    onclick={handleToggleClick}
+                                                                                    data-id={clause.Id}>
+                                                                                    <span class="custom-toggle-slider"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                            </div>
+                                                                            <!-- Show Chatter link -->
+                                                                            <div class="slds-col chatter-link-container">
+                                                                                <a href="javascript:void(0);" 
+                                                                                    class="chatter-link"
+                                                                                    data-id={clause.Id}
+                                                                                    onclick={handleToggleChatter}>
+                                                                                    {clause.chatterButtonLabel}
+                                                                                </a>
+                                                                            </div>
+                                                                            <!-- Additional Information link -->
+                                                                            <div class="slds-col chatter-link-container">
+                                                                                <a href="javascript:void(0);" 
+                                                                                    class="chatter-link"
+                                                                                    data-id={clause.Id}
+                                                                                    onclick={handleToggleAdditionalInfo}>
+                                                                                    {clause.additionalInfoButtonLabel}
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="slds-col slds-shrink-none">
+                                                                        <!-- Save button on the right -->
+                                                                        <lightning-button variant="brand"
+                                                                            style="background: #0078d4; color: white;"
+                                                                            label={Labels.LBL_Save} data-id={clause.Id}
+                                                                            onclick={handleSaveSimpleEdit}>
+                                                                        </lightning-button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    
+                                                    <!-- Additional Information component -->
+                                                    <template if:true={clause.showAdditionalInfo}>
+                                                        <div class="additional-info-container slds-p-around_medium">
+                                                            <div class="slds-col slds-size_1-of-1">
+                                                                <lightning-dual-listbox 
+                                                                    label="Resp. métier" 
+                                                                    source-label="Disponible"
+                                                                    selected-label="Sélectionné" 
+                                                                    options={businessOwnersOptions}
+                                                                    value={clause.editingClause.selectedBusinessOwners}
+                                                                    onchange={handleAdditionalInfoBusinessOwnersChange}
+                                                                    data-id={clause.Id}>
+                                                                </lightning-dual-listbox>
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                                
+                                                <!-- Add Clause Tabs - Outside the modal, under active clause -->
+                                                <template if:false={isPortalUser}>
+                                                    <div class="add-clause-section">
+                                                        <div class="add-clause-header">
+                                                            <template if:false={clause.showAddTabs}>
+                                                                <button class="add-clause-icon-btn"
+                                                                    onclick={handleShowAddClauseTabs}
+                                                                    data-clause-id={clause.Id}
+                                                                    title="Ajouter une clause">
+                                                                    <img src={addIconUrl} class="add-clause-icon-img" alt="Ajouter une clause" />
+                                                                </button>
+                                                            </template>
+                                                            <template if:true={clause.showAddTabs}>
+                                                                <lightning-button-icon icon-name="utility:close"
+                                                                    alternative-text="Fermer" variant="bare"
+                                                                    onclick={handleShowAddClauseTabs}
+                                                                    data-clause-id={clause.Id}
+                                                                    class="add-clause-icon add-clause-icon-close"
+                                                                    title="Fermer" size="small">
+                                                                </lightning-button-icon>
+                                                            </template>
+                                                        </div>
+                                                        <template if:true={clause.showAddTabs}>
+                                                            <div class="clause-type-tabs-enhanced">
+                                                                <div class="tab-button-enhanced tab-subtitle"
+                                                                    onclick={handleSelectClauseType}
+                                                                    data-type="Subtitle" data-clause-id={clause.Id}>
+                                                                    <lightning-icon icon-name="utility:approval"
+                                                                        size="x-small"
+                                                                        class="tab-icon"></lightning-icon>
+                                                                    <span>Article</span>
+                                                                </div>
+                                                                <div class="tab-button-enhanced tab-title"
+                                                                    onclick={handleSelectClauseType}
+                                                                    data-type="Title" data-clause-id={clause.Id}>
+                                                                    <lightning-icon icon-name="utility:approval"
+                                                                        size="x-small"
+                                                                        class="tab-icon"></lightning-icon>
+                                                                    <span>Chapter</span>
+                                                                </div>
+                                                                <div class="tab-button-enhanced tab-body"
+                                                                    onclick={handleSelectClauseType}
+                                                                    data-type="Body" data-clause-id={clause.Id}>
+                                                                    <lightning-icon icon-name="utility:approval"
+                                                                        size="x-small"
+                                                                        class="tab-icon"></lightning-icon>
+                                                                    <span>Clause</span>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </template>
+                                            </template>
+
+                                            <!-- Comparison View (With Supplier OR Portal Mode) -->
+                                            <template if:false={clause.showSimpleEdit}>
+                                                <div class="comparison-inline slds-box slds-theme_shade {clause.modalClass}"
+                                                    data-clause-modal-id={clause.Id}>
+                                                    <!-- Comparison Header -->
+                                                    <div class="comparison-header" style="padding: 0.75rem 1rem;">
+                                                        <div class="slds-grid slds-grid_vertical-align-center">
+                                                            <div class="slds-col slds-grow">
+                                                                <h3 class="comparison-title">
+                                                                    {Labels.LBL_VersionComparison}</h3>
+                                                            </div>
+                                                            <!-- Action Icons and Close Button -->
+                                                            <div class="slds-col slds-shrink-none header-actions-group">
+                                                                <lightning-button-icon icon-name="utility:copy"
+                                                                    alternative-text="Dupliquer" variant="bare"
+                                                                    onclick={handleDuplicateClause} data-id={clause.Id}
+                                                                    class="modal-action-icon" title="Dupliquer"
+                                                                    size="small">
+                                                                </lightning-button-icon>
+                                                                <lightning-button-icon icon-name="utility:delete"
+                                                                    alternative-text="Supprimer" variant="bare"
+                                                                    onclick={handleDeleteClause} data-id={clause.Id}
+                                                                    class="modal-action-icon" title="Supprimer"
+                                                                    size="small">
+                                                                </lightning-button-icon>
+                                                                <lightning-button-icon icon-name="utility:down"
+                                                                    alternative-text="Déplacer vers le bas"
+                                                                    variant="bare" onclick={handleMoveDownClause}
+                                                                    data-id={clause.Id}
+                                                                    class="modal-action-icon modal-arrow-icon"
+                                                                    title="Déplacer vers le bas" size="small">
+                                                                </lightning-button-icon>
+                                                                <lightning-button-icon icon-name="utility:up"
+                                                                    alternative-text="Déplacer vers le haut"
+                                                                    variant="bare" onclick={handleMoveUpClause}
+                                                                    data-id={clause.Id}
+                                                                    class="modal-action-icon modal-arrow-icon"
+                                                                    title="Déplacer vers le haut" size="small">
+                                                                </lightning-button-icon>
+                                                                <lightning-button-icon icon-name="utility:close"
+                                                                    alternative-text="Fermer" variant="bare"
+                                                                    onclick={handleCloseInlineEdit} data-id={clause.Id}
+                                                                    class="modal-close-icon" title="Fermer"
+                                                                    size="small">
+                                                                </lightning-button-icon>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- 3 Columns Comparison -->
+                                                    <div class="comparison-wrapper-container">
+                                                        <div class="slds-grid slds-gutters comparison-columns">
+                                                            <!-- Past Version (Display Only) -->
+                                                            <div class="slds-col slds-size_1-of-3 version-column">
+                                                            <div class="version-header past-header">
+                                                                <h4 class="version-title">{Labels.LBL_PastVersion}</h4>
+                                                                <!-- Only show dropdown if there are other versions to compare -->
+                                                                <template if:true={clause.hasVersionsToCompare}>
+                                                                    <lightning-combobox label=""
+                                                                        value={clause.selectedCompareVersionId}
+                                                                        options={clause.compareVersionOptions}
+                                                                        onchange={handleCompareVersionChange}
+                                                                        data-id={clause.Id} variant="label-hidden"
+                                                                        class="version-selector"
+                                                                        dropdown-alignment="left">
+                                                                    </lightning-combobox>
+                                                                </template>
+                                                            </div>
+                                                            <div class="version-content past-content">
+                                                                <lightning-formatted-rich-text
+                                                                    value={clause.pastVersionContent}
+                                                                    class="version-text">
+                                                                </lightning-formatted-rich-text>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Current Version (Display Only with Track Changes) -->
+                                                        <div class="slds-col slds-size_1-of-3 version-column">
+                                                            <div class="version-header current-header">
+                                                                <h4 class="version-title">{Labels.LBL_CurrentVersion}
+                                                                </h4>
+                                                            </div>
+                                                            <div class="version-content current-content">
+                                                                <lightning-formatted-rich-text
+                                                                    value={clause.currentVersionContent}
+                                                                    class="version-text">
+                                                                </lightning-formatted-rich-text>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- New Version (Editable) -->
+                                                        <div class="slds-col slds-size_1-of-3 version-column">
+                                                            <div class="version-header new-header">
+                                                                <h4 class="version-title">{Labels.LBL_NewVersion}</h4>
+                                                                <lightning-button-icon icon-name="utility:edit"
+                                                                    alternative-text={Labels.LBL_Edit} variant="bare"
+                                                                    onclick={handleToggleEditMode} data-id={clause.Id}
+                                                                    class="edit-version-btn" title={Labels.LBL_Edit}>
+                                                                </lightning-button-icon>
+                                                            </div>
+                                                            <div class="version-content new-content">
+                                                                <template if:false={clause.isEditingNewVersion}>
+                                                                    <lightning-formatted-rich-text
+                                                                        value={clause.newVersionContent}
+                                                                        class="version-text">
+                                                                    </lightning-formatted-rich-text>
+                                                                </template>
+                                                                <template if:true={clause.isEditingNewVersion}>
+                                                                    <lightning-input-rich-text
+                                                                        value={clause.editingClause.Clause__c}
+                                                                        onchange={handleNewVersionChange}
+                                                                        data-id={clause.Id} class="new-version-editor">
+                                                                    </lightning-input-rich-text>
+                                                                </template>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        
+                                                      
+                                                    </div>
+
+                                                    <!-- Action Buttons -->
+                                                    <div class="comparison-footer slds-p-around_small">
+                                                        <div
+                                                            class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread">
+                                                            <!-- Toggle and Chatter - Far Left -->
+                                                            <div class="slds-col slds-shrink-none">
+                                                                <div class="slds-grid slds-grid_vertical-align-center slds-gutters">
+                                                                    <!-- IsNegotiable toggle - Non-portal only -->
+                                                                    <template if:false={isPortalUser}>
+                                                                        <div class="slds-col">
+                                                                            <div class="custom-toggle-wrapper">
+                                                                                <label
+                                                                                    class="custom-toggle-label">Négociable</label>
+                                                                                <div class="custom-toggle-container">
+                                                                                    <input type="checkbox"
+                                                                                        class="custom-toggle-input"
+                                                                                        checked={clause.editingClause.IsNegotiable__c}
+                                                                                        onchange={handleEditingClauseNegotiableChange}
+                                                                                        data-id={clause.Id}
+                                                                                        data-field="IsNegotiable__c">
+                                                                                    <label class="custom-toggle-switch"
+                                                                                        onclick={handleToggleClick}
+                                                                                        data-id={clause.Id}>
+                                                                                        <span
+                                                                                            class="custom-toggle-slider"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </template>
+                                                                    <!-- Show Chatter link -->
+                                                                    <div class="slds-col chatter-link-container">
+                                                                        <a href="javascript:void(0);" 
+                                                                            class="chatter-link"
+                                                                            data-id={clause.Id}
+                                                                            onclick={handleToggleChatter}>
+                                                                            {clause.chatterButtonLabel}
+                                                                        </a>
+                                                                    </div>
+                                                                    <!-- Additional Information link -->
+                                                                    <div class="slds-col chatter-link-container">
+                                                                        <a href="javascript:void(0);" 
+                                                                            class="chatter-link"
+                                                                            data-id={clause.Id}
+                                                                            onclick={handleToggleAdditionalInfo}>
+                                                                            {clause.additionalInfoButtonLabel}
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- Action Buttons - Far Right -->
+                                                            <div class="slds-col slds-shrink-none">
+                                                                <div
+                                                                    class="slds-grid slds-grid_vertical-align-center footer-actions-group">
+                                                                    <!-- Save Draft - Always visible -->
+                                                                    <lightning-button variant="brand"
+                                                                        label={Labels.LBL_Save}
+                                                                        class="slds-m-left_small" data-id={clause.Id}
+                                                                        onclick={handleSaveClause}>
+                                                                    </lightning-button>
+
+                                                                    <!-- Publish - Conditional visibility -->
+                                                                    <template if:true={clause.showPublishButton}>
+                                                                        <lightning-button variant="brand"
+                                                                            label="Publier"
+                                                                            onclick={handlePublishClause}
+                                                                            data-id={clause.Id}
+                                                                            class="slds-m-left_x-small"
+                                                                            title="Publier la clause">
+                                                                        </lightning-button>
+                                                                    </template>
+
+                                                                    <!-- Validated - Portal only, conditional -->
+                                                                    <template if:true={clause.showValidatedButton}>
+                                                                        <lightning-button variant="brand" label="Validé"
+                                                                            class="slds-m-left_x-small"
+                                                                            data-id={clause.Id}
+                                                                            onclick={handleValidateClause}
+                                                                            title="Valider la clause">
+                                                                        </lightning-button>
+                                                                    </template>
+
+                                                                    <!-- Approved - Conditional visibility -->
+                                                                    <template if:true={clause.showApprovedButton}>
+                                                                        <lightning-button variant="brand"
+                                                                            label="Accepter" class="slds-m-left_x-small"
+                                                                            data-id={clause.Id}
+                                                                            onclick={handleAcceptClause}
+                                                                            title="Accepter la clause">
+                                                                        </lightning-button>
+                                                                    </template>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                
+                                                    </div>
+                                                    <!-- Additional Information component -->
+                                                    <template if:true={clause.showAdditionalInfo}>
+                                                        <div class="additional-info-container slds-p-around_medium">
+                                                            <div class="slds-col slds-size_1-of-1">
+                                                                <lightning-dual-listbox 
+                                                                    label="Resp. métier" 
+                                                                    source-label="Disponible"
+                                                                    selected-label="Sélectionné" 
+                                                                    options={businessOwnersOptions}
+                                                                    value={clause.editingClause.selectedBusinessOwners}
+                                                                    onchange={handleAdditionalInfoBusinessOwnersChange}
+                                                                    data-id={clause.Id}>
+                                                                </lightning-dual-listbox>
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                                
+                                                <!-- Add Clause Tabs - Outside the modal, under active clause -->
+                                                <template if:false={isPortalUser}>
+                                                    <div class="add-clause-section">
+                                                        <div class="add-clause-header">
+                                                            <template if:false={clause.showAddTabs}>
+                                                                <button class="add-clause-icon-btn"
+                                                                    onclick={handleShowAddClauseTabs}
+                                                                    data-clause-id={clause.Id}
+                                                                    title="Ajouter une clause">
+                                                                    <img src={addIconUrl} class="add-clause-icon-img" alt="Ajouter une clause" />
+                                                                </button>
+                                                            </template>
+                                                            <template if:true={clause.showAddTabs}>
+                                                                <lightning-button-icon icon-name="utility:close"
+                                                                    alternative-text="Fermer" variant="bare"
+                                                                    onclick={handleShowAddClauseTabs}
+                                                                    data-clause-id={clause.Id}
+                                                                    class="add-clause-icon add-clause-icon-close"
+                                                                    title="Fermer" size="small">
+                                                                </lightning-button-icon>
+                                                            </template>
+                                                           
+                                                        </div>
+                                                            <template if:true={clause.showAddTabs}>
+                                                                <div class="clause-type-tabs-enhanced">
+                                                                    <div class="tab-button-enhanced tab-subtitle"
+                                                                        onclick={handleSelectClauseType}
+                                                                        data-type="Subtitle" data-clause-id={clause.Id}>
+                                                                        <lightning-icon icon-name="utility:picklist"
+                                                                            size="x-small"
+                                                                            class="tab-icon"></lightning-icon>
+                                                                        <span>Article</span>
+                                                                    </div>
+                                                                    <div class="tab-button-enhanced tab-title"
+                                                                        onclick={handleSelectClauseType}
+                                                                        data-type="Title" data-clause-id={clause.Id}>
+                                                                        <lightning-icon icon-name="utility:rich_text"
+                                                                            size="x-small"
+                                                                            class="tab-icon"></lightning-icon>
+                                                                        <span>Chapter</span>
+                                                                    </div>
+                                                                    <div class="tab-button-enhanced tab-body"
+                                                                        onclick={handleSelectClauseType}
+                                                                        data-type="Body" data-clause-id={clause.Id}>
+                                                                        <lightning-icon icon-name="utility:approval"
+                                                                            size="x-small"
+                                                                            class="tab-icon"></lightning-icon>
+                                                                        <span>Clause</span>
+                                                                    </div>
+                                                                </div>
+                                                            </template>
+                                                    </div>
+                                                </template>
+                                            </template>
+                                        </template>
+                                    </div>
+                                </template>
+                            </div>
+
+                        </template>
+
+                        <template if:false={hasClauses}>
+                            <div class="slds-align_absolute-center slds-p-around_large no-clauses">
+                                <div class="slds-text-align_center">
+                                    <lightning-icon icon-name="utility:info" size="large"
+                                        class="slds-m-bottom_small"></lightning-icon>
+                                    <p class="slds-text-heading_small">Aucune clause légale trouvée</p>
+                                    <p class="slds-text-body_small slds-m-top_x-small">Cliquez sur "Add new clauses"
+                                        pour ajouter des clauses.</p>
+                                </div>
+                            </div>
+                        </template>
+                    </lightning-accordion-section>
+                </lightning-accordion>
+            </div>
+        </template>
+    </lightning-card>
+
+    <!-- Add Clause Modal (Standard Mode Only) -->
+    <template if:true={showAddModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon icon-name="utility:close" variant="bare-inverse" class="slds-modal__close"
+                        onclick={handleCloseAddModal}>
+                    </lightning-button-icon>
+                    <h2 class="slds-modal__title">Ajouter une nouvelle clause</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <!-- Clause Text -->
+                        <div class="slds-col slds-size_1-of-1 slds-m-bottom_small">
+                            <label class="slds-form-element__label">
+                                <abbr class="slds-required" title="required">*</abbr> Clause
+                            </label>
+                            <lightning-input-rich-text value={newClause.Clause__c}
+                                onchange={handleNewClauseRichTextChange}
+                                placeholder="Saisissez le texte de la clause..." class="clause-rich-text-editor">
+                            </lightning-input-rich-text>
+                        </div>
+
+                        <!-- Display Order -->
+                        <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                            <lightning-input type="number" label="Ordre d'affichage" value={newClause.DisplayOrder__c}
+                                onchange={handleNewClauseFieldChange} data-field="DisplayOrder__c">
+                            </lightning-input>
+                        </div>
+
+                        <!-- Clause Type (Required) -->
+                        <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                            <lightning-combobox label="Type de clause" value={newClause.ClauseType__c}
+                                options={clauseTypeOptions} onchange={handleClauseTypeChange} data-field="ClauseType__c"
+                                required>
+                            </lightning-combobox>
+                        </div>
+
+                        <!-- Is Negotiable -->
+                        <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                            <div class="custom-toggle-wrapper">
+                                <label class="custom-toggle-label">Négociable</label>
+                                <div class="custom-toggle-container">
+                                    <input type="checkbox" class="custom-toggle-input"
+                                        checked={newClause.IsNegotiable__c} onchange={handleNewClauseNegotiableChange}
+                                        data-field="IsNegotiable__c" id="toggle-new-clause">
+                                    <label class="custom-toggle-switch" onclick={handleNewToggleClick}>
+                                        <span class="custom-toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Business Owners (Multi-Select) -->
+                        <div class="slds-col slds-size_1-of-1 slds-m-bottom_small">
+                            <lightning-dual-listbox label="Resp. métier" source-label="Disponible"
+                                selected-label="Sélectionné" options={businessOwnersOptions}
+                                value={selectedBusinessOwners} onchange={handleNewClauseBusinessOwnersChange}
+                                data-field="BusinessOwners__c">
+                            </lightning-dual-listbox>
+                        </div>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label={Labels.LBL_Cancel} onclick={handleCloseAddModal}></lightning-button>
+                    <lightning-button variant="brand" label="Ajouter" onclick={handleSaveNewClause}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Supplier Selection Modal (Standard Mode Only) -->
+    <template if:true={showSupplierModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon icon-name="utility:close" variant="bare-inverse" class="slds-modal__close"
+                        onclick={handleCloseSupplierModal}>
+                    </lightning-button-icon>
+                    <h2 class="slds-modal__title">Envoyer aux fournisseurs</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium supplier-modal-content">
+                    <!-- Header with count on left and search on right -->
+                    <div class="slds-grid slds-grid_align-spread slds-m-bottom_small">
+                        <div class="slds-col">
+                            <p class="slds-text-body_small slds-text-color_weak">
+                                {selectedSupplierCount} éléments sur {totalSupplierCount} • {selectedSupplierCount}
+                                éléments sélectionnés
+                            </p>
+                        </div>
+                        <div class="slds-col slds-size_4-of-12">
+                            <lightning-input type="search" placeholder="Recherchez dans cette liste..."
+                                value={supplierSearchTerm} onchange={handleSupplierSearch} variant="label-hidden">
+                            </lightning-input>
+                        </div>
+                    </div>
+
+                    <!-- Loading Spinner -->
+                    <template if:true={isLoadingSuppliers}>
+                        <div class="slds-align_absolute-center slds-p-around_large">
+                            <lightning-spinner alternative-text="Chargement..." size="medium"></lightning-spinner>
+                        </div>
+                    </template>
+
+                    <!-- Supplier Table -->
+                    <template if:false={isLoadingSuppliers}>
+                        <div class="supplier-table-container">
+                            <table
+                                class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered supplier-table">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th scope="col" class="checkbox-col">
+                                            <lightning-input type="checkbox" checked={isAllSuppliersSelected}
+                                                onchange={handleSelectAllSuppliers} variant="label-hidden"
+                                                label="Select All">
+                                            </lightning-input>
+                                        </th>
+                                        <template for:each={supplierColumnLabels} for:item="col">
+                                            <th key={col.fieldName} scope="col">
+                                                <div class="slds-truncate" title={col.label}>{col.label}</div>
+                                            </th>
+                                        </template>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template if:true={hasSuppliers}>
+                                        <template for:each={filteredSuppliers} for:item="supplier">
+                                            <tr key={supplier.Id} class="slds-hint-parent">
+                                                <td class="checkbox-col">
+                                                    <lightning-input type="checkbox" checked={supplier.isSelected}
+                                                        data-id={supplier.Id} onchange={handleSupplierCheckboxChange}
+                                                        variant="label-hidden" label="Select">
+                                                    </lightning-input>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={supplier.Code__c}>
+                                                        {supplier.Code__c}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={supplier.Name}>
+                                                        <a href={supplier.recordUrl} target="_blank"
+                                                            class="supplier-link">{supplier.Name}</a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={supplier.StatusLabel}>
+                                                        {supplier.StatusLabel}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate"
+                                                        title={supplier.SPBOUCorrectedStatusLabel}>
+                                                        {supplier.SPBOUCorrectedStatusLabel}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={supplier.YearlyContractTypeLabel}>
+                                                        {supplier.YearlyContractTypeLabel}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={supplier.MarketLabel}>
+                                                        {supplier.MarketLabel}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={supplier.ReferenceLanguageLabel}>
+                                                        {supplier.ReferenceLanguageLabel}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={supplier.OwnerName}>
+                                                        {supplier.OwnerName}</div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </template>
+                                    <template if:false={hasSuppliers}>
+                                        <tr>
+                                            <td colspan="9" class="slds-text-align_center slds-p-around_medium">
+                                                <p class="slds-text-color_weak">Aucun élément à afficher.</p>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </template>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Fermer" onclick={handleCloseSupplierModal} class="slds-m-right_x-small">
+                    </lightning-button>
+                    <lightning-button variant="brand" label="Suivant" onclick={handleSendToSuppliers}
+                        disabled={isSendDisabled}>
+                    </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Chatter Sidebar -->
+    <template if:true={isChatterOpen}>
+        <div class="chatter-sidebar">
+            <div class="chatter-sidebar-header">
+                <h3 class="chatter-sidebar-title">Chatter</h3>
+                <lightning-button-icon icon-name="utility:close" variant="bare" 
+                    onclick={handleCloseChatter} class="chatter-close-btn" 
+                    alternative-text="Fermer">
+                </lightning-button-icon>
+            </div>
+            <div class="chatter-sidebar-content">
+                <c-negoptim-chatter record-id={chatterClauseId}></c-negoptim-chatter>
+            </div>
+        </div>
+    </template>
+
+</template>

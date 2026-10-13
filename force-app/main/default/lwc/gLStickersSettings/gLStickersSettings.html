@@ -1,0 +1,263 @@
+<template>
+    <template if:true={isLoading}>
+        <div class="slds-spinner_container greyBg">
+            <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+        </div>
+    </template>
+    <template if:false={isLoading}>
+        <div class="mainContainer">
+            <div class="slds-media__body slds-p-around_x-small stickyHeader pageHeader">
+                <div class="sectionTitle">
+                    {labels.LBL_GLStickersSettings}
+                </div>
+            </div>
+            <div class="slds-grid slds-grid_align-end slds-p-horizontal_none slds-m-bottom_x-small button-container">
+                <lightning-button label={labels.LBL_Add} class="slds-m-around_xx-small" onclick={handleAdd}>
+                </lightning-button>
+                <lightning-button label={labels.LBL_Save} variant="brand" onclick={handleSave}
+                    class="slds-m-vertical_xx-small slds-m-left_xx-small"></lightning-button>
+            </div>
+            <div class="slds-scrollable_y pageBody">
+                <div class="slds-card__body scrollable-body slds-m-top_none">
+                    <table class="pgTable slds-table slds-border_right slds-border_left table-w">
+                        <thead>
+                            <tr class="table-header">
+                                <th rowspan="2" class="table-th">
+                                    <div class="slds-text-align--center">
+                                        <lightning-formatted-text value={labels.LBL_Column}></lightning-formatted-text>
+                                    </div>
+                                </th>
+                                <th rowspan="2" class="table-th">
+                                    <div class="slds-text-align--center">
+                                        <lightning-formatted-text value={labels.LBL_Line}></lightning-formatted-text>
+                                    </div>
+                                </th>
+                                <th rowspan="2" class="color1 medWidth slds-p-horizontal_medium fieldHeader table-th">
+                                    <div class="slds-text-align--center">
+                                        <lightning-formatted-text value={labels.LBL_GLField}></lightning-formatted-text>
+                                    </div>
+                                </th>
+                                <th rowspan="2" class="table-th-actions">
+                                    <div class="slds-text-align--center">
+                                        {labels.LBL_Actions}
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={rows} for:item="row" for:index="index">
+                                <tr key={row.lineNumber} data-index={index} class={row.class}>
+                                    <td class="slds-text-align--center">
+                                        <div class="slds-form-element">
+                                            <div class="slds-form-element__control">
+                                                <div class="slds-combobox_container">
+                                                    <div class="slds-combobox table-data-pos slds-dropdown-trigger slds-dropdown-trigger_click"
+                                                        onclick={toggleDropdown}>
+                                                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right td-w"
+                                                            role="none">
+                                                            <button id={row.columnInputId} role="combobox" tabindex="0"
+                                                                class="slds-input slds-combobox__input"
+                                                                aria-controls={row.columnListBoxId} aria-expanded="true"
+                                                                aria-haspopup="listbox">
+                                                                <span class="slds-truncate">{row.column}</span>
+                                                            </button>
+                                                            <span
+                                                                class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right">
+                                                                <lightning-icon icon-name="utility:down"
+                                                                    class="slds-icon-utility-check slds-icon_container"
+                                                                    size="x-small"></lightning-icon>
+                                                            </span>
+                                                        </div>
+                                                        <div id={columnListBoxId}
+                                                            class="slds-dropdown slds-dropdown_length-5 table-data-pos td-w"
+                                                            role="listbox" tabindex="0" aria-busy="false">
+                                                            <ul class="slds-listbox slds-listbox_vertical table-data-pos"
+                                                                role="presentation">
+                                                                <template for:each={row.columnOptions}
+                                                                    for:item="option">
+                                                                    <li role="presentation"
+                                                                        class="slds-listbox__item table-data-pos"
+                                                                        key={option.id}>
+                                                                        <div class="slds-media slds-listbox__option table-data-pos slds-listbox__option_plain slds-media_small"
+                                                                            data-index={index} data-value={option.value}
+                                                                            data-field="column"
+                                                                            onmouseenter={handleMouseEnter}
+                                                                            onmouseleave={handleMouseLeave}
+                                                                            onclick={handleFieldChange}
+                                                                            data-is-custom="true" role="option"
+                                                                            aria-checked="true">
+                                                                            <span
+                                                                                class="slds-media__figure slds-listbox__option-icon">
+                                                                                <lightning-icon lwc:if={option.check}
+                                                                                    icon-name="utility:check"
+                                                                                    class="slds-icon-utility-check slds-icon_container"
+                                                                                    size="x-small"></lightning-icon>
+                                                                            </span>
+                                                                            <span class="slds-truncate"
+                                                                                title={option.label}>{option.label}</span>
+                                                                        </div>
+                                                                    </li>
+                                                                </template>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="slds-text-align--center">
+                                        <div class="slds-form-element">
+                                            <div class="slds-form-element__control">
+                                                <div class="slds-combobox_container">
+                                                    <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click table-data-pos"
+                                                        onclick={toggleDropdown}>
+                                                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right td-w"
+                                                            role="none">
+                                                            <button id={row.lineInputId} role="combobox" tabindex="0"
+                                                                class="slds-input slds-combobox__input"
+                                                                aria-controls={lineListBoxId} aria-expanded="true"
+                                                                aria-haspopup="listbox">
+                                                                <span class="slds-truncate">{row.line}</span>
+                                                            </button>
+                                                            <span
+                                                                class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right">
+                                                                <lightning-icon icon-name="utility:down"
+                                                                    class="slds-icon-utility-check slds-icon_container"
+                                                                    size="x-small"></lightning-icon>
+                                                            </span>
+                                                        </div>
+                                                        <div id={lineListBoxId}
+                                                            class="slds-dropdown slds-dropdown_length-7 td-w table-data-pos"
+                                                            role="listbox" tabindex="0" aria-busy="false">
+                                                            <ul class="slds-listbox slds-listbox_vertical table-data-pos"
+                                                                role="presentation">
+                                                                <template for:each={row.lineOptions} for:item="option">
+                                                                    <li role="presentation" class="slds-listbox__item"
+                                                                        key={option.id}>
+                                                                        <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small table-data-pos"
+                                                                            data-index={index} data-value={option.value}
+                                                                            data-field="line"
+                                                                            onmouseenter={handleMouseEnter}
+                                                                            onmouseleave={handleMouseLeave}
+                                                                            onclick={handleFieldChange}
+                                                                            data-is-custom="true" role="option"
+                                                                            aria-checked="true">
+                                                                            <span
+                                                                                class="slds-media__figure slds-listbox__option-icon">
+                                                                                <lightning-icon lwc:if={option.check}
+                                                                                    icon-name="utility:check"
+                                                                                    class="slds-icon-utility-check slds-icon_container table-data-pos"
+                                                                                    size="x-small"></lightning-icon>
+                                                                            </span>
+                                                                            <span class="slds-truncate"
+                                                                                title={option.label}>{option.label}</span>
+                                                                        </div>
+                                                                    </li>
+                                                                </template>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="slds-text-align--center">
+                                        <div class="slds-form-element">
+                                            <div class="slds-form-element__control">
+                                                <div class="slds-combobox_container">
+                                                    <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click table-data-pos"
+                                                        onclick={toggleDropdown}>
+                                                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right table-data-pos td-w"
+                                                            role="none">
+                                                            <button id={row.fieldNameInputId} role="combobox"
+                                                                tabindex="0"
+                                                                class="slds-input slds-text-align_left slds-combobox__input"
+                                                                aria-controls={row.fieldNameListBoxId}
+                                                                aria-expanded="true" aria-haspopup="listbox">
+                                                                <span
+                                                                    class="slds-truncate span-characteristic">{row.fieldDisplayName}</span>
+                                                            </button>
+                                                            <span
+                                                                class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right table-data-pos">
+                                                                <lightning-icon icon-name="utility:down"
+                                                                    class="slds-icon-utility-check slds-icon_container"
+                                                                    size="x-small"></lightning-icon>
+                                                            </span>
+                                                        </div>
+                                                        <div id={fieldNameListBoxId}
+                                                            class="slds-dropdown slds-dropdown_length-5 table-data-pos td-w"
+                                                            role="listbox" tabindex="0" aria-busy="false">
+                                                            <ul class="slds-listbox slds-listbox_vertical table-data-pos"
+                                                                role="presentation">
+                                                                <template for:each={row.fieldNameOptions}
+                                                                    for:item="option">
+                                                                    <li role="presentation"
+                                                                        class="slds-listbox__item table-data-pos"
+                                                                        key={option.id}>
+                                                                        <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small table-data-pos"
+                                                                            data-index={index} data-value={option.value}
+                                                                            data-field="fieldName"
+                                                                            onmouseenter={handleMouseEnter}
+                                                                            onmouseleave={handleMouseLeave}
+                                                                            onclick={handleFieldChange}
+                                                                            data-is-custom="true" role="option"
+                                                                            aria-checked="true">
+                                                                            <span
+                                                                                class="slds-media__figure slds-listbox__option-icon">
+                                                                                <lightning-icon lwc:if={option.check}
+                                                                                    icon-name="utility:check"
+                                                                                    class="slds-icon-utility-check slds-icon_container"
+                                                                                    size="x-small"></lightning-icon>
+                                                                            </span>
+                                                                            <span class="slds-truncate"
+                                                                                title={option.label}>{option.label}</span>
+                                                                        </div>
+                                                                    </li>
+                                                                </template>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="slds-text-align--center">
+                                        <div class="display-divs">
+                                            <template if:true={row.showRemoveButton}>
+                                                <div class="display-divs">
+                                                    <div class={row.removeButtonClass}>
+                                                        <div
+                                                            class="slds-icon_container custom-icon-remove edit-icon-remove">
+                                                            <lightning-icon icon-name='action:remove'
+                                                                alternative-text='remove' size='x-small'
+                                                                title={labels.LBL_Remove} onclick={handleRemove}
+                                                                data-index={index}
+                                                                class="remove-trans"></lightning-icon>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                            <div class="display-divs">
+                                                <div class={row.deleteButtonClass}>
+                                                    <div class="slds-icon_container custom-icon-delete edit-icon">
+                                                        <lightning-icon icon-name='utility:delete'
+                                                            alternative-text='delete' size='x-small'
+                                                            title={labels.LBL_Delete} onclick={handleDelete}
+                                                            data-index={index} class="delete-trans"></lightning-icon>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                    <div
+                        class="slds-grid slds-grid_align-end slds-p-horizontal_none slds-m-top_x-small button-container slds-p-bottom_x-small">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Méthode de palier</label>
+    <name>slab_calc_method__c</name>
+    <picklistValues>
+        <masterLabel>Inc Prog Qty</masterLabel>
+        <translation>Prog Qtés Tranche</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Inc Prog Sell out</masterLabel>
+        <translation>Prog CA VentesTranche</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Inc Prog TO</masterLabel>
+        <translation>Prog CA Tranche</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Inc Qty</masterLabel>
+        <translation>Qtés Tranche</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Inc Sell Out</masterLabel>
+        <translation>CA Ventes Tranche</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Inc TO</masterLabel>
+        <translation>CA Tranche</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Other</masterLabel>
+        <translation>Autre</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Prog Qty</masterLabel>
+        <translation>Prog Qtés</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Prog Qty byBU</masterLabel>
+        <translation>Prog Qtés magasin</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Prog Sell Out</masterLabel>
+        <translation>prog CA Ventes</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Prog TO</masterLabel>
+        <translation>Prog CA</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Prog TO byBU</masterLabel>
+        <translation>Prog CA magasin</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Qty</masterLabel>
+        <translation>Qtés</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Qty byBU</masterLabel>
+        <translation>Qtés magasin</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Sell Out</masterLabel>
+        <translation>CA Ventes</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>TO</masterLabel>
+        <translation>CA</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>TO byBU</masterLabel>
+        <translation>CA magasin</translation>
+    </picklistValues>
+</CustomFieldTranslation>

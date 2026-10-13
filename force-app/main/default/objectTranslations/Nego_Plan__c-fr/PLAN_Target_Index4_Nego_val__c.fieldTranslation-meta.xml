@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- PLAN - Target Index4 Nego val --></label>
+    <name>PLAN_Target_Index4_Nego_val__c</name>
+</CustomFieldTranslation>

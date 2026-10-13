@@ -1,0 +1,27 @@
+<template>
+    <section tabindex="-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <h2 class="slds-modal__title">{labels.LBL_CreateSCNAction_PageTitle1}</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium slds-scrollable_y">
+                <div class="slds-form-element slds-size_1-of-2 slds-medium-size_1-of-2">
+                    <lightning-combobox
+                        name="supplierSelect"
+                        label="Select Supplier"
+                        options={supplierList}
+                        value={selectedSupplier}
+                        onchange={handleChange}>
+                    </lightning-combobox>
+                </div>
+            </div>
+            <footer class="slds-modal__footer slds-text-align_right">
+                <lightning-button-group>
+                <lightning-button label={labels.LBL_MassAction_CancelButton} title={labels.LBL_MassAction_CancelButton} onclick={closeModal}></lightning-button>
+                <lightning-button variant="brand" label={labels.LBL_MassAction_NextButton} title={labels.LBL_MassAction_NextButton} onclick={nextModal} disabled={isNextDisabled}></lightning-button>
+                </lightning-button-group>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

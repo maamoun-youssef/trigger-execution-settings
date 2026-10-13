@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Give the section concerned by the purchases payment term exception. --></help>
+    <label><!-- Payment term exception1 --></label>
+    <name>HierarchyPaymentTermExc1__c</name>
+    <relationshipLabel><!-- Sales Cond. Exception (HE Payment Exc 1) --></relationshipLabel>
+</CustomFieldTranslation>

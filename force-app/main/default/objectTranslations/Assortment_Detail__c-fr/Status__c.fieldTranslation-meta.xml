@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Statut</label>
+    <name>Status__c</name>
+    <picklistValues>
+        <masterLabel>In preparation</masterLabel>
+        <translation>En préparation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Previously Validated</masterLabel>
+        <translation>Validé précédemment</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Request for Approval</masterLabel>
+        <translation>Demande d&apos;approbation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Validated</masterLabel>
+        <translation>Validé</translation>
+    </picklistValues>
+</CustomFieldTranslation>

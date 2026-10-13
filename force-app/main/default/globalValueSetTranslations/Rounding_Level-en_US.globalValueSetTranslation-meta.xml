@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>1 Decimal</masterLabel>
+        <translation>1 Decimal</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>10 Unit</masterLabel>
+        <translation>10 Unit</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>100 Unit</masterLabel>
+        <translation>100 Unit</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>1000 Unit</masterLabel>
+        <translation>1000 Unit</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>10000 Unit</masterLabel>
+        <translation>10000 Unit</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>2 Decimals</masterLabel>
+        <translation>2 Decimals</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>3 Decimals</masterLabel>
+        <translation>3 Decimals</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>4 Decimals</masterLabel>
+        <translation>4 Decimals</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Unit</masterLabel>
+        <translation>unit</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

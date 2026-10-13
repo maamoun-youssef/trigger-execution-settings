@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Pour faciliter le démarrage d&apos;une négociation pour une nouvelle année, nous offrons la possibilité de dupliquer les contrats d&apos;une année à l&apos;autre, voire dans la même année, afin de faciliter la simulation de différentes stratégies.
+        Configurez les contrats autorisés à être utilisés comme source de duplication en fonction de leur type d&apos;enregistrement et de leur statut.</help>
+    <label>Configuration de la duplication</label>
+    <name>ContractDuplicationConfiguration__c</name>
+</CustomFieldTranslation>

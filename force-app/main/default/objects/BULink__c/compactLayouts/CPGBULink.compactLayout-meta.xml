@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPGBULink</fullName>
+    <fields>Name</fields>
+    <fields>BusinessUnitMaster__c</fields>
+    <fields>BusinessUnitDetail__c</fields>
+    <label>negOptim CPG BU Link</label>
+</CompactLayout>

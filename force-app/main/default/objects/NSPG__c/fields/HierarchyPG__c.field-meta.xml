@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HierarchyPG__c</fullName>
+    <externalId>false</externalId>
+    <formula>PG__r.Hierarchy__r.Code__c &amp;&quot; - &quot; &amp; PG__r.Hierarchy__r.Name</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>HierarchyPG</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

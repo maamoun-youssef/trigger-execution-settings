@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Condition_Grid_Layout_For_Landing__c</fullName>
+    <description>Grid Layout for page condition of Contract &quot;Landing&quot;</description>
+    <externalId>false</externalId>
+    <label>Condition Grid Layout For Landing</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

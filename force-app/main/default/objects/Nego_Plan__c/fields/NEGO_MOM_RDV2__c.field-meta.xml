@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NEGO_MOM_RDV2__c</fullName>
+    <description>Minute of Meeting of supplier RDV2</description>
+    <inlineHelpText>Minute of Meeting of supplier RDV2</inlineHelpText>
+    <label>NEGO - MOM RDV2</label>
+    <length>16000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>15</visibleLines>
+</CustomField>

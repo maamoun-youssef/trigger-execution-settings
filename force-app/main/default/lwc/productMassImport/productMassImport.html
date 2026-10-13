@@ -1,0 +1,45 @@
+<template>
+    <div if:true={importSettingsName} class="slds-card slds-p-around--small">
+        <template if:false={statusMessage}>
+            <lightning-spinner style="z-index: 9" variant="brand" size="large" if:true={loading}></lightning-spinner>
+        </template>
+        <div if:false={loading}>
+            <div if:false={importDone}>
+                <c-import-settings object-name={objectName} import-settings-name={importSettingsName}
+                    reminder-msg={reminderMsg} onuploadexcel={uploadExcel} ongetfileid={getFileId}>
+                </c-import-settings>
+                <lightning-button label={labels.LBL_Import} variant="brand" onclick={prepareFile}></lightning-button>
+            </div>
+            <div if:true={importDone}>
+                <span if:false={logInfo.name}>{labels.LBL_ProductMassImport_ImportCompleted}</span>
+                <div if:true={logInfo.name}>
+                    <span>{labels.LBL_ProductMassImport_ImportCompletedWithErrors} </span>
+                    <a href={logInfo.url}>{logInfo.name}</a>
+                </div>
+            </div>
+        </div>
+        <div if:true={statusMessage}>
+            <div role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small"
+                aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-modal__title slds-hyphenate">
+                            {statusMessage}
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-var-p-around_medium slds-is-relative">
+                        <div class="slds-p-around_large">
+                            <lightning-spinner alternative-text={statusMessage} variant="brand">
+                            </lightning-spinner>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+        <div class="slds-m-top_medium slds-text-align_right">
+            <lightning-button label={labels.LBL_Back} variant="brand" onclick={goToProducts}>
+            </lightning-button>
+        </div>
+    </div>
+</template>

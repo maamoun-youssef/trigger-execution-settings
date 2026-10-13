@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>negOptim Contract</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>negOptim Contracts</value>
+    </caseValues>
+    <layouts>
+        <layout>Contract Layout</layout>
+        <sections>
+            <label><!-- Indice --></label>
+            <section>Indice</section>
+        </sections>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+        <sections>
+            <label><!-- QTY --></label>
+            <section>QTY</section>
+        </sections>
+        <sections>
+            <label><!-- TO --></label>
+            <section>TO</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Contract Name</nameFieldLabel>
+    <quickActions>
+        <label><!-- Calculate CD Already Invoiced --></label>
+        <name>CalculateCDAlreadyInvoiced</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Flux for test --></label>
+        <name>Flux_for_test</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Generate Contract Sell-In --></label>
+        <name>GenerateContractSellIn</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Invoices Manual Generation --></label>
+        <name>GenerateDownPaymentInvoices</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Validate Invoices --></label>
+        <name>ValidateInvoices</name>
+    </quickActions>
+    <recordTypes>
+        <label>Landing</label>
+        <name>Landing</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- This will be used as the reference of any next year negotiation --></description>
+        <label>Nego Base</label>
+        <name>Nego_Base</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- This will be used to fix start of nego process based on current year contrract aggregation --></description>
+        <label>Yearly Conso</label>
+        <name>Nego_Base_Init</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Objective</label>
+        <name>Objective</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Period Extenstion</label>
+        <name>Period_Extension</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Post Nego Simulation</label>
+        <name>PostNego_Simulation</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Proprosal</label>
+        <name>Proposal</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Safe Balance</label>
+        <name>Safe_Balance</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Record type used when a contract is approved by all the approvers and status set as &apos;Signed&apos; --></description>
+        <label>Signed</label>
+        <name>Signed</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Make a frozen copy of the contract at the Signture step --></description>
+        <label>Signed Copy</label>
+        <name>Signed_Copy</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Simulation</label>
+        <name>Simulation</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Target</label>
+        <name>Target</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Record type used when a contract is in a status different than &apos;Signed&apos; --></description>
+        <label>To Be Signed</label>
+        <name>To_Be_Signed</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label>Condition Manager</label>
+        <name>ConditionManager</name>
+    </webLinks>
+    <webLinks>
+        <label>Duplicate Contract</label>
+        <name>DuplicateContract</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- InvoiceManager --></label>
+        <name>InvoiceManager</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- InvoiceManagerVisualizer --></label>
+        <name>InvoiceManagerVisualizer</name>
+    </webLinks>
+    <webLinks>
+        <label>Negotiate</label>
+        <name>Negotiate</name>
+    </webLinks>
+    <webLinks>
+        <label>Negotiate N+1</label>
+        <name>Negotiate_N_1</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Actual (YTD)</masterLabel>
+        <translation>TO Fact (YTD)</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>BackOffice</masterLabel>
+        <translation><!-- BackOffice --></translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Forecasted</masterLabel>
+        <translation>TO FX</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Manual</masterLabel>
+        <translation><!-- Manual --></translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Negotiated</masterLabel>
+        <translation>TO Nego</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Stated</masterLabel>
+        <translation><!-- Stated --></translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Targeted</masterLabel>
+        <translation>TO Target</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

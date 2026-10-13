@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Org_HE_update_from_specfic_profil</fullName>
+    <active>true</active>
+    <description>Vous n&apos;avez pas l&apos;autorisation de modifier l&apos;hiérarchie articles.</description>
+    <errorConditionFormula>ISCHANGED( Hierarchy__c  ) &amp;&amp; ($Profile.Name = &apos;DDC&apos;) &amp;&amp;  (RecordType.DeveloperName = &apos;Nego&apos; || RecordType.DeveloperName = &apos;Target&apos;)</errorConditionFormula>
+    <errorDisplayField>Hierarchy__c</errorDisplayField>
+    <errorMessage>Vous n&apos;avez pas l&apos;autorisation de modifier l&apos;hiérarchie articles.</errorMessage>
+</ValidationRule>

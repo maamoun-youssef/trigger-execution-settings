@@ -1,0 +1,20 @@
+<template>
+    <template if:true={openFlow}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+            class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+                <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                    <lightning-button-icon variant="bare" size="large" icon-name="utility:close" onclick={handleClose}
+                        data-flow={flowName}></lightning-button-icon>
+                </div>
+                <div class="slds-modal__content"
+                    style="overflow: unset !important;overflow-y: unset !important; position: relative;">
+                    <lightning-flow data-flow={flowName} flow-api-name={flowName}
+                        onstatuschange={handleExitFlow} flow-input-variables={flow_Variables}>
+                    </lightning-flow>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExternalClientApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>khaldoun.sett@usersloveit.com</contactEmail>
+    <distributionState>Local</distributionState>
+    <isProtected>false</isProtected>
+    <label>TalendTest</label>
+    <orgScopedExternalApp>00DQH0000019GZr:TalendTest</orgScopedExternalApp>
+</ExternalClientApplication>

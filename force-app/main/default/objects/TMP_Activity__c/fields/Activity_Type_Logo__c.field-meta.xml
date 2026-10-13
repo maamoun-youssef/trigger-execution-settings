@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Activity_Type_Logo__c</fullName>
+    <externalId>false</externalId>
+    <formula>IMAGE( Activity_Type_Logo_URL__c ,&quot;Activity_Logo&quot;,25,25)</formula>
+    <label>Activity Type Logo</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

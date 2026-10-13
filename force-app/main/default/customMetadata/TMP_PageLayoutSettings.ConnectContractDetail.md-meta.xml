@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>ConnectContractDetail</label>
+    <protected>false</protected>
+    <values>
+        <field>ActionButtons__c</field>
+        <value xsi:type="xsd:string">[{&quot;label&quot;:&quot;Envoyer un commentaire&quot;,&quot;flow&quot;:&quot;&quot;,&quot;color&quot;:&quot;#4ec2a9&quot;},{&quot;label&quot;:&quot;Valider la proposition&quot;,&quot;flow&quot;:&quot;&quot;,&quot;color&quot;:&quot;#14b3bb&quot;}]</value>
+    </values>
+    <values>
+        <field>ActivityFields__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>ActivityLeftIcon__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;&quot;,&quot;isStaticRessource&quot;:false}</value>
+    </values>
+    <values>
+        <field>ActivityRightIcon__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;&quot;,&quot;isStaticRessource&quot;:false}</value>
+    </values>
+    <values>
+        <field>BottomLeftCornerFields__c</field>
+        <value xsi:type="xsd:string">[&quot;SPBOU_InternalSupplierLeaderName__c&quot;,&quot;SPBOU_InternalContactName__c&quot;]</value>
+    </values>
+    <values>
+        <field>BottomLeftCornerLogo1__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;/resource/Contact_Logo_Blue&quot;,&quot;isStaticRessource&quot;:true}</value>
+    </values>
+    <values>
+        <field>BottomLeftCornerLogo2__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;&quot;,&quot;isStaticRessource&quot;:true}</value>
+    </values>
+    <values>
+        <field>EditFlow__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FieldsConfiguration__c</field>
+        <value xsi:type="xsd:string">[[],[],[]]</value>
+    </values>
+    <values>
+        <field>HeaderField__c</field>
+        <value xsi:type="xsd:string">{&quot;showHeaderField&quot;:null,&quot;isReadOnly&quot;:null,&quot;isMandatory&quot;:null,&quot;fieldName&quot;:&quot;SPBOU_ContractName__c&quot;}</value>
+    </values>
+    <values>
+        <field>IsManualEditMode__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Name__c</field>
+        <value xsi:type="xsd:string">ConnectContractDetail</value>
+    </values>
+    <values>
+        <field>NbOfRows__c</field>
+        <value xsi:type="xsd:double">3.0</value>
+    </values>
+    <values>
+        <field>NewTaskFlow__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ObjectApiName__c</field>
+        <value xsi:type="xsd:string">Contract__c</value>
+    </values>
+    <values>
+        <field>RelatedInformations__c</field>
+        <value xsi:type="xsd:string">{&quot;whereClause&quot;:&quot;&quot;,&quot;parentRelationshipApiName&quot;:&quot;&quot;,&quot;objectApiName&quot;:&quot;&quot;,&quot;label&quot;:&quot;&quot;,&quot;groupByFields&quot;:[],&quot;filters&quot;:[],&quot;aggregateFunction&quot;:&quot;COUNT&quot;,&quot;aggregateFieldName&quot;:&quot;&quot;}</value>
+    </values>
+    <values>
+        <field>Source__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>StatusIcon__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;Status__c&quot;,&quot;isStaticRessource&quot;:false}</value>
+    </values>
+    <values>
+        <field>Tabs__c</field>
+        <value xsi:type="xsd:string">[{&quot;params&quot;:{&quot;actions&quot;:&quot;false&quot;,&quot;readOnly&quot;:&quot;false&quot;,&quot;quickActions&quot;:&quot;&quot;,&quot;filterOnNoneDisplayedFields&quot;:&quot;false&quot;,&quot;cmpHeight&quot;:null,&quot;numberFixedColumns&quot;:&quot;0&quot;,&quot;labelNewInlineButton&quot;:&quot;New inline row&quot;,&quot;saveSuccessMessage&quot;:null,&quot;partialSave&quot;:&quot;false&quot;,&quot;refreshViewAfterSave&quot;:&quot;false&quot;,&quot;enableMassUpdate&quot;:&quot;false&quot;,&quot;isReadOnly&quot;:&quot;false&quot;,&quot;showSubTotal&quot;:&quot;false&quot;,&quot;useRecordIsoCurrency&quot;:&quot;false&quot;,&quot;showCurrencyAsSymbol&quot;:&quot;false&quot;,&quot;showCurrency&quot;:&quot;true&quot;,&quot;nameAsURL&quot;:&quot;true&quot;,&quot;allowOpenRecord&quot;:&quot;true&quot;,&quot;allowFilter&quot;:&quot;true&quot;,&quot;allowExport&quot;:&quot;false&quot;,&quot;allowImport&quot;:&quot;false&quot;,&quot;displayShowHideColumns&quot;:&quot;false&quot;,&quot;allowDelete&quot;:&quot;false&quot;,&quot;displayCloneButton&quot;:&quot;false&quot;,&quot;displayNewInlineButton&quot;:&quot;false&quot;,&quot;displayNewButton&quot;:&quot;false&quot;,&quot;displayListViewActions&quot;:&quot;false&quot;,&quot;includeInListView&quot;:&quot;false&quot;,&quot;objectApiName&quot;:&quot;Contract__c&quot;},&quot;label&quot;:&quot;Liste des conditions de l&apos;accord&quot;,&quot;contentType&quot;:&quot;grid&quot;,&quot;content&quot;:&quot;SPBOU_ContractDiscountConnect&quot;},{&quot;params&quot;:null,&quot;label&quot;:&quot;LBL_ReferenceDocuments&quot;,&quot;contentType&quot;:&quot;page&quot;,&quot;content&quot;:&quot;DocumentsCenter_NegotiationPreparationSe - PAF&quot;}]</value>
+    </values>
+    <values>
+        <field>TaskFields__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>TopLeftCornerFields__c</field>
+        <value xsi:type="xsd:string">[&quot;Supplier__c&quot;,&quot;Supplier_Nego_Scope__c&quot;,&quot;Reference_Year__c&quot;]</value>
+    </values>
+    <values>
+        <field>TopLeftCornerLogo1__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;/resource/ContractBusinessProcess_Icon&quot;,&quot;isStaticRessource&quot;:true}</value>
+    </values>
+    <values>
+        <field>TopLeftCornerLogo2__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;/resource/Question_Logo_Blue&quot;,&quot;isStaticRessource&quot;:true}</value>
+    </values>
+    <values>
+        <field>TopRightCornerFields__c</field>
+        <value xsi:type="xsd:string">[&quot;Status__c&quot;,&quot;Contract_BDate__c&quot;,&quot;Contract_EDate__c&quot;]</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delivery_Chain2_Incoterm__c</fullName>
+    <label>Incoterm</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>EXW – Ex Works</fullName>
+                <default>false</default>
+                <label>EXW – Ex Works</label>
+            </value>
+            <value>
+                <fullName>FCA – Free Carrier</fullName>
+                <default>false</default>
+                <label>FCA – Free Carrier</label>
+            </value>
+            <value>
+                <fullName>CPT – Carriage Paid To</fullName>
+                <default>false</default>
+                <label>CPT – Carriage Paid To</label>
+            </value>
+            <value>
+                <fullName>CIP – Carriage and Insurance Paid To</fullName>
+                <default>false</default>
+                <label>CIP – Carriage and Insurance Paid To</label>
+            </value>
+            <value>
+                <fullName>DAT – Delivered At Terminal</fullName>
+                <default>false</default>
+                <label>DAT – Delivered At Terminal</label>
+            </value>
+            <value>
+                <fullName>DAP – Delivered At Place</fullName>
+                <default>false</default>
+                <label>DAP – Delivered At Place</label>
+            </value>
+            <value>
+                <fullName>DDP – Delivered Duty Paid</fullName>
+                <default>false</default>
+                <label>DDP – Delivered Duty Paid</label>
+            </value>
+            <value>
+                <fullName>FAS – Free Alongside Ship</fullName>
+                <default>false</default>
+                <label>FAS – Free Alongside Ship</label>
+            </value>
+            <value>
+                <fullName>FOB – Free On Board</fullName>
+                <default>false</default>
+                <label>FOB – Free On Board</label>
+            </value>
+            <value>
+                <fullName>CFR – Cost And Freight</fullName>
+                <default>false</default>
+                <label>CFR – Cost And Freight</label>
+            </value>
+            <value>
+                <fullName>CIF – Cost Insurance and Freight</fullName>
+                <default>false</default>
+                <label>CIF – Cost Insurance and Freight</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,127 @@
+<template>
+    <lightning-card title="E-Invoice Operations" icon-name="standard:invoice_statement">
+        <lightning-tabset active-tab-value={activeTabValue} onactive={handleTabActivated}>
+            <lightning-tab label="Invoices" value="invoices">
+                <div class="tab-body">
+                    <lightning-layout horizontal-align="stretch" pull-to-boundary="small">
+                        <lightning-layout-item size="5" class="panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Invoices</div>
+                                <lightning-input type="search" value={searchTerm} onchange={handleSearchChange}
+                                    placeholder="Search by invoice number">
+                                </lightning-input>
+                            </div>
+                            <div class="panel-content">
+                                <template if:true={isLoadingInvoices}>
+                                    <lightning-spinner size="small"></lightning-spinner>
+                                </template>
+                                <lightning-datatable key-field="Id" data={invoices} columns={invoiceColumns}
+                                    selected-rows={selectedInvoiceRows} onrowselection={handleInvoiceSelection}
+                                    hide-checkbox-column="false" max-row-selection="1">
+                                </lightning-datatable>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="7" class="panel">
+                            <div class="panel-header space-between">
+                                <div class="panel-title">UBL Payload</div>
+                                <div class="button-group">
+                                    <lightning-button variant="neutral" label="Generate UBL" icon-name="utility:preview"
+                                        onclick={handleGenerateUbl} disabled={isGenerateDisabled}>
+                                    </lightning-button>
+                                    <lightning-button variant="brand" label="Send Invoice" icon-name="utility:send"
+                                        onclick={handleSendInvoice} disabled={isSendDisabled}>
+                                    </lightning-button>
+                                </div>
+                            </div>
+                            <div class="panel-content form-grid">
+                                <lightning-input type="text" label="UBL File Name" value={sendOptions.ublFileName}
+                                    onchange={handleSendOptionChange} name="ublFileName">
+                                </lightning-input>
+                                <lightning-input type="text" label="UBL MIME Type" value={sendOptions.ublMimeType}
+                                    onchange={handleSendOptionChange} name="ublMimeType">
+                                </lightning-input>
+                                <lightning-input type="text" label="External Reference"
+                                    value={sendOptions.externalReference} onchange={handleSendOptionChange}
+                                    name="externalReference">
+                                </lightning-input>
+                                <lightning-input type="text" label="Report File Name" value={sendOptions.reportFileName}
+                                    onchange={handleSendOptionChange} name="reportFileName">
+                                </lightning-input>
+                                <lightning-input type="text" label="Report MIME Type" value={sendOptions.reportMimeType}
+                                    onchange={handleSendOptionChange} name="reportMimeType">
+                                </lightning-input>
+                                <lightning-textarea label="Metadata (JSON)" value={sendOptions.metadataJson}
+                                    onchange={handleSendOptionChange} name="metadataJson">
+                                </lightning-textarea>
+                                <lightning-textarea label="Report Content (Base64)"
+                                    value={sendOptions.reportContentBase64} onchange={handleSendOptionChange}
+                                    name="reportContentBase64">
+                                </lightning-textarea>
+                                <lightning-textarea label="UBL XML" class="ubl-textarea" value={ublXml}
+                                    onchange={handleUblChange} placeholder="Click Generate UBL or paste custom XML">
+                                </lightning-textarea>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+            </lightning-tab>
+            <lightning-tab label="Responses" value="responses">
+                <div class="tab-body">
+                    <template if:true={isLoadingTransmissions}>
+                        <lightning-spinner size="small"></lightning-spinner>
+                    </template>
+                    <template if:true={transmissions.length}>
+                        <lightning-datatable key-field="Id" data={transmissions} columns={transmissionColumns}
+                            hide-checkbox-column="true">
+                        </lightning-datatable>
+                    </template>
+                    <template if:false={transmissions.length}>
+                        <p class="empty-state">No transmission logs found.</p>
+                    </template>
+                </div>
+            </lightning-tab>
+            <lightning-tab label="Configuration" value="configuration">
+                <div class="tab-body">
+                    <div class="panel narrow">
+                        <div class="panel-title">Platform Settings</div>
+                        <div class="panel-content form-grid">
+                            <lightning-input type="text" label="Configuration Name" value={config.name} name="name"
+                                onchange={handleConfigChange}>
+                            </lightning-input>
+                            <lightning-input type="text" label="Named Credential API Name"
+                                value={config.namedCredentialDeveloperName} name="namedCredentialDeveloperName"
+                                onchange={handleConfigChange}>
+                            </lightning-input>
+                            <lightning-input type="text" label="Default UBL MIME Type" value={config.defaultUblMimeType}
+                                name="defaultUblMimeType" onchange={handleConfigChange}>
+                            </lightning-input>
+                            <lightning-input type="text" label="Default UBL File Name" value={config.defaultUblFileName}
+                                name="defaultUblFileName" onchange={handleConfigChange}>
+                            </lightning-input>
+                            <lightning-input type="text" label="Default Report MIME Type"
+                                value={config.defaultReportMimeType} name="defaultReportMimeType"
+                                onchange={handleConfigChange}>
+                            </lightning-input>
+                            <lightning-input type="text" label="Default Report File Name"
+                                value={config.defaultReportFileName} name="defaultReportFileName"
+                                onchange={handleConfigChange}>
+                            </lightning-input>
+                            <lightning-input type="text" label="Default External Reference Prefix"
+                                value={config.defaultExternalReferencePrefix} name="defaultExternalReferencePrefix"
+                                onchange={handleConfigChange}>
+                            </lightning-input>
+                            <lightning-textarea label="Default Metadata JSON" value={config.defaultMetadataJson}
+                                name="defaultMetadataJson" onchange={handleConfigChange}>
+                            </lightning-textarea>
+                        </div>
+                        <div class="panel-footer">
+                            <lightning-button variant="brand" label="Save Configuration" onclick={handleSaveConfig}
+                                disabled={isSavingConfig}>
+                            </lightning-button>
+                        </div>
+                    </div>
+                </div>
+            </lightning-tab>
+        </lightning-tabset>
+    </lightning-card>
+</template>

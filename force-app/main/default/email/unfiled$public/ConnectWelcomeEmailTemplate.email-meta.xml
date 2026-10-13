@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Notification relative à un utilisateur ajouté à un site.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>Connect_Header</letterhead>
+    <name>Experience Cloud : E-mail de bienvenue pour les nouveaux membres</name>
+    <style>freeForm</style>
+    <subject>{!$Label.LBL_Connect_WelcomeEmail_Subject}</subject>
+    <textOnly>{!$Label.LBL_Connect_Email_Greeting} {!User.FirstName} {!User.LastName},
+
+
+{!$Label.LBL_Connect_Email_Intro1} {!$Label.LBL_Connect_CompanyName}, {!$Label.LBL_Connect_Email_Intro2}
+
+{!$Label.LBL_Connect_Email_Intro3}
+
+
+{!$Label.LBL_Connect_Email_Benefit_Intro}
+
+
+{!$Label.LBL_Connect_Email_Benefit1}
+
+
+
+{!$Label.LBL_Connect_Email_Benefit2}
+
+
+
+{!$Label.LBL_Connect_Email_Benefit3}
+
+
+
+{!$Label.LBL_Connect_Email_Steps_Intro}
+
+
+{!$Label.LBL_Connect_Email_Step1} ({!$Label.LBL_Connect_ConnectCompanyName})
+
+{!$Label.LBL_Connect_Email_Step2} {!Receiving_User.Username} {!$Label.LBL_Connect_Email_Step2_Cont}
+
+{!$Label.LBL_Connect_Email_Step3}
+
+
+
+
+{!$Label.LBL_Connect_Email_Closing}
+
+
+{!$Label.LBL_Connect_Email_Support} {!$Label.LBL_Connect_SupportEmail}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

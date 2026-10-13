@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TaxApplied__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>LookUp to the Applied Tax</description>
+    <label>Tax Applied</label>
+    <referenceTo>Tax__c</referenceTo>
+    <relationshipLabel>Tax (Tax Applied)</relationshipLabel>
+    <relationshipName>TAXApplied</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,82 @@
+<template>
+    <!-- <div class="slds-card"> -->
+    <div>
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span class="slds-card__header-link slds-truncate" title={Label.LBL_Read_Only}>
+                            <span>{Label.LBL_Read_Only}</span>
+                        </span>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <table class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered slds-box_border">
+            <thead>
+                <tr>
+                    <th colspan="5">
+                        <lightning-input label={Label.LBL_Expression} value={expression}
+                            onchange={handleExpressionChange} class="expressionInput">
+                        </lightning-input>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="limited-cell"></th>
+                    <th class="limited-cell_medium">{Label.LBL_Field_Name}</th>
+                    <th class="limited-cell_medium">{Label.LBL_Operation}</th>
+                    <th class="limited-cell_medium">{Label.LBL_Value}</th>
+                    <th class="slds-text-align_right">
+                        <lightning-button-icon label={Label.LBL_Add} icon-name="utility:add"
+                            onclick={addCriteriaHandler}>
+                        </lightning-button-icon>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={readOnlyCriterias} for:item="criteria">
+                    <tr key={criteria.index}>
+                        <td class="limited-cell slds-align-top">
+                            {criteria.index}
+                        </td>
+                        <td class="limited-cell_medium slds-align-top">
+                            <lightning-combobox name="fieldName" label={Label.LBL_Field} value={criteria.fieldName}
+                                variant="label-hidden" placeholder={Label.LBL_Select_Field} options={fieldOptions}
+                                onchange={handleFieldChange} data-index={criteria.index}>
+                            </lightning-combobox>
+                        </td>
+                        <td class="limited-cell_medium slds-align-top">
+                            <lightning-combobox name="operation" label={Label.LBL_Operation} value={criteria.operation}
+                                variant="label-hidden" placeholder={Label.LBL_Select_Operation}
+                                options={criteria.operationOptions} onchange={handleOperationChange}
+                                data-index={criteria.index}>
+                            </lightning-combobox>
+                        </td>
+                        <template if:false={criteria.isBlankOrIsNull}>
+                            <td class="limited-cell_large slds-align-top">
+                                <lightning-input label={Label.LBL_Value} data-recordid="value" type={criteria.valueType}
+                                    variant="label-hidden" onchange={handleValuechange} value={criteria.value}
+                                    if:false={criteria.showpicklistvalues} data-index={criteria.index}>
+                                </lightning-input>
+                                <lightning-combobox label={Label.LBL_Value} data-recordid="value"
+                                    onchange={handleValuechange} variant="label-hidden" value={criteria.value}
+                                    options={criteria.picklistvalues} if:true={criteria.showpicklistvalues}
+                                    data-index={criteria.index}>
+                                </lightning-combobox>
+                            </td>
+                        </template>
+                        <template if:true={criteria.isBlankOrIsNull}>
+                            <td class="limited-cell_medium slds-align-top">
+                            </td>
+                        </template>
+                        <td class="slds-text-align_right slds-align-top">
+                            <lightning-button-icon label={Label.LBL_Delete} icon-name="utility:delete"
+                                onclick={deleteCriteriaHandler} data-index={criteria.index}>
+                            </lightning-button-icon>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+</template>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Display the section of  Group Scan and Synchro --></help>
+    <label><!-- Section - Group Scan and Synchro --></label>
+    <name>MBF_Section_GroupScanAndSynchro__c</name>
+</CustomFieldTranslation>

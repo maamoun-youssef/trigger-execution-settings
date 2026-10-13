@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>invoicingtest</label>
+    <protected>false</protected>
+    <values>
+        <field>Description__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>IsActive__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>ObjectApiName__c</field>
+        <value xsi:type="xsd:string">Invoice__c</value>
+    </values>
+    <values>
+        <field>SectionGroupTab__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Sections__c</field>
+        <value xsi:type="xsd:string">[{&quot;title&quot;:&quot;Field Group&quot;,&quot;tabset&quot;:[],&quot;styleVariant&quot;:&quot;fieldGroup&quot;,&quot;style&quot;:&quot;&quot;,&quot;showTitle&quot;:true,&quot;sectionGroupTab&quot;:null,&quot;region&quot;:&quot;sidebar&quot;,&quot;order&quot;:1,&quot;name&quot;:&quot;&quot;,&quot;icons&quot;:[{&quot;type&quot;:&quot;&quot;,&quot;name&quot;:&quot;&quot;,&quot;contentType&quot;:&quot;&quot;}],&quot;header&quot;:{&quot;type&quot;:&quot;&quot;,&quot;isReadOnly&quot;:true,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;Contract__c&quot;},&quot;fields&quot;:[[{&quot;type&quot;:&quot;&quot;,&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;Contract__c&quot;},{&quot;type&quot;:&quot;&quot;,&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;BuyerCommercialName__c&quot;}],[{&quot;type&quot;:&quot;&quot;,&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;BuyerAddress1__c&quot;}]],&quot;components&quot;:[],&quot;aggregates&quot;:[],&quot;actions&quot;:[{&quot;redirectionValue&quot;:&quot;DealApproval&quot;,&quot;redirectionType&quot;:&quot;flow&quot;,&quot;order&quot;:&quot;0&quot;,&quot;label&quot;:&quot;&quot;,&quot;icon&quot;:&quot;&quot;,&quot;actionType&quot;:&quot;&quot;}]},{&quot;title&quot;:&quot;Component&quot;,&quot;tabset&quot;:[],&quot;styleVariant&quot;:&quot;Component&quot;,&quot;style&quot;:&quot;&quot;,&quot;showTitle&quot;:true,&quot;sectionGroupTab&quot;:null,&quot;region&quot;:&quot;main&quot;,&quot;order&quot;:1,&quot;name&quot;:&quot;&quot;,&quot;icons&quot;:[{&quot;type&quot;:&quot;&quot;,&quot;name&quot;:&quot;&quot;,&quot;contentType&quot;:&quot;&quot;}],&quot;header&quot;:{&quot;type&quot;:&quot;&quot;,&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;&quot;},&quot;fields&quot;:[],&quot;components&quot;:[{&quot;type&quot;:&quot;page&quot;,&quot;style&quot;:&quot;&quot;,&quot;params&quot;:{},&quot;name&quot;:&quot;Admin - facture&quot;,&quot;label&quot;:&quot;comp1&quot;},{&quot;type&quot;:&quot;grid&quot;,&quot;style&quot;:&quot;&quot;,&quot;params&quot;:{},&quot;name&quot;:&quot;Admin_Certification_Grid&quot;,&quot;label&quot;:&quot;comp 2&quot;}],&quot;aggregates&quot;:[],&quot;actions&quot;:[]},{&quot;title&quot;:&quot;Task List&quot;,&quot;tabset&quot;:[],&quot;styleVariant&quot;:&quot;taskList&quot;,&quot;style&quot;:&quot;&quot;,&quot;showTitle&quot;:true,&quot;sectionGroupTab&quot;:null,&quot;region&quot;:&quot;right&quot;,&quot;order&quot;:1,&quot;name&quot;:&quot;&quot;,&quot;icons&quot;:[{&quot;type&quot;:&quot;&quot;,&quot;name&quot;:&quot;&quot;,&quot;contentType&quot;:&quot;&quot;}],&quot;header&quot;:{&quot;type&quot;:&quot;&quot;,&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;&quot;},&quot;fields&quot;:[[{&quot;type&quot;:&quot;&quot;,&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;AccountId&quot;}],[{&quot;type&quot;:&quot;&quot;,&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;CallDurationInSeconds&quot;}]],&quot;components&quot;:[],&quot;aggregates&quot;:[],&quot;actions&quot;:[{&quot;redirectionValue&quot;:&quot;UserAuthStatusTile&quot;,&quot;redirectionType&quot;:&quot;&quot;,&quot;order&quot;:&quot;0&quot;,&quot;label&quot;:&quot;sdsdd&quot;,&quot;icon&quot;:&quot;&quot;,&quot;actionType&quot;:&quot;text&quot;}]}]</value>
+    </values>
+    <values>
+        <field>Theme__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

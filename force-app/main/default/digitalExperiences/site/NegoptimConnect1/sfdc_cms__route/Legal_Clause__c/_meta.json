@@ -1,0 +1,5 @@
+{
+  "apiName" : "Legal_Clause__c",
+  "type" : "sfdc_cms__route",
+  "path" : "routes"
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>NegoScopeSettings</label>
+    <protected>false</protected>
+    <values>
+        <field>IsAdvancedActive__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>IsNSManagerGLTabActive__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>IsNSProjectActive__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>IsNSProjectDefaultRT__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>IsNSProjectToRegularOnValidation__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>NSManagerGuidedModeConfiguration__c</field>
+        <value xsi:type="xsd:string">[{&quot;fieldValues&quot;:[{&quot;fieldValue&quot;:&quot;Regular&quot;,&quot;fieldName&quot;:&quot;RecordTypeId&quot;},{&quot;fieldValue&quot;:&quot;false&quot;,&quot;fieldName&quot;:&quot;SetMasterNegoScope__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;ContractingLevel__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;ConditionsCaptureLevel__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;ConditionsDispatchLevel__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;SlabsApplication__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;NegoBaseManagement__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;SellinDeclarationLevel__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;InvoicingLevel__c&quot;}],&quot;caseTitle&quot;:&quot;LBL_NS_Guided_Mode_Case_Advanced_GlobalConditionalScope_Title&quot;,&quot;caseName&quot;:&quot;Case3&quot;,&quot;caseDescription&quot;:&quot;LBL_NS_Guided_Mode_Case_Advanced_GlobalConditionalScope_Description&quot;},{&quot;fieldValues&quot;:[{&quot;fieldValue&quot;:&quot;Regular&quot;,&quot;fieldName&quot;:&quot;RecordTypeId&quot;},{&quot;fieldValue&quot;:&quot;false&quot;,&quot;fieldName&quot;:&quot;SetMasterNegoScope__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;ContractingLevel__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;ConditionsCaptureLevel__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;ConditionsDispatchLevel__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;SlabsApplication__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;NegoBaseManagement__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;SellinDeclarationLevel__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;InvoicingLevel__c&quot;}],&quot;caseTitle&quot;:&quot;LBL_NS_Guided_Mode_Case_Advanced_GlobalConditionalScope_Title&quot;,&quot;caseName&quot;:&quot;Case3&quot;,&quot;caseDescription&quot;:&quot;LBL_NS_Guided_Mode_Case_Advanced_GlobalConditionalScope_Description&quot;},{&quot;fieldValues&quot;:[{&quot;fieldValue&quot;:&quot;Regular&quot;,&quot;fieldName&quot;:&quot;RecordTypeId&quot;},{&quot;fieldValue&quot;:&quot;false&quot;,&quot;fieldName&quot;:&quot;SetMasterNegoScope__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;ContractingLevel__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;ConditionsCaptureLevel__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;ConditionsDispatchLevel__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;SlabsApplication__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;NegoBaseManagement__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;SellinDeclarationLevel__c&quot;},{&quot;fieldValue&quot;:&quot;&quot;,&quot;fieldName&quot;:&quot;InvoicingLevel__c&quot;}],&quot;caseTitle&quot;:&quot;LBL_NS_Guided_Mode_Case_Advanced_GlobalConditionalScope_Title&quot;,&quot;caseName&quot;:&quot;Case3&quot;,&quot;caseDescription&quot;:&quot;LBL_NS_Guided_Mode_Case_Advanced_GlobalConditionalScope_Description&quot;}]</value>
+    </values>
+    <values>
+        <field>NSNameConfiguration__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>NegoScopeManagerBrandGrid__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>NegoScopeManagerNSGrid__c</field>
+        <value xsi:type="xsd:string">NS_List</value>
+    </values>
+    <values>
+        <field>NegoScopeManagerPGGrid__c</field>
+        <value xsi:type="xsd:string">PGsGrid_SupplierRecordPage</value>
+    </values>
+</CustomMetadata>

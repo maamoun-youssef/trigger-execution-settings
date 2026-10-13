@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Lignes agrégées sur la conso</help>
+    <label>DV Conso?</label>
+    <name>WD_Conso__c</name>
+</CustomFieldTranslation>

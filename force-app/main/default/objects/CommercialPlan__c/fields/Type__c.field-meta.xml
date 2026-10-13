@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <label>Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CommercialEvent</fullName>
+                <default>false</default>
+                <label>CommercialEvent</label>
+            </value>
+            <value>
+                <fullName>SellOutAgreement</fullName>
+                <default>false</default>
+                <label>SellOutAgreement</label>
+            </value>
+            <value>
+                <fullName>ServicesAgreement</fullName>
+                <default>false</default>
+                <label>ServicesAgreement</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

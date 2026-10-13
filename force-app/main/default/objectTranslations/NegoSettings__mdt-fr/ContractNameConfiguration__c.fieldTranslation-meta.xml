@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Vous pouvez construire un modèle pour le nom par défaut des contrats créés. Vous pouvez également choisir d&apos;autoriser la modification du nom après la création.
+        Si un type d&apos;enregistrement n&apos;a pas de modèle, le modèle par défaut sera appliqué.</help>
+    <label>Configuration des modèles des noms</label>
+    <name>ContractNameConfiguration__c</name>
+</CustomFieldTranslation>

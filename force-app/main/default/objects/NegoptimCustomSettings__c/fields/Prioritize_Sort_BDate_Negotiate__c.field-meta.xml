@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prioritize_Sort_BDate_Negotiate__c</fullName>
+    <defaultValue>false</defaultValue>
+    <label>Prioritize Sort BDate Negotiate</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

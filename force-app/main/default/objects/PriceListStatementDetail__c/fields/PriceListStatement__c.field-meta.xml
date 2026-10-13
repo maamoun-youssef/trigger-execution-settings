@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PriceListStatement__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Connect to Statement header</description>
+    <label>Price List Statement</label>
+    <referenceTo>PriceListStatement__c</referenceTo>
+    <relationshipLabel>Price List Statement Details (PLS)</relationshipLabel>
+    <relationshipName>PLSDPriceListStatement</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

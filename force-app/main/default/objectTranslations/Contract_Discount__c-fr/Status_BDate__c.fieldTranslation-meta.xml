@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Date that the status change --></help>
+    <label>Date de début du statut</label>
+    <name>Status_BDate__c</name>
+</CustomFieldTranslation>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_that_supplier_value</fullName>
+    <active>true</active>
+    <errorConditionFormula>Supplier__c &lt;&gt;  Contact__r.Supplier__c</errorConditionFormula>
+    <errorDisplayField>Supplier__c</errorDisplayField>
+    <errorMessage>Supplier should be equal to contact supplier</errorMessage>
+</ValidationRule>

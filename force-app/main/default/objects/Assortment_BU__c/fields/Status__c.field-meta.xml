@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Assortment_type__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Open (in bulding process)</fullName>
+                <default>true</default>
+                <label>Open (in bulding process)</label>
+            </value>
+            <value>
+                <fullName>Request for Approval</fullName>
+                <default>false</default>
+                <label>Request for Approval</label>
+            </value>
+            <value>
+                <fullName>Validated</fullName>
+                <default>false</default>
+                <label>Validated</label>
+            </value>
+            <value>
+                <fullName>Signed IN</fullName>
+                <default>false</default>
+                <label>Signed IN</label>
+            </value>
+            <value>
+                <fullName>Signed OUT</fullName>
+                <default>false</default>
+                <label>Signed OUT</label>
+            </value>
+            <value>
+                <fullName>Closed (Upgraded version)</fullName>
+                <default>false</default>
+                <label>Closed (Upgraded version)</label>
+            </value>
+            <value>
+                <fullName>Closed</fullName>
+                <default>false</default>
+                <label>Closed</label>
+            </value>
+            <value>
+                <fullName>Deleted</fullName>
+                <default>false</default>
+                <label>Deleted</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>In</controllingFieldValue>
+            <controllingFieldValue>Out</controllingFieldValue>
+            <valueName>Open (in bulding process)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>In</controllingFieldValue>
+            <controllingFieldValue>Out</controllingFieldValue>
+            <valueName>Request for Approval</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>In</controllingFieldValue>
+            <controllingFieldValue>Out</controllingFieldValue>
+            <valueName>Validated</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>In</controllingFieldValue>
+            <controllingFieldValue>Out</controllingFieldValue>
+            <valueName>Closed</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Out</controllingFieldValue>
+            <valueName>Signed IN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Out</controllingFieldValue>
+            <valueName>Signed OUT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Out</controllingFieldValue>
+            <valueName>Closed (Upgraded version)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Out</controllingFieldValue>
+            <valueName>Deleted</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

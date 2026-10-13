@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- This field controls the default value assigned on the creation of new Price List record (Future add to Price Waterfall) --></help>
+    <label>Nombre des charges unitaires</label>
+    <name>NumberOfUnitCharges__c</name>
+</CustomFieldTranslation>

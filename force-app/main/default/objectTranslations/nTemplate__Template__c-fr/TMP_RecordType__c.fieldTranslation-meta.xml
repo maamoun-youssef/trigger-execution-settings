@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Record Type --></label>
+    <name>TMP_RecordType__c</name>
+    <picklistValues>
+        <masterLabel>Administrative</masterLabel>
+        <translation><!-- Administrative --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Contractual</masterLabel>
+        <translation><!-- Contractual --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Financial</masterLabel>
+        <translation><!-- Financial --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Marketing</masterLabel>
+        <translation><!-- Marketing --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Pricing</masterLabel>
+        <translation><!-- Pricing --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Quality</masterLabel>
+        <translation><!-- Quality --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Sourcing</masterLabel>
+        <translation><!-- Sourcing --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

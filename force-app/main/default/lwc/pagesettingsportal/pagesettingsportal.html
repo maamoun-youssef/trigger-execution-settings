@@ -1,0 +1,34 @@
+<template>
+    <template if:true={setting}>
+        <lightning-card title="Page Setting Details">
+            <div class="slds-p-around_medium">
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Active</th>
+                            <th>Icon</th>
+                            <th>Sections</th>
+                            <th>Themes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{setting.Name__c}</td>
+                            <td>{setting.Description__c}</td>
+                            <td>{setting.isActive__c}</td>
+                            <td>
+                                <template if:true={setting.Icon__c}>
+                                    <img src={setting.Icon__c} alt="Icon" style="height:40px;" />
+                                </template>
+                            </td>
+                            <td>{setting.Sections__c}</td>
+                            <td>{setting.Themes__c}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </lightning-card>
+    </template>
+</template>

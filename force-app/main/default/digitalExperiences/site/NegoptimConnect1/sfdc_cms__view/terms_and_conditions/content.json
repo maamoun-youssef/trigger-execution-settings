@@ -1,0 +1,73 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "terms-and-conditions",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"ffb1cb9e-3227-4808-ba00-67e08031d4e3\",\"columns\":[{\"UUID\":\"d83525ae-4cfd-4750-8de6-0a528c8d5a8e\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "dxpStyle" : { },
+                "imageInfos" : "",
+                "richTextValue" : "<h1 style=\"text-align: center;\">CONDITIONS GENERALES D'UTILISATION</h1><p><br></p><h2><span style=\"color: black;\">ARTICLE 1 - Objet </span></h2><p><br></p><p><span style=\"font-size: 12pt;\">La société ULiT (RCS Versailles 812 801 660) (ci-après ULIT) est un éditeur de solutions informatiques spécialisé dans le domaine du pilotage, de l'optimisation des négociations commerciales et de la marge, de la descente tarifaire, des promotions, du trade marketing, de l'assortiment, des provisions, de la facturation, des paiements et de la gestion des litiges. Elle a développé une solution accessible en ligne dite negOptim et son programme de mise en œuvre (ci-après la Solution) qui offre une interface collaborative et simplifiée accessible depuis la plateforme login.salesforce.com. </span></p><p><br></p><p><span style=\"font-size: 12pt;\">ULiT fournit la Solution à son client qui a souscrit à des « Abonnements utilisateurs de communauté » (ci-après, individuellement, le Client). Le Client administre la Solution dans les conditions prévues par le contrat qu’il a signé avec ULiT. Le Client met la Solution à disposition de ses partenaires commerciaux (ci-après les Utilisateurs community) via la plateforme Connect de façon à faciliter leurs relations et pour permettre la gestion du process de la négociation contractuelle, la contractualisation, ainsi que la facturation et son suivi. ULiT ne prend aucune part à la relation entre le Client et les Utilisateurs community. </span></p><p><br></p><p><span style=\"font-size: 12pt;\">Les présentes Conditions Générales d'Utilisation (les « CGU ») définissent seulement les conditions dans lesquelles les Utilisateurs community ont accès à la Solution et l’utilisent. Elles prévoient aussi le respect des droits des Utilisateurs community pour les domaines qui concernent ULiT, ainsi que leur engagement de ne pas porter atteinte aux droits de ULiT. </span></p><p><br></p><h2><span style=\"color: black;\">ARTICLE 2 - Champ d'application </span></h2><p><br></p><p><span style=\"font-size: 12pt;\">Les présentes CGU s'appliquent, sans restriction ni réserve à l'utilisation des services et outils technologiques mis à disposition des Utilisateurs community par le Client. Les présentes CGU sont accessibles à tout moment sur le site de la Solution et prévaudront, le cas échéant, sur toute autre version ou tout autre document contradictoire. ULiT se réserve la possibilité de modifier, à tout moment et sans préavis, les présentes conditions d’utilisation afin de les adapter aux évolutions de la Solution et/ou de son exploitation. </span></p><p><br></p><h2><span style=\"color: black;\">ARTICLE 3 – Accès à la Solution </span></h2><p><br></p><p><span style=\"font-size: 12pt;\">La Solution est accessible en ligne sur le site indiqué lors de la création du compte Utilisateur community. Des identifiants et codes strictement confidentiels et personnels sont attribués à l’Utilisateur community par le Client en sa qualité d’administrateur. L’Utilisateur community s'engage à conserver la confidentialité de ces identifiants et codes et s'interdit de les divulguer à quelque personne que ce soit. L’Utilisateur community est seul responsable de l'utilisation de ces identifiants et codes et de l'accès à la Solution, sauf preuve d'une utilisation frauduleuse qui ne pourrait lui être imputée. Toute utilisation frauduleuse de ces identifiants et codes dont aurait connaissance l’Utilisateur community doit immédiatement être notifiée par écrit à l’administrateur de la plateforme, à savoir le Client. </span></p><p><br></p><p><span style=\"font-size: 12pt;\">ULiT s’efforce de permettre l’accès à la Solution 24 heures sur 24, 7 jours sur 7, sauf en cas de force majeure ou d’un événement hors de son contrôle, et sous réserve des éventuelles pannes et interventions de maintenance nécessaires au bon fonctionnement du site et des services. Par conséquent, ULiT ne peut garantir une disponibilité du site et/ou des services, une fiabilité des transmissions et des performances en termes de temps de réponse ou de qualité. La responsabilité de ULiT ne saurait être engagée en cas d’impossibilité d’accès à ce site et/ou d’utilisation de la Solution de quelque manière que ce soit. Par ailleurs, ULiT peut être amenée à interrompre la Solution ou tout ou partie des services, à tout moment sans préavis, le tout sans droit à indemnités pour l’Utilisateur community. L’Utilisateur community reconnaît et accepte que ULiT ne soit pas responsable des interruptions, et des conséquences qui peuvent en découler pour lui-même ou tout tiers. </span></p><p><br></p><h2><span style=\"color: black;\">ARTICLE 4 - Protection des données personnelles </span></h2><p><br></p><p><span style=\"font-size: 12pt;\">ULiT s’engage à assurer la sécurité des données à caractère personnel qu'il conserve pour les besoins de la Solution, dans la limite des moyens et informations dont il dispose. </span></p><p><br></p><p><span style=\"font-size: 12pt;\">En sa qualité d’administrateur, c’est le Client qui assure la protection des données personnelles et le droit d’accès permanent à ces données, leur modification, leur rectification, l’opposition à leur portabilité et limitation de leur traitement, dans les conditions contractuellement convenues avec l’Utilisateur community et conformément aux réglementations nationales et européennes en vigueur. </span></p><p><br></p><h2><span style=\"color: black;\">ARTICLE 5 - Propriété intellectuelle </span></h2><p><br></p><p><span style=\"font-size: 12pt;\">Le contenu de la Solution est la propriété de ULiT et est protégé par les lois françaises et internationales relatives à la propriété intellectuelle. Toute reproduction totale ou partielle de ce contenu est strictement interdite et est susceptible de constituer un délit de contrefaçon. Les marques et/ou brevets ayant été déposé(e)s par ULiT sont sa propriété exclusive. L’Utilisateur community s’interdit de modifier la structure graphique de la Solution. </span></p><p><br></p><h2><span style=\"color: black;\">ARTICLE 6 - Responsabilités </span></h2><p><br></p><p><span style=\"font-size: 12pt;\">L’Utilisateur community est libre de publier du texte, des photographies, des vidéos ou d'autres contenus sur la Solution à condition de disposer des droits sur ledit contenu, directement ou après autorisation d’un tiers, et dans les limites convenues entre lui et le Client. L’Utilisateur community est seul responsable de l'utilisation des services de la Solution, et s'engage à garantir à première demande, à indemniser et dédommager ULiT de tout dommage, perte, manque à gagner, qu'elle pourrait subir si sa responsabilité se trouvait engagée par un tiers, du fait d'une action liée à cette utilisation par l’Utilisateur community. </span></p><p><br></p><p><span style=\"font-size: 12pt;\">La responsabilité de ULiT à l'égard de l’Utilisateur community ne peut être engagée que pour des faits gravement fautifs ou délibérés qui lui seraient directement imputables et qui causeraient un préjudice direct, à l'exclusion de tout préjudice indirect et de tout préjudice d’image ou manque à gagner. La responsabilité de ULiT est exclue en cas de mauvaise utilisation des services de la Solution par l’Utilisateur community ou de faute de sa part. Elle ne saurait pas plus être engagée à raison de faits imputables à un tiers. La responsabilité de ULiT ne peut être engagée ni retenue en raison des contenus rendus disponibles sur la Solution notamment en ce qui concerne la description des produits ou services de l’Utilisateur community ou en cas de publications portant atteinte aux droits d’un tiers. </span></p><p><img src=\"//:0\" height=\"201\" width=\"690\"></p><p><br></p><p><strong style=\"font-size: 12pt;\">IMPORTANT </strong></p><p><br></p><p><span style=\"font-size: 12pt;\">La Solution étant développée sur la plateforme SALESFORCE, hébergeur, l’Utilisateur community reconnait avoir pris connaissance des CGU de cette plateforme à l’adresse suivante, et notamment les dispositions applicables aux publications : CGU Salesfor </span><a href=\"https://www.salesforce.com/company/legal/sfdc-website-terms-of-service/\" rel=\"noopener noreferrer\" target=\"null\" style=\"font-size: 12pt;\">CGU Salesforce</a><span style=\"font-size: 12pt;\"> et s’engager à les respecter. </span></p><p><br></p><h2><span style=\"color: black;\">ARTICLE 7 - Utilisation </span></h2><p><br></p><p><span style=\"font-size: 12pt;\">Les règles d’utilisation de la Solution par l’Utilisateur community sont régies par le contrat entre ce dernier et le Client. </span></p><p><br></p><h2><span style=\"color: black;\">ARTICLE 8 - Nullité partielle </span></h2><p><br></p><p><span style=\"font-size: 12pt;\">Si une ou plusieurs stipulations des présentes sont tenues pour non valides ou déclarées comme telles en application d'une loi, d'un règlement ou d'une décision définitive d'une juridiction compétente, les autres stipulations garderont toute leur force et toute leur portée. </span></p><p><br></p><h2><span style=\"color: black;\">ARTICLE 9 - Droit applicable </span></h2><p><br></p><p><span style=\"font-size: 12pt;\">Les présentes Conditions générales d'utilisation et les droits et obligations qui en découlent sont régies par le droit français. Elles sont rédigées en langue française. Dans le cas où elles seraient traduites en une ou plusieurs langues, seul le texte français ferait foi en cas de litige. </span></p><p><br></p><h2><span style=\"color: black;\">ARTICLE 10 - Litiges </span></h2><p><br></p><p><span style=\"font-size: 12pt;\">Tout litige relatif à l'interprétation et/ou à l'exécution des présentes CGU relève du Tribunal de Commerce de Versailles. Les réclamations doivent être adressées à l’adresse de contact suivantes : contact@usersloveit.com</span></p>"
+              },
+              "definition" : "community_builder:richTextEditor",
+              "id" : "65194bdf-ca9d-4964-bba2-40c100a1e770",
+              "type" : "component"
+            } ],
+            "id" : "d83525ae-4cfd-4750-8de6-0a528c8d5a8e",
+            "name" : "col1",
+            "title" : "Colonne 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "ffb1cb9e-3227-4808-ba00-67e08031d4e3",
+          "type" : "component"
+        } ],
+        "id" : "f54f16d5-fde1-4bcd-88da-b8d110cd31a4",
+        "name" : "content",
+        "title" : "Contenu",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "dxpStyle" : { },
+            "pageTitle" : "terms-and-conditions",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "eedf3163-cda9-4738-a1c5-82e4e7c48b9b",
+          "type" : "component"
+        } ],
+        "id" : "2a042629-544b-4e38-8e99-8a84383ca1b3",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "cba0cc4b-0364-46c8-925b-82ce9429cc8b",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-terms-and-conditions"
+  },
+  "urlName" : "terms-and-conditions"
+}

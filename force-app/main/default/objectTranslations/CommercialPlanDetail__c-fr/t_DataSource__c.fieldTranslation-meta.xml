@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Status --></label>
+    <name>t_DataSource__c</name>
+    <picklistValues>
+        <masterLabel>Product Discount Statement Detail</masterLabel>
+        <translation><!-- Product Discount Statement Detail --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>User Input</masterLabel>
+        <translation><!-- User Input --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

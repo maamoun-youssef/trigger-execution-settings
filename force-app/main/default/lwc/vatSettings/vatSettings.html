@@ -1,0 +1,275 @@
+<template>
+    <div class="mainContainer">
+        <template if:true={isLoading}>
+            <div class="slds-spinner_container spinnerDiv">
+                <div class="loader slds-spinner_container slds-align--absolute-center">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </template>
+        <template if:false={isLoading}>
+            <div>
+                <div class="slds-grid slds-p-bottom_xx-small  pageHeader">
+                    <div class="slds-col slds-has-flexi-truncate">
+                        <div class="slds-media slds-no-space slds-grow">
+                            <div class="slds-media__body slds-p-around_x-small label-title">
+                                <h1 class="slds-m-right_small slds-align-middle slds-truncate">
+                                    {labels.LBL_VAT_Rate_Settings}
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                    <lightning-button class="slds-button slds-m-around_xx-small" label={labels.LBL_Add}
+                        variant="brand-outline" onclick={handleAddNewRow}></lightning-button>
+                    <lightning-button class="slds-button slds-m-around_xx-small save-m" label={labels.LBL_Save}
+                        variant="brand" onclick={handleSave}></lightning-button>
+                </div>
+                <div class="pageBodySection table-body">
+                    <div class="slds-grid">
+                        <div
+                            class="pageBody tableDiv slds-scrollable slds-scrollable_y slds-border--left slds-border--right slds-border--top slds-border--bottom">
+                            <table class="pgTable slds-table">
+                                <thead>
+                                    <tr class="table-header">
+                                        <!-- TAX Order -->
+                                        <th rowspan="2" class="table-th">
+                                            <div class="slds-text-align--center">
+                                                {headerFieldsListLabels.ListingOrder__c}
+                                            </div>
+                                        </th>
+                                        <!-- TAX BusinessUnitTarget -->
+                                        <th rowspan="2" class="table-th">
+                                            <div class="slds-text-align--center">
+                                                {headerFieldsListLabels.BusinessUnitVAT__c}
+                                            </div>
+                                        </th>
+                                        <!-- TAX Code -->
+                                        <th rowspan="2" class="table-th">
+                                            <div class="slds-text-align--center">
+                                                {headerFieldsListLabels.Code__c}
+                                            </div>
+                                        </th>
+                                        <!-- TAX Name -->
+                                        <th rowspan="2" class="table-th">
+                                            <div class="slds-text-align--center">
+                                                {headerFieldsListLabels.Name}
+                                            </div>
+                                        </th>
+                                        <!-- TAX Rate -->
+                                        <th rowspan="2" class="table-th">
+                                            <div class="slds-text-align--center">
+                                                {headerFieldsListLabels.TaxRate__c}
+                                            </div>
+                                        </th>
+                                        <!-- TAX BDate -->
+                                        <th rowspan="2" class="table-th">
+                                            <div class="slds-text-align--center">
+                                                {headerFieldsListLabels.BDate__c}
+                                            </div>
+                                        </th>
+                                        <!-- TAX EDate -->
+                                        <th rowspan="2" class="table-th">
+                                            <div class="slds-text-align--center">
+                                                {headerFieldsListLabels.EDate__c}
+                                            </div>
+                                        </th>
+                                        <th rowspan="2" class="table-th-actions">
+                                            <div class="slds-text-align--center">
+                                                {labels.LBL_Actions}
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template for:each={taxesList} for:item="tax" for:index="index">
+                                        <tr key={tax.Id} class="rows" data-index={index} data-isedited={tax.isEdited}>
+                                            <td class="slds-text-align--center">
+                                                <div lwc:if={tax.isSelected} data-index={index}
+                                                    data-field="ListingOrder__c">
+                                                    <lightning-combobox data-index={index} data-field="ListingOrder__c"
+                                                        class="requiredField" dropdown-alignment="auto"
+                                                        onchange={handleFieldEdits} variant="label-hidden"
+                                                        value={tax.ListingOrder__c} options={orderOptions} required>
+                                                    </lightning-combobox>
+                                                </div>
+                                                <div lwc:else data-index={index} data-field="ListingOrder__c">
+                                                    {tax.ListingOrder__c}
+                                                </div>
+                                            </td>
+                                            <td class="slds-text-align--center" data-id={tax.Id}>
+                                                <div>
+                                                    {recordName}
+                                                </div>
+                                            </td>
+                                            <td class="slds-text-align--center">
+                                                <div lwc:if={tax.isSelected} data-index={index} data-field="Code__c">
+                                                    <lightning-input type="text" name="input2" value={tax.Code__c}
+                                                        class="requiredField" data-index={index} data-field="Code__c"
+                                                        variant="label-hidden" onchange={handleFieldEdits} required>
+                                                    </lightning-input>
+                                                </div>
+                                                <div lwc:else data-index={index} data-field="Code__c">
+                                                    {tax.Code__c}
+                                                </div>
+                                            </td>
+                                            <td class="slds-text-align--center">
+                                                <div lwc:if={tax.isSelected} data-index={index} data-field="Name">
+                                                    <lightning-input type="text" name="input2" value={tax.Name}
+                                                        class="requiredField" data-index={index} data-field="Name"
+                                                        variant="label-hidden" onchange={handleFieldEdits} required>
+                                                    </lightning-input>
+
+                                                </div>
+                                                <div lwc:else data-index={index} data-field="Name">
+                                                    {tax.Name}
+                                                </div>
+                                            </td>
+                                            <td class="slds-text-align--center">
+                                                <div lwc:if={tax.isSelected} data-index={index} data-field="TaxRate__c">
+                                                    <lightning-input type="number" name="input2" data-index={index}
+                                                        class="requiredField" data-field="TaxRate__c"
+                                                        variant="label-hidden" value={tax.TaxRate__c} step="any" min="0"
+                                                        max="100" onchange={handleFieldEdits} required>
+                                                    </lightning-input>
+                                                </div>
+                                                <div lwc:else data-index={index} data-field="TaxRate__c">
+                                                    <!-- {tax.TaxRate__c} -->
+                                                    <lightning-formatted-number value={tax.TaxRate__c}
+                                                        minimum-fraction-digits="2"></lightning-formatted-number>
+                                                </div>
+                                            </td>
+                                            <td class="slds-text-align--center">
+                                                <div lwc:if={tax.isSelected} data-index={index} data-field="BDate__c">
+                                                    <lightning-input type="date" name="input1" variant="label-hidden"
+                                                        class="requiredField" date-style='short' data-index={index}
+                                                        data-field="BDate__c" label="Enter a date" value={tax.BDate__c}
+                                                        onchange={handleFieldEdits} required></lightning-input>
+                                                </div>
+                                                <div lwc:else data-index={index} data-field="BDate__c">
+                                                    <!-- {tax.BDate__c} -->
+                                                    <lightning-formatted-date-time value={tax.BDate__c} year="numeric"
+                                                        month="numeric" day="numeric"> </lightning-formatted-date-time>
+                                                </div>
+                                            </td>
+                                            <td class="slds-text-align--center">
+                                                <div data-index={index} data-field="EDate__c">
+                                                    <!-- {tax.EDate__c} -->
+                                                    <lightning-formatted-date-time value={tax.EDate__c} year="numeric"
+                                                        month="numeric" day="numeric"> </lightning-formatted-date-time>
+                                                </div>
+                                            </td>
+                                            <td class="slds-text-align--center table-data">
+                                                <div class="display-divs">
+                                                    <template if:true={tax.showRemoveButton}>
+                                                        <div class="display-divs">
+                                                            <div class={tax.removeButtonClass}>
+                                                                <div
+                                                                    class="slds-icon_container custom-icon-remove edit-icon-remove">
+                                                                    <lightning-icon icon-name='action:remove'
+                                                                        alternative-text='remove' size='x-small'
+                                                                        title={labels.LBL_Remove} onclick={handleCancel}
+                                                                        data-index={index}
+                                                                        class="remove-trans"></lightning-icon>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                    <div class="display-divs">
+                                                        <div class={tax.logEventButtonClass}>
+                                                            <div class="slds-icon_container custom-icon-log_event">
+                                                                <lightning-icon icon-name='action:log_event'
+                                                                    alternative-text='log_event' size='x-small'
+                                                                    title={labels.LBL_UpdateLog}
+                                                                    onclick={handleUpdateRow} data-index={index}
+                                                                    class="log-event-trans"></lightning-icon>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="display-divs">
+                                                        <div class={tax.deleteButtonClass}>
+                                                            <div
+                                                                class="slds-icon_container custom-icon-delete edit-icon">
+                                                                <lightning-icon icon-name='utility:delete'
+                                                                    alternative-text='delete' size='x-small'
+                                                                    title={labels.LBL_Delete} onclick={handleDeleteRow}
+                                                                    data-index={index}
+                                                                    class="delete-trans"></lightning-icon>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="display-divs">
+                                                        <div class={tax.editButtonClass}>
+                                                            <div class="slds-icon_container custom-icon-edit edit-icon">
+                                                                <lightning-icon icon-name='utility:edit'
+                                                                    alternative-text='edit' size='x-small'
+                                                                    title={labels.LBL_Modify} onclick={handleEditRow}
+                                                                    data-index={index}
+                                                                    class="edit-trans"></lightning-icon>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <template if:true={showUpdateVATPopup}>
+                    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <!-- Modal/Popup Header -->
+                            <header class="slds-modal__header">
+                                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                    title="Close" onclick={closeVATPopup}>
+                                    <lightning-icon icon-name="utility:close" alternative-text="close"
+                                        size="small"></lightning-icon>
+                                    <span class="slds-assistive-text">Close</span>
+                                </button>
+                                <h2 class="slds-text-heading_medium">{labels.LBL_VATUpdateRate}</h2>
+                            </header>
+
+                            <!-- Modal/Popup Body -->
+                            <div class="slds-modal__content slds-p-around_medium">
+                                <p>{labels.MSG_VATUpdate} {toUpdateVAT.name} - {toUpdateVAT.rate}%</p>
+                                <div class="slds-m-top--small">
+                                    {labels.MSG_VATUpdateEnddate}
+                                </div>
+                                <div data-index={index} data-field="EDate__c">
+                                    <lightning-input class="popupfield" type="date" name="input1" date-style='short'
+                                        data-index={index} data-field="EDate__c" label={headerFieldsListLabels.EDate__c}
+                                        value={toUpdateVATDate} onchange={handleUpdateVATDate}
+                                        required></lightning-input>
+
+                                </div>
+                                <div class="slds-m-top--small">
+                                    {labels.MSG_VATUpdateRate}
+                                </div>
+                                <div data-index={index} data-field="TaxRate__c">
+                                    <lightning-input class="popupfield" type="number" name="input2" data-index={index}
+                                        data-field="TaxRate__c" label={headerFieldsListLabels.TaxRate__c} value=""
+                                        step="any" min="0" max="100" onchange={handleUpdateVATDate} required>
+                                    </lightning-input>
+                                </div>
+
+                            </div>
+                            <!-- Modal/Popup Footer -->
+                            <footer class="slds-modal__footer">
+                                <lightning-button variant="neutral" label={labels.LBL_Cancel}
+                                    class="slds-p-right--small" onclick={closeVATPopup}></lightning-button>
+                                <lightning-button variant="brand" label={labels.LBL_Ok}
+                                    onclick={handleSaveVATPopup}></lightning-button>
+                            </footer>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

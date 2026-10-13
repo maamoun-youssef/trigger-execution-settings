@@ -1,0 +1,57 @@
+<template>
+    <!-- Loading Spinner (when no status message modal) -->
+    <template if:true={loading}>
+        <div class="slds-spinner_container">
+            <div class="loader slds-spinner_container slds-align--absolute-center">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </template>
+    <div class="slds-card pluginContainer">
+        <!-- Header -->
+        <div class="pluginHeader slds-grid slds-grid_vertical-align-center">
+            <div class="slds-col slds-grid slds-grid_vertical-align-center slds-p-left_medium">
+                <lightning-icon icon-name="utility:download" size="medium"
+                    class="headerIcon slds-m-right_small"></lightning-icon>
+                <div>
+                    <p class="headerTitle"><template if:true={objectLabel}>{objectLabel} - </template> {labels.LBL_MassImport_Title}</p>
+                    <p class="headerSubtitle">{labels.LBL_MassImport_Subtitle}</p>
+                </div>
+            </div>
+            <div class="slds-col slds-no-flex slds-p-right_medium">
+                <lightning-button label={labels.LBL_Import} variant="brand" onclick={prepareFile}
+                    class="importButton"></lightning-button>
+            </div>
+        </div>
+        <!-- Body -->
+        <div class="pluginBody slds-p-around_medium">
+            <template if:false={loading}>
+                <c-import-settings import-settings-name={templateName} reminder-msg={reminderMessage}
+                    record-id={recordId} onuploadexcel={uploadExcel} ongetfileid={getFileId}>
+                </c-import-settings>
+            </template>
+        </div>
+    </div>
+    <!-- Importing Status Modal -->
+    <template if:true={statusMessage}>
+        <div role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small"
+            aria-labelledby="import-modal-heading" aria-modal="true">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 id="import-modal-heading" class="slds-modal__title slds-hyphenate">
+                        {statusMessage}
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-var-p-around_medium slds-is-relative">
+                    <div class="slds-p-around_large">
+                        <lightning-spinner alternative-text={statusMessage} variant="brand"></lightning-spinner>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

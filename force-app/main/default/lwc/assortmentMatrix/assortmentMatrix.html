@@ -1,0 +1,1365 @@
+<template>
+    <template if:true={isEmailPopup}>
+        <div class="slds-backdrop slds-backdrop_open" style="z-index: 100;">
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <div class="slds-modal__header">
+                        <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate">
+                            {labels.Email_Form}
+                        </h1>
+                    </div>
+                    <div class="slds-modal__content slds-text-align_center slds-p-around_x-small"
+                        id="modal-content-id-4">
+                        <div class="slds-modal__content slds-text-align_center slds-p-around_x-small"
+                            id="modal-content-id-2" style="position: relative">
+                            <template lwc:if={showFileGenerationBar}>
+                                <div class="slds-spinner_container">
+                                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </template>
+                            <div class="slds-form">
+                                <div class="slds-text-align_left">
+                                    <label
+                                        class="slds-form-element__label slds-text-align_left">{labels.EmailTo}</label>
+                                </div>
+                                <lightning-input label={labels.EmailTo} variant="label-hidden"
+                                    data-field="targetAddress" onchange={handleChangeEmail}></lightning-input>
+                                <div class="slds-text-align_left">
+                                    <label
+                                        class="slds-form-element__label slds-text-align_left">{labels.emailCc}</label>
+                                </div>
+                                <lightning-input variant="label-hidden" data-field="cc"
+                                    onchange={handleChangeEmail}></lightning-input>
+                                <div class="slds-text-align_left">
+                                    <label
+                                        class="slds-form-element__label slds-text-align_left">{labels.emailBcc}</label>
+                                </div>
+                                <lightning-input variant="label-hidden" data-field="bcc"
+                                    onchange={handleChangeEmail}></lightning-input>
+                                <div class="slds-text-align_left">
+                                    <label
+                                        class="slds-form-element__label slds-text-align_left">{labels.Subject}</label>
+                                </div>
+                                <lightning-input variant="label-hidden" data-field="subject"
+                                    onchange={handleChangeEmail}></lightning-input>
+
+                                <div class="slds-text-align_left">
+                                    <label
+                                        class="slds-form-element__label slds-text-align_left">{labels.Email_Body}</label>
+                                </div>
+                                <lightning-textarea variant="label-hidden" data-field="body"
+                                    onchange={handleChangeEmail}></lightning-textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <lightning-button label={labels.LBL_Cancel} variant="neutral" onclick={closeScreen}
+                            class="slds-m-right_x-small"></lightning-button>
+                        <lightning-button label={labels.Send} variant="brand" onclick={exportExcel}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </template>
+    <div class="slds-card mainContainer">
+        <div class="header">
+            <div class="slds-grid">
+                <div class="slds-col slds-p-around_xx-small slds-has-flexi-truncate">
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div
+                            class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                            <lightning-icon icon-name="utility:matrix" class="headerIconColor">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small">
+                            <p class="slds-text-title slds-line-height_reset">
+                                {labels.AssortmentLabel}
+                            </p>
+                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                {assortmentLongName}
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-no-flex slds-grid">
+                    <!-- cancel -->
+                    <lightning-button class="slds-button slds-m-around_xx-small" variant="border-filled"
+                        label={labels.LBL_Cancel} onclick={handleCancel}>
+                    </lightning-button>
+                    <!-- save -->
+                    <lightning-button class="slds-button slds-m-around_xx-small" variant="brand" label={labels.LBL_Save}
+                        onclick={handleSave} if:true={ASDToUpdateMap}></lightning-button>
+                    <div class="headerDivider slds-m-right--x-small slds-m-vertical_small"></div>
+                    <!-- Flow Actions buttons and Icons -->
+                    <div class="slds-align--absolute-center">
+                        <template for:each={iconFlows} for:item="flow">
+                            <img key={flow.value} if:true={flow.value} src={flow.icon} alt={flow.label}
+                                data-flow-name={flow.value} data-flow-label={flow.label} onclick={toggleFlow}
+                                style="width:30px; height:30px; margin-left:6px; cursor:pointer; border-radius:3px;" />
+                        </template>
+                    </div>
+                    <template for:each={buttonFlows} for:item="flow">
+                        <lightning-button key={flow.value} if:true={flow.value} label={flow.label}
+                            class="slds-button slds-m-around--xx-small" data-flow-name={flow.value}
+                            data-flow-label={flow.label} onclick={toggleFlow}>
+                        </lightning-button>
+                    </template>
+                    <lightning-button-menu menu-alignment="right" icon-name="utility:connected_apps"
+                        class="slds-align_absolute-center slds-m-right--x-small">
+                        <!-- Flow Actions -->
+                        <template for:each={actionFlows} for:item="flow">
+                            <lightning-menu-item if:true={flow.value} key={flow.value} label={flow.label}
+                                prefix-icon-name={flow.icon} data-flow-name={flow.value} data-flow-label={flow.label}
+                                onclick={toggleFlow}>
+                            </lightning-menu-item>
+                        </template>
+                        <lightning-menu-item value={labels.LBL_Assortment_Modify_Status_to_Validate}
+                            label={labels.LBL_Assortment_Modify_Status_to_Validate} onclick={handleChangeStatus}
+                            disabled={ValidateDisabled} icon-name="utility:approval">
+                        </lightning-menu-item>
+                        <template if:true={isASTarget}>
+                            <lightning-menu-item value={labels.LBL_Create_Simulation_from_Target}
+                                data-flow="createSimulationFromTarget" label={labels.LBL_Create_Simulation_from_Target}
+                                icon-name="utility:copy" onclick={handleChangeFlow}>
+                            </lightning-menu-item>
+                            <lightning-menu-item value={labels.LBL_Validate_my_Target_and_Generate_a_Simulation}
+                                data-flow="validateTargetAndGenSimul"
+                                label={labels.LBL_Validate_my_Target_and_Generate_a_Simulation} icon-name="utility:copy"
+                                onclick={handleChangeFlow}>
+                            </lightning-menu-item>
+                            <lightning-menu-item value={labels.LBL_Validate_my_Target_and_Generate_a_Validated_Nego}
+                                data-flow="validateTargetAndGenNego"
+                                label={labels.LBL_Validate_my_Target_and_Generate_a_Validated_Nego}
+                                icon-name="utility:copy" onclick={handleChangeFlow}>
+                            </lightning-menu-item>
+                        </template>
+                        <template if:true={isASNego}>
+                            <lightning-menu-item value={labels.LBL_Create_Simulation_from_Nego}
+                                data-flow="createSimulationFromNego" label={labels.LBL_Create_Simulation_from_Nego}
+                                icon-name="utility:copy" onclick={handleChangeFlow}>
+                            </lightning-menu-item>
+                            <lightning-menu-item value={labels.LBL_Create_SimulationN1_from_Nego}
+                                data-flow="createSimulationN1FromNego" label={labels.LBL_Create_SimulationN1_from_Nego}
+                                icon-name="utility:copy" onclick={handleChangeFlow}>
+                            </lightning-menu-item>
+                            <template if:true={showSynchroRelatedAssortments}>
+                                <lightning-menu-item value={labels.LBL_UpdateLinkedAssortments} data-flow="synchroRelatedAssortments"
+                                    label={labels.LBL_UpdateLinkedAssortments} icon-name="utility:sync" onclick={handleChangeFlow}>
+                                </lightning-menu-item>
+                            </template>
+                        </template>
+                        <template if:true={isASSimulation}>
+                            <lightning-menu-item value={labels.LBL_Create_Simulation_from_Simulation}
+                                data-flow="createSimulationFromSimulation"
+                                label={labels.LBL_Create_Simulation_from_Simulation} icon-name="utility:copy"
+                                onclick={handleChangeFlow}>
+                            </lightning-menu-item>
+                            <lightning-menu-item value={labels.LBL_Validate_Simulation_and_generate_a_Validated_Nego}
+                                data-flow="validateSimulAndGenNego"
+                                label={labels.LBL_Validate_Simulation_and_generate_a_Validated_Nego}
+                                icon-name="utility:survey" onclick={handleChangeFlow}>
+                            </lightning-menu-item>
+                        </template>
+                        <lightning-menu-item value={labels.LBL_Add_Product} label={labels.LBL_Add_Product}
+                            icon-name="utility:add" data-popup="productPanelVisibility" onclick={togglePopups}>
+                        </lightning-menu-item>
+                        <lightning-menu-item value={labels.LBL_Link_To_Contract} label={labels.LBL_Link_To_Contract}
+                            icon-name="utility:link" data-popup="LinkToContractVisibility" onclick={togglePopups}>
+                        </lightning-menu-item>
+                        <lightning-menu-item if:true={isGenerateASRegional}
+                            value={labels.LBL_Create_Update_AS_BU_Region} label={labels.LBL_Create_Update_AS_BU_Region}
+                            icon-name="standard:return_order" data-popup="synchroASRegion" onclick={togglePopups}>
+                        </lightning-menu-item>
+                        <lightning-menu-item value={labels.LBL_Show_Hide_Columns} label={labels.LBL_Show_Hide_Columns}
+                            icon-name="utility:edit" data-popup="fieldManagerPopup" onclick={togglePopups}>
+                        </lightning-menu-item>
+                    </lightning-button-menu>
+                    <!-- toggle filter button -->
+                    <lightning-button-icon icon-name="utility:filterList" variant="border-filled"
+                        class="slds-button slds-button-icon slds-m-right--x-small" onclick={toggleFilter}>
+                    </lightning-button-icon>
+                    <div class="headerDivider slds-m-right--x-small slds-m-vertical_small"></div>
+                    <lightning-button-menu menu-alignment="right" icon-name="doctype:excel"
+                        class="slds-align_absolute-center slds-m-right--x-small">
+                        <lightning-menu-item value={labels.LBL_Import} label={labels.LBL_Import}
+                            if:true={availableImportFields.length} icon-name="utility:arrow_bottom"
+                            data-popup="importPopup" onclick={togglePopups}>
+                        </lightning-menu-item>
+                        <lightning-menu-item value={labels.LBL_Export_Details} label={labels.LBL_Export_Details}
+                            icon-name="utility:arrow_top" onclick={exportExcel}>
+                        </lightning-menu-item>
+                    </lightning-button-menu>
+                    <!-- toggle total tree -->
+                    <lightning-button-icon icon-name="utility:hierarchy" variant="border-filled"
+                        class="slds-button slds-button-icon slds-m-right--x-small" onclick={handleShowTotal}>
+                    </lightning-button-icon>
+
+                </div>
+            </div>
+        </div>
+        <div class="slds-grid main-panel">
+            <template if:false={records.length}>
+                <div if:false={loading} class="noItemsClass">
+                    <h2
+                        class="slds-align_absolute-center slds-text-align_center slds-m-around_xx-large slds-card__header-title slds-align-content-center">
+                        {labels.LBL_No_Item_To_Display}
+                    </h2>
+                </div>
+            </template>
+            <div class="slds-scrollable">
+                <template lwc:if={showFileGenerationBar}>
+                    <div class="slds-spinner_container">
+                        <div class="loader slds-spinner_container slds-align--absolute-center">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </template>
+                <template lwc:elseif={loading}>
+                    <div class="slds-spinner_container">
+                        <div class="loader slds-spinner_container slds-align--absolute-center">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </template>
+                <template if:true={records.length}>
+                    <table
+                        class="slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border--right slds-no-row-hover">
+                        <thead>
+                            <tr style="height: 60px;">
+                                <template for:each={displayedFields} for:item="field">
+                                    <template lwc:if={field.isShown}>
+                                        <th key={field.fieldName} title={field.fieldLabel} style={field.style}
+                                            class="headerRow stickyHeader slds-p-around_x-small slds-truncate" data-field={field.fieldName}
+                                            if:false={field.isSortable}>
+                                            <span>{field.fieldLabel}</span>
+                                            <template lwc:if={field.hasHelpText}>
+                                                <lightning-helptext content={field.helpText} class="slds-m-left_xx-small">
+                                                </lightning-helptext>
+                                            </template>
+                                        </th>
+                                        <th key={field.fieldName} title={field.fieldLabel} style={field.style}
+                                            class="headerRow stickyHeader slds-p-around_x-small slds-truncate"
+                                            data-field={field.fieldName} onclick={handleChangeSortField}
+                                            if:true={field.isSortable}>
+                                            <template if:true={field.sortedField}>
+                                                <lightning-icon icon-name="utility:arrowdown" size="xx-small"
+                                                    class="sortSelected-icon slds-m-left--xxx-small"
+                                                    style="right: 0px;bottom:0;position:absolute;"
+                                                    data-field={field.fieldName} if:false={isSortASC}>
+                                                </lightning-icon>
+                                                <lightning-icon icon-name="utility:arrowup" size="xx-small"
+                                                    class="sortSelected-icon slds-m-left--xxx-small"
+                                                    style="right: 0px;bottom:0;position:absolute;"
+                                                    data-field={field.fieldName} if:true={isSortASC}>
+                                                </lightning-icon>
+                                            </template>
+                                            <span>{field.fieldLabel}</span>
+                                            <template lwc:if={field.hasHelpText}>
+                                                <lightning-helptext content={field.helpText} class="slds-m-left_xx-small">
+                                                </lightning-helptext>
+                                            </template>
+                                            <template if:false={field.sortedField}>
+                                                <lightning-icon icon-name="utility:arrowup" size="xx-small"
+                                                    class="white-icon slds-m-left--xxx-small"
+                                                    style="right: 0px;bottom:0;position:absolute;"
+                                                    data-field={field.fieldName}>
+                                                </lightning-icon>
+                                            </template>
+                                        </th>
+                                    </template>
+                                </template>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="subTotalRow">
+                                <td class="categoryTd" style="color: white; font-weight: bold;">GLOBAL</td>
+                                <template iterator:total={totalsList}>
+                                    <template lwc:if={total.value.isShown}>
+                                        <td if:false={total.first} key={total.value.key} class={total.value.class}>
+                                            <div>
+                                                <template if:true={filters.includeAllStatuses}>
+                                                    <lightning-icon icon-name="utility:up" size="xx-small"
+                                                        if:true={total.value.isValueofAllStatusUp} class="green-icon">
+                                                    </lightning-icon>
+                                                    <lightning-icon icon-name="utility:down" size="xx-small"
+                                                        if:true={total.value.isValueofAllStatusDown} class="red-icon">
+                                                    </lightning-icon>
+                                                    <lightning-formatted-number value={total.value.valueofAllStatus}
+                                                        maximum-fraction-digits={total.value.scale}
+                                                        minimum-fraction-digits={total.value.scale}>
+                                                    </lightning-formatted-number>
+                                                </template>
+                                                <template if:false={filters.includeAllStatuses}>
+                                                    <lightning-icon icon-name="utility:up" size="xx-small"
+                                                        if:true={total.value.isValueUp} class="green-icon">
+                                                    </lightning-icon>
+                                                    <lightning-icon icon-name="utility:down" size="xx-small"
+                                                        if:true={total.value.isValueDown} class="red-icon">
+                                                    </lightning-icon>
+                                                    <lightning-formatted-number value={total.value.value}
+                                                        maximum-fraction-digits={total.value.scale}
+                                                        minimum-fraction-digits={total.value.scale}>
+                                                    </lightning-formatted-number>
+                                                </template>
+                                            </div>
+                                        </td>
+                                    </template>
+                                </template>
+                            </tr>
+                            <template for:each={records} for:item="record" for:index="categIndex">
+                                <!-- <template iterator:record={records}> -->
+                                <tr key={record.key} class="subTotalRow">
+                                    <td class="categoryTd">
+                                        <a href={record.link} target="_blank" style="color: white; font-weight: bold;"
+                                            lwc:if={record.link}>
+                                            {record.categoryName}
+                                        </a>
+                                        <span style="color: white; font-weight: bold;"
+                                            lwc:else>{record.categoryName}</span>
+                                    </td>
+                                    <template iterator:subtotal={record.subTotalList}>
+                                        <template lwc:if={subtotal.value.isShown}>
+                                            <td if:false={subtotal.first} key={subtotal.value.key}
+                                                class={subtotal.value.class}>
+                                                <lightning-formatted-number
+                                                    maximum-fraction-digits={subtotal.value.scale}
+                                                    minimum-fraction-digits={subtotal.value.scale}
+                                                    value={subtotal.value.value}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                        </template>
+                                    </template>
+                                </tr>
+                                <template for:each={record.asdList} for:item="item" for:index="index">
+                                    <tr key={item.Id} data-category={categIndex} data-row={index}>
+                                        <template for:each={item.values} for:item="field" for:index="fieldIndex">
+                                            <td lwc:if={field.isShown} key={field.key} style={field.style}
+                                                class={field.class}>
+                                                <div class={field.divClass}>
+                                                    <template lwc:if={field.isInputField}>
+                                                        <lightning-input lwc:if={field.isText}
+                                                            data-fieldindex={fieldIndex} data-rowindex={index}
+                                                            data-categindex={categIndex} data-id={item.Id}
+                                                            data-field={field.fieldName} onblur={handleFieldEdits}
+                                                            variant="label-hidden" value={field.fieldValue}>
+                                                        </lightning-input>
+                                                        <lightning-input lwc:elseif={field.isNumberField} type="number"
+                                                            data-fieldindex={fieldIndex} data-categindex={categIndex}
+                                                            data-rowindex={index} data-id={item.Id}
+                                                            data-field={field.fieldName} onblur={handleFieldEdits}
+                                                            variant="label-hidden" step={field.step}
+                                                            value={field.fieldValue} class="input-right">
+                                                        </lightning-input>
+                                                        <lightning-record-edit-form lwc:elseif={field.isReference}
+                                                            object-api-name={AssortmentDetailObject}
+                                                            record-id={item.Id}>
+                                                            <lightning-input-field field-name={field.fieldName}
+                                                                data-fieldindex={fieldIndex}
+                                                                data-categindex={categIndex} data-rowindex={index}
+                                                                data-id={item.Id} data-field={field.fieldName}
+                                                                onblur={handleFieldEdits} variant="label-hidden"
+                                                                value={field.fieldValue}>
+                                                            </lightning-input-field>
+                                                        </lightning-record-edit-form>
+                                                        <lightning-input lwc:elseif={field.isBoolean} type="checkbox"
+                                                            variant="label-hidden" class="input-center"
+                                                            data-fieldindex={fieldIndex} data-rowindex={index}
+                                                            data-categindex={categIndex} data-id={item.Id}
+                                                            data-field={field.fieldName} onchange={handleFieldEdits}
+                                                            checked={field.fieldValue}>
+                                                        </lightning-input>
+                                                        <template lwc:elseif={field.isStrat}>
+                                                            <template lwc:if={field.isStratEmpty}>
+                                                                <div></div>
+                                                            </template>
+                                                            <template lwc:else>
+                                                                <lightning-input type="checkbox" variant="label-hidden"
+                                                                    class="input-center" data-fieldindex={fieldIndex}
+                                                                    data-rowindex={index} data-categindex={categIndex}
+                                                                    data-id={item.Id} data-field={field.fieldName}
+                                                                    onchange={toggleCheckboxes}
+                                                                    checked={field.fieldValue}>
+                                                                </lightning-input>
+                                                            </template>
+                                                        </template>
+                                                        <select lwc:elseif={field.isPicklist}
+                                                            onchange={handleFieldEdits} data-fieldindex={fieldIndex}
+                                                            data-rowindex={index} data-categindex={categIndex}
+                                                            data-id={item.Id} data-field={field.fieldName}>
+                                                            <template for:each={field.picklistOptions}
+                                                                for:item="option">
+                                                                <template lwc:if={option.isDisabled}>
+                                                                    <option key={option.key} value={option.value}
+                                                                        selected={option.isSelected} disabled>
+                                                                        {option.label}
+                                                                    </option>
+                                                                </template>
+                                                                <template lwc:else>
+                                                                    <option key={option.key} value={option.value}
+                                                                        selected={option.isSelected}>{option.label}
+                                                                    </option>
+                                                                </template>
+                                                            </template>
+                                                        </select>
+                                                        <lightning-input lwc:elseif={field.isDate} type="date"
+                                                            data-fieldindex={fieldIndex} data-rowindex={index}
+                                                            data-categindex={categIndex} data-id={item.Id}
+                                                            data-field={field.fieldName} onchange={handleFieldEdits}
+                                                            variant="label-hidden" value={field.fieldValue}
+                                                            date-style="short">
+                                                        </lightning-input>
+                                                    </template>
+                                                    <template lwc:else>
+                                                        <lightning-formatted-number lwc:if={field.isNumberField}
+                                                            maximum-fraction-digits={field.scale}
+                                                            value={field.fieldValue}>
+                                                        </lightning-formatted-number>
+                                                        <template lwc:elseif={field.isText}>
+                                                            <template lwc:if={field.isHTMLFormatted}>
+                                                                <lightning-formatted-rich-text class="imgRichText"
+                                                                    value={field.fieldValue}>
+                                                                </lightning-formatted-rich-text>
+                                                            </template>
+                                                            <template lwc:else>
+                                                                {field.fieldValue}
+                                                            </template>
+                                                        </template>
+                                                        <template lwc:elseif={field.isReference}>
+                                                            <a href={field.link} target="_blank"
+                                                                style={field.linkStyle}>
+                                                                {field.fieldValue}</a>
+                                                        </template>
+                                                        <lightning-input lwc:elseif={field.isBoolean} type="checkbox"
+                                                            class="input-center" variant="label-hidden"
+                                                            checked={field.fieldValue} disabled>
+                                                        </lightning-input>
+                                                        <template lwc:elseif={field.isStrat}>
+                                                            <template lwc:if={field.isStratEmpty}>
+                                                                <div></div>
+                                                            </template>
+                                                            <template lwc:else>
+                                                                <lightning-input type="checkbox" class="input-center"
+                                                                    variant="label-hidden" checked={field.fieldValue}
+                                                                    disabled>
+                                                                </lightning-input>
+                                                            </template>
+                                                        </template>
+                                                        <lightning-formatted-date-time lwc:elseif={field.isDate}
+                                                            value={field.fieldValue} year="numeric" month="2-digit"
+                                                            day="2-digit"></lightning-formatted-date-time>
+                                                        <template lwc:elseif={field.isPicklist}>
+                                                            {field.fieldOutputValue}
+                                                        </template>
+                                                    </template>
+                                                    <div class="slds-grid buttonSection">
+                                                        <template lwc:if={field.isSwitch}>
+                                                            <lightning-icon icon-name="utility:product_transfer"
+                                                                style="scale: 0.8;" size="xx-small"
+                                                                data-popup="switchRenoPopup" data-asdid={item.Id}
+                                                                data-startdate={item.startDate}
+                                                                data-productid={item.productId} onclick={togglePopups}>
+                                                            </lightning-icon>
+                                                        </template>
+                                                        <template lwc:elseif={field.isStop}>
+                                                            <lightning-icon icon-name="utility:stop" size="xx-small"
+                                                                style="scale: 0.8;">
+                                                            </lightning-icon>
+                                                        </template>
+                                                        <template lwc:elseif={field.isReno}>
+                                                            <lightning-icon icon-name="utility:refresh" size="xx-small"
+                                                                style="scale: 0.8;" data-popup="switchRenoPopup"
+                                                                data-asdid={item.Id} data-startdate={item.startDate}
+                                                                data-productid={item.productId} onclick={togglePopups}>
+                                                            </lightning-icon>
+                                                        </template>
+                                                        <template lwc:elseif={field.isHLP}>
+                                                            <lightning-icon icon-name="utility:summarydetail"
+                                                                class={field.HLPClass} style="scale: 0.8;"
+                                                                data-rowindex={index} data-categindex={categIndex}
+                                                                data-id={item.Id} data-popup="HLPPopup"
+                                                                data-productid={item.productId} size="xx-small"
+                                                                onclick={togglePopups}>
+                                                            </lightning-icon>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </template>
+                                    </tr>
+                                    <template for:each={item.historyList} for:item="history">
+                                        <tr key={history.Id}>
+                                            <template for:each={history.values} for:item="field" for:index="fieldIndex">
+                                                <td data-is-history="true" lwc:if={field.isShown} key={field.key} style={field.style}
+                                                    class={field.class}>
+                                                    <lightning-formatted-number lwc:if={field.isNumberField}
+                                                        maximum-fraction-digits={field.scale} value={field.fieldValue}>
+                                                    </lightning-formatted-number>
+                                                    <template lwc:if={field.isText}>
+                                                        <template lwc:if={field.isHTMLFormatted}>
+                                                            <lightning-formatted-rich-text class="imgRichText"
+                                                                value={field.fieldValue}>
+                                                            </lightning-formatted-rich-text>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            {field.fieldValue}
+                                                        </template>
+                                                    </template>
+                                                    <template lwc:elseif={field.isReference}>
+                                                        <a href={field.link} target="_blank" style={field.linkStyle}>
+                                                            {field.fieldValue}</a>
+                                                    </template>
+                                                    <lightning-input lwc:elseif={field.isBoolean} type="checkbox"
+                                                        class="input-center" variant="label-hidden"
+                                                        checked={field.fieldValue} disabled>
+                                                    </lightning-input>
+                                                    <template lwc:elseif={field.isStrat}>
+                                                        <template lwc:if={field.isStratEmpty}>
+                                                            <div></div>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            <lightning-input type="checkbox" class="input-center"
+                                                                variant="label-hidden" checked={field.fieldValue}
+                                                                disabled>
+                                                            </lightning-input>
+                                                        </template>
+                                                    </template>
+                                                    <lightning-formatted-date-time lwc:elseif={field.isDate}
+                                                        value={field.fieldValue} year="numeric" month="2-digit"
+                                                        day="2-digit"></lightning-formatted-date-time>
+                                                    <template lwc:elseif={field.isPicklist}>
+                                                        {field.fieldOutputValue}
+                                                    </template>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                </template>
+                            </template>
+                        </tbody>
+                    </table>
+                </template>
+            </div>
+            <div class="filter-section slds-col slds-hide" style="float: right; z-index:7;">
+                <div id="filter-panel" style="height: 100%;" class="slds-grid slds-no-flex">
+                    <div class="slds-panel slds-size_medium slds-panel_docked slds-panel_docked-right slds-grid slds-grid_vertical"
+                        style="overflow: unset;">
+                        <div class="slds-panel__header filterPanelHeader">
+                            <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate"
+                                title={labels.LBL_Filter}>
+                                {labels.LBL_Filter}
+                            </h2>
+                            <lightning-button-icon variant="bare" icon-name="utility:close" onclick={toggleFilter}>
+                            </lightning-button-icon>
+                        </div>
+                        <div class="slds-col slds-scrollable filterPanelBody">
+                            <div class="slds-grid slds-wrap slds-p-around_small">
+                                <div class="slds-list_vertical slds-list_vertical-space slds-size_1-of-1">
+                                    <div class="slds-item">
+                                        <lightning-combobox label={labels.LBL_Number_Of_Fixed_Columns}
+                                            options={fixedColumnsOptions} value={nbOfFixedColumns}
+                                            onchange={setnumberOfFixedColumns}>
+                                        </lightning-combobox>
+                                    </div>
+                                    <div class="slds-item slds-has-divider_top-space">
+                                        <lightning-input name="Search" placeholder={globalSearchPlaceholder}
+                                            label={labels.LBL_Search} type="search" onchange={setSearchValue}
+                                            value={filters.searchValue}></lightning-input>
+                                    </div>
+                                    <template if:true={fieldsToFilter.length} for:each={fieldsToFilter}
+                                        for:item="fieldToFilter">
+                                        <div key={fieldToFilter.fieldName}>
+                                            <template if:true={fieldToFilter.userFilterable}>
+                                                <!--text-->
+                                                <lightning-input if:true={fieldToFilter.isText}
+                                                    name={fieldToFilter.fieldName} data-mode="one" type="text"
+                                                    label={fieldToFilter.fieldLabel} value={fieldToFilter.value}
+                                                    onchange={setSelectedValues}>
+                                                </lightning-input>
+                                                <!--lookup-->
+                                                <template if:true={fieldToFilter.isReference}>
+                                                    <lightning-input name={fieldToFilter.fieldName} data-mode="one"
+                                                        type="text" label={fieldToFilter.fieldLabel}
+                                                        value={fieldToFilter.value} onchange={setSelectedValues}>
+                                                    </lightning-input>
+                                                </template>
+                                                <!--ID-->
+                                                <lightning-input if:true={fieldToFilter.isId}
+                                                    name={fieldToFilter.fieldName} data-mode="multiple" type="text"
+                                                    label={fieldToFilter.fieldLabel} value={fieldToFilter.displayVal}
+                                                    field-level-help={labels.MSG_Filter_On_Id_Help_Text}
+                                                    onchange={setSelectedValues}>
+                                                </lightning-input>
+                                                <!--number-->
+                                                <div if:true={fieldToFilter.isNumber} class="slds-form-element">
+                                                    <legend class="slds-form-element__label slds-form-element__legend">
+                                                        {fieldToFilter.fieldLabel}
+                                                    </legend>
+                                                    <div class="slds-form-element__control slds-grid slds-gutters">
+                                                        <lightning-input variant="label-hidden" type="number"
+                                                            class="slds-col" name={fieldToFilter.fieldName}
+                                                            data-range="value1" value={fieldToFilter.value1}
+                                                            onchange={setSelectedRangeValue}
+                                                            formatter={fieldToFilter.formatter}
+                                                            step={fieldToFilter.step}>
+                                                        </lightning-input>
+                                                        <span class="slds-align-middle">-</span>
+                                                        <lightning-input variant="label-hidden" type="number"
+                                                            class="slds-col" name={fieldToFilter.fieldName}
+                                                            data-range="value2" value={fieldToFilter.value2}
+                                                            onchange={setSelectedRangeValue}
+                                                            formatter={fieldToFilter.formatter}
+                                                            step={fieldToFilter.step}>
+                                                        </lightning-input>
+                                                    </div>
+                                                </div>
+                                                <!--date-->
+                                                <div if:true={fieldToFilter.isDate} class="slds-form-element">
+                                                    <legend class="slds-form-element__label slds-form-element__legend">
+                                                        {fieldToFilter.fieldLabel}
+                                                    </legend>
+                                                    <div class="slds-form-element__control slds-grid slds-gutters">
+                                                        <lightning-input variant="label-hidden" type="date"
+                                                            class="slds-col" name={fieldToFilter.fieldName}
+                                                            data-range="value1" value={fieldToFilter.value1}
+                                                            onchange={setSelectedRangeValue} date-style="short">
+                                                        </lightning-input>
+                                                        <span class="slds-align-middle">-</span>
+                                                        <lightning-input variant="label-hidden" type="date"
+                                                            class="slds-col" name={fieldToFilter.fieldName}
+                                                            data-range="value2" value={fieldToFilter.value2}
+                                                            onchange={setSelectedRangeValue} date-style="short">
+                                                        </lightning-input>
+                                                    </div>
+                                                </div>
+                                                <!--time-->
+                                                <div if:true={fieldToFilter.isTime} class="slds-form-element">
+                                                    <legend class="slds-form-element__label slds-form-element__legend">
+                                                        {fieldToFilter.fieldLabel}
+                                                    </legend>
+                                                    <div class="slds-form-element__control slds-grid slds-gutters">
+                                                        <lightning-input variant="label-hidden" type="time"
+                                                            class="slds-col" name={fieldToFilter.fieldName}
+                                                            data-range="value1" value={fieldToFilter.value1}
+                                                            onchange={setSelectedRangeValue}>
+                                                        </lightning-input>
+                                                        <span class="slds-align-middle">-</span>
+                                                        <lightning-input variant="label-hidden" type="time"
+                                                            class="slds-col" name={fieldToFilter.fieldName}
+                                                            data-range="value2" value={fieldToFilter.value2}
+                                                            onchange={setSelectedRangeValue}>
+                                                        </lightning-input>
+                                                    </div>
+                                                </div>
+                                                <!--checkbox group-->
+                                                <lightning-checkbox-group if:true={fieldToFilter.isCheckboxGroup}
+                                                    data-name={fieldToFilter.fieldName} name={fieldToFilter.fieldName}
+                                                    label={fieldToFilter.fieldLabel} options={fieldToFilter.options}
+                                                    value={fieldToFilter.values} onchange={setSelectedValues}>
+                                                </lightning-checkbox-group>
+                                            </template>
+                                        </div>
+                                    </template>
+                                    <div class="slds-has-divider_top-space">
+                                        <lightning-input label={labels.LBL_Hide_Blank_Status} type="checkbox"
+                                            onchange={setStaticFilters} data-filter="hideBlankStatus"
+                                            value={filters.hideBlankStatus}
+                                            checked={filters.hideBlankStatus}></lightning-input>
+                                    </div>
+                                    <div>
+                                        <lightning-input label={labels.LBL_Show_Intro_Products} type="checkbox"
+                                            onchange={setStaticFilters} data-filter="showIntroProducts"
+                                            value={filters.showIntroProducts} checked={filters.showIntroProducts}
+                                            if:true={filters.hideBlankStatus}></lightning-input>
+                                        <lightning-input label={labels.LBL_Show_Intro_Products} type="checkbox"
+                                            onchange={setStaticFilters} data-filter="showIntroProducts"
+                                            value={filters.showIntroProducts} checked={filters.showIntroProducts}
+                                            if:false={filters.hideBlankStatus} disabled></lightning-input>
+                                    </div>
+                                    <div>
+                                        <lightning-input label={labels.LBL_Only_Show_Intro_Products} type="checkbox"
+                                            onchange={setStaticFilters} data-filter="onlyShowIntroProducts"
+                                            value={filters.onlyShowIntroProducts}
+                                            checked={filters.onlyShowIntroProducts}></lightning-input>
+                                    </div>
+                                    <div>
+                                        <lightning-input label={labels.LBL_Show_History} type="checkbox"
+                                            onchange={setStaticFilters} data-filter="isShowHistory"
+                                            value={filters.isShowHistory}
+                                            checked={filters.isShowHistory}></lightning-input>
+                                    </div>
+                                    <div class="slds-has-divider_top-space">
+                                        <lightning-input label={labels.LBL_Include_Nb_Of_Store} type="checkbox"
+                                            onchange={toggleNbOfStores} data-filter="includeNbOfStores"
+                                            value={filters.includeNbOfStores}
+                                            checked={filters.includeNbOfStores}></lightning-input>
+                                    </div>
+                                    <div>
+                                        <lightning-input label={labels.LBL_Include_All_Status} type="checkbox"
+                                            onchange={setStaticFilters} data-filter="includeAllStatuses"
+                                            value={filters.includeAllStatuses}
+                                            checked={filters.includeAllStatuses}></lightning-input>
+                                    </div>
+                                    <div class="slds-grid slds-has-divider_top-space">
+                                        <div
+                                            class="slds-item slds-col slds-m-top--x-small slds-size--2-of-3 slds-list_vertical slds-list_vertical-space slds-grid slds-wrap">
+                                            <template for:each={productLifeStatusValues} for:item="status">
+                                                <div class="slds-item slds-size--1-of-2" key={status.value}
+                                                    data-status={status.value}>
+                                                    <span class="lengend-square slds-m-right--xx-small"
+                                                        style={status.style} data-status={status.value}
+                                                        onclick={setStaticFilters}></span>{status.label}
+                                                </div>
+                                            </template>
+                                        </div>
+                                        <div
+                                            class="slds-item slds-col slds-size--1-of-3 slds-list_vertical slds-list_vertical-space">
+                                            <div class="slds-item">
+                                                <lightning-icon icon-name="utility:product_transfer" size="xx-small"
+                                                    class="black-icon slds-m-right--xx-small switchIcon"
+                                                    data-product-type="Switch" onclick={setStaticFilters}>
+                                                </lightning-icon>{labels.Switch}
+                                            </div>
+                                            <div class="slds-item">
+                                                <lightning-icon icon-name="utility:stop" size="xx-small"
+                                                    class="black-icon slds-m-right--xx-small stopIcon"
+                                                    data-product-type="Stop" onclick={setStaticFilters}>
+                                                </lightning-icon>{labels.Stop}
+                                            </div>
+                                            <div class="slds-item">
+                                                <lightning-icon icon-name="utility:refresh" size="xx-small"
+                                                    class="black-icon slds-m-right--xx-small renoIcon"
+                                                    data-product-type="Reno" onclick={setStaticFilters}>
+                                                </lightning-icon>{labels.Rennovation}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="slds-card__footer slds-grid slds-m-top_none slds-p-vertical_small filterPanelFooter">
+                            <div class="slds-col">
+                                <lightning-button onclick={handleReset} label={labels.LBL_Reset}>
+                                </lightning-button>
+                            </div>
+                            <div class="slds-col">
+                                <lightning-button onclick={confirmFilter} label={labels.LBL_Search} variant="brand">
+                                </lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div if:true={records.length} class="footerDiv slds-grid slds-m-around--xx-small">
+            <span class="slds-m-horizontal_x-small slds-m-top_xxx-small">
+                <select onchange={handleChangePageSize} style="width: 45px;">
+                    <template for:each={pageSizeOptions} for:item="option">
+                        <option key={option.value} value={option.value} selected={option.isSelected}>
+                            {option.label}
+                        </option>
+                    </template>
+                </select>
+            </span>
+            <span>
+                <lightning-button-group>
+                    <lightning-button label={labels.LBL_First} disabled={previousDisabled} data-type="First"
+                        onclick={handleChangePage}>
+                    </lightning-button>
+                    <lightning-button label={labels.LBL_Previous} disabled={previousDisabled} data-type="Previous"
+                        onclick={handleChangePage}>
+                    </lightning-button>
+                    <lightning-button label={labels.LBL_Next} disabled={nextDisabled} data-type="Next"
+                        onclick={handleChangePage}>
+                    </lightning-button>
+                    <lightning-button label={labels.LBL_Last} disabled={nextDisabled} data-type="Last"
+                        onclick={handleChangePage}>
+                    </lightning-button>
+                </lightning-button-group>
+                <span class="slds-p-left_small slds-p-right_small slds-badge" style="margin-left: 10px;">
+                    {paginationBadge}
+                </span>
+            </span>
+        </div>
+        <template if:true={isAlertModalOpen}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <span>{labels.LBL_AS_Lost_Changes_Message}</span>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label={labels.LBL_Cancel} onclick={closeAlertModal}></lightning-button>
+                        <lightning-button variant="brand" label={labels.LBL_Confirm}
+                            onclick={confirmAlertModal}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <template if:true={popups.productPanelVisibility}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open slds-modal_large">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-button-icon size="large" icon-name="utility:close"
+                            data-popup="productPanelVisibility" onclick={togglePopups}></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__content" style="overflow: unset !important;overflow-y: unset !important;">
+                        <c-assortment-product-selection record-id={recordId}
+                            opened-from-another-screen="true"></c-assortment-product-selection>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <template if:true={LinkToContractVisibility}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open slds-modal_large">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            data-popup="LinkToContractVisibility" onclick={togglePopups}></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__content" style="overflow: unset !important;overflow-y: unset !important;">
+                        <c-link-assortment-to-contract record-id={recordId}></c-link-assortment-to-contract>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <template if:true={popups.synchroASRegion}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open slds-modal_large">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            data-popup="synchroASRegion" onclick={togglePopups}></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__content" style="overflow: unset !important;overflow-y: unset !important;">
+                        <c-synchro-a-s-region record-id={recordId}></c-synchro-a-s-region>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <template if:true={flows.createSimulationFromTarget}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            onclick={handleChangeFlow} data-flow="createSimulationFromTarget"></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__content"
+                        style="overflow: unset !important;overflow-y: unset !important; position: relative;">
+                        <lightning-flow data-flow="createSimulationFromTarget"
+                            flow-api-name={API_SCREEN_Assortment_Create_Simulation_from_target_Simulation}
+                            onstatuschange={handleExitFlow} flow-input-variables={createSimulationFromTargetVariables}>
+                        </lightning-flow>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <template if:true={flows.validateTargetAndGenSimul}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            onclick={handleChangeFlow} data-flow="validateTargetAndGenSimul"></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__content"
+                        style="overflow: unset !important;overflow-y: unset !important; position: relative;">
+                        <lightning-flow data-flow="validateTargetAndGenSimul"
+                            flow-api-name={API_SCREEN_Assortment_Validate_my_Target} onstatuschange={handleExitFlow}
+                            flow-input-variables={validateTargetAndGenSimulVariables}>
+                        </lightning-flow>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <template if:true={flows.validateTargetAndGenNego}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            onclick={handleChangeFlow} data-flow="validateTargetAndGenNego"></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__content"
+                        style="overflow: unset !important;overflow-y: unset !important; position: relative;">
+                        <lightning-flow data-flow="validateTargetAndGenNego"
+                            flow-api-name={API_SCREEN_Assortment_Validate_my_Target} onstatuschange={handleExitFlow}
+                            flow-input-variables={validateTargetAndGenNegoVariables}>
+                        </lightning-flow>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <template if:true={flows.createSimulationFromNego}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            onclick={handleChangeFlow} data-flow="createSimulationFromNego"></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__content"
+                        style="overflow: unset !important;overflow-y: unset !important; position: relative;">
+                        <lightning-flow data-flow="createSimulationFromNego"
+                            flow-api-name={API_SCREEN_Assortment_Create_Simulation_from_target_Simulation}
+                            onstatuschange={handleExitFlow} flow-input-variables={createSimulationFromNegoVariables}>
+                        </lightning-flow>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <template if:true={flows.synchroRelatedAssortments}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-synchro-related-assortments"
+                class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            onclick={handleChangeFlow} data-flow="synchroRelatedAssortments">
+                        </lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__content"
+                        style="overflow: unset !important; overflow-y: unset !important; position: relative;">
+                        <lightning-flow data-flow="synchroRelatedAssortments"
+                            flow-api-name={API_Synchro_Related_Assortments}
+                            onstatuschange={handleExitFlow}
+                            flow-input-variables={synchroRelatedAssortmentsVariables}>
+                        </lightning-flow>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <template if:true={flows.createSimulationN1FromNego}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            onclick={handleChangeFlow} data-flow="createSimulationN1FromNego"></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__content"
+                        style="overflow: unset !important;overflow-y: unset !important; position: relative;">
+                        <lightning-flow data-flow="createSimulationN1FromNego"
+                            flow-api-name={API_SCREEN_Assortment_Create_Simulation_from_target_Simulation}
+                            onstatuschange={handleExitFlow} flow-input-variables={createSimulationN1FromNegoVariables}>
+                        </lightning-flow>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <template if:true={flows.createSimulationFromSimulation}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            onclick={handleChangeFlow}
+                            data-flow="createSimulationFromSimulation"></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__content"
+                        style="overflow: unset !important;overflow-y: unset !important; position: relative;">
+                        <lightning-flow data-flow="createSimulationFromSimulation"
+                            flow-api-name={API_SCREEN_Assortment_Create_Simulation_from_target_Simulation}
+                            onstatuschange={handleExitFlow}
+                            flow-input-variables={createSimulationFromSimulationVariables}>
+                        </lightning-flow>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <template if:true={flows.validateSimulAndGenNego}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            onclick={handleChangeFlow} data-flow="validateSimulAndGenNego"></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__content"
+                        style="overflow: unset !important;overflow-y: unset !important; position: relative;">
+                        <lightning-flow data-flow="validateSimulAndGenNego"
+                            flow-api-name={API_SCREEN_Assortment_Validate_Simulation_and_Generate_Nego_N_1_Validated}
+                            onstatuschange={handleExitFlow} flow-input-variables={validateSimulAndGenNegoVariables}>
+                        </lightning-flow>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <!-- Flow Actions popup -->
+        <template if:true={openFlow}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                class="slds-modal slds-fade-in-open slds-modal_medium">
+                <div class="slds-modal__container">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        onclick={closeFlow}>
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
+                        </svg>
+                        <span class="slds-assistive-text">{labels.LBL_Cancel}</span>
+                    </button>
+                    <div class="slds-modal__header">
+                        <h1 id="modal-heading-03" class="slds-modal__title slds-hyphenate">
+                            {currentFlow.header}</h1>
+                    </div>
+                    <div class="slds-modal__content">
+                        <lightning-flow flow-api-name={currentFlow.flowApiName} onstatuschange={handleFlowStatusChange}
+                            flow-input-variables={currentFlow.flowVariables} flow-finish-behavior="NONE">
+                        </lightning-flow>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+
+        <template if:true={popups.switchRenoPopup}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            data-popup="switchRenoPopup" onclick={togglePopups}></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__content"
+                        style="overflow: unset !important;overflow-y: unset !important; position: relative;">
+                        <table
+                            class="slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border--right slds-no-row-hover">
+                            <thead>
+                                <tr>
+                                    <th style="background-color: #0d807d;color: white;">
+                                    </th>
+                                    <th style="background-color: #0d807d;color: white;">
+                                        {labels.Current_Product}
+                                    </th>
+                                    <th style="background-color: #0d807d;color: white;">
+                                        {labels.New_Product}
+                                    </th>
+                                    <th style="background-color: #0d807d;color: white;">
+                                        Start Date <!--custom label-->
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template if:false={switchProductsList.length}>
+                                    <tr>
+                                        <td colspan="4">
+                                            <h2
+                                                class="slds-align_absolute-center slds-text-align_center slds-m-around_xx-large slds-card__header-title slds-align-content-center">
+                                                {labels.LBL_No_Item_To_Display}
+                                            </h2>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <template if:true={switchProductsList.length}>
+                                    <template for:each={switchProductsList} for:item="switchProduct"
+                                        for:index="switchProductIndex">
+                                        <tr key={switchProduct.newProductId}>
+                                            <td>
+                                                <lightning-input type="checkbox" class="slds-m-left--x-small"
+                                                    checked={switchProduct.isSelected} variant="label-hidden"
+                                                    onchange={handleSelectSwitchProduct}
+                                                    data-index={switchProductIndex}></lightning-input>
+                                            </td>
+                                            <td>{switchProduct.productName}</td>
+                                            <td>{switchProduct.newProductName}</td>
+                                            <td>
+                                                <lightning-input type="date" onchange={handleChangeStartDate}
+                                                    data-index={switchProductIndex} variant="label-hidden"
+                                                    value={switchProduct.startDate} date-style="short">
+                                                </lightning-input>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" data-popup="switchRenoPopup"
+                            onclick={togglePopups}>{labels.LBL_Cancel}</button>
+                        <button class="slds-button slds-button_brand"
+                            onclick={handleSwitchProduct}>{labels.Switch}</button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <template if:true={popups.HLPPopup}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            data-popup="HLPPopup" onclick={togglePopups}></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__content"
+                        style="overflow: unset !important;overflow-y: unset !important; position:relative; min-height:20vh">
+                        <div class="slds-scrollable" style="height: 100%;">
+                            <template lwc:if={popupLoading}>
+                                <div class="slds-spinner_container">
+                                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </template>
+                            <table lwc:else
+                                class="hlpTable slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border--right slds-no-row-hover">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                        </th>
+                                        <th>
+                                            {labels.ProductFields.Name}
+                                        </th>
+                                        <th>
+                                            {labels.ProductFields.ProductCode}
+                                        </th>
+                                        <th>
+                                            {labels.ProductFields.ProductGTIN}
+                                        </th>
+                                        <th>
+                                            {labels.ProductFields.PCB}
+                                        </th>
+                                        <th>
+                                            {labels.ProductFields.PCBElementNb}
+                                        </th>
+                                        <th>
+                                            {labels.ProductFields.isMasterHLP}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template if:false={HLPProducts.length}>
+                                        <tr>
+                                            <td colspan="4">
+                                                <h2
+                                                    class="slds-align_absolute-center slds-text-align_center slds-m-around_xx-large slds-card__header-title slds-align-content-center">
+                                                    {labels.LBL_No_Item_To_Display}
+                                                </h2>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                    <template if:true={HLPProducts.length}>
+                                        <template for:each={HLPProducts} for:item="HLP" for:index="index">
+                                            <tr key={HLP.Id}>
+                                                <td>
+                                                    <lightning-input type="checkbox" value={HLP.isSelected}
+                                                        onchange={handleToggleHLP} data-index={index}
+                                                        checked={HLP.isSelected}>
+                                                    </lightning-input>
+                                                </td>
+                                                <td>
+                                                    {HLP.productHLP.Name}
+                                                </td>
+                                                <td>
+                                                    {HLP.productHLP.ProductCode}
+                                                </td>
+                                                <td>
+                                                    {HLP.productHLP.GTIN__c}
+                                                </td>
+                                                <td>
+                                                    {HLP.productHLP.PCB__c}
+                                                </td>
+                                                <td>
+                                                    <lightning-formatted-number value={HLP.productHLP.PCBElementNb__c}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td>
+                                                    <lightning-input
+                                                        value={HLP.productHLP.IsMaster_Higher_Level_Packaging__c}
+                                                        type="checkbox" disabled
+                                                        checked={HLP.productHLP.IsMaster_Higher_Level_Packaging__c}>
+                                                    </lightning-input>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" data-popup="HLPPopup"
+                            onclick={togglePopups}>{labels.LBL_Cancel}</button>
+                        <button class="slds-button slds-button_brand" onclick={handleSaveHLP}>{labels.LBL_Save}</button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <template if:true={popups.importPopup}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open slds-modal_large">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            data-popup="importPopup" onclick={togglePopups}></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__header">
+                        <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">{labels.LBL_Import}</h1>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        {labels.LBL_Reminder} : <br />
+                        <lightning-formatted-rich-text
+                            value={labels.MSG_ASD_Import_Reminders}></lightning-formatted-rich-text>
+                        <div class="table__form slds-scrollable">
+                            <table
+                                class="slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border--right slds-no-row-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="background-color: #0d807d;color: white;" class="stickyHeader">
+                                            {labels.LBL_Import_Field_Name}
+                                        </th>
+                                        <th style="background-color: #0d807d;color: white;" class="stickyHeader">
+                                            {labels.LBL_Import_Field_Label}
+                                        </th>
+                                        <th style="background-color: #0d807d;color: white;" class="stickyHeader">
+                                            {labels.LBL_Import_Field_Excel_Column}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template if:true={availableImportFields.length}>
+                                        <template for:each={availableImportFields} for:item="item" for:index="index">
+                                            <tr key={item.fieldName}>
+                                                <td>
+                                                    {item.fieldName}
+                                                </td>
+                                                <td>
+                                                    {item.fieldLabel}
+                                                </td>
+                                                <td>
+                                                    <lightning-input data-field={item.fieldName} data-index={index}
+                                                        value={item.columnNumber} type="number" style="width:150px;"
+                                                        variant="label-hidden" formatter="decimal" step="0"
+                                                        onchange={handleChangeColumnNumber}
+                                                        class="columnNumberInput"></lightning-input>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </template>
+                                </tbody>
+                            </table>
+                            <div class="slds-border_top slds-border_bottom" style="border-color:#000;">
+                                <label class="slds-form-element__label">{labels.LBL_Import_First_Row_Number}</label>
+                                <lightning-input class="slds-p-left_xx-small" type="number" variant="label-inline"
+                                    formatter="decimal" step="0" style="width:150px;" value={startLineNumber}
+                                    onchange={handleChangeStartLineNumber}></lightning-input>
+                            </div>
+                            <div class="slds-grid slds-var-p-around_small">
+                                <lightning-input type="file" label={labels.LBL_Upload_File} accept={acceptedFormats}
+                                    onchange={importExcel} disabled={processing}>
+                                </lightning-input>
+                                <div class="slds-var-p-around_xx-small slds-align-middle" if:true={file}>
+                                    <div class="slds-p-top_x-small" style="color:blue">
+                                        {file.name}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-p-left_x-small slds-p-bottom_x-small">
+                                <label class="slds-form-element__label">{labels.MSG_Load_File}</label>
+                                <lightning-radio-group name="loadOptions" options={loadOptions}
+                                    value={selectedLoadOption} type="radio"
+                                    onchange={handleChangeLoadOption}></lightning-radio-group>
+                                <template if:true={showSimulations}>
+                                    <label class="slds-form-element__label"
+                                        style="font-weight:bold;">{labels.LBL_List_Assortment_to_Update}</label>
+                                    <template for:each={relatedSimulations} for:item="item">
+                                        <div key={item.Id}>
+                                            <span class="legend-label" style="color:#0d807d">{item.Name}</span>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={showAllRelatedAssortments}>
+                                    <label class="slds-form-element__label"
+                                        style="font-weight:bold;">{labels.LBL_List_Assortment_to_Update}</label>
+                                    <template for:each={relatedAssortments} for:item="item">
+                                        <div key={item.Id}>
+                                            <span class="legend-label" style="color:#0d807d">{item.Name}</span>
+                                        </div>
+                                    </template>
+                                </template>
+                            </div>
+                            <div class="slds-var-p-horizontal_small slds-var-p-bottom_small slds-grid"
+                                if:true={processing}>
+                                <div class="slds-form-element slds-col">
+                                    <label class="slds-form-element__label">{labels.LBL_Processing} {processedItems} /
+                                        {totalSize}</label>
+                                    <lightning-progress-bar value={processed} size="large"
+                                        class="slds-col slds-var-p-right_small">
+                                    </lightning-progress-bar>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" data-popup="importPopup"
+                            onclick={togglePopups}>{labels.LBL_Cancel}</button>
+                        <lightning-button label={labels.LBL_Upload_File} variant="brand" class="slds-m-left_xxx-small"
+                            onclick={processUploading} disabled={noDataToProcess}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <template if:true={popups.fieldManagerPopup}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            onclick={togglePopups} data-popup="fieldManagerPopup"></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__header">
+                        <h1 class="slds-modal__title slds-hyphenate">{labels.LBL_Show_Hide_Columns}</h1>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <template if:true={fieldManagerLoading}>
+                            <lightning-spinner variant="brand" size="large"></lightning-spinner>
+                        </template>
+                        <lightning-dual-listbox name="Fields" disable-reordering
+                            label={labels.LBL_Select_Preferred_Fields} source-label={labels.LBL_Hidden_Fields}
+                            selected-label={labels.LBL_Selected_Fields}
+                            field-level-help={labels.LBL_Select_Preferred_Fields} options={fieldOptions}
+                            value={selectedFields} onchange={handleDisplayedFieldsChange}></lightning-dual-listbox>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button class="slds-button slds-button_brand" onclick={applyFieldManager}
+                            aria-label={labels.LBL_Apply}>{labels.LBL_Apply}</button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+    </div>
+</template>

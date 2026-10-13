@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LayerNegoConso__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Define the business unit can be used as aggregated level in the nego, assortment, contract, ...</description>
+    <inlineHelpText>Cette BU est utilisée pr la consolidation des niveaux d’assortiment inf. Ex: les différentes SCA de Leclerc sont consolidées sur un Leclerc national. Permet de travailler au niveau de détails mais affiche dans les synthèses uniquement le niveau consolidé.</inlineHelpText>
+    <label>Layer Nego Conso</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

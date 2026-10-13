@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Display the section of Mass Distribution --></help>
+    <label><!-- Section - Mass Distribution --></label>
+    <name>MBF_Section_MassDistribution__c</name>
+</CustomFieldTranslation>

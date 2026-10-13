@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Calculé uniquement lorsque la PDM N+1 est renseignée au niveau des strates et que le Statut de l’ASD est Validé. Si la strate sélectionnée est une strate Complémentaire, la PDM N+1 doit également être renseignée au niveau de la BU Target de l’assortiment.</help>
+    <label>DV Négo corrigée ensg</label>
+    <name>WDClientBaseNegoL4L__c</name>
+</CustomFieldTranslation>

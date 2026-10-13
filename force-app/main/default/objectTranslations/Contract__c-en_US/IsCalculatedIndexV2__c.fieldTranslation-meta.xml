@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- indicates whether to calculate the second set of indexes on a contract (index v2) --></help>
+    <label><!-- Is Calculated Index V2 --></label>
+    <name>IsCalculatedIndexV2__c</name>
+</CustomFieldTranslation>

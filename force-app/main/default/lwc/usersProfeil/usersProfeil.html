@@ -1,0 +1,16 @@
+<template>
+    <template if:true={loading}>
+        <lightning-spinner alternative-text="Loading user info..."></lightning-spinner>
+    </template>
+
+    <template if:false={loading}>
+        <h1>User Information</h1>
+        <div class="slds-p-around_medium">
+            <template for:each={userFields} for:item="field">
+                <p key={field.label}>
+                    <strong>{field.label}:</strong> {field.value}
+                </p>
+            </template>
+        </div>
+    </template>
+</template>

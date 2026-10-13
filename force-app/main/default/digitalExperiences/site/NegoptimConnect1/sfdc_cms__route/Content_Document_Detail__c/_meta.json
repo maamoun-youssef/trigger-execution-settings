@@ -1,0 +1,5 @@
+{
+  "apiName" : "Content_Document_Detail__c",
+  "type" : "sfdc_cms__route",
+  "path" : "routes"
+}

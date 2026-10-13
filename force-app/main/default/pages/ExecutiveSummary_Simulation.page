@@ -1,0 +1,841 @@
+<apex:page controller="ExecutiveSummaryController" lightningStylesheets="true" sidebar="false"
+    setup="false" applyHtmlTag="false" applyBodyTag="false" showHeader="false" docType="html-5.0">
+    <html class="slds-scope">
+
+    <head>
+        <apex:slds />
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Import the Design System style sheet -->
+        <apex:stylesheet value="{!URLFOR($Resource.fontawesome, 'css/font-awesome.min.css') }" />
+        <apex:stylesheet value="{!URLFOR($Resource.JQuery, 'jquery-ui-1.12.1/themes/smoothness/jquery-ui.css')}" />
+        <apex:stylesheet value="{!URLFOR($Resource.Assets, 'assets/css/app.css')}" />
+        <apex:includeScript value="{!URLFOR($Resource.JQuery, 'jquery.min.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.JQuery, 'jquery-ui-1.12.1/jquery-ui.min.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.JQuery, 'jquery-ui-1.12.1/i18n/jquery-ui-i18n.min.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.Assets, 'assets/js/app.js')}" />
+        <script type="text/javascript">
+            negoptimApp = new App('{!locale}', '{!localeDecimalSeparator}');
+
+        </script>
+        <style>
+            #btn-add-contract a {
+                Text-Decoration: None !important;
+            }
+
+            .message[role='alert'] {
+                margin-bottom: 0px !important;
+            }
+
+            .recordLabel {
+                font-weight: lighter;
+            }
+
+            .onTopBgColor {
+                background-color: rgb(255, 196, 203) !important;
+            }
+            .onTopBorderColor {
+                background-color: rgb(230, 57, 70) !important;
+            }
+            .simulationBgColor {
+                background-color: rgb(218, 230, 227) !important;
+            }
+            .simulationBorderBGColor {
+                background-color: rgb(112, 160, 175) !important;
+            }
+            /* tr:nth-child(even) {
+                background-color: #D6EEEE;
+            } */
+        </style>
+    </head>
+
+    <body class="slds-brand-band slds-brand-band_large">
+        <div class='slds-p-horizontal_small'>
+            <apex:pageMessages id="apexMessages" />
+        </div>
+        <apex:form rendered="{!errors.size == 0}">
+            <div class="slds-page-header slds-m-around_small" id="pageHeader">
+                <!-- LAYOUT GRID -->
+                <div class="slds-grid">
+                    <!-- GRID COL -->
+                    <div class="slds-col slds-has-flexi-truncate">
+                        <div class="slds-media slds-no-space slds-grow">
+                            <div class="slds-media__figure">
+                                <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact">
+                                    <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#report')}"></use>
+                                </svg>
+                            </div>
+                            <div class="slds-media__body">
+                                <p class="slds-text-title_caps slds-line-height_reset">
+                                    <apex:outputText value="{!$ObjectType.Contract__c.Label}" />
+                                </p>
+                                <apex:outputPanel id="pageTitle">
+                                    <h1 class="slds-page-header__title slds-var-m-right_small slds-align-middle slds-truncate">
+                                        <apex:outputText value="{!$Label.LBL_Executive_Summary_Simulation}" />
+                                    </h1>
+                                </apex:outputPanel>
+                            </div>
+                            <div class="slds-dropdown-trigger slds-dropdown-trigger_click slds-m-left_xx-small" id="btn-add-contract">
+                                <apex:outputPanel id="buttons">
+                                    <div class="slds-dropdown-trigger slds-dropdown-trigger_click" id="settings-menu" aria-expanded="false" aria-haspopup="true">
+                                        <a target="_blank" href="{!back}">
+                                            <button type="button" class="slds-button slds-button_icon slds-button_icon-more">
+                                                <apex:outputText value="{!$Label.Cancel}" />
+                                            </button>
+                                        </a>
+                                        <!-- <apex:commandButton action="{!back}" value="{!$Label.Cancel}" /> -->
+                                        <a href="/apex/ExecutiveSummaryPDF_Simulation?id={!topContract.Id}" target="_blank" title="{!JSINHTMLENCODE($Label.LBL_Preview)}">
+                                            <button type="button" class="slds-button slds-button_icon slds-button_icon-border-filled">
+                                                <span class='previewIcon'></span>
+                                            </button>
+                                        </a>
+                                        <div class="slds-button slds-button_icon slds-button_icon-more" aria-expanded="false" aria-haspopup="true" onclick="toggleMenu();return false;"
+                                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <svg focusable="false" data-key="settings" aria-hidden="true" class="slds-button__icon">
+                                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#lightning_extension')}" />
+                                            </svg>
+                                            <svg focusable="false" data-key="down" aria-hidden="true" class="slds-button__icon slds-button__icon_x-small slds-var-m-left_xx-small">
+                                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#down')}" />
+                                            </svg>
+                                        </div>
+                                        <div class="slds-dropdown slds-dropdown_right slds-nubbin_top-right">
+                                            <ul class="slds-dropdown__list" role="menu" aria-label="Show More">
+                                                <li class="slds-dropdown__item" role="presentation">
+                                                    <a target="_blank" href="{!negotiateURL}" onclick="hideMenu();">
+                                                        <apex:outputText value="{!$Label.LBL_Negotiate_URL}" />
+                                                    </a>
+                                                </li>
+                                                <!-- <li class="slds-dropdown__item {!IF(budgetMakerURL == '#', 'slds-hide', '')}" role="presentation">
+                                                    <a target="_blank" href="{!budgetMakerURL}" onclick="hideMenu();">
+                                                        <apex:outputText value="BudgetMaker Report" />
+                                                    </a>
+                                                </li> -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <apex:commandLink rendered="{!showSendApprovalButton}" reRender="buttons,apexMessages" oncomplete="afterRerender(); return false; "
+                                        action="{!submitApproval}" title="{!$Label.LBL_Submit_Approval}" status="globalloading">
+                                        <button type="button" class="slds-button slds-button_icon slds-button_icon-border-filled">
+                                            <span class='sendIcon'></span>
+                                        </button>
+                                    </apex:commandLink>
+                                </apex:outputPanel>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <apex:outputPanel id="pageBlock">
+                <div class="slds-p-horizontal_small content">
+                    <article class="slds-card slds-m-bottom_x-small slds-scrollable">
+                        <div class="slds-card__header slds-grid">
+                            <header class=" slds-media--center slds-has-flexi-truncate">
+                                <div class="slds-media__body">
+                                    <h2 class="header-title-container">
+                                        <span class="slds-card__header-title slds-truncate">
+                                            <apex:outputText value="{!topContract.Name}" />
+                                        </span>
+                                    </h2>
+                                </div>
+                            </header>
+                        </div>
+                        <div class="infos slds-card__footer slds-card__body slds-card__body_inner">
+                            <apex:outputPanel rendered="{!errors.size == 0}">
+                                <!-- Infos Table -->
+                                <div class="slds-grid slds-gutters">
+                                    <div class="slds-col {!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'onTopBorderColor', 'simulationBorderBGColor')}"  style="max-width:40px;margin-left:10px">
+                                    </div>
+                                    <div class="slds-col slds-avatar_medium">
+                                        <div class="slds-m-bottom--small slds-text-align--left">
+                                            <apex:outputText value="{!$ObjectType.Contract__c.fields.Supplier__c.Label}: " />
+                                                <apex:outputField style="padding-left:5px;" value="{!topContract.Supplier__c}" styleclass="recordLabel"
+                                                />
+                                        </div>
+                                        <div class="slds-m-bottom--small slds-text-align--left">
+                                            <apex:outputText value="{!$ObjectType.Contract__c.fields.Reference_Year__c.Label}: " />
+                                            <apex:outputField style="padding-left:5px;" value="{!topContract.Reference_Year__c}" styleclass="recordLabel"
+                                            />
+                                        </div>
+                                        <div class="slds-m-bottom--small slds-text-align--left">
+                                            <!-- <apex:outputText value="{!$ObjectType.Supplier__c.fields.Size__c.Label}: " />
+                                            <apex:outputField style="padding-left:5px;" value="{!topContract.Supplier__r.Size__c}" styleclass="recordLabel"/> -->
+                                        </div>
+                                        <div class="slds-m-bottom--small slds-text-align--left">
+                                            <apex:outputText value="{!$Label.LBL_Date_of_Submit_for_approval}: " />
+                                            <apex:outputField style="padding-left:6px;" rendered="{!contractProcessInstance != null && OR(contractProcessInstance.Status == 'Approved', contractProcessInstance.Status == 'Pending')}" value="{!contractProcessInstance.CreatedDate}"
+                                                styleclass="recordLabel" />
+                                        </div>
+                                        <div class="slds-m-bottom--small slds-text-align--left">
+                                            <apex:outputPanel layout="none" rendered="{!!isCPG}">
+                                                <apex:outputText value="{!$Label.LBL_Status_validation}: " />
+                                                <apex:outputField style="padding-left:5px;" value="{!topContract.Status__c}" styleclass="recordLabel" />
+                                            </apex:outputPanel>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-avatar_medium">
+                                        <div class="slds-m-bottom--small slds-text-align--left">
+                                            <apex:outputText value="{!$ObjectType.NegoScope__c.fields.Name.Label}:" />
+                                            <apex:outputLink rendered="{!topContract.Supplier_Nego_Scope__c != null}" value="/{!topContract.Supplier_Nego_Scope__c}"
+                                                target="_blank">
+                                                <apex:outputText style="padding-left:5px;" value="{!topContract.Supplier_Nego_Scope__r.Name}"
+                                                    styleclass="recordLabel" />
+                                            </apex:outputLink>
+                                        </div>
+                                        <div class="slds-m-bottom--small slds-text-align--left">
+                                            <apex:outputText value="{!$Label.LBL_Buyer}: " />
+                                                <apex:outputField style="padding-left:5px;" value="{!topContract.Supplier_Nego_Scope__r.OwnerId}" styleclass="recordLabel"
+                                                />
+                                        </div>
+                                        <div class="slds-m-bottom--small slds-text-align--left">
+                                            <!-- <apex:outputText value="{!$ObjectType.Supplier__c.fields.Retail_Federation__c.Label}:"
+                                            />
+                                            <apex:outputField style="padding-left:5px;" value="{!topContract.Supplier__r.Retail_Federation__c}"
+                                                styleclass="recordLabel" /> -->
+                                        </div>
+                                        <div class="slds-m-bottom--small slds-text-align--left">
+                                            <apex:outputText value="{!$Label.LBL_Poids}:" />
+                                            <apex:outputText style="padding-left:5px;" value="{!sPoids}" styleclass="recordLabel" />
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-x-small-size--x-large">
+                                        <apex:outputPanel layout="block" id="negoPlanTable">
+                                            <table class="slds-table list slds-col" style="{!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'border: 1px solid rgb(255, 196, 203);', 'border: 1px solid rgb(218, 230, 227);')}">
+                                                <thead class="{!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'onTopBgColor', 'simulationBgColor')}">
+                                                    <tr>
+                                                        <th class="slds-x-small-size--x-small {!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'onTopBgColor', 'simulationBgColor')}"></th>
+                                                        <th class="{!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'onTopBgColor', 'simulationBgColor')}">
+                                                            <div>
+                                                                <apex:outputText value="{!$Label.LBL_3Net}" />
+                                                            </div>
+                                                        </th>
+                                                        <th class="{!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'onTopBgColor', 'simulationBgColor')}">
+                                                            <div>
+                                                                <apex:outputText value="{!$Label.LBL_4Net}" />
+                                                            </div>
+                                                        </th>
+                                                        <th class="{!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'onTopBgColor', 'simulationBgColor')}">
+                                                            <div>
+                                                                <apex:outputText value="{!$Label.LBL_5Net}" />
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="negoPlanRow1">
+                                                        <th>
+                                                            <apex:outputText value="{!$Label.LBL_Nego_Intro}" />
+                                                        </th>
+                                                        <td style="background-color: rgb(255, 209, 118);" class="slds-text-align--right">
+                                                            <apex:outputField value="{!negoPlan.NEGO_NegoIntro_2_3Net_Prog_Last__c}" />
+                                                        </td>
+                                                        <td style="background-color: rgb(229, 227, 226);" class="slds-text-align--right">
+                                                            <apex:outputText value="{!sNEGO_NegoIntro_4Net_Prog_val_Last}" />
+                                                        </td>
+                                                        <td style="background-color: rgb(229, 227, 226);" class="slds-text-align--right">
+                                                            <apex:outputText value="{!sNEGO_NegoIntro_5Net_Prog_val_Last}" />
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr class="negoPlanRow2-3">
+                                                        <th>
+                                                            <apex:outputText value="{!$Label.LBL_Plan}" />
+                                                        </th>
+                                                        <td style="background-color: rgb(255, 209, 118);" class="slds-text-align--right">
+                                                            <apex:outputField value="{!negoPlan.PLAN_Target_2_3Net_Prog__c}" />
+                                                        </td>
+                                                        <td style="background-color: rgb(229, 227, 226);" class="slds-text-align--right">
+                                                            <apex:outputText value="{!sPLAN_Target_Index4_Nego_val}" />
+                                                        </td>
+                                                        <td style="background-color: rgb(229, 227, 226);" class="slds-text-align--right">
+                                                            <apex:outputText value="{!sPLAN_Target_Index5_Nego_val}" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="negoPlanRow2-3">
+                                                        <th>
+                                                            <apex:outputText value="{!$Label.LBL_Obtained}" />
+                                                        </th>
+                                                        <td style="background-color: rgb(255, 209, 118);" class="slds-text-align--right">
+                                                            <apex:outputText styleClass="output-number-field" value="{!sNegoBaseInitFormula1}" />
+                                                        </td>
+                                                        <td style="background-color: rgb(229, 227, 226);" class="slds-text-align--right">
+                                                            <apex:outputText styleClass="output-number-field" value="{!sNegoBaseInit_valeurReelle_index4}" />
+                                                        </td>
+                                                        <td style="background-color: rgb(229, 227, 226);" class="slds-text-align--right">
+                                                            <apex:outputText styleClass="output-number-field" value="{!sNegoBaseInitFormula3}" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="negoPlanRow2-3">
+                                                        <th>
+                                                            <apex:outputText value="{!$Label.LBL_GAP_per}" />
+                                                        </th>
+                                                        <td style="background-color: rgb(255, 209, 118);" class="{!IF(AND(negoPlan.PLAN_Target_2_3Net_Prog__c != null, NegoBaseInitFormula1 != null),IF(negoPlan.PLAN_Target_2_3Net_Prog__c == NegoBaseInitFormula1, '', IF(NegoBaseInitFormula1 > negoPlan.PLAN_Target_2_3Net_Prog__c, 'slds-text-color_error slds-text-title_bold','slds-text-color_success slds-text-title_bold')), '')} slds-text-align--right">
+                                                            <apex:outputText styleClass="output-number-field" value="{!sGap_2_3net_perc}" />
+                                                        </td>
+                                                        <td style="background-color: rgb(229, 227, 226);" class="slds-text-align--right">
+                                                            <apex:outputText styleClass="output-number-field" value="{!sGap_4net_perc}" />
+                                                        </td>
+                                                        <td style="background-color: rgb(229, 227, 226);" class="slds-text-align--right">
+                                                            <apex:outputText styleClass="output-number-field" value="{!sGap_5net_perc}" />
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr class="negoPlanRow2-3">
+                                                        <th>
+                                                            <apex:outputText value="{!$Label.LBL_GAP_val}" />
+                                                        </th>
+                                                        <td style="background-color: rgb(255, 209, 118);" class="slds-text-align--right">
+                                                            <apex:outputText styleClass="output-number-field" value="{!sGap_2_3net}" />
+                                                        </td>
+                                                        <td style="background-color: rgb(229, 227, 226);" class="slds-text-align--right">
+                                                            <apex:outputText styleClass="output-number-field" value="{!sGap_4net}" />
+                                                        </td>
+                                                        <td style="background-color: rgb(229, 227, 226);" class="slds-text-align--right">
+                                                            <apex:outputText styleClass="output-number-field" value="{!sGap_5net}" />
+                                                        </td>
+
+                                                    </tr>
+                                                    <!-- <tr>
+                                                        <th colspan="3">
+                                                            <apex:outputText value="{!$ObjectType.Nego_Plan__c.fields.NEGO_NegoIntro_Posted_Date_Last__c.Label}"
+                                                            />
+                                                        </th>
+                                                        <th>
+                                                            <apex:outputField value="{!negoPlan.NEGO_NegoIntro_Posted_Date_Last__c}" />
+                                                        </th>
+                                                    </tr> -->
+                                                </tbody>
+                                            </table>
+                                        </apex:outputPanel>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>
+                        </div>
+                    </article>
+                </div>
+                <apex:outputPanel rendered="{!errors.size == 0}">
+                    <div class="slds-p-horizontal_small content">
+                        <article class="slds-card slds-m-bottom_x-small slds-scrollable">
+                            <div>
+                                <apex:outputPanel id="blockA">
+                                    <apex:outputPanel styleClass="slds-p-around--small" rendered="{!currentContract.Secure_Multiyear__c == '2 years' || currentContract.Secure_Multiyear__c == '3 years'}"
+                                        style="float: left;">
+                                        <apex:actionRegion >
+                                            <apex:selectRadio value="{!selectedMultiYearOption}" layout="">
+                                                <apex:actionSupport event="onchange" rerender="indexSummary,conditionSummary,conditionDetails" oncomplete="afterRerender();return false;"
+                                                    status="globalloading" action="{!changeYear}" />
+                                                <apex:selectOptions value="{!ListMultiYear}" />
+                                            </apex:selectRadio>
+                                        </apex:actionRegion>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel >
+                                        <div class="slds-card__header slds-grid">
+                                            <header class=" slds-media--center slds-has-flexi-truncate">
+                                                <div class="slds-media__body">
+                                                    <h2 class="header-title-container">
+                                                        <span class="slds-card__header-title slds-truncate">
+                                                            <apex:outputText value="{!$Label.LBL_Nego_Results}" />
+                                                        </span>
+                                                    </h2>
+                                                </div>
+                                            </header>
+                                        </div>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                            </div>
+                            <!--SLABS-->
+                            <apex:outputPanel >
+                                <div class="slds-grid slds-card__footer " style="width :100%;">
+                                    <div class="slds-col slds-m-horizontal--medium">
+                                        <apex:outputPanel >
+                                            <!--2eme pave-->
+                                            <div>
+                                                <table class="slds-table list" style="{!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'border: 2px solid rgb(255, 196, 203);', 'border: 2px solid rgb(218, 230, 227);')}">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="{!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'onTopBgColor', 'simulationBgColor')}"></th>
+                                                            <th class="{!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'onTopBgColor', 'simulationBgColor')}">
+                                                                <apex:outputText value="{!$Label.LBL_Reference_contract}" />
+                                                            </th>
+                                                            <apex:outputPanel layout="none" rendered="{!safeContract.Id != null}">
+                                                                <th>
+                                                                    <apex:outputText value="{!safebalanceRTName}" />
+                                                                </th>
+                                                            </apex:outputPanel>
+                                                            <th class="{!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'onTopBgColor', 'simulationBgColor')}">
+                                                                <apex:outputText value="{!$Label.LBL_New_contract}" />
+                                                            </th>
+                                                            <th class="{!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'onTopBgColor', 'simulationBgColor')}"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>
+                                                                <div>
+                                                                    <apex:outputText value="{!$ObjectType.Contract__c.fields.Total_TO__c.Label}" />
+                                                                </div>
+                                                            </th>
+                                                            <td style="width: 30%">
+                                                                <apex:outputText value="{!refContractTotalTo}" />
+                                                            </td>
+                                                            <td style="width: 30%">
+                                                                <apex:outputText value="{!negoBaseInitContractTotalTo}" />
+                                                            </td>
+                                                            <td>
+                                                                <apex:outputText rendered="{!contractTotalToDiff > 0}">
+                                                                    <span class="arrowupIcon"></span>
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!contractTotalToDiff < 0}">
+                                                                    <span class="arrowdownIcon"></span>
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!contractTotalToDiff == 0}">
+                                                                    <span class="forwardIcon"></span>
+                                                                </apex:outputText>
+                                                                <apex:outputText value="{!(scontractTotalToDiff)}" />
+                                                            </td>
+                                                        </tr>
+                                                        <!-- JIRA 428 & 4645 -->
+                                                        <!-- <tr>
+                                                            <th>
+                                                                <div>
+                                                                    <apex:outputText value="{!$ObjectType.Contract__c.fields.Total_TO_4Net_Nego_YE__c.Label}" />
+                                                                </div>
+                                                            </th>
+                                                            <td style="width : 30%">
+                                                                <apex:outputText value="{!refContractTotalTO4Net}" />
+                                                            </td>
+                                                            <td style="width : 30%">
+                                                                <apex:outputText value="{!negoBaseInitContractTotalTo4Net}" />
+                                                            </td>
+                                                            <td>
+                                                                <apex:outputText rendered="{!contractTotalTO4NetDiff > 0}">
+                                                                    <span class="arrowupIcon"></span>
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!contractTotalTO4NetDiff < 0}">
+                                                                    <span class="arrowdownIcon"></span>
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!contractTotalTO4NetDiff == 0}">
+                                                                    <span class="forwardIcon"></span>
+                                                                </apex:outputText>
+                                                                <apex:outputText value="{!scontractTotalTO4NetDiff}" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                <div>
+                                                                    <apex:outputText value="{!$ObjectType.Contract__c.fields.Total_TO_3Net_Nego_YE__c.Label}" />
+                                                                </div>
+                                                            </th>
+                                                            <td style="width : 30%">
+                                                                <apex:outputText value="{!refContractTotalTO3Net}" />
+                                                            </td>
+                                                            <td style="width : 30%">
+                                                                <apex:outputText value="{!negoBaseInitContractTotalTo3Net}" />
+                                                            </td>
+                                                            <td>
+                                                                <apex:outputText rendered="{!contractTotalTO3NetDiff > 0}">
+                                                                    <span class="arrowupIcon"></span>
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!contractTotalTO3NetDiff < 0}">
+                                                                    <span class="arrowdownIcon"></span>
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!contractTotalTO3NetDiff == 0}">
+                                                                    <span class="forwardIcon"></span>
+                                                                </apex:outputText>
+                                                                <apex:outputText value="{!scontractTotalTO3NetDiff}" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                <div>
+                                                                    <apex:outputText value="{!$ObjectType.Contract__c.fields.Total_TO_2Net_Nego_YE__c.Label}" />
+                                                                </div>
+                                                            </th>
+                                                            <td style="width : 30%">
+                                                                <apex:outputText value="{!refContractTotalTO2Net}" />
+                                                            </td>
+                                                            <td style="width : 30%">
+                                                                <apex:outputText value="{!negoBaseInitContractTotalTo2Net}" />
+                                                            </td>
+                                                            <td>
+                                                                <apex:outputText rendered="{!contractTotalTO2NetDiff > 0}">
+                                                                    <span class="arrowupIcon"></span>
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!contractTotalTO2NetDiff < 0}">
+                                                                    <span class="arrowdownIcon"></span>
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!contractTotalTO2NetDiff == 0}">
+                                                                    <span class="forwardIcon"></span>
+                                                                </apex:outputText>
+                                                                <apex:outputText value="{!scontractTotalTO2NetDiff}" />
+                                                            </td>
+                                                        </tr> -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel >
+                                            <div class="slds-card__footer slds-card__body slds-card__body_inner {!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'onTopBgColor', 'simulationBgColor')}" style="{!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'border: 5px solid rgb(255, 196, 203);', 'border: 5px solid rgb(218, 230, 227);')}">
+                                                <div class="slds-grid">
+                                                    <div class="slds-col">
+                                                        <div class="slds-m-bottom--small slds-text-align--left">
+                                                            <apex:outputText value="{!$ObjectType.Nego_Plan__c.fields.NEGO_Rise_Rate_Validated_YE__c.Label} :"
+                                                            />
+                                                            <!--apex:outputText styleclass="recordLabel" style="padding-left:5px;" value="{!negoPlan.NEGO_Rise_Rate_Validated_YE__c}"/-->
+                                                            <apex:outputField styleclass="recordLabel" style="padding-left:5px;" value="{!negoPlan.NEGO_Rise_Rate_Validated_YE__c}"
+                                                            />
+                                                        </div>
+                                                        <div class="slds-m-bottom--small slds-text-align--left">
+                                                            <apex:outputText value="{!$ObjectType.Nego_Plan__c.fields.NEGO_Rise_Rate_Validated__c.Label} :"
+                                                            />
+                                                            <!--apex:outputText styleclass="recordLabel" style="padding-left:5px;" value="{!negoPlan.NEGO_Rise_Rate_Validated_YE__c}"/-->
+                                                            <apex:outputField styleclass="recordLabel" style="padding-left:5px;" value="{!negoPlan.NEGO_Rise_Rate_Validated__c}"
+                                                            />
+                                                        </div>
+                                                        <div class="slds-m-bottom--small slds-text-align--left">
+                                                            <apex:outputText value="{!$ObjectType.Nego_Plan__c.fields.NEGO_Rise_Rate_Requested__c.Label} :"
+                                                            />
+                                                            <!--apex:outputText styleclass="recordLabel" style="padding-left:5px;" value="{!negoPlan.NEGO_Rise_Rate_Requested__c}"/-->
+                                                            <apex:outputField styleclass="recordLabel" style="padding-left:5px;" value="{!negoPlan.NEGO_Rise_Rate_Requested__c}"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-col">
+                                                        <div class="slds-m-bottom--small slds-text-align--left">
+                                                            <apex:outputText value="{!$ObjectType.Contract__c.fields.Retention_Rate__c.Label} :" />
+                                                            <!--apex:outputText styleclass="recordLabel" style="padding-left:5px;" value="{!currentContract.Retention_Rate__c}"/-->
+                                                            <apex:outputField styleclass="recordLabel" style="padding-left:5px;" value="{!currentContract.Retention_Rate__c}"
+                                                            />
+
+                                                        </div>
+                                                        <div class="slds-m-bottom--small slds-text-align--left">
+                                                            <apex:outputText value="{!$ObjectType.Contract__c.fields.Retention_Rate_Promo__c.Label} :"
+                                                            />
+                                                            <apex:outputText styleclass="recordLabel" style="padding-left:5px;" value="{!IF(currentContract.Supplier_Nego_Scope__r.ManagePromoFlatPriceRate__c == true, currentContract.Retention_Rate_Promo__c , '')}"
+                                                            />
+                                                            <!--apex:outputField value="{!IF(currentContract.Supplier_Nego_Scope__r.ManagePromoFlatPriceRate__c == true, currentContract.Retention_Rate_Promo__c , '')}" /-->
+                                                        </div>
+                                                        <div class="slds-m-bottom--small slds-text-align--left">
+                                                            <!-- <apex:outputText value="{!$ObjectType.BudgetMaker_Detail__c.fields.Target_Signature_Date__c.Label} :"
+                                                            />
+                                                            <apex:outputText styleclass="recordLabel" style="padding-left:5px;" value="{!TargetSignatureDate}" /> -->
+                                                        </div>
+                                                        <div class="slds-m-bottom--small slds-text-align--left">
+                                                            <!-- <apex:outputText value="{!$ObjectType.BudgetMaker_Detail__c.fields.Target_Contract_Start_Date__c.Label} :"
+                                                            />
+                                                            <apex:outputText styleclass="recordLabel" style="padding-left:5px;" value="{!TargetContractDate}" /> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </apex:outputPanel>
+                                    </div>
+                                    <div class="slds-col slds-m-horizontal--medium">
+                                        <apex:outputPanel id="TotalId">
+                                            <table class="slds-table list" style="border-radius: 50px;{!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'border: 2px solid rgb(255, 196, 203);', 'border: 2px solid rgb(218, 230, 227);')}">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="{!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'onTopBgColor', 'simulationBgColor')}">
+                                                            
+                                                        </th>
+                                                        <th class="{!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'onTopBgColor', 'simulationBgColor')}">
+                                                            <div>
+                                                                <apex:outputText value="{!$Label.LBL_Reference_contract_index}" />
+                                                            </div>
+                                                        </th>
+                                                        <th class="{!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'onTopBgColor', 'simulationBgColor')}">
+                                                            <div>
+                                                                <apex:outputText value="{!$Label.LBL_New_contract_index}" />
+                                                            </div>
+                                                        </th>
+                                                        <th class="{!IF(topContract.Is_OnTop_Simulation__c == TRUE, 'onTopBgColor', 'simulationBgColor')}">
+                                                            <div>
+                                                                <apex:outputText value="{!$Label.LBL_Evol_indice}" />
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+
+                                                <body>
+                                                    <tr>
+                                                        <td>
+                                                            <apex:outputText value="{!$Label.LBL_Base_100}" />
+                                                        </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputText value="{!BaseIndexRef}" /> </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputText value="{!BaseIndexCur}" /> </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputText value="{!BaseIndexEvol}%" /> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <apex:outputText value="{!$ObjectType.Contract__c.fields.Index1__c.Label}" />
+                                                        </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputField value="{!refContract.Index1__c}" /> </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputField value="{!negoBaseInitContract.Index1__c}" /> </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputText value="{!refContractIndex1}%" /> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <apex:outputText value="{!$ObjectType.Contract__c.fields.Index2__c.Label}" />
+                                                        </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputField value="{!refContract.Index2__c}" /> </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputField value="{!negoBaseInitContract.Index2__c}" /> </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputText value="{!refContractIndex2}%" /> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <apex:outputText value="{!$ObjectType.Contract__c.fields.Index3__c.Label}" />
+                                                        </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputField value="{!refContract.Index3__c}" /> </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputField value="{!negoBaseInitContract.Index3__c}" /> </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputText value="{!refContractIndex3}%" /> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <apex:outputText value="{!$ObjectType.Contract__c.fields.Index4__c.Label}" />
+                                                        </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputField value="{!refContract.Index4__c}" /> </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputField value="{!negoBaseInitContract.Index4__c}" /> </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputText value="{!refContractIndex4}%" /> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <apex:outputText value="{!$ObjectType.Contract__c.fields.Index5__c.Label}" />
+                                                        </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputField value="{!refContract.Index5__c}" /> </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputField value="{!negoBaseInitContract.Index5__c}" /> </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputText value="{!refContractIndex5}%" /> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <apex:outputText value="{!$ObjectType.Contract__c.fields.Index6__c.Label}" />
+                                                        </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputField value="{!refContract.Index6__c}" /> </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputField value="{!negoBaseInitContract.Index6__c}" /> </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputText value="{!refContractIndex6}%" /> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <apex:outputText value="{!$ObjectType.Contract__c.fields.Index7__c.Label}" />
+                                                        </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputField value="{!refContract.Index7__c}" /> </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputField value="{!negoBaseInitContract.Index7__c}" /> </td>
+                                                        <td class="slds-text-align--right">
+                                                            <apex:outputText value="{!refContractIndex7}%" /> </td>
+                                                    </tr>
+                                                </body>
+                                            </table>
+                                        </apex:outputPanel>
+                                    </div>
+                                </div>
+                                <apex:outputPanel >
+                                    <div>
+                                        <h4 class="slds-section__title">
+                                            <span class="slds-truncate slds-section__title-action" title="{!JSINHTMLENCODE($Label.LBL_Detail_Of_Progressive_Rebates)}">
+                                                <apex:outputText value="{!$Label.LBL_Detail_Of_Progressive_Rebates}" />
+                                            </span>
+                                        </h4>
+                                        <div class="slds-scrollable">
+                                            <div class="slds-p-horizontal--small slds-p-top--small slds-p-bottom--small">
+                                                <div class="slds-m-bottom--small slds-text-align--left">
+                                                    <apex:outputText value="{!$Label.LBL_Reference_contract}" />:
+                                                    <apex:outputText styleclass="recordLabel" style="padding-left:5px;" value="{!IF(refProgressiveConditions != null && refProgressiveConditions.size > 0, 'la négo contient un palier', '')}" />
+                                                </div>
+                                                <div class="slds-m-bottom--small slds-text-align--left">
+                                                    <apex:outputText value="{!$Label.LBL_New_contract}" />:
+                                                    <apex:outputText styleclass="recordLabel" style="padding-left:5px;" value="{!IF(newProgressiveConditions != null && newProgressiveConditions.size > 0, 'la négo contient un palier', '')}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!errors.size == 0}" id="blockB">
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+                        </article>
+                    </div>
+                </apex:outputPanel>
+               
+            </apex:outputPanel>
+            <script>
+                $(document).ready(function () {
+                    rerenderIcons();
+                });
+                function afterRerender() {
+                    rerenderIcons();
+                }
+                /*      function rerenderChevrons() {
+                let elements = document.getElementsByClassName('chevronright');
+                for (let index = 0; index < elements.length; index++) {
+                    if (elements[index])
+                        elements[index].innerHTML = `<svg class="slds-button__icon slds-button__icon_small">
+                        <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#chevronright')}"></use>
+                    </svg>`;
+                }
+                elements = document.getElementsByClassName('chevronup');
+                for (let index = 0; index < elements.length; index++) {
+                    if (elements[index])
+                        elements[index].innerHTML = `<svg class="slds-button__icon slds-button__icon_small">
+                        <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#chevronup')}"></use>
+                    </svg>`;
+                }
+            }*/
+                function rerenderIcons() {
+                    let elements = document.getElementsByClassName('arrowupIcon');
+                    for (let index = 0; index < elements.length; index++) {
+                        if (elements[index])
+                            elements[index].innerHTML = `<span style="color:green">
+                                        <span class="slds-box--xx-small slds-icon_container slds-current-color slds-icon_container_circle slds-theme_shade">
+                                            <svg class="slds-icon slds-icon--xx-small" aria-hidden="true">
+                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#arrowup')}"></use>
+                                                </svg>
+                                                </span>
+                                                </span>`;
+                    }
+                    elements = document.getElementsByClassName('arrowdownIcon');
+                    for (let index = 0; index < elements.length; index++) {
+                        if (elements[index])
+                            elements[index].innerHTML = `<span style="color:red">
+                                    <span class="slds-box--xx-small slds-icon_container slds-current-color slds-icon_container_circle slds-theme_shade">
+                                        <svg class="slds-icon slds-icon--xx-small" aria-hidden="true">
+                                            <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#arrowdown')}"></use>
+                                            </svg>
+                                            </span>
+                                            </span>`;
+                    }
+                    elements = document.getElementsByClassName('forwardIcon');
+                    for (let index = 0; index < elements.length; index++) {
+                        if (elements[index])
+                            elements[index].innerHTML = `<span style="color:black">
+                                    <span class="slds-box--xx-small slds-icon_container slds-current-color slds-icon_container_circle slds-theme_shade">
+                                        <svg class="slds-icon slds-icon--xx-small" aria-hidden="true">
+                                            <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#forward')}"></use>
+                                            </svg>
+                                            </span>
+                                            </span>`;
+                    }
+                    elements = document.getElementsByClassName('previewIcon');
+                    for (let index = 0; index < elements.length; index++) {
+                        if (elements[index])
+                            elements[index].innerHTML = `<svg class="slds-button__icon" aria-hidden="true">
+                                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                    xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#preview')}"/>
+                                                            </svg>`;
+                    }
+                    elements = document.getElementsByClassName('sendIcon');
+                    for (let index = 0; index < elements.length; index++) {
+                        if (elements[index])
+                            elements[index].innerHTML = `<svg class="slds-button__icon" aria-hidden="true">
+                                                                <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                    xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#send')}"/>
+                                                            </svg>`;
+                    }
+                    elements = document.getElementsByClassName('chevronright');
+                    for (let index = 0; index < elements.length; index++) {
+                        if (elements[index])
+                            elements[index].innerHTML = `<svg class="slds-button__icon slds-button__icon_small">
+                                    <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#chevronright')}"></use>
+                                    </svg>`;
+                    }
+                    elements = document.getElementsByClassName('chevrondown');
+                    for (let index = 0; index < elements.length; index++) {
+                        if (elements[index])
+                            elements[index].innerHTML = `<svg class="slds-button__icon slds-button__icon_small">
+                                    <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#chevrondown')}"></use>
+                                    </svg>`;
+                    }
+
+                    elements = document.getElementsByClassName('chevronup');
+                    for (let index = 0; index < elements.length; index++) {
+                        if (elements[index])
+                            elements[index].innerHTML = `<svg class="slds-button__icon slds-button__icon_small">
+                                    <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#chevronup')}"></use>
+                                    </svg>`;
+                    }
+                }
+
+                function closeSectionDetail() {
+                    let hides = document.querySelectorAll('.details');
+                    for (let index = 0; index < hides.length; index++) {
+                        hides[index].classList.add('slds-hide');
+                        console.log("log>>>>", hides[index]);
+                    }
+                }
+
+                function openSectionDetail() {
+                    let hides = document.querySelectorAll('.details');
+                    for (let index = 0; index < hides.length; index++) {
+                        hides[index].classList.remove('slds-hide');
+                        console.log("log2>>>>", hides[index]);
+                    }
+
+                }
+                //show hide settings menu
+                function toggleMenu() {
+                    let toggleButton = document.querySelector('#settings-menu');
+                    if (toggleButton) {
+                        toggleButton.classList.toggle('slds-is-open');
+                    } else {
+                        console.warn('toggleMenu failed');
+                    }
+                }
+                function hideMenu() {
+                    let toggleButton = document.querySelector('#settings-menu');
+                    if (toggleButton) {
+                        toggleButton.classList.remove('slds-is-open');
+                    } else {
+                        console.warn('hideMenu failed');
+                    }
+                }
+
+
+            </script>
+            <apex:outputPanel id="backURLPanel">
+                <script>
+                    var backURL = '{!backURL}';
+                    var negotiateURL = '{!negotiateURL}';
+                    var budgetMakerURL = '';
+                    // <!--var budgetMakerURL = '{!budgetMakerURL}';-->
+                </script>
+            </apex:outputPanel>
+        </apex:form>
+        <apex:actionStatus id="globalloading">
+            <apex:facet name="start">
+                <div class="slds-spinner_container" style="position: fixed;">
+                    <div role="status" class="slds-spinner slds-spinner_large">
+                        <span class="slds-assistive-text">{!JSINHTMLENCODE($Label.Loading)}</span>
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+            </apex:facet>
+        </apex:actionStatus>
+    </body>
+
+    </html>
+</apex:page>

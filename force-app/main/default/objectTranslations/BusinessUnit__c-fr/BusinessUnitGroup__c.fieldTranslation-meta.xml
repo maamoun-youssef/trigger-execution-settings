@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Le Groupe de référence de la BU</help>
+    <label>Groupe</label>
+    <lookupFilter>
+        <errorMessage>Groupe - La valeur n&apos;existe pas ou ne correspond pas aux critères de filtre.</errorMessage>
+    </lookupFilter>
+    <name>BusinessUnitGroup__c</name>
+    <relationshipLabel><!-- Business Units (Group Origin) --></relationshipLabel>
+</CustomFieldTranslation>

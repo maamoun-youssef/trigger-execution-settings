@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Élément de hiérarchie (old)</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Éléments de hiérarchie (old)</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>O - CPG Hierarchy Element</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label>Paramètrage pour les filtres</label>
+            <section>Filter Settings</section>
+        </sections>
+        <sections>
+            <label>Cycle de vie</label>
+            <section>Life Cycle</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Nom</nameFieldLabel>
+    <recordTypes>
+        <label>Produit</label>
+        <name>Product</name>
+    </recordTypes>
+    <startsWith>Vowel</startsWith>
+</CustomObjectTranslation>

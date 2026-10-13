@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Statut</label>
+    <name>Status__c</name>
+    <picklistValues>
+        <masterLabel>Allocated</masterLabel>
+        <translation>Alloué</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Cancelled</masterLabel>
+        <translation>Annulée</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Deleted</masterLabel>
+        <translation>Supprimée</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Gained</masterLabel>
+        <translation>Gain</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Generated</masterLabel>
+        <translation>Générée</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Listed</masterLabel>
+        <translation>Référencé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Loosed</masterLabel>
+        <translation>Perte</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>NotValidated</masterLabel>
+        <translation>Non validée</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Paid</masterLabel>
+        <translation>Payée</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Partially Paid</masterLabel>
+        <translation>Partiellement payée</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>PartiallyAllocated</masterLabel>
+        <translation>Partiellement alloué</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Printed</masterLabel>
+        <translation>Imprimée</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>ReadyToPrint</masterLabel>
+        <translation>Prêt à imprimer</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Validated</masterLabel>
+        <translation>Validée</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>inPreparation</masterLabel>
+        <translation>En Préparation</translation>
+    </picklistValues>
+</CustomFieldTranslation>

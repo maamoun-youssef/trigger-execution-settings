@@ -1,0 +1,58 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Document juridique Liste associée",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"bf2e6dcb-1f2f-4c78-99d2-22112ed3a8c9\",\"columns\":[{\"UUID\":\"3bdd700f-4ad2-4bac-b0b1-1f2b6a6d51fd\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "id" : "3bdd700f-4ad2-4bac-b0b1-1f2b6a6d51fd",
+            "name" : "col1",
+            "title" : "Colonne 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "bf2e6dcb-1f2f-4c78-99d2-22112ed3a8c9",
+          "type" : "component"
+        } ],
+        "id" : "d3177ba3-5b02-464b-922f-fab8ea09cb5e",
+        "name" : "content",
+        "title" : "Contenu",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "135c63ce-b099-43e7-891b-fe6f38dae232",
+          "type" : "component"
+        } ],
+        "id" : "bd7c2318-ee7c-4ffe-a55e-e2db692a8106",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "bdfd70b6-01ee-40e3-a712-8b0241f9fc29",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "relatedlist-LegalDoc__c"
+  },
+  "urlName" : "document-juridique-liste-associée"
+}

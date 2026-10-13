@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>negOptim Custom Lookup</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <!-- <target>lightning__RecordAction</target> -->
+    </targets>
+    <targetConfigs>
+        <!-- <targetConfig targets="lightning__RecordAction">
+            <actionType>ScreenAction</actionType>
+        </targetConfig> -->
+        <targetConfig targets="lightning__AppPage, lightning__RecordPage">
+            <property name="objectName" type="String" label="Object Name" default="" />
+            <property name="searchFields" type="String" label="Search Fields" default="" />
+            <property name="label" type="String" label="Label" default="" />
+            <property name="placeHolder" type="String" label="Place Holder" default="" />
+            <property name="isRequired" type="Boolean" label="Is Required" default="false" />
+            <property name="isMulti" type="String" label="Is Multi Lookup" default="false" />
+            <property name="filterToken" type="String" label="Filter token" default="" />
+            <property name="searchTerm" type="String" label="search term" default="" />
+            <property name="value" type="String" label="Value" default="" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

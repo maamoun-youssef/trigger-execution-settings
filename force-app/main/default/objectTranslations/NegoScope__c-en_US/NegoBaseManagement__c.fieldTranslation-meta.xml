@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Défini si l&apos;utilisateur saisie ses bases CA / quantité de négo pour les accords de ce NS ou si elles sont agrégées depuis les niveaux partenaires. &lt;br/&gt;• Saisie des bases : l&apos;utilisateur réalise la saisie de ses bases négo &lt;br/&gt;• Remontées : les bases sont agrégées des niveaux partenaires. L&apos;utilisateur ne saisit pas de base. --></help>
+    <label>Nego Base Management</label>
+    <name>NegoBaseManagement__c</name>
+    <picklistValues>
+        <masterLabel>Input</masterLabel>
+        <translation>Input</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Partner To Advanced</masterLabel>
+        <translation>Synchro From Partners</translation>
+    </picklistValues>
+</CustomFieldTranslation>

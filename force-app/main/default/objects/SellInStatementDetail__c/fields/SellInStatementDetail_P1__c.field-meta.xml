@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SellInStatementDetail_P1__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Sell In Statement Detail P1</label>
+    <referenceTo>SellInStatementDetail__c</referenceTo>
+    <relationshipLabel>Sell In Statement Details (Previous Year)</relationshipLabel>
+    <relationshipName>SSDSellInStatementDetailP1</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

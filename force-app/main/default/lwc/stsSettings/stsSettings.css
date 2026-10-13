@@ -1,0 +1,137 @@
+:host {
+  --beij: #F2F6DFff;
+  --midnight-green: #08484Aff;
+  --verdigris: #14B2BBff;
+  --amethyst: #816BC0ff;
+  --russian-violet: #3C094Bff;
+  --space-cadet: #322B4Cff;
+  --honeydew: #E8F4E8ff;
+  --dark-violet: #9719BBff;
+  --pistachio: #8BC58Aff;
+  --mint-green: #DDF4EEff;
+  --text-body: #5C5C5C;
+  --light-gray: #B1B1B1;
+  display: block;
+  position: relative;   /* create stacking context */
+  z-index: 0;
+}
+
+/* Sticky teal header + title */
+.stickyHeader {
+  position: sticky;
+  z-index: 3;
+  top: 0;
+  background-color: var(--verdigris);
+  padding-left: 20px;
+  height: 70px;
+}
+
+/* Make the second STS header non-sticky so it won't overlap the next LWC */
+.stickyHeaderLocal {
+  position: static;
+  z-index: auto;
+}
+
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 600;
+  color: white;
+  translate: 0 7px;
+}
+
+/* Purple subtitles / section notes */
+.label {
+  font-weight: 600;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  font-size: 16px;
+  color: var(--text-body);
+  padding-top: 25px;
+}
+
+/* Two-column rows: left label, right control */
+.section-Container {
+  display: flex;
+  column-gap: 40px;
+}
+.section-label {
+  font-weight: 600;
+  width: 30%;
+  padding-left: 20px;
+  font-size: 16px;
+  color: var(--text-body);
+}
+.info-container-w { width: 75%; }
+.comboBox { width: 300px; }
+
+/* Helpers used in the STS markup */
+.ml10 { margin-left: 10px; }
+.ml20 { margin-left: 20px; }
+.ml40 { margin-left: 40px; }
+.w36  { width: 36%; }
+.lh15 { line-height: 15px; }
+.italic { font-style: italic; font-size: 14px; color: var(--text-body); }
+.add-breaks { height: 30px; }
+
+/* Save button (top-right & bottom-right) */
+.save-button-container {
+  top: 10px;
+  z-index: 4;
+  position: fixed;
+  margin-right: 20px;
+  /* the page already handles vertical offset; keep same behavior */
+  margin-top: 173px;
+}
+
+/* Loading overlay (grey bg + spinner) */
+.greyBg { background-color: #f3f3f3; }
+.loader {
+  position: absolute; width: 50px; height: 50px; border-radius: 50%;
+  background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), #fff);
+  animation: animate 1.2s linear infinite;
+}
+.loader:after {
+  content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
+  background: #f1f1f1; border-radius: 50%;
+}
+@keyframes animate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* Responsive tweaks (match parent behavior) */
+@media screen and (max-width: 980px) {
+  .save-button-container { margin-top: 230px; }
+  .sectionTitle { font-size: 18px; translate: 0 12px; }
+  .section-label { font-size: 14px; width: 100%; }
+  .add-breaks { height: 20px; }
+  .section-Container { display: block; }
+  .info-container-w { width: 100%; padding-left: 20px; padding-top: 20px; }
+}
+
+/* Blue/ON and Red/OFF for any toggle wrapped with .connect-toggle */
+.connect-toggle .slds-checkbox_toggle input:not(:checked) + .slds-checkbox_faux_container .slds-checkbox_faux {
+  background: #c23934;   /* red OFF */
+  border-color: #c23934;
+}
+.connect-toggle .slds-checkbox_toggle input:checked + .slds-checkbox_faux_container .slds-checkbox_faux {
+  background: #1589ee;   /* blue ON */
+  border-color: #1589ee;
+}
+/* knob */
+.connect-toggle .slds-checkbox_faux:before {
+  background: #fff;
+}
+
+/* First STS header remains sticky but under the Reminder one */
+.stickyHeaderSts {
+  position: sticky;
+  top: 0;
+  z-index: 5;                 /* lower than Reminder's 7 */
+  background: #36a2ad;
+  padding: 8px 12px;
+}
+
+/* Second STS header should not stick (so it won't overlap the Reminder) */
+.stickyHeaderSts.isSub {
+  position: static;
+  z-index: auto;
+}

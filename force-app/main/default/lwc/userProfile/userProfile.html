@@ -1,0 +1,200 @@
+<template>
+    <template if:true={loading}>
+        <div class="loading-container">
+            <lightning-spinner alternative-text="Loading user info..." size="medium"></lightning-spinner>
+        </div>
+    </template>
+    <template if:false={loading}>
+        <div class="profile-wrapper">
+            <div class="profile-banner">
+                <div class="banner-content">
+                    <div class="avatar-illustration">
+                        <img src={displayPhotoUrl} />
+                        <template if:true={isEditMode}>
+                            <div class="photo-action-trigger" onclick={togglePhotoMenu}>
+                                <lightning-icon icon-name="utility:photo" alternative-text="photo" size="small"
+                                    title="photo">
+                                </lightning-icon>
+                            </div>
+                            <template if:true={showPhotoMenu}>
+                                <div class="photo-action-menu">
+                                    <label for="file-upload" class="photo-menu-item">
+                                        <lightning-icon icon-name="utility:upload" size="x-small">
+                                        </lightning-icon>
+                                        <span>{label.LBL_Connect_UPUploadPhoto}</span>
+                                    </label>
+                                    <button class="photo-menu-item" onclick={handleDeletePhoto}>
+                                        <lightning-icon icon-name="utility:delete" size="x-small">
+                                        </lightning-icon>
+                                        <span>{label.LBL_Connect_UPDeletePhoto}</span>
+                                    </button>
+                                </div>
+                        </template>
+                        </template>
+                        <input id="file-upload" type="file" accept=".jpg,.jpeg,.png" onchange={handlePhotoChange}
+                            class="file-input-hidden" />
+                    </div>
+                    <div class="banner-info">
+                        <h1 class="title-heading">{label.LBL_UserAccount_Title}</h1>
+                        <h2 class="user-name">{userFullName}</h2>
+                        <p class="user-position">{userTitle}</p>
+                    </div>
+                </div>
+            </div>
+            <template if:false={isEditMode}>
+                <div class="info-section">
+                    <h3 class="section-heading">{label.LBL_UserAccount_Subtitle}</h3>
+                    <div class="details-card">
+                        <div class="detail-row">
+                            <div class="icon-container">
+                                <img src={icons.name} />
+                            </div>
+                            <div class="detail-content">
+                                <div class="detail-label">{label.LBL_UserAccount_FieldFullName}</div>
+                                <div class="detail-value">{userFullName}</div>
+                            </div>
+                        </div>
+                        <template for:each={userFieldsArrayWithIcons} for:item="field">
+                            <div key={field.apiName} class="detail-row">
+                                <div class={field.iconClass}>
+                                    <template if:true={field.isEmail}>
+                                        <img src={icons.email} />
+                                    </template>
+                                    <template if:true={field.isPhone}>
+                                        <img src={icons.phone} />
+                                    </template>
+                                    <template if:true={field.isName}>
+                                        <img src={icons.name} />
+                                    </template>
+                                    <template if:true={field.isTitle}>
+                                        <img src={icons.role} />
+                                    </template>
+                                    <template if:true={field.isLanguage}>
+                                        <img src={icons.language} />
+                                    </template>
+                                    <template if:true={field.isLocale}>
+                                        <img src={icons.locale} />
+                                    </template>
+                                </div>
+                                <div class="detail-content">
+                                    <div class="detail-label">{field.label}</div>
+                                    <div class="detail-value">
+                                        <template if:true={field.displayValue}>
+                                            {field.displayValue}
+                                            <template if:true={field.showNotVerified}>
+                                                <span class="email-not-verified">Not verified</span>
+                                            </template>
+                                        </template>
+                                        <template if:false={field.displayValue}>
+                                            N/A
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="action-container">
+                        <button class="update-btn" onclick={handleEdit}>
+                            {label.LBL_UserAccount_UpdateButton}
+                        </button>
+                    </div>
+                </div>
+            </template>
+            <template if:true={isEditMode}>
+                <div class="info-section">
+                    <h3 class="section-heading">{label.LBL_Connect_UPUpdateInformation}</h3>
+                    <div class="details-card">
+                        <div class="detail-row edit-row">
+                            <div class="icon-container">
+                                <img src={icons.name} />
+                            </div>
+                            <div class="detail-content">
+                                <lightning-input label={labels.LBL_FirstName} value={editedData.FirstName}
+                                    data-field="FirstName" onchange={handleFieldChange}
+                                    class="custom-input"></lightning-input>
+                            </div>
+                        </div>
+                        <div class="detail-row edit-row">
+                            <div class="icon-container">
+                                <img src={icons.name} />
+                            </div>
+                            <div class="detail-content">
+                                <lightning-input label={labels.LBL_LastName} value={editedData.LastName}
+                                    data-field="LastName" onchange={handleFieldChange}
+                                    class="custom-input"></lightning-input>
+                            </div>
+                        </div>
+                        <template for:each={filteredUserFieldsArray} for:item="field">
+                            <template if:true={field.updateable}>
+                                <div key={field.apiName} class="detail-row edit-row">
+                                    <div class={field.iconClass}>
+                                        <template if:true={field.isEmail}>
+                                            <img src={icons.email} />
+                                        </template>
+                                        <template if:true={field.isPhone}>
+                                            <img src={icons.phone} />
+                                        </template>
+                                        <template if:true={field.isName}>
+                                            <img src={icons.name} />
+                                        </template>
+                                        <template if:true={field.isTitle}>
+                                            <img src={icons.role} />
+                                        </template>
+                                        <template if:true={field.isLanguage}>
+                                            <img src={icons.language} />
+                                        </template>
+                                        <template if:true={field.isLocale}>
+                                            <img src={icons.locale} />
+                                        </template>
+                                    </div>
+                                    <div class="detail-content">
+                                        <template if:false={field.picklistValues}>
+                                            <lightning-input label={field.label} value={field.value}
+                                                data-field={field.apiName} onchange={handleFieldChange}
+                                                required={field.required} class="custom-input"></lightning-input>
+                                        </template>
+                                        <template if:true={field.picklistValues}>
+                                            <lightning-combobox label={field.label} value={field.value}
+                                                options={field.picklistValues} data-field={field.apiName}
+                                                onchange={handleFieldChange} required={field.required}
+                                                class="custom-input"></lightning-combobox>
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn-cancel" onclick={handleCancel}>
+                            {label.LBL_Cancel}
+                        </button>
+                        <button class="btn-save" onclick={handleSave}>
+                            {label.LBL_Save}
+                        </button>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </template>
+    <template if:true={showLanguageLogoutModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__content slds-p-around_medium" style="min-height: 150px;">
+                    <div class="slds-text-align_center">
+                        <lightning-icon icon-name="utility:world" size="large"
+                            class="slds-m-bottom_small"></lightning-icon>
+                        <p class="slds-text-heading_medium slds-m-bottom_medium">
+                            {label.LBL_Connect_UPLanguageChangeLogout}
+                        </p>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <a class="slds-button slds-button_brand" href={logoutLink}>
+                        {label.LBL_Logout}
+                    </a>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

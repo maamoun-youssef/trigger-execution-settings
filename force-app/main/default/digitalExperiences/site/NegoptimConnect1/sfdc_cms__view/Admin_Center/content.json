@@ -1,0 +1,183 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Admin Center",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "{\"url\":\"/sfsites/c/cms/delivery/media/MCZ46VJJ22NVAABKA32CSTTMVDE4?lastModifiedDate=Fri Nov 15 12:50:18 GMT 2024&height=144&width=192\",\"contentKey\":\"MCZ46VJJ22NVAABKA32CSTTMVDE4\",\"altText\":\"\",\"contentType\":\"sfdc_cms__image\",\"bgPosition\":\"center center\",\"bgSizeOrRepeat\":\"/cover\"}",
+            "backgroundImageOverlay" : "rgba(0, 0, 0, 0.34)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"89012d7b-8b58-41f9-8781-54ee4786f019\",\"columns\":[{\"UUID\":\"e78b5d41-01f8-45d2-b552-ebaf1ad25b4d\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "235px",
+            "sectionVerticalAlign" : "center"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "dxpStyle" : { },
+                "imageInfos" : "",
+                "richTextValue" : "<p style=\"text-align: center;\"><strong style=\"font-size: 72px; color: rgb(255, 255, 255);\">Admin Center\t</strong></p>"
+              },
+              "definition" : "community_builder:richTextEditor",
+              "id" : "31f28125-7425-4748-afaa-50f62845cec5",
+              "type" : "component",
+              "variations" : [ {
+                "attributes" : {
+                  "dxpStyle" : { },
+                  "imageInfos" : "",
+                  "richTextValue" : "<p style=\"text-align: center;\"><strong style=\"color: rgb(255, 255, 255); font-size: 72px;\">Centre Admin<span class=\"ql-cursor\">﻿</span></strong></p>"
+                },
+                "definition" : "community_builder:richTextEditor",
+                "id" : "a7240ccb-1d02-4777-836f-8b13fe9e2e03",
+                "title" : "FR",
+                "type" : "mutationComponent"
+              } ]
+            } ],
+            "id" : "e78b5d41-01f8-45d2-b552-ebaf1ad25b4d",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "89012d7b-8b58-41f9-8781-54ee4786f019",
+          "type" : "component"
+        }, {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"c9b664c8-e4ba-42b0-88e4-691dde64fdf7\",\"columns\":[{\"UUID\":\"e6268ee0-d53f-4c9c-886d-dc3508f295f5\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "32px",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "id" : "e6268ee0-d53f-4c9c-886d-dc3508f295f5",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "c9b664c8-e4ba-42b0-88e4-691dde64fdf7",
+          "type" : "component"
+        }, {
+          "attributes" : {
+            "backgroundImageConfig" : "{\"url\":\"/sfsites/c/cms/delivery/media/MCQJUDTSSR2VGR7JLPIIHA4X4GRA?lastModifiedDate=Fri Nov 15 12:43:33 GMT 2024&height=144&width=192\",\"contentKey\":\"MCQJUDTSSR2VGR7JLPIIHA4X4GRA\",\"altText\":\"\",\"contentType\":\"sfdc_cms__image\",\"bgPosition\":\"center center\",\"bgSizeOrRepeat\":\"/cover\"}",
+            "backgroundImageOverlay" : "rgba(0, 0, 0, 0.34)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "1200px",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"9dfc329c-4888-4a42-9c4b-b19ff96eea75\",\"columns\":[{\"UUID\":\"90d7a29a-04fc-4791-bc92-f6c6fd2f52cd\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "600px",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "dxpStyle" : { },
+                "imageInfos" : "",
+                "richTextValue" : "<p style=\"text-align: center;\"><span style=\"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 16px; color: rgb(255, 255, 255);\">&nbsp;Access and manage your company’s administrative information easily from this menu. Here, you can add or update contacts in your&nbsp;directory, review organizational details and addresses, and declare any other changes to your administrative information.</span></p><p style=\"text-align: center;\"><span style=\"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 16px; color: rgb(255, 255, 255);\"><span class=\"ql-cursor\">﻿</span></span></p>"
+              },
+              "definition" : "community_builder:richTextEditor",
+              "id" : "f2995d0b-e997-436d-bdb6-ca97398b1860",
+              "type" : "component"
+            }, {
+              "attributes" : {
+                "bannerBackgroundColor" : "rgba(66, 68, 68, 0.82)",
+                "bannerPosition" : "top",
+                "bannerSizePercent" : 35,
+                "borderRadius" : 20,
+                "boxShadow" : true,
+                "dxpStyle" : { },
+                "haveBanner" : false,
+                "iconBackgroundColor" : "rgb(255,255,255)",
+                "iconSize" : "medium",
+                "noImageColor" : "rgb(116,116,116)",
+                "overlay" : "rgba(0,0,0,0.01)",
+                "templateType" : "default",
+                "tileMenuEditor" : "Admin_Center_Menu",
+                "titleColor" : "",
+                "titleFontSize" : "medium",
+                "titleHorizontalAlign" : "center"
+              },
+              "definition" : "community_navigation:tileMenu",
+              "id" : "c2ced606-e57c-487a-b445-cae19e2cdba6",
+              "type" : "component"
+            } ],
+            "id" : "90d7a29a-04fc-4791-bc92-f6c6fd2f52cd",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "9dfc329c-4888-4a42-9c4b-b19ff96eea75",
+          "type" : "component"
+        } ],
+        "id" : "b4304847-e904-4247-afb9-a45814d94f19",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "dxpStyle" : { },
+            "pageTitle" : "Admin Center",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "daa6d458-f211-4042-8137-32d12a43dd18",
+          "type" : "component"
+        } ],
+        "id" : "e41d8f61-ec26-4a8e-8249-2befab99615a",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "23459645-6812-483f-858a-c529c28fecbc",
+      "type" : "component"
+    },
+    "contentOperations" : {
+      "operations" : [ {
+        "targetId" : "31f28125-7425-4748-afaa-50f62845cec5",
+        "ruleToVariationList" : [ {
+          "variationId" : "a7240ccb-1d02-4777-836f-8b13fe9e2e03",
+          "rule" : {
+            "name" : "182cbe10-4e2e-4057-bb2c-c3fed2ee0a32",
+            "description" : "",
+            "criteriaType" : "AllCriteriaMatch",
+            "expressionCriteria" : [ {
+              "resource" : "User.Record.LanguageLocaleKey",
+              "operator" : "Equal",
+              "value" : "fr",
+              "criterionNumber" : 1
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-admin-center"
+  },
+  "urlName" : "admin-center"
+}

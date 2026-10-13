@@ -1,0 +1,15 @@
+.main-container .slds-dropdown {
+    max-width: unset !important;
+}
+
+.main-container .slds-dropdown_fluid {
+    min-width: unset !important;
+}
+
+.main-container lightning-input.slds-text-align_right input.slds-input {
+    text-align: right;
+}
+
+.main-container .slds-input-has-icon .slds-input__icon {
+    z-index: unset;
+}

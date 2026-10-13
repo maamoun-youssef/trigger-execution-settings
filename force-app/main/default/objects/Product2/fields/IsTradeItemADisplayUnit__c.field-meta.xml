@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsTradeItemADisplayUnit__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indication que l&apos;unité commerciale déclarée est un présentoir garni (oui ou non). Un présentoir garni est une unité composée d&apos;un support utilisé en magasin pour la présentation des produits, qui a été garnie chez le fournisseur d&apos;un ou plusieurs types d&apos;unités consommateur.</description>
+    <label>Is TradeItem A DisplayUnit</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

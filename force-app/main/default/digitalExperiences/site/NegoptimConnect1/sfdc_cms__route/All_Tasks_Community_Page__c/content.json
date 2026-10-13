@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "All Tasks Community Page",
+  "contentBody" : {
+    "activeViewId" : "All_Tasks_Community_Page",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-all-tasks-community-page",
+    "urlPrefix" : "all-tasks-community-page"
+  },
+  "urlName" : "all-tasks-community-page"
+}

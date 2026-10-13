@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AssortmentMatrixWD</fullName>
+    <availability>online</availability>
+    <description>To update Assortment Details on Assort RT NEGO</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <height>600</height>
+    <linkType>url</linkType>
+    <masterLabel>Assortment Matrix</masterLabel>
+    <openType>sidebar</openType>
+    <protected>false</protected>
+    <url>/apex/AssortmentBUMatrix?id={!Assortment_BU__c.Id}&amp;&amp;showSubtotal=true</url>
+</WebLink>

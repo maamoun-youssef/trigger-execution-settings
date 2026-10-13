@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SetInvoiceBuyer__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Set Invoice Buyer</description>
+    <label>Set Invoice Buyer</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

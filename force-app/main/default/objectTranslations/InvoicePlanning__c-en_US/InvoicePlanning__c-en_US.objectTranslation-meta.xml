@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Accounting docs planning</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Accounting docs plannings</value>
+    </caseValues>
+    <nameFieldLabel><!-- Invoice Planning Name --></nameFieldLabel>
+    <recordTypes>
+        <description><!-- Planning for backmargin accrual (provision) --></description>
+        <label><!-- INVP Accrual --></label>
+        <name>Accrual</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Planning for backmargin invoicing --></description>
+        <label><!-- INVP Invoice --></label>
+        <name>Invoice</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

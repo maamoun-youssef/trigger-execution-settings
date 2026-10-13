@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Service Statement</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Service Statements</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <recordTypes>
+        <label><!-- SER Sales Terms --></label>
+        <name>SalesTerms</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- SER Terms Dispute --></label>
+        <name>TermsDispute</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

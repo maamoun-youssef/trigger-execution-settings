@@ -1,0 +1,602 @@
+<apex:page controller="ExecutiveSummaryPDFController" renderAs="{!ctrlr.contentType}" showHeader="false" applyHtmlTag="false"
+    applyBodyTag="false">
+    <!--<apex:page controller="Nego360_ES_Pdf_Controller" renderAs="{!ctrlr.contentType}">-->
+
+    <html title="{!$Label.LBL_Executive_Summary_Signed}">
+
+    <head>
+        <style>
+            body {
+                <!--from w ww.j a v a 2s . c o m-->width: 90%;
+                margin: 0 auto;
+            }
+
+            table:first-child {
+                /* background-color: blue; */
+                /* color: white; */
+                margin-right: 1%;
+            }
+
+            table:nth-child(2n) {
+                background-color: black;
+                color: white;
+            }
+
+            table {
+                width: 49%;
+                float: left;
+            }
+
+            .header-title {
+                font-size: 9px;
+                color: #000;
+                background-color: #e6e6e6;
+                font-weight:bold;
+            }
+        </style>
+    </head>
+    <table  class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+        <tr padding="3px" class="header-title">
+            <td padding="3px" colspan="2" style="padding: 3px;">{!$Label.LBL_Executive_Summary_Signed}</td>
+        </tr>
+    </table>
+    <table  class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped" border="0" cellpadding="0" cellspacing="0" style="padding-top:10px; width: 100%;">
+        <tr padding="3px" class="header-title">
+            <td padding="3px" colspan="2" style="padding: 3px;">{!ctrlr.topContract.Name}</td>
+        </tr>
+    </table>
+    <body>
+        <div>
+            <table style="width: 2%; margin-top:10px">
+                <th style="max-width:12px; height:70px; background-color:#e63946; margin-left:10px"></th>
+            </table>
+            <table style="width: 68%; margin-top:10px">
+                <tr style="font-size: 7px; margin-top:5px">
+                    <th>
+                        <apex:outputText value="{!$ObjectType.Contract__c.fields.Supplier__c.Label}: " />
+                    </th>
+                    <td>
+                         <apex:outputField value="{!ctrlr.topContract.Supplier__c}" styleclass="recordLabel"/>
+                    </td>
+                    <th >
+                        <apex:outputText value="{!$ObjectType.NegoScope__c.fields.Name.Label}: " />
+                    </th>
+                    <td>
+                        <apex:outputLink style="padding-left: 5px;" rendered="{!ctrlr.topContract.Supplier_Nego_Scope__c != null}" value="/{!ctrlr.topContract.Supplier_Nego_Scope__c}"
+                            target="_blank">
+                            <apex:outputText value="{!ctrlr.topContract.Supplier_Nego_Scope__r.Name}"
+                                styleclass="recordLabel" />
+                        </apex:outputLink>
+                    </td>
+                </tr>
+                <tr style="font-size: 7px; margin-top:5px; padding-left: 5px;">
+                    <th>
+                        <apex:outputText value="{!$ObjectType.Contract__c.fields.Reference_Year__c.Label}: " />
+                    </th>
+                    <td>
+                        <apex:outputField value="{!ctrlr.topContract.Reference_Year__c}" styleclass="recordLabel"/>
+                    </td>
+                    <th >
+                        <apex:outputText value="{!$Label.LBL_Buyer}: " />
+                    </th>
+                    <td>
+                        <apex:outputField value="{!ctrlr.topContract.Supplier_Nego_Scope__r.OwnerId}" styleclass="recordLabel"/>
+                    </td>
+                </tr>
+                <tr style="font-size: 7px; margin-top:5px">
+                    <th>
+                        <!-- <apex:outputText value="{!$ObjectType.Supplier__c.fields.Size__c.Label}:" /> -->
+                    </th>
+                    <td>
+                        <!-- <apex:outputField style="padding-left: 5px;" value="{!ctrlr.topContract.Supplier__r.Size__c}" styleclass="recordLabel"/> -->
+                    </td>
+                    <th>
+                        <!-- <apex:outputText value="{!$ObjectType.Supplier__c.fields.Retail_Federation__c.Label}:"/> -->
+
+                    </th>
+                    <td>
+                        <!-- <apex:outputField style="padding-left: 5px;" value="{!ctrlr.topContract.Supplier__r.Retail_Federation__c}" styleclass="recordLabel" /> -->
+                    </td>
+                </tr>
+                <tr style="font-size: 7px; margin-top:5px">
+                    <th>
+                        <apex:outputText value="{!$Label.LBL_Date_of_Submit_for_approval}:" />
+                    </th>
+                    <td>
+                       <apex:outputField style="padding-left:6px;" rendered="{!ctrlr.contractProcessInstance != null && OR(ctrlr.contractProcessInstance.Status == 'Approved', ctrlr.contractProcessInstance.Status == 'Pending')}" value="{!ctrlr.contractProcessInstance.CreatedDate}"
+                                         styleclass="recordLabel" />
+                    </td>
+                    <th >
+                        <apex:outputText value="{!$Label.LBL_Poids}:" />
+                    </th>
+                    <td>
+                        <apex:outputText style="padding-left: 5px;" value="{!ctrlr.sPoids}" styleclass="recordLabel" />
+                    </td>
+                </tr>
+                <tr style="font-size: 7px; margin-top:5px">
+                    <th>
+                        <apex:outputText value="{!$Label.LBL_Status_validation} " style="font-weight:bold" />
+                    </th>
+                    <td>
+                    <apex:outputField style="padding-left: 5px;" value="{!ctrlr.topContract.Status__c}" />
+                    </td>
+                </tr>
+            </table>
+            <table border="0" cellpadding="0" cellspacing="0" style="margin-top:10px; width: 26%; border: 1px solid rgb(255, 196, 203);">
+                <thead bgcolor="#39B1D9" style="text-align: center; font-size: 7px; font-weight: bold; background-color:rgb(255, 196, 203);">
+                    <th style="text-align: left;border-bottom: 1px solid #eaeaea;"></th>
+                    <th style="text-align: left;border-bottom: 1px solid #eaeaea;"><apex:outputText value="{!$Label.LBL_3Net}"/></th>
+                    <th style="text-align: left;border-bottom: 1px solid #eaeaea;"><apex:outputText value="{!$Label.LBL_4Net}"/></th>
+                    <th style="text-align: left;border-bottom: 1px solid #eaeaea;"><apex:outputText value="{!$Label.LBL_5Net}"/></th>
+                </thead>
+                <tr class="negoPlanRow1" style="font-size: 7px;">
+                    <td style="border-bottom: 1px solid #eaeaea;"><apex:outputText value="{!$Label.LBL_Nego_Intro}"/></td>
+                    <td style="background-color: rgb(255, 209, 118); border-bottom: 1px solid #eaeaea; text-align: right;"><apex:outputText value="{!ctrlr.negoPlan.NEGO_NegoIntro_2_3Net_Prog_Last__c}" /></td>
+                    <td style="background-color: rgb(229, 227, 226); border-bottom: 1px solid #eaeaea; text-align: right;"><apex:outputText value="{!ctrlr.sNEGO_NegoIntro_4Net_Prog_val_Last}" /></td>
+                    <td style="background-color: rgb(229, 227, 226); border-bottom: 1px solid #eaeaea; text-align: right;"><apex:outputText value="{!ctrlr.sNEGO_NegoIntro_5Net_Prog_val_Last}" /></td>
+                </tr>
+                <tr class="negoPlanRow2-3" style="font-size: 7px;">
+                    <td style="border-bottom: 1px solid #eaeaea;"><apex:outputText value="{!$Label.LBL_Plan}"/></td>
+                    <td style="background-color: rgb(255, 209, 118); border-bottom: 1px solid #eaeaea; text-align: right;"> <apex:outputText value="{!ctrlr.negoPlan.PLAN_Target_2_3Net_Prog__c}" /></td>
+                    <td style="background-color: rgb(229, 227, 226); border-bottom: 1px solid #eaeaea; text-align: right;"><apex:outputText value="{!ctrlr.sPLAN_Target_Index4_Nego_val}" /></td>
+                    <td style="background-color: rgb(229, 227, 226); border-bottom: 1px solid #eaeaea; text-align: right;"><apex:outputText styleClass="output-number-field" value="{!ctrlr.sPLAN_Target_Index5_Nego_val}"/></td>
+                </tr>
+                <tr class="negoPlanRow3-3"  style="font-size: 7px;">
+                    <td style="border-bottom: 1px solid #eaeaea;"><apex:outputText value="{!$Label.LBL_Obtained}"/></td>
+                    <td style="background-color: rgb(255, 209, 118); border-bottom: 1px solid #eaeaea; text-align: right;"> <apex:outputText value="{!ctrlr.sNegoBaseInitFormula1}" /></td>
+                    <td style="background-color: rgb(229, 227, 226); border-bottom: 1px solid #eaeaea; text-align: right;"> <apex:outputText value="{!ctrlr.sNegoBaseInit_valeurReelle_index4}" /></td>
+                    <td style="background-color: rgb(229, 227, 226); border-bottom: 1px solid #eaeaea; text-align: right;"><apex:outputText styleClass="output-number-field" value="{!ctrlr.sNegoBaseInitFormula3}"/></td>
+                </tr>
+                <tr class="negoPlanRow3-3"  style="font-size: 7px;">
+                    <td style="border-bottom: 1px solid #eaeaea;"><apex:outputText value="{!$Label.LBL_GAP_per}"/></td>
+                    <td style="background-color: rgb(255, 209, 118); border-bottom: 1px solid #eaeaea; text-align: right;" class="{!IF(AND(ctrlr.negoPlan.PLAN_Target_2_3Net_Prog__c != null, ctrlr.NegoBaseInitFormula1 != null),IF(ctrlr.negoPlan.PLAN_Target_2_3Net_Prog__c == ctrlr.NegoBaseInitFormula1, '', IF(ctrlr.NegoBaseInitFormula1 > ctrlr.negoPlan.PLAN_Target_2_3Net_Prog__c, 'slds-text-color_error slds-text-title_bold','slds-text-color_success slds-text-title_bold')), '')}"><apex:outputText styleClass="output-number-field" value="{!ctrlr.sGap_2_3net_perc}"/></td>
+                    <td style="background-color: rgb(229, 227, 226); border-bottom: 1px solid #eaeaea; text-align: right;"> <apex:outputText value="{!ctrlr.sGap_4net_perc}" /></td>
+                    <td style="background-color: rgb(229, 227, 226); border-bottom: 1px solid #eaeaea; text-align: right;"><apex:outputText styleClass="output-number-field" value="{!ctrlr.sGap_5net_perc}"/></td>
+                </tr>
+                <tr class="negoPlanRow3-3"  style="font-size: 7px;">
+                    <td style="border-bottom: 1px solid #eaeaea;"><apex:outputText value="{!$Label.LBL_GAP_val}"/></td>
+                    <td style="background-color: rgb(255, 209, 118); border-bottom: 1px solid #eaeaea; text-align: right;"><apex:outputText value="{!ctrlr.sGap_2_3net}" /></td>
+                    <td style="background-color: rgb(229, 227, 226); border-bottom: 1px solid #eaeaea; text-align: right;"><apex:outputText value="{!ctrlr.sGap_4net}" /></td>
+                    <td style="background-color: rgb(229, 227, 226); border-bottom: 1px solid #eaeaea; text-align: right;"><apex:outputText styleClass="output-number-field" value="{!ctrlr.sGap_5net}"/></td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <table  class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped" border="0" cellpadding="0" cellspacing="0" style="padding-top:10px; width: 100%;">
+                <tr padding="3px" class="header-title">
+                    <td padding="3px" colspan="2" style="padding: 3px;">
+                        <apex:outputText value="{!$Label.LBL_Nego_Results}" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+         <div>
+            <div style="margin-top:10px; width: 54%;">
+                <table border="0" cellpadding="0" cellspacing="0" style="margin-top:10px; width: 100%;">
+                    <thead bgcolor="#39B1D9" style="text-align: center; font-size: 7px; font-weight: bold; background-color: rgb(255, 196, 203)">
+                        <th style="text-align: left;"></th>
+                        <th style="text-align: left;">
+                            <apex:outputText value="{!$Label.LBL_Reference_contract}"/>
+                        </th>
+                        <!-- <apex:outputPanel layout="none" rendered="{!ctrlr.safeContract.Id != null}">
+                            <th style="text-align: left;border-bottom: 1px solid #eaeaea;"><apex:outputText value="{!ctrlr.safebalanceRTName}"/></th>
+                        </apex:outputPanel> -->
+                        <th style="text-align: left"><apex:outputText value="{!$Label.LBL_New_contract}"/></th>
+                        <th style="text-align: left;"></th>
+                    </thead>
+                        <!-- JIRA 428 & 4645 -->
+                     <tr style="font-size: 7px; vertical-align: middle;">
+                        <td style="border-bottom: 1px solid #eaeaea;border-left: 1px solid rgb(255, 196, 203);">
+                            <apex:outputText value="{!$ObjectType.Contract__c.fields.Total_TO__c.Label}" />
+                        </td>
+                        <td style="border-bottom: 1px solid #eaeaea;">
+                            <apex:outputText value="{!ctrlr.refContractTotalTo}" />
+                        </td>
+                        <td style="border-bottom: 1px solid #eaeaea;">
+                            <apex:outputText value="{!ctrlr.negoBaseInitContractTotalTo}" />
+                        </td>
+                        <td style="border-bottom: 1px solid #eaeaea;border-right: 1px solid rgb(255, 196, 203);">
+                            <apex:outputText rendered="{!(ctrlr.contractTotalToDiff)> 0}">
+                                <apex:image value="{!imgUp}" width="7" height="7"/>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!(ctrlr.contractTotalToDiff) < 0}">
+                                <apex:image value="{!imgDown}" width="7" height="7"/>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!(ctrlr.contractTotalToDiff) == 0}">
+                                <apex:image value="{!imgRight}" width="7" height="7"/>
+                            </apex:outputText>
+                            <apex:outputText style="padding-left : 5px;"  value="{!(ctrlr.scontractTotalToDiff)}"/>
+                        </td>
+                    </tr>
+                    <!--<tr style="font-size: 7px;">
+                        <td style="border-bottom: 1px solid #eaeaea;border-left: 1px solid rgb(255, 196, 203);">
+                            <apex:outputText value="{!$ObjectType.Contract__c.fields.Total_TO_4Net_Nego_YE__c.Label}" />
+                        </td>
+                        <td style="border-bottom: 1px solid #eaeaea;">
+                            <apex:outputText value="{!ctrlr.refContractTotalTO4Net}" />
+                        </td>
+                        <td style="border-bottom: 1px solid #eaeaea;">
+                            <apex:outputText value="{!ctrlr.negoBaseInitContractTotalTo4Net}" />
+                        </td>
+                        <td style="border-bottom: 1px solid #eaeaea;border-right: 1px solid rgb(255, 196, 203);">
+                            <apex:outputText rendered="{!(ctrlr.contractTotalTO4NetDiff)> 0}">
+                                <apex:image value="{!imgUp}" width="7" height="7"/>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!(ctrlr.contractTotalTO4NetDiff) < 0}">
+                                <apex:image value="{!imgDown}" width="7" height="7"/>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!(ctrlr.contractTotalTO4NetDiff) == 0}">
+                                <apex:image value="{!imgRight}" width="7" height="7"/>
+                            </apex:outputText>
+                            <apex:outputText style="padding-left : 5px;"  value="{!(ctrlr.scontractTotalTO4NetDiff)}"/>
+                        </td>
+                    </tr>
+                    <tr style="font-size: 7px;">
+                        <td style="border-bottom: 1px solid #eaeaea;border-left: 1px solid rgb(255, 196, 203);">
+                            <apex:outputText value="{!$ObjectType.Contract__c.fields.Total_TO_3Net_Nego_YE__c.Label}" />
+                        </td>
+                        <td style="border-bottom: 1px solid #eaeaea;">
+                            <apex:outputText value="{!ctrlr.refContractTotalTO3Net}" />
+                        </td>
+                        <td style="border-bottom: 1px solid #eaeaea;">
+                            <apex:outputText value="{!ctrlr.negoBaseInitContractTotalTo3Net}" />
+                        </td>
+                        <td style="border-bottom: 1px solid #eaeaea;border-right: 1px solid rgb(255, 196, 203);">
+                            <apex:outputText rendered="{!(ctrlr.contractTotalTO3NetDiff)> 0}">
+                                <apex:image value="{!imgUp}" width="7" height="7"/>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!(ctrlr.contractTotalTO3NetDiff) < 0}">
+                                <apex:image value="{!imgDown}" width="7" height="7"/>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!(ctrlr.contractTotalTO3NetDiff) == 0}">
+                                <apex:image value="{!imgRight}" width="7" height="7"/>
+                            </apex:outputText>
+                            <apex:outputText style="padding-left : 5px;"  value="{!(ctrlr.scontractTotalTO3NetDiff)}"/>
+                        </td>
+                    </tr>
+                    <tr style="font-size: 7px;">
+                        <td style="border-bottom: 1px solid rgb(255, 196, 203);border-left: 1px solid rgb(255, 196, 203);">
+                            <apex:outputText value="{!$ObjectType.Contract__c.fields.Total_TO_2Net_Nego_YE__c.Label}" />
+                        </td>
+                        <td style="border-bottom: 1px solid rgb(255, 196, 203);">
+                            <apex:outputText value="{!ctrlr.refContractTotalTO2Net}" />
+                        </td>
+                        <td style="border-bottom: 1px solid rgb(255, 196, 203);">
+                            <apex:outputText value="{!ctrlr.negoBaseInitContractTotalTo2Net}" />
+                        </td>
+                        <td style="border-bottom: 1px solid rgb(255, 196, 203);border-right: 1px solid rgb(255, 196, 203);">
+                            <apex:outputText rendered="{!(ctrlr.contractTotalTO2NetDiff)> 0}">
+                                <apex:image value="{!imgUp}" width="7" height="7"/>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!(ctrlr.contractTotalTO2NetDiff) < 0}">
+                                <apex:image value="{!imgDown}" width="7" height="7"/>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!(ctrlr.contractTotalTO2NetDiff) == 0}">
+                                <apex:image value="{!imgRight}" width="7" height="7"/>
+                            </apex:outputText>
+                            <apex:outputText style="padding-left : 5px;"  value="{!(ctrlr.scontractTotalTO2NetDiff)}"/>
+                        </td>
+                    </tr> -->
+                    <tr style="font-size: 7px;">
+                        <td style=" padding-top:20px;"></td>
+                        <td style=" padding-top:20px;"></td>
+                        <td style=" padding-top:20px;"></td>
+                        <td style=" padding-top:20px;"></td>
+                    </tr>
+                    <tr style="font-size: 7px; background-color: rgb(255, 196, 203);" >
+                        <th style="border-top: 1px solid rgb(255, 196, 203); border-left: 1px solid rgb(255, 196, 203);">
+                            <apex:outputText value="{!$ObjectType.Nego_Plan__c.fields.NEGO_Rise_Rate_Validated_YE__c.Label} :" />
+                        </th>
+                        <td style="border-top: 1px solid rgb(255, 196, 203);"><apex:outputText value="{!ctrlr.negoPlan.NEGO_Rise_Rate_Validated_YE__c}" /></td>
+                          <th style=" border-left: 1px solid rgb(255, 196, 203);"><apex:outputText value="{!$ObjectType.Contract__c.fields.Retention_Rate__c.Label}:"/></th>
+                        <td style=""><apex:outputText value="{!ctrlr.currentContract.Retention_Rate__c}" /></td>
+
+
+                       </tr>
+                    <tr style="font-size: 7px;background-color: rgb(255, 196, 203);">
+                        <th style="border-top: 1px solid rgb(255, 196, 203);">
+                            <apex:outputText value="{!$ObjectType.Nego_Plan__c.fields.NEGO_Rise_Rate_Validated__c.Label} :" />
+                        </th>
+                        <td style="border-top: 1px solid rgb(255, 196, 203); border-right: 1px solid rgb(255, 196, 203);"><apex:outputText value="{!ctrlr.negoPlan.NEGO_Rise_Rate_Validated__c}" /></td>
+
+                        <th style=""><apex:outputText value="{!$ObjectType.Contract__c.fields.Retention_Rate_Promo__c.Label}:"/></th>
+                        <td style=" border-right: 1px solid rgb(255, 196, 203);"><apex:outputText value="{!IF(ctrlr.currentContract.Supplier_Nego_Scope__r.ManagePromoFlatPriceRate__c == true, ctrlr.currentContract.Retention_Rate_Promo__c , '')}"  /> </td>
+                    </tr>
+                    <tr style="font-size: 7px;background-color: rgb(255, 196, 203);">
+                        <th style="border-top: 1px solid rgb(255, 196, 203);">
+                                <apex:outputText value="{!$ObjectType.Nego_Plan__c.fields.NEGO_Rise_Rate_Requested__c.Label} :" />
+                            </th>
+                            <td style="border-top: 1px solid rgb(255, 196, 203); border-right: 1px solid rgb(255, 196, 203);"><apex:outputText value="{!ctrlr.negoPlan.NEGO_Rise_Rate_Requested__c}" /></td>
+
+                        <th style="border-bottom: 1px solid rgb(255, 196, 203); border-left: 1px solid rgb(255, 196, 203);">
+                            <!-- <apex:outputText value="{!$ObjectType.BudgetMaker_Detail__c.fields.Target_Signature_Date__c.Label} :" /> -->
+                        </th>
+                        <td style="border-bottom: 1px solid rgb(255, 196, 203);"><apex:outputText value="{!ctrlr.TargetSignatureDate}" /></td>
+                    </tr>
+                    <tr style="font-size: 7px;background-color: rgb(255, 196, 203);">
+                        <th style="border-bottom: 1px solid rgb(255, 196, 203);">
+                        </th>
+                        <td style="border-bottom: 1px solid rgb(255, 196, 203); border-right: 1px solid rgb(255, 196, 203);"></td>
+
+                        <th style="border-bottom: 1px solid rgb(255, 196, 203);">
+                            <!-- <apex:outputText value="{!$ObjectType.BudgetMaker_Detail__c.fields.Target_Contract_Start_Date__c.Label} :" /> -->
+                        </th>
+                        <td style="border-bottom: 1px solid rgb(255, 196, 203); border-right: 1px solid rgb(255, 196, 203);">
+                            <!-- <apex:outputText value="{!ctrlr.TargetContractDate}" /> -->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <table border="0" cellpadding="0" cellspacing="0" style="margin-top:10px; margin-left:7px; width: 43%; border: 1px solid rgb(255, 196, 203);">
+                <thead bgcolor="#39B1D9" style="text-align: center; font-size: 7px; font-weight: bold; background-color: rgb(255, 196, 203)">
+                    <th style="text-align: left;border-bottom: 1px solid #eaeaea;">
+
+                    </th>
+                    <th style="text-align: left;border-bottom: 1px solid #eaeaea;">
+                        <apex:outputText value="{!$Label.LBL_Reference_contract_index}" />
+                    </th>
+                    <th style="text-align: left;border-bottom: 1px solid #eaeaea;">
+                        <apex:outputText value="{!$Label.LBL_New_contract_index}" />
+                    </th>
+                    <th style="text-align: left;border-bottom: 1px solid #eaeaea;">
+                        <apex:outputText value="{!$Label.LBL_Evol_indice}" />
+                    </th>
+                </thead>
+                <tr style="font-size: 7px;">
+                    <td style="border-bottom: 1px solid #eaeaea;">
+                        <apex:outputText value="{!$Label.LBL_Base_100}" />
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputText value="{!ctrlr.BaseIndexRef}"/>
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputText value="{!ctrlr.BaseIndexCur}"/>
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputText value="{!ctrlr.BaseIndexEvol}%"/>
+                    </td>
+                </tr>
+                <tr style="font-size: 7px;">
+                    <td style="border-bottom: 1px solid #eaeaea;">
+                        <apex:outputText value="{!$ObjectType.Contract__c.fields.Index1__c.Label}" />
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputField value="{!ctrlr.refContract.Index1__c}"/>
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputField value="{!ctrlr.negoBaseInitContract.Index1__c}"/>
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputText value="{!ctrlr.refContractIndex1}%" />
+                    </td>
+                </tr>
+                <tr style="font-size: 7px;">
+                    <td style="border-bottom: 1px solid #eaeaea;">
+                        <apex:outputText value="{!$ObjectType.Contract__c.fields.Index2__c.Label}" />
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputField value="{!ctrlr.refContract.Index2__c}"/>
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputField value="{!ctrlr.negoBaseInitContract.Index2__c}"/>
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputText value="{!ctrlr.refContractIndex2}%" />
+                    </td>
+                </tr>
+                <tr style="font-size: 7px;">
+                    <td style="border-bottom: 1px solid #eaeaea;">
+                        <apex:outputText value="{!$ObjectType.Contract__c.fields.Index3__c.Label}" />
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputField value="{!ctrlr.refContract.Index3__c}"/>
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputField value="{!ctrlr.negoBaseInitContract.Index3__c}"/>
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputText value="{!ctrlr.refContractIndex3}%" />
+                    </td>
+                </tr>
+                <tr style="font-size: 7px;">
+                    <td style="border-bottom: 1px solid #eaeaea;">
+                        <apex:outputText value="{!$ObjectType.Contract__c.fields.Index4__c.Label}" />
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputField value="{!ctrlr.refContract.Index4__c}"/>
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputField value="{!ctrlr.negoBaseInitContract.Index4__c}"/>
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputText value="{!ctrlr.refContractIndex4}%" />
+                    </td>
+                </tr>
+                <tr style="font-size: 7px;">
+                    <td style="border-bottom: 1px solid #eaeaea;">
+                        <apex:outputText value="{!$ObjectType.Contract__c.fields.Index5__c.Label}" />
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputField value="{!ctrlr.refContract.Index5__c}"/>
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputField value="{!ctrlr.negoBaseInitContract.Index5__c}"/>
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputText value="{!ctrlr.refContractIndex5}%" />
+                    </td>
+                </tr>
+                <tr style="font-size: 7px;">
+                    <td style="border-bottom: 1px solid #eaeaea;">
+                        <apex:outputText value="{!$ObjectType.Contract__c.fields.Index6__c.Label}" />
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputField value="{!ctrlr.refContract.Index6__c}"/>
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputField value="{!ctrlr.negoBaseInitContract.Index6__c}"/>
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputText value="{!ctrlr.refContractIndex6}%" />
+                    </td>
+                </tr>
+                <tr style="font-size: 7px;">
+                    <td style="border-bottom: 1px solid #eaeaea;">
+                        <apex:outputText value="{!$ObjectType.Contract__c.fields.Index7__c.Label}" />
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputField value="{!ctrlr.refContract.Index7__c}"/>
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputField value="{!ctrlr.negoBaseInitContract.Index7__c}"/>
+                    </td>
+                    <td style="border-bottom: 1px solid #eaeaea; text-align: right;" >
+                        <apex:outputText value="{!ctrlr.refContractIndex7}%" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
+        </div>
+        <div>
+            <table  class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped" border="0" cellpadding="0" cellspacing="0" style="padding-top:10px; width: 100%;">
+                <tr padding="3px" class="header-title">
+                    <td padding="3px" colspan="2" style="padding: 3px;">
+                        <apex:outputText value="{!$Label.LBL_Addendum}" />
+                    </td>
+                </tr>
+            </table>
+            <apex:outputPanel rendered="{!ctrlr.contractDiscounts.SIZE > 0}" id="contractDiscount">
+                <div style="padding-top:10px;">
+                    <table  class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped" border="0" cellpadding="0" cellspacing="0" style="padding-top:10px; width: 100%;">
+                        <thead bgcolor="#39B1D9" style="text-align: center; font-size: 7px; font-weight: bold; background-color: rgb(255, 196, 203);">
+                            <th style="padding: .25rem .5rem;text-align: left;border-bottom: 1px solid #eaeaea;">
+                                <div>
+                                    <apex:outputText value="{!$ObjectType.Pol_Com_Condition__c.fields.Name.Label}" />
+                                </div>
+                            </th>
+                            <th style="padding: .25rem .5rem;text-align: left;border-bottom: 1px solid #eaeaea;">
+                                <div>
+                                    <apex:outputText value="{!$ObjectType.Pol_Com_Condition__c.fields.Long_Name__c.Label}" />
+                                </div>
+                            </th>
+                            <th style="padding: .25rem .5rem;text-align: left;border-bottom: 1px solid #eaeaea;">
+                                <div>
+                                    <apex:outputText value="{!$ObjectType.Contract_Discount__c.fields.Disc_BDate__c.Label}" />
+                                </div>
+                            </th>
+                            <th style="padding: .25rem .5rem;text-align: left;border-bottom: 1px solid #eaeaea;">
+                                <div>
+                                    <apex:outputText value="{!$ObjectType.Contract_Discount__c.fields.Disc_EDate__c.Label}" />
+                                </div>
+                            </th>
+                            <th style="padding: .25rem .5rem;text-align: left;border-bottom: 1px solid #eaeaea;">
+                                <div>
+                                    <apex:outputText value="{!$ObjectType.Contract_Discount__c.fields.Value_per__c.Label}" />
+                                </div>
+                            </th>
+                            <th style="padding: .25rem .5rem;text-align: left;border-bottom: 1px solid #eaeaea;">
+                                <div>
+                                    <apex:outputText value="{!$ObjectType.Contract_Discount__c.fields.Value_amt__c.Label}" />
+                                </div>
+                            </th>
+                            <th style="padding: .25rem .5rem;text-align: left;border-bottom: 1px solid #eaeaea;">
+                                <div>
+                                    <apex:outputText value="{!$ObjectType.Contract_Discount__c.fields.unit_amount__c.Label}" />
+                                </div>
+                            </th>
+                            <th style="padding: .25rem .5rem;text-align: left;border-bottom: 1px solid #eaeaea;">
+                                <div>
+                                    <apex:outputText value="{!$ObjectType.Contract_Discount__c.fields.Unit_Amount_Type__c.Label}" />
+                                </div>
+                            </th>
+                            <th style="padding: .25rem .5rem;text-align: left;border-bottom: 1px solid #eaeaea;">
+                                <div>
+                                    <apex:outputText value="{!$ObjectType.Contract_Discount__c.fields.Rank__c.Label}" />
+                                </div>
+                            </th>
+                        </thead>
+                        <apex:repeat value="{!ctrlr.contractDiscounts}" var="contractDiscount">
+                            <tbody>
+                                <td style="font-size: 7px; border-bottom: 1px solid #eaeaea;">
+                                    <apex:outputField value="{!contractDiscount.Condition_Type__r.name}" />
+                                </td>
+                                <td style="font-size: 7px; border-bottom: 1px solid #eaeaea;">
+                                    <apex:outputField value="{!contractDiscount.Condition_Type__r.Long_Name__c}" />
+                                </td>
+                                <td style="font-size: 7px; border-bottom: 1px solid #eaeaea;">
+                                    <apex:outputField value="{!contractDiscount.Disc_BDate__c}" />
+                                </td>
+                                <td style="font-size: 7px; border-bottom: 1px solid #eaeaea;">
+                                    <apex:outputField value="{!contractDiscount.Disc_EDate__c}" />
+                                </td>
+                                <td style="font-size: 7px; border-bottom: 1px solid #eaeaea; text-align: right;">
+                                    <apex:outputField value="{!contractDiscount.Value_per__c}" />
+                                </td>
+                                <td style="font-size: 7px; border-bottom: 1px solid #eaeaea; text-align: right;">
+                                    <apex:outputField value="{!contractDiscount.Value_amt__c}" />
+                                </td>
+                                <td style="font-size: 7px; border-bottom: 1px solid #eaeaea; text-align: right;">
+                                    <apex:outputField value="{!contractDiscount.unit_amount__c}" />
+                                </td>
+                                <td style="font-size: 7px; border-bottom: 1px solid #eaeaea; text-align: right;">
+                                    <apex:outputField value="{!contractDiscount.Unit_Amount_Type__c}" />
+                                </td>
+                                <td style="font-size: 7px; border-bottom: 1px solid #eaeaea; text-align: right;">
+                                    <apex:outputField value="{!contractDiscount.Rank__c}" />
+                                </td>
+                            </tbody>
+                        </apex:repeat>
+                    </table>
+                </div>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!ctrlr.contractDiscounts.SIZE == 0}">
+                <div style="padding-top:10px;">
+                    <table  class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped" border="0" cellpadding="0" cellspacing="0" style="padding-top:10px; width: 100%;">
+                        <thead bgcolor="#39B1D9" style="text-align: center; font-size: 7px; font-weight: bold; background-color: #f2f3f3">
+                            <th style="text-align: center;border-bottom: 1px solid #eaeaea;">
+                                <div>
+                                    <apex:outputText value="{!$Label.LBL_No_Addendum_To_Display}" />
+                                </div>
+                            </th>
+                            </thead>
+                    </table>
+                </div>
+            </apex:outputPanel>
+        </div>
+        <div style="padding-top:10px;">
+            <table  class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped" border="0" cellpadding="0" cellspacing="0" style="padding-top:10px; width: 100%;">
+                <tr padding="3px" class="header-title">
+                    <td padding="3px" colspan="2" style="padding: 3px;">
+                        <apex:outputText value="{!$Label.LBL_Page_References}" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+    </html>
+    <div style="padding-top:10px;">
+        <table style="padding-top:10px;">
+            <tr style="font-size: 7px; margin-top:5px">
+                <th>
+                    <apex:outputText value="{!$Label.LBL_Negotiate_FollowUp_URL}:" />
+                </th>
+                <td>
+                    <apex:outputLink value="/{!ctrlr.negotiateFollowUpURL}"
+                        target="_blank">
+                        <apex:outputText value="{!$Label.LBL_Negotiate_FollowUp_URL}" />
+                    </apex:outputLink>
+                </td>
+                <!-- <th style="padding-left:20px; {!IF(ctrlr.budgetMakerURL == '#', 'display :none;', '')}">
+                    <apex:outputText value="{!$Label.LBL_Budget_Maker_Report}" />
+                </th>
+                <td style="{!IF(ctrlr.budgetMakerURL == '#', 'display :none;', '')}">
+                    <apex:outputLink value="/{!ctrlr.budgetMakerURL}"
+                        target="_blank">
+                        <apex:outputText value="BudgetMaker Report" />
+                    </apex:outputLink>
+                </td> -->
+            </tr>
+        </table>
+    </div>
+</apex:page>

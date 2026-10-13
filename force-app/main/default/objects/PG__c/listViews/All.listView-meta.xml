@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>t_ActiveTaxes__c</columns>
+    <columns>t_InvoiceFooterTaxes__c</columns>
+    <columns>t_GrossPriceTaxes__c</columns>
+    <columns>t_DiscountTaxes__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All Records</label>
+</ListView>

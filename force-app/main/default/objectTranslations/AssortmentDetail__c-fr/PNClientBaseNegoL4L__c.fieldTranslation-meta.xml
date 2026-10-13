@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Calculé uniquement lorsque la DV Négo corrigée ensg est calculée au niveau de l’ASD si le KPI sélectionné dans les paramètres de l’assortiment est DV, ou lorsque la DN Négo corrigée est calculée au niveau de l’ASD si le KPI sélectionné est DN, et que le Statut de l’ASD est Validé.</help>
+    <label>#Réf ensg. corrigé</label>
+    <name>PNClientBaseNegoL4L__c</name>
+</CustomFieldTranslation>

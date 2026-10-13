@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>false</isExposed>
+    <!-- <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage,lightning__RecordPage">
+            <property name="negoscopeId" type="String" label="NegoScope Id" required="true"/>
+            <property name="negoYear" type="Integer" label="Nego year" required="true"/>
+            <property name="contractId" type="String" label="Contract Id"/>
+        </targetConfig>
+    </targetConfigs> -->
+</LightningComponentBundle>

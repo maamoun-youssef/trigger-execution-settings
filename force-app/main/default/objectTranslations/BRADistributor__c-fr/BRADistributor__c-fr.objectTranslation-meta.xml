@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Marque distribuée</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Marques distribuées</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>negOptim Brands Distributor</layout>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Marque distribuée</nameFieldLabel>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

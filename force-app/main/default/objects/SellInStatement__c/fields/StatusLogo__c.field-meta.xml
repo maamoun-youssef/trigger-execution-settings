@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StatusLogo__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(TEXT(Status__c), 
+  &quot;Requested&quot;, &quot;PICTOS/PNG/Picto_negOptim2_Readyforwork&quot;, 
+  &quot;Submitted&quot;, &quot;PICTOS/PNG/Picto_negOptim2_Sent&quot;, 
+  &quot;Closed&quot;, &quot;PICTOS/PNG/Picto_negOptim2_Closed&quot;, 
+  null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Status Logo</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

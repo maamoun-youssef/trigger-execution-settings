@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>William</label>
+    <protected>false</protected>
+    <values>
+        <field>Description__c</field>
+        <value xsi:type="xsd:string">Test W</value>
+    </values>
+    <values>
+        <field>FlowSettings__c</field>
+        <value xsi:type="xsd:string">{&quot;name&quot;:&quot;&quot;,&quot;flowLabel&quot;:&quot;&quot;,&quot;buttonLabel&quot;:&quot;&quot;,&quot;buttonIcon&quot;:&quot;&quot;}</value>
+    </values>
+    <values>
+        <field>HeaderBackground__c</field>
+        <value xsi:type="xsd:string">/resource/1746800143000/ConnectHeaderAvatar</value>
+    </values>
+    <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">/resource/1746601734000/ConnectLogo</value>
+    </values>
+    <values>
+        <field>Name__c</field>
+        <value xsi:type="xsd:string">William</value>
+    </values>
+    <values>
+        <field>Sections__c</field>
+        <value xsi:type="xsd:string">[{&quot;title&quot;:&quot;Test Section W1&quot;,&quot;subTitle&quot;:&quot;Test Section Sub W1&quot;,&quot;order&quot;:1,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH000007TjozYAC&quot;,&quot;color&quot;:&quot;#4C64A9&quot;},{&quot;title&quot;:&quot;Test Section W2&quot;,&quot;subTitle&quot;:&quot;Test W2&quot;,&quot;order&quot;:2,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/resource/1747040114000/ConnectSectionAvatar&quot;,&quot;color&quot;:&quot;#FF0000&quot;}]</value>
+    </values>
+    <values>
+        <field>Themes__c</field>
+        <value xsi:type="xsd:string">[{&quot;sectionIndex&quot;:0,&quot;redirectionType&quot;:&quot;Grid&quot;,&quot;redirection&quot;:&quot;PGsGrid_Tab&quot;,&quot;params&quot;:null,&quot;label&quot;:&quot;Test W1 themes 1&quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/resource/1747038985000/ConnectThemeAvatar&quot;},{&quot;sectionIndex&quot;:0,&quot;redirectionType&quot;:&quot;Grid&quot;,&quot;redirection&quot;:&quot;Invoice_portal&quot;,&quot;params&quot;:null,&quot;label&quot;:&quot;Invoices&quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH000007cAwnYAE&quot;},{&quot;sectionIndex&quot;:0,&quot;redirectionType&quot;:&quot;Page&quot;,&quot;redirection&quot;:&quot;sellinStatementList&quot;,&quot;params&quot;:null,&quot;label&quot;:&quot;Grid Settings Page&quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/resource/1747038985000/ConnectThemeAvatar&quot;},{&quot;sectionIndex&quot;:0,&quot;redirectionType&quot;:&quot;URL&quot;,&quot;redirection&quot;:&quot;/NegoptimConnect/sellin-statement-list&quot;,&quot;params&quot;:null,&quot;label&quot;:&quot;Sellin Statement Matrix&quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH000007gpGfYAI&quot;}]</value>
+    </values>
+    <values>
+        <field>isActive__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>isDeleted__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PGPriceList__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Price List PG</label>
+    <referenceTo>PG__c</referenceTo>
+    <relationshipLabel>Assortment PriceWaterFalls (Price List PG)</relationshipLabel>
+    <relationshipName>Assortment_PriceWaterFallsPGPriceList</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

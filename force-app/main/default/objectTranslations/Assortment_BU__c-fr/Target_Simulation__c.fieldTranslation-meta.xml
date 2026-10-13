@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Identification en Cible de la DV Négo proposée. La DV Négo proposée Cible alimente le Reporting jusqu’au passage en statut validé. --></help>
+    <label>Cible ?</label>
+    <name>Target_Simulation__c</name>
+</CustomFieldTranslation>

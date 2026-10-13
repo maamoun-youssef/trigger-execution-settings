@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MBF_Section_ContractCounterpartyDetail__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Mass Batch Form - display the section of Contract Line Counterparty Detail</description>
+    <inlineHelpText>Display the section of Contract Line Counterparty Detail</inlineHelpText>
+    <label>Section - Contract Counterparty Detail</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

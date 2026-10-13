@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Préférence de chargement des promo</label>
+    <name>LoadPreferencePromoStatement__c</name>
+    <picklistValues>
+        <masterLabel>Column</masterLabel>
+        <translation><!-- Column --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Row</masterLabel>
+        <translation><!-- Row --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

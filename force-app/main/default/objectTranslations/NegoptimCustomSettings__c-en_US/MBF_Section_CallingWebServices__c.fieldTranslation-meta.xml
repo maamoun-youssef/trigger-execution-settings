@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Display the section of Calling Web Services --></help>
+    <label><!-- Section - Calling Web Services --></label>
+    <name>MBF_Section_CallingWebServices__c</name>
+</CustomFieldTranslation>

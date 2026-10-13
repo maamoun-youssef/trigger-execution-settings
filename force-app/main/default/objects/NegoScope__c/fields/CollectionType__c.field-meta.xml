@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CollectionType__c</fullName>
+    <description>Specify the Type of Offer/Assortment managing for the Client/Supplier for the linked agreement</description>
+    <inlineHelpText>Specify the Type of Offer/Assortment managing for the Client/Supplier for the linked agreement</inlineHelpText>
+    <label>Collection Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Collection_Type</valueSetName>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Mettre à jour Origin</label>
+    <name>UpdateOrigin__c</name>
+    <picklistValues>
+        <masterLabel>BusinessOwner</masterLabel>
+        <translation>Resp. métier</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Legal</masterLabel>
+        <translation>Juridique (Boulanger)</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Supplier</masterLabel>
+        <translation>Fournisseur</translation>
+    </picklistValues>
+</CustomFieldTranslation>

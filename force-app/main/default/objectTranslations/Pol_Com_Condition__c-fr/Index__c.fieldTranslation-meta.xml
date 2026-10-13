@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Type d&apos;indice</label>
+    <name>Index__c</name>
+    <picklistValues>
+        <masterLabel>Index1</masterLabel>
+        <translation>Indice 2Net</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Index2</masterLabel>
+        <translation>Indice 3Net SRP</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Index3</masterLabel>
+        <translation>Indice 3Net Négo hors Fid</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Index4</masterLabel>
+        <translation>Indice 3Net Négo avec Fid</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Index5</masterLabel>
+        <translation>Indice 4Net</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Index6</masterLabel>
+        <translation>Indice 5Net</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Index7</masterLabel>
+        <translation>Indice 6Net</translation>
+    </picklistValues>
+</CustomFieldTranslation>

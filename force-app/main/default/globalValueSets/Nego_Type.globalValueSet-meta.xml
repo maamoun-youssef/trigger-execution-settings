@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Ferme</fullName>
+        <default>true</default>
+        <label>Ferme</label>
+    </customValue>
+    <customValue>
+        <fullName>Condition</fullName>
+        <default>false</default>
+        <label>Condition</label>
+    </customValue>
+    <customValue>
+        <fullName>Commission</fullName>
+        <default>false</default>
+        <label>Commission</label>
+    </customValue>
+    <customValue>
+        <fullName>Concession</fullName>
+        <default>false</default>
+        <label>Concession</label>
+    </customValue>
+    <description>Ferme: contrat où le stock est la propriété de l&apos;enseigne 
+Condition : contrat où le stock devient la propriété de l&apos;enseigne à la vente 
+Commission : contrat où l&apos;enseigne n&apos;est jamais propriétaire du stock 
+Concession : contrat de location d&apos;un espace p</description>
+    <masterLabel>Nego Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

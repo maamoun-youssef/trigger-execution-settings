@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TradeOpType__c</fullName>
+    <label>Operation Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Trade Op 1</fullName>
+                <default>false</default>
+                <label>Trade Op 1</label>
+            </value>
+            <value>
+                <fullName>Trade Op 2</fullName>
+                <default>false</default>
+                <label>Trade Op 2</label>
+            </value>
+            <value>
+                <fullName>Trade Op 3</fullName>
+                <default>false</default>
+                <label>Trade Op 3</label>
+            </value>
+            <value>
+                <fullName>Anniversaires</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Anniversaires</label>
+            </value>
+            <value>
+                <fullName>Autres</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Autres</label>
+            </value>
+            <value>
+                <fullName>Beauté 1</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Beauté 1</label>
+            </value>
+            <value>
+                <fullName>Beauté Automne</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Beauté Automne</label>
+            </value>
+            <value>
+                <fullName>Beauté Hiver</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Beauté Hiver</label>
+            </value>
+            <value>
+                <fullName>Blanc</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Blanc</label>
+            </value>
+            <value>
+                <fullName>Gros Volumes</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Gros Volumes</label>
+            </value>
+            <value>
+                <fullName>Prospection</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Prospection</label>
+            </value>
+            <value>
+                <fullName>Renfort</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Renfort</label>
+            </value>
+            <value>
+                <fullName>Trade Apero</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Trade Apero</label>
+            </value>
+            <value>
+                <fullName>Trade CSN</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Trade CSN</label>
+            </value>
+            <value>
+                <fullName>Trade Enseigne</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Trade Enseigne</label>
+            </value>
+            <value>
+                <fullName>Trade Epiphanie</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Trade Epiphanie</label>
+            </value>
+            <value>
+                <fullName>Trade Pizza</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Trade Pizza</label>
+            </value>
+            <value>
+                <fullName>Trade Raclette</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Trade Raclette</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

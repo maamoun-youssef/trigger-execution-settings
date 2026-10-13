@@ -1,0 +1,7 @@
+.custom_slds-grid_align-start,
+.slds-grid--align-start {
+  justify-content: flex-start;
+}
+.headerSection {
+  border-top: 1px solid #c9c9c9;
+}

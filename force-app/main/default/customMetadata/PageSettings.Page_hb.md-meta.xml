@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Page_hb</label>
+    <protected>false</protected>
+    <values>
+        <field>Description__c</field>
+        <value xsi:type="xsd:string">Test 2</value>
+    </values>
+    <values>
+        <field>FlowSettings__c</field>
+        <value xsi:type="xsd:string">{&quot;name&quot;:&quot;&quot;,&quot;flowLabel&quot;:&quot;&quot;,&quot;buttonLabel&quot;:&quot;&quot;,&quot;buttonIcon&quot;:&quot;&quot;}</value>
+    </values>
+    <values>
+        <field>HeaderBackground__c</field>
+        <value xsi:type="xsd:string">/sfc/servlet.shepherd/document/download/069QH000007iD3xYAE</value>
+    </values>
+    <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">/sfc/servlet.shepherd/document/download/069QH000007iAdyYAE</value>
+    </values>
+    <values>
+        <field>Name__c</field>
+        <value xsi:type="xsd:string">Page hb</value>
+    </values>
+    <values>
+        <field>Sections__c</field>
+        <value xsi:type="xsd:string">[{&quot;title&quot;:&quot;Title 1&quot;,&quot;subTitle&quot;:&quot;sous title 1&quot;,&quot;order&quot;:1,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH000007iF5lYAE&quot;,&quot;color&quot;:&quot;#000000&quot;}]</value>
+    </values>
+    <values>
+        <field>Themes__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>isActive__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>isDeleted__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>YearlyPromoRate</fullName>
+    <active>true</active>
+    <label>Yearly Promo Rate</label>
+    <picklistValues>
+        <picklist>PromoAgreementType__c</picklist>
+        <values>
+            <fullName>AgencyAgreement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CallOffAgreementSellIn</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CallOffAgreementSellOut</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SellIn</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SellOut</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Services</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>PromoStatementType__c</picklist>
+        <values>
+            <fullName>AgencyAgreement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CallOffAgreementSellIn</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CallOffAgreementSellOut</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SellIn</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SellOut</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Services</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diffused</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In preparation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Live</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Printed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request for approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request for approval Fact</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Revue budg%2E déc%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Revue budg%2E juin%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Revue budg%2E mars%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Revue budg%2E sept%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Update with fact data</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Validate with fact data</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Validated</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type__c</picklist>
+        <values>
+            <fullName>CommercialEvent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SellOutAgreement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ServicesAgreement</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

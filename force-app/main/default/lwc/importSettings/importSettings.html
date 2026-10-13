@@ -1,0 +1,170 @@
+<template>
+    <div class="contentContainer">
+        <!-- Content -->
+        <template if:true={loadingData}>
+            <div class="slds-spinner_container">
+                <div class="loader slds-spinner_container slds-align--absolute-center">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </template>
+        <template if:false={importSettings.name}>
+            <div class="slds-text-align--center">
+                {labels.LBL_Has_No_Import_Settings}
+            </div>
+        </template>
+        <template if:true={importSettings.name}>
+            <lightning-formatted-rich-text value={reminderMsg}></lightning-formatted-rich-text>
+
+            <!-- ALWAYS-VISIBLE DEFAULT VALUES SECTION -->
+            <template lwc:if={defaultValueFieldsList.length}>
+                <div class="slds-box_xx-small">
+                    <p class="slds-text-title_caps slds-m-bottom_x-small">
+                        {labels.LBL_Import_Default_Value}
+                    </p>
+                    <div class="slds-grid slds-wrap slds-gutters_x-small">
+                        <template for:each={defaultValueFieldsList} for:item="field">
+                            <div key={field.name} class="slds-col slds-size_1-of-2 slds-m-bottom_x-small">
+                                <lightning-textarea lwc:if={field.isTextarea} data-field={field.name}
+                                    label={field.label} onchange={handleDefaultValueChange} value={field.defaultValue}>
+                                </lightning-textarea>
+                                <lightning-input lwc:elseif={field.isNumberField} type="number"
+                                    data-field={field.name} onchange={handleDefaultValueChange}
+                                    step={field.step} value={field.defaultValue}
+                                    class="input-right" label={field.label}>
+                                </lightning-input>
+                                <template lwc:elseif={field.isReference}>
+                                    <lightning-record-edit-form object-api-name={objectName}>
+                                        <lightning-input-field label={field.label} field-name={field.name}
+                                            value={field.defaultValue} data-field={field.name}
+                                            onchange={handleDefaultValueChange}>
+                                        </lightning-input-field>
+                                    </lightning-record-edit-form>
+                                </template>
+                                <lightning-input lwc:elseif={field.isBoolean} type="checkbox" label={field.label}
+                                    data-field={field.name} onchange={handleDefaultValueChange}
+                                    checked={field.defaultValue}>
+                                </lightning-input>
+                                <template lwc:elseif={field.isPicklist}>
+                                    <select onchange={handleDefaultValueChange} data-field={field.name}>
+                                        <template for:each={field.picklistOptions} for:item="option">
+                                            <template lwc:if={option.isDisabled}>
+                                                <option key={option.value} value={option.value}
+                                                    selected={option.isSelected} disabled>
+                                                    {option.label}
+                                                </option>
+                                            </template>
+                                            <template lwc:else>
+                                                <option key={option.value} value={option.value}
+                                                    selected={option.isSelected}>
+                                                    {option.label}
+                                                </option>
+                                            </template>
+                                        </template>
+                                    </select>
+                                </template>
+                                <lightning-input lwc:elseif={field.isDate} type="date" data-field={field.name}
+                                    onchange={handleDefaultValueChange} label={field.label}
+                                    value={field.defaultValue}>
+                                </lightning-input>
+                                <lightning-input lwc:elseif={field.isDateTime} type="datetime"
+                                    data-field={field.name} onchange={handleDefaultValueChange}
+                                    label={field.label} value={field.defaultValue}>
+                                </lightning-input>
+                                <template lwc:else>
+                                    <lightning-input data-field={field.name}
+                                        onchange={handleDefaultValueChange} label={field.label}
+                                        value={field.defaultValue}>
+                                    </lightning-input>
+                                </template>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+
+            <!-- ADVANCED MODE - column mapping only (no default value column here anymore) -->
+            <div if:true={isAdvancedMode}>
+                <div class="tableContainer">
+                    <table
+                        class="fieldTable slds-m-top--small slds-table slds-scrollable slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border--right slds-no-row-hover">
+                        <thead>
+                            <tr class="stickyHeader">
+                                <th>{labels.LBL_Import_Field_Name}</th>
+                                <th>{labels.LBL_Import_Field_Label}</th>
+                                <th>{labels.LBL_Import_Field_Excel_Column}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template lwc:if={fieldsToImport.length} for:each={fieldsToImport} for:item="field"
+                                for:index="index">
+                                <tr key={field.name}>
+                                    <td>
+                                        <div class="fieldNameClass slds-grid">
+                                            {field.name}
+                                            <p lwc:if={field.isRequired} class="redColor"> &nbsp;*</p>
+                                            <lightning-icon lwc:if={field.isRequired} icon-name="utility:linked"
+                                                size="x-small" style="position: absolute; right: 2px; bottom: 2px;"
+                                                title={labels.LBL_Used_in_Ext_Id}></lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>{field.label}</td>
+                                    <td>
+                                        <lightning-input class="importInput" required={field.isRequired} type="text"
+                                            value={field.columnName} variant="label-hidden" formatter="decimal" step="0"
+                                            data-field="columnName" data-index={index}
+                                            onchange={handleChangeColumnNumber}>
+                                        </lightning-input>
+                                    </td>
+                                </tr>
+                            </template>
+                            <template lwc:else>
+                                <tr>
+                                    <td colspan="3" class="emptyCell">
+                                        {labels.LBL_No_Item_To_Display}
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="slds-p-vertical--x-small loadStartClass">
+                    <lightning-input type="number" formatter="integer" label={labels.LBL_Import_First_Row_Number}
+                        required value={loadStartLine} onchange={handleChangeLoadStartLine}></lightning-input>
+                </div>
+                <div class="slds-p-vertical--x-small sheetNumberClass">
+                    <lightning-input type="number" formatter="integer" label={labels.LBL_Import_Sheet_Number} required
+                        value={sheetNumber} onchange={handleChangeSheetNumber}></lightning-input>
+                </div>
+            </div>
+            <div class="slds-border--top slds-m-top--small" if:true={isAdvancedMode}></div>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-grid">
+                    <lightning-input type="file" label={labels.LBL_Upload_File} accept={acceptedFormats}
+                        onclick={handleValidateImportSettings} onchange={importExcel}>
+                    </lightning-input>
+                    <p lwc:if={mustIncludeField} class="errorMsg slds-m-top--x-small">
+                        {labels.MSG_Import_Must_Include_Non_Required_Field}
+                    </p>
+                    <div class="slds-var-p-around_xx-small slds-align-middle" if:true={file}>
+                        <div class="slds-p-top_x-small successColor">
+                            {file.name}
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-align--absolute-center" if:true={importSettings.showAdvancedMode}>
+                    <lightning-input type="toggle" label={labels.LBL_Advanced_Mode} value={isAdvancedMode}
+                        onchange={toggleAdvancedMode} message-toggle-active=""
+                        message-toggle-inactive=""></lightning-input>
+                </div>
+                <div class="slds-col slds-align--absolute-center">
+                    <a onclick={exportExcel}>
+                        {labels.LBL_Export_Template}</a>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

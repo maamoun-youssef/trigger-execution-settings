@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Price List Statement</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Price List Statements</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>Présentation Price List Statement</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Depreciation Rate --></label>
+        <name>DepreciationRate</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Iso Partner --></label>
+        <name>IsoPartner</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Rise Rate --></label>
+        <name>RiseRate</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Simulation --></label>
+        <name>Simulation</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Tariff --></label>
+        <name>Tariff</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- GeneratePriceListStatement --></label>
+        <name>GeneratePriceListStatement</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- PriceListStatementMatrix --></label>
+        <name>PriceListStatementMatrix</name>
+    </webLinks>
+</CustomObjectTranslation>

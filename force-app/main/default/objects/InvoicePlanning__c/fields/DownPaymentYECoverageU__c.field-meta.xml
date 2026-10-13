@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DownPaymentYECoverageU__c</fullName>
+    <description>Give % of the calculated amount for the Unit amount condition that should be considered in the Down Payment planning. For exemple, if the condition give a total amount equal to 120,000€ and the down payment coverage is 80%, the total amount that should be considered for the series is equal to 120,000 * 80% = 96,000.</description>
+    <label>Down Payment YE Coverage (U)</label>
+    <precision>3</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

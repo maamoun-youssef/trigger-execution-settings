@@ -1,0 +1,111 @@
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+.groupCell {
+    background-color: #7f7f7f;
+    color: white;
+}
+
+.groupOpenCell {
+    background-color: #a3a3a3;
+    color: white;
+}
+
+.tdCell {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /*font-size: 130%;*/
+    margin: 5px;
+    /*  margin  */
+    box-sizing: border-box;
+    transition: width 0.5s ease-in-out, height 0.5s ease-in-out, font-size 0.5s ease-in-out;
+}
+
+.thWidth {
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
+}
+
+.NegoTotalClass {
+    background-color:#6ec6e9;
+    color:white;
+    text-align:center;
+}
+
+.ExitNegoTotalClass {
+    background-color:#82d7ff;
+    color:white;
+    text-align:center;
+}
+
+.ProvisionTotalClass {
+    background-color:#eac4f2;
+    color:white;
+    text-align:center;
+}
+
+.SupplierTotalClass {
+    background-color:#eac4f2;
+    color:white;
+    text-align:center;
+}
+
+.InvoicingTotalClass {
+    background-color:#eac4f2;
+    color:white;
+    text-align:center;
+}
+
+.BalancedTotalClass {
+    background-color:#f8a5a5;
+    color:white;
+    text-align:center;
+}
+
+.header-icon {
+    --slds-c-icon-color-foreground: #6ec6e9 !important;
+    --slds-c-icon-color-foreground-default: #6ec6e9 !important;
+}
+
+.white-icon {
+    --slds-c-icon-color-foreground: white !important;
+    --slds-c-icon-color-foreground-default: white !important;
+}

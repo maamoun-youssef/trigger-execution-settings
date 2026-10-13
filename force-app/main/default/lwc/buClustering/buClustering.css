@@ -1,0 +1,32 @@
+table th{
+    text-align: center;
+}
+.slds-page-header {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.slds-panel__header {
+    margin: 0 !important;
+}
+.main-table th{
+ padding: 0.2%;
+}
+.outter-table th{
+    border: 1px solid #c9c9c9;
+ padding: 0.02%;
+ background-color: #F3F3F3;
+}
+.inner-table th{
+    border: 1px solid #c9c9c9;
+    padding: 0.05%;
+    background-color: #F3F3F3;
+}
+.outter-table td{
+    border: 1px solid #c9c9c9;
+    padding: 0.02%;
+    white-space: normal;
+}
+.inner-table td{
+    border: 1px solid #c9c9c9;
+    padding: 7px;
+}

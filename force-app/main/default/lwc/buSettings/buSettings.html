@@ -1,0 +1,26 @@
+<template>
+    <template lwc:if={isLoading}>
+        <div class="slds-spinner_container greyBg">
+            <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+        </div>
+    </template>
+    <template lwc:else>
+        <div class="mainContainer">
+            <div class="slds-media__body slds-p-around_x-small stickyHeader pageHeader">
+                <div class="sectionTitle">
+                    {labels.LBL_BUListManagerSettings}
+                </div>
+            </div>
+            <div class="slds-grid slds-grid_align-end slds-p-horizontal_none slds-m-bottom_x-small button-container">
+                <lightning-button label={labels.LBL_Save} variant="brand" onclick={handleSave}
+                    class="slds-m-vertical_xx-small slds-m-left_xx-small"></lightning-button>
+            </div>
+            <div class="slds-p-horizontal_medium">
+                <lightning-combobox name="childrenBUDefaultGridSettingsTemplate"
+                    label={labels.LBL_Default_Grid_Settings_Template} value={childrenBUDefaultGridSettingsTemplate}
+                    options={gridSettingsOptions} onchange={handleChange} class="template-combobox">
+                </lightning-combobox>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Type du produit de référence - A REVOIR</label>
+    <name>Product_Reference_Type__c</name>
+    <picklistValues>
+        <masterLabel>Reno</masterLabel>
+        <translation><!-- Reno --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Switch</masterLabel>
+        <translation><!-- Switch --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

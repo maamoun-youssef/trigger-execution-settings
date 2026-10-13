@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- The row will be available to move to another contract record type --></help>
+    <label>Cible de transfert</label>
+    <name>Is_TargetToMove__c</name>
+</CustomFieldTranslation>

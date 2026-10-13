@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Joint Venture</label>
+    <name>JointVenture__c</name>
+    <picklistValues>
+        <masterLabel>JointVenture1</masterLabel>
+        <translation><!-- JointVenture1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>JointVenture2</masterLabel>
+        <translation><!-- JointVenture2 --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

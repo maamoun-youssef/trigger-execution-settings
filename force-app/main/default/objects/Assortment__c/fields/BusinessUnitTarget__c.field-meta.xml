@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BusinessUnitTarget__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>It is the client banner layer or the channel for which the assortment is created. Following the assortment type, it can be one of the client banner for ex: CRF Hyper FR,.. Or it can be one of the distribution channel</description>
+    <label>BU Target</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>(1 AND 2) OR (3 AND 4) OR (5 AND 6)</booleanFilter>
+        <filterItems>
+            <field>BusinessUnit__c.SetAssortmentBudgetBUTarget__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <filterItems>
+            <field>$Source.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ChannelBudget</value>
+        </filterItems>
+        <filterItems>
+            <field>$Source.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>AS Target, TargetConso</value>
+        </filterItems>
+        <filterItems>
+            <field>BusinessUnit__c.SetAssortmentTargetBUTarget__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <filterItems>
+            <field>$Source.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>ChannelBudget, AS Target, TargetConso</value>
+        </filterItems>
+        <filterItems>
+            <field>BusinessUnit__c.SetAssortmentNegoBUTarget__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>BusinessUnit__c</referenceTo>
+    <relationshipLabel>Assortments (Business Unit Target)</relationshipLabel>
+    <relationshipName>ASBusinessUnitTarget</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

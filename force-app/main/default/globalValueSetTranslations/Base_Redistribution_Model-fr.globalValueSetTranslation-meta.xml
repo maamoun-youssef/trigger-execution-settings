@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Equally</masterLabel>
+        <translation>Egal</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Purchases of the month</masterLabel>
+        <translation>Achats du mois</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>YTD Purchases (current year)</masterLabel>
+        <translation>Achats cumulés (Année en cours)</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Client/Fournisseur</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Clients/Fournisseurs</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>negOptim CPG Client Supplier</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Life Cycle --></label>
+            <section>Life Cycle</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Nom Client/Fournisseur</nameFieldLabel>
+    <quickActions>
+        <label><!-- Send Sales Terms Statement Request --></label>
+        <name>Send_Sales_Terms_Statement_Request</name>
+    </quickActions>
+    <recordTypes>
+        <label>Client</label>
+        <name>Client</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Fournisseur</label>
+        <name>Supplier</name>
+    </recordTypes>
+    <startsWith>Vowel</startsWith>
+    <webLinks>
+        <label>Ajouter un nego scope</label>
+        <name>Add_NegoScope</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- DocumentsCenter --></label>
+        <name>DocumentsCenter</name>
+    </webLinks>
+    <webLinks>
+        <label>Ajouter un nego scope (guidé)</label>
+        <name>Guided_Add_NegoScope</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- InvoiceManager --></label>
+        <name>InvoiceManager</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- InvoiceManagerVisualizer --></label>
+        <name>InvoiceManagerVisualizer</name>
+    </webLinks>
+    <webLinks>
+        <label>Synchro Catégorie Client</label>
+        <name>PGClientCategoryToASD</name>
+    </webLinks>
+</CustomObjectTranslation>

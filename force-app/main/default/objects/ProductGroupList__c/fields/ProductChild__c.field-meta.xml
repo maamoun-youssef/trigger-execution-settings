@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProductChild__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Product faisant partie du groupe</description>
+    <label>Child Product</label>
+    <referenceTo>Product2</referenceTo>
+    <relationshipLabel>Product Group Lists (Child Product)</relationshipLabel>
+    <relationshipName>Product_Group_Lists1</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

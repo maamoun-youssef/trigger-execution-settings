@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Extract</fullName>
+        <default>false</default>
+        <label>Extract</label>
+    </customValue>
+    <customValue>
+        <fullName>Extracted</fullName>
+        <default>false</default>
+        <label>Extracted</label>
+    </customValue>
+    <description>Used to define action done/to be doone for the row with interface (IN/OUT)</description>
+    <masterLabel>External Synchro Status</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

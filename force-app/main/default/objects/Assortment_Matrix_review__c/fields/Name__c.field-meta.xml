@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Name__c</fullName>
+    <label>Nom</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Budget</fullName>
+                <default>false</default>
+                <label>Budget</label>
+            </value>
+            <value>
+                <fullName>Negotiated</fullName>
+                <default>false</default>
+                <label>Negotiated</label>
+            </value>
+            <value>
+                <fullName>Forecast</fullName>
+                <default>false</default>
+                <label>Forecast</label>
+            </value>
+            <value>
+                <fullName>Fact1</fullName>
+                <default>false</default>
+                <label>Fact1</label>
+            </value>
+            <value>
+                <fullName>Fact2</fullName>
+                <default>false</default>
+                <label>Fact2</label>
+            </value>
+            <value>
+                <fullName>Salesforce</fullName>
+                <default>false</default>
+                <label>Salesforce</label>
+            </value>
+            <value>
+                <fullName>Like4Like</fullName>
+                <default>false</default>
+                <label>Like4Like</label>
+            </value>
+            <value>
+                <fullName>Target</fullName>
+                <default>false</default>
+                <label>Target</label>
+            </value>
+            <value>
+                <fullName>Forecast P1</fullName>
+                <default>false</default>
+                <label>Forecast P1</label>
+            </value>
+            <value>
+                <fullName>Budget P1</fullName>
+                <default>false</default>
+                <label>Budget P1</label>
+            </value>
+            <value>
+                <fullName>Target P1</fullName>
+                <default>false</default>
+                <label>Target P1</label>
+            </value>
+            <value>
+                <fullName>Negotiated P1</fullName>
+                <default>false</default>
+                <label>Negotiated P1</label>
+            </value>
+            <value>
+                <fullName>Fact1 P1</fullName>
+                <default>false</default>
+                <label>Fact1 P1</label>
+            </value>
+            <value>
+                <fullName>Fact2 P1</fullName>
+                <default>false</default>
+                <label>Fact2 P1</label>
+            </value>
+            <value>
+                <fullName>Like4Like P1</fullName>
+                <default>false</default>
+                <label>Like4Like P1</label>
+            </value>
+            <value>
+                <fullName>Salesforce P1</fullName>
+                <default>false</default>
+                <label>Salesforce P1</label>
+            </value>
+            <value>
+                <fullName>Fact1_1</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Fact1_1</label>
+            </value>
+            <value>
+                <fullName>Fact2_1</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Fact2_1</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

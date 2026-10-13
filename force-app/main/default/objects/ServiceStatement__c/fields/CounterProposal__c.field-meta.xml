@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CounterProposal__c</fullName>
+    <description>Text field used to record the internal counter-proposal in response to a supplier’s clause within a Terms Dispute. Represents the alternative terms or conditions suggested during the negotiation.</description>
+    <label>Counter Proposal</label>
+    <length>32768</length>
+    <trackTrending>false</trackTrending>
+    <type>Html</type>
+    <visibleLines>25</visibleLines>
+</CustomField>

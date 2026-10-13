@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ASDSynchroToASBULDate__c</fullName>
+    <description>Last ASD data synchro to ASBU (old SF_Planning)</description>
+    <label>ASD Synchro To AS BU LDate</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

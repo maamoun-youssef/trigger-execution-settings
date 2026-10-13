@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsSalesTermsChanged__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates whether the supplier’s Sales Terms (CGV) have changed compared to the previous declaration. Used to track updates or amendments to contractual conditions between two periods.</description>
+    <label>Sales Terms were changed</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>ActualYTD</fullName>
+        <default>true</default>
+        <label>Actual (YTD)</label>
+    </customValue>
+    <customValue>
+        <fullName>Forecasted</fullName>
+        <default>false</default>
+        <label>Forecasted</label>
+    </customValue>
+    <customValue>
+        <fullName>Negotiated</fullName>
+        <default>false</default>
+        <label>Negotiated</label>
+    </customValue>
+    <customValue>
+        <fullName>Targeted</fullName>
+        <default>false</default>
+        <label>Targeted</label>
+    </customValue>
+    <customValue>
+        <fullName>Stated</fullName>
+        <default>false</default>
+        <label>Stated</label>
+    </customValue>
+    <customValue>
+        <fullName>BackOffice</fullName>
+        <default>false</default>
+        <label>BackOffice</label>
+    </customValue>
+    <customValue>
+        <fullName>Manual</fullName>
+        <default>false</default>
+        <label>Manual</label>
+    </customValue>
+    <description>Give the base elements used for calculation</description>
+    <masterLabel>Database origin</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

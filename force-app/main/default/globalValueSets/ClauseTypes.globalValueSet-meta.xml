@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Title</fullName>
+        <default>false</default>
+        <label>Title</label>
+    </customValue>
+    <customValue>
+        <fullName>SubTitle</fullName>
+        <default>false</default>
+        <label>SubTitle</label>
+    </customValue>
+    <customValue>
+        <fullName>Body</fullName>
+        <default>false</default>
+        <label>Body</label>
+    </customValue>
+    <description>Clause Types</description>
+    <masterLabel>ClauseTypes</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

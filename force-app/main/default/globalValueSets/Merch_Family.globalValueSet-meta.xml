@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Merch Family1</fullName>
+        <default>false</default>
+        <label>Merch Family1</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family2</fullName>
+        <default>false</default>
+        <label>Merch Family2</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family3</fullName>
+        <default>false</default>
+        <label>Merch Family3</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family4</fullName>
+        <default>false</default>
+        <label>Merch Family4</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family5</fullName>
+        <default>false</default>
+        <label>Merch Family5</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family6</fullName>
+        <default>false</default>
+        <label>Merch Family6</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family7</fullName>
+        <default>false</default>
+        <label>Merch Family7</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family8</fullName>
+        <default>false</default>
+        <label>Merch Family8</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family9</fullName>
+        <default>false</default>
+        <label>Merch Family9</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family10</fullName>
+        <default>false</default>
+        <label>Merch Family10</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family11</fullName>
+        <default>false</default>
+        <label>Merch Family11</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family12</fullName>
+        <default>false</default>
+        <label>Merch Family12</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family13</fullName>
+        <default>false</default>
+        <label>Merch Family13</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family14</fullName>
+        <default>false</default>
+        <label>Merch Family14</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family15</fullName>
+        <default>false</default>
+        <label>Merch Family15</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family16</fullName>
+        <default>false</default>
+        <label>Merch Family16</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family17</fullName>
+        <default>false</default>
+        <label>Merch Family17</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family18</fullName>
+        <default>false</default>
+        <label>Merch Family18</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family19</fullName>
+        <default>false</default>
+        <label>Merch Family19</label>
+    </customValue>
+    <customValue>
+        <fullName>Merch Family20</fullName>
+        <default>false</default>
+        <label>Merch Family20</label>
+    </customValue>
+    <description>Specify the Merch Catgeory used in the Assortment.
+List is calling at Product level (Product2), Business Unit level (BusinessUnit__c) &amp; Assortment level (Assortment__c)</description>
+    <masterLabel>Merch Family</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

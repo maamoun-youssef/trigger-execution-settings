@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Slab NegoScope --></label>
+    <name>NegoScopeSlab__c</name>
+    <relationshipLabel><!-- Contract Discounts (Slab Nego Scope) --></relationshipLabel>
+</CustomFieldTranslation>

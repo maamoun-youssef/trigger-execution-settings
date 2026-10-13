@@ -1,0 +1,78 @@
+<template>
+    <div class="dynamic-chatter">
+        <button class="dc-trigger" onclick={handleOpen} title={label}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>{label}</span>
+        </button>
+
+        <template if:true={isOpen}>
+            <div class="dc-backdrop" onclick={handleBackdropClick}>
+                <div class="dc-popup" onclick={stopPropagation}>
+
+                    <div class="dc-popup-header">
+                        <span class="dc-popup-title">{resolvedHeading}</span>
+                        <div class="dc-header-actions">
+                            <template if:true={hasMessages}>
+                                <button class="dc-icon-btn" onclick={handleClear}
+                                    title="Clear conversation">Clear</button>
+                            </template>
+                            <button class="dc-icon-btn dc-close" onclick={handleClose} title="Close">&#10005;</button>
+                        </div>
+                    </div>
+
+                    <div class="dc-popup-body" role="log">
+                        <template if:false={hasMessages}>
+                            <div class="dc-empty-state">
+                                <p>{emptyStateText}</p>
+                                <div class="dc-suggestion-list">
+                                    <template for:each={suggestedQuestions} for:item="q">
+                                        <button key={q} class="dc-suggestion" data-q={q}
+                                            onclick={handleSuggestion}>{q}</button>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+
+                        <template for:each={messages} for:item="msg">
+                            <div key={msg.id} class={msg.wrapClass}>
+                                <div class={msg.bubbleClass}>
+                                    <template if:true={msg.isLoading}>
+                                        <div class="dc-typing"><span></span><span></span><span></span></div>
+                                    </template>
+                                    <template if:false={msg.isLoading}>
+                                        <template if:true={msg.hasError}>
+                                            <span class="dc-error-icon">&#9888;</span>
+                                        </template>
+                                        <template if:true={msg.isRich}>
+                                            <lightning-formatted-rich-text value={msg.html}>
+                                            </lightning-formatted-rich-text>
+                                        </template>
+                                        <template if:false={msg.isRich}>{msg.text}</template>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="dc-popup-footer">
+                        <textarea class="dc-textarea" placeholder={placeholder} value={inputValue}
+                            oninput={handleInputChange} onkeydown={handleKeyDown} rows="1"
+                            disabled={isLoading}></textarea>
+                        <button class="dc-send" onclick={handleSend} disabled={sendDisabled} title="Send">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

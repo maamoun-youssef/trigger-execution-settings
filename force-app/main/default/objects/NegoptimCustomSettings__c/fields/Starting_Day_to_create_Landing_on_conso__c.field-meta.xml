@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Starting_Day_to_create_Landing_on_conso__c</fullName>
+    <description>Use the day and the month only from this field to put a checkpoint on the starting date that allow creation of Landing contract upon conso.</description>
+    <inlineHelpText>Use the day and the month only from this field to put a checkpoint on the starting date that allow creation of Landing contract upon conso.</inlineHelpText>
+    <label>Starting Day to create Landing on conso</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

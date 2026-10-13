@@ -1,0 +1,17 @@
+Bonjour {!Receiving_User.FirstName} {!Receiving_User.LastName},
+
+Bienvenue sur Connect, votre nouvelle plateforme collaborative, dédiée à fluidifier, sécuriser et faciliter les échanges entre distributeurs et fournisseurs. Connect est conçu pour rendre vos échanges plus efficaces, plus sûrs, et plus simples.
+
+
+Grâce à Connect, vous pouvez :
+
+-Échanger des documents en toute sécurité pour un suivi optimisé et confidentiel.
+-Déclarer facilement des informations administratives et suivre leur mise à jour.
+-Partager et valider des informations commerciales, marketing et financières pour une collaboration transparente et productive.
+
+Pour bien démarrer, voici quelques étapes :
+- Cliquez ici pour démarrer  {!Community_Url}
+-Renseignez votre nom d'utilisateur  {!Receiving_User.Username} et créez votre mot de passe. 
+-Une fois connecté, vérifiez vos informations en cliquant sur votre profil, en haut à droite de la page d'accueil. 
+
+A très bientôt sur Connect!

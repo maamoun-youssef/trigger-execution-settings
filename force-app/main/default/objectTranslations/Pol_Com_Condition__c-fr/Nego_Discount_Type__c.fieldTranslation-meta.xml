@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Type de condition (services, remises, international, marketing..)</help>
+    <label>Type négo</label>
+    <name>Nego_Discount_Type__c</name>
+</CustomFieldTranslation>

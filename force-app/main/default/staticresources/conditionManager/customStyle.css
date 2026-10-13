@@ -1,0 +1,162 @@
+:root {
+  --c-header-detail-color-background: #FFFFFF;
+  --c-header-detail-color-text: #000000;
+  --c-nego-plan-color1-background: #FFD176;
+  --c-nego-plan-color1-text: #000000;
+  --c-nego-plan-color2-background: #E5E3E2;
+  --c-nego-plan-color2-text: #000000;
+  --c-index-color-background: #E63946;
+  --c-index-color-text: #000000;
+  --c-nego-type-color-background: #FC8E9B;
+  --c-nego-type-color-text: #000000;
+  --c-index-color2-background: #E9B4B4;
+  --c-index-color2-text: #000000;
+  --c-nego-type-color2-background: #FFEDED;
+  --c-nego-type-color2-text: #000000;
+  --c-cond-color-background: #FFFFFF;
+  --c-cond-color-text: #000000;
+  --c-default-header-color-background: #FFF4ED;
+  --c-default-header-color-text: #000000;
+  --c-default-index-color-background: #FFF4ED;
+  --c-default-index-color-text: #000000;
+  --c-default-hmp-color-background: #FFF4ED;
+  --c-default-hmp-color-text: #000000;
+  --c-custom-header-color1-background: #FFFBFA;
+  --c-custom-header-color1-text: #000000;
+  /* --c-ref-nego-base-color-background: #FFDADA;
+  --c-ref-nego-base-color-text: #000000; */
+  --c-safe-balance-header-color-background: #D88C9A;
+  --c-safe-balance-header-color-text: #FFFFFF;
+  --c-safe-balance-index-color-background: #F2D0A9;
+  --c-safe-balance-index-color-text: #000000;
+  --c-safe-balance-hmp-color-background: #F1E3D3;
+  --c-safe-balance-hmp-color-text: #000000;
+  --c-nego-base-header-color-background: #457B9D;
+  --c-nego-base-header-color-text: #FFFFFF;
+  --c-nego-base-index-color-background: #A8DADC;
+  --c-nego-base-index-color-text: #000000;
+  --c-nego-base-hmp-color-background: #F1FAEE;
+  --c-nego-base-hmp-color-text: #000000;
+  --c-simulation-header-color-background: #70A0AF;
+  --c-simulation-header-color-text: #FFFFFF;
+  --c-simulation-index-color-background: #A0C1B9;
+  --c-simulation-index-color-text: #000000;
+  --c-simulation-hmp-color-background: #DAE6E3;
+  --c-simulation-hmp-color-text: #000000;
+  --c-on-top-header-color-background: #E63946;
+  --c-on-top-header-color-text: #FFFFFF;
+  --c-on-top-index-color-background: #FC8E9B;
+  --c-on-top-index-color-text: #000000;
+  --c-on-top-hmp-color-background: #FFC4CB;
+  --c-on-top-hmp-color-text: #000000;
+  --c-period-extension-header-color-background: #495867;
+  --c-period-extension-header-color-text: #FFFFFF;
+  --c-period-extension-index-color-background: #577399;
+  --c-period-extension-index-color-text: #FFFFFF;
+  --c-period-extension-hmp-color-background: #BDD5EA;
+  --c-period-extension-hmp-color-text: #000000;
+  --c-brief-color-background: #F9DED7;
+  --c-brief-color-text: #000000;
+  /*----------------*/
+  --c-nego-base-exit-header-color-background: #FFF4ED;
+  --c-nego-base-exit-header-color-text: #000000;
+  --c-nego-base-exit-index-color-background: #E9B4B4;
+  --c-nego-base-exit-index-color-text: #000000;
+  --c-nego-base-exit-hmp-color-background: #FFEDED;
+  --c-nego-base-exit-hmp-color-text: #000000;
+  --c-perfcom-3112-header-color-background: #FFF4ED;
+  --c-perfcom-3112-header-color-text: #000000;
+  --c-perfcom-3112-index-color-background: #E9B4B4;
+  --c-perfcom-3112-index-color-text: #000000;
+  --c-perfcom-3112-hmp-color-background: #FFEDED;
+  --c-perfcom-3112-hmp-color-text: #000000;
+  --c-landing-header-color-background: #FFF4ED;
+  --c-landing-header-color-text: #000000;
+  --c-landing-index-color-background: #E9B4B4;
+  --c-landing-index-color-text: #000000;
+  --c-landing-hmp-color-background: #FFEDED;
+  --c-landing-hmp-color-text: #000000;
+  --c-nego-base-init-header-color-background: #FFF4ED;
+  --c-nego-base-init-header-color-text: #000000;
+  --c-nego-base-init-index-color-background: #E9B4B4;
+  --c-nego-base-init-index-color-text: #000000;
+  --c-nego-base-init-hmp-color-background: #FFEDED;
+  --c-nego-base-init-hmp-color-text: #000000;
+  --c-postnego-simulation-header-color-background: #FFF4ED;
+  --c-postnego-simulation-header-color-text: #000000;
+  --c-postnego-simulation-index-color-background: #E9B4B4;
+  --c-postnego-simulation-index-color-text: #000000;
+  --c-postnego-simulation-hmp-color-background: #FFEDED;
+  --c-postnego-simulation-hmp-color-text: #000000;
+  --c-proposal-header-color-background: #FFF4ED;
+  --c-proposal-header-color-text: #000000;
+  --c-proposal-index-color-background: #E9B4B4;
+  --c-proposal-index-color-text: #000000;
+  --c-proposal-hmp-color-background: #FFEDED;
+  --c-proposal-hmp-color-text: #000000;
+  --c-signed-header-color-background: #FFF4ED;
+  --c-signed-header-color-text: #000000;
+  --c-signed-index-color-background: #E9B4B4;
+  --c-signed-index-color-text: #000000;
+  --c-signed-hmp-color-background: #FFEDED;
+  --c-signed-hmp-color-text: #000000;
+  --c-signed-copy-header-color-background: #FFF4ED;
+  --c-signed-copy-header-color-text: #000000;
+  --c-signed-copy-index-color-background: #E9B4B4;
+  --c-signed-copy-index-color-text: #000000;
+  --c-signed-copy-hmp-color-background: #FFEDED;
+  --c-signed-copy-hmp-color-text: #000000;
+  --c-target-header-color-background: #FFF4ED;
+  --c-target-header-color-text: #000000;
+  --c-target-index-color-background: #E9B4B4;
+  --c-target-index-color-text: #000000;
+  --c-target-hmp-color-background: #FFEDED;
+  --c-target-hmp-color-text: #000000;
+}
+
+.no-help-text lightning-helptext {
+  display: none;
+}
+.slds-text-align_right input, .custom-slds-text-align_right input {
+  text-align: right;
+}
+input {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.header_simulation label {
+  color: var(--c-simulation-header-color-text) !important;
+}
+
+.header_period-extension label {
+  color: var(--c-period-extension-header-color-text) !important;
+}
+
+/* .header_period-extension input, .header_period-extension button, .header_simulation input, .header_on-top input, .header_on-top button, .header_simulation button, .header_nego-base input, .header_nego-base button, .header_safe-balance input, .header_safe-balance button, .header_Gradient_signed input, .header_Gradient_signed button, .header_Gradient_simulation input, .header_Gradient_simulation button, .header_Gradient_signed-copy input, .header_Gradient_proposal input,  .header_Gradient_postnego-simulation input, .header_Gradient_perfcom-3112 input, .header_Gradient_landing input, .header_Gradient_on-top input, .header_Gradient_on-top input, .header_Gradient_nego-base-exit input, .header_Gradient_target input, .header_Gradient_safe-balance input, .header_Gradient_period-extension input, .header_Gradient_nego-base-init input, .header_Gradient_signed-copy button, .header_Gradient_proposal button,  .header_Gradient_postnego-simulation button, .header_Gradient_perfcom-3112 button, .header_Gradient_landing button, .header_Gradient_on-top button, .header_Gradient_nego-base-exit button, .header_Gradient_target button, .header_Gradient_safe-balance button, .header_Gradient_period-extension button, .header_Gradient_nego-base-init button {
+  color: black !important;
+} */
+.header_nego-base label {
+  color: var(--c-nego-base-header-color-text) !important;
+}
+
+.header_safe-balance label {
+  color: var(--c-safe-balance-header-color-text) !important;
+}
+
+/* .header_simulation label{
+  color: var(--c-simulation-header-color-text) !important;
+}
+.header_simulation input {
+  color: black !important;
+}
+.header_simulation label{
+  color: var(--c-simulation-header-color-text) !important;
+}
+.header_simulation input {
+  color: black !important;
+} */
+.grid-area .slds-input[disabled],
+.slds-input.slds-is-disabled {
+  all: unset;
+}

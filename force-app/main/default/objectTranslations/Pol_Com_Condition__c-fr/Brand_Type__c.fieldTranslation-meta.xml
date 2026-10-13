@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Allow to specify a limited allocation to contract having similar brand type --></help>
+    <label>Visibilité code budget</label>
+    <name>Brand_Type__c</name>
+</CustomFieldTranslation>

@@ -1,0 +1,204 @@
+<template>
+    <div class="mainContainer">
+        <template if:true={isLoading}>
+            <div class="slds-spinner_container spinnerDiv">
+                <div class="loader slds-spinner_container slds-align--absolute-center">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </template>
+        <template if:false={isLoading}>
+            <div>
+                <div class="slds-grid slds-p-bottom_xx-small  pageHeader">
+                    <div class="slds-col slds-has-flexi-truncate">
+                        <div class="slds-media slds-no-space slds-grow">
+                            <div class="slds-media__body slds-p-around_x-small label-title">
+                                <h1 class="slds-m-right_small slds-align-middle slds-truncate">
+                                    {labels.LBL_VAT_Rate_Settings_By_Category}
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                    <lightning-button class="slds-button slds-m-around_xx-small" label={labels.LBL_Add}
+                        variant="brand-outline" onclick={handleAddNewRow}></lightning-button>
+                    <lightning-button class="slds-button slds-m-around_xx-small save-m" label={labels.LBL_Save}
+                        variant="brand" onclick={handleSave}></lightning-button>
+                </div>
+                <div class="table-body pageBodySection">
+                    <div class="slds-grid">
+                        <div
+                            class="pageBody tableDiv slds-scrollable slds-border--left slds-border--right slds-border--top slds-border--bottom">
+                            <table class="table slds-table">
+                                <thead>
+                                    <tr class="table-header">
+                                        <!-- TAX Order -->
+                                        <th rowspan="2" class="table-th">
+                                            <div class="slds-text-align--center">
+                                                {headerFieldsListLabels.BusinessUnitVAT__c}
+                                            </div>
+                                        </th>
+                                        <!-- TAX BusinessUnitVAT__c -->
+                                        <th rowspan="2" class="table-th">
+                                            <div class="slds-text-align--center">
+                                                {headerFieldsListLabels.Category__c}
+                                            </div>
+                                        </th>
+                                        <!-- TAX Code -->
+                                        <th rowspan="2" class="table-th">
+                                            <div class="slds-text-align--center">
+                                                {headerFieldsListLabels.IsForeignSupplier__c}
+                                            </div>
+                                        </th>
+                                        <!-- TAX Name -->
+                                        <th rowspan="2" class="table-th">
+                                            <div class="slds-text-align--center">
+                                                {headerFieldsListLabels.Zone__c}
+                                            </div>
+                                        </th>
+                                        <!-- TAX Rate -->
+                                        <th rowspan="2" class="table-th">
+                                            <div class="slds-text-align--center">
+                                                {headerFieldsListLabels.TaxApplied__c}
+                                            </div>
+                                        </th>
+                                        <!-- TAX BDate -->
+                                        <th rowspan="2" class="table-th">
+                                            <div class="slds-text-align--center">
+                                                {headerFieldsListLabels.TaxRate__c}
+                                            </div>
+                                        </th>
+                                        <th rowspan="2" class="table-th-actions">
+                                            <div class="slds-text-align--center">
+                                                {labels.LBL_Actions}
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template for:each={taxesList} for:item="tax" for:index="index">
+                                        <tr key={tax.Id} class="rows" data-index={index} data-isedited={tax.isEdited}>
+                                            <td class="slds-text-align--center" data-id={tax.Id}>
+                                                <div>
+                                                    {recordName}
+                                                </div>
+                                            </td>
+                                            <td class="slds-text-align--center">
+                                                <div lwc:if={tax.isSelected} data-index={index}
+                                                    data-field="Category__c">
+                                                    <lightning-combobox data-index={index} data-field="Category__c"
+                                                        class="requiredField" dropdown-alignment="auto"
+                                                        onchange={handleFieldEdits} variant="label-hidden"
+                                                        value={tax.Category__c} options={categoryOptions} required>
+                                                    </lightning-combobox>
+                                                </div>
+                                                <div lwc:else data-index={index} data-field="Category__c">
+                                                    {tax.Category}
+                                                </div>
+                                            </td>
+                                            <td class="slds-text-align--center">
+                                                <div lwc:if={tax.isSelected} data-index={index}
+                                                    data-field="IsForeignSupplier__c">
+                                                    <lightning-input type="checkbox" name="input2"
+                                                        checked={tax.IsForeignSupplier__c} data-index={index}
+                                                        data-field="IsForeignSupplier__c" variant="label-hidden"
+                                                        onchange={handleFieldEdits}>
+                                                    </lightning-input>
+                                                </div>
+                                                <div lwc:else data-index={index} data-field="IsForeignSupplier__c">
+                                                    <lightning-input type="checkbox" name="input2"
+                                                        checked={tax.IsForeignSupplier__c} data-index={index}
+                                                        data-field="IsForeignSupplier__c" variant="label-hidden"
+                                                        onchange={handleFieldEdits} disabled>
+                                                    </lightning-input>
+                                                </div>
+                                            </td>
+                                            <td class="slds-text-align--center">
+                                                <div lwc:if={tax.isSelected} data-index={index} data-field="Zone__c">
+                                                    <lightning-combobox data-index={index} data-field="Zone__c"
+                                                        class="requiredField" dropdown-alignment="auto"
+                                                        onchange={handleFieldEdits} variant="label-hidden"
+                                                        value={tax.Zone__c} options={zoneOptions} required>
+                                                    </lightning-combobox>
+                                                </div>
+                                                <div lwc:else data-index={index} data-field="Zone__c">
+                                                    {tax.Zone}
+                                                </div>
+                                            </td>
+                                            <td class="slds-text-align--center">
+                                                <div lwc:if={tax.isSelected} data-index={index}
+                                                    data-field="TaxApplied__c">
+                                                    <lightning-record-picker
+                                                        label="Supplier to exclude from invoice emails"
+                                                        variant="label-hidden" placeholder={labels.LBL_Vat_Placeholder}
+                                                        data-index={index} data-field="TaxApplied__c"
+                                                        class="requiredField" object-api-name={API_NAMES.Tax__c.objectApiName}
+                                                        value={tax.TaxApplied__c} display-info={displayInfo}
+                                                        filter={recordPickerfilter} onchange={handleFieldEdits}
+                                                        required>
+                                                    </lightning-record-picker>
+                                                </div>
+                                                <div lwc:else data-index={index} data-field="TaxApplied__c">
+                                                    {tax.taxName}
+                                                </div>
+                                            </td>
+                                            <td class="slds-text-align--center">
+                                                <div data-index={index} data-field="TaxRate__c">
+                                                    <lightning-formatted-number value={tax.taxRate}
+                                                        minimum-fraction-digits="2"></lightning-formatted-number>
+                                                </div>
+                                            </td>
+                                            <td class="slds-text-align--center table-data">
+                                                <div class="display-divs">
+                                                    <template if:true={tax.showRemoveButton}>
+                                                        <div class="display-divs">
+                                                            <div class={tax.removeButtonClass}>
+                                                                <div
+                                                                    class="slds-icon_container custom-icon-remove edit-icon-remove">
+                                                                    <lightning-icon icon-name='action:remove'
+                                                                        alternative-text='remove' size='x-small'
+                                                                        title={labels.LBL_Remove} onclick={handleCancel}
+                                                                        data-index={index}
+                                                                        class="remove-trans"></lightning-icon>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                    <div class="display-divs">
+                                                        <div class={tax.deleteButtonClass}>
+                                                            <div
+                                                                class="slds-icon_container custom-icon-delete edit-icon">
+                                                                <lightning-icon icon-name='utility:delete'
+                                                                    alternative-text='delete' size='x-small'
+                                                                    title={labels.LBL_Delete} onclick={handleDeleteRow}
+                                                                    data-index={index}
+                                                                    class="delete-trans"></lightning-icon>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="display-divs">
+                                                        <div class={tax.editButtonClass}>
+                                                            <div class="slds-icon_container custom-icon-edit edit-icon">
+                                                                <lightning-icon icon-name='utility:edit'
+                                                                    alternative-text='edit' size='x-small'
+                                                                    title={labels.LBL_Modify} onclick={handleEditRow}
+                                                                    data-index={index}
+                                                                    class="edit-trans"></lightning-icon>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

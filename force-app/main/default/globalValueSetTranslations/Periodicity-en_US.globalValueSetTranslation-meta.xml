@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Contrat d&apos;application</masterLabel>
+        <translation><!-- Contrat d&apos;application --></translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>March/July/October</masterLabel>
+        <translation>March/July/October</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Month</masterLabel>
+        <translation>Monthly</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Semester</masterLabel>
+        <translation>Semester</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Trimester</masterLabel>
+        <translation>Trimester</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Week</masterLabel>
+        <translation>Weekly</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Year</masterLabel>
+        <translation>Annual</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

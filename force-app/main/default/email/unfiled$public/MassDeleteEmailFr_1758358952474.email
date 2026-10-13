@@ -1,0 +1,20 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body style="height: auto; min-height: auto;">negOptim Logo<br />
+<br />
+Bonjour User.FirstName User.LastName,<br />
+<br />
+ℹ️ Suppression des pièces comptables terminée pour l'execution du X à Y via negOptim.<br />
+<br />
+📶 Détails des pièces comptables supprimées :<br />
+<br />
+{{{Log__c.00NQH00000L2y0p}}}<br />
+<br />
+Cordialement,<br />
+<br />
+L'équipe negOptim<br />
+<br />
+negOptim Logo</body>
+</html>

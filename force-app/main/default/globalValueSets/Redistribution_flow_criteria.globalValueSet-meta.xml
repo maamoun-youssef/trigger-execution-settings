@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Redisitrbute to any flow (Indirect + direct)</fullName>
+        <default>true</default>
+        <label>Redisitrbute to any flow (Indirect + direct)</label>
+    </customValue>
+    <customValue>
+        <fullName>Redistribute to any indirect flow</fullName>
+        <default>false</default>
+        <label>Redistribute to any indirect flow</label>
+    </customValue>
+    <customValue>
+        <fullName>No redistribution</fullName>
+        <default>false</default>
+        <label>No redistribution</label>
+    </customValue>
+    <description>Consider direct &amp; Indirect flow in the redistribution and any exception criteria</description>
+    <masterLabel>Redistribution flow criteria</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

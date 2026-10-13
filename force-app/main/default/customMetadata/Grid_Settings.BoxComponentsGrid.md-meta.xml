@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Composants du box</label>
+    <protected>false</protected>
+    <values>
+        <field>Calendar_Setting__c</field>
+        <value xsi:type="xsd:string">{&quot;startDate&quot;:&quot;&quot;,&quot;endDate&quot;:&quot;&quot;,&quot;pickListValue&quot;:&quot;&quot;,&quot;showCalendarSettings&quot;:false}</value>
+    </values>
+    <values>
+        <field>Columns__c</field>
+        <value xsi:type="xsd:string">[{&quot;label&quot;:&quot;Product Detail&quot;,&quot;FieldName&quot;:&quot;ProductDetail__c&quot;},{&quot;label&quot;:&quot;Quantity&quot;,&quot;FieldName&quot;:&quot;Quantity__c&quot;},{&quot;label&quot;:&quot;Product Detail&gt;GTIN&quot;,&quot;FieldName&quot;:&quot;ProductDetail__r.GTIN__c&quot;},{&quot;label&quot;:&quot;Product Detail&gt;Code du produit&quot;,&quot;FieldName&quot;:&quot;ProductDetail__r.ProductCode&quot;}]</value>
+    </values>
+    <values>
+        <field>Compiled_Grid_JSON__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Filters__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Grid_Configuration__c</field>
+        <value xsi:type="xsd:string">{&quot;Default_Page_Size&quot;:&quot;50&quot;,&quot;isShowFilterOnColumnHeader&quot;:false,&quot;overrideFilter&quot;:false}</value>
+    </values>
+    <values>
+        <field>Grid_Slogan__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">custom:custom57</value>
+    </values>
+    <values>
+        <field>Master_Object_Columns__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Master_Object_Name__c</field>
+        <value xsi:type="xsd:string">Product2</value>
+    </values>
+    <values>
+        <field>Object_Name__c</field>
+        <value xsi:type="xsd:string">PRDLink__c</value>
+    </values>
+    <values>
+        <field>ReadOnly_Criteria__c</field>
+        <value xsi:type="xsd:string">{}</value>
+    </values>
+    <values>
+        <field>Relationship_Name__c</field>
+        <value xsi:type="xsd:string">ProductMaster__c</value>
+    </values>
+    <values>
+        <field>Time_Line_Settings__c</field>
+        <value xsi:type="xsd:string">{&quot;levelControl&quot;:1,&quot;masterLookup&quot;:&quot;&quot;,&quot;masterLookupParent&quot;:&quot;&quot;,&quot;isTimeLineSettings&quot;:false}</value>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:type="xsd:string">Master-Detail-Lookup</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,83 @@
+<template>
+    <!-- Icon Picker Modal -->
+    <div role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium"
+        aria-labelledby="icon-picker-heading" aria-modal="true" onkeydown={handleKeyDown}>
+        <div class="slds-modal__container">
+            <!-- Header -->
+            <header class="slds-modal__header">
+                <lightning-button-icon icon-name="utility:close" variant="bare" size="large"
+                    class="slds-modal__close" alternative-text={labels.LBL_Close} onclick={handleClose}>
+                </lightning-button-icon>
+                <h2 id="icon-picker-heading" class="slds-modal__title slds-hyphenate">
+                    {labels.LBL_Connect_IconPickerTitle}
+                </h2>
+            </header>
+            <!-- Body -->
+            <div class="slds-modal__content slds-var-p-around_medium slds-is-relative picker-body">
+                <template if:true={isLoading}>
+                    <lightning-spinner alternative-text={labels.LBL_Loading} variant="brand"></lightning-spinner>
+                </template>
+                <template if:true={hasLoadError}>
+                    <p class="slds-text-color_error">{labels.MSG_Connect_IconPickerLoadError}</p>
+                </template>
+                <!-- Icons -->
+                <template if:true={showGrid}>
+                    <lightning-input type="search" label={labels.LBL_Search} variant="label-hidden"
+                        placeholder={labels.LBL_Search} value={searchTerm} onchange={handleSearch}
+                        class="slds-m-bottom_small">
+                    </lightning-input>
+                    <div class="slds-m-bottom_medium">
+                        <template for:each={categoryOptions} for:item="category">
+                            <lightning-button key={category.name} label={category.label} variant={category.variant}
+                                data-category={category.name} onclick={handleCategoryChange}
+                                class="slds-m-right_xx-small slds-m-bottom_xx-small">
+                            </lightning-button>
+                        </template>
+                    </div>
+                    <template if:true={hasResults}>
+                        <ul class="icon-grid">
+                            <template for:each={filteredIcons} for:item="icon">
+                                <li key={icon.key}>
+                                    <button type="button" class="icon-tile" title={icon.name} data-key={icon.key}
+                                        onclick={handleIconClick}>
+                                        <img src={icon.url} alt="" loading="lazy" class="icon-image" />
+                                        <span class="icon-name slds-truncate">{icon.name}</span>
+                                    </button>
+                                </li>
+                            </template>
+                        </ul>
+                    </template>
+                    <template if:false={hasResults}>
+                        <p class="slds-text-color_weak">{labels.MSG_Connect_IconPickerNoResult}</p>
+                    </template>
+                </template>
+                <!-- Sizes -->
+                <template if:true={showSizes}>
+                    <div class="slds-grid slds-grid_vertical-align-center slds-m-bottom_large">
+                        <lightning-button label={labels.LBL_Back} icon-name="utility:back" onclick={handleBack}>
+                        </lightning-button>
+                        <span class="slds-m-left_small slds-text-color_weak">
+                            {selectedIcon.name} · {labels.LBL_Size}
+                        </span>
+                    </div>
+                    <div class="size-options">
+                        <template for:each={selectedIcon.sizes} for:item="size">
+                            <div key={size.name} class="size-option">
+                                <div class="size-preview">
+                                    <img src={size.url} alt={size.label} class="size-image" />
+                                </div>
+                                <lightning-button label={size.label} data-url={size.url} onclick={handleSizeSelect}>
+                                </lightning-button>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            </div>
+            <!-- Footer -->
+            <footer class="slds-modal__footer">
+                <lightning-button label={labels.LBL_Cancel} onclick={handleClose}></lightning-button>
+            </footer>
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

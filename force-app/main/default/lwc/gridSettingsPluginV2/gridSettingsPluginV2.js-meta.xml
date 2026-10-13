@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Grid Settings Plugin V2</masterLabel>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage,lightning__RecordPage">
+            <property name="templateName" type="String" label="Grid Settings Template" required="true" datasource="apex://GridSettingsPluginDataSource" default=""/>
+            <property name="objectApiName" type="String" label="Object Name" datasource="apex://GridSettingsPluginObjects" default="None"/>          
+            <property name="includeInListView" type="Boolean" label="Display as a List View" description="Display an arrow to access a list view of 'details-type' templates related to the object specified in “Object Name.”" default="false" />
+            <property name="displayListViewActions" type="Boolean" label="Display Action buttons" description="Display action buttons selected in the “Quick Actions” section of the “Grid Settings Manager.”" default="false" />
+            <property name="displayNewButton" type="Boolean" label="Display New Button" description="Display a button to open the 'Add New Record' window." default="false" />
+            <property name="displayNewInlineButton" type="Boolean" label="Display New Inline Row" description="Display a button to add a new row and create a new record." default="false" />
+            <property name="displayCloneButton" type="Boolean" label="Display Clone Button" description="Display a button to copy a record." default="false" />
+            <property name="allowDelete" type="Boolean" label="Display Delete Button" description="Display a button to delete a record." default="false" />
+            <property name="displayShowHideColumns" type="Boolean" label="Display Show/Hide Columns" description="Display a button to open the window where columns can be hidden or shown as needed." default="false" />
+            <property name="allowImport" type="Boolean" label="Display Import button" description="Display a button to import Excel file." default="false" />
+            <property name="allowExport" type="Boolean" label="Display Export button" description="Display a button to export template data to an Excel file." default="false" />
+            <property name="allowFilter" type="Boolean" label="Display Filter" description="Display a filter button." default="false" />
+            <property name="allowOpenRecord" type="Boolean" label="Allow redirect to detail record page" description="Display a button to open the related record page in a new window." default="true" />
+            <property name="nameAsURL" type="Boolean" label="Display Record Names as URL" description="Display record names as clickable URLs to open the related record page." default="false" />
+            <property name="showCurrency" type="Boolean" label="Show Currency" description="Display the currency symbol at the end of an amount value." default="true" />
+            <property name="showCurrencyAsSymbol" type="Boolean" label="Show Currency as Symbol" description="Display the currency in symbol form (e.g., “USD” becomes “$”)." default="false" />
+            <property name="useRecordIsoCurrency" type="Boolean" label="Show Currency Based on CurrencyIsoCode" description="Display record amounts based on their defined or specified currency." default="false" />
+            <property name="showSubTotal" type="Boolean" label="Show Sub Total" description="Display a subtotal (SUM, Average, Minimum, etc.) at the top of a numeric column (configuration required in the Grid Settings Manager)." default="false" />
+            <property name="isReadOnly" type="Boolean" label="Read Only" description="Display all values as read-only (cannot be edited)." default="false" />
+            <property name="enableMassUpdate" type="Boolean" label="Enable Mass Update" description="Display a pencil icon on the column header to allow selection and modification of multiple values simultaneously (configuration required in the Grid Settings Manager)." default="false" />
+            <property name="refreshViewAfterSave" type="Boolean" label="Refresh Standard Components After Save" description="Refresh all standard components on the page, where the grid plugin is added, when the save button is clicked." default="false" />
+            <!-- <property name="preventLoadDataByDefault" type="Boolean" label="Prevent Load Data by Default" description="Prevent data from loading until a filter criterion is applied." default="false" /> -->
+            <!--property name="filterOnNoneDisplayedFields" type="Boolean" label="Filter on fields that are no displayed in the grid" default="false" /-->
+            <property name="partialSave" type="Boolean" label="Apply Partial Save" default="false" />
+            <!-- <property name="quickActions" type="String" label="List of quick action" placeholder='[{"label": "my action1", "value": "action1"},{label: "my action2", value: "action2"}]' default=""/> -->
+            <property name="saveSuccessMessage" type="String" label="Message Upon Save Success" description="A custom message that will be displayed upon success." />
+            <property name="labelNewInlineButton" type="String" label="Label of New Inline Row Button" default="New inline row"/>
+            <property name="numberFixedColumns" type="Integer" label="Number Of Fixed Columns" default="0" />
+            <property name="cmpHeight" type="String" label="Component height" placeholder="300px" description="Exemple: 400px. "/>
+            <property name="filterOnNoneDisplayedFields" type="Boolean" label="Filter on fields that are no displayed in the grid (not handled)" default="false" />
+            <property name="quickActions" type="String" label="List of quick action (not handled))" placeholder='[{"label": "my action1", "value": "action1"},{label: "my action2", value: "action2"}]' default=""/>
+            <property name="readOnly" type="Boolean" label="Read Only (to Delete)" default="false" />
+            <property name="applyNewDesign" type="Boolean" label="Apply New Design(To Delete)" description="" default="false" />
+            <property name="actions" type="Boolean" label="Display Action buttons (To Delete)" description="Display action buttons selected in the “Quick Actions” section of the “Grid Settings Manager.”" default="false" />
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" type="String" label="Record ID" description="Should be set to {!recordId} if in community, empty if recordPage" default="" />
+            <property name="templateName" type="String" label="Grid Settings Template" required="true" datasource="apex://GridSettingsPluginDataSource" default=""/>
+            <property name="objectApiName" type="String" label="Object Name" datasource="apex://GridSettingsPluginObjects" default="None"/>
+            <property name="includeInListView" type="Boolean" label="Display as a List View" description="Display an arrow to access a list view of 'details-type' templates related to the object specified in “Object Name.”" default="false" />
+            <property name="displayListViewActions" type="Boolean" label="Display Action buttons" description="Display action buttons selected in the “Quick Actions” section of the “Grid Settings Manager.”" default="false" />
+            <property name="displayNewButton" type="Boolean" label="Display New Button" description="Display a button to open the 'Add New Record' window." default="false" />
+            <property name="displayNewInlineButton" type="Boolean" label="Display New Inline Row" description="Display a button to add a new row and create a new record." default="false" />
+            <property name="displayCloneButton" type="Boolean" label="Display Clone Button" description="Display a button to copy a record." default="false" />
+            <property name="allowDelete" type="Boolean" label="Display Delete Button" description="Display a button to delete a record." default="false" />
+            <property name="displayShowHideColumns" type="Boolean" label="Display Show/Hide Columns" description="Display a button to open the window where columns can be hidden or shown as needed." default="false" />
+            <property name="allowImport" type="Boolean" label="Display Import button" description="Display a button to import Excel file." default="false" />
+            <property name="allowExport" type="Boolean" label="Display Export button" description="Display a button to export template data to an Excel file." default="false" />
+            <property name="allowFilter" type="Boolean" label="Display Filter" description="Display a filter button." default="false" />
+            <property name="allowOpenRecord" type="Boolean" label="Allow redirect to detail record page" description="Display a button to open the related record page in a new window." default="true" />
+            <property name="nameAsURL" type="Boolean" label="Display Record Names as URL" description="Display record names as clickable URLs to open the related record page." default="false" />
+            <property name="showCurrency" type="Boolean" label="Show Currency" description="Display the currency symbol at the end of an amount value." default="true" />
+            <property name="showCurrencyAsSymbol" type="Boolean" label="Show Currency as Symbol" description="Display the currency in symbol form (e.g., “USD” becomes “$”)." default="false" />
+            <property name="useRecordIsoCurrency" type="Boolean" label="Show Currency Based on CurrencyIsoCode" description="Display record amounts based on their defined or specified currency." default="false" />
+            <property name="showSubTotal" type="Boolean" label="Show Sub Total" description="Display a subtotal (SUM, Average, Minimum, etc.) at the top of a numeric column (configuration required in the Grid Settings Manager)." default="false" />
+            <property name="isReadOnly" type="Boolean" label="Read Only" description="Display all values as read-only (cannot be edited)." default="false" />
+            <property name="enableMassUpdate" type="Boolean" label="Enable Mass Update" description="Display a pencil icon on the column header to allow selection and modification of multiple values simultaneously (configuration required in the Grid Settings Manager)." default="false" />
+            <property name="refreshViewAfterSave" type="Boolean" label="Refresh Standard Components After Save" description="Refresh all standard components on the page, where the grid plugin is added, when the save button is clicked." default="false" />
+            <!-- <property name="preventLoadDataByDefault" type="Boolean" label="Prevent Load Data by Default" description="Prevent data from loading until a filter criterion is applied." default="false" /> -->
+            <!--property name="filterOnNoneDisplayedFields" type="Boolean" label="Filter on fields that are no displayed in the grid" default="false" /-->
+            <property name="partialSave" type="Boolean" label="Apply Partial Save" default="false" />
+            <!-- <property name="quickActions" type="String" label="List of quick action" placeholder='[{"label": "my action1", "value": "action1"},{label: "my action2", value: "action2"}]' default=""/> -->
+            <property name="saveSuccessMessage" type="String" label="Message Upon Save Success" description="A custom message that will be displayed upon success." />
+            <property name="labelNewInlineButton" type="String" label="Label of New Inline Row Button" default="New inline row"/>
+            <property name="numberFixedColumns" type="Integer" label="Number Of Fixed Columns" default="0" />
+            <property name="cmpHeight" type="String" label="Component height" placeholder="300px" description="Exemple: 400px. "/>
+            <property name="filterOnNoneDisplayedFields" type="Boolean" label="Filter on fields that are no displayed in the grid (not handled)" default="false" />
+            <property name="quickActions" type="String" label="List of quick action (not handled))" placeholder='[{"label": "my action1", "value": "action1"},{label: "my action2", value: "action2"}]' default=""/>
+            <property name="readOnly" type="Boolean" label="Read Only (to Delete)" default="false" />
+            <property name="applyNewDesign" type="Boolean" label="Apply New Design (To Delete)" description="" default="false" />
+            <property name="actions" type="Boolean" label="Display Action buttons (To Delete)" description="Display action buttons selected in the “Quick Actions” section of the “Grid Settings Manager.”" default="false" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

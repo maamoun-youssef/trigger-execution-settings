@@ -1,0 +1,451 @@
+<template>
+    <template if:true={loading}>
+        <lightning-spinner size="small" variant="brand"></lightning-spinner>
+    </template>
+
+    <!-- Add Sub Discount Button - positioned at top right, sticky -->
+    <div class="slds-m-bottom_small"
+        style="position: sticky; top: 0; z-index: 10; background: white; padding: 0.5rem 0; display: flex; justify-content: flex-end;"
+        if:false={isReadOnly}>
+        <lightning-button label={labels.LBL_Condition_Manager_Add_Sub_Discount} icon-name="utility:add"
+            variant="success" onclick={openSubPCCSelection}>
+        </lightning-button>
+    </div>
+
+    <!-- Grid - Shown based on settings and data -->
+    <template if:true={shouldShowGrid}>
+        <table class="main-table slds-table slds-table_bordered slds-table_striped">
+            <!--HEADER-->
+            <thead class="stickyHeader">
+                <tr>
+                    <template for:each={displayedFields} for:item="field">
+                        <th key={field.fieldName} title={field.fieldLabel} style={field.headerStyle}
+                            class="rowspanHeightTh slds-text-align_center">
+                            {field.fieldLabel}
+                        </th>
+                    </template>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <!--TABLE BODY-->
+            <!-- Empty state row when no sub discounts -->
+            <tbody if:false={hasData}>
+                <tr>
+                    <td colspan="13" class="slds-text-align_center slds-p-around_large">
+                        <lightning-formatted-rich-text value={labels.LBL_Condition_Manager_Empty_Sub_Discount_HelpText}>
+                        </lightning-formatted-rich-text>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- Data rows when sub discounts exist -->
+            <tbody lwc:if={hasData}>
+                <template for:each={subdiscountlist} for:item="item" for:index="index" lwc:if={subdiscountlist.length}>
+                    <tr key={item.Id} class={item.rowClass}>
+                        <template for:each={item.values} for:item="field" for:index="fieldIndex">
+                            <td key={field.fieldName} style={field.style}>
+                                <!-- Draft Badge for first field (PCC NAME) in draft rows -->
+                                <template lwc:if={field.isFirstField}>
+                                    <template lwc:if={item.isDraft}>
+                                        <lightning-badge label={labels.LBL_Draft} class="slds-m-right_xx-small" 
+                                            style="background-color: #FFD803; color: #000;">
+                                        </lightning-badge>
+                                    </template>
+                                </template>
+                                <template if:true={field.isInputField}>
+                                    <lightning-input lwc:if={field.isText} data-id={item.Id}
+                                        data-field={field.fieldName} data-index={index} onchange={handleFieldEdits}
+                                        label={field.fieldLabel} variant="label-hidden" value={field.fieldValue}>
+                                    </lightning-input>
+                                    <lightning-textarea lwc:if={field.isTextarea} data-id={item.Id}
+                                        data-field={field.fieldName} data-index={index} onchange={handleFieldEdits}
+                                        variant="label-hidden" value={field.fieldValue}>
+                                    </lightning-textarea>
+                                    <lightning-input lwc:elseif={field.isNumberField} type="number" data-id={item.Id}
+                                        data-field={field.fieldName} data-index={index} onchange={handleFieldEdits}
+                                        variant="label-hidden" step={field.step} value={field.fieldValue}
+                                        class="input-right">
+                                    </lightning-input>
+                                    <!-- BU Scope: Custom clickable field to open popup instead of standard lookup -->
+                                    <template lwc:elseif={field.isBUScope}>
+                                        <div class="slds-form-element">
+                                            <div class="slds-form-element__control" 
+                                                style="cursor: pointer; border: 1px solid #dddbda; border-radius: 0.25rem; padding: 0 0.75rem; min-height: 1.875rem; display: flex; align-items: center; background: white;"
+                                                data-index={index} onclick={openBUs} title="Click to select Business Unit">
+                                                <template lwc:if={field.fieldOutputValue}>
+                                                    <span class="slds-truncate" style="color: #181818;">
+                                                        {field.fieldOutputValue}
+                                                    </span>
+                                                </template>
+                                                <template lwc:else>
+                                                    <span class="slds-truncate" style="color: #706e6b;">Enter BU scope...</span>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <!-- Nego Scope: Custom clickable field to open popup instead of standard lookup -->
+                                    <template lwc:elseif={field.isNegoScope}>
+                                        <div class="slds-form-element">
+                                            <div class="slds-form-element__control" 
+                                                style="cursor: pointer; border: 1px solid #dddbda; border-radius: 0.25rem; padding: 0 0.75rem; min-height: 1.875rem; display: flex; align-items: center; background: white;"
+                                                data-index={index} onclick={openNegoScope} title="Click to select Nego Scope">
+                                                <template lwc:if={field.fieldOutputValue}>
+                                                    <span class="slds-truncate" style="color: #181818;">
+                                                        {field.fieldOutputValue}
+                                                    </span>
+                                                </template>
+                                                <template lwc:else>
+                                                    <span class="slds-truncate" style="color: #706e6b;">Enter product scope...</span>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template lwc:elseif={field.isReference}>
+                                        <lightning-record-edit-form object-api-name={detailApiName}>
+                                            <lightning-input-field variant="label-hidden" field-name={field.fieldName}
+                                                value={field.fieldValue} data-field={field.fieldName} data-index={index}
+                                                onchange={handleFieldEdits} data-id={item.Id}>
+                                            </lightning-input-field>
+                                        </lightning-record-edit-form>
+                                    </template>
+                                    <lightning-input lwc:elseif={field.isBoolean} type="checkbox" variant="label-hidden"
+                                        data-id={item.Id} data-field={field.fieldName} data-index={index}
+                                        onchange={handleFieldEdits} checked={field.fieldValue}>
+                                    </lightning-input>
+                                    <template lwc:elseif={field.isPicklist}>
+                                        <select onchange={handleFieldEdits} data-id={item.Id}
+                                            data-field={field.fieldName} data-index={index}>
+                                            <template for:each={field.pickListValues} for:item="option">
+                                                <template lwc:if={option.isDisabled}>
+                                                    <option key={option.value} value={option.value}
+                                                        selected={option.isSelected} disabled>
+                                                        {option.label}
+                                                    </option>
+                                                </template>
+                                                <template lwc:else>
+                                                    <option key={option.value} value={option.value}
+                                                        selected={option.isSelected}>
+                                                        {option.label}
+                                                    </option>
+                                                </template>
+                                            </template>
+                                        </select>
+                                    </template>
+                                    <lightning-input lwc:elseif={field.isDate} type="date" data-id={item.Id}
+                                        data-field={field.fieldName} data-index={index} onchange={handleFieldEdits}
+                                        variant="label-hidden" value={field.fieldValue}>
+                                    </lightning-input>
+                                    <lightning-input lwc:elseif={field.isDateTime} type="datetime" data-id={item.Id}
+                                        data-field={field.fieldName} data-index={index} onchange={handleFieldEdits}
+                                        variant="label-hidden" value={field.fieldValue}>
+                                    </lightning-input>
+                                </template>
+                                <template if:false={field.isInputField}>
+                                    <!-- Draft Badge for first field in non-editable draft rows -->
+                                    <template lwc:if={field.isFirstField}>
+                                        <template lwc:if={item.isDraft}>
+                                            <lightning-badge label={labels.LBL_Draft} class="slds-m-right_xx-small"
+                                                style="background-color: #FFD803; color: #000;">
+                                            </lightning-badge>
+                                        </template>
+                                    </template>
+                                    <lightning-formatted-number lwc:if={field.isNumberField}
+                                        maximum-fraction-digits={field.scale} minimum-fraction-digits={field.scale}
+                                        value={field.fieldValue} variant="label-hidden">
+                                    </lightning-formatted-number>
+                                    <template lwc:elseif={field.isText}>
+                                        <template lwc:if={field.isHTMLFormatted}>
+                                            <lightning-formatted-rich-text value={field.fieldValue}
+                                                variant="label-hidden">
+                                            </lightning-formatted-rich-text>
+                                        </template>
+                                        <template lwc:else>
+                                            {field.fieldValue}
+                                        </template>
+                                    </template>
+                                    <template lwc:elseif={field.isReference}>
+                                        <template lwc:if={field.link}>
+                                            <a href={field.link} target="_blank" if:true={field.link}>
+                                                {field.fieldOutputValue}</a>
+                                        </template>
+                                        <template lwc:else>
+                                            {field.fieldOutputValue}
+                                        </template>
+                                    </template>
+                                    <lightning-input lwc:elseif={field.isBoolean} type="checkbox" class="input-center"
+                                        variant="label-hidden" checked={field.fieldValue} disabled>
+                                    </lightning-input>
+                                    <lightning-formatted-date-time lwc:elseif={field.isDate} value={field.fieldValue}
+                                        year="numeric" month="2-digit" day="2-digit"></lightning-formatted-date-time>
+                                    <lightning-formatted-date-time lwc:elseif={field.isDateTime}
+                                        value={field.fieldValue} year="numeric" month="2-digit" day="2-digit"
+                                        hour="2-digit" minute="2-digit"></lightning-formatted-date-time>
+                                    <template lwc:elseif={field.isPicklist}>
+                                        {field.fieldOutputValue}
+                                    </template>
+                                    <template lwc:else>
+                                        {field.fieldValue}
+                                    </template>
+                                </template>
+                            </td>
+                        </template>
+                        <!-- Actions Column -->
+                        <td scope="col" class="slds-text-align_center">
+                            <div class="slds-grid slds-gutters_xxx-small">
+                                <!-- Link to record details (only if saved) -->
+                                <div class="slds-col" if:true={item.Id}>
+                                    <a href={item.link} target="_blank" title="View Details">
+                                        <lightning-icon icon-name="utility:threedots" size="xx-small">
+                                        </lightning-icon>
+                                    </a>
+                                </div>
+                                <!-- Clone action -->
+                                <div class="slds-col">
+                                    <lightning-button-icon icon-name="utility:copy" size="xx-small" 
+                                        variant="bare" alternative-text="Clone" title="Clone"
+                                        data-index={index} onclick={handleSubDiscountClone}>
+                                    </lightning-button-icon>
+                                </div>
+                                <!-- Delete action -->
+                                <div class="slds-col">
+                                    <lightning-button-icon icon-name="utility:delete" size="xx-small" 
+                                        variant="bare" alternative-text="Delete" title="Delete"
+                                        data-index={index} onclick={handleSubDiscountDelete}>
+                                    </lightning-button-icon>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+                <template lwc:else>
+                    <tr class="trHeight">
+                        <td colspan={displayedFields.length} class="slds-text-align--center">
+                            {labels.LBL_No_Record_To_Display}
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </template>
+
+    <template if:true={popups.Discount_Terms__c.isOpen}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+            class="slds-modal_medium slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                    <lightning-button-icon variant="bare-inverse" size="large" icon-name="utility:close"
+                        onclick={popups.Discount_Terms__c.close}>
+                    </lightning-button-icon>
+                </div>
+                <div class="slds-modal__header">
+                    <h1 class="slds-modal__title slds-hyphenate">{popups.Discount_Terms__c.title}
+                    </h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium discountTermsEdit">
+                    <lightning-input-rich-text variant="label-hidden" value={popups.Discount_Terms__c.value}
+                        onchange={popups.Discount_Terms__c.handleValueChange}>
+                    </lightning-input-rich-text>
+                </div>
+                <div class="slds-modal__footer">
+                    <lightning-button class="slds-p-right_small" onclick={popups.Discount_Terms__c.close}
+                        label={labels.LBL_Cancel}>
+                    </lightning-button>
+                    <lightning-button variant="brand" onclick={popups.Discount_Terms__c.confirm}
+                        label={labels.LBL_Ok}></lightning-button>
+                </div>
+            </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+    <template if:true={popups.Proof_counterparty_description__c.isOpen}>
+        <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal_medium slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                    <lightning-button-icon variant="bare-inverse" size="large" icon-name="utility:close"
+                        onclick={popups.Proof_counterparty_description__c.close}>
+                    </lightning-button-icon>
+                </div>
+                <div class="slds-modal__header">
+                    <h1 class="slds-modal__title slds-hyphenate">
+                        {popups.Proof_counterparty_description__c.title}
+                    </h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium discountTermsEdit">
+                    <lightning-textarea variant="label-hidden" value={popups.Proof_counterparty_description__c.value}
+                        onchange={popups.Proof_counterparty_description__c.handleValueChange}>
+                    </lightning-textarea>
+                </div>
+                <div class="slds-modal__footer">
+                    <lightning-button class="slds-p-right_small"
+                        onclick={popups.Proof_counterparty_description__c.close} label={labels.LBL_Cancel}>
+                    </lightning-button>
+                    <lightning-button variant="brand" onclick={popups.Proof_counterparty_description__c.confirm}
+                        label={labels.LBL_Ok}></lightning-button>
+                </div>
+            </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+    <template if:true={showBUSelection}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-43"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                    <lightning-button-icon variant="bare-inverse" size="large" icon-name="utility:close"
+                        onclick={closeBUSelection}></lightning-button-icon>
+                </div>
+                <div class="slds-modal__header">
+                    <h1 class="slds-modal__title slds-hyphenate">{labels.LBL_BU_Selection}</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div class="slds-grid slds-p-around_x-small">
+                        <lightning-input class="slds-p-bottom_medium slds-size_full" style="position: sticky;"
+                            onchange={filterBUs} onkeyup={filterBUs} value={BUSearch} type="search"
+                            variant="label-hidden">
+                        </lightning-input>
+                    </div>
+                    <table class="slds-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align:left;top: 0px; position: sticky; z-index: 2;">
+                                    {labels.LBL_Name}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={BUForSelection} for:item="BU">
+                                <tr key={BU.Id} style="cursor: pointer;" onclick={handleBUChanges} data-index={BU.index} data-id={BU.Id}>
+                                    <td style="text-align:left; padding: 0.5rem;">
+                                        {BU.BUName}
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="slds-modal__footer">
+                    <lightning-button class="slds-button" onclick={closeBUSelection} label={labels.LBL_Cancel}>
+                    </lightning-button>
+                </div>
+            </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+
+    <!-- Nego Scope Selection Popup -->
+    <template if:true={showNegoScopeSelection}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-negoscope"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                    <lightning-button-icon variant="bare-inverse" size="large" icon-name="utility:close"
+                        onclick={closeNegoScopeSelection}></lightning-button-icon>
+                </div>
+                <div class="slds-modal__header">
+                    <h1 class="slds-modal__title slds-hyphenate">{labels.LBL_Nego_Scope_Selection}</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div class="slds-grid slds-p-around_x-small">
+                        <lightning-input class="slds-p-bottom_medium slds-size_full" style="position: sticky;"
+                            onchange={filterNegoScope} onkeyup={filterNegoScope} value={negoScopeSearch} type="search"
+                            placeholder={labels.LBL_Search} variant="label-hidden">
+                        </lightning-input>
+                    </div>
+                    <div class="slds-scrollable" style="max-height: 400px;">
+                        <table class="slds-table slds-table_bordered">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:left;top: 0px; position: sticky; z-index: 2;">
+                                        {labels.LBL_Name}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={negoScopeForSelection} for:item="nego">
+                                    <tr key={nego.Id} style="cursor: pointer;" onclick={handleNegoScopeChange} data-index={nego.index} data-id={nego.Id}>
+                                        <td style="text-align:left; padding: 0.5rem;">
+                                            {nego.Name}
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="slds-modal__footer">
+                    <lightning-button class="slds-button" onclick={closeNegoScopeSelection} label={labels.LBL_Cancel}>
+                    </lightning-button>
+                </div>
+            </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+
+    <!-- Sub PCC Selection Popup -->
+    <template if:true={showSubPCCSelection}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-subpcc"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                    <lightning-button-icon variant="bare-inverse" size="large" icon-name="utility:close"
+                        onclick={closeSubPCCSelection}></lightning-button-icon>
+                </div>
+                <div class="slds-modal__header">
+                    <h1 class="slds-modal__title slds-hyphenate">
+                        {labels.LBL_Condition_Manager_Add_Sub_Discount_Popup_Title}</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div class="slds-grid slds-p-around_x-small slds-m-bottom_medium">
+                        <lightning-input class="slds-size_full" onchange={filterSubPCCs} onkeyup={filterSubPCCs}
+                            value={subPCCSearch} type="search" placeholder={labels.LBL_Search} variant="label-hidden">
+                        </lightning-input>
+                    </div>
+                    <div class="slds-scrollable" style="max-height: 400px;">
+                        <table class="slds-table slds-table_bordered">
+                            <tbody>
+                                <template for:each={filteredSubPCCs} for:item="pcc">
+                                    <tr key={pcc.id}>
+                                        <td style="width: 40px;">
+                                            <lightning-input type="checkbox" variant="label-hidden" data-id={pcc.id}
+                                                onchange={handleSubPCCSelection}>
+                                            </lightning-input>
+                                        </td>
+                                        <td>
+                                            <div><strong>{pcc.name}</strong></div>
+                                            <div class="slds-text-color_weak slds-text-body_small">{pcc.description}
+                                            </div>
+                                        </td>
+                                        <td style="width: 120px;">
+                                            <div class="slds-form-element">
+                                                <label
+                                                    class="slds-form-element__label slds-text-body_small">Qty:</label>
+                                                <lightning-input type="number" variant="label-hidden" min="1" value="1"
+                                                    data-id={pcc.id} onchange={handleSubPCCQuantityChange}
+                                                    class="slds-m-top_xx-small">
+                                                </lightning-input>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="slds-m-top_medium slds-text-body_small slds-text-color_weak">
+                        {selectedPCCCount}
+                    </div>
+                </div>
+                <div class="slds-modal__footer">
+                    <lightning-button label={labels.LBL_Cancel} onclick={closeSubPCCSelection}>
+                    </lightning-button>
+                    <lightning-button variant="brand" label={labels.LBL_Add_Selected} onclick={addSelectedSubPCCs}
+                        disabled={isAddSelectedDisabled}>
+                    </lightning-button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

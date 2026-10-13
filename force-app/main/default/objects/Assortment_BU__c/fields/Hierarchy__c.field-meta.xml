@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hierarchy__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <label>hierarchy</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>Hierarchy__c - Value does not exist or does not match filter criteria.</errorMessage>
+        <filterItems>
+            <field>Hierarchy__c.SetAssortmentLevel__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Hierarchy__c</referenceTo>
+    <relationshipLabel>Assortiments BU Hierarchies</relationshipLabel>
+    <relationshipName>Assortment_BUHierarchy</relationshipName>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

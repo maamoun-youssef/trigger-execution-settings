@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Déclaration de remises à l&apos;article</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Déclarations de remises à l&apos;article</value>
+    </caseValues>
+    <gender>Masculine</gender>
+    <layouts>
+        <layout>negOptim Product Discount Statement Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label>Contrat de mandat</label>
+        <name>Other</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Pénalité</label>
+        <name>Penality</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Promo</label>
+        <name>Promo</name>
+    </recordTypes>
+    <recordTypes>
+        <label>TMP</label>
+        <name>Regular</name>
+    </recordTypes>
+    <recordTypes>
+        <label>CPS</label>
+        <name>StockCompensation</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- End date must be greater than or equal to the begin date. --></errorMessage>
+        <name>PDS_Dates</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Product_Discount_Matrix --></label>
+        <name>Product_Discount_Matrix</name>
+    </webLinks>
+</CustomObjectTranslation>

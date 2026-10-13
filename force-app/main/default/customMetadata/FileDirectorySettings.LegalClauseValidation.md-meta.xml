@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>LegalClauseValidation</label>
+    <protected>false</protected>
+    <values>
+        <field>DisplayOrder__c</field>
+        <value xsi:type="xsd:double">6.0</value>
+    </values>
+    <values>
+        <field>IsDeleted__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>SObjectName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>SectionColor__c</field>
+        <value xsi:type="xsd:string">#14b3bb</value>
+    </values>
+    <values>
+        <field>SectionIcon__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>SectionSubTitle__c</field>
+        <value xsi:type="xsd:string">Legal Clause</value>
+    </values>
+    <values>
+        <field>SectionTitle__c</field>
+        <value xsi:type="xsd:string">Legal Clause Validation</value>
+    </values>
+    <values>
+        <field>ThemesSettings__c</field>
+        <value xsi:type="xsd:string">[{&quot;themeLabel&quot;:null,&quot;theme&quot;:&quot;Legal Documents&quot;,&quot;smallThemeImage&quot;:null,&quot;relatedSection&quot;:&quot;Legal Clause Validation&quot;,&quot;largeThemeImage&quot;:null,&quot;isPortalDisplayed&quot;:true,&quot;isDisplayed&quot;:true,&quot;isAllowCancelDocInternal&quot;:true,&quot;isAllowCancelDocExternal&quot;:true,&quot;isAllowApproveDocInternal&quot;:true,&quot;isAllowApproveDocExternal&quot;:true,&quot;gridSettingsName&quot;:&quot;Legal_Doc_Grid&quot;,&quot;allowUpload&quot;:true,&quot;allowSharing&quot;:true,&quot;allowReceiptConfirmation&quot;:true,&quot;allowMultipleUpload&quot;:true,&quot;allowedStatusesForUpload&quot;:[&quot;Requested&quot;],&quot;allowedStatusesForShare&quot;:[&quot;Sent&quot;],&quot;allowedStatusesForReceiptConfirmation&quot;:[&quot;Sent&quot;],&quot;allowedStatusesForDelete&quot;:null,&quot;allowDelete&quot;:null}]</value>
+    </values>
+</CustomMetadata>

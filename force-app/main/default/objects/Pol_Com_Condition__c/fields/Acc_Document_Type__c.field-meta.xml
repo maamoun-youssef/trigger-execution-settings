@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Acc_Document_Type__c</fullName>
+    <description>Specify the accounting document should be used for the condition: Credit Note request, debit note, Invoice, ...</description>
+    <inlineHelpText>Specify the accounting document should be used for the condition: Credit Note request, debit note, Invoice, ...</inlineHelpText>
+    <label>Accounting Document Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Acc_Document_Type</valueSetName>
+    </valueSet>
+</CustomField>

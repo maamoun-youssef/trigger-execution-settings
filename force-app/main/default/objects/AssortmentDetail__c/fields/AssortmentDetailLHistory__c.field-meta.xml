@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AssortmentDetailLHistory__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Previsouly validated line that is replaced by the current line. It is automatically filled and updated by a trigger once the user modify some value in the assortment validated line.</description>
+    <label>Last History</label>
+    <referenceTo>AssortmentDetail__c</referenceTo>
+    <relationshipLabel>Assortment Details (Assortment Detail LHistory)</relationshipLabel>
+    <relationshipName>AssortmentDetailsLHistory</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

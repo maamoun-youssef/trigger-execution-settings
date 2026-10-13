@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Ferme: contrat où le stock est la propriété de l&apos;enseigne Condition : contrat où le stock devient la propriété de l&apos;enseigne à la vente Commission : contrat où l&apos;enseigne n&apos;est jamais propriétaire du stock Concession : contrat de location d&apos;un espac</help>
+    <label>Type de négociation</label>
+    <name>NegoType__c</name>
+</CustomFieldTranslation>

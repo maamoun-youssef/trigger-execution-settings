@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Nego scope parent</label>
+    <lookupFilter>
+        <errorMessage>Nego Scope Parent - La valeur n&apos;existe pas ou ne correspond pas aux critères de filtre.</errorMessage>
+    </lookupFilter>
+    <name>NegoscopeParent__c</name>
+    <relationshipLabel>Nego Scopes (Negoscope parent)</relationshipLabel>
+</CustomFieldTranslation>

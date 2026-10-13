@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allow_Updating_Print_Date_On_Print__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Indicates whether to change the invoice print date to the current day on print or keep the date generated when the invoice was created</description>
+    <inlineHelpText>Indicates whether to change the invoice print date to the current day on print or keep the date generated when the invoice was created</inlineHelpText>
+    <label>Update Invoice Print Date on Print</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

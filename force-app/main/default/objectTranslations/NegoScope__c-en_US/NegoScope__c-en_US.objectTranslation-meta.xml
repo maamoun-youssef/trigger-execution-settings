@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Nego Scope</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Negoscopes</value>
+    </caseValues>
+    <fieldSets>
+        <label>Advanced NS Field Set</label>
+        <name>FS_Advanced</name>
+    </fieldSets>
+    <fieldSets>
+        <label>NS Project Field Set</label>
+        <name>FS_In_Preparation</name>
+    </fieldSets>
+    <fieldSets>
+        <label>Regular NS Field Set</label>
+        <name>FS_Regular</name>
+    </fieldSets>
+    <fieldSets>
+        <label>Sub NS Field Set</label>
+        <name>FS_Sub_NS</name>
+    </fieldSets>
+    <layouts>
+        <layout>Nego Scope Layout</layout>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Nego Scope Layout Portal</layout>
+        <sections>
+            <label><!-- Champs --></label>
+            <section>Champs</section>
+        </sections>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+        <sections>
+            <label><!-- Nouvelle section --></label>
+            <section>Nouvelle section</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Sub Nego Scope Layout</layout>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Nego Scope Name --></nameFieldLabel>
+    <recordTypes>
+        <description><!-- An Advanced Nego Scope is a comprehensive negotiation framework designed to facilitate agreements between multiple suppliers or clients within a unified scope. --></description>
+        <label>Advanced</label>
+        <name>Advanced</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- New NS in preparation --></description>
+        <label>NS Project</label>
+        <name>NSProject</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- My negotiation scope --></description>
+        <label>Regular</label>
+        <name>Regular</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Is a sub Nego scope (having a parent nego scope) --></description>
+        <label>Sub NS</label>
+        <name>SubNS</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label>Add Nego Scope</label>
+        <name>Add_NegoScope_List</name>
+    </webLinks>
+    <webLinks>
+        <label>Add Sub Nego Scope</label>
+        <name>Add_Sub_NegoScope_List</name>
+    </webLinks>
+    <webLinks>
+        <label>Add Sub Nego Scope</label>
+        <name>Add_Sub_Negoscope</name>
+    </webLinks>
+    <webLinks>
+        <label>Document Center</label>
+        <name>DocumentCenter</name>
+    </webLinks>
+    <webLinks>
+        <label>Add Nego Scope (Guided)</label>
+        <name>Guided_Add_NegoScope_List</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- InvoiceManager --></label>
+        <name>InvoiceManager</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- InvoiceManagerVisualizer --></label>
+        <name>InvoiceManagerVisualizer</name>
+    </webLinks>
+    <webLinks>
+        <label>Manage Nego Scope</label>
+        <name>NegoScope_Manager</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Specify if countryu of the contract equal to the country of the NS or its VAT Linked Country --></help>
+    <label>Est un fournisseur étranger</label>
+    <name>IsForeignSupplier__c</name>
+</CustomFieldTranslation>

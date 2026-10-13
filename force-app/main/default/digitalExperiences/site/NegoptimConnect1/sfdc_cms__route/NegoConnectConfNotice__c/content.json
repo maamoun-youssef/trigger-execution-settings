@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "confidentiality-notice",
+  "contentBody" : {
+    "activeViewId" : "confidentiality_notice",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-confidentiality-notice",
+    "urlPrefix" : "confidentiality-notice"
+  },
+  "urlName" : "confidentiality-notice"
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Correspond to a specific condition for Free products.. Account will be not for payement but for free sellin provisionning --></help>
+    <label><!-- Is Free Product Discount --></label>
+    <name>Is_Free_Product_Discount__c</name>
+</CustomFieldTranslation>

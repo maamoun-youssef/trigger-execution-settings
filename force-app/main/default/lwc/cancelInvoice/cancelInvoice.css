@@ -1,0 +1,9 @@
+.slds-table th,
+.slds-table td {
+    white-space: pre-wrap;
+}
+
+.tableDiv {
+    height: 100%;
+    width: 100%;
+}

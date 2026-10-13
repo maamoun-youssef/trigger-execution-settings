@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Business Unit</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Business Units</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>negOptim Business Unit</layout>
+        <sections>
+            <label><!-- Filter Settings - Assortment --></label>
+            <section>Filter Settings - Assortment</section>
+        </sections>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+        <sections>
+            <label><!-- Life cycle --></label>
+            <section>Life cycle</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Nom BU</nameFieldLabel>
+    <recordTypes>
+        <description>Ajouter une strate d&apos;assortiment</description>
+        <label>Strate d&apos;assortiments</label>
+        <name>AssortmentCluster</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Regrouper des strates d&apos;assortiment pour les référencer dans un détail d&apos;assortiment (utilisé dans la gestion multi-complémentaire)</description>
+        <label>Liste de strates</label>
+        <name>AssortmentClusterList</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Ajouter une enseigne nationale ou régionale</description>
+        <label>Enseigne</label>
+        <name>Banner</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Ajouter un circuit de distribution (Hyper, Super, ...)</description>
+        <label>Circuit</label>
+        <name>Channel</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Ajouter un pays ou une centrale pays</description>
+        <label>Centrale pays</label>
+        <name>Country</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Ajouter un drive à une enseigne</description>
+        <label>Drive</label>
+        <name>Drive</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Ajouter l&apos;entité maître d&apos;une organisation client</description>
+        <label>Groupe</label>
+        <name>Group</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Définir une liste de XXX pour les filtres de scope négo</description>
+        <label>Liste</label>
+        <name>List</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Ajouter une région géographique gérée par une organisation</description>
+        <label>Région</label>
+        <name>Region</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Ajouter un magasin à une enseigne</description>
+        <label>Magasin</label>
+        <name>Store</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Ajouter un site collecteur de taxes</description>
+        <label>Collecteur de taxes</label>
+        <name>TaxAgency</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Ajouter un entrepôt à une centrale</description>
+        <label>Entrepôt</label>
+        <name>Warehouse</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Ajouter un site ecommerce</description>
+        <label>Web</label>
+        <name>Web</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- BUListManager --></label>
+        <name>BUListManager</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- NewBUList --></label>
+        <name>NewBUList</name>
+    </webLinks>
+</CustomObjectTranslation>

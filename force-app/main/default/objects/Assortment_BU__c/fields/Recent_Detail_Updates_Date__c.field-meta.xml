@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Recent_Detail_Updates_Date__c</fullName>
+    <description>Give the last validation date of one of the row detail</description>
+    <inlineHelpText>Give the last validation date of one of the row detail</inlineHelpText>
+    <label>Recent Detail Updates Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

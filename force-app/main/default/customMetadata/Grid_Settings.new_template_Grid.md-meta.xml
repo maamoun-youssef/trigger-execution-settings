@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>new template Grid</label>
+    <protected>false</protected>
+    <values>
+        <field>Calendar_Setting__c</field>
+        <value xsi:type="xsd:string">{&quot;startDate&quot;:&quot;&quot;,&quot;endDate&quot;:&quot;&quot;,&quot;pickListValue&quot;:&quot;&quot;,&quot;showCalendarSettings&quot;:false}</value>
+    </values>
+    <values>
+        <field>Columns__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Compiled_Grid_JSON__c</field>
+        <value xsi:type="xsd:string">{&quot;WARNINGS&quot;:[&quot;Template Has No Fields&quot;],&quot;USERFILTERS&quot;:[],&quot;TIME_LINE_SETTINGS&quot;:{&quot;masterLookupParent&quot;:&quot;&quot;,&quot;masterLookup&quot;:&quot;&quot;,&quot;levelControl&quot;:1,&quot;isTimeLineSettings&quot;:false},&quot;templateType&quot;:&quot;Detail&quot;,&quot;STATIC_FIELDS&quot;:&quot;&quot;,&quot;SEARCHABLE_FIELDS&quot;:null,&quot;relationName&quot;:null,&quot;readOnlyCriteria&quot;:null,&quot;Quick_Actions&quot;:[],&quot;picklistValuesMap&quot;:{&quot;ReceiptConfirmedBy__c&quot;:{&quot;Retailer&quot;:&quot;Retailer&quot;,&quot;Supplier&quot;:&quot;Supplier&quot;},&quot;SubType__c&quot;:{&quot;Market Analysis&quot;:&quot;Market Analysis&quot;,&quot;Letter of reservation&quot;:&quot;Letter of reservation&quot;,&quot;Tender Master Document&quot;:&quot;Tender Master Document&quot;,&quot;Tariff&quot;:&quot;Tariff&quot;,&quot;Specification Book&quot;:&quot;Specification Book&quot;,&quot;Scorecard&quot;:&quot;Scorecard&quot;,&quot;Sample request form&quot;:&quot;Sample request form&quot;,&quot;Sales Terms&quot;:&quot;Sales Terms&quot;,&quot;Sales Forecast&quot;:&quot;Sales Forecast&quot;,&quot;Purchasing Terms&quot;:&quot;Purchasing Terms&quot;,&quot;Proforma Invoice&quot;:&quot;Proforma Invoice&quot;,&quot;Pre-Populated Template&quot;:&quot;Pre-Populated Template&quot;,&quot;Planograms&quot;:&quot;Planograms&quot;,&quot;Penalty&quot;:&quot;Penalty&quot;,&quot;Payment&quot;:&quot;Payment&quot;,&quot;Non Disclosure Agreement&quot;:&quot;Non Disclosure Agreement&quot;,&quot;Non-conformance report&quot;:&quot;Non-conformance report&quot;,&quot;Mandate&quot;:&quot;Mandate&quot;,&quot;Invoice&quot;:&quot;Invoice&quot;,&quot;Framework Agreement Template&quot;:&quot;Framework Agreement Template&quot;,&quot;Framework Agreement&quot;:&quot;Framework Agreement&quot;,&quot;Ethical Chart&quot;:&quot;Ethical Chart&quot;,&quot;Datasharing&quot;:&quot;Datasharing&quot;,&quot;Credit Note&quot;:&quot;Credit Note&quot;,&quot;Compliance Audit&quot;:&quot;Compliance Audit&quot;,&quot;Certifications&quot;:&quot;Certifications&quot;,&quot;Branding Elements&quot;:&quot;Branding Elements&quot;,&quot;Blank Template&quot;:&quot;Blank Template&quot;,&quot;Benchmark&quot;:&quot;Benchmark&quot;,&quot;Banking Document&quot;:&quot;Banking Document&quot;,&quot;Application Contract&quot;:&quot;Application Contract&quot;,&quot;Appendix&quot;:&quot;Appendix&quot;,&quot;Advertising Materials&quot;:&quot;Advertising Materials&quot;,&quot;Admin Certification&quot;:&quot;Admin Certification&quot;,&quot;Addendum&quot;:&quot;Addendum&quot;,&quot;Account Status&quot;:&quot;Account Status&quot;},&quot;Status__c&quot;:{&quot;Cancelled&quot;:&quot;Cancelled&quot;,&quot;Rejected&quot;:&quot;Rejected&quot;,&quot;Requested&quot;:&quot;Requested&quot;,&quot;Receipt Confirmed&quot;:&quot;Receipt Confirmed&quot;,&quot;Signed&quot;:&quot;Signed&quot;,&quot;Validated&quot;:&quot;Validated&quot;,&quot;Sent&quot;:&quot;Sent&quot;},&quot;RecordTypeId&quot;:{&quot;Template&quot;:&quot;Template&quot;,&quot;Sourcing&quot;:&quot;Sourcing&quot;,&quot;Quality&quot;:&quot;Quality&quot;,&quot;Pricing&quot;:&quot;Pricing&quot;,&quot;Marketing&quot;:&quot;Marketing&quot;,&quot;Financial&quot;:&quot;Financial&quot;,&quot;Contractual&quot;:&quot;Contractual&quot;,&quot;Administrative&quot;:&quot;Administrative&quot;},&quot;CurrencyIsoCode&quot;:{&quot;LBP&quot;:&quot;Lebanese Pound&quot;,&quot;EUR&quot;:&quot;Euro&quot;}},&quot;overrideFilter&quot;:false,&quot;objectReferenceMap&quot;:{&quot;TMP_ServiceStatement__c&quot;:&quot;TMP_ServiceStatement__c&quot;,&quot;Contract__c&quot;:&quot;Contract__c&quot;,&quot;Invoice__c&quot;:&quot;Invoice__c&quot;,&quot;Assortment__c&quot;:&quot;Assortment__c&quot;,&quot;Supplier__c&quot;:&quot;Supplier__c&quot;,&quot;Negoscope__c&quot;:&quot;NegoScope__c&quot;,&quot;FileDirectoryReference__c&quot;:&quot;FileDirectory__c&quot;,&quot;FileDirectoryParent__c&quot;:&quot;FileDirectory__c&quot;,&quot;LastModifiedById&quot;:&quot;User&quot;,&quot;CreatedById&quot;:&quot;User&quot;,&quot;RecordTypeId&quot;:&quot;RecordType&quot;,&quot;OwnerId&quot;:&quot;Group&quot;},&quot;objectLabel&quot;:&quot;File Directory&quot;,&quot;OBJECT_NAME&quot;:&quot;FileDirectory__c&quot;,&quot;Master_OBJECT_STATIC_FIELDS&quot;:&quot;&quot;,&quot;Master_OBJECT_NAME&quot;:&quot;&quot;,&quot;layoutSlogan&quot;:null,&quot;layoutLabel&quot;:&quot;new template Grid&quot;,&quot;isShowFilterOnColumnHeader&quot;:false,&quot;isReadOnly&quot;:false,&quot;Include_In_List_View&quot;:false,&quot;iconSection&quot;:&quot;standard&quot;,&quot;iconName&quot;:&quot;orders&quot;,&quot;iconClass&quot;:&quot;slds-icon-standard-orders&quot;,&quot;hierarchyParentField&quot;:[],&quot;hasMaster&quot;:false,&quot;groupedField&quot;:&quot;&quot;,&quot;gridTypeValue&quot;:&quot;normal&quot;,&quot;gridLayout&quot;:{&quot;attributes&quot;:{&quot;type&quot;:&quot;Grid_Settings__mdt&quot;,&quot;url&quot;:&quot;/services/data/v66.0/sobjects/Grid_Settings__mdt/m01QH00002C2d71YAB&quot;},&quot;Id&quot;:&quot;m01QH00002C2d71YAB&quot;,&quot;Calendar_Setting__c&quot;:&quot;{\&quot;startDate\&quot;:\&quot;\&quot;,\&quot;endDate\&quot;:\&quot;\&quot;,\&quot;pickListValue\&quot;:\&quot;\&quot;,\&quot;showCalendarSettings\&quot;:false}&quot;,&quot;Time_Line_Settings__c&quot;:&quot;{\&quot;levelControl\&quot;:1,\&quot;masterLookup\&quot;:\&quot;\&quot;,\&quot;masterLookupParent\&quot;:\&quot;\&quot;,\&quot;isTimeLineSettings\&quot;:false}&quot;,&quot;DeveloperName&quot;:&quot;new_template_Grid&quot;,&quot;MasterLabel&quot;:&quot;new template Grid&quot;,&quot;Columns__c&quot;:&quot;[]&quot;,&quot;Object_Name__c&quot;:&quot;FileDirectory__c&quot;,&quot;Master_Object_Columns__c&quot;:&quot;[]&quot;,&quot;Icon__c&quot;:&quot;standard:orders&quot;,&quot;Filters__c&quot;:&quot;[]&quot;,&quot;ReadOnly_Criteria__c&quot;:&quot;{}&quot;,&quot;Type__c&quot;:&quot;Detail&quot;,&quot;Grid_Configuration__c&quot;:&quot;{\&quot;Default_Page_Size\&quot;:\&quot;50\&quot;,\&quot;hierarchyParentField\&quot;:[],\&quot;groupedField\&quot;:\&quot;\&quot;,\&quot;gridTypeValue\&quot;:\&quot;normal\&quot;,\&quot;isShowFilterOnColumnHeader\&quot;:false,\&quot;overrideFilter\&quot;:null,\&quot;Quick_Actions\&quot;:[],\&quot;actions\&quot;:{\&quot;screenFlows\&quot;:[],\&quot;quickActions\&quot;:[]},\&quot;defaultSortFields\&quot;:[],\&quot;formulas\&quot;:[],\&quot;importSettingsTemplate\&quot;:\&quot;\&quot;}&quot;},&quot;GRID_FIELDS&quot;:[],&quot;FILTERS&quot;:[],&quot;FILTER_FIELDS&quot;:[],&quot;ERRORS&quot;:[],&quot;Display_Order&quot;:null,&quot;defaultSortFields&quot;:[],&quot;Default_Page_Size&quot;:50,&quot;CALENDAR_SETTINGS&quot;:{&quot;startDate&quot;:&quot;&quot;,&quot;showCalendarSettings&quot;:false,&quot;pickListValue&quot;:&quot;&quot;,&quot;endDate&quot;:&quot;&quot;},&quot;BANNER_FIELDS&quot;:[],&quot;ALL_FIELDS&quot;:[&quot;id&quot;,&quot;currencyisocode&quot;],&quot;ALL_BANNER_FIELDS&quot;:[&quot;id&quot;],&quot;actions&quot;:{&quot;screenFlows&quot;:[],&quot;quickActions&quot;:[]}}</value>
+    </values>
+    <values>
+        <field>Filters__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Grid_Configuration__c</field>
+        <value xsi:type="xsd:string">{&quot;Default_Page_Size&quot;:&quot;50&quot;,&quot;hierarchyParentField&quot;:[],&quot;groupedField&quot;:&quot;&quot;,&quot;gridTypeValue&quot;:&quot;normal&quot;,&quot;isShowFilterOnColumnHeader&quot;:false,&quot;overrideFilter&quot;:null,&quot;Quick_Actions&quot;:[],&quot;actions&quot;:{&quot;screenFlows&quot;:[],&quot;quickActions&quot;:[]},&quot;defaultSortFields&quot;:[],&quot;formulas&quot;:[],&quot;importSettingsTemplate&quot;:&quot;&quot;}</value>
+    </values>
+    <values>
+        <field>Grid_Slogan__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">standard:orders</value>
+    </values>
+    <values>
+        <field>Master_Object_Columns__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Master_Object_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Object_Name__c</field>
+        <value xsi:type="xsd:string">FileDirectory__c</value>
+    </values>
+    <values>
+        <field>ReadOnly_Criteria__c</field>
+        <value xsi:type="xsd:string">{}</value>
+    </values>
+    <values>
+        <field>Relationship_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Time_Line_Settings__c</field>
+        <value xsi:type="xsd:string">{&quot;levelControl&quot;:1,&quot;masterLookup&quot;:&quot;&quot;,&quot;masterLookupParent&quot;:&quot;&quot;,&quot;isTimeLineSettings&quot;:false}</value>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:type="xsd:string">Detail</value>
+    </values>
+</CustomMetadata>

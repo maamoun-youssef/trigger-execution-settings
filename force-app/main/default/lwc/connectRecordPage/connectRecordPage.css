@@ -1,0 +1,738 @@
+:host {
+    --beij: #F2F6DFff;
+    --midnight-green: #08484Aff;
+    --verdigris: #14B2BBff;
+    --amethyst: #816BC0ff;
+    --russian-violet: #3C094Bff;
+    --space-cadet: #322B4Cff;
+    --honeydew: #E8F4E8ff;
+    --dark-violet: #9719BBff;
+    --pistachio: #8BC58Aff;
+    --mint-green: #DDF4EEff;
+    --text-body: #5C5C5C;
+    --light-gray: #B1B1B1;
+}
+
+/* Reference links on teal header: hover feedback (inline styles cannot use :hover) */
+.headerReferenceLink {
+    color: #ffffff;
+    text-decoration: underline;
+    text-decoration-color: rgb(42, 140, 218);
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition: color 0.15s ease, text-shadow 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.headerReferenceLink:hover,
+.headerReferenceLink:focus {
+    color: #e8ecec;
+    text-shadow: 0 0 0.35em rgba(255, 255, 255, 0.55), 0 0.08em 0.12em rgba(0, 0, 0, 0.35);
+    text-decoration-color: rgb(90, 170, 235);
+}
+
+.headerReferenceLink:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.65);
+    outline-offset: 2px;
+}
+
+.actionButton {
+    cursor: pointer;
+    color: white;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 600;
+    overflow: hidden;
+    margin: 0;
+    padding: 6px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    text-overflow: ellipsis;
+    /* padding-right: 26px; */
+    border-radius: 12px;
+}
+
+.p10 {
+    padding-inline: 10px;
+}
+
+.slds-modal__container {
+    width: 60% !important;
+    max-width: none !important;
+}
+
+
+.nextStepsContent {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    padding-bottom: 1.2px;
+}
+
+.taskHoverPopover {
+    position: absolute;
+    top: 0.5rem;
+    left: -36rem;
+    width: 34rem;
+    z-index: 10;
+}
+
+.taskPopoverTitle {
+    text-align: center;
+    font-weight: 700;
+}
+
+.hoverFieldRow {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    border-bottom: 1px solid #e5e5e5;
+    min-height: 2rem;
+}
+
+.hoverFieldRow:last-child {
+    border-bottom: none;
+}
+
+.hoverFieldLabel {
+    font-weight: 600;
+    color: #3e3e3c;
+    padding: 0.35rem 0.5rem;
+}
+
+.hoverFieldValue {
+    padding: 0.35rem 0.5rem;
+    color: #3e3e3c;
+    word-break: break-word;
+}
+
+.actionButton:hover {
+    filter: brightness(1.2);
+}
+
+.buttonContainer {
+    width: 25%;
+    display: inline-block;
+    padding: 10px;
+    text-align: center;
+}
+
+.buttonGroupContainer {
+    font-size: 0;
+    container-type: inline-size;
+}
+
+.row {
+    display: flex;
+    gap: 1rem;
+    /* space between fields */
+    margin-bottom: 0.5rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.statusList,
+.buttonGroupContainer,
+.buttonContainer,
+.div1 {
+    -moz-transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+}
+
+/* table, th, td {
+    padding: 0px;
+} */
+.tabClass {
+    /* height:29vh; */
+}
+
+.internalQATable td {
+    text-align: center;
+    white-space: pre-wrap;
+    min-width: 200px;
+    height: 60px;
+
+}
+
+.internalQATable th,
+.filesTable th {
+    text-align: center;
+    z-index: 3;
+    position: sticky;
+    top: 0;
+}
+
+.relativeDiv {
+    position: relative;
+}
+
+.filterIcon {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+
+.filterMenu {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    top: 100%;
+    z-index: 6;
+    position: absolute;
+    /* min-width: 150px;
+    left: -50px; */
+    /* top: 0; */
+    /* min-width: 200px; */
+    min-width: 310px;
+    top: 38px;
+    height: 260px;
+    /* left: 84%; */
+    /* left: 85.5%; */
+    left: 78.5%;
+
+}
+
+.breakCell {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.callButton {
+    background-color: #806bbf;
+}
+
+.callButton:hover {
+    background-color: #9d83e9;
+}
+
+.emailButton {
+    background-color: #14B3BB;
+}
+
+.emailButton:hover {
+    background-color: #1acdd6;
+}
+
+.relaunchButton {
+    background-color: #8CC58A;
+}
+
+.relaunchButton:hover {
+    background-color: #97d194;
+}
+
+.statusButton {
+    background-color: #BDD25A;
+}
+
+.statusButton:hover {
+    background-color: #c4da5a;
+}
+
+.div1 {
+    z-index: 1;
+    width: 20%;
+    /* font-size:0 */
+}
+
+.div2 {
+    z-index: 4;
+    margin-top: 0;
+    width: 55%;
+    /* font-size:0 */
+}
+
+.div3 {
+    /* z-index: 4; */
+    z-index: 3;
+    width: 25%;
+    border-left: 1px solid rgba(0, 0, 0, 0.089);
+    /* font-size:0 */
+}
+
+.wideTd {
+    min-width: 250px;
+    text-align: left !important;
+}
+
+.polygonClass {
+    clip-path: polygon(10% 0, 100% 0, 100% 100%, 5% 100%);
+    background: white;
+    width: 89%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    position: absolute;
+    z-index: 3
+}
+
+.borderClass {
+    clip-path: polygon(10% 0, 100% 0, 100% 100%, 5% 100%);
+    background: rgba(0, 0, 0, 0.089);
+    width: 89%;
+    top: 0;
+    right: 1px;
+    bottom: 0;
+    left: auto;
+    position: absolute;
+    z-index: 2
+}
+
+.titleClass {
+    font-weight: 600;
+}
+
+.activityIcon {
+    background: white;
+    position: absolute;
+    /* left: 10px; */
+    left: 5px;
+    margin-top: 10px;
+    top: -10px;
+    z-index: 1;
+    /* background: white;*/
+}
+
+.profileIcon {
+    background: white;
+}
+
+.subTitleClass {
+    font-style: italic;
+    font-size: smaller;
+    margin-top: -10px;
+}
+
+.editButton {
+    /* position: absolute;
+    right: 0.75rem;
+    top: 4px; */
+    scale: 1.3;
+    /* margin-bottom: 10px; */
+}
+
+.emptyProductLabel {
+    position: absolute;
+    left: 0.75rem;
+    top: 4px;
+    scale: 1.3;
+}
+
+.questionEditButton {
+    position: absolute;
+    right: 0.75rem;
+    top: 4px;
+}
+
+.sectionTitle {
+    min-height: 50px;
+    position: relative;
+    background: #F3F3F3;
+    align-items: center;
+    font-size: 1rem;
+    line-height: 1.875rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    justify-content: space-between;
+}
+
+.iconsActionDiv {
+    /* margin-top: 51px; */
+    margin-top: 15px;
+
+}
+
+.answerQA {
+    display: none;
+}
+
+.statusIcon {
+    /* height: 90px; */
+}
+
+.productTabClass {
+    /* min-height: 300px; */
+    min-height: 215px;
+    position: relative;
+    /* height: 30%; */
+}
+
+.fileTableRow {
+    height: 50px;
+}
+
+.tabSetClass {
+    min-height: 300px;
+}
+
+.nextStepTitle {
+    position: relative;
+    text-align: center;
+    font-size: large;
+    height: 41px;
+    font-weight: 600;
+    background: #791395;
+    color: white;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-color: #791395;
+}
+
+.nextstepTable td {
+    width: min-content;
+    padding: 0.1rem;
+    cursor: pointer;
+    width: 20px;
+    /* min-width: 100px; */
+}
+
+.taskActionCell {
+    white-space: nowrap;
+    min-width: 70px;
+}
+
+.taskActionButton {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0.2rem;
+    margin: 0 0.1rem;
+}
+
+.deleteTaskButton {
+    --slds-c-icon-color-foreground-default: #a22525;
+}
+
+.cloneTaskButton {
+    --slds-c-icon-color-foreground-default: #0070d2;
+}
+
+.nextstepVerticalTable {
+    border-collapse: collapse;
+}
+
+.nextstepVerticalTable td {
+    padding: 0.1rem;
+    cursor: pointer;
+    white-space: break-spaces;
+    /* min-width: 100px; */
+}
+
+.padding {
+    padding: 5px;
+}
+
+.borderBottom {
+    border-bottom: 2px solid rgb(0 0 0 / 40%);
+}
+
+.nextStepHeader {
+    background-color: rgb(243, 243, 243);
+    color: rgb(68, 68, 68);
+    padding: 0.25rem 0.5rem;
+    font-weight: 700;
+    white-space: nowrap !important;
+}
+
+.addButton {
+    --slds-c-button-text-color: white;
+}
+
+.editButtonIcon {
+    /* --slds-c-button-text-color: rgb(162, 21, 21); */
+    --slds-c-icon-color-foreground: #777777;
+    /* --slds-c-button-brand-color-background: #7e0f6f; */
+}
+
+.editButtonIcon:hover {
+    cursor: pointer;
+}
+
+.addButton:hover {
+    cursor: pointer;
+}
+
+/* @container (max-width:620px) {
+    .actionButton {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+@container (min-width:820px) {
+    .actionButton {
+        padding-left: 58px;
+        padding-right: 58px;
+    }
+}
+@container (min-width:1100px) {
+    .actionButton {
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+}
+@container (min-width:1300px) {
+    .actionButton {
+        padding-left: 122px;
+        padding-right: 122px;
+    }
+}
+@container (min-width:3200px) {
+    .actionButton {
+        padding-left: 140px;
+        padding-right: 140px;
+    }
+} */
+
+
+/* Q&A */
+.question {
+    color: #00708A;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.answer {
+    border-left: 2px solid #00708A;
+    margin-top: 10px;
+    font-size: 13px;
+    padding-bottom: 4px;
+    padding-left: 15px;
+    display: none;
+}
+
+.tabQuestions {
+    display: none;
+}
+
+.bold1 {
+    font-weight: 600;
+}
+
+.bold2 {
+    font-weight: 700;
+}
+
+.popover1 {
+    position: absolute;
+    left: -710px;
+    top: -365px;
+    z-index: 9;
+    width: 700px;
+}
+
+.popover1Vertical {
+    position: absolute;
+    left: -454px;
+    white-space: break-spaces;
+    bottom: -25%;
+    z-index: 9;
+    overflow: hidden;
+    width: 448px;
+}
+
+.popoverBody1 {
+    height: 365px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 7px;
+}
+
+.popover2 {
+    position: absolute;
+    left: -710px;
+    top: -200px;
+    z-index: 9;
+    width: 700px;
+}
+
+.popover2Vertical {
+    position: absolute;
+    left: -454px;
+    white-space: break-spaces;
+    bottom: -25%;
+    z-index: 9;
+    width: 448px;
+    overflow: hidden;
+}
+
+.popoverBody2 {
+    min-height: 50px;
+    margin-bottom: 10px;
+}
+
+.p1 {
+    font-size: 46px;
+    font-weight: 700;
+    color: #C00000;
+}
+
+.fontSize1 {
+    font-size: 17px;
+    white-space: no-wrap;
+}
+
+.fontSize2 {
+    font-size: 22px;
+    white-space: no-wrap;
+}
+
+.fontSize3 {
+    font-size: 14px;
+}
+
+.caseInfoDiv {
+    color: #595959;
+}
+
+.blueDiv {
+    background: #00708A;
+    color: white;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.div1Toggle:hover,
+.div3Toggle:hover {
+    background: aliceblue;
+}
+
+.div1Toggle {
+    display: none;
+    position: absolute;
+    left: -7px;
+    top: 300px;
+    border: 1px solid rgba(0, 0, 0, 0.089);
+}
+
+.div3Toggle {
+    display: none;
+    position: absolute;
+    cursor: pointer;
+    right: -7px;
+    top: 300px;
+    z-index: 12;
+    border: 1px solid rgba(0, 0, 0, 0.089);
+}
+
+.hover-text {
+  color: black;
+}
+
+/* Hover state */
+.hover-text:hover {
+  color: red;
+}
+
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+@media (max-width:1150px) {
+    .buttonContainer {
+        width: 50%;
+    }
+}
+
+@media (max-width:950px) {
+    .buttonContainer {
+        width: 100%;
+    }
+}
+
+.nextSteps2 {
+    display: none;
+}
+
+@media (max-width:1600px) {}
+
+@media (max-width:1300px) {
+    .nextSteps1 {
+        display: none;
+    }
+
+    .nextSteps2 {
+        display: inline;
+    }
+}
+
+
+@media (max-width:1450px) {
+    .borderClass {
+        display: none;
+    }
+
+    .div1 {
+        display: none;
+        width: 30%;
+    }
+
+    .div2 {
+        width: 70%;
+    }
+
+    .div3 {
+        width: 30%;
+    }
+
+    .borderClass {
+        width: 80%;
+        height: 150%;
+    }
+
+    .polygonClass {
+        width: 80%;
+        height: 150%;
+    }
+
+    .div1Toggle {
+        display: inline;
+        cursor: pointer;
+    }
+
+    .dinline {
+        display: inline !important;
+    }
+
+    .dnone {
+        display: none !important;
+        cursor: pointer;
+    }
+}

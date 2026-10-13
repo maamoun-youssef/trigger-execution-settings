@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- New Client WD ClientBased Net (Pts) --></label>
+    <name>New_Client_WD_ClientBased_Net_Pts__c</name>
+</CustomFieldTranslation>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Spécifier le statut de la portée de négociation. Si Inactif, le périmètre de négociation ne sera pas proposé au propriétaire pour son contrat</help>
+    <label>Statut</label>
+    <name>Status__c</name>
+    <picklistValues>
+        <masterLabel>Active</masterLabel>
+        <translation>Actif</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>In Preparation</masterLabel>
+        <translation>En préparation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Inactive</masterLabel>
+        <translation>Inactif</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Request For Approval</masterLabel>
+        <translation>Demande d&apos;approbation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Request For Stop</masterLabel>
+        <translation>Demande d&apos;arrêt</translation>
+    </picklistValues>
+</CustomFieldTranslation>

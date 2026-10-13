@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "ForgotPasswordCustom",
+  "contentBody" : {
+    "activeViewId" : "ForgotPasswordCustom",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-forgotpasswordcustom",
+    "urlPrefix" : "forgotpasswordcustom"
+  },
+  "urlName" : "forgotpasswordcustom"
+}

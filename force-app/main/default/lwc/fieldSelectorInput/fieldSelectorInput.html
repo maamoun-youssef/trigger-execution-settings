@@ -1,0 +1,107 @@
+<template>
+    <div class="slds-is-relative">
+        <template lwc:if={selectedField}>
+            <div class="slds-pill_container" onclick={handlePillClick}>
+                <lightning-pill label={selectedField.fieldLabel} onremove={handleFieldClear} class="frp-pill">
+                </lightning-pill>
+            </div>
+        </template>
+
+        <template lwc:else>
+            <div class="slds-combobox_container">
+                <div class={comboboxClass} aria-expanded={isOpen} aria-haspopup="listbox" role="combobox">
+                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                        <lightning-input type="search" data-id="searchInput"
+                            placeholder={labels.LBL_FieldSelectorInput_SearchField} variant="label-hidden"
+                            onclick={handleInputClick} onchange={handleSearchInput} value={searchTerm}>
+                        </lightning-input>
+                    </div>
+                    <template lwc:if={isOpen}>
+                        <div class="slds-dropdown slds-dropdown_fluid slds-dropdown_length-7 frp-dropdown"
+                            role="listbox" onclick={handleDropdownClick}>
+                            <template lwc:if={navStack.length}>
+                                <div
+                                    class="slds-theme_shade slds-border_bottom slds-p-horizontal_small slds-p-vertical_x-small">
+                                    <nav>
+                                        <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                                            <li class="slds-breadcrumb__item">
+                                                <a href="#" onclick={handleBreadcrumbClick} data-index="-1">
+                                                    {labels.LBL_FieldSelectorInput_AllResources}
+                                                </a>
+                                            </li>
+                                            <template for:each={navStack} for:item="nav" for:index="navIdx">
+                                                <li key={nav.fieldApiName} class="slds-breadcrumb__item">
+                                                    <a href="#" onclick={handleBreadcrumbClick} data-index={navIdx}>
+                                                        {nav.fieldLabel}
+                                                    </a>
+                                                </li>
+                                            </template>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </template>
+
+                            <template lwc:if={isLoading}>
+                                <div class="slds-align_absolute-center slds-p-around_large">
+                                    <lightning-spinner alternative-text="Loading…" size="small"></lightning-spinner>
+                                </div>
+                            </template>
+
+                            <template lwc:else>
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template lwc:if={filteredFields.length}>
+                                        <template for:each={filteredFields} for:item="field" for:index="index">
+                                            <li key={field.apiName} class="slds-listbox__item" role="option"
+                                                data-index={index} onclick={handleFieldClick}>
+                                                <span
+                                                    class="slds-media slds-listbox__option slds-listbox__option_entity slds-media_small">
+                                                    <span class="slds-media__figure slds-listbox__option-icon">
+                                                        <lightning-icon icon-name={field.typeIcon} size="small"
+                                                            alternative-text={field.type}>
+                                                        </lightning-icon>
+                                                    </span>
+                                                    <span class="slds-media__body">
+                                                        <span
+                                                            class="slds-listbox__option-text slds-listbox__option-text_entity"
+                                                            title={field.label}>
+                                                            {field.label}
+                                                        </span>
+                                                    </span>
+                                                    <template lwc:if={field.isReference}>
+                                                        <span
+                                                            class="slds-media__figure slds-media__figure_reverse slds-text-color_weak">
+                                                            <lightning-icon icon-name="utility:chevronright"
+                                                                size="x-small">
+                                                            </lightning-icon>
+                                                        </span>
+                                                    </template>
+                                                </span>
+                                            </li>
+                                        </template>
+                                    </template>
+                                    <template lwc:else>
+                                        <li class="slds-listbox__item" role="option">
+                                            <span
+                                                class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small">
+                                                <span
+                                                    class="slds-media__body slds-align_absolute-center slds-p-vertical_x-small slds-text-body_small slds-text-color_weak">
+                                                    <template lwc:if={searchTerm}>
+                                                        {labels.LBL_FieldSelectorInput_NoFieldsMatch}
+                                                        &ldquo;{searchTerm}&rdquo;
+                                                    </template>
+                                                    <template lwc:else>
+                                                        {labels.LBL_FieldSelectorInput_NoFieldsMatch}
+                                                    </template>
+                                                </span>
+                                            </span>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

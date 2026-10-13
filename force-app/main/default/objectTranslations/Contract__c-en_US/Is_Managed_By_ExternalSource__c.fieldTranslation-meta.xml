@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Is Managed By External Source</label>
+    <name>Is_Managed_By_ExternalSource__c</name>
+</CustomFieldTranslation>

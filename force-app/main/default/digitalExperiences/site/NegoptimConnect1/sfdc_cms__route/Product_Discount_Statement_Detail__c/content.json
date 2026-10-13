@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Product Discount Statement Detail",
+  "contentBody" : {
+    "activeViewId" : "Product_Discount_Statement_Detail",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "detail-ProductDiscountStatement__c",
+    "urlPrefix" : "productdiscountstatement"
+  },
+  "urlName" : "product-discount-statement-detail"
+}

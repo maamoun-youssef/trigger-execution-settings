@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Détail du contrat d&apos;application / mandat</label>
+    <name>CommercialPlandetail__c</name>
+    <relationshipLabel>Détail pièce comptable (Détail du contrat d&apos;application / de mandat)</relationshipLabel>
+</CustomFieldTranslation>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hierarchy__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <label>Orga Hierarchy Element</label>
+    <referenceTo>Hierarchy__c</referenceTo>
+    <relationshipLabel>Assortment Matrix review</relationshipLabel>
+    <relationshipName>Assortment_Matrix_review</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

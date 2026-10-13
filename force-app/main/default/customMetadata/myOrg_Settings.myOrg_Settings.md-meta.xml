@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>myOrg_Settings</label>
+    <protected>false</protected>
+    <values>
+        <field>BUListManagerConfiguration__c</field>
+        <value xsi:type="xsd:string">{&quot;childrenBUDefaultGridSettingsTemplate&quot;:&quot;Test_BU_A&quot;}</value>
+    </values>
+    <values>
+        <field>GL_Stickers_Settings__c</field>
+        <value xsi:type="xsd:string">[[&quot;&quot;,&quot;&quot;],[&quot;&quot;,&quot;&quot;],[&quot;&quot;,&quot;&quot;],[&quot;&quot;,&quot;&quot;],[&quot;Address1__c&quot;,&quot;&quot;],[&quot;Identifier10__c&quot;,&quot;&quot;]]</value>
+    </values>
+</CustomMetadata>

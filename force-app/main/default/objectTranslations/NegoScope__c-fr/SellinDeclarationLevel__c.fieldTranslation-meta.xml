@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Défini si ce NS fait l&apos;objet d&apos;une demande de déclaration de CA par le fournisseur. &lt;br/&gt;• Aucun : pas de déclaration attendue. &lt;br/&gt;• Oui : une déclaration est attendue. &lt;br/&gt;• Oui sans process : le fournisseur déclare pour simple vérification, sans aucun process exécutoire attendu pour les données déclarées</help>
+    <label>Niveau de déclaration CA fournisseur</label>
+    <name>SellinDeclarationLevel__c</name>
+    <picklistValues>
+        <masterLabel>Advanced Only</masterLabel>
+        <translation>Niveau avancé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>NoSellInDeclaration</masterLabel>
+        <translation>Pas de déclaration</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Partner Only</masterLabel>
+        <translation>Niveau partenaire</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Yes-wo process</masterLabel>
+        <translation>Oui sans process</translation>
+    </picklistValues>
+</CustomFieldTranslation>

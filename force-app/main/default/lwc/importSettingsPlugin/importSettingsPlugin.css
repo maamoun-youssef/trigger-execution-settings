@@ -1,0 +1,85 @@
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+.pluginContainer {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pluginHeader {
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186));
+    padding: 16px 0;
+    min-height: 60px;
+}
+
+.headerIcon {
+    --sds-c-icon-color-foreground-default: #fff;
+}
+
+.headerTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+}
+
+.headerSubtitle {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.3;
+}
+
+.importButton {
+    --sds-c-button-brand-color-background: #0cb4ba;
+    --sds-c-button-brand-color-border: rgba(255, 255, 255, 0.3);
+    --sds-c-button-brand-text-color: #fff;
+    --sds-c-button-brand-color-background-hover: #0a9095;
+    --sds-c-button-brand-color-border-hover: rgba(255, 255, 255, 0.5);
+}
+
+.pluginBody {
+    background-color: #fff;
+    min-height: 120px;
+    position: relative;
+}
+
+.successIcon {
+    --sds-c-icon-color-foreground-default: #2e844a;
+}

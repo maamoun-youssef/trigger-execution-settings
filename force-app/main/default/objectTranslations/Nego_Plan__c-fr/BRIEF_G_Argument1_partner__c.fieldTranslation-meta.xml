@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Success &amp; lost of the Agrument / Submitted counter-argument --></help>
+    <label><!-- BRIEF - G Argument1 React --></label>
+    <name>BRIEF_G_Argument1_partner__c</name>
+</CustomFieldTranslation>

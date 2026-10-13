@@ -1,0 +1,778 @@
+<template>
+    <!-- Modal/Popup Box starts here-->
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+        <div class="slds-modal__container">
+            <!-- Modal/Popup Box Header Starts here-->
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                    onclick={closeSettings}>
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                    title={currentFieldsSettingsLabel}>
+                    {currentFieldsSettingsLabel}
+                </div>
+            </header>
+            <!--Modal/Popup Box Body Starts here-->
+            <div class="slds-modal__content" id="modal-content-id-1" style="height: 62vh;">
+                <template if:true={Loading}>
+                    <lightning-spinner size="large" variant="brand" alternative-text='loading'>
+                    </lightning-spinner>
+                </template>
+                <lightning-accordion if:false={Loading}>
+                    <template if:true={fieldWrapper.isFormula}>
+                        <lightning-textarea class="big-textarea slds-m-around--small" label="Enter Equation"
+                            data-field="equation" value={fieldWrapper.equation} onchange={handleFormulaChange}
+                            placeholder="e.g. col1 + col2 * 2">
+                        </lightning-textarea>
+                        <lightning-input label="Scale" class="slds-m-around--small" type="number"
+                            value={fieldWrapper.scale} onchange={handleChangeScale}></lightning-input>
+                    </template>
+                    <template if:false={fieldWrapper.isFormula}>
+                        <template if:false={fieldWrapper.isSeparator}>
+                            <template if:false={fieldWrapper.someIsPersonalized}>
+                                <lightning-accordion-section name="section1" label={Label.LBL_Field_Type}>
+                                    <div class="slds-grid slds-wrap">
+                                        <div class="slds-form-element slds-col" if:false={isBigObject}>
+                                            <label class="slds-checkbox_toggle slds-grid">
+                                                <span
+                                                    class="slds-form-element__label slds-m-bottom_none">{Label.LBL_Field_Type}</span>
+                                                <input type="checkbox" name="checkbox-field-type"
+                                                    value="checkbox-field-type" aria-describedby="checkbox-field-type"
+                                                    checked={fieldWrapper.isInputField}
+                                                    onchange={handleIsInputFieldChange}
+                                                    disabled={fieldWrapper.isDisabled}
+                                                    if:false={fieldWrapper.isCalculated} />
+                                                <input type="checkbox" name="checkbox-field-type"
+                                                    value="checkbox-field-type" aria-describedby="checkbox-field-type"
+                                                    checked={fieldWrapper.isInputField} disabled
+                                                    if:true={fieldWrapper.isCalculated} />
+                                                <span id="checkbox-field-type" class="slds-checkbox_faux_container"
+                                                    aria-live="assertive">
+                                                    <span class="slds-checkbox_faux"></span>
+                                                    <span class="slds-checkbox_on">{Label.LBL_Input}</span>
+                                                    <span class="slds-checkbox_off">{Label.LBL_Output}</span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="slds-form-element slds-col">
+                                            <label class="slds-checkbox_toggle slds-grid">
+                                                <span
+                                                    class="slds-form-element__label slds-m-bottom_none">{Label.LBL_Internally_Calculated}</span>
+                                                <input type="checkbox" name="checkbox-is-hidden"
+                                                    value="checkbox-is-hidden" aria-describedby="checkbox-is-hidden"
+                                                    checked={fieldWrapper.internallyCalculated}
+                                                    onchange={handleInternallyCalculatedFieldChange} />
+                                                <span id="checkbox-is-internallyCalculated"
+                                                    class="slds-checkbox_faux_container" aria-live="assertive">
+                                                    <span class="slds-checkbox_faux"></span>
+                                                    <span class="slds-checkbox_on"></span>
+                                                    <span class="slds-checkbox_off"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="slds-form-element slds-col">
+                                            <label class="slds-checkbox_toggle slds-grid">
+                                                <span
+                                                    class="slds-form-element__label slds-m-bottom_none">{Label.LBL_Is_Field_Hidden}</span>
+                                                <input type="checkbox" name="checkbox-is-hidden"
+                                                    value="checkbox-is-hidden" aria-describedby="checkbox-is-hidden"
+                                                    checked={fieldWrapper.isHidden}
+                                                    onchange={handleIsHiddenFieldChange} />
+                                                <span id="checkbox-is-hidden" class="slds-checkbox_faux_container"
+                                                    aria-live="assertive">
+                                                    <span class="slds-checkbox_faux"></span>
+                                                    <span class="slds-checkbox_on"></span>
+                                                    <span class="slds-checkbox_off"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="slds-form-element slds-col">
+                                            <label class="slds-checkbox_toggle slds-grid">
+                                                <span
+                                                    class="slds-form-element__label slds-m-bottom_none">{Label.LBL_Is_Not_Exportable}</span>
+                                                <input type="checkbox" name="checkbox-is-hidden"
+                                                    value="checkbox-is-exportable" aria-describedby="checkbox-is-hidden"
+                                                    checked={fieldWrapper.isNotExportable}
+                                                    onchange={handleisNotExportableFieldChange} />
+                                                <span id="checkbox-is-hidden1" class="slds-checkbox_faux_container"
+                                                    aria-live="assertive">
+                                                    <span class="slds-checkbox_faux"></span>
+                                                    <span class="slds-checkbox_on"></span>
+                                                    <span class="slds-checkbox_off"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <template if:true={fieldWrapper.isFilterable}>
+                                            <div class="slds-form-element slds-col">
+                                                <label class="slds-checkbox_toggle slds-grid">
+                                                    <span
+                                                        class="slds-form-element__label slds-m-bottom_none">{Label.LBL_Is_Sortable}</span>
+                                                    <input type="checkbox" name="checkbox-is-sortable"
+                                                        value="checkbox-is-sortable"
+                                                        aria-describedby="checkbox-is-hidden"
+                                                        checked={fieldWrapper.isSortable}
+                                                        onchange={handleIsSortableFieldChange} />
+                                                    <span id="checkbox-is-sortable" class="slds-checkbox_faux_container"
+                                                        aria-live="assertive">
+                                                        <span class="slds-checkbox_faux"></span>
+                                                        <span class="slds-checkbox_on"></span>
+                                                        <span class="slds-checkbox_off"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </template>
+                                        <template if:true={fieldWrapper.isInputField}>
+                                            <template if:false={fieldWrapper.internallyCalculated}>
+                                                <div class="slds-form-element slds-col">
+                                                    <label class="slds-checkbox_toggle slds-grid">
+                                                        <span
+                                                            class="slds-form-element__label slds-m-bottom_none">{Label.LBL_Enable_Mass_Update}</span>
+                                                        <input type="checkbox" name="checkbox-is-mass-update"
+                                                            value="checkbox-is-mass-update"
+                                                            aria-describedby="checkbox-is-hidden"
+                                                            checked={fieldWrapper.isMassUpdate}
+                                                            onchange={handleIsMassUpdateFieldChange} />
+                                                        <span id="checkbox-is-mass-update"
+                                                            class="slds-checkbox_faux_container" aria-live="assertive">
+                                                            <span class="slds-checkbox_faux"></span>
+                                                            <span class="slds-checkbox_on"></span>
+                                                            <span class="slds-checkbox_off"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </template>
+                                        </template>
+                                    </div>
+                                </lightning-accordion-section>
+                                <template if:true={fieldWrapper.hasTotal}>
+                                    <lightning-accordion-section name="section1" label={Label.LBL_Display_In_Totals}>
+                                        <div class="slds-form-element slds-col">
+                                            <label class="slds-checkbox_toggle slds-grid">
+                                                <span
+                                                    class="slds-form-element__label slds-m-bottom_none">{Label.LBL_Display_In_Totals}</span>
+                                                <input type="checkbox" name="checkbox-display-in-totals"
+                                                    value="checkbox-display-in-totals"
+                                                    aria-describedby="checkbox-display-in-totals"
+                                                    checked={fieldWrapper.showInTotal}
+                                                    onchange={handleshowInTotalChange} />
+                                                <span id="checkbox-display-in-totals"
+                                                    class="slds-checkbox_faux_container" aria-live="assertive">
+                                                    <span class="slds-checkbox_faux"></span>
+                                                    <span class="slds-checkbox_on"></span>
+                                                    <span class="slds-checkbox_off"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <template if:true={fieldWrapper.showInTotal}>
+                                            <div class="slds-size_1-of-1">
+                                                <lightning-combobox name="totalType" label={Label.LBL_Total_Type}
+                                                    value={fieldWrapper.totalType}
+                                                    placeholder={Label.LBL_Select_Total_Type} options={totalTypeOptions}
+                                                    onchange={handleTotalTypeChange}>
+                                                </lightning-combobox>
+                                            </div>
+                                        </template>
+                                    </lightning-accordion-section>
+                                </template>
+                                <template if:true={fieldWrapper.isNumber}>
+                                    <lightning-accordion-section name="Scale" label="Scale">
+                                        <lightning-input type="number" value={fieldWrapper.scale}
+                                            onchange={handleChangeScale}></lightning-input>
+                                    </lightning-accordion-section>
+                                </template>
+                                <lightning-accordion-section if:true={fieldWrapper.isURL} name="section2"
+                                    label={Label.LBL_URL_Settings}>
+                                    <div class="slds-form-element slds-col">
+                                        <label class="slds-checkbox_toggle slds-grid">
+                                            <span
+                                                class="slds-form-element__label slds-m-bottom_none">{Label.LBL_Show_File_Input}</span>
+                                            <input type="checkbox" name="checkbox-display-file-input"
+                                                value="checkbox-display-file-input"
+                                                aria-describedby="checkbox-display-file-input"
+                                                checked={fieldWrapper.hasFileInput}
+                                                onchange={handleHasInputFileChange} />
+                                            <span id="checkbox-display-file-input" class="slds-checkbox_faux_container"
+                                                aria-live="assertive">
+                                                <span class="slds-checkbox_faux"></span>
+                                                <span class="slds-checkbox_on"></span>
+                                                <span class="slds-checkbox_off"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="slds-grid slds-gutters_direct-small">
+                                        <div class="slds-form-element slds-col slds-size_1-of-2">
+                                            <lightning-combobox value={fieldWrapper.URLOption} options={urlOptions}
+                                                label="URL Options" onchange={handleDisplayFullURLChanged}>
+                                            </lightning-combobox>
+                                            <!--<label class="slds-checkbox_toggle slds-grid">
+                                            <span class="slds-form-element__label slds-m-bottom_none">Display Full
+                                                URL</span>
+                                            <input type="checkbox" name="checkbox-display-file-input2"
+                                                value="checkbox-display-file-input2"
+                                                aria-describedby="checkbox-display-file-input2"
+                                                checked={fieldWrapper.displayFullURL}
+                                                onchange={handleDisplayFullURLChanged} />
+                                            <span id="checkbox-display-file-input2"
+                                                class="slds-checkbox_faux_container" aria-live="assertive">
+                                                <span class="slds-checkbox_faux"></span>
+                                                <span class="slds-checkbox_on"></span>
+                                                <span class="slds-checkbox_off"></span>
+                                            </span>
+                                        </label>-->
+                                        </div>
+                                        <div if:true={fieldWrapper.isURL} class="slds-col slds-size_1-of-2">
+                                            <template if:false={displayFullURL}>
+                                                <lightning-input class="urlReplaceWith" if:true={replaceWithText}
+                                                    type="text" label={Label.LBL_Replace_URL_With}
+                                                    value={fieldWrapper.replaceURLWith}
+                                                    onchange={handleReplaceURLWithChanged}>
+                                                </lightning-input>
+                                                <lightning-combobox if:true={replaceWithIcon} label="Select Icon"
+                                                    options={iconPicklist} class="urlReplaceWith slds-size_medium"
+                                                    value={fieldWrapper.replaceURLWith}
+                                                    onchange={handleReplaceURLWithChanged}>
+                                                </lightning-combobox>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </lightning-accordion-section>
+                                <lightning-accordion-section if:false={fieldWrapper.isCalculated} name="section2"
+                                    label={Label.LBL_Clone}>
+                                    <div class="slds-form-element slds-col">
+                                        <label class="slds-checkbox_toggle slds-grid">
+                                            <span class="slds-form-element__label slds-m-bottom_none">Clear</span>
+                                            <input type="checkbox" name="checkbox-is-sortable" value="checkbox-to-clear"
+                                                aria-describedby="checkbox-is-hidden"
+                                                checked={fieldWrapper.clearOnClone}
+                                                onchange={handleClearOnCloneChange} />
+                                            <span id="checkbox-to-clear" class="slds-checkbox_faux_container"
+                                                aria-live="assertive">
+                                                <span class="slds-checkbox_faux"></span>
+                                                <span class="slds-checkbox_on"></span>
+                                                <span class="slds-checkbox_off"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </lightning-accordion-section>
+                            </template>
+                            <!-- <template if:true={fieldWrapper.isMultiple}>
+                            <lightning-accordion-section name="section1" label={Label.LBL_Personalised_Field}
+                                if:true={fieldWrapper.allIsPersonalised}>
+                                <lightning-combobox label={Label.LBL_Field_Type}
+                                    onchange={personalisedFieldTypeChangeHandler} options={personalisedFieldTypeOptions}
+                                    value={fieldWrapper.stringFieldType}>
+                                </lightning-combobox>
+                            </lightning-accordion-section>
+                        </template>
+                        <template if:false={fieldWrapper.isMultiple}>
+                            <lightning-accordion-section name="section1" label={Label.LBL_Personalised_Field}
+                                if:true={fieldWrapper.someIsPersonalized}>
+                                <lightning-input label={Label.LBL_Field_Name}
+                                    onchange={personalisedFieldNameChangeHandler}
+                                    value={fieldWrapper.value}>
+                                </lightning-input>
+                                <lightning-combobox label={Label.LBL_Field_Type}
+                                    onchange={personalisedFieldTypeChangeHandler} options={personalisedFieldTypeOptions}
+                                    value={fieldWrapper.stringFieldType}>
+                                </lightning-combobox>
+                                <lightning-input label={Label.LBL_Action} onchange={personalisedActionChangeHandler} value={fieldWrapper.action}>
+                                </lightning-input>
+                                <lightning-input label={Label.LBL_Rerender} onchange={personalisedRerenderChangeHandler} value={fieldWrapper.rerender} field-level-help={Label.MSG_Rerender_Help_Text}>
+                                </lightning-input>
+                            </lightning-accordion-section>
+                        </template> -->
+                        </template>
+                    </template>
+                    <!-- <template if:false={fieldWrapper.isMultiple}>
+                        <template if:true={fieldWrapper.isInputField}>
+                            <lightning-accordion-section name="section2" label={Label.LBL_Custom_Js}>
+                                function onChangeGenericHandler(element, fieldName, recordId) { <br />
+                                let parent = element.parentElement;
+                                <lightning-textarea variant="label-hidden" onchange={customJSChangeHandler}
+                                    value={fieldWrapper.customJS}>
+                                </lightning-textarea>
+                                }
+                            </lightning-accordion-section>
+                        </template>
+                    </template> -->
+                    <lightning-accordion-section name="section3" label={Label.LBL_Column_Formating}>
+                        <template if:false={fieldWrapper.isMultiple}>
+                            <template if:true={fieldWrapper.isNumberOrBooleanOrTextOrRecordTypeId}>
+                                <lightning-input type="toggle" label={Label.LBL_Conditional_Formatting}
+                                    checked={fieldWrapper.hasConditionalFormating}
+                                    onchange={handlehasConditionalFormatingChange} message-toggle-active=""
+                                    message-toggle-inactive="" class="slds-p-left_small"></lightning-input>
+                                <template if:true={fieldWrapper.hasConditionalFormating}>
+                                    <template if:false={Loading}>
+                                        <div class="slds-grid">
+                                            <div class="slds-size_12-of-12 slds-scrollable slds-p-top_small">
+                                                <table class="slds-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                {Label.LBL_Operation}
+                                                            </th>
+                                                            <th>
+                                                                {Label.LBL_Value}
+                                                            </th>
+                                                            <th style="width: 20px;">
+                                                            </th>
+                                                            <th style="width: 20px;">
+                                                            </th>
+                                                            <th style="width: 20px;">
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <template for:each={fieldWrapper.formattingRulesList}
+                                                            for:item="formatRule" for:index='index'>
+                                                            <tr key={formatRule}>
+                                                                <td>
+                                                                    {formatRule.operation}
+                                                                </td>
+                                                                <td>
+                                                                    {formatRule.displayValue}
+                                                                </td>
+                                                                <td>
+                                                                    <lightning-helptext icon-name="utility:preview"
+                                                                        content={formatRule.stylePreview}>
+                                                                    </lightning-helptext>
+                                                                </td>
+                                                                <td>
+                                                                    <lightning-button-icon icon-name="utility:delete"
+                                                                        onclick={handleDeleteFormatingRule}
+                                                                        data-recordid={index}>
+                                                                    </lightning-button-icon>
+                                                                </td>
+                                                                <td>
+                                                                    <lightning-button-icon icon-name="utility:edit"
+                                                                        onclick={handleEditFormatingRule}
+                                                                        data-recordid={index}>
+                                                                    </lightning-button-icon>
+                                                                </td>
+                                                            </tr>
+                                                        </template>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template if:true={editting}>
+                                        <lightning-combobox name="operation" label={Label.LBL_Operation}
+                                            value={operation} required placeholder={Label.LBL_Select_Operation}
+                                            options={operationOptions} onchange={handleOperationChange}>
+                                        </lightning-combobox>
+                                        <template if:false={fieldWrapper.isBoolean}>
+                                            <template if:true={showInputOne}>
+                                                <lightning-input label={Label.LBL_Value} data-recordid="value1"
+                                                    type={valueType} onchange={handleFormatRuleValuechange}
+                                                    value={value1} required if:false={showpicklistvalues}>
+                                                </lightning-input>
+                                                <lightning-combobox label={Label.LBL_Value} data-recordid="value1"
+                                                    onchange={handleFormatRuleValuechange} value={value1} required
+                                                    options={picklistvalues} if:true={showpicklistvalues}>
+                                                </lightning-combobox>
+                                            </template>
+                                            <template if:true={showInputTwo}>
+                                                <lightning-input label={Label.LBL_Lower_Bound} data-recordid="value1"
+                                                    type={valueType} onchange={handleFormatRuleValuechange}
+                                                    value={value1} required>
+                                                </lightning-input>
+                                                <lightning-input label={Label.LBL_Upper_Bound} data-recordid="value2"
+                                                    type={valueType} onchange={handleFormatRuleValuechange}
+                                                    value={value2} required>
+                                                </lightning-input>
+                                            </template>
+                                            <lightning-tabset>
+                                                <lightning-tab name="section5" label={Label.LBL_Style}>
+                                                    <c-grid-settings-style-editor api-field-style={formatingRuleStyle}
+                                                        event-name={Events.formatingRuleStyle}
+                                                        onformatingrulestyle={handleFormatRuleStylechange}
+                                                        class="slds-p-top_x-small" data-id="formatingRuleStyle">
+                                                    </c-grid-settings-style-editor>
+                                                </lightning-tab>
+                                            </lightning-tabset>
+                                        </template>
+                                        <template if:true={fieldWrapper.isBoolean}>
+                                            <lightning-combobox label={Label.LBL_Value} data-recordid="value1"
+                                                onchange={handleFormatRuleValuechange} value={value1} required
+                                                options={valueOptions}>
+                                            </lightning-combobox>
+                                            <lightning-accordion allow-multiple-sections-open
+                                                title={Label.LBL_Column_Formating}>
+                                                <lightning-tabset>
+                                                    <lightning-tab name="section5" label={Label.LBL_Style}>
+                                                        <c-grid-settings-style-editor
+                                                            api-field-style={formatingRuleStyle}
+                                                            event-name={Events.formatingRuleStyle}
+                                                            onformatingrulestyle={handleFormatRuleStylechange}
+                                                            class="slds-p-top_x-small" data-id="formatingRuleStyle">
+                                                        </c-grid-settings-style-editor>
+                                                    </lightning-tab>
+                                                    <lightning-tab name="section6" label={Label.LBL_Opposite_Style}>
+                                                        <c-grid-settings-style-editor
+                                                            api-field-style={formatingRuleOppositeStyle}
+                                                            event-name={Events.formatingRuleOppositeStyle}
+                                                            onformatingruleoppositestyle={handleFormatRuleOppositeStylechange}
+                                                            class="slds-p-top_x-small"
+                                                            data-id="formatingRuleOppositeStyle">
+                                                        </c-grid-settings-style-editor>
+                                                    </lightning-tab>
+                                                </lightning-tabset>
+                                            </lightning-accordion>
+                                        </template>
+                                    </template>
+                                    <template if:false={fieldWrapper.isBooleanWithOneFormatingRuleStyle}>
+                                        <template if:false={editting}>
+                                            <div class="slds-clearfix">
+                                                <lightning-button-icon icon-name='utility:add' variant="brand"
+                                                    class="slds-p-top_x-small slds-float_left"
+                                                    onclick={handleAddFormatingRule}>
+                                                </lightning-button-icon>
+                                            </div>
+                                        </template>
+                                    </template>
+                                </template>
+                            </template>
+                        </template>
+                        <template if:false={fieldWrapper.hasConditionalFormating}>
+                            <c-grid-settings-style-editor api-field-style={fieldWrapper.nonConditional}
+                                onnonconditional={handlenonConditionalchange} api-new-label={newLabel}
+                                event-name={Events.nonConditional} class="slds-p-top_x-small" data-id="nonConditional"
+                                if:false={fieldWrapper.isSeparator}>
+                            </c-grid-settings-style-editor>
+                            <template if:true={fieldWrapper.isSeparator}>
+                                <div class="slds-grid">
+                                    <lightning-input label={Label.LBL_Size} class="slds-p-right_small"
+                                        value={fieldWrapper.separatorSettings.size} data-name='size'
+                                        onchange={genericChangeHandlerSeperator}></lightning-input>
+                                    <lightning-combobox label={Label.LBL_Style} options={borderStyleOptions}
+                                        class="slds-p-right_small" value={fieldWrapper.separatorSettings.pattern}
+                                        data-name='pattern' onchange={genericChangeHandlerSeperator}
+                                        style="width: 200px;">
+                                    </lightning-combobox>
+                                    <lightning-input type="color" label={Label.LBL_Color} class="slds-p-right_small"
+                                        value={fieldWrapper.separatorSettings.color} data-name='color'
+                                        onchange={genericChangeHandlerSeperator}></lightning-input>
+                                </div>
+                            </template>
+                        </template>
+                        <div class="headerSection" if:false={fieldWrapper.isSeparator}>
+                            <lightning-accordion allow-multiple-sections-open active-section-name={}>
+                                <lightning-accordion-section name="headerSection" label={Label.LBL_Header}>
+                                    <lightning-input type="text" label="field label" value={fieldWrapper.newLabel}
+                                        onchange={handleNewLabelChange}>
+                                    </lightning-input>
+                                    <lightning-input type="color" label={Label.LBL_Background}
+                                        onchange={headerBackgroundColorChangeHandler}
+                                        value={fieldWrapper.headerStyle.bgColor}></lightning-input>
+                                    <lightning-input type="color" label={Label.LBL_Color}
+                                        onchange={headerColorChangeHandler}
+                                        value={fieldWrapper.headerStyle.color}></lightning-input>
+                                </lightning-accordion-section>
+                            </lightning-accordion>
+                        </div>
+                    </lightning-accordion-section>
+                    <lightning-accordion-section name="section4" label={Label.LBL_Picklist_Formatting}
+                        if:true={fieldWrapper.isPicklist}>
+                        <div>
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+                                aria-labelledby="element-with-table-label other-element-with-table-label">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Label">Label</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Color">Color</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template for:each={picklistColorsList} for:item="pickItem">
+                                        <tr class="slds-hint-parent" key={pickItem.value}>
+                                            <td>
+                                                <div class="slds-truncate" title={pickItem.label}>{pickItem.label}</div>
+                                            </td>
+                                            <td>
+                                                <div class="slds-truncate" data-id={pickItem.value}
+                                                    title={pickItem.color}>
+                                                    <lightning-input data-id={pickItem.value} type="color"
+                                                        name="input-color" label={Label.LBL_Favorite_Color}
+                                                        value={pickItem.color}
+                                                        onchange={handlePickListItemColorChanged}>
+                                                    </lightning-input>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--<lightning-button value="generate colors" label="generate colors" onclick={handleGeneratePicklistColors}></lightning-button>-->
+                    </lightning-accordion-section>
+                    <template if:false={fieldWrapper.isFormula}>
+                        <template if:false={fieldWrapper.isSeparator}>
+                            <lightning-accordion-section name="section5" label={Label.LBL_Default_Value}
+                                if:true={hasDefaultValue}>
+                                <lightning-radio-group name="radioGroup" label={Label.LBL_Default_Value} variant=""
+                                    options={defaultValuesOptions} value={defaultType} type="radio"
+                                    onchange={handleChangeDefaultValueType}>
+                                </lightning-radio-group>
+                                <template if:false={isFieldRef}>
+                                    <template if:true={isDefaultText}>
+                                        <lightning-input if:true={isTextPredefinedValue} type="text"
+                                            label={Label.LBL_Default_Value} value={defaultValue}
+                                            onchange={handleChangeDefaultField}></lightning-input>
+                                        <lightning-input if:true={fieldWrapper.isNumber} type="number"
+                                            label={Label.LBL_Default_Value} value={defaultValue}
+                                            onchange={handleChangeDefaultField}></lightning-input>
+                                        <lightning-input if:true={fieldWrapper.isDate} type="date"
+                                            label={Label.LBL_Default_Value} value={defaultValue}
+                                            onchange={handleChangeDefaultField}></lightning-input>
+                                        <lightning-input if:true={fieldWrapper.isDateTime} type="datetime"
+                                            label={Label.LBL_Default_Value} value={defaultValue}
+                                            onchange={handleChangeDefaultField}></lightning-input>
+                                        <lightning-combobox if:true={fieldWrapper.isBoolean}
+                                            label={Label.LBL_Default_Value} value={defaultValue}
+                                            options={booleanOptions}
+                                            onchange={handleChangeDefaultField}></lightning-combobox>
+                                        <lightning-combobox label={Label.LBL_Default_Value}
+                                            onchange={handleChangeDefaultField} value={defaultValue}
+                                            options={picklistvalues} if:true={showpicklistvalues}></lightning-combobox>
+                                    </template>
+                                </template>
+                                <template if:false={isFieldRef}>
+                                    <lightning-input if:true={isDefaultExpression} type="text"
+                                        label={Label.LBL_Default_Expression} placeholder={defaultExpressionPlaceHolder}
+                                        value={defaultExpression}
+                                        onchange={handleChangeExpressionField}></lightning-input>
+                                </template>
+                                <lightning-combobox if:true={isDefaultCurrent} name="Current Fields"
+                                    label={Label.LBL_Current_Fields} class="dropCombo" value={defaultValue}
+                                    options={matchingObjectFields} onchange={handleChangeDefaultField}>
+                                </lightning-combobox>
+                                <lightning-combobox if:true={isDefaultParent} name="Parent Fields"
+                                    label={Label.LBL_Parent_Fields} class="dropCombo" value={defaultValue}
+                                    options={matchingRefObjectFields} onchange={handleChangeDefaultField}>
+                                </lightning-combobox>
+                            </lightning-accordion-section>
+                            <lightning-accordion-section name="section7" label={Label.LBL_External_Control}>
+                                <lightning-tabset>
+                                    <lightning-tab label={Label.LBL_Define_New_External_Control}>
+                                        <div class="slds-grid">
+                                            <lightning-input class="controlActionName slds-m-right_x-small slds-col"
+                                                label={Label.LBL_Description}></lightning-input>
+                                            <lightning-button valeur="Register Control" variant="brand"
+                                                class="slds-align-bottom slds-col_bump-left" onclick={handleSaveControl}
+                                                label={Label.LBL_Register}>
+                                            </lightning-button>
+                                        </div>
+                                        <div class="slds-grid">
+                                            <lightning-combobox name="Control Type" label={Label.LBL_Type}
+                                                class="controlActionType slds-p-right_x-small" options={controlOptions}
+                                                onchange={controlOptionsChange} style="width:50%">
+                                            </lightning-combobox>
+                                            <lightning-input class="message slds-m-right_x-small"
+                                                label={Label.LBL_Message} if:true={displayControleMessage}
+                                                style="width: 50%"></lightning-input>
+                                        </div>
+                                        <c-grid-settings-expression-editor data-comp="externalCriteriaExpressionEditor"
+                                            criterias-wrapperjson={externalCriteriasJSON}
+                                            onconfirmexternalcriteriaexpressioneditor={confirmExternalCriteriaExpressionEditor}
+                                            confirm-event={Events.confirmExternalCriteriaExpressionEditor}
+                                            card-label={Label.LBL_Control_Rules}>
+                                        </c-grid-settings-expression-editor>
+                                    </lightning-tab>
+                                    <lightning-tab label={Label.LBL_Predefined_External_Controls}>
+                                        <ol>
+                                            <template for:each={conditionalRules} for:item="controllerAction"
+                                                for:index="index">
+                                                <li key={controllerAction} class="slds-item slds-p-bottom_xx-small">
+                                                    <div class="slds-box slds-box_xx-small slds-grid">
+                                                        <div
+                                                            class="slds-grid slds-grid_vertical slds-p-vertical_xx-small">
+                                                            <div style="font-size: 18px; font-weight: bold;"
+                                                                class="slds-p-left_x-small">
+                                                                {controllerAction.description}
+                                                            </div>
+                                                            <div>
+                                                                <span
+                                                                    class="slds-badge">{controllerAction.criteria.expression}</span>
+                                                            </div>
+                                                            <ul class="slds-list_ordered">
+                                                                <template for:each={controllerAction.criteriasList}
+                                                                    for:item="controlCriteria">
+                                                                    <li key={controlCriteria}>
+                                                                        {controlCriteria.fieldName}
+                                                                        {controlCriteria.operation}
+                                                                        {controlCriteria.value}
+                                                                    </li>
+                                                                </template>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="slds-col_bump-left">
+                                                            <lightning-button-icon icon-name="utility:close"
+                                                                variant="bare" data-id={index}
+                                                                onclick={handleDeleteExternalControl}>
+                                                            </lightning-button-icon>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </template>
+                                        </ol>
+                                    </lightning-tab>
+                                </lightning-tabset>
+                            </lightning-accordion-section>
+                        </template>
+                    </template>
+                </lightning-accordion>
+            </div>
+            <!--Modal/Popup Box Footer Starts here-->
+            <footer class="slds-modal__footer">
+                <lightning-button title={Label.LBL_Cancel} label={Label.LBL_Cancel} onclick={closeSettings}
+                    class="slds-p-right_x-small">
+                </lightning-button>
+                <lightning-button title={Label.LBL_Confirm} label={Label.LBL_Confirm} variant="brand"
+                    onclick={confirmSettings}>
+                </lightning-button>
+            </footer>
+        </div>
+        <template if:false={fieldWrapper.isMultiple}>
+            <template if:false={fieldWrapper.isPersonalised}>
+                <template if:true={fieldWrapper.isNumberOrBooleanOrTextOrRecordTypeId}>
+                    <template if:true={fieldWrapper.hasConditionalFormating}>
+                        <template if:true={editting}>
+                            <!-- Modal/Popup Box starts here-->
+                            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+                                aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+                                <div class="slds-modal__container">
+                                    <header class="slds-modal__header">
+                                        <button
+                                            class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                            title="Close" onclick={handleCancelFormatingRule}>
+                                            <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close">
+                                                </use>
+                                            </svg>
+                                            <span class="slds-assistive-text">Close</span>
+                                        </button>
+                                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                                            title={Label.LBL_Formating_Rule}>
+                                            {Label.LBL_Formating_Rule}
+                                        </div>
+                                    </header>
+                                    <!--Modal/Popup Box Body Starts here-->
+                                    <div class="slds-modal__content" id="modal-content-id-2" style="height: 62vh;">
+                                        <template if:true={Loading}>
+                                            <lightning-spinner size="large" variant="brand" alternative-text='loading'>
+                                            </lightning-spinner>
+                                        </template>
+                                        <lightning-tabset>
+                                            <template if:false={fieldWrapper.isBoolean}>
+                                                <lightning-tab name="section5" label={Label.LBL_Settings}>
+                                                    <lightning-combobox name="operation" label={Label.LBL_Operation}
+                                                        value={operation} required
+                                                        placeholder={Label.LBL_Select_Operation}
+                                                        options={operationOptions} onchange={handleOperationChange}
+                                                        class="slds-p-horizontal_small">
+                                                    </lightning-combobox>
+                                                    <template if:true={showInputOne}>
+                                                        <lightning-input label={Label.LBL_Value} data-recordid="value1"
+                                                            type={valueType} class="slds-p-horizontal_small"
+                                                            onchange={handleFormatRuleValuechange} value={value1}
+                                                            required if:false={showpicklistvalues}>
+                                                        </lightning-input>
+                                                        <lightning-combobox label={Label.LBL_Value}
+                                                            data-recordid="value1" class="slds-p-horizontal_small"
+                                                            onchange={handleFormatRuleValuechange} value={value1}
+                                                            required options={picklistvalues}
+                                                            if:true={showpicklistvalues}>
+                                                        </lightning-combobox>
+                                                    </template>
+                                                    <template if:true={showInputTwo}>
+                                                        <lightning-input label={Label.LBL_Lower_Bound}
+                                                            data-recordid="value1" type={valueType}
+                                                            class="slds-p-horizontal_small"
+                                                            onchange={handleFormatRuleValuechange} value={value1}
+                                                            required>
+                                                        </lightning-input>
+                                                        <lightning-input label={Label.LBL_Upper_Bound}
+                                                            data-recordid="value2" type={valueType}
+                                                            class="slds-p-horizontal_small"
+                                                            onchange={handleFormatRuleValuechange} value={value2}
+                                                            required>
+                                                        </lightning-input>
+                                                    </template>
+                                                </lightning-tab>
+                                                <lightning-tab name="section6" label={Label.LBL_Style}>
+                                                    <c-grid-settings-style-editor api-field-style={formatingRuleStyle}
+                                                        event-name={Events.formatingRuleStyle}
+                                                        class="slds-p-top_x-small"
+                                                        onformatingrulestyle={handleFormatRuleStylechange}
+                                                        data-id="formatingRuleStyle">
+                                                    </c-grid-settings-style-editor>
+                                                </lightning-tab>
+                                            </template>
+                                            <template if:true={fieldWrapper.isBoolean}>
+                                                <lightning-tab name="section5" label={Label.LBL_Settings}>
+                                                    <lightning-combobox name="operation" label={Label.LBL_Operation}
+                                                        class="slds-p-horizontal_small" value={operation} required
+                                                        placeholder={Label.LBL_Select_Operation}
+                                                        options={operationOptions} onchange={handleOperationChange}>
+                                                    </lightning-combobox>
+                                                    <lightning-combobox label={Label.LBL_Value} data-recordid="value1"
+                                                        class="slds-p-horizontal_small"
+                                                        onchange={handleFormatRuleValuechange} value={value1} required
+                                                        options={valueOptions}>
+                                                    </lightning-combobox>
+                                                </lightning-tab>
+                                                <lightning-accordion allow-multiple-sections-open
+                                                    title={Label.LBL_Column_Formating}>
+                                                    <lightning-tab name="section5" label={Label.LBL_Style}>
+                                                        <c-grid-settings-style-editor
+                                                            api-field-style={formatingRuleStyle}
+                                                            event-name={Events.formatingRuleStyle}
+                                                            onformatingrulestyle={handleFormatRuleStylechange}
+                                                            class="slds-p-top_x-small" data-id="formatingRuleStyle">
+                                                        </c-grid-settings-style-editor>
+                                                    </lightning-tab>
+                                                    <lightning-tab name="section6" label={Label.LBL_Opposite_Style}>
+                                                        <c-grid-settings-style-editor
+                                                            api-field-style={formatingRuleOppositeStyle}
+                                                            event-name={Events.formatingRuleOppositeStyle}
+                                                            onformatingruleoppositestyle={handleFormatRuleOppositeStylechange}
+                                                            class="slds-p-top_x-small"
+                                                            data-id="formatingRuleOppositeStyle">
+                                                        </c-grid-settings-style-editor>
+                                                    </lightning-tab>
+                                                </lightning-accordion>
+                                            </template>
+                                        </lightning-tabset>
+                                    </div>
+                                    <!--Modal/Popup Box Footer Starts here-->
+                                    <footer class="slds-modal__footer">
+                                        <lightning-button title={Label.LBL_Cancel} label={Label.LBL_Cancel}
+                                            onclick={handleCancelFormatingRule} data-recordid={edittingIndex}
+                                            class="slds-p-right_x-small">
+                                        </lightning-button>
+                                        <lightning-button title={Label.LBL_Confirm} label={Label.LBL_Confirm}
+                                            variant="brand" onclick={handleSaveFormatingRule}>
+                                        </lightning-button>
+                                    </footer>
+                                </div>
+                            </section>
+                            <div class="slds-backdrop slds-backdrop_open" style="opacity: 0.8;"></div>
+                        </template>
+                    </template>
+                </template>
+            </template>
+        </template>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open" style="opacity: 0.8;"></div>
+</template>

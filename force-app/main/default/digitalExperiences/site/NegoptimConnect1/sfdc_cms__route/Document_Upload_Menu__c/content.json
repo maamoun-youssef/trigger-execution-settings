@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Document Upload Menu",
+  "contentBody" : {
+    "activeViewId" : "Document_Upload_Menu",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-document-upload-menu",
+    "urlPrefix" : "document-upload-menu"
+  },
+  "urlName" : "document-upload-menu"
+}

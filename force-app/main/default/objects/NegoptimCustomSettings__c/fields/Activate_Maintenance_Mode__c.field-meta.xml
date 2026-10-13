@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Activate_Maintenance_Mode__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Tick this box to handle data in maintenance mode.</description>
+    <inlineHelpText>Tick this box to handle data correction in maintenance mode.</inlineHelpText>
+    <label>Activate Maintenance Mode</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

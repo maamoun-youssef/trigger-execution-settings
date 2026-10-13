@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Document juridique Liste",
+  "contentBody" : {
+    "activeViewId" : "Document_juridique_Liste",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "list-LegalDoc__c",
+    "urlPrefix" : "legaldoc"
+  },
+  "urlName" : "document-juridique-liste"
+}

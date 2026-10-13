@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPGNSBra</fullName>
+    <fields>Name</fields>
+    <fields>NegoScope__c</fields>
+    <fields>Brand__c</fields>
+    <label>negOptim CPG NS Brand</label>
+</CompactLayout>

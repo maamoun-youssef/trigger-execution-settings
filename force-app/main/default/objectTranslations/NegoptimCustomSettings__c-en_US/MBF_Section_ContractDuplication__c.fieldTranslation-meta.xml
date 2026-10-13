@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Display the section of contract duplication --></help>
+    <label><!-- Section - Contract Duplication --></label>
+    <name>MBF_Section_ContractDuplication__c</name>
+</CustomFieldTranslation>

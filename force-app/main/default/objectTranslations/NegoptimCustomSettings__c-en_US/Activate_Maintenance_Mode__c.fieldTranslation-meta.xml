@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Tick this box to handle data correction in maintenance mode. --></help>
+    <label><!-- Activate Maintenance Mode --></label>
+    <name>Activate_Maintenance_Mode__c</name>
+</CustomFieldTranslation>

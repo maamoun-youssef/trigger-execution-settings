@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Type de sell out</label>
+    <name>SellOutDiscountType__c</name>
+    <picklistValues>
+        <masterLabel>20</masterLabel>
+        <translation><!-- 20 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>30</masterLabel>
+        <translation><!-- 30 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>40</masterLabel>
+        <translation><!-- 40 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>50</masterLabel>
+        <translation><!-- 50 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>90</masterLabel>
+        <translation><!-- 90 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>BAD_20</masterLabel>
+        <translation><!-- BAD_20 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>BAD_25</masterLabel>
+        <translation><!-- BAD_25 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>BAD_30</masterLabel>
+        <translation><!-- BAD_30 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>BAD_34</masterLabel>
+        <translation><!-- BAD_34 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>CRLV_25</masterLabel>
+        <translation><!-- CRLV_25 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>CRLV_30</masterLabel>
+        <translation><!-- CRLV_30 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>CRLV_34</masterLabel>
+        <translation><!-- CRLV_34 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>CR_10</masterLabel>
+        <translation><!-- CR_10 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>CR_20</masterLabel>
+        <translation><!-- CR_20 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>CR_25</masterLabel>
+        <translation><!-- CR_25 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>CR_30</masterLabel>
+        <translation><!-- CR_30 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>CR_34</masterLabel>
+        <translation><!-- CR_34 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>FID 0</masterLabel>
+        <translation><!-- FID 0 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Prix Rond 1€</masterLabel>
+        <translation><!-- Prix Rond 1€ --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Prix Rond 2€</masterLabel>
+        <translation><!-- Prix Rond 2€ --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>RD 0</masterLabel>
+        <translation><!-- RD 0 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>RI_15</masterLabel>
+        <translation><!-- RI_15 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>RI_20</masterLabel>
+        <translation><!-- RI_20 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>RI_25</masterLabel>
+        <translation><!-- RI_25 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>RI_30</masterLabel>
+        <translation><!-- RI_30 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>RI_34</masterLabel>
+        <translation><!-- RI_34 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>RI_50</masterLabel>
+        <translation><!-- RI_50 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>TP_100</masterLabel>
+        <translation><!-- TP_100 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>VR11_50</masterLabel>
+        <translation><!-- VR11_50 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>VR32_33</masterLabel>
+        <translation><!-- VR32_33 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>VR43_25</masterLabel>
+        <translation><!-- VR43_25 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>VR_20</masterLabel>
+        <translation><!-- VR_20 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>VR_25</masterLabel>
+        <translation><!-- VR_25 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>VR_30</masterLabel>
+        <translation><!-- VR_30 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>VR_34</masterLabel>
+        <translation><!-- VR_34 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>VR_35</masterLabel>
+        <translation><!-- VR_35 --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

@@ -1,0 +1,119 @@
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+.separator {
+    border-right: 1.5mm ridge rgb(137 122 122 / 58%);
+}
+
+th {
+    text-align: center !important;
+    vertical-align: middle !important;
+    white-space: inherit !important;
+}
+
+.blank-cell {
+    background: repeating-linear-gradient(45deg,
+            #ffffff 10px,
+            #14b3bb 15px);
+    width: 100%;
+    height: 15px;
+    display: inline-block;
+}
+
+.Target-cell {
+    background: repeating-linear-gradient(45deg,
+            #ffffff 10px,
+            #ff0000 15px);
+    width: 100%;
+    height: 15px;
+    display: inline-block;
+}
+
+.headerDivider {
+    border-left:0.1mm solid #939393;
+}
+
+.subTotalRow {
+    background-color:#595959;
+    color:white;
+    font-weight:bold;
+    text-align:right;
+}
+
+.fieldLabelClass {
+    
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+}
+
+.productFieldsStyle { 
+    background-color: #267a7c;
+    color:white;
+}
+
+.imgOpacity { 
+    opacity:0.5;
+}
+tr.newLoading {
+    background-image: linear-gradient(to right, transparent 50%, rgba(0, 0, 0, .08) 50%);
+    background-size: 200% 100%;
+    animation: newLoading 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+tr.newLoading td {
+    opacity: .45;
+    pointer-events: none;
+}
+@keyframes newLoading {
+    0% {
+        background-position: 0;
+    }
+
+    50% {
+        background-position: -30%;
+    }
+
+    80% {
+        background-position: -100%;
+    }
+
+    100% {
+        background-position: -200%;
+    }
+}

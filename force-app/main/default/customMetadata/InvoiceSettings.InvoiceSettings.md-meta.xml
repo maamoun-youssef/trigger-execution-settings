@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>InvoiceSettings</label>
+    <protected>false</protected>
+    <values>
+        <field>AutonumLength__c</field>
+        <value xsi:type="xsd:double">6.0</value>
+    </values>
+    <values>
+        <field>ContractRecordTypesForGeneration__c</field>
+        <value xsi:type="xsd:string">[&quot;Signed&quot;,&quot;To_Be_Signed&quot;]</value>
+    </values>
+    <values>
+        <field>ContractStatusesForGeneration__c</field>
+        <value xsi:type="xsd:string">{&quot;To_Be_Signed&quot;:[],&quot;Signed&quot;:[&quot;Signed&quot;,&quot;Updated wAddendum&quot;,&quot;Validated&quot;]}</value>
+    </values>
+    <values>
+        <field>DiscountStatusesForGeneration__c</field>
+        <value xsi:type="xsd:string">[&quot;Signed&quot;,&quot;Open&quot;]</value>
+    </values>
+    <values>
+        <field>EnableInvoiceKPICategory__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>GenerateAllValidatedDiscounts__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>GenerateDiscountsWoSettings__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>InvoiceDeletionRulesAccDoc__c</field>
+        <value xsi:type="xsd:string">{&quot;CreditNoteRequest&quot;:&quot;&quot;,&quot;BalanceCreditNote&quot;:&quot;NotValidated,PartiallyAllocated,Allocated,Listed,inPreparation,Deleted,Loosed,Gained,PartiallyPaid,Cancelled,Paid,Printed,ReadyToPrint,Validated,Generated&quot;,&quot;BalanceCNCancelRequest&quot;:&quot;NotValidated,PartiallyAllocated,Allocated,Listed,inPreparation,Deleted,Loosed,Gained,PartiallyPaid,Cancelled,Paid,Printed,ReadyToPrint,Validated,Generated&quot;,&quot;CNCancelRequest&quot;:&quot;NotValidated,PartiallyAllocated,Allocated,Listed,inPreparation,Deleted,Loosed,Gained,PartiallyPaid,Cancelled,Paid,Printed,ReadyToPrint,Validated,Generated&quot;,&quot;AccrualInv&quot;:&quot;NotValidated,PartiallyAllocated,Allocated,Listed,inPreparation,Deleted,Loosed,Gained,PartiallyPaid,Cancelled,Paid,Printed,ReadyToPrint,Validated,Generated&quot;,&quot;AccrualCN&quot;:&quot;NotValidated,PartiallyAllocated,Allocated,Listed,inPreparation,Deleted,Loosed,Gained,PartiallyPaid,Cancelled,Paid,Printed,ReadyToPrint,Validated,Generated&quot;,&quot;BalanceCreditNoteRequest&quot;:&quot;NotValidated,PartiallyAllocated,Allocated,Listed,inPreparation,Deleted,Loosed,Gained,PartiallyPaid,Cancelled,Paid,Printed,ReadyToPrint,Validated,Generated&quot;,&quot;DownPaymentInvoice&quot;:&quot;NotValidated,PartiallyAllocated,Allocated,Listed,inPreparation,Deleted,Loosed,Gained,PartiallyPaid,Cancelled,Paid,Printed,ReadyToPrint,Validated,Generated&quot;,&quot;BalanceInvoice&quot;:&quot;NotValidated,PartiallyAllocated,Allocated,Listed,inPreparation,Deleted,Loosed,Gained,PartiallyPaid,Cancelled,Paid,Printed,ReadyToPrint,Validated,Generated&quot;,&quot;CreditNote&quot;:&quot;NotValidated,PartiallyAllocated,Allocated,Listed,inPreparation,Deleted,Loosed,Gained,PartiallyPaid,Cancelled,Paid,Printed,ReadyToPrint,Validated,Generated&quot;,&quot;DebitNote&quot;:&quot;NotValidated,PartiallyAllocated,Allocated,Listed,inPreparation,Deleted,Loosed,Gained,PartiallyPaid,Cancelled,Paid,Printed,ReadyToPrint,Validated,Generated&quot;,&quot;Invoice&quot;:&quot;Generated&quot;}</value>
+    </values>
+    <values>
+        <field>InvoiceGenerationMode__c</field>
+        <value xsi:type="xsd:string">Automatic</value>
+    </values>
+    <values>
+        <field>InvoiceManagerActionsAccDoc__c</field>
+        <value xsi:type="xsd:string">{&quot;LBL_InvoiceMng_PrintToday&quot;:&quot;Invoice,DebitNote,CreditNote,BalanceInvoice,DownPaymentInvoice,BalanceCreditNote,CreditNoteRequest,BalanceCreditNoteRequest&quot;,&quot;LBL_InvoiceMng_PrintFuture&quot;:&quot;Invoice,DebitNote,CreditNote,BalanceInvoice,DownPaymentInvoice,BalanceCreditNote,CreditNoteRequest,BalanceCreditNoteRequest&quot;,&quot;LBL_InvoiceMng_ResendToSupplier&quot;:&quot;Invoice,DebitNote,CreditNote,BalanceInvoice,DownPaymentInvoice,BalanceCreditNote,CreditNoteRequest,BalanceCreditNoteRequest&quot;,&quot;LBL_InvoiceMng_DeleteInvoice&quot;:&quot;Invoice,DebitNote,CreditNote,BalanceInvoice,DownPaymentInvoice,BalanceCreditNote,CreditNoteRequest,BalanceCreditNoteRequest&quot;,&quot;LBL_InvoiceMng_CancelOrCreateCreditNote&quot;:&quot;Invoice,BalanceInvoice,DownPaymentInvoice,CreditNoteRequest,BalanceCreditNoteRequest&quot;,&quot;LBL_InvoiceMng_AllocatePayment&quot;:&quot;Invoice,BalanceInvoice,DownPaymentInvoice,CreditNoteRequest,BalanceCreditNoteRequest&quot;,&quot;LBL_InvoiceMng_InvoiceDeduct&quot;:&quot;Invoice,DownPaymentInvoice,BalanceInvoice,CreditNoteRequest,BalanceCreditNoteRequest&quot;,&quot;LBL_InvoiceMng_AllocateCreditNote&quot;:&quot;CreditNote&quot;,&quot;LBL_InvoiceMng_InvoiceScheduler&quot;:&quot;AccrualCN&quot;}</value>
+    </values>
+    <values>
+        <field>InvoiceManagerActionsGrid__c</field>
+        <value xsi:type="xsd:string">{&quot;LBL_InvoiceMng_PrintToday&quot;:&quot;InvoicesToPrint&quot;,&quot;LBL_InvoiceMng_PrintFuture&quot;:&quot;InvoicesToPrint&quot;,&quot;LBL_InvoiceMng_ResendToSupplier&quot;:&quot;InvoicesDefault&quot;,&quot;LBL_InvoiceMng_DeleteInvoice&quot;:&quot;InvoicesToPrint&quot;,&quot;LBL_InvoiceMng_CancelOrCreateCreditNote&quot;:&quot;InvoicesDefault&quot;,&quot;LBL_InvoiceMng_AllocatePayment&quot;:&quot;InvoicesDefault&quot;,&quot;LBL_InvoiceMng_InvoiceDeduct&quot;:&quot;InvoicesToDeduct&quot;,&quot;LBL_InvoiceMng_AllocateCreditNote&quot;:&quot;InvoicesDefault&quot;,&quot;LBL_InvoiceMng_InvoiceScheduler&quot;:&quot;InvoiceVisualizer&quot;}</value>
+    </values>
+    <values>
+        <field>InvoiceManagerActionsStatuses__c</field>
+        <value xsi:type="xsd:string">{&quot;LBL_InvoiceMng_InvoiceScheduler&quot;:&quot;Cancelled,Printed,ReadyToPrint,Validated,Generated,Paid,PartiallyPaid&quot;,&quot;LBL_InvoiceMng_AllocateCreditNote&quot;:&quot;Listed,PartiallyAllocated,Allocated,Cancelled&quot;,&quot;LBL_InvoiceMng_InvoiceDeduct&quot;:&quot;Printed,PartiallyPaid&quot;,&quot;LBL_InvoiceMng_AllocatePayment&quot;:&quot;PartiallyPaid,Printed&quot;,&quot;LBL_InvoiceMng_CancelOrCreateCreditNote&quot;:&quot;PartiallyPaid,Paid,Printed&quot;,&quot;LBL_InvoiceMng_DeleteInvoice&quot;:&quot;inPreparation,Validated,ReadyToPrint,Generated&quot;,&quot;LBL_InvoiceMng_ResendToSupplier&quot;:&quot;NotValidated,PartiallyAllocated,Allocated,Listed,inPreparation,Deleted,Loosed,Gained,PartiallyPaid,Cancelled,Paid,Printed,ReadyToPrint,Validated,Generated&quot;,&quot;LBL_InvoiceMng_PrintFuture&quot;:&quot;ReadyToPrint,Validated,Generated&quot;,&quot;LBL_InvoiceMng_PrintToday&quot;:&quot;NotValidated,PartiallyAllocated,Allocated,Listed,inPreparation,Deleted,Loosed,Gained,PartiallyPaid,Cancelled,Paid,Printed,ReadyToPrint,Validated,Generated&quot;}</value>
+    </values>
+    <values>
+        <field>InvoiceManagerActionsTopic__c</field>
+        <value xsi:type="xsd:string">{&quot;LBL_InvoiceMng_InvoiceScheduler&quot;:&quot;2&quot;,&quot;LBL_InvoiceMng_AllocateCreditNote&quot;:&quot;4&quot;,&quot;LBL_InvoiceMng_InvoiceDeduct&quot;:&quot;3&quot;,&quot;LBL_InvoiceMng_AllocatePayment&quot;:&quot;3&quot;,&quot;LBL_InvoiceMng_CancelOrCreateCreditNote&quot;:&quot;3&quot;,&quot;LBL_InvoiceMng_DeleteInvoice&quot;:&quot;1&quot;,&quot;LBL_InvoiceMng_ResendToSupplier&quot;:&quot;1&quot;,&quot;LBL_InvoiceMng_PrintFuture&quot;:&quot;1&quot;,&quot;LBL_InvoiceMng_PrintToday&quot;:&quot;1&quot;}</value>
+    </values>
+    <values>
+        <field>InvoiceManagerActions__c</field>
+        <value xsi:type="xsd:string">[&quot;LBL_InvoiceMng_PrintFuture&quot;,&quot;LBL_InvoiceMng_AllocatePayment&quot;,&quot;LBL_InvoiceMng_CancelOrCreateCreditNote&quot;,&quot;LBL_InvoiceMng_ResendToSupplier&quot;,&quot;LBL_InvoiceMng_DeleteInvoice&quot;,&quot;LBL_InvoiceMng_InvoiceDeduct&quot;,&quot;LBL_InvoiceMng_AllocateCreditNote&quot;,&quot;LBL_InvoiceMng_InvoiceScheduler&quot;,&quot;LBL_InvoiceMng_PrintToday&quot;]</value>
+    </values>
+    <values>
+        <field>InvoiceManagerKpisAccDoc__c</field>
+        <value xsi:type="xsd:string">{&quot;LBL_KpiTable_InvVsPaid&quot;:&quot;Invoice,DebitNote,CreditNote,BalanceInvoice,DownPaymentInvoice,BalanceCreditNote&quot;,&quot;LBL_KpiTable_InvVsPaidIssue5Days&quot;:&quot;Invoice,DebitNote,CreditNote,BalanceInvoice,DownPaymentInvoice,BalanceCreditNote&quot;,&quot;LBL_KpiTable_LastPrint&quot;:&quot;Invoice,DebitNote,CreditNote,BalanceInvoice,DownPaymentInvoice,BalanceCreditNote,CreditNoteRequest,BalanceCreditNoteRequest&quot;,&quot;LBL_KpiTable_LastGen&quot;:&quot;Invoice,DebitNote,CreditNote,BalanceInvoice,DownPaymentInvoice,BalanceCreditNote,CreditNoteRequest,BalanceCreditNoteRequest&quot;,&quot;LBL_KpiTable_Next5Days&quot;:&quot;Invoice,DebitNote,CreditNote,BalanceInvoice,DownPaymentInvoice,BalanceCreditNote,CreditNoteRequest,BalanceCreditNoteRequest&quot;,&quot;LBL_KpiTable_ReadyToPrint&quot;:&quot;Invoice,DebitNote,CreditNote,BalanceInvoice,DownPaymentInvoice,BalanceCreditNote,CreditNoteRequest,BalanceCreditNoteRequest&quot;}</value>
+    </values>
+    <values>
+        <field>InvoiceManagerKpisGrid__c</field>
+        <value xsi:type="xsd:string">{&quot;LBL_KpiTable_ReadyToPrint&quot;:&quot;InvoicesToPrint&quot;,&quot;LBL_KpiTable_Next5Days&quot;:&quot;InvoicesToPrint&quot;,&quot;LBL_KpiTable_LastGen&quot;:&quot;InvoicesToPrint&quot;,&quot;LBL_KpiTable_LastPrint&quot;:&quot;InvoicesToPrint&quot;,&quot;LBL_KpiTable_InvVsPaidIssue5Days&quot;:&quot;InvoicesToPaid&quot;,&quot;LBL_KpiTable_InvVsPaid&quot;:&quot;InvoicesToPaid&quot;}</value>
+    </values>
+    <values>
+        <field>InvoiceManagerKpisStatuses__c</field>
+        <value xsi:type="xsd:string">{&quot;LBL_KpiTable_InvVsPaid&quot;:&quot;Printed,PartiallyPaid&quot;,&quot;LBL_KpiTable_InvVsPaidIssue5Days&quot;:&quot;Printed,PartiallyPaid&quot;,&quot;LBL_KpiTable_LastPrint&quot;:&quot;Printed,PartiallyPaid,Paid&quot;,&quot;LBL_KpiTable_LastGen&quot;:&quot;Generated,Validated,ReadyToPrint&quot;,&quot;LBL_KpiTable_Next5Days&quot;:&quot;Validated,ReadyToPrint&quot;,&quot;LBL_KpiTable_ReadyToPrint&quot;:&quot;Validated,ReadyToPrint&quot;}</value>
+    </values>
+    <values>
+        <field>InvoiceManagerKpis__c</field>
+        <value xsi:type="xsd:string">[&quot;LBL_KpiTable_InvVsPaid&quot;,&quot;LBL_KpiTable_InvVsPaidIssue5Days&quot;,&quot;LBL_KpiTable_LastPrint&quot;,&quot;LBL_KpiTable_LastGen&quot;,&quot;LBL_KpiTable_Next5Days&quot;,&quot;LBL_KpiTable_ReadyToPrint&quot;]</value>
+    </values>
+    <values>
+        <field>InvoiceManagerTopics__c</field>
+        <value xsi:type="xsd:string">[{&quot;name&quot;:&quot;{!$Label.LBL_InvoiceMng_TopicName1}&quot;,&quot;isActive&quot;:true,&quot;index&quot;:1},{&quot;name&quot;:&quot;{!$Label.LBL_InvoiceMng_TopicName2}&quot;,&quot;isActive&quot;:true,&quot;index&quot;:2},{&quot;name&quot;:&quot;{!$Label.LBL_InvoiceMng_TopicName3}&quot;,&quot;isActive&quot;:true,&quot;index&quot;:3},{&quot;name&quot;:&quot;{!$Label.LBL_InvoiceMng_TopicName4}&quot;,&quot;isActive&quot;:true,&quot;index&quot;:4},{&quot;name&quot;:&quot;{!$Label.LBL_InvoiceMng_TopicName5}&quot;,&quot;isActive&quot;:true,&quot;index&quot;:5}]</value>
+    </values>
+    <values>
+        <field>InvoiceValidationRules__c</field>
+        <value xsi:type="xsd:string">{&quot;intervalStatus&quot;:true,&quot;intervalStartOperator&quot;:&quot;&lt;=&quot;,&quot;intervalStart&quot;:-5,&quot;intervalEndOperator&quot;:&quot;&lt;=&quot;,&quot;intervalEnd&quot;:5}</value>
+    </values>
+    <values>
+        <field>NumberPrefixFormula__c</field>
+        <value xsi:type="xsd:string">CASE(Text(AccDocType__c),
+ &apos;Invoice&apos;,&apos;F&apos;,
+ &apos;Credit Note&apos;,&apos;A&apos;,
+ &apos;Credit Note Request&apos;,&apos;R&apos;, 
+&apos;Debit Note&apos;,&apos;D&apos;,&apos;&apos;) 
+&amp; RIGHT(TEXT(FiscalYear__c),2)</value>
+    </values>
+</CustomMetadata>

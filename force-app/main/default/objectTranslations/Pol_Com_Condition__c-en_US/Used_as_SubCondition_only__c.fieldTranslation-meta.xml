@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Define if the condition will be used as regular condition or only as a sub condition --></help>
+    <label><!-- Used as a Sub condition only --></label>
+    <name>Used_as_SubCondition_only__c</name>
+</CustomFieldTranslation>

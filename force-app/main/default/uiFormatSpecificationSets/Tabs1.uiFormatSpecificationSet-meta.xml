@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UiFormatSpecificationSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <field>NegoScope__c.ExtId__c</field>
+    <formatType>ICON</formatType>
+    <masterLabel>Tabs</masterLabel>
+    <sobjectType>NegoScope__c</sobjectType>
+    <uiFormatSpecifications>
+        <formatProperties>{&quot;icon&quot;:&quot;happy_face&quot;,&quot;iconColor&quot;:&quot;gray&quot;}</formatProperties>
+        <formatType>ICON</formatType>
+        <order>1</order>
+        <visibilityRule>
+            <criteria>
+                <leftValue>{!Record.ExtId__c}</leftValue>
+                <operator>EQUAL</operator>
+                <rightValue>0</rightValue>
+            </criteria>
+        </visibilityRule>
+    </uiFormatSpecifications>
+</UiFormatSpecificationSet>

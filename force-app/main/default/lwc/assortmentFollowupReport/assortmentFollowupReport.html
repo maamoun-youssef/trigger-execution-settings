@@ -1,0 +1,374 @@
+<template>
+    <div class="slds-card">
+        <!--div class="main-header">
+            <div class="slds-card slds-grid slds-p-around_xx-small slds-page-header">
+                <div class="slds-col slds-has-flexi-truncate">
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div
+                            class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                            <lightning-icon icon-name="standard:report">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small">
+                            <p class="slds-text-title slds-line-height_reset">
+                                Assortment
+                            </p>
+                            <p class="slds-m-right_small slds-align-middle slds-truncate">
+                                {channel.Name} - {selectedYear}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div-->
+        <div class="main-panel">
+            <template if:true={tableLoading}>
+                <div class="slds-spinner_container">
+                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </template>
+            <template if:true={isEmptyList}>
+                <div class="slds-media__body">
+                    <h1
+                        class="slds-text-heading_medium slds-text-color_destructive slds-align_absolute-center slds-m-around_xx-large slds-size_1-of-1">
+                        {labels.LBL_No_Record_To_Display}
+                    </h1>
+                </div>
+            </template>
+            <template if:false={isEmptyList}>
+                <div class="main-panel">
+                    <div class="slds-tabs_scoped">
+                        <ul class="tabHeader slds-tabs_scoped__nav" role="tablist"
+                            style="background-color: white;border:none;">
+                            <li class="firstTab slds-tabs_scoped__item slds-tabs_scoped__link" role="presentation"
+                                data-tab="first" onclick={changeTab} style="background-color: #92d050;color:white;">
+                                {labels.LBL_WD_Ref}
+                            </li>
+                            <li class="secondTab slds-tabs_scoped__item slds-tabs_scoped__link" role="presentation"
+                                data-tab="second" onclick={changeTab}>
+                                {labels.LBL_Qty_Volume}
+                            </li>
+                            <li class="thirdTab slds-tabs_scoped__item slds-tabs_scoped__link" role="presentation"
+                                data-tab="third" style="border-right: 2px solid black;" onclick={changeTab}>
+                                {labels.LBL_Sell_GP}
+                            </li>
+                        </ul>
+                        <div class="tabBody slds-scrollable">
+                            <div class="slds-tabs_scoped__content" role="tabpanel" aria-labelledby="tab-scoped-1__item"
+                                style="padding:0;" if:true={tabMgt.first}>
+                                <table
+                                    class="slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border--right slds-no-row-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="scopeHeaderClass borderSeparator" rowspan="2" colspan="2">
+                                                {labels.LBL_Scope_Name}
+                                            </th>
+                                            <th colspan={budgetFields.dvrefBudgetFields.length}
+                                                style="background-color:#92d050;color:white;" class="borderSeparator">
+                                                <a href={channel.link} target="_blank" style="color:white;">
+                                                    {channel.Name} - {selectedYear}
+                                                </a>
+                                            </th>
+                                            <template for:each={buTargetList} for:item="bu">
+                                                <th key={bu.Id} colspan={targetFields.dvrefTargetFields.length} class="borderSeparator">
+                                                    <a href={bu.link} target="_blank">
+                                                        {bu.Name}
+                                                    </a>
+                                                </th>
+                                            </template>
+                                        </tr>
+                                        <tr>
+                                            <template iterator:field={budgetFields.dvrefBudgetFields}>
+                                                <th if:false={field.last} key={field.value.fieldName} style="background-color:#92d050;color:white;"
+                                                    class="limitWidth">
+                                                    {field.value.fieldLabel}
+                                                </th>
+                                                <th if:true={field.last} key={field.value.fieldName} style="background-color:#92d050;color:white;"
+                                                    class="limitWidth borderSeparator">
+                                                    {field.value.fieldLabel}
+                                                </th>
+                                            </template>
+                                            <template for:each={buTargetList} for:item="bu">
+                                                <template iterator:field={targetFields.dvrefTargetFields}>
+                                                    <th if:false={field.last} key={field.value.fieldName} class="limitWidth">{field.value.fieldLabel}</th>
+                                                    <th if:true={field.last} key={field.value.fieldName} class="limitWidth borderSeparator">{field.value.fieldLabel}</th>
+                                                </template>
+                                            </template>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={asdList} for:item="scope">
+                                            <tr key={scope.Name} class="category">
+                                                <td colspan="2" class="scopeClass borderSeparator">
+                                                    {scope.label}
+                                                </td>
+                                                <td colspan={categoryColspan} class="scopeClass"></td>
+                                            </tr>
+                                            <template for:each={scope.scopeValues} for:item="scopeValue">
+                                                <tr key={scopeValue}>
+                                                    <td style={scopeValue.style}>
+                                                        {scopeValue.value}
+                                                    </td>
+                                                    <td style={scopeValue.style} class="borderSeparator">
+                                                        <lightning-button-icon variant="bare" size="large"
+                                                            icon-name="utility:products"
+                                                            data-scope-value={scopeValue.value}
+                                                            data-budget-fields="dvrefBudgetFields"
+                                                            data-target-fields="dvrefTargetFields"
+                                                            data-scope-name={scope.Name} onclick={buildDetailSection}>
+                                                        </lightning-button-icon>
+                                                    </td>
+                                                    <template for:each={scopeValue.fieldsDvRef} for:item="field">
+                                                        <td key={field} style={field.style}
+                                                            class="slds-text-align_right">
+                                                            <lightning-formatted-number value={field.fieldValue}
+                                                                minimum-fraction-digits={field.scale}
+                                                                maximum-fraction-digits={field.scale}></lightning-formatted-number>
+                                                        </td>
+                                                    </template>
+                                                </tr>
+                                            </template>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="slds-tabs_scoped__content" role="tabpanel" aria-labelledby="tab-scoped-1__item"
+                                style="padding:0;" if:true={tabMgt.second}>
+                                <table
+                                    class="slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border--right slds-no-row-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="scopeHeaderClass borderSeparator" rowspan="2" colspan="2">
+                                                {labels.LBL_Scope_Name}
+                                            </th>
+                                            <th colspan={budgetFields.qtyvolumeBudgetFields.length}
+                                                style="background-color:#e49edd;color:white;" class="borderSeparator">
+                                                <a href={channel.link} target="_blank" style="color:white;">
+                                                    {channel.Name} - {selectedYear}
+                                                </a>
+                                            </th>
+                                            <template for:each={buTargetList} for:item="bu">
+                                                <th key={bu.Id} colspan={targetFields.qtyvolumeTargetFields.length} class="borderSeparator">
+                                                    <a href={bu.link} target="_blank">
+                                                        {bu.Name}
+                                                    </a>
+                                                </th>
+                                            </template>
+                                        </tr>
+                                        <tr>
+                                            <template iterator:field={budgetFields.qtyvolumeBudgetFields}>
+                                                <th if:false={field.last} key={field.value.fieldName} style="background-color:#e49edd;color:white;"
+                                                    class="limitWidth">
+                                                    {field.value.fieldLabel}
+                                                </th>
+                                                <th if:true={field.last} key={field.value.fieldName} style="background-color:#e49edd;color:white;"
+                                                    class="limitWidth borderSeparator">
+                                                    {field.value.fieldLabel}
+                                                </th>
+                                            </template>
+                                            <template for:each={buTargetList} for:item="bu">
+                                                <template iterator:field={targetFields.qtyvolumeTargetFields}>
+                                                    <th if:false={field.last} key={field.value.fieldName} class="limitWidth">{field.value.fieldLabel}</th>
+                                                    <th if:true={field.last} key={field.value.fieldName} class="limitWidth borderSeparator">{field.value.fieldLabel}</th>
+                                                </template>
+                                            </template>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={asdList} for:item="scope">
+                                            <tr key={scope.Name} class="category">
+                                                <td colspan="2" class="scopeClass borderSeparator">
+                                                    {scope.label}
+                                                </td>
+                                                <td colspan={categoryColspan} class="scopeClass"></td>
+                                            </tr>
+                                            <template for:each={scope.scopeValues} for:item="scopeValue">
+                                                <tr key={scopeValue}>
+                                                    <td style={scopeValue.style}>
+                                                        {scopeValue.value}
+                                                    </td>
+                                                    <td style={scopeValue.style} class="borderSeparator">
+                                                        <lightning-button-icon variant="bare" size="large"
+                                                            icon-name="utility:products"
+                                                            data-scope-value={scopeValue.value}
+                                                            data-budget-fields="qtyvolumeBudgetFields"
+                                                            data-target-fields="qtyvolumeTargetFields"
+                                                            data-scope-name={scope.Name} onclick={buildDetailSection}>
+                                                        </lightning-button-icon>
+                                                    </td>
+                                                    <template for:each={scopeValue.fieldsQtyVolume} for:item="field">
+                                                        <td key={field} style={field.style}
+                                                            class="slds-text-align_right">
+                                                            <lightning-formatted-number value={field.fieldValue}
+                                                                minimum-fraction-digits={field.scale}
+                                                                maximum-fraction-digits={field.scale}></lightning-formatted-number>
+                                                        </td>
+                                                    </template>
+                                                </tr>
+                                            </template>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="slds-tabs_scoped__content" role="tabpanel" aria-labelledby="tab-scoped-1__item"
+                                style="padding:0;" if:true={tabMgt.third}>
+                                <table
+                                    class="slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border--right slds-no-row-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="scopeHeaderClass borderSeparator" rowspan="2" colspan="2">
+                                                {labels.LBL_Scope_Name}
+                                            </th>
+                                            <th colspan={budgetFields.sellgpBudgetFields.length}
+                                                style="background-color:#0c769e;color:white;" class="borderSeparator">
+                                                <a href={channel.link} target="_blank" style="color:white;">
+                                                    {channel.Name} - {selectedYear}
+                                                </a>
+                                            </th>
+                                            <template for:each={buTargetList} for:item="bu">
+                                                <th key={bu.Id} colspan={targetFields.sellgpTargetFields.length} class="borderSeparator">
+                                                    <a href={bu.link} target="_blank">
+                                                        {bu.Name}
+                                                    </a>
+                                                </th>
+                                            </template>
+                                        </tr>
+                                        <tr>
+                                            <template iterator:field={budgetFields.sellgpBudgetFields}>
+                                                <th if:false={field.last} key={field.value.fieldName} style="background-color:#0c769e;color:white;"
+                                                    class="limitWidth">
+                                                    {field.value.fieldLabel}
+                                                </th>
+                                                <th if:true={field.last} key={field.value.fieldName} style="background-color:#0c769e;color:white;"
+                                                    class="limitWidth borderSeparator">
+                                                    {field.value.fieldLabel}
+                                                </th>
+                                            </template>
+                                            <template for:each={buTargetList} for:item="bu">
+                                                <template iterator:field={targetFields.sellgpTargetFields}>
+                                                    <th if:false={field.last} key={field.value.fieldName} class="limitWidth">{field.value.fieldLabel}</th>
+                                                    <th if:true={field.last} key={field.value.fieldName} class="limitWidth borderSeparator">{field.value.fieldLabel}</th>
+                                                </template>
+                                            </template>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={asdList} for:item="scope">
+                                            <tr key={scope.Name} class="category">
+                                                <td colspan="2" class="scopeClass borderSeparator">
+                                                    {scope.label}
+                                                </td>
+                                                <td colspan={categoryColspan} class="scopeClass"></td>
+                                            </tr>
+                                            <template for:each={scope.scopeValues} for:item="scopeValue">
+                                                <tr key={scopeValue}>
+                                                    <td style={scopeValue.style}>
+                                                        {scopeValue.value}
+                                                    </td>
+                                                    <td style={scopeValue.style} class="borderSeparator">
+                                                        <lightning-button-icon variant="bare" size="large"
+                                                            icon-name="utility:products"
+                                                            data-scope-value={scopeValue.value}
+                                                            data-budget-fields="sellgpBudgetFields"
+                                                            data-target-fields="sellgpTargetFields"
+                                                            data-scope-name={scope.Name} onclick={buildDetailSection}>
+                                                        </lightning-button-icon>
+                                                    </td>
+                                                    <template for:each={scopeValue.fieldsSellGP} for:item="field">
+                                                        <td key={field} style={field.style}
+                                                            class="slds-text-align_right">
+                                                            <lightning-formatted-number value={field.fieldValue}
+                                                                minimum-fraction-digits={field.scale}
+                                                                maximum-fraction-digits={field.scale}></lightning-formatted-number>
+                                                        </td>
+                                                    </template>
+                                                </tr>
+                                            </template>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="secondDiv slds-scrollable" if:true={showDetailedData}>
+                        <table
+                            class="slds-table slds-table_bordered slds-table_col-bordered product-table slds-border--left slds-border--right slds-no-row-hover">
+                            <thead>
+                                <tr>
+                                    <th class="scopeHeaderClass borderSeparator" colspan={productFields.length}>
+                                        Product Info
+                                    </th>
+                                    <th colspan={productBudgetFields.length} style={selectedStyle} class="borderSeparator">
+                                        <a href={channel.link} target="_blank" style="color:white;">
+                                            {channel.Name} - {selectedYear}
+                                        </a>
+                                    </th>
+                                    <template for:each={buTargetList} for:item="bu">
+                                        <th key={bu.Id} colspan={productTargetFieldsColspan} class="borderSeparator">
+                                            <a href={bu.link} target="_blank">
+                                                {bu.Name}
+                                            </a>
+                                        </th>
+                                    </template>
+                                </tr>
+                                <tr>
+                                    <template iterator:field={productFields}>
+                                        <th if:false={field.last} key={field.value.fieldName} style="background-color:#0d807d;color:white;"
+                                            class="limitWidth">
+                                            {field.value.fieldLabel}
+                                        </th>
+                                        <th if:true={field.last} key={field.value.fieldName} style="background-color:#0d807d;color:white;"
+                                            class="limitWidth borderSeparator">
+                                            {field.value.fieldLabel}
+                                        </th>
+                                    </template>
+                                    <template iterator:field={productBudgetFields}>
+                                        <th if:false={field.last} key={field.value.fieldName} style={selectedStyle} class="limitWidth">
+                                            {field.value.fieldLabel}
+                                        </th>
+                                        <th if:true={field.last} key={field.value.fieldName} style={selectedStyle} class="limitWidth borderSeparator">
+                                            {field.value.fieldLabel}
+                                        </th>
+                                    </template>
+                                    <template for:each={buTargetList} for:item="bu">
+                                        <th key={bu} class="limitWidth">
+                                            Cluster
+                                        </th>
+                                        <template iterator:field={productTargetFields}>
+                                            <th if:false={field.last} key={field.value.fieldName} class="limitWidth">{field.value.fieldLabel}</th>
+                                            <th if:true={field.last} key={field.value.fieldName} class="limitWidth borderSeparator">{field.value.fieldLabel}</th>
+                                        </template>
+                                    </template>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={productDetailedData} for:item="product">
+                                    <tr key={product.prodId}>
+                                        <!-- <td>{product.prodEAN}</td>
+                                        <td>{product.prodName}</td> -->
+                                        <template for:each={product.fields} for:item="field">
+                                            <td key={field.fieldApiName} class="slds-text-align_right" style={field.style}
+                                                if:true={field.isNumber}>
+                                                <lightning-formatted-number value={field.fieldValue}
+                                                    minimum-fraction-digits={field.scale}
+                                                    maximum-fraction-digits={field.scale}></lightning-formatted-number>
+                                            </td>
+                                            <td key={field.fieldApiName} if:false={field.isNumber}
+                                                class="slds-text-align_center" style={field.style}>
+                                                {field.fieldValue}</td>
+                                        </template>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

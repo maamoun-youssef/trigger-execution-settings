@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>CUS</fullName>
+        <default>false</default>
+        <label>Customs information</label>
+    </customValue>
+    <customValue>
+        <fullName>AAB</fullName>
+        <default>false</default>
+        <label>Discount mention</label>
+    </customValue>
+    <customValue>
+        <fullName>BLU</fullName>
+        <default>false</default>
+        <label>Eco-participation or WEEE Eco-contribution</label>
+    </customValue>
+    <customValue>
+        <fullName>AAI</fullName>
+        <default>false</default>
+        <label>General information</label>
+    </customValue>
+    <customValue>
+        <fullName>ABL</fullName>
+        <default>false</default>
+        <label>Legal information</label>
+    </customValue>
+    <customValue>
+        <fullName>PMD</fullName>
+        <default>false</default>
+        <label>Mention of penalties</label>
+    </customValue>
+    <customValue>
+        <fullName>PMT</fullName>
+        <default>false</default>
+        <label>Mention of the fixed compensation</label>
+    </customValue>
+    <customValue>
+        <fullName>TXD</fullName>
+        <default>false</default>
+        <label>Mention of the member of a single taxable person</label>
+    </customValue>
+    <customValue>
+        <fullName>AAC</fullName>
+        <default>false</default>
+        <label>Subrogation factoring clause</label>
+    </customValue>
+    <customValue>
+        <fullName>SUR</fullName>
+        <default>false</default>
+        <label>Supplier notes</label>
+    </customValue>
+    <masterLabel>Note Picklist</masterLabel>
+    <sorted>true</sorted>
+</GlobalValueSet>

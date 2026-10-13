@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FileDirectoryReference__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>FileDirectoryReference__c + DisplayOrder__c for big files referenced by more then 1 Content Document in a chunks (all chuncks have the same FileDirectoryReference__c)</description>
+    <label>File Directory Reference</label>
+    <referenceTo>FileDirectory__c</referenceTo>
+    <relationshipLabel>File Directories (File Directory Reference)</relationshipLabel>
+    <relationshipName>FDFileDirectoryReference</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

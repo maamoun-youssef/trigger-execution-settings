@@ -1,0 +1,39 @@
+<html>
+
+<head>
+	<title>Welcome Email</title>
+</head>
+
+<body style="font-family: Arial, sans-serif; font-size: 12pt; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); height: auto; min-height: auto;">
+	<p>{{{$Label.LBL_Connect_Email_Greeting}}} {{{Recipient.FirstName}}}&nbsp; {{{Recipient.LastName}}},</p>
+
+	<p>{{{$Label.LBL_Connect_Email_Intro1}}}
+		<strong>{{{$Label.LBL_Connect_CompanyName}}}</strong>&nbsp;{{{$Label.LBL_Connect_Email_Intro2}}}
+	</p>
+
+	<p>{{{$Label.LBL_Connect_Email_Intro3}}}</p>
+
+	<p>{{{$Label.LBL_Connect_Email_Benefit_Intro}}}</p>
+
+	<ul>
+		<li>{{{$Label.LBL_Connect_Email_Benefit1}}}</li>
+		<li>{{{$Label.LBL_Connect_Email_Benefit2}}}</li>
+		<li>{{{$Label.LBL_Connect_Email_Benefit3}}}</li>
+	</ul>
+
+	<p>{{{$Label.LBL_Connect_Email_Steps_Intro}}}</p>
+
+	<ol>
+		<li>{{{$Label.LBL_Connect_Email_Step1}}} (<a href="{{Community_Url}}" style="color: #4a86e8;"><i>{{{$Label.LBL_Connect_ConnectCompanyName}}}</i></a>)</li>
+		<li>{{{$Label.LBL_Connect_Email_Step2}}} {{{Recipient.Username}}} {{{$Label.LBL_Connect_Email_Step2_Cont}}}</li>
+		<li>{{{$Label.LBL_Connect_Email_Step3}}}</li>
+	</ol>
+
+	<p>{{{$Label.LBL_Connect_Email_Closing}}}</p>
+
+	<p>{{{$Label.LBL_Connect_Email_Support}}}
+		<strong style="color: #ff6600;">{{{$Label.LBL_Connect_SupportEmail}}}</strong>
+	</p>
+</body>
+
+</html>

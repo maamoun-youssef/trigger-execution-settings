@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Séquences</label>
+    <name>Specific_Contract_Type_Authorization__c</name>
+    <picklistValues>
+        <masterLabel>All - Amendment</masterLabel>
+        <translation>Tout sauf Avenant</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Amendment</masterLabel>
+        <translation>Avenant</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Negotiation</masterLabel>
+        <translation>Convention unique</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Negotiation + Amendment</masterLabel>
+        <translation>Avenant + Convention unique</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Period Extension</masterLabel>
+        <translation>Période transitoire</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Proposal</masterLabel>
+        <translation>Proposition</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Simulation</masterLabel>
+        <translation>Simulation</translation>
+    </picklistValues>
+</CustomFieldTranslation>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TransactionSecurityPolicy xmlns="http://soap.sforce.com/2006/04/metadata">
+    <action>
+        <block>false</block>
+        <endSession>false</endSession>
+        <freezeUser>false</freezeUser>
+        <twoFactorAuthentication>true</twoFactorAuthentication>
+        <useStepUp>true</useStepUp>
+    </action>
+    <active>true</active>
+    <description>La politique par défaut qui limite les exportations importantes de rapports en appliquant l&apos;authentification renforcée.</description>
+    <developerName>sfdc_default_ReportExport_Protection</developerName>
+    <eventName>ReportEvent</eventName>
+    <flow>sfdc_default_ReportExport_Protection_Flow</flow>
+    <masterLabel>Politique de sécurité des transactions sur l&apos;exportation de rapports par défaut</masterLabel>
+    <type>CustomConditionBuilderPolicy</type>
+</TransactionSecurityPolicy>

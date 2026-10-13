@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BusinessUnit__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Business Unit</label>
+    <referenceTo>BusinessUnit__c</referenceTo>
+    <relationshipLabel>Sell In Statement Details (BU)</relationshipLabel>
+    <relationshipName>SSDBusinessUnit</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

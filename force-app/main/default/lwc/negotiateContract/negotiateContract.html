@@ -1,0 +1,1165 @@
+<template>
+    <div class="slds-is-relative">
+        <table
+            class="slds-no-row-hover slds-table slds-table_tree slds-tree slds-border_left slds-border_right contract-table">
+            <thead class={headerClass} style="position: sticky; top: 0; z-index: 1;">
+                <tr class="slds-line-height_reset">
+                    <th colspan="7">
+                        <div class="slds-grid_vertical">
+                            <div class="slds-grid">
+                                <div class="slds-align_absolute-center">
+                                    <a data-id={contractId} href={linkContractName} target="_blank"
+                                        class="slds-p-right_x-small">
+                                        {contractName}
+                                    </a>
+                                    <div if:true={isOnTopSimulation} class="slds-p-right_x-small On_Top">
+                                        <lightning-icon icon-name="utility:trail" size="x-small"
+                                            title={Labels.LBL_Is_OnTop_Simulation}>
+                                        </lightning-icon>
+                                    </div>
+                                    <a class="slds-p-right_x-small slds-hidden"
+                                        style="padding: 0; width: 0px; margin: 0;">
+                                        <lightning-icon icon-name="utility:approval" size="x-small"
+                                            title={Labels.LBL_Executive_Summary}>
+                                        </lightning-icon>
+                                    </a>
+                                    <!-- <a href={executiveSummaryUrl} target="_blank" if:true={executiveSummaryUrl} -->
+                                    <a if:true={executiveSummaryUrl} onclick={openExecutiveSummary}
+                                        class="slds-p-right_x-small">
+                                        <lightning-icon icon-name="utility:approval" size="x-small"
+                                            title={Labels.LBL_Executive_Summary}>
+                                        </lightning-icon>
+                                    </a>
+                                    <template if:false={canUserModifyAll}>
+                                        <template if:true={isLocked}>
+                                            <lightning-icon icon-name="utility:lock" size="x-small"
+                                                title={Labels.LBL_Locked_By_Approval_Process}>
+                                            </lightning-icon>
+                                        </template>
+                                    </template>
+                                    <template if:true={canUserModifyAll}>
+                                        <template if:true={isLocked}>
+                                            <lightning-icon icon-name="utility:unlock" size="x-small"
+                                                title={Labels.LBL_Unlock} onclick={unlockContract}>
+                                            </lightning-icon>
+                                        </template>
+                                    </template>
+                                    <template if:false={loadingLockedActions}>
+                                        <template if:false={lockedActions}>
+                                            <button type="button" if:true={isAvailableForClone} class="slds-button">
+                                                <lightning-icon icon-name="utility:copy" data-id="cloneIcon"
+                                                    size="x-small" title={cloneLabel} onclick={createNewContract}>
+                                                </lightning-icon>
+                                            </button>
+                                            <template if:false={readOnly}>
+                                                <template if:false={isLockedByAprovalProcess}>
+                                                    <button type="button" if:true={isSimulation} class="slds-button"
+                                                        title={Labels.LBL_Update_Contract_BDate}>
+                                                        <lightning-icon icon-name="utility:date_input" size="x-small"
+                                                            onclick={openeditContract}>
+                                                        </lightning-icon>
+                                                    </button>
+                                                    <template if:false={hasTopNotSimulation}>
+                                                        <template if:false={isOnTopSimulation}>
+                                                            <button type="button" if:true={isSimulation}
+                                                                class="slds-button">
+                                                                <lightning-icon icon-name="utility:trail" size="x-small"
+                                                                    onclick={setOnTop}
+                                                                    title={Labels.LBL_Is_OnTop_Simulation}>
+                                                                </lightning-icon>
+                                                            </button>
+                                                        </template>
+                                                    </template>
+                                                    <template if:true={isCPG}>
+                                                        <button type="button" if:true={isAvailableForDelete}
+                                                            class="slds-button">
+                                                            <lightning-icon icon-name="utility:delete" size="x-small"
+                                                                onclick={openDeletePopup}>
+                                                            </lightning-icon>
+                                                        </button>
+                                                    </template>
+                                                </template>
+                                            </template>
+                                        </template>
+                                    </template>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="slds-align_absolute-center slds-text-body_small slds-text-font_monospace">
+                                    {dateContract}
+                                </div>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+                <tr class={indexesClass}>
+                    <th colspan="7" style="height: 184px; padding: 0; background-color: white !important;">
+                        <c-negotiate-indexes nonce={nonce} is-ref-nego-base={isRefNegoBase} post-signed={postSigned}
+                            is-nego-base-init-nego-year={isNegoBaseInitNegoYear} data-id="negotiate-indexes-cmp"
+                            contract-id={contractId} is-on-top-simulation={isOnTopSimulation}
+                            is-safe-balance={isSafeBalance}>
+                        </c-negotiate-indexes>
+                    </th>
+                </tr>
+                <tr style="height: 12px;" class={indexesClass}>
+                    <th colspan="7" style="background-color: white !important;"></th>
+                </tr>
+                <tr style="height: 27.6px;" class={indexesClass}>
+                    <th class="nego-type-cell" colspan="4">
+                    </th>
+                    <th class="nego-type-cell" colspan="3">
+                        <div class="slds-grid">
+                            {Labels.LBL_Total_TO_Tariff_Nego__c}
+                            <div class="slds-p-left_small slds-col_bump-left output-number-field">
+                                <lightning-formatted-number value={wIndex.totalToTariffNego} maximum-fraction-digits="2"
+                                    minimum-fraction-digits="2">
+                                </lightning-formatted-number>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+                <tr style="height: 27.6px;" class={indexesClass}>
+                    <th class="nego-type-cell" colspan="4">
+                        <div class="slds-grid">
+                            {Labels.LBL_Depreciation_Rise_Rate}:
+                            <template if:false={loadingLockedActions}>
+                                <template if:false={lockedActions}>
+                                    <div if:true={readOnly}
+                                        class="slds-p-left_small slds-col_bump-left slds-grid output-number-field">
+                                        <lightning-formatted-number value={depreciationRate} maximum-fraction-digits={contractFieldsScaleStepMap.depreciationRate.scale}
+                                            minimum-fraction-digits={contractFieldsScaleStepMap.depreciationRate.scale}>
+                                        </lightning-formatted-number>
+                                    </div>
+                                    <div if:false={readOnly} class="slds-p-left_small slds-col_bump-left slds-grid">
+                                        <!-- <lightning-record-edit-form
+                                            object-api-name={API_NAMES.Contract__c.objectApiName}>
+                                            <lightning-input-field variant="label-hidden"
+                                                field-name={API_NAMES.Contract__c.Depreciation_Rate__c}
+                                                value={depreciationRate}
+                                                data-field-api-name={API_NAMES.Contract__c.Depreciation_Rate__c}
+                                                data-field="depreciationRate" onchange={handleContractFieldChange}
+                                                data-contract-id={contractId} onkeydown={blockSubmit}
+                                                class={depreciationRateClass}>
+                                            </lightning-input-field>
+                                        </lightning-record-edit-form> -->
+                                        <lightning-input value={depreciationRate} type="number" step={contractFieldsScaleStepMap.depreciationRate.step}
+                                            data-field-api-name={API_NAMES.Contract__c.Depreciation_Rate__c}
+                                            data-field="depreciationRate" onblur={handleContractFieldChange}
+                                            data-contract-id={contractId} onkeydown={blockSubmit}
+                                            class={depreciationRateClass}></lightning-input>
+                                    </div>
+                                </template>
+                                <div if:true={lockedActions}
+                                    class="slds-p-left_small slds-col_bump-left slds-grid output-number-field">
+                                    <lightning-formatted-number value={depreciationRate} maximum-fraction-digits={contractFieldsScaleStepMap.depreciationRate.scale}
+                                        minimum-fraction-digits={contractFieldsScaleStepMap.depreciationRate.scale}>
+                                    </lightning-formatted-number>
+                                </div>
+                            </template>
+                        </div>
+                    </th>
+                    <th class="nego-type-cell">
+                        <div class="slds-align-middle">
+                            {Labels.LBL_TO}:
+                        </div>
+                    </th>
+                    <th class="nego-type-cell">
+                        <div class="slds-p-right_x-small slds-grid_vertical">
+                            <div style={gapTOStyle}>
+                                <lightning-formatted-number value={diffTO} maximum-fraction-digits="2"
+                                    minimum-fraction-digits="2" format-style="percent">
+                                </lightning-formatted-number>
+                                (<lightning-formatted-number value={gapTO} maximum-fraction-digits="2"
+                                    minimum-fraction-digits="2" format-style="percent">
+                                </lightning-formatted-number>)
+                            </div>
+                            <div style={gapSBTOStyle}>
+                                <lightning-formatted-number value={gapSBTO} maximum-fraction-digits="2"
+                                    minimum-fraction-digits="2" format-style="percent">
+                                </lightning-formatted-number>
+                            </div>
+                        </div>
+                    </th>
+                    <th class="nego-type-cell">
+                        <template if:false={loadingLockedActions}>
+                            <template if:false={lockedActions}>
+                                <div if:true={readOnly} class="output-number-field slds-col slds-align-middle">
+                                    <lightning-formatted-number value={purchase} maximum-fraction-digits={contractFieldsScaleStepMap.to.scale}
+                                        minimum-fraction-digits={contractFieldsScaleStepMap.to.scale}>
+                                    </lightning-formatted-number>
+                                </div>
+                                <div if:false={readOnly} class="slds-align-middle">
+                                    <!-- <lightning-record-edit-form object-api-name={API_NAMES.Contract__c.objectApiName}>
+                                        <lightning-input-field variant="label-hidden"
+                                            field-name={API_NAMES.Contract__c.TO1__c} value={purchase}
+                                            data-field-api-name={API_NAMES.Contract__c.TO1__c} data-field="purchase"
+                                            onchange={handleContractFieldChange} data-contract-id={contractId}
+                                            onkeydown={blockSubmit}>
+                                        </lightning-input-field>
+                                    </lightning-record-edit-form> -->
+                                    <lightning-input value={purchase} type="number" step={contractFieldsScaleStepMap.to.step}
+                                        data-field-api-name={API_NAMES.Contract__c.TO1__c} data-field="purchase"
+                                        onblur={handleContractFieldChange} data-contract-id={contractId}
+                                        onkeydown={blockSubmit}>
+                                    </lightning-input>
+                                </div>
+                            </template>
+                            <div if:true={lockedActions} class="output-number-field slds-col slds-align-middle">
+                                <lightning-formatted-number value={purchase} maximum-fraction-digits={contractFieldsScaleStepMap.to.scale}
+                                    minimum-fraction-digits={contractFieldsScaleStepMap.to.scale}>
+                                </lightning-formatted-number>
+                            </div>
+                        </template>
+                    </th>
+                </tr>
+                <tr style="height: 27.6px;" class={indexesClass}>
+                    <th class="nego-type-cell" colspan="4">
+                        <div class="slds-grid">
+                            {Labels.LBL_Rise_Rate}:
+                            <template if:false={loadingLockedActions}>
+                                <template if:false={lockedActions}>
+                                    <div if:true={readOnly}
+                                        class="slds-p-left_small slds-col_bump-left slds-grid output-number-field">
+                                        <lightning-formatted-number value={riseRate} maximum-fraction-digits={contractFieldsScaleStepMap.riseRate.scale}
+                                            minimum-fraction-digits={contractFieldsScaleStepMap.riseRate.scale}>
+                                        </lightning-formatted-number>
+                                    </div>
+                                    <div if:false={readOnly} class="slds-p-left_small slds-col_bump-left slds-grid">
+                                        <!-- <lightning-record-edit-form
+                                            object-api-name={API_NAMES.Contract__c.objectApiName}>
+                                            <lightning-input-field variant="label-hidden"
+                                                field-name={API_NAMES.Contract__c.Rise_Rate__c} value={riseRate}
+                                                data-field-api-name={API_NAMES.Contract__c.Rise_Rate__c}
+                                                data-field="riseRate" onchange={handleContractFieldChange}
+                                                data-contract-id={contractId} onkeydown={blockSubmit}
+                                                class={riseRateClass}>
+                                            </lightning-input-field>
+                                        </lightning-record-edit-form> -->
+                                        <lightning-input value={riseRate} type="number" step={contractFieldsScaleStepMap.riseRate.step}
+                                            data-field-api-name={API_NAMES.Contract__c.Rise_Rate__c}
+                                            data-field="riseRate" onblur={handleContractFieldChange}
+                                            data-contract-id={contractId} onkeydown={blockSubmit} class={riseRateClass}>
+                                        </lightning-input>
+                                    </div>
+                                </template>
+                                <div if:true={lockedActions}
+                                    class="slds-p-left_small slds-col_bump-left slds-grid output-number-field">
+                                    <lightning-formatted-number value={riseRate} maximum-fraction-digits={contractFieldsScaleStepMap.riseRate.scale}
+                                        minimum-fraction-digits={contractFieldsScaleStepMap.riseRate.scale}>
+                                    </lightning-formatted-number>
+                                </div>
+                            </template>
+                        </div>
+                    </th>
+                    <th class="nego-type-cell">
+                        <div class="slds-align-middle">
+                            {Labels.LBL_QTY}:
+                        </div>
+                    </th>
+                    <th class="nego-type-cell">
+                        <div class="slds-p-right_x-small slds-grid_vertical">
+                            <div style={gapQtyStyle}>
+                                <lightning-formatted-number value={diffQty} maximum-fraction-digits="2"
+                                    minimum-fraction-digits="2" format-style="percent">
+                                </lightning-formatted-number>
+                                (<lightning-formatted-number value={gapQty} maximum-fraction-digits="2"
+                                    minimum-fraction-digits="2" format-style="percent">
+                                </lightning-formatted-number>)
+                            </div>
+                            <div style={gapSBQtyStyle}>
+                                <lightning-formatted-number value={gapSBQty} maximum-fraction-digits="2"
+                                    minimum-fraction-digits="2" format-style="percent">
+                                </lightning-formatted-number>
+                            </div>
+                        </div>
+                    </th>
+                    <th class="nego-type-cell">
+                        <template if:false={loadingLockedActions}>
+                            <template if:false={lockedActions}>
+                                <div if:true={readOnly} class="output-number-field slds-col slds-align-middle">
+                                    <lightning-formatted-number value={quantity} maximum-fraction-digits={contractFieldsScaleStepMap.qty.scale}
+                                        minimum-fraction-digits={contractFieldsScaleStepMap.qty.scale}>
+                                    </lightning-formatted-number>
+                                </div>
+                                <div if:false={readOnly} class="slds-align-middle">
+                                    <!-- <lightning-record-edit-form object-api-name={API_NAMES.Contract__c.objectApiName}>
+                                        <lightning-input-field variant="label-hidden"
+                                            field-name={API_NAMES.Contract__c.Qty1__c} value={quantity}
+                                            data-field-api-name={API_NAMES.Contract__c.Qty1__c} data-field="quantity"
+                                            onchange={handleContractFieldChange} data-contract-id={contractId}
+                                            onkeydown={blockSubmit}>
+                                        </lightning-input-field>
+                                    </lightning-record-edit-form> -->
+                                    <lightning-input value={quantity} type="number" step={contractFieldsScaleStepMap.qty.step}
+                                        data-field-api-name={API_NAMES.Contract__c.Qty1__c} data-field="quantity"
+                                        onblur={handleContractFieldChange} data-contract-id={contractId}
+                                        onkeydown={blockSubmit}></lightning-input>
+                                </div>
+                            </template>
+                            <div if:true={lockedActions} class="output-number-field slds-col slds-align-middle">
+                                <lightning-formatted-number value={quantity} maximum-fraction-digits={contractFieldsScaleStepMap.qty.scale}
+                                    minimum-fraction-digits={contractFieldsScaleStepMap.qty.scale}>
+                                </lightning-formatted-number>
+                            </div>
+                        </template>
+                    </th>
+                </tr>
+                <tr style="height: 12px;">
+                    <th colspan="7" style="background-color: white !important;"></th>
+                </tr>
+                <tr class="third-header" style="height: 27.6px;">
+                    <th>%</th>
+                    <th>{Labels.Amount}</th>
+                    <th></th>
+                    <th>{Labels.TotalComputed}</th>
+                    <th>{Labels.LBL_Index_val__c}</th>
+                    <th>{Labels.LBL_Index_perc__c}</th>
+                    <th>
+                        <template if:false={loadingLockedActions}>
+                            <template if:false={lockedActions}>
+                                <template if:false={readOnly}>
+                                    <template if:true={hasIndexTarget}>
+                                        <button type="button" class="slds-button" if:true={isSimulationOrisSafeBalance}
+                                            title={Labels.LBL_Add_Condition}>
+                                            <lightning-icon icon-name="utility:add" size="x-small"
+                                                onclick={addIndexTargetCondition}>
+                                            </lightning-icon>
+                                        </button>
+                                    </template>
+                                </template>
+                            </template>
+                        </template>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class={headerClass}>
+                <template for:each={arraysCondtion} for:item="item">
+                    <tr key={item.key} data-label={item.key} aria-level={item.level}>
+                        <td class="index-cell slds-text-align_center">
+                            <lightning-formatted-number value={item.percent} maximum-fraction-digits="2"
+                                minimum-fraction-digits="2">
+                            </lightning-formatted-number>
+                        </td>
+                        <td class="index-cell slds-text-align_center"></td>
+                        <td class="index-cell slds-text-align_center"></td>
+                        <td class="index-cell slds-text-align_center">
+                            <lightning-formatted-number value={item.computedAmount} maximum-fraction-digits="0"
+                                minimum-fraction-digits="0">
+                            </lightning-formatted-number>
+                        </td>
+                        <td class="index-cell slds-text-align_center">
+                            <lightning-formatted-number value={item.indexVal} maximum-fraction-digits="2"
+                                minimum-fraction-digits="2">
+                            </lightning-formatted-number>
+                        </td>
+                        <td class="index-cell slds-text-align_center"></td>
+                        <td class="index-cell slds-text-align_center"></td>
+                    </tr>
+                    <template for:each={item.negodiscounts} for:item="discounttype">
+                        <tr key={discounttype.key} aria-level={discounttype.level} class={item.rowClass}>
+                            <td class="nego-type-cell slds-text-align_center"></td>
+                            <td class="nego-type-cell slds-text-align_center"></td>
+                            <td class="nego-type-cell slds-text-align_center"></td>
+                            <td class="nego-type-cell slds-text-align_center">
+                                <lightning-formatted-number value={discounttype.computedAmount}
+                                    maximum-fraction-digits="0" minimum-fraction-digits="0">
+                                </lightning-formatted-number>
+                            </td>
+                            <td class="nego-type-cell slds-text-align_center"></td>
+                            <td class="nego-type-cell slds-text-align_center">
+                                <lightning-formatted-number value={discounttype.indexPer} maximum-fraction-digits="2"
+                                    minimum-fraction-digits="2">
+                                </lightning-formatted-number>
+                            </td>
+                            <td class="nego-type-cell slds-text-align_center"></td>
+                        </tr>
+                        <template for:each={discounttype.conditions} for:item="condition" for:index="index">
+                            <tr key={condition} aria-level={condition.level} class={condition.rowClass}>
+                                <template if:false={condition.hideRow}>
+                                    <td class={condition.cellClass}>
+                                        <template if:true={condition.enablePercentage}>
+                                            <lightning-formatted-number value={condition._Value_per__c}
+                                                maximum-fraction-digits={discountPercentScale}
+                                                minimum-fraction-digits={discountPercentScale}>
+                                            </lightning-formatted-number>
+                                        </template>
+                                    </td>
+                                    <td class={condition.cellClass}>
+                                        <template if:true={condition.enableAmt}>
+                                            <lightning-formatted-number value={condition._Value_amt__c}
+                                                maximum-fraction-digits="0" minimum-fraction-digits="0">
+                                            </lightning-formatted-number>
+                                        </template>
+                                    </td>
+                                    <td class={condition.cellClass}>
+                                        <lightning-icon size="x-small" icon-name="utility:home"
+                                            if:false={condition.matchBu}
+                                            title={Labels.Conditions_not_diffused_country_level}>
+                                        </lightning-icon>
+                                        <lightning-icon size="x-small" icon-name="utility:bookmark"
+                                            if:false={condition.matchNegoscope}
+                                            title={Labels.LBL_Conditions_not_default_negoscope}>
+                                        </lightning-icon>
+                                    </td>
+                                    <td class={condition.cellClass}>
+                                        <lightning-formatted-number value={condition._YTD_Nego_Computed__c}
+                                            maximum-fraction-digits="0" minimum-fraction-digits="0">
+                                        </lightning-formatted-number>
+                                    </td>
+                                    <td class={condition.cellClass}>
+                                        <lightning-formatted-number value={condition._Index_val__c}
+                                            maximum-fraction-digits="2" minimum-fraction-digits="2">
+                                        </lightning-formatted-number>
+                                    </td>
+                                    <td class={condition.cellClass}>
+                                        <lightning-formatted-number value={condition._Index_perc__c}
+                                            maximum-fraction-digits="2" minimum-fraction-digits="2">
+                                        </lightning-formatted-number>
+                                    </td>
+                                    <td class={condition.cellClassIcons} onmouseenter={toggleShowEdit}
+                                        onmouseleave={toggleShowInfo} data-index={item.key}
+                                        data-negotiatetype={discounttype.key} data-rowindex={index}>
+                                        <lightning-icon icon-name="utility:ban" variant="error" size="xx-small"
+                                            class="slds-cell-edit__button slds-m-left_x-small slds-p-top_xx-small"
+                                            title={Labels.MSG_Invalid_Condition} if:false={condition.isValid}>
+                                        </lightning-icon>
+                                        <template if:false={loadingLockedActions}>
+                                            <template if:true={lockedActions}>
+                                                <lightning-button-icon icon-name="utility:info" variant="bare"
+                                                    class="slds-cell-edit__button slds-m-left_x-small">
+                                                </lightning-button-icon>
+                                            </template>
+                                            <template if:false={lockedActions}>
+                                                <template if:true={readOnly}>
+                                                    <lightning-button-icon icon-name="utility:info" variant="bare"
+                                                        class="slds-cell-edit__button slds-m-left_x-small">
+                                                    </lightning-button-icon>
+                                                </template>
+                                                <template if:false={readOnly}>
+                                                    <template if:true={condition.readOnly}>
+                                                        <lightning-button-icon icon-name="utility:info" variant="bare"
+                                                            class="slds-cell-edit__button slds-m-left_x-small">
+                                                        </lightning-button-icon>
+                                                    </template>
+                                                    <template if:false={condition.readOnly}>
+                                                        <lightning-button variant="base" label={Labels.LBL_Slabs}
+                                                            data-index={item.key} data-negotiatetype={discounttype.key}
+                                                            data-rowindex={index} onclick={openEditSlabsConditionModel}
+                                                            if:true={condition.isConditional} class="slabs-button">
+                                                        </lightning-button>
+                                                        <lightning-button-icon icon-name="utility:info" variant="bare"
+                                                            class="slds-cell-edit__button slds-m-left_x-small"
+                                                            if:false={condition.hideInfo}>
+                                                        </lightning-button-icon>
+                                                        <lightning-button-icon icon-name="utility:edit" variant="bare"
+                                                            data-index={item.key} data-negotiatetype={discounttype.key}
+                                                            data-rowindex={index}
+                                                            class="slds-cell-edit__button slds-m-left_x-small"
+                                                            onclick={openEditConditionModel}
+                                                            if:true={condition.hideInfo}>
+                                                        </lightning-button-icon>
+                                                    </template>
+                                                </template>
+                                                <lightning-button-icon if:true={condition.deleteActive}
+                                                    key={condition.Name} icon-name="utility:delete" variant="bare"
+                                                    data-index={item.key} data-negotiatetype={discounttype.key}
+                                                    data-rowindex={index}
+                                                    class="slds-cell-edit__button slds-m-left_x-small delete-icon"
+                                                    onclick={deleteHandler}>
+                                                </lightning-button-icon>
+                                            </template>
+                                        </template>
+                                        <section if:true={condition.passedFirstLoad} class={condition.popOverClass}
+                                            style={condition.popOverStyle} role="dialog">
+                                            <header class="slds-popover__header"
+                                                style="border-left:1px solid #c9c9c9;border-right:1px solid #c9c9c9;padding:6px !important;">
+                                                <div class="slds-media slds-media_center slds-has-flexi-truncate">
+                                                    <div class="slds-media__body">
+                                                        <h2 class="slds-truncate slds-text-heading_medium"
+                                                            style="font-size:13px !important">
+                                                            {condition.Condition_Type.Name}
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                            </header>
+                                            <div class="slds-popover__body slds-text-align_left popover-content"
+                                                style="background:white;white-space: break-spaces;border:1px solid #c9c9c9;padding:0px !important;border-bottom:none">
+                                                <lightning-record-edit-form
+                                                    object-api-name={API_NAMES.Contract_Discount__c.objectApiName}
+                                                    record-id={condition.Id} form-class="slds-grid slds-wrap">
+                                                    <template for:each={condition.detailPopupFields} for:item="field"
+                                                        style="line-height:30px !important">
+                                                        <lightning-input-field disabled key={field}
+                                                            field-name={field.fieldApiName} value={field.value}
+                                                            onkeydown={blockSubmit} class="slds-size_1-of-2 hide-input"
+                                                            if:false={field.hasValue}>
+                                                        </lightning-input-field>
+                                                        <lightning-input-field disabled key={field}
+                                                            field-name={field.fieldApiName} value={field.value}
+                                                            onkeydown={blockSubmit} class="slds-size_1-of-2"
+                                                            if:true={field.hasValue}>
+                                                        </lightning-input-field>
+                                                    </template>
+                                                </lightning-record-edit-form>
+                                            </div>
+                                        </section>
+                                    </td>
+                                </template>
+                                <template if:true={condition.hideRow}>
+                                    <td class="slds-text-align_center" colspan="7">
+                                        <div class="blank-cell"></div>
+                                    </td>
+                                </template>
+                            </tr>
+                        </template>
+                    </template>
+                </template>
+            </tbody>
+        </table>
+        <template if:true={isEditConditionModelOpen}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeEditConditionModel}>
+                            <lightning-icon icon-name="utility:close" variant="inverse" size="small">
+                            </lightning-icon>
+                        </button>
+                        <h2 class="slds-text-heading_medium slds-hyphenate">
+                            {currentCondition.Condition_Type.Name}
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-horizontal_xx-small" style="height: 60vh;">
+                        <lightning-spinner variant="brand" size="large" if:true={fakesaveLoading}></lightning-spinner>
+                        <div class="slds-grid">
+                            <div class={popupColClass} if:true={refCurrentCondition}>
+                                <h3 class="slds-section__title" style="position: sticky; top: 0; z-index: 5;">
+                                    <span class="slds-truncate slds-section__title-action"
+                                        title={refCurrentCondition.contract.Name}
+                                        style="font-size: 10px;">{refCurrentCondition.contract.Name}</span>
+                                </h3>
+                                <lightning-record-edit-form
+                                    object-api-name={API_NAMES.Contract_Discount__c.objectApiName}>
+                                    <template for:each={refCurrentConditionPopupfieldsWrappers}
+                                        for:item="fieldsWrapper">
+                                        <template if:true={fieldsWrapper.show}>
+                                            <template lwc:if={fieldsWrapper.isDiscPercent}>
+                                                <lightning-input key={fieldsWrapper.fieldApiName}
+                                                    field-name={fieldsWrapper.fieldApiName} value={fieldsWrapper.value}
+                                                    data-field-api-name={fieldsWrapper.fieldApiName}
+                                                    step={discPercentStep} type="number" formatter="decimal" disabled>
+                                                </lightning-input>
+                                            </template>
+                                            <template lwc:else>
+                                                <lightning-input-field key={fieldsWrapper.fieldApiName}
+                                                    field-name={fieldsWrapper.fieldApiName} value={fieldsWrapper.value}
+                                                    data-field-api-name={fieldsWrapper.fieldApiName} disabled>
+                                                </lightning-input-field>
+                                            </template>
+                                        </template>
+                                    </template>
+                                </lightning-record-edit-form>
+                            </div>
+                            <div class={popupColClass}>
+                                <h3 class="slds-section__title" style="position: sticky; top: 0; z-index: 5;">
+                                    <span class="slds-truncate slds-section__title-action"
+                                        title={currentCondition.contract.Name}
+                                        style="font-size: 10px;">{currentCondition.contract.Name}</span>
+                                </h3>
+                                <lightning-record-edit-form
+                                    object-api-name={API_NAMES.Contract_Discount__c.objectApiName}
+                                    record-id={currentCondition.Id}>
+                                    <template for:each={currentConditionPopupfieldsWrappers} for:item="fieldsWrapper">
+                                        <template if:true={fieldsWrapper.show}>
+                                            <template if:false={fieldsWrapper.isSearchNS}>
+                                                <template if:false={fieldsWrapper.isSearchBU}>
+                                                    <template lwc:if={fieldsWrapper.isInput}>
+                                                        <template lwc:if={fieldsWrapper.isDiscPercent}>
+                                                            <lightning-input key={fieldsWrapper.fieldApiName}
+                                                                field-name={fieldsWrapper.fieldApiName}
+                                                                value={fieldsWrapper.value}
+                                                                data-field-api-name={fieldsWrapper.fieldApiName}
+                                                                onchange={handleEditConditionValueChange}
+                                                                onkeydown={blockSubmit}
+                                                                if:false={fieldsWrapper.disabled} step={discPercentStep}
+                                                                type="number" formatter="decimal">
+                                                            </lightning-input>
+                                                            <lightning-input key={fieldsWrapper.fieldApiName}
+                                                                field-name={fieldsWrapper.fieldApiName}
+                                                                value={fieldsWrapper.value}
+                                                                data-field-api-name={fieldsWrapper.fieldApiName}
+                                                                if:true={fieldsWrapper.disabled} step={discPercentStep}
+                                                                type="number" formatter="decimal" disabled>
+                                                            </lightning-input>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            <lightning-input-field key={fieldsWrapper.fieldApiName}
+                                                                field-name={fieldsWrapper.fieldApiName}
+                                                                value={fieldsWrapper.value}
+                                                                data-field-api-name={fieldsWrapper.fieldApiName}
+                                                                onchange={handleEditConditionValueChange}
+                                                                onkeydown={blockSubmit}
+                                                                if:false={fieldsWrapper.disabled}>
+                                                            </lightning-input-field>
+                                                            <lightning-input-field key={fieldsWrapper.fieldApiName}
+                                                                field-name={fieldsWrapper.fieldApiName}
+                                                                value={fieldsWrapper.value}
+                                                                data-field-api-name={fieldsWrapper.fieldApiName}
+                                                                if:true={fieldsWrapper.disabled} disabled>
+                                                            </lightning-input-field>
+                                                        </template>
+                                                    </template>
+                                                    <template lwc:else>
+                                                        <template lwc:if={fieldsWrapper.isDiscPercent}>
+                                                            <lightning-input key={fieldsWrapper.fieldApiName}
+                                                                field-name={fieldsWrapper.fieldApiName}
+                                                                value={fieldsWrapper.value}
+                                                                data-field-api-name={fieldsWrapper.fieldApiName}
+                                                                if:false={fieldsWrapper.isInput} step={discPercentStep}
+                                                                type="number" formatter="decimal" disabled>
+                                                            </lightning-input>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            <lightning-input-field key={fieldsWrapper.fieldApiName}
+                                                                field-name={fieldsWrapper.fieldApiName}
+                                                                value={fieldsWrapper.value}
+                                                                data-field-api-name={fieldsWrapper.fieldApiName}
+                                                                if:false={fieldsWrapper.isInput} disabled>
+                                                            </lightning-input-field>
+                                                        </template>
+                                                    </template>
+                                                </template>
+                                            </template>
+                                            <template if:true={fieldsWrapper.isSearchNS}>
+                                                <div class="slds-form-element slds-form-element_stacked"
+                                                    key={fieldsWrapper.fieldApiName}>
+                                                    <div class="slds-form-element">
+                                                        <label
+                                                            class="slds-form-element__label">{Labels.Product_Scope__c}</label>
+                                                        <lightning-helptext if:true={helpText.Product_Scope__c}
+                                                            content={helpText.Product_Scope__c}>
+                                                        </lightning-helptext>
+                                                        <div class="slds-form-element__control">
+                                                            <div class="slds-combobox_container">
+                                                                <div
+                                                                    class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+                                                                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                                                        role="none">
+                                                                        <lightning-input variant="label-hidden"
+                                                                            value={nsPopUp.selectedDataName}
+                                                                            onclick={nsPopUp.showDataList}
+                                                                            onblur={nsPopUp.hideDataList}
+                                                                            onchange={nsPopUp.handleChange}
+                                                                            onkeydown={blockSubmit} type="search">
+                                                                        </lightning-input>
+                                                                    </div>
+                                                                    <div class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid slds-align_absolute-center"
+                                                                        if:true={nsPopUp.displayDataList}
+                                                                        style="z-index: 10;" role="listbox">
+                                                                        <ul class="slds-listbox slds-listbox_vertical"
+                                                                            role="presentation">
+                                                                            <template
+                                                                                for:each={nsPopUp.filteredDataList}
+                                                                                for:item='item'>
+                                                                                <li role="presentation"
+                                                                                    class="slds-listbox__item slds-truncate"
+                                                                                    key={item.Id}>
+                                                                                    <div class="slds-truncate"
+                                                                                        title={item.Name}>
+                                                                                        <div data-id={item.Id}
+                                                                                            data-name={item.Name}
+                                                                                            class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                                                                                            role="option"
+                                                                                            onclick={nsPopUp.setCurrentItem}>
+                                                                                            <span
+                                                                                                class="slds-media__body"
+                                                                                                data-id={item.Id}
+                                                                                                data-name={item.Name}>{item.Name}</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </template>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                            <template if:true={fieldsWrapper.isSearchBU}>
+                                                <div class="slds-form-element slds-form-element_stacked"
+                                                    key={fieldsWrapper.fieldApiName}>
+                                                    <div class="slds-form-element">
+                                                        <label
+                                                            class="slds-form-element__label">{Labels.BusinessUnitScope__c}</label>
+                                                        <lightning-helptext if:true={helpText.BusinessUnitScope__c}
+                                                            content={helpText.BusinessUnitScope__c}>
+                                                        </lightning-helptext>
+                                                        <div class="slds-form-element__control">
+                                                            <div class="slds-combobox_container">
+                                                                <div
+                                                                    class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+                                                                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                                                        role="none">
+                                                                        <lightning-input variant="label-hidden"
+                                                                            value={buPopUp.selectedDataName}
+                                                                            onclick={buPopUp.showDataList}
+                                                                            onblur={buPopUp.hideDataList}
+                                                                            onchange={buPopUp.handleChange}
+                                                                            onkeydown={blockSubmit} type="search">
+                                                                        </lightning-input>
+                                                                    </div>
+                                                                    <div class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid slds-align_absolute-center"
+                                                                        if:true={buPopUp.displayDataList}
+                                                                        style="z-index: 10;" role="listbox">
+                                                                        <ul class="slds-listbox slds-listbox_vertical"
+                                                                            role="presentation">
+                                                                            <template
+                                                                                for:each={buPopUp.filteredDataList}
+                                                                                for:item='item'>
+                                                                                <li role="presentation"
+                                                                                    class="slds-listbox__item slds-truncate"
+                                                                                    key={item.Id}>
+                                                                                    <div class="slds-truncate"
+                                                                                        title={item.Name}>
+                                                                                        <div data-id={item.Id}
+                                                                                            data-name={item.Name}
+                                                                                            class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                                                                                            role="option"
+                                                                                            onclick={buPopUp.setCurrentItem}>
+                                                                                            <span
+                                                                                                class="slds-media__body"
+                                                                                                data-id={item.Id}
+                                                                                                data-name={item.Name}>{item.Name}</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </template>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </template>
+                                    </template>
+                                </lightning-record-edit-form>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" onclick={closeEditConditionModel}
+                            title={Labels.Cancel}>{Labels.Cancel}</button>
+                        <button class="slds-button slds-button_brand" onclick={submitEditConditionChanged}
+                            title={Labels.OK}>{Labels.OK}</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <template if:true={isEditSlabsConditionModelOpen}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeEditSlabsConditionModel}>
+                            <lightning-icon icon-name="utility:close" variant="inverse" size="small">
+                            </lightning-icon>
+                        </button>
+                        <h2 class="slds-text-heading_medium slds-hyphenate">
+                            {currentCondition.Condition_Type.Name}
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-horizontal_xx-small">
+                        <h3 class="slds-section__title" style="position: sticky; top: 0; z-index: 5;">
+                            <span class="slds-truncate slds-section__title-action" style="font-size: 10px;"
+                                title={currentCondition.contract.Name}>{currentCondition.contract.Name}</span>
+                        </h3>
+                        <div class="slds-grid slds-p-bottom_x-small">
+                            <lightning-record-edit-form object-api-name={API_NAMES.Contract_Discount__c.objectApiName}
+                                record-id={currentCondition.Id} form-class="slds-grid" class="slds-size_full">
+                                <div class="slds-size_1-of-3">
+                                    <lightning-combobox label={Labels.LBL_slab_calc_method} options={slabsMethodOptions}
+                                        data-field-api-name={API_NAMES.Contract_Discount__c.slab_calc_method__c}
+                                        onchange={handleEditSlabsConditionValueChange} onkeydown={blockSubmit}>
+                                    </lightning-combobox>
+                                </div>
+                                <lightning-input-field class="slds-size_1-of-3"
+                                    field-name={API_NAMES.Contract_Discount__c.Slab_Calc_Method_TO_Origin__c}
+                                    data-field-api-name={API_NAMES.Contract_Discount__c.Slab_Calc_Method_TO_Origin__c}
+                                    onchange={handleEditSlabsConditionValueChange} onkeydown={blockSubmit}>
+                                </lightning-input-field>
+                                <lightning-input-field class="slds-size_1-of-3" if:true={showSlabsUnitType}
+                                    field-name={API_NAMES.Contract_Discount__c.Unit_Amount_Type__c}
+                                    data-field-api-name={API_NAMES.Contract_Discount__c.Unit_Amount_Type__c}
+                                    onchange={handleEditSlabsConditionValueChange} onkeydown={blockSubmit}>
+                                </lightning-input-field>
+                                <lightning-output-field class="slds-size_1-of-3" if:true={showSlabsCurrency}
+                                    field-name={API_NAMES.Contract_Discount__c.CurrencyIsoCode}
+                                    data-field-api-name={API_NAMES.Contract_Discount__c.CurrencyIsoCode}
+                                    onchange={handleEditSlabsConditionValueChange} onkeydown={blockSubmit}>
+                                </lightning-output-field>
+                            </lightning-record-edit-form>
+                        </div>
+                        <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_edit">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th class="slds-text-align_center" scope="col">
+                                        <div class="slds-truncate">{Labels.LBL_No}</div>
+                                    </th>
+                                    <th class="slds-text-align_center" scope="col">
+                                        <div class="slds-truncate">{Labels.LBL_Threshold}</div>
+                                    </th>
+                                    <th class="slds-text-align_center" scope="col">
+                                        <div class="slds-truncate">{Labels.LBL_Percentage}</div>
+                                    </th>
+                                    <th class="slds-text-align_center" scope="col">
+                                        <div class="slds-truncate">{Labels.Amount}</div>
+                                    </th>
+                                    <th class="slds-text-align_center" scope="col">
+                                        <div class="slds-truncate">{Labels.LBL_Target}</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={currentCondition.slabs} for:item="slab">
+                                    <tr key={slab.index}>
+                                        <td class="slds-text-align_center">
+                                            {slab.index}
+                                        </td>
+                                        <template for:each={slab.fields} for:item="field">
+                                            <td key={field.fieldApiName}>
+                                                <lightning-record-edit-form
+                                                    object-api-name={API_NAMES.Contract_Discount__c.objectApiName}
+                                                    record-id={currentCondition.Id}>
+                                                    <lightning-input-field key={field.fieldApiName}
+                                                        variant="label-hidden" field-name={field.fieldApiName}
+                                                        value={field.value} data-field-api-name={field.fieldApiName}
+                                                        data-index={slab.index}
+                                                        onchange={handleEditSlabsConditionValueChange}
+                                                        onkeydown={blockSubmit}>
+                                                    </lightning-input-field>
+                                                </lightning-record-edit-form>
+                                            </td>
+                                        </template>
+                                        <td class="slds-text-align_center">
+                                            <lightning-button-icon icon-name="utility:check" variant="brand"
+                                                data-index={slab.index} if:true={slab.isSelected}>
+                                            </lightning-button-icon>
+                                            <lightning-button-icon icon-name="utility:check" variant="neutral"
+                                                data-index={slab.index} if:false={slab.isSelected}
+                                                onclick={handleEditSlabsConditionSelect}>
+                                            </lightning-button-icon>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" onclick={closeEditSlabsConditionModel}
+                            title={Labels.Cancel}>{Labels.Cancel}</button>
+                        <button class="slds-button slds-button_brand" onclick={submitEditSlabsConditionChanged}
+                            title={Labels.OK}>{Labels.OK}</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <template if:true={isNewContractModelOpen}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeNewContractModel}>
+                            <lightning-icon icon-name="utility:close" variant="inverse" size="small">
+                            </lightning-icon>
+                        </button>
+                        <h2 class="slds-text-heading_medium slds-hyphenate">
+                            {contract.Name}
+                        </h2>
+                        <h2 class="slds-text-heading_label-normal slds-hyphenate">
+                            {cloneLabel}
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content" style="overflow: unset;">
+                        <div class="slds-grid slds-p-around_small">
+                            <lightning-combobox variant="label-hidden" options={newContractRecordTypeOptions}
+                                value={selectedNewContractDeveloperName} onchange={handleNewContractDeveloperNameChange}
+                                onkeydown={blockSubmit} class="slds-size_full">
+                            </lightning-combobox>
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" onclick={closeNewContractModel}
+                            title={Labels.Cancel}>{Labels.Cancel}</button>
+                        <button class="slds-button slds-button_brand" onclick={createNewContract}
+                            title={Labels.OK}>{Labels.OK}</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <template if:true={isSetSimulationDataBeforeCreateNewModalOpen}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeSetSimulationDataBeforeCreateNewModal}>
+                            <lightning-icon icon-name="utility:close" variant="inverse" size="small">
+                            </lightning-icon>
+                        </button>
+                        <h2 class="slds-text-heading_medium slds-hyphenate">
+                            {contract.Name}
+                        </h2>
+                        <h2 class="slds-text-heading_label-normal slds-hyphenate" if:true={isSafeBalance}>
+                            {createSimulFromSafeBalanceLabel}
+                        </h2>
+                        <h2 class="slds-text-heading_label-normal slds-hyphenate" if:true={isSimulation}>
+                            {createSimulFromSimulLabel}
+                        </h2>
+                        <h2 class="slds-text-heading_label-normal slds-hyphenate" if:true={isNegoBase}>
+                            {createSimulFromNegoBaseLabel}
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-horizontal_xx-small" style="overflow: unset;">
+                        <!-- <div if:true={showWarningMessagePeWillBeDeleted}
+class="slds-text-color_error slds-text-title_bold slds-icon-text-error">
+<lightning-icon icon-name="utility:warning" size="x-small" variant="error"
+class="slds-p-bottom_xx-small">
+</lightning-icon>
+{Labels.MSG_Prompt_PT_Deletion}
+</div> -->
+                        <lightning-record-edit-form object-api-name={API_NAMES.Contract__c.objectApiName}
+                            class="slds-size_1-of-2">
+                            <div class="slds-grid">
+                                <div class="slds-size_1-of-2">
+                                    <lightning-input-field
+                                        field-name={API_NAMES.Contract__c.Contract_Commercial_BDate__c}
+                                        value={contractBeginDate} data-field-name="contractBeginDate"
+                                        onchange={handleEditContractChange} onkeydown={blockSubmit}>
+                                    </lightning-input-field>
+                                    <lightning-input-field
+                                        field-name={API_NAMES.Contract__c.Contract_Commercial_EDate__c}
+                                        value={contractEndDate} data-field-name="contractEndDate"
+                                        onchange={handleEditContractChange} onkeydown={blockSubmit}>
+                                    </lightning-input-field>
+                                    <lightning-input-field field-name="Name" value={contractSimulationName}
+                                        data-field-name="contractSimulationName" onchange={handleEditContractChange}
+                                        onkeydown={blockSubmit}>
+                                    </lightning-input-field>
+                                    <!-- <div if:true={showWarningMessagePeWillBeDeleted}
+class="slds-text-color_error slds-text-title_bold slds-icon-text-error">
+<lightning-icon icon-name="utility:warning" size="x-small" variant="error"
+class="slds-p-bottom_xx-small">
+</lightning-icon>
+{Labels.MSG_Prompt_PT_Deletion}
+</div> -->
+                                </div>
+                                <div class="slds-grid slds-size_1-of-2 slds-grid_vertical">
+                                    <lightning-input-field
+                                        field-name={API_NAMES.Contract__c.Is_TotalTo_Recalc_AfterDateChange__c}
+                                        value={isTotalToRecalcAfterDateChange}
+                                        data-field-name="isTotalToRecalcAfterDateChange"
+                                        onchange={handleEditContractChange} onkeydown={blockSubmit}>
+                                    </lightning-input-field>
+                                    <lightning-input-field
+                                        field-name={API_NAMES.Contract__c.Is_FixCond_Recalc_AfterDateChange__c}
+                                        value={isFixCondRecalcAfterDateChange}
+                                        data-field-name="isFixCondRecalcAfterDateChange"
+                                        onchange={handleEditContractChange} onkeydown={blockSubmit}>
+                                    </lightning-input-field>
+                                </div>
+                            </div>
+                        </lightning-record-edit-form>
+                        <div if:true={showWarningMessagePeWillBeDeleted}
+                            class="slds-grid slds-text-color_error slds-text-title_bold slds-icon-text-error">
+                            <lightning-icon icon-name="utility:warning" size="x-small" variant="error"
+                                class="slds-p-bottom_xx-small">
+                            </lightning-icon>
+                            {Labels.MSG_Prompt_PT_Deletion}
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral"
+                            onclick={closeSetSimulationDataBeforeCreateNewModal}
+                            title={Labels.Cancel}>{Labels.Cancel}</button>
+                        <button class="slds-button slds-button_brand" onclick={createNewContract}
+                            title={Labels.OK}>{Labels.OK}</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <template if:true={iseditContractOpen}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeeditContract}>
+                            <lightning-icon icon-name="utility:close" variant="inverse" size="small">
+                            </lightning-icon>
+                        </button>
+                        <h2 class="slds-text-heading_medium slds-hyphenate">
+                            {contract.Name}
+                        </h2>
+                        <h2 class="slds-text-heading_label-normal slds-hyphenate">
+                            {Labels.LBL_Update_Contract_BDate}
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-horizontal_xx-small" style="overflow: unset;">
+                        <lightning-record-edit-form object-api-name={API_NAMES.Contract__c.objectApiName}
+                            class="slds-size_1-of-2">
+                            <div class="slds-grid">
+                                <div class="slds-size_1-of-2">
+                                    <lightning-input-field
+                                        field-name={API_NAMES.Contract__c.Contract_Commercial_BDate__c}
+                                        value={contractBeginDate} data-field-name="contractBeginDate"
+                                        onchange={handleEditContractChange} onkeydown={blockSubmit}>
+                                    </lightning-input-field>
+                                    <lightning-input-field
+                                        field-name={API_NAMES.Contract__c.Contract_Commercial_EDate__c}
+                                        value={contractEndDate} data-field-name="contractEndDate"
+                                        onchange={handleEditContractChange} onkeydown={blockSubmit}>
+                                    </lightning-input-field>
+                                    <lightning-input-field field-name="Name" value={contractSimulationName}
+                                        data-field-name="contractSimulationName" onchange={handleEditContractChange}
+                                        onkeydown={blockSubmit}>
+                                    </lightning-input-field>
+                                    <!-- <div if:true={showWarningMessagePeWillBeDeleted}
+class="slds-text-color_error slds-text-title_bold slds-icon-text-error">
+<lightning-icon icon-name="utility:warning" size="x-small" variant="error"
+class="slds-p-bottom_xx-small">
+</lightning-icon>
+{Labels.MSG_Prompt_PT_Deletion}
+</div> -->
+                                </div>
+                                <div class="slds-grid slds-size_1-of-2 slds-grid_vertical">
+                                    <lightning-input-field
+                                        field-name={API_NAMES.Contract__c.Is_TotalTo_Recalc_AfterDateChange__c}
+                                        value={isTotalToRecalcAfterDateChange}
+                                        data-field-name="isTotalToRecalcAfterDateChange"
+                                        onchange={handleEditContractChange} onkeydown={blockSubmit}>
+                                    </lightning-input-field>
+                                    <lightning-input-field
+                                        field-name={API_NAMES.Contract__c.Is_FixCond_Recalc_AfterDateChange__c}
+                                        value={isFixCondRecalcAfterDateChange}
+                                        data-field-name="isFixCondRecalcAfterDateChange"
+                                        onchange={handleEditContractChange} onkeydown={blockSubmit}>
+                                    </lightning-input-field>
+                                </div>
+                            </div>
+                        </lightning-record-edit-form>
+                        <div if:true={showWarningMessagePeWillBeDeleted}
+                            class="slds-grid slds-text-color_error slds-text-title_bold slds-icon-text-error">
+                            <lightning-icon icon-name="utility:warning" size="x-small" variant="error"
+                                class="slds-p-bottom_xx-small">
+                            </lightning-icon>
+                            {Labels.MSG_Prompt_PT_Deletion}
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" onclick={closeeditContract}
+                            title={Labels.Cancel}>{Labels.Cancel}</button>
+                        <button class="slds-button slds-button_brand" onclick={confirmeditContract}
+                            title={Labels.OK}>{Labels.OK}</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <template if:true={isRevalidatePTOpen}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeeditContract}>
+                            <lightning-icon icon-name="utility:close" variant="inverse" size="small">
+                            </lightning-icon>
+                        </button>
+                        <h2 class="slds-text-heading_medium slds-hyphenate">
+                            {contract.Name}
+                        </h2>
+                        <h2 class="slds-text-heading_label-normal slds-hyphenate">
+                            {Labels.LBL_Update_Contract_BDate}
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" style="overflow: unset;">
+                        <lightning-formatted-text
+                            value={Labels.MSG_Revalidate_PT_Confirmation}></lightning-formatted-text>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" onclick={closerevalidatept}
+                            title={Labels.Cancel}>{Labels.LBL_No}</button>
+                        <button class="slds-button slds-button_brand" onclick={confirmrevalidatept}
+                            title={Labels.OK}>{Labels.LBL_Yes}</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <template if:true={isDeleteContractOpen}>
+            <div class="demo-only" style="height:24rem">
+                <section role="dialog" tabindex="0" aria-modal="true"
+                    class="slds-modal slds-fade-in-open slds-modal_prompt">
+                    <div class="slds-modal__container">
+                        <div class="slds-modal__header slds-theme_error slds-theme_alert-texture">
+                            <h1 class="slds-text-heading_medium">Delete Contract</h1>
+                        </div>
+                        <div class="slds-modal__content slds-p-around_medium">
+                            <p>are you sure you want to delete {contract.Name}</p>
+                        </div>
+                        <div class="slds-modal__footer slds-theme_default">
+                            <button class="slds-button slds-button_neutral" onclick={closeDeletePopup}
+                                title={Labels.Cancel}>{Labels.Cancel}</button>
+                            <button class="slds-button slds-button_brand" onclick={confirmDeletePopup}
+                                title={Labels.OK}>{Labels.OK}</button>
+                        </div>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+            </div>
+        </template>
+        <template if:true={confirmSetOnTop}>
+            <div class="demo-only" style="height:24rem">
+                <section role="dialog" tabindex="0" aria-modal="true"
+                    class="slds-modal slds-fade-in-open slds-modal_prompt">
+                    <div class="slds-modal__container">
+                        <div class="slds-modal__header slds-theme_error slds-theme_alert-texture">
+                            <h1 class="slds-text-heading_medium">{Labels.LBL_Is_OnTop_Simulation}</h1>
+                        </div>
+                        <div class="slds-modal__content slds-p-around_medium">
+                            <div>{Labels.MSG_Confirm_set_simulation_on_top}</div>
+                            <div if:true={showOnTopMessage}>
+                                {Labels.MSG_Dates_different_with_old_top_simulation}</div>
+                            <div if:true={showPTMessage}
+                                class="slds-text-color_error slds-text-title_bold slds-icon-text-error">
+                                <lightning-icon icon-name="utility:warning" size="x-small" variant="error"
+                                    class="slds-p-bottom_xx-small">
+                                </lightning-icon>
+                                {Labels.MSG_Prompt_PT_Deletion}
+                            </div>
+                        </div>
+                        <div class="slds-modal__footer slds-theme_default">
+                            <button class="slds-button slds-button_neutral" onclick={cancelSetOnTop}
+                                title={Labels.Cancel}>{Labels.Cancel}</button>
+                            <button class="slds-button slds-button_brand" onclick={setOnTop}
+                                title={Labels.OK}>{Labels.OK}</button>
+                        </div>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+            </div>
+        </template>
+        <lightning-spinner variant="brand" size="large" if:true={Loading}></lightning-spinner>
+    </div>
+</template>

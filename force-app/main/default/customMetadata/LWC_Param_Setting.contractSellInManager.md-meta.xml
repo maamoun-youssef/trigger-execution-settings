@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>contractSellInManager</label>
+    <protected>false</protected>
+    <values>
+        <field>Configuration__c</field>
+        <value xsi:type="xsd:string">[{&quot;name&quot;: &quot;displayAsScopedView&quot;, &quot;label&quot;: &quot;display as scoped view&quot;, &quot;type&quot;: &quot;Boolean&quot;, &quot;datasource&quot;: null, &quot;defaultValue&quot;: &quot;true&quot;, &quot;description&quot;: null, &quot;required&quot;: &quot;true&quot;}, {&quot;name&quot;: &quot;recordId&quot;, &quot;label&quot;: &quot;recordId&quot;, &quot;type&quot;: &quot;string&quot;, &quot;datasource&quot;: null, &quot;defaultValue&quot;: null, &quot;description&quot;: null, &quot;required&quot;: null}]</value>
+    </values>
+</CustomMetadata>

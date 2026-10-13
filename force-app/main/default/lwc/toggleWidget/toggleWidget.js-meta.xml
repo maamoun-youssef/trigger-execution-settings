@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>negOptim Toggle Widget</masterLabel>
+    <description>A component to toggle values on boolean fields in a record page.</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="title" type="String" label="Title:"/>
+            <property name="description" type="String" label="Description:"/>
+            <property name="descriptionPosition" type="String" label="Description Position:" datasource="Top, Bottom" default="Top"/>
+            <property name="layout" type="String" label="Layout:" datasource="Vertical, Horizontal" default="Vertical" required="true"/>
+            <property name="bgColor" placeholder="#AABBCC or blue" type="String" label="Background color:"/>
+            <property name="field1" type="String" label="Field Name 1:" datasource="apex://FieldsDatasource" required="true" default=""/>
+            <property name="showConfirmMsg1" type="Boolean" label="Show confirmation message 1:" description="Show prompt to confirm user actions on field 1"/>
+            <property name="messageToggleActive1" type="String" label="Message on toggle active 1:"/>
+            <property name="messageToggleInactive1" type="String" label="Message on toggle inactive 1:"/>
+            <property name="borderColor1" placeholder="#AABBCC or blue" type="String" label="Field border color 1:"/>
+            <property name="backgroundColor1" placeholder="#AABBCC or blue" type="String" label="Field background color 1:"/>
+            <property name="field2" type="String" label="Field Name 2:" datasource="apex://FieldsDatasource"/>
+            <property name="showConfirmMsg2" type="Boolean" label="Show confirmation message 2:" description="Show prompt to confirm user actions on field 2"/>
+            <property name="messageToggleActive2" type="String" label="Message on toggle active 2:"/>
+            <property name="messageToggleInactive2" type="String" label="Message on toggle inactive 2:"/>
+            <property name="borderColor2" placeholder="#AABBCC or blue" type="String" label="Field border color 2:"/>
+            <property name="backgroundColor2" placeholder="#AABBCC or blue" type="String" label="Field background color 2:"/>
+            <property name="field3" type="String" label="Field Name 3:" datasource="apex://FieldsDatasource"/>
+            <property name="showConfirmMsg3" type="Boolean" label="Show confirmation message 3:" description="Show prompt to confirm user actions on field 3"/>
+            <property name="messageToggleActive3" type="String" label="Message on toggle active 3:"/>
+            <property name="messageToggleInactive3" type="String" label="Message on toggle inactive 3:"/>
+            <property name="borderColor3" placeholder="#AABBCC or blue" type="String" label="Field border color 3:"/>
+            <property name="backgroundColor3" placeholder="#AABBCC or blue" type="String" label="Field background color 3:"/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" type="String" label="Record ID" description="Should be set to {!recordId}" default="{!recordId}"/>
+            <property name="title" type="String" label="Title:"/>
+            <property name="description" type="String" label="Description:"/>
+            <property name="descriptionPosition" type="String" label="Description Position:" datasource="Top, Bottom" default="Top"/>
+            <property name="layout" type="String" label="Layout:" datasource="Vertical, Horizontal" default="Vertical" required="true"/>
+            <property name="bgColor" type="color" label="Background color:"/>
+            <property name="field1" type="String" label="Field Name 1:" datasource="apex://FieldsDatasource" required="true" default=""/>
+            <property name="showConfirmMsg1" type="Boolean" label="Show confirmation message 1:" description="Show prompt to confirm user actions on field 1"/>
+            <property name="messageToggleActive1" type="String" label="Message on toggle active 1:"/>
+            <property name="messageToggleInactive1" type="String" label="Message on toggle inactive 1:"/>
+            <property name="borderColor1" type="color" label="Field border color 1:"/>
+            <property name="backgroundColor1" type="color" label="Field background color 1:"/>
+            <property name="field2" type="String" label="Field Name 2:" datasource="apex://FieldsDatasource"/>
+            <property name="showConfirmMsg2" type="Boolean" label="Show confirmation message 2:" description="Show prompt to confirm user actions on field 2"/>
+            <property name="messageToggleActive2" type="String" label="Message on toggle active 2:"/>
+            <property name="messageToggleInactive2" type="String" label="Message on toggle inactive 2:"/>
+            <property name="borderColor2" type="color" label="Field border color 2:"/>
+            <property name="backgroundColor2" type="color" label="Field background color 2:"/>
+            <property name="field3" type="String" label="Field Name 3:" datasource="apex://FieldsDatasource"/>
+            <property name="showConfirmMsg3" type="Boolean" label="Show confirmation message 3:" description="Show prompt to confirm user actions on field 3"/>
+            <property name="messageToggleActive3" type="String" label="Message on toggle active 3:"/>
+            <property name="messageToggleInactive3" type="String" label="Message on toggle inactive 3:"/>
+            <property name="borderColor3" type="color" label="Field border color 3:"/>
+            <property name="backgroundColor3" type="color" label="Field background color 3:"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

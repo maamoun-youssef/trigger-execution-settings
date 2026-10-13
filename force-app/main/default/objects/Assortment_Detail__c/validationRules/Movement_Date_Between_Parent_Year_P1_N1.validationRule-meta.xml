@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Movement_Date_Between_Parent_Year_P1_N1</fullName>
+    <active>true</active>
+    <description>Assortment Detail Movement Date should be between the assortment previous year and next year.</description>
+    <errorConditionFormula>OR(YEAR(Movement_Date__c) &lt; Assortment_BU__r.Year__c - 1, YEAR(Movement_Date__c) &gt;  Assortment_BU__r.Year__c + 1)</errorConditionFormula>
+    <errorDisplayField>Movement_Date__c</errorDisplayField>
+    <errorMessage>Movement Date should be between the Assortment &quot;Year - 1&quot; and &quot;Year + 1&quot;</errorMessage>
+</ValidationRule>

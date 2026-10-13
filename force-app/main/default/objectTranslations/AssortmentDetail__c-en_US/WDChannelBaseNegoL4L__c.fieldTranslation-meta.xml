@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Calculated only when Weighted Distribution Manual N+1 is filled at Cluster level and the ASD Status is Validated.</help>
+    <label>WD Channel Nego L4L</label>
+    <name>WDChannelBaseNegoL4L__c</name>
+</CustomFieldTranslation>

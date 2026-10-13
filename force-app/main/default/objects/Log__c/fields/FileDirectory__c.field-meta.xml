@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FileDirectory__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The FileDirectory__c record holding the .html file attached when TraceLog__c was too long to display in full.</description>
+    <label>File Directory</label>
+    <referenceTo>FileDirectory__c</referenceTo>
+    <relationshipLabel>Logs</relationshipLabel>
+    <relationshipName>Logs</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

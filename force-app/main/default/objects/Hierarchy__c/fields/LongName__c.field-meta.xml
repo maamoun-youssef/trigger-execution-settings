@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LongName__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE( Level__c, 
+0, Name, 
+1, Name, 
+2,  HierarchyParent__r.Name &amp; &apos; - &apos; &amp; Name, 
+3,  HierarchyParent__r.HierarchyParent__r.Name  &amp; &apos; - &apos; &amp; HierarchyParent__r.Name &amp; &apos; - &apos; &amp; Name, 
+4,   HierarchyParent__r.HierarchyParent__r.HierarchyParent__r.Name  &amp; &apos; - &apos; &amp; HierarchyParent__r.HierarchyParent__r.Name  &amp; &apos; - &apos; &amp; HierarchyParent__r.Name &amp; &apos; - &apos; &amp; Name,
+&apos;..&apos; &amp; Name)</formula>
+    <label>Long Name</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

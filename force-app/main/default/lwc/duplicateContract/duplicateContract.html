@@ -1,0 +1,445 @@
+<template>
+    <div class="mainContainer" style="height:100%">
+        <!-- HEADER1 -->
+         <template if:false={displayFromPopup}>
+            <div class="slds-page-header slds-page-header_record-home pageHeader1">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                            <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-partner_fund_claim">
+                                    <lightning-icon icon-name="standard:contract"></lightning-icon>
+                                </span>
+                            </div>
+                            <div class="slds-media__body">
+                                <p class="slds-page-header__name-meta">{labels.LBL_Contract}</p>
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                        <h1>
+                                            <span class="slds-page-header__title slds-truncate">
+                                                {labels.LBL_Duplicate_Contarct}: {sourceContract.Name}
+                                            </span>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-page-header__col-actions">
+                        <div class="slds-page-header__controls">
+                            <div class="slds-page-header__control">
+                                <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                                    <div class="slds-grid" style="position: relative;">
+                                        <lightning-button label={labels.LBL_Cancel} onclick={handleCancel}
+                                            class="slds-p-right_xx-small">
+                                        </lightning-button>
+                                        <lightning-button variant="brand" label={labels.LBL_Save} onclick={handleSave}
+                                            class="slds-p-right_xx-small" disabled={saveDisabled}>
+                                        </lightning-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-page-header__row slds-page-header__row_gutters">
+                    <div class="slds-page-header__col-details">
+                        <ul class="slds-page-header__detail-row">
+                            <li class="slds-page-header__detail-block">
+                                <div class="slds-text-title slds-truncate">
+                                    {labels.LBL_Contract_Supplier_Code}
+                                </div>
+                                <div class="slds-truncate" lwc:if={sourceContract.supplier}>
+                                    {sourceContract.supplierCode}
+                                </div>
+                            </li>
+                            <li class="slds-page-header__detail-block">
+                                <div class="slds-text-title slds-truncate">
+                                    {labels.LBL_Contract_Supplier}</div>
+                                <div class="slds-truncate" lwc:if={sourceContract.supplier}>
+                                    <a href={sourceContract.supplierLink} target="_blank">
+                                        {sourceContract.supplier.Name}
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="slds-page-header__detail-block">
+                                <div class="slds-text-title slds-truncate">
+                                    {labels.LBL_Contract_Status}
+                                </div>
+                                <div class="slds-truncate">
+                                    {sourceContract.status}
+                                </div>
+                            </li>
+                            <!-- <li class="slds-page-header__detail-block">
+                                <div class="slds-text-title slds-truncate">{labels.LBL_Contract_NS}
+                                </div>
+                                <div class="slds-truncate" lwc:if={sourceContract.supplierNS}>
+                                    {sourceContract.supplierNSCode}
+                                </div>
+                            </li> -->
+                            <li class="slds-page-header__detail-block">
+                                <div class="slds-text-title slds-truncate">
+                                    {labels.LBL_Contract_Number}
+                                </div>
+                                <div class="slds-truncate">
+                                    {sourceContract.contractNumber}
+                                </div>
+                            </li>
+                            <li class="slds-page-header__detail-block">
+                                <div class="slds-text-title slds-truncate">
+                                    {labels.LBL_Contract_BU}
+                                </div>
+                                <div class="slds-truncate" lwc:if={sourceContract.contractBU}>
+                                    <a href={sourceContract.contractBuLink} target="_blank">
+                                        {sourceContract.contractBU.Name}
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="slds-page-header__detail-block">
+                                <div class="slds-text-title slds-truncate">
+                                    {labels.LBL_Contract_NS}
+                                </div>
+                                <div class="slds-truncate" lwc:if={sourceContract.supplierNS}>
+                                    <a href={sourceContract.nsLink} target="_blank">
+                                        {sourceContract.supplierNS.Name}
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="slds-page-header__detail-block">
+                                <div class="slds-text-title slds-truncate">
+                                    {labels.LBL_Contract_Commercial_BDate}
+                                </div>
+                                <div class="slds-truncate">
+                                    <lightning-formatted-date-time value={sourceContract.commercialBDate}>
+                                    </lightning-formatted-date-time>
+                                </div>
+                            </li>
+                            <li class="slds-page-header__detail-block">
+                                <div class="slds-text-title slds-truncate">
+                                    {labels.LBL_Contract_Commercial_EDate}
+                                </div>
+                                <div class="slds-truncate">
+                                    <lightning-formatted-date-time value={sourceContract.commercialEDate}>
+                                    </lightning-formatted-date-time>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /HEADER1 -->
+        </template>
+            <lightning-spinner lwc:if={isPageLoading} variant="brand" size="small"></lightning-spinner>
+            <!-- PE And Signed Exist / Signed exists on 1/1/N+1 / no data-->
+        <template lwc:if={hasErrorMessage}>
+            <div class="slds-card pageBody slds-m-top_xx-small" style="text-align: center;">
+                <p class="slds-p-around_large" style="font-size: medium; font-weight: 700;">
+                    {errorMessage}
+                </p>
+            </div>
+        </template>
+        <!-- /PE or Signed Exist -->
+        <template lwc:else>
+            <!-- HEADER2 -->
+            <div class="slds-card slds-grid pageHeader2 slds-m-top_x-small">
+                <lightning-spinner lwc:if={isLoading} variant="brand" size="small"></lightning-spinner>
+                <template lwc:else>
+                    <lightning-combobox class="slds-m-around_x-small" label={labels.LBL_RecordTypeId}
+                        placeholder={labels.LBL_RecordTypeId} value={targetContract.recordTypeDeveloperName}
+                        options={recordTypeOptions} style="width: 250px;" onchange={handleRecordTypeChange}>
+                    </lightning-combobox>
+                    <!-- <template lwc:if={isPeriodExtension}>
+                        <div class="slds-m-around_x-small slds-p-left_large">
+                            <p class="slds-m-bottom_x-small slds-m-top_xxx-small">{labels.LBL_Contract_Commercial_BDate}
+                            </p>
+                            <lightning-formatted-date-time value={targetContract.commercialBDate}>
+                            </lightning-formatted-date-time>
+                        </div>
+                        <lightning-input type="Date" class="slds-m-around_x-small slds-p-left_large" min={minDate}
+                            max={maxDate} style="width: 250px;" value={targetContract.commercialEDate}
+                            placeholder={labels.LBL_Contract_Commercial_EDate} data-field="Contract_Commercial_EDate__c"
+                            label={labels.LBL_Contract_Commercial_EDate} onchange={handleChangeDate}>
+                        </lightning-input>
+                    </template>
+                    <template lwc:elseif={isSigned}>
+                        <lightning-input type="Date" class="slds-m-around_x-small slds-p-left_large" min={minDate}
+                            max={maxDate} style="width: 250px;" placeholder={labels.LBL_Contract_Commercial_BDate}
+                            value={targetContract.commercialBDate} data-field="Contract_Commercial_BDate__c"
+                            label={labels.LBL_Contract_Commercial_BDate} onchange={handleChangeDate}>
+                        </lightning-input>
+                        <div class="slds-m-around_x-small slds-p-left_large">
+                            <p class="slds-m-bottom_small">{labels.LBL_Contract_Commercial_EDate}</p>
+                            <lightning-formatted-date-time value={targetContract.commercialEDate}>
+                            </lightning-formatted-date-time>
+                        </div>
+                    </template> -->
+                    <!-- <template if:true={dateInputsDisplayed}>
+                        <lightning-input type="Date" class="slds-m-around_x-small slds-p-left_large" min={minDate}
+                            max={maxDate} style="width: 250px;" placeholder={labels.LBL_Contract_Commercial_BDate}
+                            value={targetContract.commercialBDate} data-field="Contract_Commercial_BDate__c"
+                            label={labels.LBL_Contract_Commercial_BDate} onchange={handleChangeDate}>
+                        </lightning-input>
+                        <lightning-input type="Date" class="slds-m-around_x-small slds-p-left_large" min={minDate}
+                            max={maxDate} style="width: 250px;" value={targetContract.commercialEDate}
+                            placeholder={labels.LBL_Contract_Commercial_EDate} data-field="Contract_Commercial_EDate__c"
+                            label={labels.LBL_Contract_Commercial_EDate} onchange={handleChangeDate}>
+                        </lightning-input>
+                    </template> -->
+                    <lightning-input type="Date" class="slds-m-around_x-small slds-p-left_large" style="width: 250px;"
+                        placeholder={labels.LBL_Contract_Commercial_BDate} value={targetContract.commercialBDate}
+                        data-field="Contract_Commercial_BDate__c" label={labels.LBL_Contract_Commercial_BDate}
+                        onchange={handleChangeDate}>
+                    </lightning-input>
+                    <lightning-input type="Date" class="slds-m-around_x-small slds-p-left_large" style="width: 250px;"
+                        value={targetContract.commercialEDate} placeholder={labels.LBL_Contract_Commercial_EDate}
+                        data-field="Contract_Commercial_EDate__c" label={labels.LBL_Contract_Commercial_EDate}
+                        onchange={handleChangeDate}>
+                    </lightning-input>
+                </template>
+            </div>
+            <!-- /HEADER2 -->
+            <!-- TABLES -->
+            <div class="slds-card slds-grid pageBody">
+                <lightning-spinner lwc:if={isLoading} variant="brand" size="small"></lightning-spinner>
+                <!-- <div lwc:elseif={isAlreadyExist} style="text-align: center; width: 100%">
+                    <p class="slds-p-around_large" style="font-size: medium; font-weight: 700;">
+                        <template if:true={signedExist}>{labels.MSG_Signed_Exist}</template>
+                        <template if:true={peExist}>{labels.MSG_PE_Exist}</template>
+                        <template if:true={toBeSignedExist}>{labels.MSG_To_Be_Signed_Exist}</template>
+                        <template if:true={objectiveExist}>{labels.MSG_Objective_Exist}</template>
+                        {errorMessage}
+                    </p>
+                </div> -->
+                <template lwc:else>
+                    <!-- TABLE1 -->
+                    <div style="width: 50%;" class="slds-box slds-m-around_x-small slds-scrollable slds-p-around_none">
+                        <table class="slds-table slds-no-row-hover">
+                            <thead style="position: sticky; z-index: 3; top: 0;">
+                                <tr class="slds-border_bottom">
+                                    <th>
+                                        {labels.LBL_Condition_Type}
+                                    </th>
+                                    <th></th>
+                                    <th>
+                                        {labels.LBL_Condition_Bdate}
+                                    </th>
+                                    <th>
+                                        {labels.LBL_Condition_Edate}
+                                    </th>
+                                    <th>
+                                        {labels.LBL_Condition_Percent}
+                                    </th>
+                                    <th>
+                                        {labels.LBL_Condition_Amount}
+                                    </th>
+                                    <th>
+                                        {labels.LBL_Condition_Unit_Amount}
+                                    </th>
+                                    <th>
+                                        {labels.LBL_Condition_Unit_Amount_Type}
+                                    </th>
+                                    <th>
+                                        {labels.LBL_Condition_BU}
+                                    </th>
+                                    <th>
+                                        {labels.LBL_Condition_NS}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={sourceContractDiscountsList} for:item="disc" for:index="index">
+                                    <tr lwc:if={disc} key={disc.Id} class="slds-border_bottom">
+                                        <td>
+                                            <div lwc:if={disc.conditionType}>
+                                                <a href={disc.conditionLink} target="_blank">
+                                                    {disc.conditionType.Name}
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <lightning-icon lwc:if={disc.isPromoDisc} class="slds-m-left_x-small"
+                                                icon-name="standard:product" size="x-small"
+                                                title={disc.captureProductLevelMessage}>
+                                            </lightning-icon>
+                                        </td>
+                                        <td>
+                                            <lightning-formatted-date-time value={disc.discBDate}>
+                                            </lightning-formatted-date-time>
+                                        </td>
+                                        <td>
+                                            <lightning-formatted-date-time value={disc.discEDate}>
+                                            </lightning-formatted-date-time>
+                                        </td>
+                                        <td>
+                                            <lightning-formatted-number format-style="decimal" value={disc.percent}
+                                                maximum-fraction-digits={discountPercentScale}
+                                                minimum-fraction-digits={discountPercentScale}>
+                                            </lightning-formatted-number>
+                                        </td>
+                                        <td>
+                                            <lightning-formatted-number format-style="decimal" value={disc.valueAmount}
+                                                maximum-fraction-digits="2" minimum-fraction-digits="2">
+                                            </lightning-formatted-number>
+                                        </td>
+                                        <td>
+                                            <lightning-formatted-number format-style="decimal" value={disc.unitAmount}
+                                                maximum-fraction-digits="4" minimum-fraction-digits="4">
+                                            </lightning-formatted-number>
+                                        </td>
+                                        <td>
+                                            {disc.unitAmountType}
+                                        </td>
+                                        <td>
+                                            <div lwc:if={disc.buScope}>
+                                                <a href={disc.buLink} target="_blank">
+                                                    {disc.buScope.Name}
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div lwc:if={disc.productScope}>
+                                                <a href={disc.nsLink} target="_blank">
+                                                    {disc.productScope.Name}
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /TABLE1 -->
+                    <!-- TABLE2 -->
+                    <div style="width: 50%;" class="slds-box slds-m-around_x-small slds-scrollable slds-p-around_none">
+                        <lightning-spinner lwc:if={isTable2Loading} variant="brand" size="small"></lightning-spinner>
+                        <table class="slds-table slds-no-row-hover">
+                            <thead style="position: sticky; z-index: 3; top: 0;">
+                                <tr class="slds-border_bottom">
+                                    <th>
+                                        {labels.LBL_Condition_Type}
+                                    </th>
+                                    <th></th>
+                                    <th>
+                                        {labels.LBL_Condition_Bdate}
+                                    </th>
+                                    <th>
+                                        {labels.LBL_Condition_Edate}
+                                    </th>
+                                    <th>
+                                        {labels.LBL_Condition_Percent}
+                                    </th>
+                                    <th>
+                                        {labels.LBL_Condition_Amount}
+                                    </th>
+                                    <th>
+                                        {labels.LBL_Condition_Unit_Amount}
+                                    </th>
+                                    <th>
+                                        {labels.LBL_Condition_Unit_Amount_Type}
+                                    </th>
+                                    <th>
+                                        {labels.LBL_Condition_BU}
+                                    </th>
+                                    <th>
+                                        {labels.LBL_Condition_NS}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={targetContractDiscountsList} for:item="disc" for:index="index">
+                                    <template lwc:if={disc}>
+                                        <tr lwc:if={disc.isDuplicable} key={disc.Id} class="slds-border_bottom">
+                                            <td>
+                                                <div lwc:if={disc.conditionType}>
+                                                    <a href={disc.conditionLink} target="_blank">
+                                                        {disc.conditionType.Name}
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <lightning-icon lwc:if={disc.isPromoDisc} class="slds-m-left_x-small"
+                                                    icon-name="standard:product" size="x-small"
+                                                    title={disc.captureProductLevelMessage}>
+                                                </lightning-icon>
+                                            </td>
+                                            <td>
+                                                <lightning-formatted-date-time value={disc.discBDate}>
+                                                </lightning-formatted-date-time>
+                                            </td>
+                                            <td>
+                                                <lightning-formatted-date-time value={disc.discEDate}>
+                                                </lightning-formatted-date-time>
+                                            </td>
+                                            <td>
+                                                <lightning-formatted-number format-style="decimal" value={disc.percent}
+                                                    maximum-fraction-digits={discountPercentScale}
+                                                    minimum-fraction-digits={discountPercentScale}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td>
+                                                <lightning-formatted-number format-style="decimal"
+                                                    value={disc.valueAmount} maximum-fraction-digits="2"
+                                                    minimum-fraction-digits="2">
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td>
+                                                <lightning-formatted-number format-style="decimal"
+                                                    value={disc.unitAmount} maximum-fraction-digits="4"
+                                                    minimum-fraction-digits="4">
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td>
+                                                {disc.unitAmountType}
+                                            </td>
+                                            <td>
+                                                <div lwc:if={disc.buScope}>
+                                                    <a href={disc.buLink} target="_blank">
+                                                        {disc.buScope.Name}
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div lwc:if={disc.productScope}>
+                                                    <a href={disc.nsLink} target="_blank">
+                                                        {disc.productScope.Name}
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr lwc:else key={disc.Id}>
+                                            <td colspan="10" class="hatched-background">
+                                                <lightning-helptext content={disc.message} if:true={disc.message}>
+                                                </lightning-helptext>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /TABLE2 -->
+                </template>
+            </div>
+            <!-- /TABLES -->
+        </template>
+    </div>
+    <!-- Progress popup (matches Condition Manager / Negotiate) -->
+    <div if:true={savePopUp}>
+        <div role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small"
+            aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-modal__title slds-hyphenate">
+                        {currentStatusMSG}
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-var-p-around_medium slds-is-relative">
+                    <div class="slds-p-around_large">
+                        <lightning-spinner alternative-text="Loading" variant="brand"></lightning-spinner>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+</template>

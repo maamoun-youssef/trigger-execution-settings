@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validation_Date__c</fullName>
+    <description>Give the last validation date for the row (1st validation &amp; next update validation)</description>
+    <inlineHelpText>Donne la dernière date de validation (1ère et prochaine maj)</inlineHelpText>
+    <label>Validation Date</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

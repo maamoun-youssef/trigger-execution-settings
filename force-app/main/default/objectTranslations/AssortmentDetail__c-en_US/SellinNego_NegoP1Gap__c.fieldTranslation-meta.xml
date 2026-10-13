@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Sellin Nego Gap N/N-1</label>
+    <name>SellinNego_NegoP1Gap__c</name>
+</CustomFieldTranslation>

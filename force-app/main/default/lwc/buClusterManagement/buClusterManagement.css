@@ -1,0 +1,157 @@
+.head-td-Style {
+    background-color: #808080;
+    color: white;
+    font-weight: bold;
+}
+
+.white-icon {
+    --slds-c-icon-color-foreground: white !important;
+    --slds-c-icon-color-foreground-default: white !important;
+}
+
+.name-link a:link {
+    color: green;
+}
+
+.name-link a:hover {
+    color: green;
+}
+
+.name-link a:active {
+    color: green;
+}
+
+.name-link a:visited {
+    color: green;
+}
+
+.link a:link {
+    color: white;
+}
+
+.link a:hover {
+    color: white;
+}
+
+.link a:active {
+    color: white;
+}
+
+.link a:visited {
+    color: white;
+}
+
+.slds-table th,
+.slds-table td {
+    white-space: pre-wrap;
+}
+
+.main-th {
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
+}
+
+.number-th {
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+    text-align: center;
+}
+
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+.SOSHeaderStyle {
+    background-color: #f1a983;
+    color: white;
+    border-left: 2px solid black;
+    border-top: 2px solid black;
+}
+
+.WDHeaderStyle {
+    background-color: #b5e6a2;
+    color: white;
+    border-left: 2px solid black;
+    border-top: 2px solid black;
+}
+
+.WDInnoRiseHeaderStyle {
+    background-color: #f2ceef;
+    color: white;
+    border-left: 2px solid black;
+    border-top: 2px solid black;
+}
+
+.WDSwitchRiseHeaderStyle {
+    background-color: #f2ceef;
+    color: white;
+    border-left: 2px solid black;
+    border-top: 2px solid black;
+}
+
+.WDStopRiseHeaderStyle {
+    background-color: #f2ceef;
+    color: white;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-top: 2px solid black;
+}
+
+.borderSeparatorRight {
+    border-right: 2px solid black;
+}
+
+.borderSeparatorLeft {
+    border-left: 2px solid black;
+}
+select {
+display:block;
+position:relative;
+/* font-family:monospace; */
+border-radius:0.25rem;
+cursor: pointer;
+background-size: 12px;
+padding: 0.4rem;
+border-radius: 4px;
+z-index: 2;
+width: 100%;
+min-width: 100%;
+max-width: 100%;
+}

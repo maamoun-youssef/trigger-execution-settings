@@ -1,0 +1,4 @@
+.custom_slds-grid_align-start,
+.slds-grid--align-start {
+  justify-content: flex-start;
+}

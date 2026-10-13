@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <masterLabel>negOptim Image Viewer</masterLabel>
+    <capabilities>
+        <capability>lightning__dynamicComponent</capability>
+    </capabilities>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="logo" type="String" label="Logo"
+                description="Name of the Static Resource or ContentAsset" />
+            <!-- <property name="resourceType" type="String" label="Resource Type (Auto-detect if
+            empty)" description="Leave empty for auto-detection, or specify: StaticResource or
+            ContentAsset" default="" datasource="ContentAsset,StaticResource,"/> -->
+            <property name="width" type="String" label="Width"
+                description="Width of the image if the unit is not specified, px is used by default"
+                default="100" />
+            <property name="height" type="String" label="Height"
+                description="Height of the image if the unit is not specified, px is used by default"
+                default="100" />
+            <property name="alignment" type="String" label="Alignment"
+                description="Image alignment: left, center, or right" default="center"
+                datasource="left,center,right" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

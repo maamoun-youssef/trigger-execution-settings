@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SellIn__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>SellIn</label>
+    <referenceTo>SellIn__c</referenceTo>
+    <relationshipName>SIDSellIn</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

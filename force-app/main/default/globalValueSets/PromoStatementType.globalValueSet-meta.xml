@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>SellIn</fullName>
+        <default>false</default>
+        <label>Sell In</label>
+    </customValue>
+    <customValue>
+        <fullName>SellOut</fullName>
+        <default>false</default>
+        <label>Sell Out</label>
+    </customValue>
+    <customValue>
+        <fullName>Services</fullName>
+        <default>false</default>
+        <label>Services</label>
+    </customValue>
+    <masterLabel>Promo Statement Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

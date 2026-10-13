@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- The condition shound not participate to the master index calculation --></help>
+    <label><!-- Is Excluded From MasterIndex Calcl --></label>
+    <name>Is_Excluded_From_MasterIndex_Calcl__c</name>
+</CustomFieldTranslation>

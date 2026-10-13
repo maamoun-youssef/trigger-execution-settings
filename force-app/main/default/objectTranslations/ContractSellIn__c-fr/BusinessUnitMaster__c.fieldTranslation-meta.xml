@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Business Unit Master --></label>
+    <name>BusinessUnitMaster__c</name>
+    <relationshipLabel><!-- Contract Sell In (Business Unit Master) --></relationshipLabel>
+</CustomFieldTranslation>

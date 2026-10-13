@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pol_Com_ConditionServices__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Services Pol Com Condition</label>
+    <referenceTo>Pol_Com_Condition__c</referenceTo>
+    <relationshipLabel>Product Discount Statement Details (Services Pol Com Condition)</relationshipLabel>
+    <relationshipName>PDSDPol_Com_ConditionServices</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

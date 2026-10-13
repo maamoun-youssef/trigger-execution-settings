@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>j</label>
+    <protected>false</protected>
+    <values>
+        <field>DisplayOrder__c</field>
+        <value xsi:type="xsd:double">1.0</value>
+    </values>
+    <values>
+        <field>IsDeleted__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>SectionColor__c</field>
+        <value xsi:type="xsd:string">#7C1010</value>
+    </values>
+    <values>
+        <field>SectionIcon__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>SectionSubTitle__c</field>
+        <value xsi:type="xsd:string">janaaa</value>
+    </values>
+    <values>
+        <field>SectionTitle__c</field>
+        <value xsi:type="xsd:string">janaaaa</value>
+    </values>
+    <values>
+        <field>ThemesSettings__c</field>
+        <value xsi:type="xsd:string">[{&quot;themeLabel&quot;:null,&quot;theme&quot;:&quot;jana&quot;,&quot;smallThemeImage&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH000005wuWoYAI&quot;,&quot;relatedSection&quot;:&quot;janaaaa&quot;,&quot;largeThemeImage&quot;:null,&quot;isPortalDisplayed&quot;:false,&quot;isDisplayed&quot;:true,&quot;gridSettingsName&quot;:&quot;Contract_Documents_Grid&quot;}]</value>
+    </values>
+</CustomMetadata>

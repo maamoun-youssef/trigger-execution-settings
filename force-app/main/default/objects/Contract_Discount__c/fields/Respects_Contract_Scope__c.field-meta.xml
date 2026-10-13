@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Respects_Contract_Scope__c</fullName>
+    <description>Check if gap exists between the contract scope and the condition scope (BU, Products, Dates).</description>
+    <formula>If( AND(Product_Scope__c =  Contract__r.Supplier_Nego_Scope__c,  
+        BusinessUnitScope__c =  Contract__r.BusinessUnitContract__c,
+        Disc_BDate__c = Contract__r.Contract_BDate__c,
+        Disc_EDate__c = Contract__r.Contract_EDate__c,
+        OR(unit_amount__c = 0, AND(unit_amount__c &lt;&gt; 0, OR(TEXT(Unit_Amount_Type__c) = &apos;Piece&apos;, TEXT(Unit_Amount_Type__c) = &apos;UC&apos;)))) , True, False)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Précise si la condition suit le scope du contrat ou un scope spécifique</inlineHelpText>
+    <label>Respects Contract Scope</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

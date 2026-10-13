@@ -1,0 +1,359 @@
+<template>
+    <template if:true={loading}>
+        <div class="slds-spinner_container">
+            <div class="loader slds-spinner_container slds-align--absolute-center">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </template>
+    <template if:true={isEmailPopup}>
+        <div class="slds-backdrop slds-backdrop_open" style="z-index: 100">
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <div class="slds-modal__header">
+                        <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate">
+                            {labels.Email_Form}
+                        </h1>
+                    </div>
+                    <div class="slds-modal__content slds-text-align_center slds-p-around_x-small"
+                        id="modal-content-id-4">
+                        <div class="slds-modal__content slds-text-align_center slds-p-around_x-small"
+                            id="modal-content-id-2">
+                            <div class="slds-form">
+                                <div class="slds-text-align_left">
+                                    <label
+                                        class="slds-form-element__label slds-text-align_left">{labels.EmailTo}</label>
+                                </div>
+                                <lightning-input label={labels.EmailTo} variant="label-hidden" data-field="to"
+                                    onchange={handleChangeEmail}></lightning-input>
+                                <div class="slds-text-align_left">
+                                    <label
+                                        class="slds-form-element__label slds-text-align_left">{labels.emailCc}</label>
+                                </div>
+                                <lightning-input variant="label-hidden" data-field="cc"
+                                    onchange={handleChangeEmail}></lightning-input>
+                                <div class="slds-text-align_left">
+                                    <label
+                                        class="slds-form-element__label slds-text-align_left">{labels.emailBcc}</label>
+                                </div>
+                                <lightning-input variant="label-hidden" data-field="bcc"
+                                    onchange={handleChangeEmail}></lightning-input>
+                                <div class="slds-text-align_left">
+                                    <label
+                                        class="slds-form-element__label slds-text-align_left">{labels.Subject}</label>
+                                </div>
+                                <lightning-input variant="label-hidden" data-field="subject"
+                                    onchange={handleChangeEmail}></lightning-input>
+
+                                <div class="slds-text-align_left">
+                                    <label
+                                        class="slds-form-element__label slds-text-align_left">{labels.Email_Body}</label>
+                                </div>
+                                <lightning-textarea variant="label-hidden" data-field="body"
+                                    onchange={handleChangeEmail}></lightning-textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <lightning-button label={labels.LBL_Cancel} variant="neutral" onclick={closeModal}
+                            class="slds-m-right_x-small"></lightning-button>
+                        <lightning-button label={labels.Send} variant="brand" onclick={handleSend}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </template>
+    <div class="mainContainer slds-card">
+        <template if:false={loading}>
+            <div class="FilterRow slds-grid slds-grid_align-spread slds-p-around_xx-small" style="height:50px">
+                <div class="slds-col">
+                    <div class="slds-grid slds-grid_align-spread">
+                        <div class="slds-col slds-border_top slds-border_left slds-border_bottom slds-p-left_xx-small"
+                            style="background-color:#fce4d6;height:32px">
+                            <label class="slds-form-element__label" style="color:#6a8358">{labels.Year}</label>
+                        </div>
+                        <div class="slds-col ">
+                            <c-neg-optim-custom-picklist selected-values={stringifiedSelectedYears} options={yearsOptions}
+                                selected-event={Events.handleChangeMultiPicklistValues} data-field="year" 
+                                data-filter-name="year" onhandlechangemultipicklistvalues={filterTable}>
+                            </c-neg-optim-custom-picklist>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-col">
+                    <div class="slds-grid slds-grid_align-spread">
+                        <div class="slds-col slds-border_top slds-border_left slds-border_bottom slds-p-left_xx-small"
+                            style="background-color:#fce4d6;height:32px">
+                            <label class="slds-form-element__label" style="color:#6a8358;">{labels.BUTarget}
+                            </label>
+                        </div>
+                        <div class="slds-col">
+                            <c-neg-optim-custom-lookup object-name={orgaBUObject} data-field="buTarget" filter-token={buTargetFilterToken}
+                                field-name="Name" is-multi="false" icon-name="" selected-event={Events.selectbutarget}
+                                data-isdecimal="false" onselectbutarget={filterTable} search-fields={searchBUfields}>
+                            </c-neg-optim-custom-lookup>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-col">
+                    <div class="slds-grid slds-grid_align-spread">
+                        <div class="slds-col slds-border_top slds-border_left slds-border_bottom slds-p-left_xx-small"
+                            style="background-color:#fce4d6;height:32px">
+                            <label class="slds-form-element__label " style="color:#6a8358">{labels.BUSource}</label>
+                        </div>
+                        <div class="slds-col">
+                            <c-neg-optim-custom-lookup object-name={orgaBUObject} data-field="buSource" filter-token={buSourceFilterToken}
+                                field-name="Name" is-multi="false" icon-name="" selected-event={Events.selectbusource}
+                                data-isdecimal="false" onselectbusource={filterTable} search-fields={searchBUfields}>
+                            </c-neg-optim-custom-lookup>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-col">
+                    <div class="slds-grid slds-grid_align-spread">
+                        <div class="slds-col slds-border_top slds-border_left slds-border_bottom slds-p-left_xx-small"
+                            style="background-color:#fce4d6;height:32px">
+                            <label class="slds-form-element__label" style="color:#6a8358;">{labels.Hierarchy}
+                            </label>
+                        </div>
+                        <div class="slds-col">
+                            <c-neg-optim-custom-lookup object-name={HierarchyObject} data-field="hierarchy" filter-token={hierarchyFilterToken}
+                                field-name="Name" is-multi="false" icon-name="" selected-event={Events.selecthierarchy}
+                                data-isdecimal="false" onselecthierarchy={filterTable}
+                                search-fields={searchHierarchyfields}>
+                            </c-neg-optim-custom-lookup>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-col">
+                    <div class="slds-grid slds-grid_align-spread">
+                        <div class="slds-col slds-border_top slds-border_left slds-border_bottom slds-p-left_xx-small"
+                            style="background-color:#fce4d6;height:32px">
+                            <label class="slds-form-element__label"
+                                style="color:#6a8358">{labels.LBL_Record_Type}</label>
+                        </div>
+                        <div class="slds-col">
+                            <c-neg-optim-custom-picklist data-name="recordTypes"
+                                selected-values={stringifiedSelectedRecordType} options={recordTypesOptions}
+                                selected-event={Events.handleChangeMultiRT} data-field="recordTypes"
+                                onhandlechangemultirt={handleChangeMultiRT}>
+                            </c-neg-optim-custom-picklist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <template if:true={tableLoading}>
+                <div class="slds-spinner_container">
+                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </template>
+            <template if:false={tableLoading}>
+                <div class="TableDiv slds-scrollable">
+                    <table
+                        class="slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border_right slds-no-row-hover">
+                        <thead style="position: sticky; top: 0px; z-index: 5;">
+                            <tr style="height: 65px;">
+                                <!-- style="height: 50px;" -->
+                                <template for:each={displayedFields} for:item="field">
+                                    <template if:false={field.isSkip}>
+                                        <template if:true={field.isSortable}>
+                                            <th class="sticky-header limited-cell" scope="col" key={field.fieldName}
+                                                data-field={field.fieldName} onclick={handleChangeSortField}>
+                                                {field.fieldLabel}
+                                                <template if:true={field.sortedField}>
+                                                    <lightning-icon icon-name="utility:arrowdown" size="xx-small"
+                                                        class="sortSelected-icon slds-m-left--xxx-small"
+                                                        data-field={field.fieldName} if:false={isSortASC}>
+                                                    </lightning-icon>
+                                                    <lightning-icon icon-name="utility:arrowup" size="xx-small"
+                                                        class="sortSelected-icon slds-m-left--xxx-small"
+                                                        data-field={field.fieldName} if:true={isSortASC}>
+                                                    </lightning-icon>
+                                                </template>
+                                                <template if:false={field.sortedField}>
+                                                    <lightning-icon icon-name="utility:arrowup" size="xx-small"
+                                                        class="white-icon slds-m-left--xxx-small"
+                                                        data-field={field.fieldName}>
+                                                    </lightning-icon>
+                                                </template>
+                                            </th>
+                                        </template>
+                                        <template if:false={field.isSortable}>
+                                            <th class="sticky-header limited-cell" scope="col" key={field.fieldName}>
+                                                {field.fieldLabel}
+                                            </th>
+                                        </template>
+                                        <template if:true={field.isNameField}>
+                                            <th class="sticky-header slds-border_left" scope="col"
+                                                key={field.fieldName}>
+                                            </th>
+                                            <th class="sticky-header slds-border_left ontopCell" scope="col"
+                                                key={field.fieldName}>
+                                                {labels.isOnTop} + {labels.isBreakingScenario}
+                                            </th>
+                                        </template>
+                                    </template>
+                                </template>
+                                <th class="sticky-header slds-border_left slds-align-bottom"
+                                    style="background-color: #267a7c;text-align: center;MIN-WIDTH: 60PX !IMPORTANT;color: #ffffff"
+                                    scope="col">
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template if:false={records.length}>
+                                <tr>
+                                    <td class="slds-text-align_center slds-text-color_error slds-text-heading_small"
+                                        colspan={colspan}>
+                                        {labels.LBL_No_Item_To_Display}</td>
+                                </tr>
+                            </template>
+                            <template if:true={records.length}>
+                                <template for:each={records} for:item="assortment">
+                                    <tr key={assortment.assortmentId}>
+                                        <template for:each={assortment.values} for:item="field">
+                                            <td key={field} style={field.style}>
+                                                <template if:true={field.isBoolean}>
+                                                    <lightning-input type="checkbox" value={field.fieldValue}
+                                                        checked={field.fieldValue} disabled>
+                                                    </lightning-input>
+                                                </template>
+                                                <template if:true={field.isText}>
+                                                    <template if:true={field.isHTMLFormatted}>
+                                                        <lightning-formatted-rich-text
+                                                            value={field.fieldValue}></lightning-formatted-rich-text>
+                                                    </template>
+                                                    <template if:false={field.isHTMLFormatted}>
+                                                        {field.fieldValue}
+                                                    </template>
+                                                </template>
+                                                <template if:true={field.isPicklist}>
+                                                    {field.fieldValue}
+                                                </template>
+                                                <template if:true={field.isNameField}>
+                                                    <a href={field.link} target="_blank">
+                                                        {field.fieldValue}
+                                                    </a>
+                                                </template>
+                                                <template if:true={field.isOntopandBreaking}>
+                                                    <div class="slds-align_absolute-center">
+                                                        <div if:true={field.isOnTop}
+                                                            class="slds-m-top--xx-small slds-m-left--xx-small">
+                                                            <lightning-icon icon-name="utility:trail" size="small"
+                                                                class="my-icon round-icon">
+                                                            </lightning-icon>
+                                                        </div>
+                                                        <div if:true={field.isBreakingScenario}
+                                                            class="slds-m-top--xx-small slds-m-left--xx-small">
+                                                            <lightning-icon icon-name="utility:close" size="small"
+                                                                class="my-iconClose round-icon">
+                                                            </lightning-icon>
+                                                        </div>
+                                                        <div if:false={field.isBreakingScenario}
+                                                            class="slds-m-top--xx-small slds-m-left--xx-small slds-hidden">
+                                                            <div if:false={field.isOnTop}
+                                                                class="slds-m-top--xx-small slds-m-left--xx-small">
+                                                                <lightning-icon icon-name="utility:trail" size="small"
+                                                                    class="my-icon round-icon">
+                                                                </lightning-icon>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                                <template if:true={field.isNumber}>
+                                                    <lightning-formatted-number maximum-fraction-digits={field.scale}
+                                                        minimum-fraction-digits={field.scale} value={field.fieldValue}>
+                                                    </lightning-formatted-number>
+                                                </template>
+                                            </td>
+                                            <!-- <td key={field} style={field.style} if:true={field.isNumber}
+                                                class="slds-text-align--right">
+                                                <lightning-formatted-number maximum-fraction-digits={field.scale}
+                                                    minimum-fraction-digits={field.scale} value={field.fieldValue}>
+                                                </lightning-formatted-number>
+                                            </td> -->
+                                            <template if:true={field.isNameField}>
+                                                <td key={field.fieldName} class="slds-text-align_center" scope="col">
+                                                    <div class="slds-align_absolute-center">
+                                                        <lightning-button-icon icon-name="utility:products"
+                                                            variant="bare" size="large" data-url={assortment.screenURL}
+                                                            onclick={openScreen}></lightning-button-icon>
+                                                    </div>
+                                                </td>
+                                            </template>
+                                        </template>
+                                        <td style='text-align: left;color: #6a8358'
+                                            class="slds-text-align_center slds-border_left" scope="col">
+                                            <div class="slds-align_absolute-center">
+                                                <div class="slds-align_absolute-center slds-p-around_xx-small">
+                                                    <lightning-button-icon icon-name="utility:socialshare"
+                                                        alternative-text="share" title="share" variant="bare"
+                                                        data-id={assortment.assortmentId}
+                                                        data-record-type={assortment.assortmentDetail.RecordType.DeveloperName}
+                                                        data-name={assortment.assortmentName}
+                                                        onclick={handleSendEmail}></lightning-button-icon>
+                                                </div>
+                                                <div class="slds-align_absolute-center slds-p-around_xx-small">
+                                                    <lightning-button-icon icon-name="doctype:csv"
+                                                        alternative-text="exportCSV" title="exportCSV" variant="bare"
+                                                        data-id={assortment.assortmentId}
+                                                        data-record-type={assortment.assortmentDetail.RecordType.DeveloperName}
+                                                        data-name={assortment.assortmentName}
+                                                        onclick={handleExportExcel}></lightning-button-icon>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </template>
+            <template if:true={tableLoading}>
+                <div class="EmptyTableDiv slds-scrollable">
+                </div>
+            </template>
+            <div class="paginationSection slds-grid slds-m-around--small slds-text-align--left"
+                if:true={showPaginationSection}>
+                <lightning-combobox options={pageSizeOptions} value={pageSize} onchange={changePageSizeHandler}
+                    dropdown-alignment="bottom-left" variant="label-hidden"
+                    class="slds-size_xx-small slds-var-p-right_small">
+                </lightning-combobox>
+                <!-- <span> -->
+                <lightning-button-group>
+                    <lightning-button label={labels.LBL_First} disabled={previousDisabled} data-type="First"
+                        onclick={handleChangePage}>
+                    </lightning-button>
+                    <lightning-button label={labels.LBL_Previous} disabled={previousDisabled} data-type="Previous"
+                        onclick={handleChangePage}>
+                    </lightning-button>
+                    <lightning-button label={labels.LBL_Next} disabled={nextDisabled} data-type="Next"
+                        onclick={handleChangePage}>
+                    </lightning-button>
+                    <lightning-button label={labels.LBL_Last} disabled={nextDisabled} data-type="Last"
+                        onclick={handleChangePage}>
+                    </lightning-button>
+                </lightning-button-group>
+                <span class="slds-p-left_small slds-p-right_small slds-badge" style="margin-left: 10px;">
+                    {pageNumber} - {totalPagesCount}
+                </span>
+                <!-- </span> -->
+            </div>
+        </template>
+    </div>
+</template>

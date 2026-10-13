@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsConnectAccessRequested__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Supplier requested Connect access for this contact</description>
+    <label>Is Connect Access Requested</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

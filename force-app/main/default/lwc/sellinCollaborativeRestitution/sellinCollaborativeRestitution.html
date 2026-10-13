@@ -1,0 +1,327 @@
+<template>
+    <div class="mainContainer relativeDiv slds-card main-template" style="overflow: unset;">
+        <template lwc:if={isLoading}>
+            <div class="slds-spinner_container greyBg">
+                <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+            </div>
+        </template>
+        <template if:false={isLoading}>
+            <div class="header slds-page-header slds-page-header_record-home slds-p-around--xx-small slds-grid">
+                <template if:true={popup.visibility}>
+                    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                        class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <div class="slds-modal__header">
+                                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate" tabindex="-1">
+                                    {popup.title}</h1>
+                            </div>
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <p>{popup.body}</p>
+                            </div>
+                            <div class="slds-modal__footer">
+                                <button data-id="cancel" class="slds-button slds-button_neutral"
+                                    aria-label="Cancel and close" onclick={submitPopUp}>{labels.LBL_Cancel}</button>
+                                <button data-id="confirm" class="slds-button slds-button_destructive"
+                                    onclick={submitPopUp}>{labels.LBL_Confirm}</button>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+                </template>
+                <div class="slds-grid">
+                    <div class="slds-col slds-p-around_xx-small slds-has-flexi-truncate">
+                        <div class="slds-media slds-no-space slds-grow">
+                            <div
+                                class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                                <lightning-icon icon-name="utility:product_warranty_term" class="headerIconColor">
+                                </lightning-icon>
+                            </div>
+                            <div class="slds-media__body slds-p-around_x-small">
+                                <p class="slds-text-title slds-line-height_reset">
+                                    {labels.LBL_Connect_CollaborativeRestitution}
+                                </p>
+                                <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate"
+                                    style="font-size: 15px;">
+                                    {sellinName}
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rightControlsClass "
+                    style="  display: flex;width: 100%; flex:1; justify-content: right; position: relative;">
+                    <div class="slds-page-header__control slds-grid slds-m-right--medium" style="align-items:center">
+                        <!-- BACK -->
+                        <lightning-button label={labels.LBL_Back} onclick={handleBack} variant="brand"
+                            class="custom-button">
+                        </lightning-button>
+                        <!-- Validate -->
+                        <lightning-button-icon if:false={isPortal} icon-name="utility:like" variant="border-filled"
+                            class="custom-icon-like slds-m-left_xx-small" title={labels.LBL_ValidateStatement}
+                            onclick={handleOpenModal}>
+                        </lightning-button-icon>
+                        <!-- filter -->
+                        <lightning-button-icon icon-name="utility:filterList" variant="border-filled"
+                            class="slds-m-left_xx-small" title={labels.LBL_Filter} onclick={openFilter}>
+                        </lightning-button-icon>
+                        <!-- Excel-->
+                        <lightning-button-icon icon-name="doctype:excel" variant="border-filled"
+                            class="slds-m-left_xx-small" title={labels.LBL_Export_To_Excel} onclick={downloadCSV}>
+                        </lightning-button-icon>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="bodyDiv slds-is-relative">
+                <div class="negoptim-tablesection slds-scrollable relativeDiv" style="height:100%">
+                    <ul class="slds-accordion" style="display: table;">
+                        <table class="sticky" style="margin-top: 1.99px">
+                            <thead class="tableHeader">
+                                <tr>
+                                    <th rowspan="3" style={fixedHeaderStyle} class="centerText relativeDiv main-header">
+                                        <div>
+                                            {headerPeriodType}
+                                        </div>
+                                    </th>
+                                    <template for:each={fieldsWrapperList} for:item="field" for:index="index">
+                                        <th if:true={field.isDisplay} rowspan={field.fieldRow} key={field.Id}
+                                            style={field.headerStyle} class="centerText relativeDiv main-header">
+                                            <div style="text-wrap: auto;">
+                                                {field.fieldLabel}
+                                            </div>
+                                            <div class="icons-container slds-grid slds-m-right--xxx-small">
+                                                <div if:true={field.fieldHelpText}>
+                                                    <lightning-icon class="white-icon" if:true={field.fieldHelpText}
+                                                        size="xx-small" icon-name="utility:info"
+                                                        title={field.fieldHelpText}>
+                                                    </lightning-icon>
+                                                </div>
+                                            </div>
+                                        </th>
+                                    </template>
+                                    <template for:each={discHeaders} for:item="discHeader">
+                                        <th key={discHeader.title} colspan={discHeader.colSpan}
+                                            style={discHeader.style}>
+                                            {discHeader.title}
+                                        </th>
+                                    </template>
+                                </tr>
+                                <tr>
+                                    <template for:each={subDiscHeaders} for:item="subDiscHeader">
+                                        <th key={subDiscHeader.key} colspan={subDiscHeader.colSpan}
+                                            style={subDiscHeader.style}>
+                                            {subDiscHeader.title}
+                                        </th>
+                                    </template>
+                                </tr>
+                                <tr>
+                                    <template for:each={disTitles} for:item="disTitle">
+                                        <th key={disTitle.key} style={disTitle.style}>
+                                            {disTitle.title}
+                                        </th>
+                                    </template>
+                                </tr>
+                            </thead>
+                        </table>
+                        <template for:each={tables} for:item="table" lwc:if={tables}>
+                            <li key={table.key} class="slds-accordion__list-item">
+                                <section class="slds-accordion__section slds-is-open"
+                                    style="padding: 0; min-width: fit-content;">
+                                    <div class="slds-accordion__summary accordionSummary" data-key={table.key}
+                                        onclick={toggleSection}>
+                                        <div style="display: flex; position: sticky; left: 0; ">
+                                            <div style="align-items: center;display:flex;margin-left:10px;"
+                                                data-key={table.key}>
+                                                <lightning-button-icon lwc:if={table.isOpen}
+                                                    style="align-items: center;" variant="bare" size="large"
+                                                    icon-name="utility:jump_to_bottom" class="slds-m-right_small"
+                                                    data-key={table.key}>
+                                                </lightning-button-icon>
+                                                <lightning-button-icon lwc:else style="align-items: center;"
+                                                    variant="bare" size="large" icon-name="utility:jump_to_right"
+                                                    class="slds-m-right_small" data-key={table.key}>
+                                                </lightning-button-icon>
+                                            </div>
+                                            <img style="align-items: center; width: 30px; height:30px;"
+                                                src={table.headerIconSrc} title={table.headerLabel}
+                                                class="slds-m-right_small" data-key={table.key}>
+                                            <h2 style="align-items: center;" class="slds-accordion__summary-heading"
+                                                data-key={table.key}>
+                                                {table.headerLabel}
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <div class="slds-accordion__content" id={table.key}>
+                                        <table class={table.class} style="margin-top: 1.99px;">
+                                            <tbody>
+                                                <template for:each={table.recordsWrapperList} for:item="record"
+                                                    for:index="index">
+                                                    <tr key={record.Id} data-index={index} data-id={record.Id}>
+                                                        <template for:each={record.columns} for:item="field"
+                                                            for:index="index">
+                                                            <td key={field.Id} style={field.style}>
+                                                                <template lwc:if={field.isNumber}>
+                                                                    <lightning-formatted-number value={field.value}
+                                                                        maximum-fraction-digits="0"
+                                                                        minimum-fraction-digits="0"></lightning-formatted-number>
+                                                                </template>
+                                                                <template lwc:elseif={field.isPercent}>
+                                                                    <template lwc:if={field.arrowIcon}>
+                                                                        <lightning-icon lwc:if={field.isStable}
+                                                                            size="small"
+                                                                            class="slds-float_left icon-yellow-foreground"
+                                                                            icon-name="utility:forward"></lightning-icon>
+                                                                        <lightning-icon lwc:else size="small"
+                                                                            class="slds-float_left icon-green-foreground"
+                                                                            icon-name="utility:arrowup"></lightning-icon>
+                                                                    </template>
+                                                                    <lightning-formatted-number
+                                                                        format-style="percent-fixed" value={field.value}
+                                                                        maximum-fraction-digits="0"
+                                                                        minimum-fraction-digits="0"></lightning-formatted-number>
+                                                                </template>
+                                                                <template lwc:elseif={field.icon}>
+                                                                    <img src={field.link} title={field.title}
+                                                                        style={field.iconStyle}>
+                                                                </template>
+                                                                <template lwc:else>
+                                                                    {field.value}
+                                                                </template>
+                                                            </td>
+                                                        </template>
+                                                    </tr>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                            </li>
+                        </template>
+                        <template lwc:else>
+                            <div class="slds-grid slds-grid_align-center">
+                                <p>{labels.LBL_No_Item_To_Display}</p>
+                            </div>
+                        </template>
+                    </ul>
+                </div>
+                <div if:true={filterState} class="filter-section "
+                    style="float: right; z-index:20; position : absolute; top:0; right:0; height:100%">
+                    <div id="filter-panel" style="height: 100%;" class="slds-grid slds-no-flex">
+                        <div class="slds-panel filterPanelDiv slds-size_medium slds-panel_docked slds-panel_docked-right slds-grid slds-grid_vertical"
+                            style="overflow: unset;">
+                            <div class="slds-panel__header filterPanelHeader">
+                                <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate"
+                                    title={labels.LBL_Filter}>
+                                    {labels.LBL_Filter}
+                                </h2>
+                                <lightning-button-icon variant="bare" icon-name="utility:close" onclick={closeFilter}>
+                                </lightning-button-icon>
+                            </div>
+                            <div class="slds-col slds-scrollable filterPanelBody">
+                                <div class="slds-grid slds-wrap slds-p-around_small">
+                                    <div class="slds-list_vertical slds-list_vertical-space slds-size_1-of-1">
+                                        <div class="slds-p-top--small">
+                                            <legend class="slds-form-element__label slds-form-element__legend">
+                                                {labels.LBL_Period}
+                                            </legend>
+                                            <!--text-->
+                                            <lightning-input data-mode="one" type="number" variant="label-hidden"
+                                                value={filter.periodNumber} data-field="periodNumber"
+                                                onchange={handleFilterInput}>
+                                            </lightning-input>
+                                        </div>
+                                        <div class="slds-p-top--small">
+                                            <legend class="slds-form-element__label slds-form-element__legend">
+                                                {labels.Tab_Business_Units}
+                                            </legend>
+                                            <!--text-->
+                                            <lightning-input data-mode="one" type="text" variant="label-hidden"
+                                                onchange={handleFilterInput} value={filter.businessUnit}
+                                                data-field="businessUnit">
+                                            </lightning-input>
+                                        </div>
+                                        <div class="slds-p-top--small">
+                                            <legend class="slds-form-element__label slds-form-element__legend">
+                                                {labels.LBL_Status}
+                                            </legend>
+                                            <!--text-->
+                                            <lightning-checkbox-group class="slds-p-top_medium " variant="label-hidden"
+                                                options={statusOptions} value={filter.status} data-field="status"
+                                                onchange={handleFilterInput}>
+                                            </lightning-checkbox-group>
+                                        </div>
+                                        <div class="slds-p-top--small">
+                                            <lightning-combobox label={labels.LBL_Number_Of_Fixed_Columns}
+                                                options={fixedColumnsOptions} value={nbOfFixedColumns}
+                                                onchange={handleNumberOfFixedColumns}>
+                                            </lightning-combobox>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="slds-card__footer slds-grid slds-m-top_none slds-p-vertical_small filterPanelFooter">
+                                <div class="slds-col">
+                                    <lightning-button onclick={handleRestFilter} label={labels.LBL_Reset}>
+                                    </lightning-button>
+                                </div>
+                                <div class="slds-col">
+                                    <lightning-button onclick={handleApplyFilter} label={labels.LBL_Apply}
+                                        variant="brand">
+                                    </lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="footerDiv slds-grid slds-m-around--xx-small">
+                <lightning-combobox options={pageSizeOptions} variant="label-hidden" dropdown-alignment="auto"
+                    class="slds-size_xx-small slds-p-horizontal_x-small" value={pageSize}
+                    onchange={handleChangePageSize}>
+                </lightning-combobox>
+                <span>
+                    <lightning-button-group style="height: 100%;">
+                        <lightning-button label={labels.LBL_First} disabled={previousDisabled} data-type="First"
+                            onclick={handleChangePage}>
+                        </lightning-button>
+                        <lightning-button label={labels.LBL_Previous} disabled={previousDisabled} data-type="Previous"
+                            onclick={handleChangePage}>
+                        </lightning-button>
+                        <lightning-button label={labels.LBL_Next} disabled={nextDisabled} data-type="Next"
+                            onclick={handleChangePage}>
+                        </lightning-button>
+                        <lightning-button label={labels.LBL_Last} disabled={nextDisabled} data-type="Last"
+                            onclick={handleChangePage}>
+                        </lightning-button>
+                    </lightning-button-group>
+                    <lightning-badge class="slds-m-left--x-small" label={pagesBadge}>
+                    </lightning-badge>
+                </span>
+            </div>
+        </template>
+    </div>
+    <!-- MODAL -->
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-modal_medium slds-fade-in-open">
+            <div class="slds-modal__container" style={modalContainerStyle}>
+                <lightning-button-icon icon-name="utility:close" alternative-text="Cancel and close" size="large"
+                    class="dc-modal-close-button-icon slds-button--icon-more"
+                    style="display: flex; justify-content: end;" variant="bare"
+                    onclick={handleCloseModal}></lightning-button-icon>
+                <div class="slds-modal__content slds-p-around_medium" style={modalContentStyle}>
+                    <div style="position: relative;">
+                        <lightning-flow flow-api-name={flowApiName} flow-input-variables={flowInputVariables}
+                            onstatuschange={handleflowStatusChange} flow-finish-behavior="NONE">
+                        </lightning-flow>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

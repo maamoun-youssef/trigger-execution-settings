@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>invoiceKpiManager</componentName>
+                <identifier>c_invoiceKpiManager</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>invoiceManagerAdvancedFilter</componentName>
+                <identifier>c_invoiceManagerAdvancedFilter</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>theme</name>
+                    <value>Admin - facture</value>
+                </componentInstanceProperties>
+                <componentName>fileDirectoryManager</componentName>
+                <identifier>c_fileDirectoryManager4</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>main</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <masterLabel>myCash Home Page</masterLabel>
+    <template>
+        <name>industries_common:homeTemplateOneRegion</name>
+    </template>
+    <type>HomePage</type>
+</FlexiPage>

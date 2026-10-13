@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>hello</label>
+    <protected>false</protected>
+    <values>
+        <field>ActionButtons__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>ActivityFields__c</field>
+        <value xsi:type="xsd:string">[&quot;Account__c&quot;]</value>
+    </values>
+    <values>
+        <field>ActivityLeftIcon__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:null,&quot;isStaticRessource&quot;:null}</value>
+    </values>
+    <values>
+        <field>ActivityRightIcon__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:null,&quot;isStaticRessource&quot;:null}</value>
+    </values>
+    <values>
+        <field>BottomLeftCornerFields__c</field>
+        <value xsi:type="xsd:string">[&quot;Contract__c&quot;,&quot;Name&quot;,&quot;BusinessUnitBuyer__c&quot;]</value>
+    </values>
+    <values>
+        <field>BottomLeftCornerLogo1__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:null,&quot;isStaticRessource&quot;:null}</value>
+    </values>
+    <values>
+        <field>BottomLeftCornerLogo2__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:null,&quot;isStaticRessource&quot;:null}</value>
+    </values>
+    <values>
+        <field>EditFlow__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FieldsConfiguration__c</field>
+        <value xsi:type="xsd:string">[[{&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;&quot;}],[{&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;&quot;}],[{&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;&quot;}],[{&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;&quot;}]]</value>
+    </values>
+    <values>
+        <field>HeaderField__c</field>
+        <value xsi:type="xsd:string">{&quot;showHeaderField&quot;:null,&quot;isReadOnly&quot;:null,&quot;isMandatory&quot;:true,&quot;fieldName&quot;:&quot;Name&quot;}</value>
+    </values>
+    <values>
+        <field>IsManualEditMode__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Name__c</field>
+        <value xsi:type="xsd:string">hello</value>
+    </values>
+    <values>
+        <field>NbOfRows__c</field>
+        <value xsi:type="xsd:double">4.0</value>
+    </values>
+    <values>
+        <field>NewTaskFlow__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ObjectApiName__c</field>
+        <value xsi:type="xsd:string">Invoice__c</value>
+    </values>
+    <values>
+        <field>RelatedInformations__c</field>
+        <value xsi:type="xsd:string">{&quot;whereClause&quot;:null,&quot;parentRelationshipApiName&quot;:null,&quot;objectApiName&quot;:null,&quot;label&quot;:null,&quot;groupByFields&quot;:null,&quot;filters&quot;:null,&quot;aggregateFunction&quot;:null,&quot;aggregateFieldName&quot;:null}</value>
+    </values>
+    <values>
+        <field>Source__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>StatusIcon__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:null,&quot;isStaticRessource&quot;:null}</value>
+    </values>
+    <values>
+        <field>Tabs__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>TaskFields__c</field>
+        <value xsi:type="xsd:string">[&quot;IsArchived&quot;]</value>
+    </values>
+    <values>
+        <field>TopLeftCornerFields__c</field>
+        <value xsi:type="xsd:string">[&quot;Name&quot;]</value>
+    </values>
+    <values>
+        <field>TopLeftCornerLogo1__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:null,&quot;isStaticRessource&quot;:true}</value>
+    </values>
+    <values>
+        <field>TopLeftCornerLogo2__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:null,&quot;isStaticRessource&quot;:null}</value>
+    </values>
+    <values>
+        <field>TopRightCornerFields__c</field>
+        <value xsi:type="xsd:string">[&quot;AgreementBDate__c&quot;,&quot;Contract__c&quot;,&quot;AgreementEDate__c&quot;,&quot;BusinessUnitBuyer__c&quot;,&quot;BuyerCommercialName__c&quot;]</value>
+    </values>
+</CustomMetadata>

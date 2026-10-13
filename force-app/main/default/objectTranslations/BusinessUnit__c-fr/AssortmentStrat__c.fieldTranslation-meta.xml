@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Niveau de strate</label>
+    <name>AssortmentStrat__c</name>
+    <picklistValues>
+        <masterLabel>Cplt0</masterLabel>
+        <translation><!-- Cplt0 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Cplt1</masterLabel>
+        <translation><!-- Cplt1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Cplt2</masterLabel>
+        <translation><!-- Cplt2 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Cplt3</masterLabel>
+        <translation><!-- Cplt3 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Cplt4</masterLabel>
+        <translation><!-- Cplt4 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Cplt5</masterLabel>
+        <translation><!-- Cplt5 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat0</masterLabel>
+        <translation><!-- Strat0 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat1</masterLabel>
+        <translation><!-- Strat1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat10</masterLabel>
+        <translation><!-- Strat10 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat11</masterLabel>
+        <translation><!-- Strat11 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat12</masterLabel>
+        <translation><!-- Strat12 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat13</masterLabel>
+        <translation><!-- Strat13 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat14</masterLabel>
+        <translation><!-- Strat14 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat15</masterLabel>
+        <translation><!-- Strat15 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat16</masterLabel>
+        <translation><!-- Strat16 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat2</masterLabel>
+        <translation><!-- Strat2 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat3</masterLabel>
+        <translation><!-- Strat3 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat4</masterLabel>
+        <translation><!-- Strat4 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat5</masterLabel>
+        <translation><!-- Strat5 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat6</masterLabel>
+        <translation><!-- Strat6 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat7</masterLabel>
+        <translation><!-- Strat7 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat8</masterLabel>
+        <translation><!-- Strat8 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strat9</masterLabel>
+        <translation><!-- Strat9 --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

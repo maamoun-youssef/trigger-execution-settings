@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Taille de l&apos;entreprise</label>
+    <name>BusinessSize__c</name>
+    <picklistValues>
+        <masterLabel>Federal</masterLabel>
+        <translation>Fédéral</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Local</masterLabel>
+        <translation>Locale</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>SME</masterLabel>
+        <translation>PME</translation>
+    </picklistValues>
+</CustomFieldTranslation>

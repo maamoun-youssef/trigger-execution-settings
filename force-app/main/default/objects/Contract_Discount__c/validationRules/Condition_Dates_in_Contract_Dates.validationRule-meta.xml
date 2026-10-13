@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Condition_Dates_in_Contract_Dates</fullName>
+    <active>true</active>
+    <description>End date must be greater than or equal to the start date and between the contract date range</description>
+    <errorConditionFormula>AND(TEXT(Status__c) &lt;&gt; &apos;Deleted&apos;, OR(Disc_BDate__c &lt; Contract__r.Contract_BDate__c, Disc_EDate__c &gt; Contract__r.Contract_EDate__c, Disc_EDate__c &lt; Disc_BDate__c))</errorConditionFormula>
+    <errorMessage>End date must be greater than or equal to the start date and between the contract date range</errorMessage>
+</ValidationRule>

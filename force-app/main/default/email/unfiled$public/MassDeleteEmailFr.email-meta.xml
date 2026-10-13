@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>Connect_Header</letterhead>
+    <name>MassDeleteEmailFr</name>
+    <style>formalLetter</style>
+    <subject>negOptim : Suppression des pièces comptables terminée pour l&apos;execution du X à Y.</subject>
+    <textOnly>{!$Label.LBL_Connect_Email_Greeting} {!Receiving_User.FirstName} {!Receiving_User.LastName}, 
+
+{!Log__c.Summary_Header__c}
+
+{!Log__c.00NQH00000L2y0p}
+
+{!$Label.LBL_Best_Regards},
+
+{!$Label.LBL_Negoptim_Team}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

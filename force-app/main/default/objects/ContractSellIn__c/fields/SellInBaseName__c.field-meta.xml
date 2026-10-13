@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SellInBaseName__c</fullName>
+    <externalId>false</externalId>
+    <formula>If(TEXT($User.LanguageLocaleKey) = &apos;fr&apos;, 
+NegoScope__r.Name &amp; &quot; - &quot; &amp; BusinessUnit__r.Name &amp; &quot; - du &quot; &amp; LPAD(TEXT(DAY(BaseBDate__c)), 2, &quot;0&quot;)&amp; &quot;/&quot; &amp; LPAD(TEXT(MONTH(BaseBDate__c)), 2, &quot;0&quot;) &amp; &quot;/&quot; &amp; TEXT(YEAR(BaseBDate__c)) &amp; &quot; au &quot; &amp; LPAD(TEXT(DAY(BaseEDate__c)), 2, &quot;0&quot;) &amp; &quot;/&quot; &amp; LPAD(TEXT(MONTH(BaseEDate__c)), 2, &quot;0&quot;) &amp; &quot;/&quot; &amp; TEXT(YEAR(BaseEDate__c)),
+ NegoScope__r.Name + &quot; - &quot; &amp; BusinessUnit__r.Name + &quot; from &quot; +  Text(BaseBDate__c) + &quot; to &quot; +  Text(BaseEDate__c))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>SellIn Base Name</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

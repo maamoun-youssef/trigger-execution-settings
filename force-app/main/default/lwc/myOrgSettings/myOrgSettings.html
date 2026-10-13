@@ -1,0 +1,52 @@
+<template>
+    <template lwc:if={loadingData}>
+        <div class="slds-spinner_container">
+            <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+        </div>
+    </template>
+    <template lwc:else>
+        <div class="slds-card">
+            <div class="header">
+                <div class="slds-media slds-no-space slds-grow settings-header">
+                    <div class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                        <lightning-icon icon-name='utility:settings' class="custom-icon-settings icon-header">
+                        </lightning-icon>
+                    </div>
+                    <div class="slds-media__body slds-p-around_x-small">
+                        <p class="slds-text-title slds-line-height_reset settings-subtitle">
+                            {labels.LBL_myOrg}
+                        </p>
+                        <h1
+                            class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate settings-header-title">
+                            {labels.LBL_myOrgSettings}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="main-panel slds-col slds-scrollable">
+                <lightning-tabset variant="vertical" class="tab-set-style slds-m-bottom_x-small">
+                    <lightning-tab tabindex="-1" label={labels.LBL_GLStickersSettings}>
+                        <div style={mainPanelHeight}>
+                            <c-g-l-stickers-settings class="component-height"></c-g-l-stickers-settings>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab tabindex="-1" label={labels.LBL_NegoScope_Settings} class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <c-nego-scope-settings class="component-height"></c-nego-scope-settings>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab tabindex="-1" label={labels.LBL_Product_Settings} class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <c-product-settings class="component-height"></c-product-settings>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab tabindex="-1" label={labels.LBL_BUListManagerSettings} class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <c-bu-list-manager-settings class="component-height"></c-bu-list-manager-settings>
+                        </div>
+                    </lightning-tab>
+                </lightning-tabset>
+            </div>
+        </div>
+    </template>
+</template>

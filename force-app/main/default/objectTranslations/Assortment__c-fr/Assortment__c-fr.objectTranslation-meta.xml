@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Assortiment</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Assortiments</value>
+    </caseValues>
+    <gender>Masculine</gender>
+    <layouts>
+        <layout>Assortment Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Nom de l&apos;assortiment</nameFieldLabel>
+    <quickActions>
+        <label><!-- Update Linked Assortments --></label>
+        <name>UpdateLinkedAssortments</name>
+    </quickActions>
+    <recordTypes>
+        <label>Objectif Circuit</label>
+        <name>ChannelBudget</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Négociation</label>
+        <name>Negotiation</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Conso On Top</label>
+        <name>OnTopConso</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Simulation</label>
+        <name>Simulation</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Objectif Enseigne</label>
+        <name>Target</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Conso Obj. Ens</label>
+        <name>TargetConso</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- No update of the year can be performed after the assortment creation. --></errorMessage>
+        <name>No_year_update</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- ERROR --></errorMessage>
+        <name>TEST_ERROR</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The Year should be between the Begin Date Year and the End Date Year. --></errorMessage>
+        <name>Year_Between_BDate_Year_EDate_Year</name>
+    </validationRules>
+    <webLinks>
+        <label>Synchro Catégorie Client</label>
+        <name>PGClientCategoryToASD</name>
+    </webLinks>
+    <webLinks>
+        <label>Synchro Produit vers ASD</label>
+        <name>ProductToASD</name>
+    </webLinks>
+</CustomObjectTranslation>

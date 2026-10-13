@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SlabMethod__c</fullName>
+    <label>Slab Method</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>TO</fullName>
+                <default>true</default>
+                <label>TO</label>
+            </value>
+            <value>
+                <fullName>Prog TO</fullName>
+                <default>false</default>
+                <label>Prog TO</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Inc TO</fullName>
+                <default>false</default>
+                <label>Inc TO</label>
+            </value>
+            <value>
+                <fullName>Inc Prog TO</fullName>
+                <default>false</default>
+                <label>Inc Prog TO</label>
+            </value>
+            <value>
+                <fullName>Qty</fullName>
+                <default>false</default>
+                <label>Qty</label>
+            </value>
+            <value>
+                <fullName>Prog Qty</fullName>
+                <default>false</default>
+                <label>Prog Qty</label>
+            </value>
+            <value>
+                <fullName>Inc Qty</fullName>
+                <default>false</default>
+                <label>Inc Qty</label>
+            </value>
+            <value>
+                <fullName>Inc Prog Qty</fullName>
+                <default>false</default>
+                <label>Inc Prog Qty</label>
+            </value>
+            <value>
+                <fullName>Sell Out</fullName>
+                <default>false</default>
+                <label>Sell Out</label>
+            </value>
+            <value>
+                <fullName>Prog Sell Out</fullName>
+                <default>false</default>
+                <label>Prog Sell Out</label>
+            </value>
+            <value>
+                <fullName>Inc Sell Out</fullName>
+                <default>false</default>
+                <label>Inc Sell Out</label>
+            </value>
+            <value>
+                <fullName>Inc Prog Sell out</fullName>
+                <default>false</default>
+                <label>Inc Prog Sell out</label>
+            </value>
+            <value>
+                <fullName>TO byBU</fullName>
+                <default>false</default>
+                <label>TO byBU</label>
+            </value>
+            <value>
+                <fullName>Prog TO byBU</fullName>
+                <default>false</default>
+                <label>Prog TO byBU</label>
+            </value>
+            <value>
+                <fullName>Qty byBU</fullName>
+                <default>false</default>
+                <label>Qty byBU</label>
+            </value>
+            <value>
+                <fullName>Prog Qty byBU</fullName>
+                <default>false</default>
+                <label>Prog Qty byBU</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

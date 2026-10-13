@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_NetPrice_wTax__c</fullName>
+    <formula>ROUND(New_NetPrice_woTax__c
++ ROUND(IF(CONTAINS(New_NetPrice_Taxes__c, &apos;N1/&apos;),New_Tax_1__c,0)
++IF(CONTAINS(New_NetPrice_Taxes__c, &apos;N2/&apos;), New_Tax_2__c,0)
++IF(CONTAINS(New_NetPrice_Taxes__c, &apos;N3/&apos;), New_Tax_3__c,0)
++IF(CONTAINS(New_NetPrice_Taxes__c, &apos;N4/&apos;), New_Tax_4__c,0)
++IF(CONTAINS(New_NetPrice_Taxes__c, &apos;N5/&apos;), New_Tax_5__c,0)
++IF(CONTAINS(New_NetPrice_Taxes__c, &apos;N6/&apos;), New_Tax_6__c,0)
++IF(CONTAINS(New_NetPrice_Taxes__c, &apos;N7/&apos;), New_Tax_7__c,0)
++IF(CONTAINS(New_NetPrice_Taxes__c, &apos;N8/&apos;), New_Tax_8__c,0)
++IF(CONTAINS(New_NetPrice_Taxes__c, &apos;N9/&apos;), New_Tax_9__c,0)
++IF(CONTAINS(New_NetPrice_Taxes__c, &apos;N10/&apos;), New_Tax_10__c,0), IF( ISBLANK(TEXT(Assortment_BU__r.Tax_Rounding_Level__c)) , 4, VALUE(TEXT(Assortment_BU__r.Tax_Rounding_Level__c)))), IF(ISBLANK(TEXT(Assortment_BU__r.NetPrice_Rounding_Level__c)), 4,VALUE(TEXT(Assortment_BU__r.NetPrice_Rounding_Level__c))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>New NetPrice wTax</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

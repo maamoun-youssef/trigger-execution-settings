@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Accord Liste",
+  "contentBody" : {
+    "activeViewId" : "Accord_Liste",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "list-Contract__c",
+    "urlPrefix" : "contract"
+  },
+  "urlName" : "accord-liste"
+}

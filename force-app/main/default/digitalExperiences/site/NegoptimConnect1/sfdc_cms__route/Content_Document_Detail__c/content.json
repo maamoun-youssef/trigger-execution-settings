@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Content Document Detail",
+  "contentBody" : {
+    "activeViewId" : "Content_Document_Detail",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "detail-069",
+    "urlPrefix" : "ContentDocument"
+  },
+  "urlName" : "content-document-detail"
+}

@@ -1,0 +1,48 @@
+/* Empty State Styling */
+.empty-state-link {
+    color: #0176d3;
+    text-decoration: none;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: inline-block;
+}
+
+.empty-state-link:hover {
+    text-decoration: underline;
+    color: #014486;
+}
+
+/* Sync Status Styling */
+.sync-status {
+    font-weight: bold;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.sync-status.synced {
+    color: #2e844a;
+}
+
+.sync-status.sync-required {
+    color: #c23934;
+}
+
+/* Table Header Styling */
+.table-header-cell {
+    height: 80px !important;
+    vertical-align: middle !important;
+}
+
+.table-header-text {
+    white-space: normal !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.3;
+}
+
+/* Actions Column Centering */
+.actions-column {
+    text-align: center !important;
+}

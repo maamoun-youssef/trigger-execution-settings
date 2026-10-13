@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Last_History__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Lookup field used to register the last history entry for each validated record.</description>
+    <inlineHelpText>pour tracer la dernière entrée de chaque validation</inlineHelpText>
+    <label>Last History</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Assortment_Detail__c.Version__c</field>
+            <operation>notEqual</operation>
+            <value></value>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Assortment_Detail__c</referenceTo>
+    <relationshipLabel>Assortment BU Details (Last History)</relationshipLabel>
+    <relationshipName>Assortment_BU_Details2</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,33 @@
+<template>
+    <div class="main-container slds-p-around_xx-large" data-section-target-id={settings.sectionLabel}> 
+        <div class="flex-container">
+            <!-- ICON -->
+            <div class="icon-container">
+                <img src={settings.sectionIcon} alt="section-icon" class="section-icon" />
+            </div>
+            <!-- TITLE + SUB-TITLE -->
+            <div class="description-container">
+                <p class="section-title slds-text-heading_large">{settings.sectionLabel}</p>
+                <p class="section-sub-title slds-text-heading_small slds-p-top_medium">{settings.sectionSubTitle}</p>
+            </div>
+            <!-- FILET -->
+            <div class="filet-container">
+                <img src={images.connectFilet} alt="section-filet" class="connect-filet" />
+            </div>
+            <!-- THEMES -->
+            <div class="theme-flex-container">
+                <template for:each={settings.themesSettings} for:item="theme">
+                    <div lwc:if={theme.showTheme} class="theme-container" key={theme.themeLabel} data-theme-name={theme.themeKey} onclick={handleThemeClick}>
+                        <!-- THEME -->
+                        <div class="theme" onmouseenter={handleMouseEnterTheme} onmouseleave={handleMouseLeaveTheme}>
+                            <img src={theme.largeThemeImage} class="theme-image card"/>
+                            <div class="theme-title-overlay" style={themeTitleOverlayStyle}>
+                                <p class="theme-title">{theme.themeLabel}</p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Périmètre Négo</label>
+    <name>NegoScope__c</name>
+    <relationshipLabel>Déclarations de CA (NS)</relationshipLabel>
+</CustomFieldTranslation>

@@ -1,0 +1,368 @@
+<template>
+    <div class="slds-card slds-scrollable mainContainer">
+        <div class="main-header slds-border--bottom">
+            <div class="slds-card slds-grid slds-p-around_xx-small slds-page-header negoptimHeader">
+                <div class="slds-col slds-has-flexi-truncate">
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div
+                            class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                            <lightning-icon icon-name="utility:arrow_bottom">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small">
+                            <p class="slds-text-title slds-line-height_reset">
+                                {labels.LBL_Import_Settings_Manager_Title}
+                            </p>
+                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                <div class="slds-grid">
+                                    <template lwc:if={selectedImportSettings}>
+                                        {selectedImportSettings.objectName} - {selectedImportSettings.name}
+                                    </template>
+                                    <template lwc:else>
+                                        {labels.LBL_Import_Settings_Manager_SubTitle}
+                                    </template>
+                                </div>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- ACTION BUTTONS -->
+                <div class="slds-col slds-no-flex slds-grid slds-icon_container">
+                    <template lwc:if={selectedImportSettings}>
+                        <lightning-button lwc:if={isNotPackageMetadata} class="slds-button slds-m-right_x-small" variant="brand" label={labels.LBL_Save}
+                            onclick={handleSave}>
+                        </lightning-button>
+                        <lightning-button class="slds-button slds-m-right_x-small" variant="neutral"
+                            label={labels.LBL_Save_As} onclick={handleSaveAs}>
+                        </lightning-button>
+                    </template>
+                    <lightning-button class="slds-button slds-m-right_x-small" label={labels.LBL_Add_Import_Settings}
+                        title={labels.LBL_Add_Import_Settings} onclick={togglePopupAddImportSettings}
+                        icon-name="utility:add">
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+        <!-- ImportSettings Metadata-->
+        <div class="main-div slds-grid slds-scrollable">
+            <template if:true={loadingData}>
+                <div class="slds-spinner_container">
+                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </template>
+            <div class="slds-col slds-size_1-of-4 slds-border_right " style="background-color: white; height: inherit">
+                <div class="templatesSplitView slds-split-view_container slds-panel_docked-left slds-is-open"
+                    style="height: -webkit-fill-available;">
+                    <div class="slds-panel__header slds-p-around_x-small searchBox" id="filterHeader">
+                        <div style="padding: 0;" class="slds-page-header__col-details">
+                            <lightning-input type="search" variant="label-hidden" autocomplete="off"
+                                onchange={searchSettings} value={searchTermSettings}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                    <template if:false={importSettingsList.length}>
+                        <div class="slds-align_absolute-center slds-m-vertical_small">
+                            <span class="slds-truncate" title={labels.LBL_No_Item_To_Display}>
+                                {labels.LBL_No_Item_To_Display}
+                            </span>
+                        </div>
+                    </template>
+                    <div class="slds-scrollable--y" if:true={importSettingsList.length}>
+                        <article aria-hidden="false" id="split-view-id"
+                            class="slds-split-view slds-grid slds-grid_vertical slds-scrollable">
+                            <div class="slds-grid slds-grid_vertical">
+                                <ul aria-multiselectable="true" class="slds-scrollable_y" role="listbox"
+                                    aria-label="Select an item to open it in a new workspace tab.">
+                                    <template for:each={importSettingsList} for:item="item">
+                                        <li class="slds-split-view__list-item" role="presentation" key={item.name}
+                                            data-id={item.name} onclick={handleChangeImportSettings}>
+                                            <a href="#" role="option" data-id={item.name}
+                                                class="menuItem slds-split-view__list-item-action slds-grow slds-has-flexi-truncate"
+                                                tabindex="0">
+                                                <div class="slds-grid slds-wrap">
+                                                    <b>
+                                                        <span
+                                                            class="slds-truncate slds-text-body_regular slds-text-color_default"
+                                                            title={item.name}>{item.name}</span>
+                                                    </b>
+                                                    <span class="slds-truncate slds-col_bump-left"
+                                                        title="packageIcon">
+                                                        <lightning-icon lwc:if={item.namespacePrefix}
+                                                            icon-name="utility:package" size="xx-small">
+                                                        </lightning-icon>
+                                                    </span>
+                                                </div>
+                                                <div class="slds-grid">
+                                                    <span class="slds-truncate"
+                                                        title={item.objectName}>{item.objectName}
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-form_stacked slds-col slds-scrollable" if:true={selectedImportSettings}>
+                <article class="slds-card">
+                    <div class="slds-card__body slds-card__body_inner">
+                        <div
+                            class="cmpHeader slds-m-bottom--small slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                            <!--span class="cmpTitle">
+                                {selectedImportSettings.objectName} - {selectedImportSettings.name}
+                            </span-->
+                            <div class="slds-grid">
+                                <div class="slds-col">
+                                    <lightning-input type="number" label={labels.DefaultLoadStartLine__c}
+                                        value={selectedImportSettings.defaultLoadStartLine}
+                                        data-field="defaultLoadStartLine" onchange={handleImportEdit}></lightning-input>
+                                </div>
+                                <div class="slds-col">
+                                    <lightning-input type="number" label={labels.DefaultSheetNumber__c}
+                                        value={selectedImportSettings.defaultSheetNumber}
+                                        data-field="defaultSheetNumber" onchange={handleImportEdit}></lightning-input>
+                                </div>
+                                <div class="slds-col">
+                                    <lightning-combobox label={labels.RecordIdLookupField__c}
+                                        data-field="recordIdLookupField"
+                                        value={selectedImportSettings.recordIdLookupField} options={lookupFieldOptions}
+                                        dropdown-alignment="auto" onchange={handleImportEdit}>
+                                    </lightning-combobox>
+                                </div>
+                                <template lwc:if={hasExternalIdFieldOptions}>
+                                    <div class="slds-col slds-m-left_small">
+                                        <lightning-combobox label={labels.ExternalIdField__c}
+                                            data-field="externalIdField" value={selectedImportSettings.externalIdField}
+                                            options={externalIdFieldOptions} dropdown-alignment="auto"
+                                            onchange={handleImportEdit}>
+                                        </lightning-combobox>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-m-right_x-small">
+                                    <lightning-input type="toggle" label={labels.ShowAdvancedMode__c}
+                                        checked={selectedImportSettings.showAdvancedMode} onchange={handleImportEdit}
+                                        data-field="showAdvancedMode" message-toggle-active=""
+                                        message-toggle-inactive=""></lightning-input>
+                                </div>
+                                <lightning-button class="slds-m-right_x-small" label={labels.LBL_Import_Add_Field}
+                                    title={labels.LBL_Import_Add_Field} onclick={handleAddImportField}
+                                    icon-name="utility:add">
+                                </lightning-button>
+                            </div>
+                        </div>
+                        <div class="tableWrapper">
+                            <table
+                                class="slds-table slds-table_bordered slds-table_col-bordered slds-border--left slds-border--right slds-no-row-hover slds-scrollable_y">
+                                <thead>
+                                    <tr class="stickyHeader">
+                                        <th style="background-color:#0d807d;color:white;">#</th>
+                                        <th style="background-color:#0d807d;color:white;">
+                                            {labels.LBL_Import_Field_Label}
+                                        </th>
+                                        <th style="background-color:#0d807d;color:white;">
+                                            {labels.LBL_Import_Field_Name}
+                                        </th>
+                                        <th style="background-color:#0d807d;color:white;">
+                                            {labels.LBL_DefaultExcelColumnOrder}
+                                        </th>
+                                        <th style="background-color:#0d807d;color:white;">
+                                            {labels.LBL_Import_Field_SysAdmin}
+                                        </th>
+                                        <th style="background-color:#0d807d;color:white;">
+                                            {labels.LBL_Import_Field_User}
+                                        </th>
+                                        <th style="background-color:#0d807d;color:white;">
+                                            {labels.LBL_Import_Field_isKey}
+                                        </th>
+                                        <th style="background-color:#0d807d;color:white;">
+                                            {labels.LBL_Import_Field_isMandatory}
+                                        </th>
+                                        <th style="background-color:#0d807d;color:white;">
+                                            {labels.LBL_Import_Field_DefaultValue}
+                                        </th>
+                                        <th style="background-color:#0d807d;color:white;">
+                                            {labels.LBL_Import_Field_Lookup_ExtId}
+                                        </th>
+                                        <th style="background-color:#0d807d;color:white;">
+                                            {labels.LBL_Import_Field_ExtId_Order}
+                                        </th>
+                                        <th
+                                            style="background-color:#0d807d;color:white; text-align: center; width: 40px;">
+                                        </th>
+                                        <th
+                                            style="background-color:#0d807d;color:white; width: 40px; text-align: center;">
+                                        </th>
+                                        <!-- <th style="background-color:#0d807d;color:white;">
+                                        </th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template lwc:if={selectedImportSettings.fields.length}
+                                        for:each={selectedImportSettings.fields} for:item="field" for:index="index">
+                                        <tr key={field.key} class={field.class} data-index={index}
+                                            ondragover={handleDragOver} ondrop={handleDrop}
+                                            ondragenter={handleDragEnter} ondragleave={handleDragLeave}>
+                                            <td class="alignCenter">{field.rowNumber}</td>
+                                            <td>
+                                                <c-neg-optim-searchable-picklist placeholder="" label=""
+                                                    value={field.name} options={fieldOptions} data-index={index}
+                                                    required data-field="name" onchange={handleEditImportField}>
+                                                </c-neg-optim-searchable-picklist>
+                                                <!-- <lightning-combobox required dropdown-alignment="auto"
+                                                    variant="label-hidden" data-index={index} value={field.name}
+                                                    data-field="name" options={fieldOptions}
+                                                    onchange={handleEditImportField}></lightning-combobox>                                                  -->
+                                            </td>
+                                            <td>
+                                                {field.name}
+                                            </td>
+                                            <td>
+                                                <lightning-input formatter="integer" required variant="label-hidden"
+                                                    data-index={index} value={field.defaultColumn}
+                                                    data-field="defaultColumn" onchange={handleEditImportField}>
+                                                </lightning-input>
+                                            </td>
+                                            <td class="alignCenter">
+                                                <lightning-input type="checkbox" checked={field.isAdmin}
+                                                    value={field.isAdmin} data-field="isAdmin" data-index={index}
+                                                    variant="label-hidden" onchange={handleEditImportField} disabled={field.isRequired}>
+                                                </lightning-input>
+                                            </td>
+                                            <td class="alignCenter">
+                                                <lightning-input type="checkbox" checked={field.isUser}
+                                                    value={field.isUser} data-field="isUser" data-index={index}
+                                                    variant="label-hidden" onchange={handleEditImportField} disabled={field.isRequired}>
+                                                </lightning-input>
+                                            </td>
+                                            <td class="alignCenter">
+                                                <lightning-input type="checkbox" checked={field.isRequired}
+                                                    disabled={field.isAlwaysRequired} value={field.isRequired}
+                                                    data-field="isRequired" data-index={index} 
+                                                    onchange={handleEditImportField}>
+                                                </lightning-input>
+                                            </td>
+                                            <!-- isMandatory -->
+                                            <td class="alignCenter">
+                                                <lightning-input type="checkbox" checked={field.isMandatory}
+                                                    disabled={field.isAlwaysRequired} value={field.isMandatory}
+                                                    data-field="isMandatory" data-index={index}
+                                                    onchange={handleEditImportField}>
+                                                </lightning-input>
+                                            </td>
+                                            <td class="alignCenter">
+                                                <lightning-input type="checkbox" checked={field.allowDefaultValue}
+                                                    data-field="allowDefaultValue" data-index={index} disabled={field.isAlwaysRequired}
+                                                    onchange={handleEditImportField}>
+                                                </lightning-input>
+                                            </td>
+                                            <td class="alignCenter">
+                                                <lightning-combobox lwc:if={field.isReference}
+                                                    dropdown-alignment="auto" required variant="label-hidden"
+                                                    data-index={index} value={field.referenceExtId}
+                                                    data-field="referenceExtId"
+                                                    options={field.relatedObjectFieldOptions}
+                                                    onchange={handleEditImportField}></lightning-combobox>
+                                                <lightning-input lwc:else disabled type="number" formatter="integer"
+                                                    required variant="label-hidden">
+                                                </lightning-input>
+                                            </td>
+                                            <td class="alignCenter">
+                                                <lightning-input lwc:if={field.isRequired} type="number"
+                                                    formatter="integer" required variant="label-hidden"
+                                                    data-index={index} value={field.referenceExtIdOrder}
+                                                    data-field="referenceExtIdOrder" onchange={handleEditImportField}>
+                                                </lightning-input>
+                                                <lightning-input lwc:else disabled type="number" formatter="integer"
+                                                    required variant="label-hidden">
+                                                </lightning-input>
+                                            </td>
+                                            <td class="alignCenter">
+                                                <div class="slds-align--absolute-center">
+                                                    <lightning-icon icon-name="utility:delete" size="xx-small"
+                                                        data-index={index} onclick={handleDeleteImportField}>
+                                                    </lightning-icon>
+                                                </div>
+                                            </td>
+                                            <td class="alignCenter drag-handle-cell" data-index={index}
+                                                ondragstart={handleDragStart} ondragend={handleDragEnd}
+                                                draggable="true">
+                                                <lightning-icon icon-name="utility:drag_and_drop"
+                                                    size="small"></lightning-icon>
+                                            </td>
+                                            <!-- <td class="alignCenter">
+                                                <div class="slds-shrink-none">
+                                                    <lightning-icon size="xx-small"
+                                                        class="red-icon slds-icon slds-input__icon_right slds-icon-text-default slds-align_absolute-center slds-button--icon-border"
+                                                        icon-name="utility:delete" data-index={index}
+                                                        onclick={handleDeleteImportField}>
+                                                    </lightning-icon>
+                                                </div>
+                                            </td> -->
+                                        </tr>
+                                    </template>
+                                    <template lwc:else>
+                                        <tr>
+                                            <td colspan="8" class="emptyCell slds-align_absolute-center">
+                                                {labels.LBL_No_Item_To_Display}
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="separatorContainer slds-m-top--medium">
+                            <div class="separatorClass">
+                                <lightning-combobox dropdown-alignment="auto" label={labels.LBL_Separator_Title}
+                                    data-field="extIdSeparator" value={selectedImportSettings.extIdSeparator}
+                                    options={separatorOptions} onchange={handleChangeSeparator}></lightning-combobox>
+                            </div>
+                            <div class="templateClass slds-m-left--medium">
+                                <lightning-input disabled label={labels.LBL_Import_ExtId_Template} title={extIdTemplate}
+                                    value={selectedImportSettings.extIdTemplate}></lightning-input>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <template if:true={addNewRowImportSettings}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            onclick={togglePopupAddImportSettings}></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__header">
+                        <h1 class="slds-modal__title slds-hyphenate">Add New Import Settings</h1>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium modal-content-no-clip">
+                        <c-neg-optim-searchable-picklist label={labels.LBL_ObjectName}
+                            value={newImportSettings.objectName} options={objectOptions}
+                            placeholder="Search or select an object" required data-field="objectName"
+                            onchange={handleOnChangeNewImportSettings} disabled={isSaveAs}>
+                        </c-neg-optim-searchable-picklist>
+                        <lightning-input label={labels.LBL_ScreenName} required value={newImportSettings.name}
+                            data-field="name" onchange={handleOnChangeNewImportSettings}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <lightning-button label={labels.LBL_Add_Import_Settings} variant="brand"
+                            onclick={handleAddImportSettings}></lightning-button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+    </div>
+</template>

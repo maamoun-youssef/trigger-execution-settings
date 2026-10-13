@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Buying_Payment_Condition__c</fullName>
+    <label>Payment Condition for Purchases</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>End of Month</fullName>
+                <default>true</default>
+                <label>End of Month</label>
+            </value>
+            <value>
+                <fullName>End of Month, the 15</fullName>
+                <default>false</default>
+                <label>End of Month, the 15</label>
+            </value>
+            <value>
+                <fullName>Net</fullName>
+                <default>false</default>
+                <label>Net</label>
+            </value>
+            <value>
+                <fullName>The 10</fullName>
+                <default>false</default>
+                <label>The 10</label>
+            </value>
+            <value>
+                <fullName>The 15</fullName>
+                <default>false</default>
+                <label>The 15</label>
+            </value>
+            <value>
+                <fullName>The 20</fullName>
+                <default>false</default>
+                <label>The 20</label>
+            </value>
+            <value>
+                <fullName>Twice the Month</fullName>
+                <default>false</default>
+                <label>Twice the Month</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

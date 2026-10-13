@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>PlanningRuleDetailP__c</columns>
+    <columns>DownPaymentYECoverageP__c</columns>
+    <columns>SeriesBaseP__c</columns>
+    <columns>SeriesPeriodP__c</columns>
+    <columns>SeriesSequenceP__c</columns>
+    <columns>SeriesStartDateP__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Tout</label>
+</ListView>

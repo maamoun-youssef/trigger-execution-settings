@@ -1,0 +1,846 @@
+<template>
+    <template lwc:if={isLoading}>
+        <div class="slds-spinner_container">
+            <div class="loader slds-spinner_container slds-align_absolute-center">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </template>
+    <div class="slds-card" onclick={closeDropdown}>
+        <div class="settings-header">
+            <lightning-icon icon-name="utility:settings" class="custom-icon-settings"></lightning-icon>
+            <div>
+                <p class="settings-subtitle">Page Layout Settings</p>
+                <h1 class="slds-page-header__title settings-header-title">{labels.LBL_PageSettingsTitle}</h1>
+            </div>
+        </div>
+        <div class="main-panel slds-col">
+            <div class="page-toolbar slds-p-around_small slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                <template if:false={addNewPageLayout}>
+                    <div class="slds-grid slds-grid_vertical-align-center toolbar-template">
+                        <div class="section-label toolbar-section-label">{labels.LBL_PageSettingsTitle}</div>
+                        <lightning-combobox name="pageLayoutSettings" value={templateName} variant="label-hidden"
+                            options={pageLayoutSettingsOptions} onchange={handleChangepageLayoutSettings}
+                            class="toolbar-combobox">
+                        </lightning-combobox>
+                    </div>
+                </template>
+                <template if:true={addNewPageLayout}>
+                    <div class="section-label toolbar-section-label">{labels.LBL_NewPageLayoutSettings}</div>
+                </template>
+                <div class="slds-grid slds-grid_align-end">
+                    <template if:true={selectedPageSettings}>
+                        <lightning-button class="slds-m-right_x-small" variant="neutral" label={labels.Cancel}
+                            onclick={handleCancel}>
+                        </lightning-button>
+                    </template>
+                    <template if:false={selectedPageSettings}>
+                        <lightning-button variant="brand" label={labels.LBL_NewPageLayoutSettings}
+                            onclick={togglePopupAddPageSettings}>
+                        </lightning-button>
+                    </template>
+                </div>
+            </div>
+            <template if:true={selectedPageSettings}>
+                <lightning-tabset variant="vertical" class="tab-set-style slds-m-bottom_x-small mainHeight">
+                    <lightning-tab label={labels.LBL_GeneralInformationTitle} class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <div>
+                                <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                    <div class="sectionTitle slds-media__body">{labels.LBL_GeneralInformationTitle}</div>
+                                    <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                        label={labels.LBL_Save} onclick={handleSave}>
+                                    </lightning-button>
+                                </div>
+                                <div class="label">{labels.LBL_GeneralInformationDetails}</div>
+                    <div class="slds-p-bottom--medium">
+                        <div class="slds-grid">
+                            <!-- Template Name Section -->
+                            <div class="section-container slds-m-top_medium slds-size--1-of-2">
+                                <div class="section-container slds-m-top_medium slds-size--1-of-1">
+                                    <div class="section-label">{labels.LBL_TemplateName}</div>
+                                    <lightning-input label="Template Name:" value={selectedPageSettings.name}
+                                        onchange={handleTemplateNameChange} variant="label-hidden">
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <!-- Select Object Section -->
+                            <div class="section-container slds-m-top_medium slds-size--1-of-2">
+                                <div class="section-container slds-m-top_medium slds-size--1-of-1">
+                                    <div class="section-label">{labels.LBL_SelectObject}</div>
+                                    <!-- Search Input -->
+                                    <div class="slds-is-relative">
+                                        <lightning-input if:false={addNewPageLayout} label="Select Object:"
+                                            onchange={searchObject} onfocus={showallObjects} type="search"
+                                            value={selectedPageSettings.objectApiName} variant="label-hidden" disabled>
+                                        </lightning-input>
+                                        <lightning-input if:true={addNewPageLayout} label="Select Object:"
+                                            onchange={searchObject} onfocus={showallObjects} type="search"
+                                            value={selectedPageSettings.objectApiName} variant="label-hidden"
+                                            onclick={stopClose}>
+                                        </lightning-input>
+                                        <!-- Dropdown List -->
+                                        <template if:true={showObjectDropdown}>
+                                            <div lwc:if={searchedObjects.length}
+                                                class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                                                role="listbox">
+                                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                                    <template for:each={searchedObjects} for:item="searchResult">
+                                                        <li key={searchResult.value} data-value={searchResult.apiname}
+                                                            data-label={searchResult.label} role="presentation"
+                                                            onclick={selectObject} class="slds-listbox__item">
+                                                            <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                                                                role="option" data-value={searchResult.apiname}
+                                                                data-label={searchResult.label} onclick={selectObject}>
+                                                                <span class="slds-media__body"
+                                                                    data-value={searchResult.apiname}
+                                                                    data-label={searchResult.label}
+                                                                    onclick={selectObject}>
+                                                                    <span class="slds-truncate"
+                                                                        title={searchResult.label}
+                                                                        data-value={searchResult.apiname}
+                                                                        data-label={searchResult.label}
+                                                                        onclick={selectObject}>
+                                                                        {searchResult.label}
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                    </template>
+                                                </ul>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="section-container slds-m-top_medium slds-size--1-of-2">
+                                <div class="section-container slds-m-top_medium slds-size--1-of-1">
+                                    <div class="section-label">{labels.LBL_Source}</div>
+                                    <lightning-input label="Source:" value={selectedPageSettings.source}
+                                        onchange={handleTemplateSourceChange} variant="label-hidden">
+                                    </lightning-input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                            </div>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab label={labels.LBL_TopLeftSettingsTitle} class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <div>
+                                <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                    <div class="sectionTitle slds-media__body">{labels.LBL_TopLeftSettingsTitle}</div>
+                                    <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                        label={labels.LBL_Save} onclick={handleSave}>
+                                    </lightning-button>
+                                </div>
+                                <div class="label">{labels.LBL_TopLeftCornerDetails}</div>
+                    <div class="slds-grid slds-m-top_medium">
+                        <div class="section-container  slds-size--1-of-2">
+                            <div class="section-label">{labels.LBL_HeaderFields}</div>
+                            <lightning-dual-listbox class="slds-size--2-of-3" name="fields" label=""
+                                source-label="Available" selected-label="Selected" options={fieldNameOptions}
+                                onchange={handleChange}
+                                value={selectedPageSettings.topLeftCornerFields}></lightning-dual-listbox>
+                        </div>
+                        <!-- Icon Section -->
+                        <div class="slds-size--1-of-2">
+                            <div class="section-container slds-m-top_medium">
+                                <div class="section-label"> {labels.LBL_PrimaryIcon} </div>
+                                <lightning-radio-group name="iconOptions1" variant="label-hidden" options={iconOptions}
+                                    value={selectedPageSettings.topLeftCornerLogo1.isStaticRessource} type="radio"
+                                    data-icon="topLeftLogo1" onchange={topLeftIconsChange}>
+                                </lightning-radio-group>
+
+                                <template if:true={selectedPageSettings.topLeftCornerLogo1.isStaticRessource}>
+                                    <lightning-input class="slds-size--1-of-3" placeholder="/resource/"
+                                        value={selectedPageSettings.topLeftCornerLogo1.value}
+                                        data-icon="topLeftLogo1Value" onchange={handleIconsChange}
+                                        variant="label-hidden">
+                                    </lightning-input>
+                                </template>
+                                <template if:false={selectedPageSettings.topLeftCornerLogo1.isStaticRessource}>
+                                    <lightning-combobox class="slds-size--1-of-3" name="fieldSelector"
+                                        value={selectedPageSettings.topLeftCornerLogo1.value} placeholder=""
+                                        options={fieldNameOptions} data-icon="topLeftLogo1Value"
+                                        onchange={handleIconsChange} variant="label-hidden">
+                                    </lightning-combobox>
+                                </template>
+                            </div>
+                            <div class="section-container slds-m-top_medium">
+                                <div class="section-label">{labels.LBL_SecondaryIcon} </div>
+                                <lightning-radio-group name="iconOptions2" variant="label-hidden" options={iconOptions}
+                                    value={selectedPageSettings.topLeftCornerLogo2.isStaticRessource} type="radio"
+                                    data-icon="topLeftLogo2" onchange={topLeftIconsChange}>
+                                </lightning-radio-group>
+                                <template if:true={selectedPageSettings.topLeftCornerLogo2.isStaticRessource}>
+                                    <lightning-input class="slds-size--1-of-3" placeholder="/resource/"
+                                        value={selectedPageSettings.topLeftCornerLogo2.value}
+                                        data-icon="topLeftLogo2Value" onchange={handleIconsChange}
+                                        variant="label-hidden">
+                                    </lightning-input>
+                                </template>
+                                <template if:false={selectedPageSettings.topLeftCornerLogo2.isStaticRessource}>
+                                    <lightning-combobox class="slds-size--1-of-3" name="fieldSelector"
+                                        value={selectedPageSettings.topLeftCornerLogo2.value} placeholder=""
+                                        options={fieldNameOptions} data-icon="topLeftLogo2Value"
+                                        onchange={handleIconsChange} variant="label-hidden">
+                                    </lightning-combobox>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                            </div>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab label={labels.LBL_TopRightCornerSettingsTitle} class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <div>
+                                <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                    <div class="sectionTitle slds-media__body">{labels.LBL_TopRightCornerSettingsTitle}</div>
+                                    <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                        label={labels.LBL_Save} onclick={handleSave}>
+                                    </lightning-button>
+                                </div>
+                    <div class="slds-grid slds-m-top_medium">
+                        <!-- Icon Section -->
+                        <div class="section-container  slds-size--1-of-2">
+
+                            <div class="section-label">{labels.LBL_StatusIcon}</div>
+                            <lightning-radio-group name="iconOptions3" variant="label-hidden" options={iconOptions}
+                                value={selectedPageSettings.statusIcon.isStaticRessource} type="radio"
+                                data-icon="topRightLogo1" onchange={topRightIconsChange}>
+                            </lightning-radio-group>
+                            <template if:true={selectedPageSettings.statusIcon.isStaticRessource}>
+                                <lightning-input class="slds-size--1-of-3" placeholder="/resource/"
+                                    data-icon="topRightLogo1Value" value={selectedPageSettings.statusIcon.value}
+                                    onchange={handleIconsChange} variant="label-hidden">
+                                </lightning-input>
+                            </template>
+                            <template if:false={selectedPageSettings.statusIcon.isStaticRessource}>
+                                <lightning-combobox class="slds-size--1-of-3" name="fieldSelector"
+                                    value={selectedPageSettings.statusIcon.value} placeholder=""
+                                    data-icon="topRightLogo1Value" options={fieldNameOptions}
+                                    onchange={handleIconsChange} variant="label-hidden">
+                                </lightning-combobox>
+                            </template>
+                        </div>
+                        <div class="slds-size--1-of-2">
+                            <div class="section-container ">
+                                <div class="section-label">{labels.LBL_ActivityLeftLogo}</div>
+                                <lightning-radio-group name="iconOptions4" variant="label-hidden" options={iconOptions}
+                                    value={selectedPageSettings.activityLeftIcon.isStaticRessource} type="radio"
+                                    data-icon="topRightLogo2" onchange={topRightIconsChange}>
+                                </lightning-radio-group>
+                                <template if:true={selectedPageSettings.activityLeftIcon.isStaticRessource}>
+                                    <lightning-input class="slds-size--1-of-3" placeholder="/resource/"
+                                        value={selectedPageSettings.activityLeftIcon.value}
+                                        data-icon="topRightLogo2Value" onchange={handleIconsChange}
+                                        variant="label-hidden">
+                                    </lightning-input>
+                                </template>
+                                <template if:false={selectedPageSettings.activityLeftIcon.isStaticRessource}>
+                                    <lightning-combobox name="fieldSelector" class="slds-size--1-of-3"
+                                        value={selectedPageSettings.activityLeftIcon.value} placeholder=""
+                                        options={fieldNameTMPOptions} data-icon="topRightLogo2Value"
+                                        onchange={handleIconsChange} variant="label-hidden">
+                                    </lightning-combobox>
+                                </template>
+                            </div>
+                            <div class="section-container slds-m-top_medium">
+                                <div class="section-label">{labels.LBL_ActivityRightLogo}</div>
+                                <lightning-radio-group name="iconOptions5" variant="label-hidden" options={iconOptions}
+                                    value={selectedPageSettings.activityRightIcon.isStaticRessource} type="radio"
+                                    data-icon="topRightLogo3" onchange={topRightIconsChange}>
+                                </lightning-radio-group>
+                                <template if:true={selectedPageSettings.activityRightIcon.isStaticRessource}>
+                                    <lightning-input class="slds-size--1-of-3" placeholder="/resource/"
+                                        value={selectedPageSettings.activityRightIcon.value} variant="label-hidden"
+                                        data-icon="topRightLogo3Value" onchange={handleIconsChange}>
+                                    </lightning-input>
+                                </template>
+                                <template if:false={selectedPageSettings.activityRightIcon.isStaticRessource}>
+                                    <lightning-combobox class="slds-size--1-of-3" name="fieldSelector"
+                                        value={selectedPageSettings.activityRightIcon.value} placeholder=""
+                                        options={fieldNameTMPOptions} data-icon="topRightLogo3Value"
+                                        onchange={handleIconsChange} variant="label-hidden">
+                                    </lightning-combobox>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-m-top_medium">
+                        <div class="section-container slds-size--1-of-2">
+                            <div class="section-label">{labels.LBL_TopRightFields}</div>
+                            <lightning-dual-listbox class="slds-size--2-of-3" name="fields" label=""
+                                source-label="Available" selected-label="Selected" options={fieldNameOptions}
+                                onchange={handleRightFieldsChange}
+                                value={selectedPageSettings.topRightCornerFields}></lightning-dual-listbox>
+                        </div>
+                        <div class="section-container slds-size--1-of-2">
+                            <div class="section-label">{labels.LBL_ActivityFields}</div>
+                            <lightning-dual-listbox class="slds-size--2-of-3" name="fields" label=""
+                                source-label="Available" selected-label="Selected" options={fieldNameTMPOptions}
+                                onchange={handleRightFields2Change}
+                                value={selectedPageSettings.activityFields}></lightning-dual-listbox>
+                        </div>
+                    </div>
+                            </div>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab label={labels.LBL_TaskSettingsTitle} class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <div>
+                                <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                    <div class="sectionTitle slds-media__body">{labels.LBL_TaskSettingsTitle}</div>
+                                    <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                        label={labels.LBL_Save} onclick={handleSave}>
+                                    </lightning-button>
+                                </div>
+                    <div class="label">{labels.LBL_TaskSectionDetails}</div>
+                    <div class=" slds-m-top_medium slds-size--1-of-2">
+                        <div class="section-container slds-m-top_medium slds-size--1-of-1">
+                            <div class="section-label">{labels.LBL_AddTaskFlow}</div>
+                            <lightning-combobox class="slds-size--1-of-3" name="flowCombobox" variant="label-hidden"
+                                value={selectedPageSettings.newTaskFlow} placeholder="Select Flow"
+                                options={screenFlowOptions} onchange={handleNewFlowChange}>
+                            </lightning-combobox>
+                        </div>
+                        <div class="section-container slds-m-top_medium slds-size--1-of-1">
+                            <div class="section-label">{labels.LBL_TaskFields}</div>
+                            <lightning-dual-listbox class="slds-size--2-of-3" name="tasks" variant="label-hidden"
+                                value={selectedPageSettings.taskFields} source-label="Available" max="3"
+                                selected-label="Selected" options={taskNameOptions} onchange={handleTasks}>
+                            </lightning-dual-listbox>
+                        </div>
+                    </div>
+                            </div>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab label={labels.LBL_RelatedInformations} class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <div>
+                                <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                    <div class="sectionTitle slds-media__body">{labels.LBL_RelatedInformations}</div>
+                                    <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                        label={labels.LBL_Save} onclick={handleSave}>
+                                    </lightning-button>
+                                </div>
+                    <div class="label">{labels.LBL_RelatedInformationAgg}</div>
+                    <div class="negoptim-tablesection slds-m-top_medium">
+                        <table class="slds-table slds-table_bordered slds-border--left slds-border--right slds-no-row-hover">
+                            <tr class="table-header">
+                                <th class="table-th">{labels.LBL_Label}</th>
+                                <th class="table-th">{labels.LBL_Field}</th>
+                                <th class="table-th th-w10"></th>
+                            </tr>
+                            <tbody>
+                                <tr style="text-align: center;">
+                                    <td class="table-td td-w30">
+                                        <lightning-input value={selectedPageSettings.relatedInformations.label}
+                                            data-field="label" onchange={handleRelatedInformationsChange}
+                                            variant="label-hidden"></lightning-input>
+                                    </td>
+                                    <td class="table-td td-w30">
+                                        <lightning-combobox options={relationshipFieldOptions}
+                                            value={selectedPageSettings.relatedInformations.parentRelationshipApiName}
+                                            onchange={handleRelatedInformationsRelationshipChange}
+                                            variant="label-hidden"></lightning-combobox>
+                                    </td>
+                                    <td class="table-td td-5">
+                                        <lightning-button-icon icon-name="utility:settings" size="small"
+                                            onclick={openRelatedInformationsPopup}>
+                                        </lightning-button-icon>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                            </div>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab label={labels.LBL_BottomLeftCornerSettingsTitle} class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <div>
+                                <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                    <div class="sectionTitle slds-media__body">{labels.LBL_BottomLeftCornerSettingsTitle}</div>
+                                    <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                        label={labels.LBL_Save} onclick={handleSave}>
+                                    </lightning-button>
+                                </div>
+                    <div class="slds-grid slds-m-top_medium">
+                        <div class="section-container  slds-size--1-of-2">
+                            <div class="section-label">{labels.LBL_SideBarFields}</div>
+                            <lightning-dual-listbox class="slds-size--2-of-3" name="fields" label=""
+                                source-label="Available" selected-label="Selected" options={fieldNameOptions}
+                                onchange={handleButtomLeftFieldsChange}
+                                value={selectedPageSettings.bottomLeftCornerFields}></lightning-dual-listbox>
+                        </div>
+                        <!-- Logo Section -->
+                        <div class="slds-size--1-of-2">
+                            <div class="section-container slds-m-top_medium">
+                                <div class="section-label"> {labels.LBL_PrimaryIcon} </div>
+                                <lightning-radio-group name="iconOptions6" variant="label-hidden" options={iconOptions}
+                                    value={selectedPageSettings.bottomLeftCornerLogo1.isStaticRessource} type="radio"
+                                    data-icon="bottomLogo1" onchange={bottomIconsChange}>
+                                </lightning-radio-group>
+                                <template if:true={selectedPageSettings.bottomLeftCornerLogo1.isStaticRessource}>
+                                    <lightning-input class="slds-size--1-of-3" placeholder="/resource/"
+                                        value={selectedPageSettings.bottomLeftCornerLogo1.value}
+                                        data-icon="bottomLogo1Value" onchange={handleIconsChange}
+                                        variant="label-hidden">
+                                    </lightning-input>
+                                </template>
+                                <template if:false={selectedPageSettings.bottomLeftCornerLogo1.isStaticRessource}>
+                                    <lightning-combobox class="slds-size--1-of-3" name="fieldSelector"
+                                        value={selectedPageSettings.bottomLeftCornerLogo1.value} placeholder=""
+                                        options={fieldNameOptions} data-icon="bottomLogo1Value"
+                                        onchange={handleIconsChange} variant="label-hidden">
+                                    </lightning-combobox>
+                                </template>
+                            </div>
+                            <div class="section-container slds-m-top_medium">
+                                <div class="section-container slds-m-top_medium slds-size--1-of-1">
+                                    <div class="section-label"> {labels.LBL_SecondaryIcon} </div>
+                                    <lightning-radio-group name="iconOptions7" variant="label-hidden"
+                                        options={iconOptions}
+                                        value={selectedPageSettings.bottomLeftCornerLogo2.isStaticRessource}
+                                        type="radio" data-icon="bottomLogo2" onchange={bottomIconsChange}>
+                                    </lightning-radio-group>
+                                    <template if:true={selectedPageSettings.bottomLeftCornerLogo2.isStaticRessource}>
+                                        <lightning-input class="slds-size--1-of-3" placeholder="/resource/"
+                                            value={selectedPageSettings.bottomLeftCornerLogo2.value}
+                                            data-icon="bottomLogo2Value" onchange={handleIconsChange}
+                                            variant="label-hidden">
+                                        </lightning-input>
+                                    </template>
+                                    <template if:false={selectedPageSettings.bottomLeftCornerLogo2.isStaticRessource}>
+                                        <lightning-combobox class="slds-size--1-of-3" name="fieldSelector"
+                                            value={selectedPageSettings.bottomLeftCornerLogo2.value} placeholder=""
+                                            options={fieldNameOptions} data-icon="bottomLogo2Value"
+                                            onchange={handleIconsChange} variant="label-hidden">
+                                        </lightning-combobox>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                            </div>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab label={labels.LBL_ConfiguringfieldsTitle} class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <div>
+                                <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                    <div class="sectionTitle slds-media__body">{labels.LBL_ConfiguringfieldsTitle}</div>
+                                    <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                        label={labels.LBL_Save} onclick={handleSave}>
+                                    </lightning-button>
+                                </div>
+                    <div class="label">{labels.LBL_ConfiguringfieldsDetails}</div>
+                    <div class="slds-grid section-container slds-m-top--medium ">
+                        <div class="section-label">{labels.LBL_EditMode} </div>
+                        <lightning-input type="toggle" checked={selectedPageSettings.isFlowMode}
+                            onchange={handleToggleChange} message-toggle-active={labels.LBL_EditModeFlow}
+                            message-toggle-inactive={labels.LBL_EditModeManual} variant="label-hidden">
+                        </lightning-input>
+                        <template if:true={isFlowMode}>
+                            <lightning-combobox value={selectedPageSettings.selectedFlow} options={screenFlowOptions}
+                                onchange={handleFlowChange} class="comboBox" variant="label-hidden">
+                            </lightning-combobox>
+                        </template>
+                    </div>
+                    <div class="section-container slds-m-top_medium">
+                        <div class="section-container slds-m-top_medium slds-size--1-of-1">
+                            <div class="section-label"> {labels.LBL_HeaderField} </div>
+                            <lightning-input type="toggle" checked={selectedPageSettings.headerField.showHeaderField}
+                                onchange={handleHeaderFieldToggle} message-toggle-active="Show"
+                                message-toggle-inactive="Hide" variant="label-hidden">
+                            </lightning-input>
+                            <template if:true={selectedPageSettings.headerField.showHeaderField}>
+                                <div class="slds-box slds-m-top_small slds-size--1-of-3">
+                                    <!-- Field Name -->
+                                    <lightning-combobox label={labels.LBL_FieldName}
+                                        value={selectedPageSettings.headerField.fieldName} options={fieldNameOptions}
+                                        placeholder="" onchange={handleFirstFieldChange} data-field="fieldName">
+                                    </lightning-combobox>
+                                    <!-- Mandatory -->
+                                    <lightning-input type="radio" name="headerFieldAccess" label={labels.LBL_Mandatory}
+                                        onchange={handleFirstFieldChange}
+                                        checked={selectedPageSettings.headerField.isMandatory} data-field="accessMode"
+                                        value="mandatory">
+                                    </lightning-input>
+                                    <!-- Read-Only -->
+                                    <lightning-input type="radio" name="headerFieldAccess" label={labels.LBL_ReadOnly}
+                                        onchange={handleFirstFieldChange}
+                                        checked={selectedPageSettings.headerField.isReadOnly} data-field="accessMode"
+                                        value="readOnly">
+                                    </lightning-input>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <!-- Rows Per Template on same line -->
+                    <div class="slds-m-top_medium section-container">
+                        <div class="section-label">{labels.LBL_RowsPerTemp} </div>
+                        <lightning-combobox class="slds-size--1-of-3" value={rowsPerTemplate}
+                            onchange={handleRowsChange} options={rowOptions} placeholder="">
+                        </lightning-combobox>
+                    </div>
+                    <!-- Fields Configuration (Only if rowsPerTemplate is set) -->
+                    <template if:true={showNewFieldConfig}>
+                        <template if:true={rowsPerTemplate}>
+                            <template for:each={fieldsPerRowList} for:item="row" for:index="rowindex">
+                                <div key={row.rowKey} class="slds-m-top_medium  slds-border--top slds-p-top--small">
+                                    <!-- Field Count Dropdown -->
+                                    <div class="section-container">
+                                        <div class="section-label">{labels.LBL_FieldsPerRow} {row.rowNumber} </div>
+                                        <lightning-combobox label={row.label} value={row.selectedFieldCount}
+                                            options={fieldCountOptions} placeholder="" data-index={rowindex}
+                                            onchange={handleFieldCountChange} class="slds-size--1-of-3">
+                                        </lightning-combobox>
+                                    </div>
+                                    <!-- Fields Grid (3 per row) -->
+                                    <div class="slds-m-around--large slds-grid" style="flex-wrap: wrap; gap: 1rem; ">
+                                        <template for:each={row.displayFields} for:item="field" for:index="colindex">
+                                            <div key={field.fieldKey} class="slds-box  notEmpty " style="min-width:30%">
+                                                <!-- Field Name -->
+                                                <lightning-combobox label={labels.LBL_FieldName} value={field.fieldName}
+                                                    options={fieldNameOptions} placeholder="" data-rowindex={rowindex}
+                                                    data-colindex={colindex} onchange={handleFieldChange}
+                                                    data-field="fieldName">
+                                                </lightning-combobox>
+                                                <!-- Mandatory -->
+                                                <lightning-input type="radio" label={labels.LBL_Mandatory}
+                                                    name={field.fieldKey} data-rowindex={rowindex}
+                                                    data-colindex={colindex} checked={field.isMandatory}
+                                                    onchange={handleFieldChange} data-field="accessMode"
+                                                    value="mandatory">
+                                                </lightning-input>
+                                                <!-- Read-Only -->
+                                                <lightning-input type="radio" label={labels.LBL_ReadOnly}
+                                                    name={field.fieldKey} data-rowindex={rowindex}
+                                                    data-colindex={colindex} checked={field.isReadOnly}
+                                                    onchange={handleFieldChange} data-field="accessMode"
+                                                    value="readOnly">
+                                                </lightning-input>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                    </template>
+                            </div>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab label={labels.LBL_ButtonActionTitle} class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <div>
+                                <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                    <div class="sectionTitle slds-media__body">{labels.LBL_ButtonActionTitle}</div>
+                                    <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                        label={labels.LBL_Save} onclick={handleSave}>
+                                    </lightning-button>
+                                </div>
+                    <div class="label">{labels.LBL_ButtonActionDetails}</div>
+                    <div class="slds-grid slds-p-bottom_xx-small">
+                        <div class="slds-col slds-has-flexi-truncate"></div>
+                        <lightning-button label={labels.LBL_AddButton} onclick={handleAdd} data-btn="yes"
+                            variant="brand" class="slds-float_right add-m" icon-name="utility:add">
+                        </lightning-button>
+                    </div>
+                    <div class="negoptim-tablesection">
+                        <table class="slds-table slds-table_bordered slds-border--left slds-border--right slds-no-row-hover">
+                            <tr class="table-header">
+                                <th class="table-th td-5"></th>
+                                <th class="table-th">
+                                    {labels.LBL_ButtonLabel}
+                                </th>
+                                <th class="table-th">
+                                    {labels.LBL_Color} </th>
+                                <th class="table-th">
+                                    {labels.LBL_AssosciatedFlow} </th>
+                            </tr>
+                            <tbody>
+                                <template for:each={selectedPageSettings.actionButtons} for:item="btn"
+                                    for:index="index">
+                                    <tr key={btn.buttonKey} style="text-align: center;">
+                                        <td class="table-td td-5">
+                                            <div class="slds-icon_container edit-icon custom-icon-delete">
+                                                <lightning-icon icon-name='utility:delete' size="x-small"
+                                                    data-index={index} onclick={handleDelete} class="delete-trans"
+                                                    data-btn="yes">
+                                                </lightning-icon>
+                                            </div>
+                                        </td>
+                                        <td class="table-td td-w30">
+                                            <lightning-input value={btn.label} data-index={index} data-field="label"
+                                                onchange={handleChangeButtonSettings} variant="label-hidden">
+                                            </lightning-input>
+                                        </td>
+                                        <td class="table-td td-15">
+                                            <lightning-input class="input-p" type="color" data-field="color"
+                                                value={btn.color} data-index={index}
+                                                onchange={handleChangeButtonSettings}>
+                                            </lightning-input>
+                                        </td>
+                                        <td class="section-check-box table-td td-w30">
+                                            <lightning-combobox class="slds-p-left--x-small slds-size--10-of-12"
+                                                placeholder="" value={btn.flow} name="month" label="Status"
+                                                variant="label-hidden" options={screenFlowOptions} data-index={index}
+                                                data-field="flow" onchange={handleChangeButtonSettings}
+                                                required></lightning-combobox>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                            </div>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab label={labels.LBL_TabSectionTitle} class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <div>
+                                <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                    <div class="sectionTitle slds-media__body">{labels.LBL_TabSectionTitle}</div>
+                                    <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                        label={labels.LBL_Save} onclick={handleSave}>
+                                    </lightning-button>
+                                </div>
+                    <div class="label">{labels.LBL_TabSectionDetails}</div>
+                    <div class="slds-grid slds-p-bottom_xx-small">
+                        <div class="slds-col slds-has-flexi-truncate"></div>
+                        <lightning-button label={labels.LBL_AddTab} onclick={handleAdd} variant="brand"
+                            class="slds-float_right add-m" icon-name="utility:add">
+                        </lightning-button>
+                    </div>
+                    <div class="negoptim-tablesection">
+                        <table class="slds-table slds-table_bordered slds-border--left slds-border--right slds-no-row-hover">
+                            <tr class="table-header">
+                                <th class="table-th td-5"></th>
+                                <th class="table-th">
+                                    {labels.LBL_TabLabel}
+                                </th>
+                                <th class="table-th">
+                                    {labels.LBL_ContentType}
+                                </th>
+                                <th class="table-th">
+                                    {labels.LBL_Content}
+                                </th>
+                                <th class="table-th th-w10">
+                                </th>
+                            </tr>
+                            <tbody>
+                                <template for:each={selectedPageSettings.tabs} for:item="btn" for:index="index">
+                                    <tr key={btn.tabKey} style="text-align: center;">
+                                        <td class="table-td td-5">
+                                            <div class="slds-icon_container edit-icon custom-icon-delete">
+                                                <lightning-icon icon-name='utility:delete' size="x-small"
+                                                    data-index={index} onclick={handleDelete} class="delete-trans">
+                                                </lightning-icon>
+                                            </div>
+                                        </td>
+                                        <td class="table-td td-w30">
+                                            <lightning-input value={btn.label} data-index={index} data-field="label"
+                                                onchange={handleChangeTabSettings} variant="label-hidden">
+                                            </lightning-input>
+                                        </td>
+                                        <td class="table-td">
+                                            <lightning-combobox variant="label-hidden" data-index={index}
+                                                data-field="contentType" onchange={handleChangeSettings}
+                                                value={btn.contentType} options={redirectionOptions} label="Status">
+                                            </lightning-combobox>
+                                        </td>
+                                        <td class="table-td">
+                                            <template if:true={btn.isGridFile}>
+                                                <lightning-combobox value={btn.content} variant="label-hidden"
+                                                    options={gridSettings} data-index={index} data-field="content"
+                                                    onchange={handleChangeTabSettings}>
+                                                </lightning-combobox>
+                                            </template>
+                                            <template if:false={btn.isGridFile}>
+                                                <lightning-combobox variant="label-hidden" data-index={index}
+                                                    data-field="content" onchange={handleChangeTabSettings}
+                                                    value={btn.content} options={fileDirectoryData}>
+                                                </lightning-combobox>
+                                            </template>
+                                        </td>
+                                        <td class="table-td td-5">
+                                            <template if:true={isGridContentType}>
+                                                <lightning-button-icon icon-name="utility:settings" size="small"
+                                                    data-index={index} onclick={popups.tabParams.open}>
+                                                </lightning-button-icon>
+                                            </template>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                            </div>
+                        </div>
+                    </lightning-tab>
+                </lightning-tabset>
+            </template>
+        </div>
+    </div>
+    <template if:true={popups.tabParams.isOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-button slds-button_icon slds-modal__close">
+                    <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                        onclick={popups.tabParams.close}></lightning-button-icon>
+                </div>
+                <div class="slds-modal__header">
+                    <h1 class="slds-modal__title slds-hyphenate">Configuration</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <template for:each={popups.tabParams.params} for:item="param" for:index="paramindex">
+                        <div key={param.paramKey} class="slds-m-bottom_small">
+                            <template lwc:if={param.isCombobox}>
+                                <lightning-combobox data-name={param.name} data-index={paramindex} label={param.label}
+                                    value={param.value} field-level-help={param.description}
+                                    options={param.datasourceList} onchange={popups.tabParams.handleTabParamChange}
+                                    required={param.required}></lightning-combobox>
+                            </template>
+                            <template lwc:elseif={param.isString}>
+                                <lightning-input data-name={param.name} data-index={paramindex} label={param.label}
+                                    value={param.value} field-level-help={param.description}
+                                    onchange={popups.tabParams.handleTabParamChange}
+                                    required={param.required}></lightning-input>
+                            </template>
+                            <template lwc:elseif={param.isBoolean}>
+                                <lightning-input type="checkbox" data-name={param.name} data-index={paramindex}
+                                    label={param.label} checked={param.value} field-level-help={param.description}
+                                    onchange={popups.tabParams.handleTabParamChange} required={param.required}>
+                                </lightning-input>
+                            </template>
+                            <template lwc:elseif={param.isInteger}>
+                                <lightning-input type="number" data-name={param.name} data-index={paramindex}
+                                    label={param.label} value={param.value} field-level-help={param.description}
+                                    onchange={popups.tabParams.handleTabParamChange}
+                                    required={param.required}></lightning-input>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+                <div class="slds-modal__footer">
+                    <div class="slds-grid slds-grid_align-end slds-gutters_x-small">
+                        <div class="slds-col">
+                            <lightning-button label={labels.Cancel} onclick={popups.tabParams.close}>
+                            </lightning-button>
+                        </div>
+                        <div class="slds-col">
+                            <lightning-button label={labels.LBL_Save} variant="brand"
+                                onclick={popups.tabParams.confirm}>
+                            </lightning-button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+    <template if:true={popups.relatedInformations.isOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open related-informations-modal">
+            <div class="slds-modal__container related-informations-modal__container">
+                <div class="slds-button slds-button_icon slds-modal__close">
+                    <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                        onclick={closeRelatedInformationsPopup}></lightning-button-icon>
+                </div>
+                <div class="slds-modal__header">
+                    <h1 class="slds-modal__title slds-hyphenate">{labels.LBL_RelatedInformationSettings}</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div class="section-label slds-m-bottom_small">{labels.LBL_Filter} (AND)</div>
+                    <template for:each={popups.relatedInformations.filters} for:item="filter" for:index="index">
+                        <div key={filter.rowKey}
+                            class="related-informations-filter-row slds-grid slds-gutters_medium slds-m-bottom_small slds-grid_vertical-align-center">
+                            <div class="slds-col slds-size_4-of-12 related-informations-filter-field">
+                                <template if:true={relatedInformationsFilterObjectName}>
+                                    <c-field-selector-input object-name={relatedInformationsFilterObjectName}
+                                        value={filter.fieldName} data-index={index}
+                                        onfieldselect={handleRelatedInformationsFieldSelect}
+                                        onfieldrestore={handleRelatedInformationsFieldRestore}>
+                                    </c-field-selector-input>
+                                </template>
+                                <template if:false={relatedInformationsFilterObjectName}>
+                                    <lightning-input variant="label-hidden" disabled
+                                        placeholder={labels.LBL_SelectObject}>
+                                    </lightning-input>
+                                </template>
+                            </div>
+                            <div class="slds-col slds-size_3-of-12 related-informations-filter-operator">
+                                <lightning-combobox options={filter.operationsOptions} value={filter.operator}
+                                    data-index={index} data-field="operator"
+                                    onchange={handleRelatedInformationsFilterChange}
+                                    variant="label-hidden"></lightning-combobox>
+                            </div>
+                            <div class="slds-col slds-size_4-of-12 related-informations-filter-value">
+                                <template if:false={filter.disableValue}>
+                                <template if:true={filter.isReference}>
+                                    <lightning-record-edit-form object-api-name={filter.previousObject}>
+                                        <lightning-input-field field-name={filter.refFieldName} value={filter.value}
+                                            data-index={index} data-field="value"
+                                            onchange={handleRelatedInformationsFilterChange} variant="label-hidden">
+                                        </lightning-input-field>
+                                    </lightning-record-edit-form>
+                                </template>
+                                <template if:false={filter.isReference}>
+                                    <template if:true={filter.isPicklist}>
+                                        <lightning-combobox options={filter.picklistValues} value={filter.value}
+                                            data-index={index} data-field="value"
+                                            onchange={handleRelatedInformationsFilterChange} variant="label-hidden">
+                                        </lightning-combobox>
+                                    </template>
+                                    <template if:false={filter.isPicklist}>
+                                        <lightning-input type={filter.inputType} value={filter.value}
+                                            data-index={index} data-field="value"
+                                            onchange={handleRelatedInformationsFilterChange} variant="label-hidden">
+                                        </lightning-input>
+                                    </template>
+                                </template>
+                                </template>
+                            </div>
+                            <!-- <div class="slds-icon_container edit-icon custom-icon-delete slds-p-left--x-small">
+                                <lightning-icon icon-name='utility:delete' size="x-small" data-index={index}
+                                    onclick={handleDelete} class="delete-trans" data-btn="relatedInfoFilter">
+                                </lightning-icon>
+                            </div> -->
+                            <div class="slds-icon_container edit-icon custom-icon-delete slds-col slds-size_1-of-12">
+                                <lightning-icon icon-name='utility:delete' size="x-small"
+                                    data-index={index} onclick={handleDelete} class="delete-trans"
+                                    data-btn="yes">
+                                </lightning-icon>
+                            </div>
+                        </div>
+                    </template>
+                    <lightning-button label={labels.LBL_AddFilter} icon-name="utility:add" icon-position="left"
+                        onclick={addRelatedInformationsFilterRow}></lightning-button>
+                </div>
+                <div class="slds-modal__footer">
+                    <div class="slds-grid slds-grid_align-end slds-gutters_x-small">
+                        <div class="slds-col">
+                            <lightning-button label={labels.Cancel}
+                                onclick={closeRelatedInformationsPopup}></lightning-button>
+                        </div>
+                        <div class="slds-col">
+                            <lightning-button label={labels.LBL_Save} variant="brand"
+                                onclick={confirmRelatedInformationsPopup}></lightning-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

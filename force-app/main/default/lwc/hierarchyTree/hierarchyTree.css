@@ -1,0 +1,248 @@
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+.pageHeader {
+    padding: 0;
+}
+.loader:after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+.headerTitle {
+    font-size: 0.75rem;
+    line-height: 1.25;
+    color: var(--slds-g-color-neutral-base-30, rgb(68, 68, 68));
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem;
+}
+.pr0 {
+    padding-right: 0;
+    margin-right: 0;
+}
+.pm0 {
+    padding: 0;
+    margin: 0;
+}
+.filterInput {
+    width: 25vh;
+}
+.filterInputS {
+    width: 15vh;
+}
+.mainContainer {
+    min-height: 10vh;
+    height: 100%;
+    position: relative;
+}
+.filter-panel {
+    position: relative;
+}
+.filterButtons {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+.saveRow {
+    text-align: center;
+    background: rgb(243, 243, 243);
+}
+.color1 {
+    background: #0d807d;
+    color: white;
+}
+tr.newLoading {
+    background-image: linear-gradient(to right, transparent 50%, rgba(0, 0, 0, 0.08) 50%);
+    background-size: 200% 100%;
+    animation: newLoading 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.firstColumn {
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+.secondColumn {
+    position: sticky;
+    z-index: 4;
+}
+.thirdColumn {
+    position: sticky;
+    z-index: 4;
+}
+.fourthColumn {
+    position: sticky;
+    z-index: 4;
+}
+tr.newLoading td {
+    opacity: 0.45;
+    pointer-events: none;
+}
+.whiteBg {
+    background: white;
+}
+.main-table tr:focus-within {
+    border: black solid;
+}
+
+@keyframes newLoading {
+    0% {
+        background-position: 0;
+    }
+
+    50% {
+        background-position: -30%;
+    }
+
+    80% {
+        background-position: -100%;
+    }
+
+    100% {
+        background-position: -200%;
+    }
+}
+.color2 {
+    color: white;
+    background: #8cc58a;
+}
+.loadingContainer {
+    width: 100%;
+}
+.alignRight {
+    justify-self: end;
+}
+.buttonSection {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: end;
+    align-items: center;
+    justify-content: space-between;
+}
+.alignRight {
+    justify-self: end;
+}
+
+.rows {
+    height: 30px;
+}
+.noDataText {
+    font-size: larger;
+    font-weight: 600;
+    width: 100%;
+}
+h1 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.newRow td {
+    background-color: rgb(248 255 150 / 32%);
+}
+
+.filter-panel {
+    position: sticky;
+    right: 0;
+    z-index: 7;
+    background: white;
+}
+.stickyTop {
+    top: 0;
+    z-index: 6;
+}
+.buttonTd {
+    text-align: left;
+}
+.pageBody {
+    min-height: 75px;
+    position: relative;
+    border-radius: 0;
+    border: 0;
+}
+.headerTds {
+    padding: 5px;
+    text-align: center;
+}
+.truncate {
+    width: 300px;
+    white-space: break-spaces;
+}
+th {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+}
+.spinnerDiv {
+    min-height: 10vh;
+}
+.pageHeader {
+    position: relative;
+    border-bottom: 0;
+    border-radius: 0;
+}
+
+.tableDiv {
+    height: 100%;
+}
+
+.pgTable {
+    border-radius: 0;
+}
+
+.largeWidth {
+    width: 50%;
+}
+
+.medWidth {
+    border-left: 0.5px #ffffff4a solid;
+}
+.blankCell {
+    background: repeating-linear-gradient(45deg, #7ad4ef 10px, #ffffff 15px);
+    width: 100%;
+    height: 15px;
+    display: inline-block;
+}
+.categoryRow td {
+    background-color: rgb(89, 89, 89) !important;
+    color: white;
+}
+.consoCell {
+    background-color: #fbefdf !important;
+}
+
+.hierarchyLink{
+    color: #0070d2 !important;
+}
+
+.hierarchyLink:hover {
+    text-decoration: underline !important;
+    color: #005fb2 !important;
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Statut d&apos;encodage</label>
+    <name>Extraction_Status__c</name>
+    <picklistValues>
+        <masterLabel>Blocked</masterLabel>
+        <translation>Bloqué</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Choice1</masterLabel>
+        <translation><!-- Choice1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Extract</masterLabel>
+        <translation>A Encoder</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Extracted</masterLabel>
+        <translation>Envoyé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>History</masterLabel>
+        <translation><!-- History --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

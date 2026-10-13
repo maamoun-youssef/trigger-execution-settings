@@ -1,0 +1,292 @@
+<template>
+    <div class="slds-card slds-scrollable mainContainer">
+
+        <!-- ─── HEADER ─── -->
+        <div class="main-header slds-border--bottom">
+            <div class="slds-card slds-grid slds-p-around_xx-small slds-page-header themeManagerHeader">
+                <div class="slds-col slds-has-flexi-truncate">
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                            <lightning-icon icon-name="utility:brush"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small">
+                            <p class="slds-text-title slds-line-height_reset">Theme Manager</p>
+                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                <div class="slds-grid">
+                                    <template lwc:if={hasSelectedTheme}>
+                                        {selectedTheme.name}
+                                    </template>
+                                    <template lwc:else>
+                                        Select or create a theme
+                                    </template>
+                                </div>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- ACTION BUTTONS -->
+                <div class="slds-col slds-no-flex slds-grid slds-icon_container">
+                    <template lwc:if={selectedTheme}>
+                        <lightning-button
+                            class="slds-button slds-m-right_x-small"
+                            variant="brand"
+                            label="Save"
+                            onclick={handleSave}
+                            disabled={isSaving}>
+                        </lightning-button>
+                    </template>
+                    <lightning-button
+                        class="slds-button slds-m-right_x-small"
+                        label="New Theme"
+                        title="Create a new theme"
+                        onclick={toggleAddNewTheme}
+                        icon-name="utility:add">
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ─── MAIN CONTENT ─── -->
+        <div class="main-div slds-grid slds-scrollable">
+
+            <!-- Loading spinner -->
+            <template if:true={loadingData}>
+                <div class="slds-spinner_container">
+                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </template>
+
+            <!-- LEFT: Split view list -->
+            <div class="slds-col slds-size_1-of-4 slds-border_right"
+                 style="background-color: white; height: inherit;">
+                <div class="templatesSplitView slds-split-view_container slds-panel_docked-left slds-is-open"
+                     style="height: -webkit-fill-available;">
+
+                    <div class="slds-panel__header slds-p-around_x-small searchBox" id="filterHeader">
+                        <div style="padding: 0;" class="slds-page-header__col-details">
+                            <lightning-input
+                                type="search"
+                                variant="label-hidden"
+                                autocomplete="off"
+                                placeholder="Search themes..."
+                                onchange={handleSearch}
+                                value={searchTerm}>
+                            </lightning-input>
+                        </div>
+                    </div>
+
+                    <template if:false={filteredThemes.length}>
+                        <div class="slds-align_absolute-center slds-m-vertical_small">
+                            <span class="slds-truncate">No themes to display</span>
+                        </div>
+                    </template>
+
+                    <div class="slds-scrollable--y" if:true={filteredThemes.length}>
+                        <article class="slds-split-view slds-grid slds-grid_vertical slds-scrollable">
+                            <div class="slds-grid slds-grid_vertical">
+                                <ul aria-multiselectable="true"
+                                    class="slds-scrollable_y"
+                                    role="listbox"
+                                    aria-label="Select a theme.">
+                                    <template for:each={filteredThemes} for:item="theme">
+                                        <li class="slds-split-view__list-item"
+                                            role="presentation"
+                                            key={theme.name}
+                                            data-name={theme.name}
+                                            onclick={handleThemeCardClick}>
+                                            <a href="#"
+                                               role="option"
+                                               data-name={theme.name}
+                                               class="menuItem slds-split-view__list-item-action slds-grow slds-has-flexi-truncate"
+                                               tabindex="0">
+                                                <div class="slds-grid slds-wrap">
+                                                    <div class="theme-swatch" style={theme.swatchStyle}></div>
+                                                    <b class="slds-m-left_x-small">
+                                                        <span class="slds-truncate slds-text-body_regular slds-text-color_default"
+                                                              title={theme.name}>
+                                                            {theme.name}
+                                                        </span>
+                                                    </b>
+                                                </div>
+                                                <div class="slds-grid slds-m-top_xx-small">
+                                                    <span class="slds-truncate slds-text-body_small slds-text-color_weak"
+                                                          title={theme.fontFamily}>
+                                                        {theme.fontLabel}
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Editor + Preview -->
+            <div class="slds-form_stacked slds-col slds-scrollable" if:true={hasSelectedTheme}>
+                <article class="slds-card">
+                    <div class="slds-card__body slds-card__body_inner">
+
+                        <!-- Editor form row -->
+                        <div class="slds-m-bottom_medium slds-grid slds-grid_vertical-align-end slds-wrap">
+                            <div class="slds-col slds-size_1-of-4 slds-p-right_small">
+                                <lightning-input
+                                    label="Theme Name"
+                                    value={selectedTheme.name}
+                                    onchange={handleAttributeChange}
+                                    data-attribute-name="name"
+                                    disabled={disableName}
+                                    required>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_1-of-4 slds-p-right_small">
+                                <lightning-input
+                                    type="color"
+                                    label="Brand Color"
+                                    value={selectedTheme.themeAttributes.brandColor}
+                                    onchange={handleAttributeChange}
+                                    data-attribute-name="brandColor"
+                                    disabled={isSaving}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_1-of-4 slds-p-right_small">
+                                <lightning-input
+                                    type="color"
+                                    label="Background Color"
+                                    value={selectedTheme.themeAttributes.bgColor}
+                                    onchange={handleAttributeChange}
+                                    data-attribute-name="bgColor"
+                                    disabled={isSaving}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_1-of-4">
+                                <lightning-combobox
+                                    label="Border Radius"
+                                    value={selectedTheme.themeAttributes.borderRadius}
+                                    options={radiusOptions}
+                                    onchange={handleAttributeChange}
+                                    data-attribute-name="fontFamily"
+                                    dropdown-alignment="auto"
+                                    disabled={isSaving}>
+                                </lightning-combobox>
+                            </div>
+                        </div>
+
+                        <div class="slds-m-bottom_medium slds-grid slds-grid_vertical-align-end">
+                            <div class="slds-col slds-size_1-of-2 slds-p-right_small">
+                                <lightning-combobox
+                                    label="Font Family"
+                                    value={selectedTheme.themeAttributes.fontFamily}
+                                    options={fontOptions}
+                                    onchange={handleAttributeChange}
+                                    data-attribute-name="borderRadius"
+                                    dropdown-alignment="auto"
+                                    disabled={isSaving}>
+                                </lightning-combobox>
+                            </div>
+                            <div class="slds-col slds-m-left_small">
+                                <lightning-input
+                                    type="toggle"
+                                    label="Show Live Preview"
+                                    checked={showPreview}
+                                    onchange={handlePreviewToggle}
+                                    message-toggle-active=""
+                                    message-toggle-inactive="">
+                                </lightning-input>
+                            </div>
+                        </div>
+
+                        <!-- Live Preview (toggleable) -->
+                       <div data-id="preview-scope">
+                            <div class="slds-m-top_large" lwc:if={showPreview}>
+                                <h3 class="slds-text-heading_small slds-m-bottom_small">Live Preview</h3>
+                                <div class="slds-box slds-p-around_medium cardPreview">
+
+                                    <!-- Banner -->
+                                    <div class="preview-banner">
+                                        <div class="preview-banner__icon">
+                                            <lightning-icon icon-name="utility:money" size="small"></lightning-icon>
+                                        </div>
+                                        <div class="preview-banner__body">
+                                            <p class="preview-banner__eyebrow">Accounting doc</p>
+                                            <h2 class="preview-banner__title">INV25003071</h2>
+                                        </div>
+                                        <div class="preview-banner__actions">
+                                            <lightning-button variant="neutral" label="Print" class="slds-m-right_xx-small"></lightning-button>
+                                            <lightning-button variant="brand" label="Validate"></lightning-button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Table -->
+                                    <div class="preview-table-wrapper slds-m-top_medium">
+                                        <table class="preview-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Detail ID</th>
+                                                    <th>Budget Code</th>
+                                                    <th>Amount excl VAT</th>
+                                                    <th>VAT Rate</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>INVD3012</td>
+                                                    <td>DRV</td>
+                                                    <td>30,000.00</td>
+                                                    <td>0.00%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>INVD3013</td>
+                                                    <td>OPX</td>
+                                                    <td>12,500.00</td>
+                                                    <td>5.00%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>INVD3014</td>
+                                                    <td>CAP</td>
+                                                    <td>8,750.00</td>
+                                                    <td>10.00%</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <template if:true={addNewTheme}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            onclick={toggleAddNewTheme}></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__header">
+                        <h1 class="slds-modal__title slds-hyphenate">Add New Theme</h1>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium modal-content-no-clip">
+                        <lightning-input label="Theme Name" required value={newThemeName}
+                            data-field="name" onchange={handleOnChangeNewTheme} class="slds-m-bottom_small">
+                        </lightning-input>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <lightning-button label='Add New Theme' variant="brand"
+                            onclick={handleAddNewTheme}></lightning-button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+    </div>
+</template>

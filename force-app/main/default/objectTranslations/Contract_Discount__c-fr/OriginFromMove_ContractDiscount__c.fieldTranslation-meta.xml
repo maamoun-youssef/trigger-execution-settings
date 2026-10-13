@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Origin From Move ContractDiscount --></label>
+    <name>OriginFromMove_ContractDiscount__c</name>
+    <relationshipLabel><!-- Lignes contrats (Origin From Move ContractDiscount) --></relationshipLabel>
+</CustomFieldTranslation>

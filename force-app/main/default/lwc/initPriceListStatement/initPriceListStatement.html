@@ -1,0 +1,430 @@
+<template>
+    <div class="mainContainer relativeDiv slds-card" style="overflow: unset;">
+        <template lwc:if={isLoading}>
+            <div class="slds-spinner_container greyBg">
+                <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+            </div>
+        </template>
+        <template if:false={isLoading}>
+            <template if:true={showHeader}>
+                <div data-pls-header="true"
+                    class="header slds-page-header slds-page-header_record-home slds-p-around--xx-small slds-grid">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-p-around_xx-small slds-has-flexi-truncate">
+                            <div class="slds-media slds-no-space slds-grow">
+                                <div
+                                    class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                                    <lightning-icon icon-name="utility:product_warranty_term" class="headerIconColor">
+                                    </lightning-icon>
+                                </div>
+                                <div class="slds-media__body slds-p-around_x-small">
+                                    <p class="slds-text-title slds-line-height_reset">
+                                        {labels.LBL_PriceListStatement}
+                                    </p>
+                                    <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate"
+                                        style="font-size: 15px;">
+                                        {labels.LBL_InitPriceListStatement}
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rightControlsClass " style="display:flex;width:100%;justify-content:right;">
+                        <div class="slds-page-header__control slds-grid slds-m-right--medium"
+                            style="align-items:center">
+                            <lightning-button label={labels.LBL_Send} class="slds-m-left_xx-small slds-button"
+                                onclick={handleOpenInitPriceListPopup} icon-name="utility:send" icon-position="left">
+                            </lightning-button>
+                            <lightning-button-icon icon-name="utility:filterList" class="slds-m-left_xx-small"
+                                variant="border-filled" size="medium" onclick={toggleFilter}
+                                alternative-text={labels.LBL_Filter} title={labels.LBL_Filter}>
+                            </lightning-button-icon>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <!-- MAIN CONTENT (header above) -->
+            <div class="contentWrap slds-grid slds-grid_vertical" style={contentRightInsetStyle}>
+                <!-- BODY: inner scroll host (like PDS) -->
+                <div class="bodyDiv slds-p-horizontal_none" style="flex:1; min-height:0;">
+                    <div class="main-panel slds-size_1-of-1">
+                        <div class="scrollHost slds-scrollable_y negoptim-tablesection relativeDiv"
+                            style="height:100%;">
+                            <table>
+                                <thead class="tableHeader">
+                                    <template for:each={fieldsWrapperList} for:item="field" for:index="index">
+                                        <th key={field.fieldName} class={field.headerClass}>
+                                            <div>{field.fieldLabel}</div>
+                                            <div class="icons-container slds-grid slds-m-right--xxx-small">
+                                                <lightning-icon class="white-icon" if:false={field.isFiltered}
+                                                    size="xx-small" icon-name="utility:filterList"
+                                                    data-field={field.filterKey} onclick={toggleFilterPanel}
+                                                    alternative-text={labels.LBL_Filter} title={labels.LBL_Filter}>
+                                                </lightning-icon>
+                                                <lightning-icon if:true={field.isFiltered} variant="brand"
+                                                    size="xx-small" icon-name="utility:filterList"
+                                                    data-field={field.filterKey} onclick={toggleFilterPanel}
+                                                    alternative-text={labels.LBL_Filter} title={labels.LBL_Filter}>
+                                                </lightning-icon>
+                                                <div class={field.filterPopoverClass}
+                                                    data-filter-field={field.filterKey}>
+                                                    <span style="position: absolute;right: 0;top: 0; z-index: 7;">
+                                                        <lightning-button-icon variant="container" size="small"
+                                                            icon-name="utility:close" data-field={field.filterKey}
+                                                            onclick={toggleFilterPanel}
+                                                            alternative-text={labels.LBL_Close}
+                                                            title={labels.LBL_Close}>
+                                                        </lightning-button-icon>
+                                                    </span>
+                                                    <ul class="slds-dropdown__list" role="menu" aria-label="Show More">
+                                                        <li class="slds-dropdown__item" role="presentation"
+                                                            style="text-align: left;">
+                                                            <!-- SINGLE CONDITIONAL CHAIN (so year range wins) -->
+                                                            <template lwc:if={field.isReferenceText}>
+                                                                <lightning-input name="filter" type="text"
+                                                                    class="slds-p-top_medium" variant="label-hidden"
+                                                                    value={field.fieldSearchValue}
+                                                                    data-field={field.filterKey} data-type="text"
+                                                                    data-nsfield={field.isNSField}
+                                                                    onchange={handleChangeFilter}
+                                                                    placeholder={labels.LBL_InputSearch}>
+                                                                </lightning-input>
+                                                            </template>
+                                                            <!-- Reference Year: dropdowns instead of number inputs -->
+                                                            <template lwc:elseif={field.isYearRange}>
+                                                                <div class="slds-p-top_medium">
+                                                                    <lightning-combobox name="filterYearFrom"
+                                                                        variant="label-hidden" options={yearOptions}
+                                                                        value={field.fieldSearchValue1} data-number="1"
+                                                                        data-type="year" data-field={field.filterKey}
+                                                                        data-nsfield={field.isNSField}
+                                                                        onchange={handleChangeFilter}
+                                                                        placeholder={labels.LBL_From}>
+                                                                    </lightning-combobox>
+                                                                    <lightning-combobox name="filterYearTo"
+                                                                        variant="label-hidden" options={yearOptions}
+                                                                        value={field.fieldSearchValue2} data-number="2"
+                                                                        data-type="year" data-field={field.filterKey}
+                                                                        data-nsfield={field.isNSField}
+                                                                        onchange={handleChangeFilter}
+                                                                        placeholder={labels.LBL_TO}>
+                                                                    </lightning-combobox>
+                                                                </div>
+                                                            </template>
+                                                            <template lwc:elseif={field.isDate}>
+                                                                <div class="filter-grid slds-p-top_medium">
+                                                                    <lightning-input name="filter" type="date"
+                                                                        variant="label-hidden"
+                                                                        value={field.fieldSearchValue1} data-number="1"
+                                                                        data-field={field.filterKey} data-type="date"
+                                                                        data-nsfield={field.isNSField}
+                                                                        onchange={handleChangeFilter}
+                                                                        placeholder={labels.LBL_From}></lightning-input>
+                                                                    <lightning-input name="filter" type="date"
+                                                                        variant="label-hidden"
+                                                                        value={field.fieldSearchValue2} data-number="2"
+                                                                        data-field={field.filterKey} data-type="date"
+                                                                        data-nsfield={field.isNSField}
+                                                                        onchange={handleChangeFilter}
+                                                                        placeholder={labels.LBL_TO}></lightning-input>
+                                                                </div>
+                                                            </template>
+                                                            <template lwc:elseif={field.isPicklist}>
+                                                                <lightning-checkbox-group name="Checkbox Group"
+                                                                    data-nsfield={field.isNSField}
+                                                                    class="slds-p-top_medium " variant="label-hidden"
+                                                                    value={field.selectedValues}
+                                                                    options={field.pickListValues}
+                                                                    onchange={handlePicklistChange}
+                                                                    data-field={field.filterKey}>
+                                                                </lightning-checkbox-group>
+                                                            </template>
+                                                        </li>
+                                                        <li class="slds-has-divider_top-space" role="separator">
+                                                        </li>
+                                                        <div style="width: 100%;">
+                                                            <button type="submit" title={labels.LBL_Apply}
+                                                                onclick={handleApplyFilters}
+                                                                class="slds-button slds-button_brand"
+                                                                style="width:100%">
+                                                                {labels.LBL_Apply}
+                                                            </button>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </th>
+                                    </template>
+                                </thead>
+                                <tbody>
+                                    <template lwc:if={recordsWrapperList.length} for:each={recordsWrapperList}
+                                        for:item="record" for:index="index">
+                                        <template iterator:pls={record.priceListStatements}>
+                                            <tr key={pls.value.Id}>
+                                                <template lwc:if={pls.first}>
+                                                    <template for:each={record.columns} for:item="field"
+                                                        for:index="index">
+                                                        <!-- Nego Scope columns: show ONCE with a rowspan like PDS “Hierarchy” -->
+                                                        <td key={field.Id} style={field.cellstyle}
+                                                            rowspan={record.priceListStatements.length}>
+                                                            <lightning-formatted-number lwc:if={field.isNumberField}
+                                                                value={field.value}
+                                                                minimum-fraction-digits={field.fieldScale}
+                                                                maximum-fraction-digits={field.fieldScale}>
+                                                            </lightning-formatted-number>
+                                                            <template lwc:elseif={field.isReference}>
+                                                                <a href={field.link} target="_blank"
+                                                                    rel="noopener">{field.value}</a>
+                                                            </template>
+                                                            <lightning-input lwc:elseif={field.isBoolean}
+                                                                type="checkbox" class="input-center"
+                                                                variant="label-hidden" checked={field.value} disabled>
+                                                            </lightning-input>
+                                                            <lightning-formatted-date-time lwc:elseif={field.isDate}
+                                                                value={field.value} year="numeric" month="2-digit"
+                                                                day="2-digit"></lightning-formatted-date-time>
+                                                            <template lwc:else>{field.value}</template>
+                                                        </td>
+                                                    </template>
+                                                </template>
+                                                <template for:each={pls.value.columns} for:item="field"
+                                                    for:index="index">
+                                                    <!-- All other (PLS-level) cells render per row -->
+                                                    <td key={field.Id} style={field.cellstyle}>
+                                                        <lightning-formatted-number lwc:if={field.isNumberField}
+                                                            value={field.value}
+                                                            minimum-fraction-digits={field.fieldScale}
+                                                            maximum-fraction-digits={field.fieldScale}>
+                                                        </lightning-formatted-number>
+                                                        <template lwc:elseif={field.isReference}>
+                                                            <a href={field.link} target="_blank"
+                                                                rel="noopener">{field.value}</a>
+                                                        </template>
+                                                        <lightning-input lwc:elseif={field.isBoolean} type="checkbox"
+                                                            class="input-center" variant="label-hidden"
+                                                            checked={field.value} disabled>
+                                                        </lightning-input>
+                                                        <lightning-formatted-date-time lwc:elseif={field.isDate}
+                                                            value={field.value} year="numeric" month="2-digit"
+                                                            day="2-digit"></lightning-formatted-date-time>
+                                                        <template lwc:else>{field.value}</template>
+                                                    </td>
+                                                </template>
+                                            </tr>
+                                        </template>
+                                    </template>
+                                    <template lwc:else>
+                                        <tr>
+                                            <td colspan={colspanDisplayedFields}>
+                                                <div
+                                                    class="slds-align_absolute-center slds-text-heading_small slds-p-top_large">
+                                                    <p>{labels.LBL_No_Item_To_Display}</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                            <!-- Modal Popup -->
+                            <template if:true={openInitPriceListPopup}>
+                                <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                                    <div class="slds-modal__container">
+                                        <!-- Modal Header -->
+                                        <header class="slds-modal__header">
+                                            <h2 class="slds-text-heading_medium">{labels.LBL_PriceListStatementHeader}
+                                            </h2>
+                                            <lightning-button-icon icon-name="utility:close" alternative-text="Close"
+                                                class="slds-modal__close" style="border-radius: 5px;"
+                                                onclick={handleClosePopup}></lightning-button-icon>
+                                        </header>
+                                        <!-- Modal Body -->
+                                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id" style="overflow: visible;">
+                                            <!-- Type (required) -->
+                                            <div class="slds-grid slds-m-bottom_small">
+                                                <label class="slds-col slds-size_1-of-2 slds-form-element__label">
+                                                    <abbr class="slds-required" title="required">*</abbr>
+                                                    {labels.LBL_Record_Type}
+                                                </label>
+                                                <lightning-combobox name="sendType" variant="label-hidden"
+                                                    class="slds-col requiredField" options={typeOptions}
+                                                    value={sendType} onchange={handleSendTypeChange} required>
+                                                </lightning-combobox>
+                                            </div>
+                                            <!-- Reference Year (required) -->
+                                            <div class="slds-grid slds-m-bottom_small">
+                                                <label class="slds-col slds-size_1-of-2 slds-form-element__label">
+                                                    <abbr class="slds-required" title="required">*</abbr>
+                                                    {popupPriceListFields.ReferenceYear__c.fieldLabel}
+                                                </label>
+                                                <lightning-combobox name="sendYear" variant="label-hidden"
+                                                    class="slds-col requiredField" options={yearOptions}
+                                                    value={sendYear} onchange={handleSendYearChange} required>
+                                                </lightning-combobox>
+                                            </div>
+                                            <!-- Application Date (required) -->
+                                            <div class="slds-grid slds-m-bottom_small">
+                                                <label class="slds-col slds-size_1-of-2 slds-form-element__label">
+                                                    <abbr class="slds-required" title="required">*</abbr>
+                                                    {popupPriceListFields.ApplicationDateRequested__c.fieldLabel}
+                                                </label>
+                                                <lightning-input name="sendApplicationDate" type="date"
+                                                    variant="label-hidden" class="slds-col requiredField"
+                                                    value={sendApplicationDate} onchange={handleSendApplicationDateChange}
+                                                    required>
+                                                </lightning-input>
+                                            </div>
+                                            <!-- Nego Scope (required) -->
+                                            <div class="slds-grid slds-m-bottom_small">
+                                                <label class="slds-col slds-size_1-of-2 slds-form-element__label">
+                                                    <abbr class="slds-required" title="required">*</abbr>
+                                                    {popupPriceListFields.NegoScope__c.fieldLabel}
+                                                </label>
+                                                <c-neg-optim-custom-lookup class="slds-col requiredField" search-term={sendNegoScopeName}
+                                                    object-name={API_NAMES.NegoScope__c.objectApiName}
+                                                    field-name="Name" is-multi="false"
+                                                    selected-event={Events.selectNegoScopeAction}
+                                                    onselectnegoscopeaction={selectNegoScopeAction} search-fields={searchNSFields}
+                                                    place-holder={popupPriceListFields.NegoScope__c.fieldLabel}
+                                                    value={sendNegoScopeIdSerialized} data-search="true">
+                                                </c-neg-optim-custom-lookup>
+                                            </div>
+                                            <!-- BU Source -->
+                                            <div class="slds-grid slds-m-bottom_small">
+                                                <label class="slds-col slds-size_1-of-2 slds-form-element__label">
+                                                    {popupPriceListFields.BusinessUnitSource__c.fieldLabel}
+                                                </label>
+                                                <c-neg-optim-custom-lookup class="slds-col" search-term={sendBUSourceName}
+                                                    object-name={API_NAMES.BusinessUnit__c.objectApiName}
+                                                    field-name="Name" is-multi="false"
+                                                    selected-event={Events.selectBUAction}
+                                                    onselectbuaction={selectRunBUAction} search-fields={searchBUFields}
+                                                    place-holder={popupPriceListFields.BusinessUnitSource__c.fieldLabel}
+                                                    value={sendBUSourceIdSerialized} data-search="true" data-target="buSource"
+                                                    filter-token={buFilterToken}>
+                                                </c-neg-optim-custom-lookup>
+                                            </div>
+                                            <!-- BU Target -->
+                                            <div class="slds-grid slds-m-bottom_small">
+                                                <label class="slds-col slds-size_1-of-2 slds-form-element__label">
+                                                    {popupPriceListFields.BusinessUnitTarget__c.fieldLabel}
+                                                </label>
+                                                <c-neg-optim-custom-lookup class="slds-col" search-term={sendBUTargetName}
+                                                    object-name={API_NAMES.BusinessUnit__c.objectApiName}
+                                                    field-name="Name" is-multi="false"
+                                                    selected-event={Events.selectBUAction}
+                                                    onselectbuaction={selectRunBUAction} search-fields={searchBUFields}
+                                                    place-holder={popupPriceListFields.BusinessUnitTarget__c.fieldLabel}
+                                                    value={sendBUTargetIdSerialized} data-search="true" data-target="buTarget"
+                                                    filter-token={buFilterToken}>
+                                                </c-neg-optim-custom-lookup>
+                                            </div>
+                                        </div>
+                                        <!-- Modal Footer -->
+                                        <footer class="slds-modal__footer">
+                                            <lightning-button label={labels.LBL_Cancel} title="Cancel"
+                                                class="slds-m-left_x-small"
+                                                onclick={handleClosePopup}></lightning-button>
+                                            <lightning-button variant="brand" label={labels.LBL_Next} title="Next"
+                                                icon-name="utility:forward" icon-position="left"
+                                                class="slds-m-left_x-small"
+                                                onclick={handleGeneratePriceListStatement}></lightning-button>
+                                        </footer>
+                                    </div>
+                                </section>
+                                <div class="slds-backdrop slds-backdrop_open"></div>
+                            </template>
+                            <template if:true={openConfirmationPopup}>
+                                <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                                    <div class="slds-modal__container">
+                                        <!-- Modal Header -->
+                                        <header class="slds-modal__header">
+                                            <h2 class="slds-text-heading_medium">{labels.LBL_Confirm}</h2>
+                                            <lightning-button-icon icon-name="utility:close" alternative-text="Close"
+                                                class="slds-modal__close" style="border-radius: 5px;"
+                                                onclick={handleClosePopup}></lightning-button-icon>
+                                        </header>
+                                        <!-- Modal Body -->
+                                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id2">
+                                            <div>{initPriceListStatementConfirmationMsg}</div>
+                                        </div>
+                                        <!-- Modal Footer -->
+                                        <footer class="slds-modal__footer">
+                                            <lightning-button label={labels.LBL_Cancel} title="Cancel"
+                                                class="slds-m-left_x-small" data-button="confirmpopup"
+                                                onclick={handleClosePopup}></lightning-button>
+                                            <lightning-button variant="brand" label={labels.LBL_Confirm} title="Send"
+                                                icon-name="utility:send" icon-position="left"
+                                                class="slds-m-left_x-small"
+                                                onclick={handleConfirmInitPriceList}></lightning-button>
+                                        </footer>
+                                    </div>
+                                </section>
+                                <div class="slds-backdrop slds-backdrop_open"></div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div class="footerDiv slds-grid slds-m-around--xx-small">
+                    <lightning-combobox options={pageSizeOptions} variant="label-hidden" dropdown-alignment="auto"
+                        class="slds-size_xx-small slds-p-horizontal_x-small" value={pageSize}
+                        onchange={handleChangePageSize}>
+                    </lightning-combobox>
+                    <span>
+                        <lightning-button-group>
+                            <lightning-button label={labels.LBL_First} disabled={previousDisabled} data-type="First"
+                                onclick={handleChangePage}>
+                            </lightning-button>
+                            <lightning-button label={labels.LBL_Previous} disabled={previousDisabled}
+                                data-type="Previous" onclick={handleChangePage}>
+                            </lightning-button>
+                            <lightning-button label={labels.LBL_Next} disabled={nextDisabled} data-type="Next"
+                                onclick={handleChangePage}>
+                            </lightning-button>
+                            <lightning-button label={labels.LBL_Last} disabled={nextDisabled} data-type="Last"
+                                onclick={handleChangePage}>
+                            </lightning-button>
+                        </lightning-button-group>
+                        <lightning-badge class="slds-m-left--x-small" label={paginationBadge}>
+                        </lightning-badge>
+                    </span>
+                </div>
+            </div>
+            <!-- Right FILTER PANEL (docked overlay) -->
+            <template if:true={isFilterOpen}>
+                <div class="slds-panel slds-size_medium slds-panel_docked slds-panel_docked-right filter-panel">
+                    <div class="slds-panel__header" style="background-color:white;">
+                        <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate"
+                            title={labels.LBL_Filter}>
+                            {labels.LBL_Filter}
+                        </h2>
+                        <lightning-button-icon variant="bare" icon-name="utility:close"
+                            onclick={toggleFilter}></lightning-button-icon>
+                    </div>
+                    <div class="filterBody slds-panel__body slds-p-around_small"
+                        style="background-color:#fff; flex:1; overflow:auto;">
+                        <lightning-combobox name="filterYear" label={popupPriceListFields.ReferenceYear__c.fieldLabel}
+                            placeholder={popupPriceListFields.ReferenceYear__c.fieldLabel} options={yearOptions}
+                            value={selectedYearStr} onchange={handleHeaderYearChange}>
+                        </lightning-combobox>
+                        <div class="slds-m-top_small">
+                            <c-neg-optim-custom-lookup class="slds-col" search-term={selectedBUName}
+                                object-name={API_NAMES.BusinessUnit__c.objectApiName} field-name="Name" is-multi="false"
+                                selected-event={Events.selectBUAction} onselectbuaction={handleHeaderBUSelected}
+                                search-fields={searchBUFields}
+                                place-holder={popupPriceListFields.BusinessUnitTarget__c.fieldLabel}
+                                value={selectedBUIdSerialized} data-search="true" filter-token={buFilterToken}>
+                            </c-neg-optim-custom-lookup>
+                        </div>
+                    </div>
+                    <div class="slds-panel__footer slds-grid slds-grid_align-end slds-p-around_small"
+                        style="background-color:#fff; flex:0 0 auto;">
+                        <lightning-button label={labels.LBL_ResetFilters} onclick={resetAllFilters}></lightning-button>
+                        <lightning-button class="slds-m-left_small" variant="brand" label={labels.LBL_Apply}
+                            onclick={applyHeaderFilters}></lightning-button>
+                    </div>
+                </div>
+            </template>
+        </template>
+    </div>
+</template>

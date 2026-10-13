@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Précisez la BU en charge de la négociation et de la signature du contrat</help>
+    <label>Business Unit source (old)</label>
+    <name>BU_Source__c</name>
+    <relationshipLabel><!-- Contrats1 (Dealing From) --></relationshipLabel>
+</CustomFieldTranslation>

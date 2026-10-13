@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NavigationMenu xmlns="http://soap.sforce.com/2006/04/metadata">
+    <container>NegoptimConnect</container>
+    <containerType>Network</containerType>
+    <label>Documents Center - Quality Documents Sub Menu</label>
+    <navigationMenuItem>
+        <label>Certifications</label>
+        <menuItemBranding>
+            <tileImage>CertificationIcon</tileImage>
+        </menuItemBranding>
+        <position>1</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>/certifications</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Compliance Audits</label>
+        <menuItemBranding>
+            <tileImage>AuditIcon</tileImage>
+        </menuItemBranding>
+        <position>2</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>/error</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Scorecards</label>
+        <menuItemBranding>
+            <tileImage>ScorecardIcon</tileImage>
+        </menuItemBranding>
+        <position>3</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>/error</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+</NavigationMenu>

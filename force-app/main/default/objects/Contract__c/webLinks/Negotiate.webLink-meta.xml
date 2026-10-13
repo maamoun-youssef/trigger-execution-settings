@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Negotiate</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>false</hasMenubar>
+    <hasScrollbars>true</hasScrollbars>
+    <hasToolbar>false</hasToolbar>
+    <height>600</height>
+    <isResizable>true</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>Negotiate</masterLabel>
+    <openType>newWindow</openType>
+    <position>none</position>
+    <protected>false</protected>
+    <showsLocation>false</showsLocation>
+    <showsStatus>false</showsStatus>
+    <url>/apex/NegoptimNavigator?c__componentName=c:negotiate&amp;a__negoyear={!TEXT(Contract__c.Reference_Year__c)}&amp;c__negoId={!Contract__c.Supplier_Nego_ScopeId__c}&amp;c__supplier={!Contract__c.SupplierId__c}&amp;c__contractId={!Contract__c.Id}</url>
+</WebLink>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Type de gamme</label>
+    <name>Collection_type__c</name>
+    <picklistValues>
+        <masterLabel>Introduction</masterLabel>
+        <translation>Inno / Intro</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Promo</masterLabel>
+        <translation><!-- Promo --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Regular</masterLabel>
+        <translation>Standard</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Seasonal</masterLabel>
+        <translation>Saisonnier</translation>
+    </picklistValues>
+</CustomFieldTranslation>

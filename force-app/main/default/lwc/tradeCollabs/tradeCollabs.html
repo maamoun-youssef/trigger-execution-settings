@@ -1,0 +1,56 @@
+<template>
+    <div class="dc-container mainContainer">
+        <template lwc:if={isLoading}>
+            <div class="slds-spinner_container">
+                <div class="dc-loader slds-spinner_container slds-align_absolute-center"></div>
+            </div>
+        </template>
+        <template if:false={isLoading}>
+            <!-- HEADER -->
+            <div class="dc-header slds-m-bottom_x-large header">
+                <img class="dc-header-img" src={headerImageTradeCollabs} alt="header-img" />
+                <div style="position: absolute; top: 90px; left: 50%;">
+                    <div style=" display:inline-block; width: 120px; height: 100px; margin-right: 20px;">
+                        <img src={ConnectHeaderForCollabs} />
+                    </div>
+                    <div
+                        style="height:65px; width:2px; background-color:#b9b5cc; display:inline-block; margin-right: 20px; translate: 0px 20px;">
+                    </div>
+                    <div style=" display:inline-block; font-size:50px; color:white; font-weight: 500;">TRADE COLLABS
+                    </div>
+                </div>
+            </div>
+            <!-- BUTTONS RIBBON -->
+            <div class="dc-buttons-container slds-p-horizontal_xx-large">
+                <template for:each={sectionWrappers} for:item="settings">
+                    <button if:true={settings.showSection} key={settings.displayOrder}
+                        data-section-id={settings.sectionLabel} onclick={handleSectionBtnClick}
+                        class="dc-section-button slds-p-horizontal_large slds-p-vertical_small slds-m-vertical_small btn-header">
+                        {settings.sectionLabel}
+                    </button>
+                </template>
+            </div>
+            <!-- SECTIONS -->
+            <div class="slds-grid slds-wrap slds-p-horizontal_xx-large ">
+                <template for:each={sectionWrappers} for:item="settings">
+                    <div if:true={settings.showSection} class="slds-col slds-size_1-of-1 dc-section-container"
+                        key={settings.displayOrder} data-section-target-id={settings.sectionLabel}>
+                        <c-trade-collabs-section settings={settings} prefix={prefix} onthemeclick={handleOpenModal}
+                            is-portal={isPortalUser}>
+                        </c-trade-collabs-section>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template if:true={showScrollToTopButton}>
+            <div class="scroll-to-top-button-container">
+                <button class="slds-button slds-button_icon slds-button_icon-inverse slds-m-around_medium"
+                    onclick={scrollToTop}>
+                    <lightning-icon icon-name="utility:jump_to_top" size="large"
+                        alternative-text="Scroll to top"></lightning-icon>
+                    <span class="slds-assistive-text">Scroll to top</span>
+                </button>
+            </div>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SlabSellInType__c</fullName>
+    <label>Slab TO Origin</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Target</fullName>
+                <default>false</default>
+                <label>Target</label>
+            </value>
+            <value>
+                <fullName>Nego</fullName>
+                <default>true</default>
+                <label>Nego</label>
+            </value>
+            <value>
+                <fullName>Actual</fullName>
+                <default>false</default>
+                <label>Actual</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

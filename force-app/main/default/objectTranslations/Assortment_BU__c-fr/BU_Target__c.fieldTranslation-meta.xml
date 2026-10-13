@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>
+        <!-- Budget = HMSM + DRIVE, PROXI, WEB, CASH &amp; CARRY.  /  
+target/ Nego =Banner(ex. Carrefour HM, Carrefour SM, Intermarché.fr).  /  
+
+Saisir &apos;..&apos; pour accéder à l&apos;ensemble des BU possibles pour le type choisi. -->
+    </help>
+    <label>BU Cible (old)</label>
+    <name>BU_Target__c</name>
+    <relationshipLabel>Assortiments</relationshipLabel>
+</CustomFieldTranslation>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Accrual_CN</masterLabel>
+        <translation>Provision de DA</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Accrual_Inv</masterLabel>
+        <translation>Provision de Facture</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Balance CN Cancel Request</masterLabel>
+        <translation>Annulation demande d&apos;avoir de solde</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Balance Credit Note</masterLabel>
+        <translation>Avoir de solde</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Balance Credit Note Request</masterLabel>
+        <translation>Demande d&apos;avoir de solde</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Balance Invoice</masterLabel>
+        <translation>Facture de solde</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>CN Cancel Request</masterLabel>
+        <translation>Annulation demande d&apos;avoir</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Credit Note</masterLabel>
+        <translation>Avoir</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Credit Note Request</masterLabel>
+        <translation>Demande d&apos;avoir</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Debit Note</masterLabel>
+        <translation>Note de débit</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Down-payment Invoice</masterLabel>
+        <translation>Facture d&apos;acompte</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Invoice</masterLabel>
+        <translation>Facture</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

@@ -1,0 +1,616 @@
+.titleClass {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.fieldRow {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.activityIcon {
+    background: white;
+    left: 15px;
+    margin-top: 5px;
+    top: -10px;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   MAIN POST - The Only Card
+   ========================================================================== */
+
+.slds-post {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.slds-post:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Post Header - Simplified */
+.slds-post__header {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+}
+
+.slds-post__header .slds-media__figure {
+    margin-right: 0.75rem;
+}
+
+/* Main post avatar - larger */
+.slds-post .slds-avatar {
+    width: 40px !important;
+    height: 40px !important;
+}
+
+/* Name first, prominent */
+.slds-post__header a {
+    color: #374151;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.9375rem;
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.slds-post__header a:hover {
+    color: #1f2937;
+    text-decoration: none;
+}
+
+/* Timestamp - smaller and lighter */
+.slds-post__header .slds-text-body_small {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.slds-post__header .slds-text-link_reset {
+    color: #9ca3af;
+    font-size: 0.75rem;
+}
+
+.slds-post__header .slds-text-link_reset:hover {
+    color: #6b7280;
+    text-decoration: none;
+}
+
+/* Post Content */
+.slds-post__content {
+    margin: 0.75rem 0;
+    color: #374151;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+}
+
+.slds-post__content p {
+    margin: 0;
+}
+
+/* ==========================================================================
+   REPLIES - Nested, Secondary, Threaded
+   ========================================================================== */
+
+/* Scrollable Container for ALL Comments - Including First One */
+.comments-scrollable-container {
+    background: transparent !important;
+    border: none !important;
+    margin: 0;
+    padding: 0;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.comments-list-unified {
+    padding: 0.5rem 0;
+}
+
+/* Legacy class - keep for backward compatibility */
+.slds-feed__item-comments {
+    background: transparent !important;
+    border: none !important;
+    margin-top: 0.75rem;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Reply/Comment - Consistent white background like main post */
+.slds-comment {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0;
+    margin-left: 0;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.slds-comment:hover {
+    border-color: #d1d5db;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    background-color: #ffffff;
+}
+
+/* Avatars for replies - consistent sizing */
+.slds-comment .slds-avatar {
+    width: 32px !important;
+    height: 32px !important;
+    flex-shrink: 0;
+}
+
+.slds-comment .slds-media__figure {
+    margin-right: 0.75rem;
+}
+
+/* Reply header - consistent with main post */
+.slds-comment header {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0;
+}
+
+.slds-comment header .slds-media {
+    align-items: center;
+}
+
+.slds-comment header a {
+    color: #374151;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.9375rem;
+    display: inline-block;
+}
+
+.slds-comment header a:hover {
+    color: #1f2937;
+    text-decoration: none;
+}
+
+/* Reply timestamp - consistent styling */
+.slds-comment header .slds-text-body_small,
+.slds-comment header .slds-text-link_reset {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.slds-comment header .slds-text-link_reset:hover {
+    color: #6b7280;
+    text-decoration: none;
+}
+
+/* Reply content - consistent with main post */
+.slds-comment__content {
+    color: #374151;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.slds-comment__content p {
+    margin: 0;
+}
+
+/* Reply footer - minimal, consistent */
+.slds-comment footer {
+    margin-top: 0.75rem;
+    padding-top: 0;
+}
+
+.slds-comment footer .slds-item {
+    color: #9ca3af;
+    font-size: 0.75rem;
+}
+
+/* Comment footer - for buttons on first comment */
+.slds-comment__footer {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+}
+
+
+.slds-post__footer {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.slds-post__footer-meta-list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-left: auto;
+}
+
+/* Comment button - Light/Secondary */
+.slds-post__footer-meta-list li:first-child .slds-post__footer-action {
+    background-color: transparent;
+    border: 1px solid #e5e7eb;
+    color: #6b7280;
+    font-weight: 400;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+}
+
+.slds-post__footer-meta-list li:first-child .slds-post__footer-action:hover {
+    background-color: #f9fafb;
+    border-color: #d1d5db;
+    color: #374151;
+    box-shadow: none;
+    transform: none;
+}
+
+.slds-post__footer-meta-list li:first-child .slds-post__footer-action lightning-icon {
+    --slds-c-icon-color-foreground-default: #9ca3af;
+}
+
+.slds-post__footer-meta-list li:first-child .slds-post__footer-action:hover lightning-icon {
+    --slds-c-icon-color-foreground-default: #6b7280;
+}
+
+/* Resolve button - Strong/Primary */
+.slds-post__footer-meta-list li:last-child .slds-post__footer-action {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    color: #ffffff;
+    font-weight: 500;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+}
+
+.slds-post__footer-meta-list li:last-child .slds-post__footer-action:hover {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+    transform: none;
+}
+
+.slds-post__footer-meta-list li:last-child .slds-post__footer-action:active {
+    transform: scale(0.98);
+}
+
+.slds-post__footer-meta-list li:last-child .slds-post__footer-action lightning-icon {
+    filter: brightness(0) invert(1);
+}
+
+.slds-post__footer-action {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    border: 1px solid transparent;
+    font-size: 0.8125rem;
+}
+
+.slds-post__footer-action lightning-icon {
+    margin-right: 0.25rem;
+    width: 14px;
+    height: 14px;
+}
+
+
+.comment-editor-wrapper {
+    display: flex;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.comment-editor-avatar {
+    flex-shrink: 0;
+    margin-right: 0;
+}
+
+.comment-editor-avatar .avatar-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.comment-editor-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.comment-editor-box {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 0.875rem 1rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.comment-editor-box:focus-within {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1), 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.comment-textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #374151;
+    background-color: transparent;
+}
+
+.comment-textarea::placeholder {
+    color: #9ca3af;
+}
+
+.comment-editor-action {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #f3f2f2;
+}
+
+.comment-btn-cancel {
+    background-color: transparent;
+    color: #6b7280;
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid #e5e7eb;
+    font-family: inherit;
+    min-width: 80px;
+}
+
+.comment-btn-cancel:hover {
+    background-color: #f9fafb;
+    color: #374151;
+    border-color: #d1d5db;
+}
+
+.comment-btn-cancel:active {
+    transform: scale(0.98);
+}
+
+.comment-btn-submit {
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid #2563eb;
+    font-family: inherit;
+    min-width: 100px;
+}
+
+.comment-btn-submit:hover {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.comment-btn-submit:active {
+    transform: scale(0.98);
+}
+
+
+.slds-post.resolved {
+    background-color: #f0fdf4;
+    border-color: #86efac;
+}
+
+.slds-post.resolved .slds-post__header {
+    border-bottom-color: #dcfce7;
+}
+
+/* Writing state - editor focused */
+.comment-editor-box.writing {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Hover states - consistent across all posts and comments */
+.slds-post:hover {
+    border-color: #d1d5db;
+}
+
+.slds-comment:hover {
+    background-color: #ffffff;
+    border-color: #d1d5db;
+}
+
+
+.profileIcon {
+    background: white;
+    margin-left: auto;
+}
+
+.dateValue {
+    margin-left: 0.5rem; 
+}
+
+/* Feed item spacing - improved consistency */
+.slds-feed__item {
+    margin-bottom: 0;
+}
+
+.slds-feed__list {
+    border: none !important;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.slds-feed__item {
+    border: none !important;
+}
+
+/* Ensure consistent spacing between main post and comments */
+.slds-feed__item > article.slds-post {
+    margin-bottom: 0;
+}
+
+.slds-feed__item-comments {
+    margin-top: 0.75rem;
+}
+
+.statusList,
+.statusList.slds-box {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.slds-grid.slds-gutters {
+    border: none !important;
+}
+
+.slds-feed__item article,
+.slds-feed__item .slds-post {
+    border: none !important;
+}
+
+/* Custom scrollbar styling - enhanced */
+.slds-feed__item-comments::-webkit-scrollbar {
+    width: 6px;
+}
+
+.slds-feed__item-comments::-webkit-scrollbar-track {
+    background: #f9fafb;
+    border-radius: 3px;
+}
+
+.slds-feed__item-comments::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 3px;
+}
+
+.slds-feed__item-comments::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* Avatar styling - consistent across all posts and comments */
+.slds-avatar {
+    flex-shrink: 0;
+    border: 2px solid #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.slds-media__figure {
+    margin-right: 0.75rem;
+}
+
+/* Ensure proper alignment of media body */
+.slds-media__body {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Text link styling */
+.slds-text-link_reset {
+    color: #9ca3af;
+    text-decoration: none;
+}
+
+.slds-text-link_reset:hover {
+    color: #6b7280;
+    text-decoration: none;
+}
+
+/* Show Chatter Link - Modern Design */
+.chatter-wrapper-modern {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.show-chatter-link-wrapper {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.show-chatter-link {
+    color: #2563eb;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    text-transform: lowercase;
+}
+
+.show-chatter-link:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+/* Ensure consistent spacing and alignment for comment list */
+.slds-feed__item-comments ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Remove default list styling from comment items */
+.slds-feed__item-comments li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure comment editor is properly spaced */
+.slds-feed__item-comments .comment-editor-wrapper {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #f3f2f2;
+}

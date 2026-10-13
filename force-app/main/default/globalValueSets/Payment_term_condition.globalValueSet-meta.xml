@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>End of Month</fullName>
+        <default>true</default>
+        <label>End of Month</label>
+    </customValue>
+    <customValue>
+        <fullName>End of Month, the 15</fullName>
+        <default>false</default>
+        <label>End of Month, the 15</label>
+    </customValue>
+    <customValue>
+        <fullName>Net</fullName>
+        <default>false</default>
+        <label>Net</label>
+    </customValue>
+    <customValue>
+        <fullName>The 10</fullName>
+        <default>false</default>
+        <label>The 10</label>
+    </customValue>
+    <customValue>
+        <fullName>The 15</fullName>
+        <default>false</default>
+        <label>The 15</label>
+    </customValue>
+    <customValue>
+        <fullName>The 20</fullName>
+        <default>false</default>
+        <label>The 20</label>
+    </customValue>
+    <customValue>
+        <fullName>Twice the Month</fullName>
+        <default>false</default>
+        <label>Twice the Month</label>
+    </customValue>
+    <customValue>
+        <fullName>End of The 10th</fullName>
+        <default>false</default>
+        <label>End of The 10th</label>
+    </customValue>
+    <description>Payment Conditions</description>
+    <masterLabel>Payment term (condition)</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Status --></label>
+    <name>Status__c</name>
+    <picklistValues>
+        <masterLabel>Approved</masterLabel>
+        <translation><!-- Approved --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Closed</masterLabel>
+        <translation><!-- Closed --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Deleted</masterLabel>
+        <translation><!-- Deleted --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>InPreparation</masterLabel>
+        <translation><!-- InPreparation --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Legal publishing</masterLabel>
+        <translation><!-- Legal publishing --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Open</masterLabel>
+        <translation><!-- Open --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Supplier publishing</masterLabel>
+        <translation><!-- Supplier publishing --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Validated</masterLabel>
+        <translation><!-- Validated --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Validated by legal</masterLabel>
+        <translation><!-- Validated by legal --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Validated by supplier</masterLabel>
+        <translation><!-- Validated by supplier --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

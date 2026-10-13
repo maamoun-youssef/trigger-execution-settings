@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Activity Type --></label>
+    <name>Activity_Type__c</name>
+    <picklistValues>
+        <masterLabel>Customer Call</masterLabel>
+        <translation><!-- Customer Call --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Customer Email</masterLabel>
+        <translation><!-- Customer Email --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Customer Post Mail</masterLabel>
+        <translation><!-- Customer Post Mail --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Internal Call</masterLabel>
+        <translation><!-- Internal Call --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Internal Email</masterLabel>
+        <translation><!-- Internal Email --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Social Media</masterLabel>
+        <translation><!-- Social Media --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Status Change</masterLabel>
+        <translation><!-- Status Change --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

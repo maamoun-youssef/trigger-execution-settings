@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SellOutDiscountMassValueLanded__c</fullName>
+    <description>Valorisation en masse de la remise, total de la valeur de contribution pour la remise (Qtté attterit *  Tx de remontée *Prix HT * % de la remise)</description>
+    <formula>null</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Sell Out Discount Mass Value Landed</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

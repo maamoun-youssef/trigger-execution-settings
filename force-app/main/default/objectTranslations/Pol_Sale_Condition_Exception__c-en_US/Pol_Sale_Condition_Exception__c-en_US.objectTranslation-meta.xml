@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Contract - Sales Conditions Exception</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Sales Conditions Exception</value>
+    </caseValues>
+    <recordTypes>
+        <description><!-- Sales Conditions are confirmed in exception for the contract --></description>
+        <label><!-- In Exception --></label>
+        <name>In_Exception</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Confirm the Exception on the default Sales Conditions --></description>
+        <label><!-- Opening Exception --></label>
+        <name>Opening_Exception</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

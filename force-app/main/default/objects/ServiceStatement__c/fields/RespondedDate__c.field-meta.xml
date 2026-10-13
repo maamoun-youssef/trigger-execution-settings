@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RespondedDate__c</fullName>
+    <description>Date when an official response was provided to the supplier regarding this Service Statement. Used to track communication timelines and measure the delay between supplier submission and feedback.</description>
+    <label>Responded Date</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

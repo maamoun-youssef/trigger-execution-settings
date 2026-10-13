@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Specify if the condition is conditional  (one or several slab) --></help>
+    <label>Is Cond</label>
+    <name>Is_Conditional__c</name>
+</CustomFieldTranslation>

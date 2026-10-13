@@ -1,0 +1,183 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "RFx",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "{\"url\":\"/sfsites/c/cms/delivery/media/MCDPU5INHX2FFAVBYGECDM7OSFM4?lastModifiedDate=Mon Oct 14 21:12:19 GMT 2024&height=144&width=192\",\"contentKey\":\"MCDPU5INHX2FFAVBYGECDM7OSFM4\",\"altText\":\"\",\"contentType\":\"sfdc_cms__image\",\"bgPosition\":\"center center\",\"bgSizeOrRepeat\":\"/cover\"}",
+            "backgroundImageOverlay" : "rgba(0, 0, 0, 0.34)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"4b304e8f-2ac2-4b78-9355-c9e4c561e2e7\",\"columns\":[{\"UUID\":\"bed62cff-a703-4fc1-8fed-becc48a5e2a9\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "235px",
+            "sectionVerticalAlign" : "center"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "dxpStyle" : { },
+                "imageInfos" : "",
+                "richTextValue" : "<p style=\"text-align: center;\"><strong style=\"color: rgb(255, 255, 255); font-size: 72px;\">RFx</strong></p>"
+              },
+              "definition" : "community_builder:richTextEditor",
+              "id" : "5bc4a009-c17c-47eb-a707-3b4907d1dda3",
+              "type" : "component"
+            } ],
+            "id" : "bed62cff-a703-4fc1-8fed-becc48a5e2a9",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "4b304e8f-2ac2-4b78-9355-c9e4c561e2e7",
+          "type" : "component"
+        }, {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"9a351532-fc55-400d-8b8f-486af79e3c8b\",\"columns\":[{\"UUID\":\"64003a6e-c7d8-4404-a3f5-957a838a9e6a\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "32px",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "id" : "64003a6e-c7d8-4404-a3f5-957a838a9e6a",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "9a351532-fc55-400d-8b8f-486af79e3c8b",
+          "type" : "component"
+        }, {
+          "attributes" : {
+            "backgroundImageConfig" : "{\"url\":\"/sfsites/c/cms/delivery/media/MCUGYHTPZ7WJEBRLBZ3I3WUSK7CY?lastModifiedDate=Mon Oct 14 21:23:24 GMT 2024&height=144&width=192\",\"contentKey\":\"MCUGYHTPZ7WJEBRLBZ3I3WUSK7CY\",\"altText\":\"\",\"contentType\":\"sfdc_cms__image\",\"bgPosition\":\"center center\",\"bgSizeOrRepeat\":\"/cover\"}",
+            "backgroundImageOverlay" : "rgba(79, 55, 76, 0.64)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "1200px",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"9ce2474d-17de-4c9b-8b33-048c9c6d7b99\",\"columns\":[{\"UUID\":\"b44646cb-23d2-4484-b816-2fe45479f204\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "600px",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "dxpStyle" : { },
+                "imageInfos" : "",
+                "richTextValue" : "<p><br></p><p><strong style=\"color: rgb(255, 255, 255); font-size: 26px;\">﻿Unlock New Business Opportunities with RFx</strong></p><p><strong style=\"color: rgb(255, 255, 255); font-size: 16px;\">-Stand Out in the Market - </strong><span style=\"color: rgb(255, 255, 255); font-size: 16px;\">Boost your visibility by completing a Request for Information (RFi) and showcase what sets you apart.</span></p><p><strong style=\"color: rgb(255, 255, 255); font-size: 16px;\">-Win More Tenders - </strong><span style=\"color: rgb(255, 255, 255); font-size: 16px;\">Secure new business by providing detailed, winning responses with a Request for Participation (RFp).</span></p><p><strong style=\"color: rgb(255, 255, 255); font-size: 16px;\">-Send Competitive Quotes Fast - </strong><span style=\"color: rgb(255, 255, 255); font-size: 16px;\">Respond quickly and effectively with a Request for Quote (RFq) to get ahead of the competition.</span></p><p><br></p>"
+              },
+              "definition" : "community_builder:richTextEditor",
+              "id" : "9eb18f71-957c-4fb3-8b07-ff843c1138e1",
+              "type" : "component",
+              "variations" : [ {
+                "attributes" : {
+                  "dxpStyle" : { },
+                  "imageInfos" : "",
+                  "richTextValue" : "<p><br></p><p><strong style=\"color: rgb(255, 255, 255); font-size: 26px;\">Débloquez de nouvelles opportunités commerciales avec RFx</strong></p><p><strong style=\"color: rgb(255, 255, 255); font-size: 16px;\">-Démarquez-vous sur le marché - </strong><span style=\"color: rgb(255, 255, 255); font-size: 16px;\">Augmentez votre visibilité en remplissant une Demande d'Information (Request For Information) et montrez ce qui vous distingue.</span></p><p><strong style=\"color: rgb(255, 255, 255); font-size: 16px;\">-Remportez plus d’appels d’offres - </strong><span style=\"color: rgb(255, 255, 255); font-size: 16px;\">Obtenez de nouveaux contrats en fournissant des réponses détaillées et convaincantes avec une Demande de Participation (Request For Participation).</span></p><p><strong style=\"color: rgb(255, 255, 255); font-size: 16px;\">-Envoyez des devis compétitifs rapidement - </strong><span style=\"color: rgb(255, 255, 255); font-size: 16px;\">Répondez rapidement et efficacement avec une Demande de Prix (Request For Quote) pour devancer la concurrence.</span></p>"
+                },
+                "definition" : "community_builder:richTextEditor",
+                "id" : "ee54eb42-51e9-4073-8ae7-cb7d1a094540",
+                "title" : "FR",
+                "type" : "mutationComponent"
+              } ]
+            }, {
+              "attributes" : {
+                "bannerBackgroundColor" : "rgb(151, 24, 187)",
+                "bannerPosition" : "top",
+                "bannerSizePercent" : 35,
+                "borderRadius" : 20,
+                "boxShadow" : true,
+                "dxpStyle" : { },
+                "haveBanner" : false,
+                "iconBackgroundColor" : "rgb(255,255,255)",
+                "iconSize" : "medium",
+                "noImageColor" : "rgb(116,116,116)",
+                "overlay" : "rgba(0,0,0,0.01)",
+                "templateType" : "default",
+                "tileMenuEditor" : "RFx_Menu",
+                "titleColor" : "",
+                "titleFontSize" : "large",
+                "titleHorizontalAlign" : "center"
+              },
+              "definition" : "community_navigation:tileMenu",
+              "id" : "11c14af6-a7aa-44da-9e35-414c18a74b54",
+              "type" : "component"
+            } ],
+            "id" : "b44646cb-23d2-4484-b816-2fe45479f204",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "9ce2474d-17de-4c9b-8b33-048c9c6d7b99",
+          "type" : "component"
+        } ],
+        "id" : "4d29773a-c0a7-4243-9186-2fa02fa7d1f3",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "dxpStyle" : { },
+            "pageTitle" : "RFx",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "d93ddda8-eb05-43b1-9975-a0b6d70c97f2",
+          "type" : "component"
+        } ],
+        "id" : "6dc52517-7ee9-41f7-8bda-546e222d6376",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "8253475b-e972-48c4-a87c-dc42e213dd72",
+      "type" : "component"
+    },
+    "contentOperations" : {
+      "operations" : [ {
+        "targetId" : "9eb18f71-957c-4fb3-8b07-ff843c1138e1",
+        "ruleToVariationList" : [ {
+          "variationId" : "ee54eb42-51e9-4073-8ae7-cb7d1a094540",
+          "rule" : {
+            "name" : "f85a6b4a-b903-43eb-afbf-e95cd439bdfc",
+            "description" : "",
+            "criteriaType" : "AllCriteriaMatch",
+            "expressionCriteria" : [ {
+              "resource" : "User.Record.LocaleSidKey",
+              "operator" : "Equal",
+              "value" : "fr",
+              "criterionNumber" : 1
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-rfx"
+  },
+  "urlName" : "rfx"
+}

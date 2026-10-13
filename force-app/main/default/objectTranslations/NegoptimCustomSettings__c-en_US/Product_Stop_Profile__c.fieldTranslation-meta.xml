@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Product Stop Profile --></help>
+    <label><!-- Product Stop Profile --></label>
+    <name>Product_Stop_Profile__c</name>
+</CustomFieldTranslation>

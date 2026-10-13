@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- BU Source --></label>
+    <lookupFilter>
+        <errorMessage><!-- The status of BusinessUnitSource (Supplier) should be &apos;Open&apos; --></errorMessage>
+    </lookupFilter>
+    <name>BusinessUnitSource__c</name>
+    <relationshipLabel><!-- Commercial Plans (BU Source) --></relationshipLabel>
+</CustomFieldTranslation>

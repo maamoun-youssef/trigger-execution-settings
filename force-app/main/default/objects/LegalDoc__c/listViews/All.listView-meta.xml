@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Year__c</columns>
+    <columns>Type__c</columns>
+    <columns>Language__c</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>LegalDoc__c</columns>
+    <columns>Supplier__c</columns>
+    <columns>Status__c</columns>
+    <columns>PartnerStatus__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>UPDATEDBY_USER.ALIAS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>NAME</field>
+        <operation>contains</operation>
+        <value>Contrat cadre Sophie 26 bis</value>
+    </filters>
+    <label>Tout</label>
+</ListView>

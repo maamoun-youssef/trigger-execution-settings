@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>CreditNoteRequest</fullName>
+        <default>true</default>
+        <label>Credit Note Request</label>
+    </customValue>
+    <customValue>
+        <fullName>Invoice</fullName>
+        <default>false</default>
+        <label>Invoice</label>
+    </customValue>
+    <customValue>
+        <fullName>DebitNote</fullName>
+        <default>false</default>
+        <label>Debit Note</label>
+    </customValue>
+    <customValue>
+        <fullName>CreditNote</fullName>
+        <default>false</default>
+        <label>Credit Note</label>
+    </customValue>
+    <customValue>
+        <fullName>BalanceInvoice</fullName>
+        <default>false</default>
+        <label>Balance Invoice</label>
+    </customValue>
+    <customValue>
+        <fullName>DownPaymentInvoice</fullName>
+        <default>false</default>
+        <label>Down-payment Invoice</label>
+    </customValue>
+    <customValue>
+        <fullName>BalanceCreditNoteRequest</fullName>
+        <default>false</default>
+        <label>Balance Credit Note Request</label>
+    </customValue>
+    <customValue>
+        <fullName>AccrualCN</fullName>
+        <default>false</default>
+        <label>Accrual_CN</label>
+    </customValue>
+    <customValue>
+        <fullName>AccrualInv</fullName>
+        <default>false</default>
+        <label>Accrual_Inv</label>
+    </customValue>
+    <customValue>
+        <fullName>CNCancelRequest</fullName>
+        <default>false</default>
+        <label>CN Cancel Request</label>
+    </customValue>
+    <customValue>
+        <fullName>BalanceCNCancelRequest</fullName>
+        <default>false</default>
+        <label>Balance CN Cancel Request</label>
+    </customValue>
+    <customValue>
+        <fullName>BalanceCreditNote</fullName>
+        <default>false</default>
+        <label>Balance Credit Note</label>
+    </customValue>
+    <customValue>
+        <fullName>Provision</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Provision</label>
+    </customValue>
+    <description>Specify the accounting document used in the process : Credit Note request, debit note, Invoice, ....</description>
+    <masterLabel>Accounting Document Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

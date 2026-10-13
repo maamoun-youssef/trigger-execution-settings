@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Sélectionnez le ou les modes de calcul autorisés pour la condition</help>
+    <label>Mode</label>
+    <name>Condition_Mode__c</name>
+    <picklistValues>
+        <masterLabel>%</masterLabel>
+        <translation><!-- % --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>F</masterLabel>
+        <translation>Montant fixe</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>U</masterLabel>
+        <translation>Valeur unitaire</translation>
+    </picklistValues>
+</CustomFieldTranslation>

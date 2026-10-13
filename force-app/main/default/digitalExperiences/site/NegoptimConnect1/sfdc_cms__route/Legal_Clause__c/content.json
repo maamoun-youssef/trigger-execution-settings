@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Legal Clause",
+  "contentBody" : {
+    "activeViewId" : "Legal_Clause",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-legal-clause",
+    "urlPrefix" : "legal-clause"
+  },
+  "urlName" : "legal-clause"
+}

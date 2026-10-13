@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>Connect_Header</letterhead>
+    <name>NegoptimGenericEmail</name>
+    <style>formalLetter</style>
+    <subject>Process Finished</subject>
+    <textOnly>{!$Label.LBL_Connect_Email_Greeting} {!User.FirstName} {!User.LastName},
+{!Log__c.SummaryHeader__c}
+
+{!Log__c.SuccessResultSummary__c}
+
+{!Log__c.FailureResultSummary__c}
+{!$Label.LBL_Best_Regards},
+{!$Label.LBL_Negoptim_Team}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

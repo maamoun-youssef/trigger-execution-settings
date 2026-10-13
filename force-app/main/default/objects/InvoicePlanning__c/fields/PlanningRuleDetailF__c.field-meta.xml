@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PlanningRuleDetailF__c</fullName>
+    <description>Wording or summary of the Invoicing planning rules for Fix amount contract discount row</description>
+    <label>Planning Rule Detail (F)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

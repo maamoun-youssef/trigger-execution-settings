@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Directory",
+  "contentBody" : {
+    "activeViewId" : "Directory",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-directory",
+    "urlPrefix" : "directory"
+  },
+  "urlName" : "directory"
+}

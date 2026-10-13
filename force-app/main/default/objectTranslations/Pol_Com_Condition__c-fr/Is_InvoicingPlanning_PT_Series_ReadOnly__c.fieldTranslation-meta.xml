@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Lecture seule champs échéanciers (PT)</label>
+    <name>Is_InvoicingPlanning_PT_Series_ReadOnly__c</name>
+</CustomFieldTranslation>

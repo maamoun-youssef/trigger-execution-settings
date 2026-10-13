@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Assortment Detail</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Assortment Details</value>
+    </caseValues>
+    <layouts>
+        <layout>O Assortment Detail</layout>
+        <sections>
+            <label><!-- A classer --></label>
+            <section>A classer</section>
+        </sections>
+        <sections>
+            <label><!-- Cluster --></label>
+            <section>Cluster</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- ND --></label>
+            <section>ND</section>
+        </sections>
+        <sections>
+            <label><!-- Product --></label>
+            <section>Product</section>
+        </sections>
+        <sections>
+            <label><!-- WD Banner --></label>
+            <section>WD Banner</section>
+        </sections>
+        <sections>
+            <label><!-- WD Channel --></label>
+            <section>WD Channel</section>
+        </sections>
+        <sections>
+            <label><!-- WD Panel &amp; Data --></label>
+            <section>WD Panel &amp; Data</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Assortiment Detail Name --></nameFieldLabel>
+    <recordTypes>
+        <label><!-- Higher-Level Packaging (deprecated) --></label>
+        <name>Higher_Level_Packaging</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Regular (deprecated) --></label>
+        <name>Regular</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Cannot validate the record because the client status is blank. --></errorMessage>
+        <name>Client_Status_Not_Blank_On_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Movement Date should be between the Assortment &quot;Year - 1&quot; and &quot;Year + 1&quot; --></errorMessage>
+        <name>Movement_Date_Between_Parent_Year_P1_N1</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Cannot validate the record because the Movement Date is blank. --></errorMessage>
+        <name>Movement_Date_Not_Blank_On_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Vérifier les valeurs saisies. Elles doivent se situer entre 0 et 100. --></errorMessage>
+        <name>WDs_from_0_to_100_only</name>
+    </validationRules>
+</CustomObjectTranslation>

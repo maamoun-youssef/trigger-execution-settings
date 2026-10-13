@@ -1,0 +1,187 @@
+<template>
+    <!-- Modal/Popup Box starts here-->
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <!-- Modal/Popup Box Header Starts here-->
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                    onclick={closeFilter}>
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                </button>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title={Label.LBL_Filter}>
+                    {Label.LBL_Applied_Filter_On_Data_Selection}
+                </div>
+            </header>
+            <!--Modal/Popup Box Body Starts here-->
+            <div class="slds-modal__content slds-p-around_small" id="modal-content-id-1" style="height: 62vh;">
+                <template if:true={hasFields} for:each={fieldsToFilter} for:item='fieldToFilter'>
+                    <!--text-->
+                    <lightning-input if:true={fieldToFilter.isText} key={fieldToFilter.fieldName}
+                        name={fieldToFilter.fieldName} data-mode='one' type='text' label={fieldToFilter.fieldLabel}
+                        value={fieldToFilter.value} onchange={setSelectedValues}>
+                    </lightning-input>
+                    <!--ID-->
+                    <lightning-input if:true={fieldToFilter.isId} key={fieldToFilter.fieldName}
+                        name={fieldToFilter.fieldName} data-mode='multiple' type='text' label={fieldToFilter.fieldLabel}
+                        value={fieldToFilter.displayVal} field-level-help={Label.MSG_Filter_On_Id_Help_Text}
+                        onchange={setSelectedValues}>
+                    </lightning-input>
+                    <!--number-->
+                    <div if:true={fieldToFilter.isNumber} key={fieldToFilter.fieldName} class='slds-form-element'>
+                        <legend class="slds-form-element__label slds-form-element__legend">{fieldToFilter.fieldLabel}
+                        </legend>
+                        <div class="slds-form-element__control slds-grid slds-gutters">
+                            <lightning-input type="number" label={Label.LBL_Minimum} class='slds-col'
+                                name={fieldToFilter.fieldName} data-range='value1' value={fieldToFilter.value1}
+                                onchange={setSelectedRangeValue} formatter={fieldToFilter.formatter}
+                                step={fieldToFilter.step}>
+                            </lightning-input>
+                            <span style='margin-top: 1.75rem;'>-</span>
+                            <lightning-input type="number" label={Label.LBL_Maximum} class='slds-col'
+                                name={fieldToFilter.fieldName} data-range='value2' value={fieldToFilter.value2}
+                                onchange={setSelectedRangeValue} formatter={fieldToFilter.formatter}
+                                step={fieldToFilter.step}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                    <!--date-->
+                    <div if:true={fieldToFilter.isDate} key={fieldToFilter.fieldName} class='slds-form-element'>
+                        <legend class="slds-form-element__label slds-form-element__legend">{fieldToFilter.fieldLabel}
+                        </legend>
+                        <div class="slds-form-element__control slds-grid slds-gutters">
+                            <lightning-input type="date" label={Label.LBL_Start} class='slds-col'
+                                name={fieldToFilter.fieldName} data-range='value1' value={fieldToFilter.value1}
+                                onchange={setSelectedRangeValue}>
+                            </lightning-input>
+                            <span style='margin-top: 1.75rem;'>-</span>
+                            <lightning-input type="date" label={Label.LBL_End} class='slds-col'
+                                name={fieldToFilter.fieldName} data-range='value2' value={fieldToFilter.value2}
+                                onchange={setSelectedRangeValue}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                    <!--time-->
+                    <div if:true={fieldToFilter.isTime} key={fieldToFilter.fieldName} class='slds-form-element'>
+                        <legend class="slds-form-element__label slds-form-element__legend">{fieldToFilter.fieldLabel}
+                        </legend>
+                        <div class="slds-form-element__control slds-grid slds-gutters">
+                            <lightning-input type="time" label={Label.LBL_Start} class='slds-col'
+                                name={fieldToFilter.fieldName} data-range='value1' value={fieldToFilter.value1}
+                                onchange={setSelectedRangeValue}>
+                            </lightning-input>
+                            <span style='margin-top: 1.75rem;'>-</span>
+                            <lightning-input type="time" label={Label.LBL_End} class='slds-col'
+                                name={fieldToFilter.fieldName} data-range='value2' value={fieldToFilter.value2}
+                                onchange={setSelectedRangeValue}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                    <!--checkbox group-->
+                    <lightning-checkbox-group if:true={fieldToFilter.isCheckboxGroup} key={fieldToFilter.fieldName}
+                        data-name={fieldToFilter.fieldName} name={fieldToFilter.fieldName}
+                        label={fieldToFilter.fieldLabel} options={fieldToFilter.options} value={fieldToFilter.values}
+                        onchange={setSelectedValues}>
+                    </lightning-checkbox-group>
+                </template>
+                <!--MultiLevel-->
+                <div if:true={hasAdvancedFields} class='slds-p-top_small slds-has-divider_top-space'>
+                    <lightning-accordion allow-multiple-sections-open>
+                        <lightning-accordion-section label={Label.LBL_Advanced} class='slds-p-bottom_none'>
+                            <template for:each={multilevelFields} for:item='multilevelField'>
+                                <!--isText: value, isNumber, isDate, isTime: value1,value2, isCheckboxGroup: values-->
+                                <!--text-->
+                                <lightning-input if:true={multilevelField.isText} key={multilevelField.fieldName}
+                                    type='text' name={multilevelField.fieldName} data-mode='one'
+                                    label={multilevelField.fieldLabel} value={multilevelField.value}
+                                    onchange={setSelectedValues}>
+                                </lightning-input>
+                                <!--id-->
+                                <lightning-input if:true={multilevelField.isId} key={multilevelField.fieldName}
+                                    type='text' data-mode='multiple' name={multilevelField.fieldName}
+                                    label={multilevelField.fieldLabel} value={multilevelField.displayVal}
+                                    field-level-help={Label.MSG_Filter_On_Id_Help_Text} onchange={setSelectedValues}>
+                                </lightning-input>
+                                <!--number-->
+                                <div if:true={multilevelField.isNumber} key={multilevelField.fieldName}
+                                    class='slds-form-element'>
+                                    <legend class="slds-form-element__label slds-form-element__legend">
+                                        {multilevelField.fieldLabel}
+                                    </legend>
+                                    <div class="slds-form-element__control slds-grid slds-gutters">
+                                        <lightning-input type="number" label={Label.LBL_Minimum} class='slds-col'
+                                            name={multilevelField.fieldName} data-range='value1'
+                                            value={multilevelField.value1} onchange={setSelectedRangeValue}
+                                            formatter={multilevelField.formatter} step={multilevelField.step}>
+                                        </lightning-input>
+                                        <span style='margin-top: 1.75rem;'>-</span>
+                                        <lightning-input type="number" label={Label.LBL_Maximum} class='slds-col'
+                                            name={multilevelField.fieldName} data-range='value2'
+                                            value={multilevelField.value2} onchange={setSelectedRangeValue}
+                                            formatter={multilevelField.formatter} step={multilevelField.step}>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                                <!--date-->
+                                <div if:true={multilevelField.isDate} key={multilevelField.fieldName}
+                                    class='slds-form-element'>
+                                    <legend class="slds-form-element__label slds-form-element__legend">
+                                        {multilevelField.fieldLabel}
+                                    </legend>
+                                    <div class="slds-form-element__control slds-grid slds-gutters">
+                                        <lightning-input type="date" label={Label.LBL_Start} class='slds-col'
+                                            name={multilevelField.fieldName} data-range='value1'
+                                            value={multilevelField.value1} onchange={setSelectedRangeValue}>
+                                        </lightning-input>
+                                        <span style='margin-top: 1.75rem;'>-</span>
+                                        <lightning-input type="date" label={Label.LBL_End} class='slds-col'
+                                            name={multilevelField.fieldName} data-range='value2'
+                                            value={multilevelField.value2} onchange={setSelectedRangeValue}>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                                <!--time-->
+                                <div if:true={multilevelField.isTime} key={multilevelField.fieldName}
+                                    class='slds-form-element'>
+                                    <legend class="slds-form-element__label slds-form-element__legend">
+                                        {multilevelField.fieldLabel}
+                                    </legend>
+                                    <div class="slds-form-element__control slds-grid slds-gutters">
+                                        <lightning-input type="time" label={Label.LBL_Start} class='slds-col'
+                                            name={multilevelField.fieldName} data-range='value1'
+                                            value={multilevelField.value1} onchange={setSelectedRangeValue}>
+                                        </lightning-input>
+                                        <span style='margin-top: 1.75rem;'>-</span>
+                                        <lightning-input type="time" label={Label.LBL_End} class='slds-col'
+                                            name={multilevelField.fieldName} data-range='value2'
+                                            value={multilevelField.value2} onchange={setSelectedRangeValue}>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                                <!--checkbox group-->
+                                <lightning-checkbox-group if:true={multilevelField.isCheckboxGroup}
+                                    key={multilevelField.fieldName} data-name={multilevelField.fieldName}
+                                    name={multilevelField.fieldName} label={multilevelField.fieldLabel}
+                                    options={multilevelField.options} value={multilevelField.values}
+                                    onchange={setSelectedValues}>
+                                </lightning-checkbox-group>
+                            </template>
+                        </lightning-accordion-section>
+                    </lightning-accordion>
+                </div>
+            </div>
+            <!--Modal/Popup Box Footer Starts here-->
+            <footer class="slds-modal__footer">
+                <lightning-button title={Label.LBL_Cancel} label={Label.LBL_Cancel} onclick={closeFilter}
+                    class="slds-p-right_x-small">
+                </lightning-button>
+                <lightning-button title={Label.LBL_Apply} label={Label.LBL_Apply} variant="brand"
+                    onclick={confirmFilter}>
+                </lightning-button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open" style="opacity: 0.8;"></div>
+</template>

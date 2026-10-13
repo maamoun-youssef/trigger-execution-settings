@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ManagePromoFlatPriceRate__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>NS is managing a specific FlatPrice Promo Rate</description>
+    <label>Is Managing FlatPrice Rate Promo</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,131 @@
+<template>
+    <div class="slds-border_top slds-col">
+        <!-- <div class="slds-text-body_regular slds-text-align_center slds-truncate slds-section__title">
+                {wIndex.contractName}
+            </div> -->
+        <!-- <div class="slds-grid slds-p-around_xxx-small">
+                <div class="slds-col slds-truncate">Total TO Tariff Nego
+                </div>
+                <div class="slds-truncate output-number-field">{wIndex.totalToTariffNego}
+                </div>
+            </div> -->
+        <table class="indexTable slds-table">
+            <thead class={headerClass}>
+                <tr class="slds-line-height_reset">
+                    <th scope="col" class="index-cell">
+                        <div class="slds-truncate">Base 100</div>
+                    </th>
+                    <th scope="col" class="index-cell slds-text-align_left">
+                        <div class="slds-truncate">
+                            <lightning-formatted-number value={wIndex.baseIndex} maximum-fraction-digits="2"
+                                minimum-fraction-digits="2">
+                            </lightning-formatted-number>
+                        </div>
+                    </th>
+                    <th scope="col" class="index-cell slds-text-align_center">
+                        <div class="slds-truncate">%</div>
+                    </th>
+                    <th scope="col" class="index-cell slds-text-align_center">
+                        <div class="slds-truncate">{Labels.LBL_Value_Abb}</div>
+                    </th>
+                    <th scope="col" class="index-cell slds-text-align_center">
+                        <div class="slds-truncate">{Labels.TotalComputed}</div>
+                    </th>
+                    <th scope="col" class="index-cell slds-text-align_center" if:false={isProgHidden}>
+                        <div class="slds-truncate">{Labels.LBL_GAP}</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody style="font-weight: unset; color: black;">
+                <template for:each={wIndex.values} for:item="indexRow">
+                    <tr key={indexRow.Name} class="slds-line-height_reset">
+                        <td scope="col">
+                            <div class="slds-truncate">{indexRow.Name}</div>
+                        </td>
+                        <td scope="col" class="slds-text-align_left">
+                            <lightning-formatted-number style="padding-right: 3px;" value={indexRow.Index}
+                                maximum-fraction-digits="2" minimum-fraction-digits="2">
+                            </lightning-formatted-number>
+                            <template if:true={indexRow.displayV2}>
+                                <span style="color: red;">
+                                    (<lightning-formatted-number value={indexRow.IndexV2} maximum-fraction-digits="2"
+                                        minimum-fraction-digits="2" title={Labels.LBL_Index_V2_Helper_Text}>
+                                    </lightning-formatted-number>)
+                                </span>
+                            </template>
+                        </td>
+                        <td scope="col" class="slds-text-align_center">
+                            <lightning-formatted-number value={indexRow.IndexPerc} maximum-fraction-digits="2"
+                                minimum-fraction-digits="2">
+                            </lightning-formatted-number>
+                        </td>
+                        <td scope="col" class="slds-text-align_center">
+                            <lightning-formatted-number value={indexRow.To} maximum-fraction-digits="0"
+                                minimum-fraction-digits="0">
+                            </lightning-formatted-number>
+                        </td>
+                        <td scope="col" class="slds-text-align_center">
+                            <lightning-formatted-number value={indexRow.Computed} maximum-fraction-digits="0"
+                                minimum-fraction-digits="0">
+                            </lightning-formatted-number>
+                        </td>
+                        <td scope="col" class="slds-text-align_center" if:false={isProgHidden}>
+                            <lightning-formatted-number style="padding-right: 3px;" value={indexRow.Gap}
+                                maximum-fraction-digits="2" minimum-fraction-digits="2">
+                            </lightning-formatted-number>
+                            <template if:true={indexRow.displayV2}>
+                                <span style="color: red;">
+                                    (<lightning-formatted-number value={indexRow.GapV2} maximum-fraction-digits="2"
+                                        minimum-fraction-digits="2" title={Labels.LBL_Index_V2_Helper_Text}>
+                                    </lightning-formatted-number>)
+                                </span>
+                            </template>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <!-- <div class="slds-grid slds-p-around_xxx-small">
+                <div class="slds-col slds-truncate">Total TO Tariff Nego
+                </div>
+                <div class="slds-truncate output-number-field">
+                    <lightning-formatted-number value={wIndex.totalToTariffNego} maximum-fraction-digits="2" minimum-fraction-digits="2">
+                    </lightning-formatted-number>
+                </div>
+            </div> -->
+        <!-- <div class="slds-grid slds-align_absolute-bottom">
+                        <div class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_xx-small">
+                            <div class="slds-p-horizontal_small">
+                                <lightning-input label="Rise Rate">{wIndex.riseRate}
+                                </lightning-input>
+                            </div>
+                            <div class="slds-p-horizontal_small">
+                                <lightning-input label="Depreciation Rate">{wIndex.depresiationRate}
+                                </lightning-input>
+                            </div>
+                        </div>
+                        <div style="background-color: #f5ff5c;display: block;"
+                            class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-grid_align-space slds-p-bottom_xx-small">
+                            <div class="slds-col slds-form-element">
+                                <div class="slds-p-horizontal_small">
+                                    <lightning-input label="Index progress target">
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <div class="slds-p-horizontal_small">
+                                <div>
+                                    <lightning-combobox label="Nego Discount Type" options={negoDiscountTypes}>
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+                            <div class="slds-p-horizontal_small slds-text-align_right">
+                                <div class="slds-form-element__control slds-p-top_x-small">
+                                    <lightning-button variant="neutral" label={Labels.LBL_Apply}
+                                        onclick={estimateContractProgress}>
+                                    </lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+    </div>
+</template>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Last date for Support intervention on the row. --></help>
+    <label><!-- Last Support Date --></label>
+    <name>Support_Date__c</name>
+</CustomFieldTranslation>

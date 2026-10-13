@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ConditionsCaptureLevel__c</fullName>
+    <inlineHelpText>Défini le niveau de saisie pour les accords de ce NS. &lt;br/&gt;• Aucun : pas de saisie attendue, uniquement la visualisation des conditions partenaires reçues. &lt;br/&gt;• Saisie uniquement : pas de remontée des conditions partenaires attendue, uniquement la saisie des conditions de ce NS &lt;br/&gt;• Les deux: visualisation des conditions partenaires + saisie des conditions de ce NS</inlineHelpText>
+    <label>Contract Capture Level</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>PartnerOnly</fullName>
+                <default>false</default>
+                <label>Partner Only</label>
+            </value>
+            <value>
+                <fullName>AdvancedOnly</fullName>
+                <default>false</default>
+                <label>Advanced Only</label>
+            </value>
+            <value>
+                <fullName>AdvancedAndPartner</fullName>
+                <default>false</default>
+                <label>Advanced And Partner</label>
+            </value>
+            <value>
+                <fullName>CaptureOnly</fullName>
+                <default>false</default>
+                <label>CaptureOnly</label>
+            </value>
+            <value>
+                <fullName>Capture and read partner</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Capture and read partner</label>
+            </value>
+            <value>
+                <fullName>ReadPartnerOnly</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>ReadPartnerOnly</label>
+            </value>
+            <value>
+                <fullName>test</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>test</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

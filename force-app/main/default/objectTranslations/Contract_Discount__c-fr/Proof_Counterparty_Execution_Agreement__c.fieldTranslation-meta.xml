@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Contrepartie - Exécution contrat</label>
+    <name>Proof_Counterparty_Execution_Agreement__c</name>
+    <picklistValues>
+        <masterLabel>Application</masterLabel>
+        <translation>Application</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Mandat</masterLabel>
+        <translation>Mandat</translation>
+    </picklistValues>
+</CustomFieldTranslation>

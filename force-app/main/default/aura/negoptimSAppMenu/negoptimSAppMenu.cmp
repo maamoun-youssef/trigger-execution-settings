@@ -1,0 +1,20 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="Main_App_launcher_Controller">
+    <aura:handler name="init" value="{!this}" action="{!c.autoLoad}" />
+    <aura:attribute name="apps" type="String[]" />
+    <lightning:card>
+        <aura:set attribute="title">
+            negOptim Apps
+        </aura:set>
+        <aura:set attribute="footer">
+            by ULiT
+        </aura:set>
+        <aura:iteration items="{!v.apps}" var="item">
+            <div class="app-item">
+                <a href="{!item.StartUrl}">
+                    <img src="{!item.LogoUrl}" alt="{!item.Label}" height="150" width="200" />
+                    <!--lightning:avatar src="{!item.LogoUrl}" alternativeText="{!item.Label}" size="large" /-->
+                </a>
+            </div>
+        </aura:iteration>
+    </lightning:card>
+</aura:component>

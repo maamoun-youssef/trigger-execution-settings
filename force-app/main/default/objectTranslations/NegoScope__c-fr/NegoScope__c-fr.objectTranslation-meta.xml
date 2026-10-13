@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Nego Scope</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Negoscopes</value>
+    </caseValues>
+    <fieldSets>
+        <label>Ensemble de champ NS avancé</label>
+        <name>FS_Advanced</name>
+    </fieldSets>
+    <fieldSets>
+        <label>Ensemble de champ projet NS</label>
+        <name>FS_In_Preparation</name>
+    </fieldSets>
+    <fieldSets>
+        <label>Ensemble de champ NS Régulier</label>
+        <name>FS_Regular</name>
+    </fieldSets>
+    <fieldSets>
+        <label>Ensemble de champ Sous NS</label>
+        <name>FS_Sub_NS</name>
+    </fieldSets>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>Nego Scope Layout</layout>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Nego Scope Layout Portal</layout>
+        <sections>
+            <label><!-- Champs --></label>
+            <section>Champs</section>
+        </sections>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+        <sections>
+            <label><!-- Nouvelle section --></label>
+            <section>Nouvelle section</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Sub Nego Scope Layout</layout>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Nom du nego scope</nameFieldLabel>
+    <recordTypes>
+        <description>Un périmètre de négociation avancé utilisé pour les contrats chapeaux ou les contrats tripartites</description>
+        <label>Nego Scope Avancé</label>
+        <name>Advanced</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Un nouveau nego scope en préparation qui n&apos;est pas encore prêt à être utilisé dans la négociation</description>
+        <label>Projet de Nego Scope</label>
+        <name>NSProject</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Mon périmètre de négociation</description>
+        <label>Régulier</label>
+        <name>Regular</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Un périmètre de négociation enfant utilisé pour les conditions assiettes</description>
+        <label>Sous Nego Scope</label>
+        <name>SubNS</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label>Ajouter un nego scope</label>
+        <name>Add_NegoScope_List</name>
+    </webLinks>
+    <webLinks>
+        <label>Ajouter un sous nego scope</label>
+        <name>Add_Sub_NegoScope_List</name>
+    </webLinks>
+    <webLinks>
+        <label>Ajouter un sous nego scope</label>
+        <name>Add_Sub_Negoscope</name>
+    </webLinks>
+    <webLinks>
+        <label>Centre documentaire</label>
+        <name>DocumentCenter</name>
+    </webLinks>
+    <webLinks>
+        <label>Ajouter un nego scope (guidé)</label>
+        <name>Guided_Add_NegoScope_List</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- InvoiceManager --></label>
+        <name>InvoiceManager</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- InvoiceManagerVisualizer --></label>
+        <name>InvoiceManagerVisualizer</name>
+    </webLinks>
+    <webLinks>
+        <label>Gérer le nego scope</label>
+        <name>NegoScope_Manager</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Atteinte de palier - sell out réel</label>
+    <name>Slab_Reach_Actual_SellOut__c</name>
+</CustomFieldTranslation>

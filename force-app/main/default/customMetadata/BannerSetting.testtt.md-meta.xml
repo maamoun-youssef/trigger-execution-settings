@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>testtt</label>
+    <protected>false</protected>
+    <values>
+        <field>BackgroundColor__c</field>
+        <value xsi:type="xsd:string">#ffffff</value>
+    </values>
+    <values>
+        <field>DetailFields__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>DisplayMode__c</field>
+        <value xsi:type="xsd:string">Horizontal</value>
+    </values>
+    <values>
+        <field>IconSource__c</field>
+        <value xsi:type="xsd:string">standard</value>
+    </values>
+    <values>
+        <field>IconValue__c</field>
+        <value xsi:type="xsd:string">standard:record</value>
+    </values>
+    <values>
+        <field>Iconsize__c</field>
+        <value xsi:type="xsd:string">30px</value>
+    </values>
+    <values>
+        <field>IsActive__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>NumberOfFieldsDisplay__c</field>
+        <value xsi:type="xsd:double">3.0</value>
+    </values>
+    <values>
+        <field>ObjectAPIName__c</field>
+        <value xsi:type="xsd:string">AcceptedEventRelation</value>
+    </values>
+    <values>
+        <field>SelectedActions__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>SubtitleFieldAPI__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>TextColor__c</field>
+        <value xsi:type="xsd:string">#16325c</value>
+    </values>
+    <values>
+        <field>TitleFieldAPI__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:type="xsd:string">Record</value>
+    </values>
+</CustomMetadata>

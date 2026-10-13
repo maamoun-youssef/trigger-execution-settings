@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Price_List_Init_Default_BU__c</fullName>
+    <description>Default Business units for User Roles</description>
+    <inlineHelpText>Default Business units for User Roles</inlineHelpText>
+    <label>Price List Init Default BU</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

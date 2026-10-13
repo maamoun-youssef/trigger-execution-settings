@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>True</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordAction</target>
+        <target>lightning__Tab</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig
+            targets="lightning__AppPage,lightning__HomePage,lightning__RecordPage">
+            <property name="displayAddChildrenLine" type="Boolean" label="Display Add Children Line"
+                default="false" />
+            <property name="displayCloneForMultipleProducts" type="Boolean"
+                label="Display Clone For Multiple Products"
+                default="false" />
+            <property name="displayHelpText" type="Boolean"
+                label="Display Help Text"
+                default="false" />
+            <property name="enableMassUpdate" type="Boolean"
+                label="Enable Mass Update"
+                default="false" />
+            <property name="allowOpenRecord" type="Boolean" label="Display Open Record Page" default="false" />
+            <property name="allowDelete" type="Boolean" label="Display Delete CPD" default="false" />
+            <property name="cmpHeight" type="String" label="Component height" placeholder="300px"
+                description="Exemple: 400px. " />
+        </targetConfig>
+        <targetConfig targets="lightning__RecordAction">
+            <actionType>ScreenAction</actionType>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

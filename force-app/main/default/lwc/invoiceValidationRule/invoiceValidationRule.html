@@ -1,0 +1,58 @@
+<template>
+    <template lwc:if={isLoading}>
+        <div class="slds-spinner_container">
+            <div class="slds-spinner_container greyBg">
+                <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+            </div>
+        </div>
+    </template>
+    
+    <template lwc:else>
+        <div>
+            <div class="save-btn">
+                <lightning-button variant="brand" label={labels.LBL_Save} onclick={handleSaveInvoiceSettings} disabled={isSaveDisabled}>
+                </lightning-button>
+            </div>
+            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                <div class="sectionTitle slds-media__body">
+                    {labels.LBL_InvoiceValidationRules_PageTitle}
+                </div>
+            </div>
+            <div class="section-Container slds-m-top_medium">
+                <div class="label-toggle">
+                    <!-- {labels.LBL_InvoiceValidationRules_Description} -->
+                     {formattedDescription}
+                </div>
+            </div>
+            <div class="slds-m-top--medium dp slds-p-around--small">
+                <div class="slds-grid validation-contrller">
+                    <div class="gp-10" style="height: fit-content;">
+                        <lightning-input type="checkbox" variant="label-hidden" data-field="intervalStatus"
+                            checked={invoiceValidationRules.intervalStatus} style="align-self: center;"
+                            onchange={handleValidationRulesChange}></lightning-input>
+                        <lightning-input type="number" variant="label-hidden" data-field="intervalStart" class="input"
+                            value={invoiceValidationRules.intervalStart} max={invoiceValidationRules.intervalEnd} step="1"
+                            onchange={handleValidationRulesChange} required>
+                        </lightning-input>
+                        <!-- <lightning-combobox name="progress" value={invoiceValidationRules.intervalStartOperator}
+                            variant="label-hidden" options={operatorOptions} onchange={handleValidationRulesChange}
+                            data-field="intervalStartOperator"></lightning-combobox> -->
+                        <div class="slds-text-heading--medium">{invoiceValidationRules.intervalStartOperator}</div>
+                    </div>
+                    <div class="label-toggle slds-text-align--center" style="align-content:center;">{totalAmountwVATLabel}
+                    </div>
+                    <div class="gp-10">
+                        <div class="slds-text-heading--medium">{invoiceValidationRules.intervalEndOperator}</div>
+                        <!-- <lightning-combobox name="progress" value={invoiceValidationRules.intervalEndOperator}
+                            variant="label-hidden" options={operatorOptions} onchange={handleValidationRulesChange}
+                            data-field="intervalEndOperator" ></lightning-combobox> -->
+                        <lightning-input type="number" variant="label-hidden" data-field="intervalEnd" class="input"
+                            value={invoiceValidationRules.intervalEnd} min={invoiceValidationRules.intervalStart} step="1"
+                            onchange={handleValidationRulesChange} required>
+                        </lightning-input>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

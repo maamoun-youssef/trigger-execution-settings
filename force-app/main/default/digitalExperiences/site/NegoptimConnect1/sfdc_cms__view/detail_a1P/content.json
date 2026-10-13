@@ -1,0 +1,70 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Document juridique Détails",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"4614fbbb-8186-424a-8e59-24c81c53ed65\",\"columns\":[{\"UUID\":\"9151d515-83e3-46d3-8332-e3794ecc5c0c\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "isPortalUser" : true,
+                "recordId" : "{!recordId}"
+              },
+              "definition" : "c:legalClauseManager",
+              "id" : "938aba1b-17da-4a92-bb02-15261e4ddbef",
+              "type" : "component"
+            } ],
+            "id" : "9151d515-83e3-46d3-8332-e3794ecc5c0c",
+            "name" : "col1",
+            "title" : "Colonne 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "4614fbbb-8186-424a-8e59-24c81c53ed65",
+          "type" : "component"
+        } ],
+        "id" : "04214237-b7ba-4bbc-9da6-5f2901bedeec",
+        "name" : "content",
+        "title" : "Contenu",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "pageTitle" : "{!Record._Object}: {!Record._Title}",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "a13f92a7-115b-4aae-906f-629efa0b852a",
+          "type" : "component"
+        } ],
+        "id" : "eda9f4be-be58-4c15-a9de-5f812d722f2d",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "34ab3fb8-d86e-42e2-b111-38d05366cf55",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "detail-LegalDoc__c"
+  },
+  "urlName" : "document-juridique-détails"
+}

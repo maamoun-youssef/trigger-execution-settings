@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Précisez le niveau de négociation et de signature du contrat</help>
+    <label>Contract BU (old)</label>
+    <name>Contract_BU__c</name>
+    <relationshipLabel><!-- All contracts (Coming from / Dealing by) --></relationshipLabel>
+</CustomFieldTranslation>

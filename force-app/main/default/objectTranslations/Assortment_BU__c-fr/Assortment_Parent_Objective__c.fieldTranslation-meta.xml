@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Objectif lié</label>
+    <name>Assortment_Parent_Objective__c</name>
+    <relationshipLabel>Assortiments liés des ensg</relationshipLabel>
+</CustomFieldTranslation>

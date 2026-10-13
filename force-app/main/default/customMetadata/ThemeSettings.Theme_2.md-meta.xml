@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Theme_2</label>
+    <protected>false</protected>
+    <values>
+        <field>ThemeAttributes__c</field>
+        <value xsi:type="xsd:string">{&quot;fontFamily&quot;:&quot;&apos;Salesforce Sans&apos;, Arial, sans-serif&quot;,&quot;brandColor&quot;:&quot;#97EA94&quot;,&quot;borderRadius&quot;:&quot;12px&quot;,&quot;bgColor&quot;:&quot;#00E2FF&quot;}</value>
+    </values>
+</CustomMetadata>

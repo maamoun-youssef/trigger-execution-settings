@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BusinessOwners_Accounting__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>BusinessOwners Accounting</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>User.BusinessOwners__c</field>
+            <operation>equals</operation>
+            <value>Comptabilité</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>User</referenceTo>
+    <relationshipName>BusinessOwnersAccounting</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

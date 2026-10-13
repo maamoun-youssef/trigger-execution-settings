@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>AssortmentBU</fullName>
+        <default>false</default>
+        <label>AssortmentBU</label>
+    </customValue>
+    <customValue>
+        <fullName>PriceListStatement</fullName>
+        <default>false</default>
+        <label>PriceListStatement</label>
+    </customValue>
+    <customValue>
+        <fullName>InternalPriceList</fullName>
+        <default>false</default>
+        <label>InternalPriceList</label>
+    </customValue>
+    <customValue>
+        <fullName>PriceWaterfall</fullName>
+        <default>false</default>
+        <label>PriceWaterfall</label>
+    </customValue>
+    <customValue>
+        <fullName>External</fullName>
+        <default>false</default>
+        <label>External</label>
+    </customValue>
+    <customValue>
+        <fullName>NetPriceStatement</fullName>
+        <default>false</default>
+        <label>NetPriceStatement</label>
+    </customValue>
+    <masterLabel>Synchro Data Source</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

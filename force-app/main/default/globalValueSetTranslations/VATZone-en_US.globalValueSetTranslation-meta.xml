@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>EU</masterLabel>
+        <translation>EU</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>None</masterLabel>
+        <translation>None</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Outside EU</masterLabel>
+        <translation>Outside EU</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

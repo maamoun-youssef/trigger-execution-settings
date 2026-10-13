@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Administrative Fees</masterLabel>
+        <translation>Services administratifs</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Advertising Fees 2</masterLabel>
+        <translation>Enveloppe TMP 4net</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Advertising fees</masterLabel>
+        <translation>Enveloppe TMP</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Financial Fees</masterLabel>
+        <translation>Fid et Nips</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>International Fees</masterLabel>
+        <translation>International</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>International Fees 2</masterLabel>
+        <translation>International 2</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Others</masterLabel>
+        <translation>Services 4net</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Others 2</masterLabel>
+        <translation>Marketing dotations</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Payment</masterLabel>
+        <translation>Paiement</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Penalties</masterLabel>
+        <translation>Pénalités</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Price Discount</masterLabel>
+        <translation>Remises facture</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Progressive Rebates</masterLabel>
+        <translation>Paliers de ristournes</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Quality</masterLabel>
+        <translation>Qualité</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Rebates</masterLabel>
+        <translation>Généré ristournes</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Rebates 2</masterLabel>
+        <translation>Ristourne complémentaire</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Rebates 4Net</masterLabel>
+        <translation>Ristournes 4net</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Stock Returns</masterLabel>
+        <translation>Reprise stocks</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Store Fees</masterLabel>
+        <translation>Coop magasin</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Supply Fees</masterLabel>
+        <translation>Coop fournisseur</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

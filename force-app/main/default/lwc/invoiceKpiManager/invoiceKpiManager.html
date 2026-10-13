@@ -1,0 +1,107 @@
+<template>
+        <div class="slds-card">
+            <div class="container">
+                <div class="container-content">
+                    <template lwc:if={isLoading}>
+                        <div class="slds-spinner_container">
+                            <div class="slds-spinner_container greyBg">
+                                <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+                            </div>
+                        </div>
+                    </template>
+                    <template lwc:else>
+                        <template lwc:if={isAvailable}>
+                            <template lwc:if={wrapper}>
+                                <!-- <div class="header-container">
+                                    <div class="title">Key performance Overview</div>
+                                    <div class="sub-title">This section presents a table of key performance indicators (KPIs) with summarized details</div>
+                                </div> -->
+                                <div class="dashboard">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="cell"></div>
+                                            <div class="cell fields">{label.LBL_KpiTable_NbOfPiece}</div>
+                                            <div class="cell fields">{label.LBL_KpiTable_TotalValue}</div>
+                                        </div>
+                                        <template for:each={wrapper} for:item='item' for:index="index">
+                                            <div  class="col" key={item}>
+                                                <div class="cell" style={item.headerStyle}>{item.header}</div>
+                                                <template for:each={item.kpiValue} for:item='field' for:index="itemIndex">
+                                                    
+                                                    <div class="cell border " style={item.bodyStyle} onclick={handleOpenLink}
+                                                    data-index={index} key={field} onmouseenter={handleMouseEnter} onmouseleave={handleMouseLeave}>
+                                                        <lightning-formatted-number value={field.value} format-style={field.type}
+                                                        maximum-fraction-digits='0' currency-code="EUR" use-grouping="true" class="cell-number">
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+            
+                                </div>
+                                <div class="footer-container" if:true={enableInvoiceKPICategory}>
+                                    <p class="category-guide">{categoryGuideText}</p>
+                                    <div onclick={handleCategoryVisibility} class="show-detail">{categoryToggleText}</div>
+                                </div>
+                            </template>
+                            <template lwc:if={showCategory}>
+                                <div class="dashboard" lwc:if={wrapper}>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="cell"></div>
+                                            <div class="cell" style="height: 45px;"></div>
+                                            <template for:each={category} for:item="item">
+                                                <div class="cell category-fields " key={item}>{item}</div>
+                                            </template>
+                                        </div>
+                                        <template for:each={wrapper} for:item='item' for:index="index">
+                                            <div class="col" key={item}>
+                                                <div class="cell" style={item.headerStyle}>{item.header}</div>
+                                                <div class="grid">
+                                                    <div class="grid-child border fields"  key={field}
+                                                    data-index={index} >{label.LBL_KpiTable_NbOfPiece}</div>  
+                                                    <div class="grid-child border fields"  key={field}
+                                                    data-index={index} > {label.LBL_KpiTable_TotalValue}</div>    
+                                                </div>
+                                                <template for:each={item.category} for:item='category' for:index="categoryIndex">
+                                                    <div class="grid" key={category}>
+                                                    <template for:each={category.kpiValue} for:item='field' for:index="itemIndex">
+                                                        <template lwc:if={field.Thousands}>
+                                                            <div class="grid-child  border category-number smallNumber" style={item.bodyStyle} key={field}
+                                                            data-index={index} onmouseenter={handleMouseEnter} onmouseleave={handleMouseLeave} 
+                                                            onclick={handleOpenLink} data-large={field.value} data-small={field.smallValue} data-field={categoryIndex}>
+                                                                <p >{field.smallValue}</p>
+                                                            </div>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            <div class="grid-child  border category-number" style={item.bodyStyle} key={field}
+                                                            data-index={index} onmouseenter={handleMouseEnter} onmouseleave={handleMouseLeave} 
+                                                            onclick={handleOpenLink} data-field={categoryIndex}>
+                                                                <lightning-formatted-number value={field.value} format-style={field.type}
+                                                                maximum-fraction-digits='0' currency-code="EUR" use-grouping="true">
+                                                                </lightning-formatted-number>
+                                                            </div>
+                                                        </template>
+            
+                                                    </template>
+                                                    
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                        <template lwc:else>
+                            <div style="height:200px;align-items:center; display:flex; justify-content:center;">
+                                {label.LBL_Connect_Invoice_NoActiveKPIActions}
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+</template>

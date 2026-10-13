@@ -1,0 +1,386 @@
+.contractIndexesSummary_landing .contract-header {
+    background-color: var(--c-landing-header-color-background) !important;
+    color: var(--c-landing-header-color-text) !important;
+    min-width: 50px !important;
+}
+
+.contractIndexesSummary_landing .contract-base {
+    background-color: var(--c-landing-hmp-color-background) !important;
+    color: var(--c-landing-hmp-color-text) !important;
+}
+
+.contractIndexesSummary_landing .contract-title {
+    margin: inherit;
+    width: 5%;
+    color: var(--c-landing-header-color-text) !important;
+    background-image: linear-gradient(#ffffff, var(--c-landing-header-color-background)) !important;
+}
+
+.contractIndexesSummary_nego-base .contract-header {
+    background-color: var(--c-nego-base-header-color-background) !important;
+    color: var(--c-nego-base-header-color-text) !important;
+    min-width: 50px !important;
+}
+
+.contractIndexesSummary_nego-base .contract-base {
+    background-color: var(--c-nego-base-hmp-color-background) !important;
+    color: var(--c-nego-base-hmp-color-text) !important;
+}
+
+.contractIndexesSummary_nego-base .contract-title {
+    margin: inherit;
+    width: 5%;
+    color: var(--c-nego-base-header-color-text) !important;
+    background-image: linear-gradient(#ffffff, var(--c-nego-base-header-color-background)) !important;
+}
+
+.contractIndexesSummary_nego-base-init .contract-header {
+    background-color: var(--c-nego-base-init-header-color-background) !important;
+    color: var(--c-nego-base-init-header-color-text) !important;
+    min-width: 50px !important;
+}
+
+.contractIndexesSummary_nego-base-init .contract-base {
+    background-color: var(--c-nego-base-init-hmp-color-background) !important;
+    color: var(--c-nego-base-init-hmp-color-text) !important;
+}
+
+.contractIndexesSummary_nego-base-init .contract-title {
+    margin: inherit;
+    width: 5%;
+    color: var(--c-nego-base-init-header-color-text) !important;
+    background-image: linear-gradient(#ffffff, var(--c-nego-base-init-header-color-background)) !important;
+}
+
+.contractIndexesSummary_period-extension .contract-header {
+    background-color: var(--c-period-extension-header-color-background) !important;
+    color: var(--c-period-extension-header-color-text) !important;
+    min-width: 50px !important;
+}
+
+.contractIndexesSummary_period-extension .contract-base {
+    background-color: var(--c-period-extension-hmp-color-background) !important;
+    color: var(--c-period-extension-hmp-color-text) !important;
+}
+
+.contractIndexesSummary_period-extension .contract-title {
+    margin: inherit;
+    width: 5%;
+    color: var(--c-period-extension-header-color-text) !important;
+    background-image: linear-gradient(#ffffff, var(--c-period-extension-header-color-background)) !important;
+}
+
+.contractIndexesSummary_postnego-simulation .contract-header {
+    background-color: var(--c-postnego-simulation-header-color-background) !important;
+    color: var(--c-postnego-simulation-header-color-text) !important;
+    min-width: 50px !important;
+}
+
+.contractIndexesSummary_postnego-simulation .contract-base {
+    background-color: var(--c-postnego-simulation-hmp-color-background) !important;
+    color: var(--c-postnego-simulation-hmp-color-text) !important;
+}
+
+.contractIndexesSummary_postnego-simulation .contract-title {
+    margin: inherit;
+    width: 5%;
+    color: var(--c-postnego-simulation-header-color-text) !important;
+    background-image: linear-gradient(#ffffff, var(--c-postnego-simulation-header-color-background)) !important;
+}
+
+.contractIndexesSummary_proposal .contract-header {
+    background-color: var(--c-proposal-header-color-background) !important;
+    color: var(--c-proposal-header-color-text) !important;
+    min-width: 50px !important;
+}
+
+.contractIndexesSummary_proposal .contract-base {
+    background-color: var(--c-proposal-hmp-color-background) !important;
+    color: var(--c-proposal-hmp-color-text) !important;
+}
+
+.contractIndexesSummary_proposal .contract-title {
+    margin: inherit;
+    width: 5%;
+    color: var(--c-proposal-header-color-text) !important;
+    background-image: linear-gradient(#ffffff, var(--c-proposal-header-color-background)) !important;
+}
+
+.contractIndexesSummary_safe-balance .contract-header {
+    background-color: var(--c-safe-balance-header-color-background) !important;
+    color: var(--c-safe-balance-header-color-text) !important;
+    min-width: 50px !important;
+}
+
+.contractIndexesSummary_safe-balance .contract-base {
+    background-color: var(--c-safe-balance-hmp-color-background) !important;
+    color: var(--c-safe-balance-hmp-color-text) !important;
+}
+
+.contractIndexesSummary_safe-balance .contract-title {
+    margin: inherit;
+    width: 5%;
+    color: var(--c-safe-balance-header-color-text) !important;
+    background-image: linear-gradient(#ffffff, var(--c-safe-balance-header-color-background)) !important;
+}
+
+.contractIndexesSummary_signed .contract-header {
+    background-color: var(--c-signed-header-color-background) !important;
+    color: var(--c-signed-header-color-text) !important;
+    min-width: 50px !important;
+}
+
+.contractIndexesSummary_signed .contract-base {
+    background-color: var(--c-signed-hmp-color-background) !important;
+    color: var(--c-signed-hmp-color-text) !important;
+}
+
+.contractIndexesSummary_signed .contract-title {
+    margin: inherit;
+    width: 5%;
+    color: var(--c-signed-header-color-text) !important;
+    background-image: linear-gradient(#ffffff, var(--c-signed-header-color-background)) !important;
+}
+
+.contractIndexesSummary_signed-copy .contract-header {
+    background-color: var(--c-signed-copy-header-color-background) !important;
+    color: var(--c-signed-copy-header-color-text) !important;
+    min-width: 50px !important;
+}
+
+.contractIndexesSummary_signed-copy .contract-base {
+    background-color: var(--c-signed-copy-hmp-color-background) !important;
+    color: var(--c-signed-copy-hmp-color-text) !important;
+}
+
+.contractIndexesSummary_signed-copy .contract-title {
+    margin: inherit;
+    width: 5%;
+    color: var(--c-signed-copy-header-color-text) !important;
+    background-image: linear-gradient(#ffffff, var(--c-signed-copy-header-color-background)) !important;
+}
+
+.contractIndexesSummary_simulation .contract-header {
+    background-color: var(--c-simulation-header-color-background) !important;
+    color: var(--c-simulation-header-color-text) !important;
+    min-width: 50px !important;
+}
+
+.contractIndexesSummary_simulation .contract-base {
+    background-color: var(--c-simulation-hmp-color-background) !important;
+    color: var(--c-simulation-hmp-color-text) !important;
+}
+
+.contractIndexesSummary_simulation .contract-title {
+    margin: inherit;
+    width: 5%;
+    color: var(--c-simulation-header-color-text) !important;
+    background-image: linear-gradient(#ffffff, var(--c-simulation-header-color-background)) !important;
+}
+
+.contractIndexesSummary_target .contract-header {
+    background-color: var(--c-target-header-color-background) !important;
+    color: var(--c-target-header-color-text) !important;
+    min-width: 50px !important;
+}
+
+.contractIndexesSummary_target .contract-base {
+    background-color: var(--c-target-hmp-color-background) !important;
+    color: var(--c-target-hmp-color-text) !important;
+}
+
+.contractIndexesSummary_target .contract-title {
+    margin: inherit;
+    width: 5%;
+    color: var(--c-target-header-color-text) !important;
+    background-image: linear-gradient(#ffffff, var(--c-target-header-color-background)) !important;
+}
+
+.contractIndexesSummary_to-be-signed .contract-header {
+    background-color: var(--c-to-be-signed-header-color-background) !important;
+    color: var(--c-to-be-signed-header-color-text) !important;
+    min-width: 50px !important;
+}
+
+.contractIndexesSummary_to-be-signed .contract-base {
+    background-color: var(--c-to-be-signed-hmp-color-background) !important;
+    color: var(--c-to-be-signed-hmp-color-text) !important;
+}
+
+.contractIndexesSummary_to-be-signed .contract-title {
+    margin: inherit;
+    width: 5%;
+    color: var(--c-to-be-signed-header-color-text) !important;
+    background-image: linear-gradient(#ffffff, var(--c-to-be-signed-header-color-background)) !important;
+}
+
+.contractIndexesSummary_objective .contract-header {
+    background-color: var(--c-objective-header-color-background) !important;
+    color: var(--c-objective-header-color-text) !important;
+    min-width: 50px !important;
+}
+
+.contractIndexesSummary_objective .contract-base {
+    background-color: var(--c-objective-hmp-color-background) !important;
+    color: var(--c-objective-hmp-color-text) !important;
+}
+
+.contractIndexesSummary_objective .contract-title {
+    margin: inherit;
+    width: 5%;
+    color: var(--c-objective-header-color-text) !important;
+    background-image: linear-gradient(#ffffff, var(--c-objective-header-color-background)) !important;
+}
+
+.back-color {
+    background: white;
+}
+
+.contractIndexesSummary_on-top .contract-header {
+    background-color: var(--c-on-top-header-color-background) !important;
+    color: var(--c-on-top-header-color-text) !important;
+    min-width: 50px !important;
+}
+
+.contractIndexesSummary_on-top .contract-base {
+    background-color: var(--c-on-top-hmp-color-background) !important;
+    color: var(--c-on-top-hmp-color-text) !important;
+}
+
+.contractIndexesSummary_on-top .contract-title {
+    margin: inherit;
+    width: 5%;
+    color: var(--c-on-top-header-color-text) !important;
+    background-image: linear-gradient(#ffffff, var(--c-on-top-header-color-background)) !important;
+}
+
+.contractIndexesSummary_nego-base-exit .contract-header {
+    background-color: var(--c-nego-base-exit-header-color-background) !important;
+    color: var(--c-nego-base-exit-header-color-text) !important;
+    min-width: 50px !important;
+}
+
+.contractIndexesSummary_nego-base-exit .contract-base {
+    background-color: var(--c-nego-base-exit-hmp-color-background) !important;
+    color: var(--c-nego-base-exit-hmp-color-text) !important;
+}
+
+.contractIndexesSummary_nego-base-exit .contract-title {
+    margin: inherit;
+    width: 5%;
+    color: var(--c-nego-base-exit-header-color-text) !important;
+    background-image: linear-gradient(#ffffff, var(--c-nego-base-exit-header-color-background)) !important;
+}
+
+.contractIndexesSummary_default .contract-header {
+    background-color: var(--c-default-header-color-background, #0cb4ba) !important;
+    color: var(--c-default-header-color-text, #ffffff) !important;
+    min-width: 50px !important;
+}
+
+.contractIndexesSummary_default .contract-base {
+    background-color: var(--c-default-hmp-color-background) !important;
+    color: var(--c-default-hmp-color-text) !important;
+}
+
+.contractIndexesSummary_default .contract-title {
+    margin: inherit;
+    width: 5%;
+    color: var(--c-default-header-color-text, #ffffff) !important;
+    background-image: linear-gradient(#ffffff, var(--c-default-header-color-background, #0cb4ba)) !important;
+}
+
+.cl-ribbon {
+    width: 28px;
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cl-ribbon>span {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .2);
+    padding: 8px 0;
+}
+
+.cl-main {
+    flex: 1;
+    background: #fff;
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+    overflow: hidden;
+}
+
+.cl-container {
+    padding: 0;
+}
+
+.cl-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+}
+
+.cl-header {
+    height: 40px;
+
+}
+
+.cl-header>th {
+    padding: 1px 0px 1px 5px;
+    font-size: 9pt;
+    position: relative;
+}
+
+.cl-header>th:last-child {
+    border-right: none;
+}
+
+.cl-header>th+th::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.85);
+    pointer-events: none;
+}
+
+.cl-row td {
+    padding: 1px 0px 1px 5px;
+    font-size: 9pt;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.cl-header>td:last-child {
+    padding: 1px 5px 1px 5px;
+}
+
+.cl-row:last-child td {
+    border-bottom: 0;
+}
+
+.cl-footer {
+    display: flex;
+}
+
+.cl-link {
+    color: var(--cl-link, #0b5cab);
+    text-decoration: none;
+}
+
+.cl-link:hover {
+    text-decoration: underline;
+}
+
+.cl-empty {
+    padding: 12px 10px;
+    color: #666;
+}

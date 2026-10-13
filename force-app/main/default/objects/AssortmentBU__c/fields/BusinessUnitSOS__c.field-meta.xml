@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BusinessUnitSOS__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Reference Site of sales for the line for the product</description>
+    <label>Business Unit SOS</label>
+    <referenceTo>BusinessUnit__c</referenceTo>
+    <relationshipLabel>Assortments BU (Business Unit SOS)</relationshipLabel>
+    <relationshipName>ASBUBusinessUnitSOS</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

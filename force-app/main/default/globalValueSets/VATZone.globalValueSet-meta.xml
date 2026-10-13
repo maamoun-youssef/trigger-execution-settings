@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>None</fullName>
+        <default>true</default>
+        <label>None</label>
+    </customValue>
+    <customValue>
+        <fullName>EU</fullName>
+        <default>false</default>
+        <label>EU</label>
+    </customValue>
+    <customValue>
+        <fullName>Outside EU</fullName>
+        <default>false</default>
+        <label>Outside EU</label>
+    </customValue>
+    <description>VAT Zone</description>
+    <masterLabel>VATZone</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

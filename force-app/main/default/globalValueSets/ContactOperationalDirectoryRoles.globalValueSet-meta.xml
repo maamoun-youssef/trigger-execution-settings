@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Commercial - Main Contact</fullName>
+        <default>false</default>
+        <label>Commercial - Main Contact</label>
+    </customValue>
+    <customValue>
+        <fullName>Commercial - Secondary Contact</fullName>
+        <default>false</default>
+        <label>Commercial - Secondary Contact</label>
+    </customValue>
+    <customValue>
+        <fullName>Accounting - Main Contact</fullName>
+        <default>false</default>
+        <label>Accounting - Main Contact</label>
+    </customValue>
+    <customValue>
+        <fullName>Accounting - Secondary Contact</fullName>
+        <default>false</default>
+        <label>Accounting - Secondary Contact</label>
+    </customValue>
+    <customValue>
+        <fullName>Legal - Main Contact</fullName>
+        <default>false</default>
+        <label>Legal - Main Contact</label>
+    </customValue>
+    <customValue>
+        <fullName>Legal - Secondary Contact</fullName>
+        <default>false</default>
+        <label>Legal - Secondary Contact</label>
+    </customValue>
+    <masterLabel>Contact Operational Directory Roles</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Trade Collabs",
+  "contentBody" : {
+    "activeViewId" : "Trade_Collabs",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-trade-collabs",
+    "urlPrefix" : "trade-collabs"
+  },
+  "urlName" : "trade-collabs"
+}

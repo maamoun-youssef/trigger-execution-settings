@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Funding type --></label>
+    <name>BudgetType__c</name>
+    <picklistValues>
+        <masterLabel>CTN gratuits</masterLabel>
+        <translation><!-- CTN gratuits --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>FG</masterLabel>
+        <translation><!-- FG --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>FG/NIP</masterLabel>
+        <translation><!-- FG/NIP --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>NIP</masterLabel>
+        <translation><!-- NIP --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>SellInDiscount</masterLabel>
+        <translation><!-- SellInDiscount --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>TMP/FG</masterLabel>
+        <translation><!-- TMP/FG --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>TMP/NIP</masterLabel>
+        <translation><!-- TMP/NIP --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

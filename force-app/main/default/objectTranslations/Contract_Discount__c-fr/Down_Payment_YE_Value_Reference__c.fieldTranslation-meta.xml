@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Le montant de l&apos;acompte se calcule en fonction du nombre d&apos;acomptes interprété dans la colonne &quot;Période de facturation&quot;</help>
+    <label>Montant d&apos;acompte / d&apos;échéance</label>
+    <name>Down_Payment_YE_Value_Reference__c</name>
+</CustomFieldTranslation>

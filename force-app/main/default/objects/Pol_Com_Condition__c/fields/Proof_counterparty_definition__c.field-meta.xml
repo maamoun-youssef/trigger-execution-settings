@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Proof_counterparty_definition__c</fullName>
+    <defaultValue>&quot;Define here the counterpart criteria&quot;</defaultValue>
+    <description>Give the description of the counterpart.</description>
+    <inlineHelpText>Give the description of the counterpart.</inlineHelpText>
+    <label>Counterparty definition</label>
+    <length>32768</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

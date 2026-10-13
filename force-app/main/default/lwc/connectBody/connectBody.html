@@ -1,0 +1,303 @@
+<template>
+    <div class="c pv160 m_pv80 m_m_pv60 pt160">
+        <div class="flexi g_nm m_m_h">
+            <div class="w80 g_nm m_w90" style="height:200px;">
+                <div class="ov con " style={imageUrlNegoArc}></div>
+                <div class={actionSectionClass}>
+                    <div class="ov b fs30 ta m_fs25 m_m_fs15 menu-logo c">
+                        <div class="g_nm vm con w20 sq logo-class" style={LogoCircle} onmouseover={handleMouseOver}
+                            onmouseout={handleMouseOut}>
+                            <div class="cc w35 con sq c-letter " style={LogoC}></div>
+                            <div class=" w35 con sq play-icon" style={LogoPlay} onclick={playVideo}></div>
+                            <div class="ov w90 con sq nego-logo" style={LogoNego}></div>
+                            <div class="ov la w90 con sq connect-logo" style={LogoOnnet}></div>
+                            <div class="ov la w30 con sq cletter-logo" style={LogoCBlack}></div>
+                        </div>
+                    </div>
+                    <div if:true={action1.isDisplayed} class={action1.class} onclick={navigateToDetailsPage}
+                        data-action="action1">
+                        <div class="con sq50 w100 cc menu-img" style={action1.style}></div>
+                        <div class="ov ta fs20 m_fs16 m_m_fs14"
+                            style="bottom:-60px;color:#89A3A3;font-family:'customFontTest'">
+                            {action1.name}
+                        </div>
+                    </div>
+                    <div if:true={action2.isDisplayed} class={action2.class} onclick={navigateToDetailsPage}
+                        data-action="action2">
+                        <div class="con sq50 w100 menu-img cc" style={action2.style}></div>
+                        <div class="ov ta fs20 m_fs16 m_m_fs14 text-c2 "
+                            style="bottom:-60px;color:#89A3A3;font-family:'customFontTest'">
+                            {action2.name}
+                        </div>
+                    </div>
+                    <div if:true={action3.isDisplayed} class={action3.class} onclick={navigateToDetailsPage}
+                        data-action="action3">
+                        <div class="con sq50 w100 cc menu-img" style={action3.style}></div>
+                        <div class="ov ta fs20 m_fs16 m_m_fs14 text-center "
+                            style="bottom:-60px;color:#89A3A3;font-family:'customFontTest'">
+                            {action3.name}
+                        </div>
+                    </div>
+                    <div if:true={action4.isDisplayed} class={action4.class} onclick={navigateToDetailsPage}
+                        data-action="action4">
+                        <div class="con sq50 w100 cc menu-img" style={action4.style}></div>
+                        <div class="ov ta fs20 m_fs16 m_m_fs14 text-c3 "
+                            style="bottom:-60px;color:#89A3A3;font-family:'customFontTest'">
+                            {action4.name}
+                        </div>
+                    </div>
+                    <div if:true={action5.isDisplayed} class={action5.class} onclick={navigateToDetailsPage}
+                        data-action="action5">
+                        <div class="con sq50 w100 cc menu-img" style={action5.style}></div>
+                        <div class="ov ta fs20 m_fs16 m_m_fs14 text-c1 "
+                            style="bottom: -60px;px;color:#89A3A3;font-family:'customFontTest'">
+                            {action5.name}
+                        </div>
+                    </div>
+                    <div if:true={action6.isDisplayed} class={action6.class} onclick={navigateToDetailsPage}
+                        data-action="action6">
+                        <div class="con sq50 w100 cc menu-img" style={action6.style}></div>
+                        <div class="ov ta fs20 m_fs16 m_m_fs14 text-center " style="bottom:-60px;color:#89A3A3;">
+                            {action6.name}
+                        </div>
+                    </div>
+                    <div if:true={action7.isDisplayed} class={action7.class} onclick={navigateToDetailsPage}
+                        data-action="action7">
+                        <div class="con sq50 w100 cc menu-img" style={action7.style}></div>
+                        <div class="ov ta fs20 m_fs16 m_m_fs14 text-center " style="bottom:-60px;color:#89A3A3;">
+                            {action7.name}
+                        </div>
+                    </div>
+                    <div if:true={action8.isDisplayed} class={action8.class} onclick={navigateToDetailsPage}
+                        data-action="action8">
+                        <div class="con sq50 w100 cc menu-img" style={action8.style}></div>
+                        <div class="ov ta fs20 m_fs16 m_m_fs14 text-center " style="bottom:-60px;color:#89A3A3;">
+                            {action8.name}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flexi m_w90 m_m_w100 h m_m_sib g_nm">
+            <div class="g_nm vm con sq m_w30 logo-class" style={LogoCircle} onmouseover={handleMouseOver}
+                onmouseout={handleMouseOut}>
+                <div class="cc w35 con sq c-letter" style={LogoC}></div>
+                <div class=" w35 con sq play-icon" style={LogoPlay} onclick={playVideo}></div>
+                <div class="ov la w90 con sq connect-logo-m" style={LogoOnnet}></div>
+                <div class="ov la w30 con sq cletter-logo-m" style={LogoCBlack}></div>
+            </div>
+            <div class="pv20" style="margin-top:-3px">
+                <div class="ov cc"
+                    style="background: linear-gradient(180deg, rgb(208, 214, 52), transparent) rgb(12, 180, 187);width:2px;height:100%">
+                </div>
+                <tbl_nm if:true={action1.isDisplayed}>
+                    <rw>
+                        <cl class="w50 ">
+                            <div onclick={navigateToDetailsPage} data-action="action1">
+                                <div class={action1.classmobile}
+                                    style="z-index:1;;width:65px;height:65px;border-radius:50px">
+                                    <div class="cc w50 con sq menu-img-mobile" style={action1.style}></div>
+                                </div>
+                                <div class="fs16" style="color:#89A3A3">{action1.name}</div>
+                            </div>
+                        </cl>
+                        <cl style="width:3px;min-width:3px;">
+                            <div class="ov ba"
+                                style="left:-50px;top:-15px;background: linear-gradient(180deg, rgb(208, 214, 52), transparent) rgb(12, 180, 187);width:2px;height:100px;transform: rotate(90deg);">
+                            </div>
+                            <div class="ov "
+                                style="top:30px;left:-3px;width:10px;height:10px;background:#545555;border-radius:50%">
+                            </div>
+                        </cl>
+                        <cl class="w50 vt "></cl>
+                    </rw>
+                </tbl_nm>
+                <tbl_nm if:true={action2.isDisplayed}>
+                    <rw>
+                        <cl class="w50 ">
+                        </cl>
+                        <cl style="width:3px;min-width:3px;">
+                            <div class="ov ba"
+                                style="left:50px;top:-15px;background: linear-gradient(180deg, rgb(208, 214, 52), transparent) rgb(12, 180, 187);width:2px;height:100px;transform: rotate(90deg);">
+                            </div>
+                            <div class="ov ba"
+                                style="top:30px;left:-3px;width:10px;height:10px;background:#545555;border-radius:50%">
+                            </div>
+                        </cl>
+                        <cl class="w50 vt ">
+                            <div onclick={navigateToDetailsPage} data-action="action2">
+                                <div class={action2.classmobile}
+                                    style="z-index:1;width:65px;height:65px;border-radius:50px">
+                                    <div class="cc w50 con sq menu-img-mobile" style={action2.style}></div>
+                                </div>
+                                <div class="fs16" style="color:#89A3A3">{action2.name}</div>
+                            </div>
+                        </cl>
+                    </rw>
+                </tbl_nm>
+                <tbl_nm if:true={action3.isDisplayed}>
+                    <rw>
+                        <cl class="w50 ">
+                            <div onclick={navigateToDetailsPage} data-action="action3">
+                                <div class={action3.classmobile}
+                                    style="z-index:1;width:65px;height:65px;border-radius:50px">
+                                    <div class="cc w50 con sq menu-img-mobile" style={action3.style}></div>
+                                </div>
+                                <div class="fs16" style="color:#89A3A3">{action3.name}</div>
+                            </div>
+                        </cl>
+                        <cl style="width:3px;min-width:3px;">
+                            <div class="ov ba"
+                                style="left:-50px;top:-15px;background: linear-gradient(180deg, rgb(208, 214, 52), transparent) rgb(12, 180, 187);width:2px;height:100px;transform: rotate(90deg);">
+                            </div>
+                            <div class="ov "
+                                style="top:30px;left:-3px;width:10px;height:10px;background:#545555;border-radius:50%">
+                            </div>
+                        </cl>
+                        <cl class="w50 vt "></cl>
+                    </rw>
+                </tbl_nm>
+                <tbl_nm if:true={action4.isDisplayed}>
+                    <rw>
+                        <cl class="w50 ">
+                        </cl>
+                        <cl style="width:3px;min-width:3px;">
+                            <div class="ov ba"
+                                style="left:50px;top:-15px;background: linear-gradient(180deg, rgb(208, 214, 52), transparent) rgb(12, 180, 187);width:2px;height:100px;transform: rotate(90deg);">
+                            </div>
+                            <div class="ov ba"
+                                style="top:30px;left:-3px;width:10px;height:10px;background:#545555;border-radius:50%">
+                            </div>
+                        </cl>
+                        <cl class="w50 vt ">
+                            <div onclick={navigateToDetailsPage} data-action="action4">
+                                <div class={action4.classmobile}
+                                    style="z-index:1;width:65px;height:65px;border-radius:50px">
+                                    <div class="cc w50 con sq menu-img-mobile" style={action4.style}></div>
+                                </div>
+                                <div class="fs16" style="color:#89A3A3">{action4.name}</div>
+                            </div>
+                        </cl>
+                    </rw>
+                </tbl_nm>
+                <tbl_nm if:true={action5.isDisplayed}>
+                    <rw>
+                        <cl class="w50 ">
+                            <div onclick={navigateToDetailsPage} data-action="action5">
+                                <div class={action5.classmobile}
+                                    style="z-index:1;width:65px;height:65px;border-radius:50px">
+                                    <div class="cc w50 con sq menu-img-mobile" style={action5.style}></div>
+                                </div>
+                                <div class="fs16" style="color:#89A3A3">{action5.name}</div>
+                            </div>
+                        </cl>
+                        <cl style="width:3px;min-width:3px;">
+                            <div class="ov ba"
+                                style="left:-50px;top:-15px;background: linear-gradient(180deg, rgb(208, 214, 52), transparent) rgb(12, 180, 187);width:2px;height:100px;transform: rotate(90deg);">
+                            </div>
+                            <div class="ov "
+                                style="top:30px;left:-3px;width:10px;height:10px;background:#545555;border-radius:50%">
+                            </div>
+                        </cl>
+                        <cl class="w50 vt "></cl>
+                    </rw>
+                </tbl_nm>
+                <tbl_nm if:true={action6.isDisplayed}>
+                    <rw>
+                        <cl class="w50 ">
+                        </cl>
+                        <cl style="width:3px;min-width:3px;">
+                            <div class="ov ba"
+                                style="left:50px;top:-15px;background: linear-gradient(180deg, rgb(208, 214, 52), transparent) rgb(12, 180, 187);width:2px;height:100px;transform: rotate(90deg);">
+                            </div>
+                            <div class="ov ba"
+                                style="top:30px;left:-3px;width:10px;height:10px;background:#545555;border-radius:50%">
+                            </div>
+                        </cl>
+                        <cl class="w50 vt ">
+                            <div onclick={navigateToDetailsPage} data-action="action6">
+                                <div class={action6.classmobile}
+                                    style="z-index:1;width:65px;height:65px;border-radius:50px">
+                                    <div class="cc w50 con sq menu-img-mobile" style={action6.style}></div>
+                                </div>
+                                <div class="fs16" style="color:#89A3A3">{action6.name}</div>
+                            </div>
+                        </cl>
+                    </rw>
+                </tbl_nm>
+                <tbl_nm if:true={action7.isDisplayed}>
+                    <rw>
+                        <cl class="w50 ">
+                        </cl>
+                        <cl style="width:3px;min-width:3px;">
+                            <div class="ov ba"
+                                style="left:50px;top:-15px;background: linear-gradient(180deg, rgb(208, 214, 52), transparent) rgb(12, 180, 187);width:2px;height:100px;transform: rotate(90deg);">
+                            </div>
+                            <div class="ov ba"
+                                style="top:30px;left:-3px;width:10px;height:10px;background:#545555;border-radius:50%">
+                            </div>
+                        </cl>
+                        <cl class="w50 vt ">
+                            <div onclick={navigateToDetailsPage} data-action="action7">
+                                <div class={action7.classmobile}
+                                    style="z-index:1;width:65px;height:65px;border-radius:50px">
+                                    <div class="cc w50 con sq menu-img-mobile" style={action7.style}></div>
+                                </div>
+                                <div class="fs16" style="color:#89A3A3">{action7.name}</div>
+                            </div>
+                        </cl>
+                    </rw>
+                </tbl_nm>
+                <tbl_nm if:true={action8.isDisplayed}>
+                    <rw>
+                        <cl class="w50 ">
+                        </cl>
+                        <cl style="width:3px;min-width:3px;">
+                            <div class="ov ba"
+                                style="left:50px;top:-15px;background: linear-gradient(180deg, rgb(208, 214, 52), transparent) rgb(12, 180, 187);width:2px;height:100px;transform: rotate(90deg);">
+                            </div>
+                            <div class="ov ba"
+                                style="top:30px;left:-3px;width:10px;height:10px;background:#545555;border-radius:50%">
+                            </div>
+                        </cl>
+                        <cl class="w50 vt ">
+                            <div onclick={navigateToDetailsPage} data-action="action8">
+                                <div class={action8.classmobile}
+                                    style="z-index:1;width:65px;height:65px;border-radius:50px">
+                                    <div class="cc w50 con sq menu-img-mobile" style={action8.style}></div>
+                                </div>
+                                <div class="fs16" style="color:#89A3A3">{action8.name}</div>
+                            </div>
+                        </cl>
+                    </rw>
+                </tbl_nm>
+            </div>
+        </div>
+    </div>
+    <div class="negoptim-pb50 negoptim-pt150 m_pv80 m_m_pv60">
+    </div>
+    <div class="negoptim-pb50">
+        <c-chatter-app></c-chatter-app>
+    </div>
+    <div class="negoptim-pb50">
+        <c-agenda></c-agenda>
+    </div>
+    <template if:true={ShowVideo}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close negoptim-closebutton" title="Close"
+                    onclick={handleCloseDetails}>
+                    <lightning-icon icon-name="utility:close" size="small" style="translate: 0% -10%;"></lightning-icon>
+                </button>
+                <div class="slds-modal__header">
+                    <h1 class="slds-modal__title slds-hyphenate">{labels.LBL_Self_Onboarding_Video}</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <video src='{videoUrl}' controls autoplay preload style="width: 100%;">
+                    </video>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

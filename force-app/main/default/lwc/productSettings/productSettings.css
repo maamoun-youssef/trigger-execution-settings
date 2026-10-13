@@ -1,0 +1,165 @@
+:host{
+    --beij: #F2F6DFff;
+     --midnight-green: #08484Aff;
+     --verdigris: #14B2BBff;
+     --amethyst: #816BC0ff;
+     --russian-violet: #3C094Bff;
+     --space-cadet: #322B4Cff;
+     --honeydew: #E8F4E8ff;
+     --dark-violet: #9719BBff;
+     --pistachio: #8BC58Aff;
+     --mint-green: #DDF4EEff;
+     --text-body: #5C5C5C;
+     --light-gray: #B1B1B1;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+.sectionTitle {
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+    translate: 0px 7px;
+}
+
+
+.section-Container {
+    display: flex;
+    column-gap: 40px;
+}
+
+.infoIcon {
+    translate: 5px -10px;
+}
+
+.infoPopover {
+    position: absolute;
+    translate: 20px -8px;
+}
+
+.info-container-w {
+    width: 300px;
+}
+
+ul {
+    list-style-type: unset;
+}
+
+.save-button-container {
+    top: 10px;
+    z-index: 100;
+    margin-top: 180px;
+    position: fixed;
+}
+
+.stickyHeader {
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    background-color: var(--verdigris);
+    padding-left: 20px;
+    height: 70px;
+}
+
+.recordTypeContainer {
+    padding-left: 10px;
+}
+
+.list-Container {
+    width: 70%;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.label {
+    font-weight: 600;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    font-size: 16px;
+    color: var(--text-body);
+}
+
+.add-breaks {
+    height: 40px;
+}
+
+.grille-w {
+    width: 300px;
+}
+
+.definition-mode {
+    margin-top: 20px;
+}
+
+.button-m {
+    margin-left: 10px;
+}
+
+.slds-card {
+    position: relative;
+}
+
+.grid-settings-link:hover {
+    color: #ff5733;
+    text-decoration: underline;
+}
+
+.dual-list-w {
+    width: 50%;
+}
+
+.section-label {
+    font-weight: 600;
+    width: 30%;
+    padding-left: 20px;
+    font-size: 14px;
+    color: var(--text-body);
+}
+
+.section-m {
+    margin-left: 10px;
+}
+
+.display-divs {
+    display: inline-block;
+}

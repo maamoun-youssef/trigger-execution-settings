@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Target_Simulation__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Used to select &amp; aggregate different simulation to category</description>
+    <inlineHelpText>Identification en Cible de la DV Négo proposée. La DV Négo proposée Cible alimente le Reporting jusqu’au passage en statut validé.</inlineHelpText>
+    <label>Target Simulation</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

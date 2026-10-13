@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Contract Discount</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Contract Discounts</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>Contract Discount Layout</layout>
+        <sections>
+            <label><!-- Contreparties --></label>
+            <section>Contreparties</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Données facturation --></label>
+            <section>Données facturation</section>
+        </sections>
+        <sections>
+            <label><!-- Détails ligne contrat --></label>
+            <section>Détails ligne contrat</section>
+        </sections>
+        <sections>
+            <label><!-- Informations système --></label>
+            <section>Informations système</section>
+        </sections>
+        <sections>
+            <label><!-- Périmètre --></label>
+            <section>Périmètre</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Nom de ligne d&apos;accord</nameFieldLabel>
+    <quickActions>
+        <label><!-- Validate Invoices --></label>
+        <name>ValidateInvoices</name>
+    </quickActions>
+    <recordTypes>
+        <label>Condition détail</label>
+        <name>Discount_Detail</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Following the selected condition, some counterparties are requested --></description>
+        <label>Avec contrepartie</label>
+        <name>Proof_with_counterparty</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Following the selected condition, no counterparty is requested --></description>
+        <label>Sans contrepartie</label>
+        <name>Proof_without_counterparty</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Record type used when a contract line is approved by all the approvers and status set as &apos;Signed&apos; --></description>
+        <label>Condition signée</label>
+        <name>Signed</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Sous condition signée</label>
+        <name>Sub_Term_Signed</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Sous condition à signer</label>
+        <name>Sub_Term_To_Be_Signed</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Record type used when a contract line is in a status different than &apos;Signed&apos; --></description>
+        <label>Condition à signer</label>
+        <name>To_Be_Signed</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage>La date de fin doit être supérieure ou égale à la date de début et comprise dans la plage de dates du contrat</errorMessage>
+        <name>Condition_Dates_in_Contract_Dates</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Discount invoice first date must be between the start date and end date. --></errorMessage>
+        <name>Invoice_Date_Range_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Certaines des lignes d&apos;accord saisies nécessitent obligatoirement une référence commerciale. --></errorMessage>
+        <name>SPBOU_CommentFilledControl</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- InvoiceManager --></label>
+        <name>InvoiceManager</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- InvoiceManagerVisualizer --></label>
+        <name>InvoiceManagerVisualizer</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,54 @@
+<template>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <h2 class="slds-modal__title">{labels.LBL_CreateSCNAction_PageTitle2}</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium slds-scrollable_y">
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <template for:each={fieldsConfig} for:item="field">
+                        <div key={field.apiName} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                            <template if:true={field.isCombobox}>
+                                <lightning-combobox label={field.label} value={field.value} options={field.options}
+                                    data-field={field.apiName} onchange={handleChange}>
+                                </lightning-combobox>
+                            </template>
+                            <template if:false={field.isCombobox}>
+                                <lightning-input type={field.type} label={field.label} value={field.value}
+                                    data-field={field.apiName} onchange={handleChange}>
+                                </lightning-input>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+                <div class="slds-m-top_medium">
+                    <p class="slds-text-body_small slds-text-color_weak">
+                        {labels.LBL_CreateSCNAction_EndMsg}
+                    </p>
+                    <p class="slds-text-body_small slds-text-color_weak">
+                        {labels.LBL_CreateSCNAction_AllocateMsg}
+                    </p>
+                </div>
+                <p style="color:red;">{error}</p>
+            </div>
+
+
+            <footer class="slds-modal__footer">
+                <lightning-button-group>
+                    <template if:true={isBackEnabled}>
+                        <lightning-button label="Back" onclick={handleBack}></lightning-button>
+                    </template>
+                    <lightning-button label={labels.LBL_MassAction_CancelButton}
+                        onclick={handleCancel}></lightning-button>
+                    <lightning-button variant="brand" label={labels.LBL_CreateSCNAction_CreateButton}
+                        onclick={handleSave}></lightning-button>
+                    <lightning-button variant="brand" label={labels.LBL_CreateSCNAction_CreateAndNewButton}
+                        onclick={handleSaveAndNew}></lightning-button>
+                    <lightning-button variant="brand" label={labels.LBL_CreateSCNAction_AllocateButton}
+                        onclick={handleAllocate} disabled></lightning-button>
+                </lightning-button-group>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

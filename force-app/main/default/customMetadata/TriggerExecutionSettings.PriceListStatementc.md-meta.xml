@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>PriceListStatementc</label>
+    <protected>false</protected>
+    <values>
+        <field>CalculatedFieldSettings__c</field>
+        <value xsi:type="xsd:string">[{&quot;formula&quot;:&quot; SellInTotalQtywGrossPriceP1__c + 30&quot;,&quot;fieldName&quot;:&quot;SellInTotalQtyTaxesP1__c&quot;,&quot;eventType&quot;:&quot;BEFORE_UPDATE&quot;},{&quot;formula&quot;:&quot; SellInTotalQtywGrossPricewNetTaxP1__c *2&quot;,&quot;fieldName&quot;:&quot;SellInTotalQtywGrossPriceP1__c&quot;,&quot;eventType&quot;:&quot;BEFORE_UPDATE&quot;}]</value>
+    </values>
+    <values>
+        <field>ExternalIdSettings__c</field>
+        <value xsi:type="xsd:string">[{&quot;separator&quot;:&quot;,&quot;,&quot;fields&quot;:[&quot;Id&quot;,&quot;IsDeleted&quot;],&quot;externalIdField&quot;:&quot;ExtId__c&quot;,&quot;eventType&quot;:&quot;BEFORE_INSERT&quot;}]</value>
+    </values>
+    <values>
+        <field>IsActive__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>MethodsExecutionSettings__c</field>
+        <value xsi:type="xsd:string">[{&quot;methodName&quot;:&quot;generatePLSName&quot;,&quot;isActive&quot;:true,&quot;eventType&quot;:&quot;BEFORE_INSERT&quot;,&quot;classHandlerName&quot;:&quot;Trg_PriceListStatement_Handler&quot;},{&quot;methodName&quot;:&quot;populateFields&quot;,&quot;isActive&quot;:false,&quot;eventType&quot;:&quot;BEFORE_INSERT&quot;,&quot;classHandlerName&quot;:&quot;Trg_PriceListStatement_Handler&quot;},{&quot;methodName&quot;:&quot;populateFields&quot;,&quot;isActive&quot;:true,&quot;eventType&quot;:&quot;BEFORE_UPDATE&quot;,&quot;classHandlerName&quot;:&quot;Trg_PriceListStatement_Handler&quot;},{&quot;methodName&quot;:&quot;stopUnitNeedProducts&quot;,&quot;isActive&quot;:true,&quot;eventType&quot;:&quot;AFTER_UPDATE&quot;,&quot;classHandlerName&quot;:&quot;Trg_PriceListStatement_Handler&quot;},{&quot;methodName&quot;:&quot;synchronisePriceListStatementDetails&quot;,&quot;isActive&quot;:true,&quot;eventType&quot;:&quot;AFTER_UPDATE&quot;,&quot;classHandlerName&quot;:&quot;Trg_PriceListStatement_Handler&quot;},{&quot;methodName&quot;:&quot;duplicatePriceListStatement&quot;,&quot;isActive&quot;:true,&quot;eventType&quot;:&quot;AFTER_UPDATE&quot;,&quot;classHandlerName&quot;:&quot;Trg_PriceListStatement_Handler&quot;},{&quot;methodName&quot;:&quot;cleanUpRelatedList&quot;,&quot;isActive&quot;:true,&quot;eventType&quot;:&quot;AFTER_DELETE&quot;,&quot;classHandlerName&quot;:&quot;Trg_PriceListStatement_Handler&quot;}]</value>
+    </values>
+    <values>
+        <field>ObjectName__c</field>
+        <value xsi:type="xsd:string">PriceListStatement__c</value>
+    </values>
+</CustomMetadata>

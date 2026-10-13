@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Sélectionnez le type de TVA de la condition</help>
+    <label>Type TVA</label>
+    <name>VAT_Type__c</name>
+    <picklistValues>
+        <masterLabel>Finance</masterLabel>
+        <translation>Finance</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Product</masterLabel>
+        <translation><!-- Product --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Rebate</masterLabel>
+        <translation>Ristourne</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Service</masterLabel>
+        <translation>Coopération</translation>
+    </picklistValues>
+</CustomFieldTranslation>

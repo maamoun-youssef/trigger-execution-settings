@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unit_need</fullName>
+    <fields>Name</fields>
+    <fields>IsInnovation__c</fields>
+    <fields>TOP20_Hyper__c</fields>
+    <fields>Top20_Convenience__c</fields>
+    <fields>Top20_Drive__c</fields>
+    <fields>Last_Unit_Cost__c</fields>
+    <fields>Retail_Price_Reco__c</fields>
+    <label>Unit need</label>
+</CompactLayout>

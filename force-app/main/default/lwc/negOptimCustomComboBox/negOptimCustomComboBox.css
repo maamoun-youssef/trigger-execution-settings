@@ -1,0 +1,31 @@
+:host {
+    --input-max-height: 32px;
+    --search-padding: 5px;
+    --g-padding: 1%;
+}
+
+.arrow {
+    position: absolute;
+    right: var(--g-padding);
+    align-self: anchor-center;
+}
+
+.search {
+    text-align: left;
+    width: 100%;
+    max-height: var(--input-max-height);
+    padding-left: var(--g-padding);
+}
+
+.search input,
+.search lightning-input::part(input) {
+    text-align: center;
+    padding: var(--search-padding);
+
+}
+
+.item-not-found {
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}

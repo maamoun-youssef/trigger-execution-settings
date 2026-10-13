@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Documents_juridiques_et_roles</fullName>
+    <columns>NAME</columns>
+    <columns>BOAccountingIsPlayer__c</columns>
+    <columns>BOAfterSalesIsPlayer__c</columns>
+    <columns>BOBuyerIsPlayer__c</columns>
+    <columns>BOComplianceIsPlayer__c</columns>
+    <columns>BOMarketingIsPlayer__c</columns>
+    <columns>BOOfferIsPlayer__c</columns>
+    <columns>BOQualityIsPlayer__c</columns>
+    <columns>BOSupplyChainIsPlayer__c</columns>
+    <columns>LegalIsPlayer__c</columns>
+    <columns>PartnerIsPlayer__c</columns>
+    <columns>Status__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>LegalDoc__c.Partner</value>
+    </filters>
+    <label>Documents juridiques en attente</label>
+</ListView>

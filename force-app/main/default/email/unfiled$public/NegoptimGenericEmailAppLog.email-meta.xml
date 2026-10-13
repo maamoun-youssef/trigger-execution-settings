@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>same purpose as NegoptimGenericEmail but for appLog object instead of Log object</description>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>Connect_Header</letterhead>
+    <name>NegoptimGenericEmailAppLog</name>
+    <style>formalLetter</style>
+    <subject>Process Completed</subject>
+    <textOnly>{!$Label.LBL_Connect_Email_Greeting} {!User.FirstName} {!User.LastName}, {!$Label.LBL_Best_Regards},
+{!$Label.LBL_Negoptim_Team}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

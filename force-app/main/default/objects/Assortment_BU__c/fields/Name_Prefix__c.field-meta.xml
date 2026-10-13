@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Name_Prefix__c</fullName>
+    <description>Used to generate the name of assortment.</description>
+    <externalId>false</externalId>
+    <formula>CASE(RecordType.DeveloperName, 
+&quot;Budget&quot;, $Label.RT_Assortment_Budget, 
+&quot;Conso&quot;, $Label.RT_Assortment_Conso, 
+&quot;L4L&quot;, $Label.RT_Assortment_Like4Like, 
+&quot;Nego&quot;, $Label.RT_Assortment_Nego, 
+&quot;Target&quot;, $Label.RT_Assortment_Target,
+&quot;Conso_Target&quot;, $Label.RT_Assortment_Conso_Target, 
+&quot;Panel&quot;, $Label.RT_Assortment_Panel,
+&quot;PR&quot;, $Label.RT_Assortment_PR,
+&quot;Simulation&quot;, $Label.RT_Assortment_Simulation,
+&quot;Conso_Simulation&quot;, $Label.RT_Assortment_Conso_Simulation, &quot;&quot;)
++ &quot;-&quot; 
++ BusinessUnitTarget__r.Name 
++ &quot;-&quot; 
++ Hierarchy__r.Name 
++ &quot;-&quot; 
++ Year_String__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Name Prefix</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

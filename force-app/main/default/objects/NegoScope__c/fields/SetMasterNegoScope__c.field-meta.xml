@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SetMasterNegoScope__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If enabled, this nego scope takes precedence over the associated NS Link nego scopes and contracts.</description>
+    <label>Set Master Nego Scope</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

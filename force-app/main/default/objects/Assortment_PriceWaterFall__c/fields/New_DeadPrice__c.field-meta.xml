@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_DeadPrice__c</fullName>
+    <formula>New_7NetPrice__c - 
+(Product_UnitCharge1__c + Product_UnitCharge2__c + Product_UnitCharge3__c + Product_UnitCharge4__c + Product_UnitCharge5__c + Product_UnitCharge6__c + Product_UnitCharge7__c + Product_UnitCharge8__c + Product_UnitCharge9__c + Product_UnitCharge10__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>New DeadPrice</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

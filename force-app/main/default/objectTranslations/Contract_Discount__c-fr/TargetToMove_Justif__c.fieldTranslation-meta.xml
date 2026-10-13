@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Justification about the target to move --></help>
+    <label><!-- Target To Move Justif --></label>
+    <name>TargetToMove_Justif__c</name>
+</CustomFieldTranslation>

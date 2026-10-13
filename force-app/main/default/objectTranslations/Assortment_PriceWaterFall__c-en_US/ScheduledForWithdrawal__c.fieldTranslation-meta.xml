@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>
+        <!-- A flag to identify records that are marked for withdrawal but have not been withdrawn yet.
+A withdrawn record could either be permanently deleted from the database or archived. -->
+    </help>
+    <label><!-- Scheduled for Withdrawal --></label>
+    <name>ScheduledForWithdrawal__c</name>
+</CustomFieldTranslation>

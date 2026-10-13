@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>BU de référence</label>
+    <lookupFilter>
+        <errorMessage><!-- Reference BU - Value does not exist or does not match filter criteria. --></errorMessage>
+    </lookupFilter>
+    <name>BusinessUnitOrigin__c</name>
+    <relationshipLabel><!-- Clients/Suppliers (Reference BU) --></relationshipLabel>
+</CustomFieldTranslation>

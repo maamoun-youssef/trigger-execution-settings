@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RequestedNegoscope__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Negoscope requested by supplier as new negoscope for this entry or used if directory entry is created by supplier</description>
+    <label>Requested Negoscope</label>
+    <referenceTo>NegoScope__c</referenceTo>
+    <relationshipLabel>Proposed Contacts For This Agreement</relationshipLabel>
+    <relationshipName>Contact_Operational_Directories1</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

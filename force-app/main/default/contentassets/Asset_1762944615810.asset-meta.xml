@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentAsset xmlns="http://soap.sforce.com/2006/04/metadata">
+    <isVisibleByExternalUsers>false</isVisibleByExternalUsers>
+    <language>en_US</language>
+    <masterLabel>Asset_1762944615810</masterLabel>
+    <versions>
+        <version>
+            <number>1</number>
+            <pathOnClient>Recording 2025-11-11 171004.mp4</pathOnClient>
+        </version>
+    </versions>
+</ContentAsset>

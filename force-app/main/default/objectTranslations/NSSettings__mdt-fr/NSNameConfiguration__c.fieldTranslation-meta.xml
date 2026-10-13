@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>
+        <!-- You can construct a model for the default name of created contracts. You can also choose to allow the modification of the name after creation.
+If a record type does not have a model, the default model will be applied. -->
+    </help>
+    <label><!-- NSNameConfiguration --></label>
+    <name>NSNameConfiguration__c</name>
+</CustomFieldTranslation>

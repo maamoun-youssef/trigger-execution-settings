@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="invoiceDetailsJson" label="invoiceDetailsJson" type="String"
+                role="outputOnly" />
+            <property name="isCreateSupplierCreditNote" label="isCreateSupplierCreditNote"
+                type="Boolean" />
+            <property name="newInvoiceSupplierCreditNoteJson"
+                label="newInvoiceSupplierCreditNoteJson"
+                type="String" role="outputOnly" />
+            <property name="invNumber" label="invNumber" type="String" />
+            <property name="paymentType" label="paymentType" type="String" />
+            <property name="recordId" label="Invoice Id" type="String" role="inputOnly" />
+            <property name="isFullCancel" label="isFullCancel" type="Boolean" role="inputOnly" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

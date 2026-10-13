@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Statut</label>
+    <name>Status__c</name>
+    <picklistValues>
+        <masterLabel>Closed</masterLabel>
+        <translation>Fermé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Closed (Upgraded version)</masterLabel>
+        <translation>Fermé (Copié vers une version supérieure)</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Deleted</masterLabel>
+        <translation>Supprimé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Open (in bulding process)</masterLabel>
+        <translation>En préparation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Request for Approval</masterLabel>
+        <translation>Proposé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Signed IN</masterLabel>
+        <translation>Signé Interne</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Signed OUT</masterLabel>
+        <translation>Signé Client</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Validated</masterLabel>
+        <translation>Validé</translation>
+    </picklistValues>
+</CustomFieldTranslation>

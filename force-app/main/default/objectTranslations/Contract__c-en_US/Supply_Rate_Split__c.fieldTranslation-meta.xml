@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Supply Rate - Split</label>
+    <name>Supply_Rate_Split__c</name>
+</CustomFieldTranslation>

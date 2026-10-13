@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Dclarations_de_promo</label>
+    <protected>false</protected>
+    <values>
+        <field>Description__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowSettings__c</field>
+        <value xsi:type="xsd:string">{&quot;name&quot;:null,&quot;flowLabel&quot;:null,&quot;buttonLabel&quot;:null,&quot;buttonIcon&quot;:null}</value>
+    </values>
+    <values>
+        <field>HeaderBackground__c</field>
+        <value xsi:type="xsd:string">/sfc/servlet.shepherd/document/download/069WS000008DmJxYAK</value>
+    </values>
+    <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">/sfc/servlet.shepherd/document/download/069WS000008DezJYAS</value>
+    </values>
+    <values>
+        <field>Name__c</field>
+        <value xsi:type="xsd:string">Déclarations de promo</value>
+    </values>
+    <values>
+        <field>Sections__c</field>
+        <value xsi:type="xsd:string">[{&quot;title&quot;:&quot;Déclaration des remises au produit&quot;,&quot;subTitle&quot;:&quot;jana&quot;,&quot;order&quot;:5,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/sfc/servlet.shepherd/document/download/069WS000008DqQoYAK&quot;,&quot;color&quot;:&quot;#2d8495&quot;}]</value>
+    </values>
+    <values>
+        <field>Themes__c</field>
+        <value xsi:type="xsd:string">[{&quot;sectionIndex&quot;:0,&quot;redirectionType&quot;:&quot;Grid&quot;,&quot;redirection&quot;:&quot;PDSGrid&quot;,&quot;params&quot;:{&quot;pdsGridSettingsTemplate&quot;:&quot;PDSGrid&quot;,&quot;flowApiName&quot;:&quot;SCREEN_Product_Discount_Statement_Statement_Creation&quot;,&quot;input_Sender&quot;:&quot;Buyer&quot;,&quot;input_Recipient&quot;:&quot;Supplier&quot;,&quot;input_TypePromoStatement&quot;:&quot;SellIn&quot;},&quot;label&quot;:&quot;Promo Budget Sell In&quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/file-asset/COLLAB_THEME_PromoSellIn&quot;},{&quot;sectionIndex&quot;:0,&quot;redirectionType&quot;:&quot;Grid&quot;,&quot;redirection&quot;:&quot;PDSGrid&quot;,&quot;params&quot;:{&quot;pdsGridSettingsTemplate&quot;:&quot;PDSGrid&quot;,&quot;flowApiName&quot;:&quot;SCREEN_Product_Discount_Statement_Statement_Creation&quot;,&quot;input_Sender&quot;:&quot;Buyer&quot;,&quot;input_Recipient&quot;:&quot;Supplier&quot;,&quot;input_TypePromoStatement&quot;:&quot;SellOut&quot;},&quot;label&quot;:&quot;Promo Budget Sell Out&quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/file-asset/ChangeIcon&quot;},{&quot;sectionIndex&quot;:0,&quot;redirectionType&quot;:&quot;Page&quot;,&quot;redirection&quot;:&quot;productDiscountStatementGrid&quot;,&quot;params&quot;:{&quot;pdsGridSettingsTemplate&quot;:&quot;PDSGrid_Promo_Services&quot;,&quot;flowApiName&quot;:&quot;SCREEN_Product_Discount_Statement_Statement_Creation&quot;,&quot;input_Sender&quot;:&quot;Buyer&quot;,&quot;input_Recipient&quot;:&quot;Supplier&quot;,&quot;input_TypePromoStatement&quot;:&quot;Services&quot;},&quot;label&quot;:&quot;Promo Budget Services&quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/file-asset/Plus_Icon_1&quot;},{&quot;sectionIndex&quot;:0,&quot;redirectionType&quot;:&quot;Flow&quot;,&quot;redirection&quot;:&quot;Account_Status_Grid&quot;,&quot;params&quot;:{&quot;actions&quot;:&quot;false&quot;,&quot;readOnly&quot;:&quot;false&quot;,&quot;quickActions&quot;:&quot;&quot;,&quot;filterOnNoneDisplayedFields&quot;:&quot;false&quot;,&quot;cmpHeight&quot;:null,&quot;numberFixedColumns&quot;:&quot;0&quot;,&quot;labelNewInlineButton&quot;:&quot;New inline row&quot;,&quot;saveSuccessMessage&quot;:null,&quot;partialSave&quot;:&quot;false&quot;,&quot;refreshViewAfterSave&quot;:&quot;false&quot;,&quot;enableMassUpdate&quot;:&quot;false&quot;,&quot;isReadOnly&quot;:&quot;false&quot;,&quot;showSubTotal&quot;:&quot;false&quot;,&quot;useRecordIsoCurrency&quot;:&quot;false&quot;,&quot;showCurrencyAsSymbol&quot;:&quot;false&quot;,&quot;showCurrency&quot;:&quot;false&quot;,&quot;nameAsURL&quot;:&quot;true&quot;,&quot;allowOpenRecord&quot;:&quot;false&quot;,&quot;allowFilter&quot;:&quot;false&quot;,&quot;allowExport&quot;:&quot;false&quot;,&quot;allowImport&quot;:&quot;false&quot;,&quot;displayShowHideColumns&quot;:&quot;false&quot;,&quot;allowDelete&quot;:&quot;false&quot;,&quot;displayCloneButton&quot;:&quot;false&quot;,&quot;displayNewInlineButton&quot;:&quot;false&quot;,&quot;displayNewButton&quot;:&quot;false&quot;,&quot;displayListViewActions&quot;:&quot;false&quot;,&quot;includeInListView&quot;:&quot;false&quot;},&quot;label&quot;:&quot;Grid Settings Plugin Sell out&quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;ChangeIcon2&quot;},{&quot;sectionIndex&quot;:0,&quot;redirectionType&quot;:&quot;Flow&quot;,&quot;redirection&quot;:&quot;SCREEN_Product_Discount_Statement_Statement_Creation&quot;,&quot;params&quot;:null,&quot;label&quot;:&quot;flow&quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;Sent_Icon&quot;},{&quot;sectionIndex&quot;:0,&quot;redirectionType&quot;:&quot;Grid&quot;,&quot;redirection&quot;:&quot;Account_Status_Grid&quot;,&quot;params&quot;:null,&quot;label&quot;:&quot;Column Injection&quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;ChangeIcon&quot;},{&quot;sectionIndex&quot;:0,&quot;redirectionType&quot;:&quot;Page&quot;,&quot;redirection&quot;:&quot;injectionLWC&quot;,&quot;params&quot;:null,&quot;label&quot;:&quot;Method Injection &quot;,&quot;isPortalDisplay&quot;:true,&quot;isInternalDisplay&quot;:true,&quot;isActive&quot;:true,&quot;icon&quot;:&quot;/resource/1747038985000/ConnectThemeAvatar&quot;}]</value>
+    </values>
+    <values>
+        <field>isActive__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>isDeleted__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+</CustomMetadata>

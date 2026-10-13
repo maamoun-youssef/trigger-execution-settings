@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Invoice_Status_For_Fast_Deduction__c</fullName>
+    <description>Available Invoice/Invoice line statuses uset for fast deduction.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Available Invoice/Invoice line statuses uset for fast deduction.</inlineHelpText>
+    <label>Invoice Status For Fast Deduction</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

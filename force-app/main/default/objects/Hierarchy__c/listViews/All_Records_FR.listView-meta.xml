@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Records_FR</fullName>
+    <columns>NAME</columns>
+    <columns>Code__c</columns>
+    <columns>Level__c</columns>
+    <columns>Status__c</columns>
+    <columns>StatusBDate__c</columns>
+    <columns>StatusEDate__c</columns>
+    <columns>SetAssortmentClusterLevel__c</columns>
+    <columns>SetAssortmentLevel__c</columns>
+    <columns>SetProductLevel__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Tous les éléments</label>
+</ListView>

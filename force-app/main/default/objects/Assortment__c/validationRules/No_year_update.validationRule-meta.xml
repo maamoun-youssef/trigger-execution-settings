@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_year_update</fullName>
+    <active>true</active>
+    <description>No year update after assortment saving</description>
+    <errorConditionFormula>ISCHANGED( Year__c )</errorConditionFormula>
+    <errorDisplayField>Year__c</errorDisplayField>
+    <errorMessage>No update of the year can be performed after the assortment creation.</errorMessage>
+</ValidationRule>

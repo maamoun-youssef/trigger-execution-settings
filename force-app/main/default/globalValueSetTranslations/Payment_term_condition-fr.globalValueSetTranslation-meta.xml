@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>End of Month</masterLabel>
+        <translation>Fin de mois</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>End of Month, the 15</masterLabel>
+        <translation>Fin de mois, le 15</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>End of The 10th</masterLabel>
+        <translation>Fin de dizaine</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Net</masterLabel>
+        <translation>Net</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>The 10</masterLabel>
+        <translation>Le 10</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>The 15</masterLabel>
+        <translation>Le 15</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>The 20</masterLabel>
+        <translation>Le 20</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Twice the Month</masterLabel>
+        <translation>Bi-mensuel</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Select the dealing counterpart in the predefined condition type list. --></help>
+    <label>Contrepartie - Type</label>
+    <name>Proof_counterparty_type__c</name>
+</CustomFieldTranslation>

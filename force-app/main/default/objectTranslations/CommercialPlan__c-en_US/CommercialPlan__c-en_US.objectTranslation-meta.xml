@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Commercial Plan</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Commercial Plans</value>
+    </caseValues>
+    <layouts>
+        <layout>O Commercial Plan</layout>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+        <sections>
+            <label><!-- Suivi Budget --></label>
+            <section>Suivi Budget</section>
+        </sections>
+        <sections>
+            <label><!-- Suivi contrôl FG/NIP --></label>
+            <section>Suivi contrôl FG/NIP</section>
+        </sections>
+        <sections>
+            <label><!-- Suivi contrôl TMP/Carton Gratuit --></label>
+            <section>Suivi contrôl TMP/Carton Gratuit</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Event Name --></nameFieldLabel>
+    <recordTypes>
+        <label><!-- Commercial Event --></label>
+        <name>CommercialEvent</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Promo Agreement --></label>
+        <name>PromoAgreement</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Sales Floor Event --></label>
+        <name>SalesFloorEvent</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Trade Marketing Campaign --></label>
+        <name>TradeMarketingCampaign</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Yearly Promo Rate --></label>
+        <name>YearlyPromoRate</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- InvoiceManager --></label>
+        <name>InvoiceManager</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- InvoiceManagerVisualizer --></label>
+        <name>InvoiceManagerVisualizer</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Promo_Management_LWC --></label>
+        <name>Promo_Management_LWC</name>
+    </webLinks>
+</CustomObjectTranslation>

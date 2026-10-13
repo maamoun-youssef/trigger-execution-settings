@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LineType__c</fullName>
+    <label>Line Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>TotalBase</fullName>
+                <default>false</default>
+                <label>TotalBase</label>
+            </value>
+            <value>
+                <fullName>BUTotalBase</fullName>
+                <default>false</default>
+                <label>BUTotalBase</label>
+            </value>
+            <value>
+                <fullName>YearBase</fullName>
+                <default>false</default>
+                <label>YearBase</label>
+            </value>
+            <value>
+                <fullName>BUYearBase</fullName>
+                <default>false</default>
+                <label>BUYearBase</label>
+            </value>
+            <value>
+                <fullName>PeriodBase</fullName>
+                <default>false</default>
+                <label>PeriodBase</label>
+            </value>
+            <value>
+                <fullName>BUPeriodBase</fullName>
+                <default>false</default>
+                <label>BUPeriodBase</label>
+            </value>
+            <value>
+                <fullName>Conso Scope</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Conso Scope</label>
+            </value>
+            <value>
+                <fullName>Conso Scope Period</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Conso Scope Period</label>
+            </value>
+            <value>
+                <fullName>Conso Scope Year</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Conso Scope Year</label>
+            </value>
+            <value>
+                <fullName>Detail Scope BU Period</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Detail Scope BU Period</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

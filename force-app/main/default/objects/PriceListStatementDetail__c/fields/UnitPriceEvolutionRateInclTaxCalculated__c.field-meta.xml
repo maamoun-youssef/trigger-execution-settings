@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UnitPriceEvolutionRateInclTaxCalculated__c</fullName>
+    <formula>(SellInTotalQtywUnitGrossPricewNetTaxP1__c / PriceListStatement__r.SellInTotalQtywUnitGrossPricewNetTaxP1__c) * (UnitGrossPricewNetTaxGap__c / UnitGrossPricewNetTaxP1__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Unit Price Evol Rate Incl Tax Calculated</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

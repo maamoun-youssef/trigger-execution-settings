@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NetPricePromo__c</fullName>
+    <description>PAN HT recalculé après application de la remise promo. Il est recalculé live depuis la page de saisie de promotion en appliquant les remises de rang inférieur ou égal au rang de la remise promo. Par défaut il est égale au negOptim__NetPriceRegular__c tant que aucune remise promo (ou tarif spécific promo) est appliquée.</description>
+    <label>Promo Purchase NetPrice</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>3</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

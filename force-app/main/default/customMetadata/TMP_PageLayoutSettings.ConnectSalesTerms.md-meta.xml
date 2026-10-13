@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>ConnectSalesTerms</label>
+    <protected>false</protected>
+    <values>
+        <field>ActionButtons__c</field>
+        <value xsi:type="xsd:string">[{&quot;label&quot;:&quot;LBL_DefineSalesTerms&quot;,&quot;flow&quot;:&quot;SPBOU_SCREEN_Service_Statement_Sales_Terms_Definition&quot;,&quot;color&quot;:&quot;#4ec2a9&quot;},{&quot;label&quot;:&quot;LBL_SubmitSalesTerms&quot;,&quot;flow&quot;:&quot;SPBOU_SCREEN_Service_Statement_Sales_Terms_Submission_Flow&quot;,&quot;color&quot;:&quot;#14b3bb&quot;}]</value>
+    </values>
+    <values>
+        <field>ActivityFields__c</field>
+        <value xsi:type="xsd:string">[&quot;Activity_Date__c&quot;,&quot;Status__c&quot;,&quot;Assignee__c&quot;]</value>
+    </values>
+    <values>
+        <field>ActivityLeftIcon__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;Status_Logo_URL__c&quot;,&quot;isStaticRessource&quot;:false}</value>
+    </values>
+    <values>
+        <field>ActivityRightIcon__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;AssigneeIconURL__c&quot;,&quot;isStaticRessource&quot;:false}</value>
+    </values>
+    <values>
+        <field>BottomLeftCornerFields__c</field>
+        <value xsi:type="xsd:string">[&quot;InternalContactName__c&quot;,&quot;InternalContactRole__c&quot;]</value>
+    </values>
+    <values>
+        <field>BottomLeftCornerLogo1__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;/resource/Contact_Logo_Blue&quot;,&quot;isStaticRessource&quot;:true}</value>
+    </values>
+    <values>
+        <field>BottomLeftCornerLogo2__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;/resource/Question_Logo_Blue&quot;,&quot;isStaticRessource&quot;:true}</value>
+    </values>
+    <values>
+        <field>EditFlow__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FieldsConfiguration__c</field>
+        <value xsi:type="xsd:string">[[{&quot;isReadOnly&quot;:true,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;FRSummary__c&quot;}],[{&quot;isReadOnly&quot;:true,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;InternalComments__c&quot;}],[],[],[],[]]</value>
+    </values>
+    <values>
+        <field>HeaderField__c</field>
+        <value xsi:type="xsd:string">{&quot;showHeaderField&quot;:true,&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:true,&quot;fieldName&quot;:&quot;Designation__c&quot;}</value>
+    </values>
+    <values>
+        <field>IsManualEditMode__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Name__c</field>
+        <value xsi:type="xsd:string">ConnectSalesTerms</value>
+    </values>
+    <values>
+        <field>NbOfRows__c</field>
+        <value xsi:type="xsd:double">6.0</value>
+    </values>
+    <values>
+        <field>NewTaskFlow__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ObjectApiName__c</field>
+        <value xsi:type="xsd:string">TMP_ServiceStatement__c</value>
+    </values>
+    <values>
+        <field>RelatedInformations__c</field>
+        <value xsi:type="xsd:string">{&quot;whereClause&quot;:&quot;&quot;,&quot;parentRelationshipApiName&quot;:&quot;File_Directories__r&quot;,&quot;objectApiName&quot;:&quot;TMP_ServiceStatement__c&quot;,&quot;label&quot;:&quot;test&quot;,&quot;groupByFields&quot;:[],&quot;filters&quot;:[{&quot;value&quot;:&quot;{recordId}&quot;,&quot;operator&quot;:&quot;=&quot;,&quot;fieldName&quot;:&quot;TMP_ServiceStatement__c&quot;}],&quot;aggregateFunction&quot;:&quot;COUNT&quot;,&quot;aggregateFieldName&quot;:&quot;&quot;}</value>
+    </values>
+    <values>
+        <field>Source__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>StatusIcon__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;StatusLogoURL__c&quot;,&quot;isStaticRessource&quot;:false}</value>
+    </values>
+    <values>
+        <field>Tabs__c</field>
+        <value xsi:type="xsd:string">[{&quot;params&quot;:null,&quot;label&quot;:&quot;LBL_RequestedFiles&quot;,&quot;contentType&quot;:&quot;page&quot;,&quot;content&quot;:&quot;Admin - Admin&quot;},{&quot;params&quot;:null,&quot;label&quot;:&quot;LBL_RejectedClauses&quot;,&quot;contentType&quot;:&quot;grid&quot;,&quot;content&quot;:&quot;Account_Status_Grid&quot;},{&quot;params&quot;:null,&quot;label&quot;:&quot;LBL_ReferenceDocuments&quot;,&quot;contentType&quot;:&quot;page&quot;,&quot;content&quot;:&quot;Admin - Admin&quot;}]</value>
+    </values>
+    <values>
+        <field>TaskFields__c</field>
+        <value xsi:type="xsd:string">[&quot;Subject&quot;,&quot;Status&quot;,&quot;ActivityDate&quot;]</value>
+    </values>
+    <values>
+        <field>TopLeftCornerFields__c</field>
+        <value xsi:type="xsd:string">[&quot;RelatedScope__c&quot;,&quot;BusinessUnitTarget__c&quot;,&quot;Year__c&quot;,&quot;BDate__c&quot;]</value>
+    </values>
+    <values>
+        <field>TopLeftCornerLogo1__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;SalesTermsLogoURL__c&quot;,&quot;isStaticRessource&quot;:false}</value>
+    </values>
+    <values>
+        <field>TopLeftCornerLogo2__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:null,&quot;isStaticRessource&quot;:null}</value>
+    </values>
+    <values>
+        <field>TopRightCornerFields__c</field>
+        <value xsi:type="xsd:string">[&quot;SubmittedDate__c&quot;,&quot;RespondedDate__c&quot;]</value>
+    </values>
+</CustomMetadata>

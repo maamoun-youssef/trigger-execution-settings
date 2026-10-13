@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>TO</fullName>
+        <default>false</default>
+        <label>TO</label>
+    </customValue>
+    <customValue>
+        <fullName>Prog TO</fullName>
+        <default>false</default>
+        <label>Prog TO</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Inc TO</fullName>
+        <default>false</default>
+        <label>Inc TO</label>
+    </customValue>
+    <customValue>
+        <fullName>Inc Prog TO</fullName>
+        <default>false</default>
+        <label>Inc Prog TO</label>
+    </customValue>
+    <customValue>
+        <fullName>Qty</fullName>
+        <default>false</default>
+        <label>Qty</label>
+    </customValue>
+    <customValue>
+        <fullName>Prog Qty</fullName>
+        <default>false</default>
+        <label>Prog Qty</label>
+    </customValue>
+    <customValue>
+        <fullName>Inc Qty</fullName>
+        <default>false</default>
+        <label>Inc Qty</label>
+    </customValue>
+    <customValue>
+        <fullName>Inc Prog Qty</fullName>
+        <default>false</default>
+        <label>Inc Prog Qty</label>
+    </customValue>
+    <customValue>
+        <fullName>Sell Out</fullName>
+        <default>false</default>
+        <label>Sell Out</label>
+    </customValue>
+    <customValue>
+        <fullName>Prog Sell Out</fullName>
+        <default>false</default>
+        <label>Prog Sell Out</label>
+    </customValue>
+    <customValue>
+        <fullName>Inc Sell Out</fullName>
+        <default>false</default>
+        <label>Inc Sell Out</label>
+    </customValue>
+    <customValue>
+        <fullName>Inc Prog Sell out</fullName>
+        <default>false</default>
+        <label>Inc Prog Sell out</label>
+    </customValue>
+    <customValue>
+        <fullName>TO byBU</fullName>
+        <default>false</default>
+        <label>TO byBU</label>
+    </customValue>
+    <customValue>
+        <fullName>Prog TO byBU</fullName>
+        <default>false</default>
+        <label>Prog TO byBU</label>
+    </customValue>
+    <customValue>
+        <fullName>Qty byBU</fullName>
+        <default>false</default>
+        <label>Qty byBU</label>
+    </customValue>
+    <customValue>
+        <fullName>Prog Qty byBU</fullName>
+        <default>false</default>
+        <label>Prog Qty byBU</label>
+    </customValue>
+    <masterLabel>Discount Conditional Slab Method</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

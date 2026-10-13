@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Previous Year SellIn Statement Detail</label>
+    <name>SellInStatementDetail_P1__c</name>
+    <relationshipLabel>Sell In Statement Details (Previous Year)</relationshipLabel>
+</CustomFieldTranslation>

@@ -1,0 +1,5 @@
+{
+  "apiName" : "User_Detail",
+  "type" : "sfdc_cms__view",
+  "path" : "views"
+}

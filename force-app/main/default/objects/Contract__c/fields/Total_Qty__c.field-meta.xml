@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Qty__c</fullName>
+    <externalId>false</externalId>
+    <formula>Qty1__c + Qty2__c + Qty3__c + Qty4__c + Qty5__c + Qty6__c + Qty7__c + Qty8__c + Qty9__c + Qty10__c + Qty11__c + Qty12__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total Qty</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allow_contract_overlap_dates__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Allow contract overlap dates</description>
+    <label>Allow contract overlap dates</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

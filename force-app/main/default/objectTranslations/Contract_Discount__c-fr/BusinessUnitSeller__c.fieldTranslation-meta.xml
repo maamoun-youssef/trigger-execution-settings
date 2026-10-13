@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Vendeur - BU</label>
+    <lookupFilter>
+        <errorMessage><!-- BU Vendeur: La valeur n&apos;existe pas ou ne correspond pas aux critères de filtre. --></errorMessage>
+    </lookupFilter>
+    <name>BusinessUnitSeller__c</name>
+    <relationshipLabel>Lignes d&apos;accord (Vendeur - BU)</relationshipLabel>
+</CustomFieldTranslation>

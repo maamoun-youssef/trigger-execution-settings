@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Mode d&apos;affichage</label>
+    <name>DisplayMode__c</name>
+    <picklistValues>
+        <masterLabel>Horizontal</masterLabel>
+        <translation><!-- Horizontal --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Vertical</masterLabel>
+        <translation><!-- Vertical --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

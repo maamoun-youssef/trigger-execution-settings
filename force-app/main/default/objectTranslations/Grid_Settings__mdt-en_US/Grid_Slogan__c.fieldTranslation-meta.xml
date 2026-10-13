@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Slogan ou texte descriptif optionnel affiché avec le tableau pour le contexte/branding. Calendar_Setting</help>
+    <label><!-- Grid Slogan --></label>
+    <name>Grid_Slogan__c</name>
+</CustomFieldTranslation>

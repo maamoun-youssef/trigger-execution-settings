@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CountryListPayee__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Payee Location Country</description>
+    <label>Payee Location Country</label>
+    <referenceTo>Country__c</referenceTo>
+    <relationshipName>INVPayeeCountry</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

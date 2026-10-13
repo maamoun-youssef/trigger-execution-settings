@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title={Labels.LBL_Trigger_Settings}>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="small" variant="brand"></lightning-spinner>
+        </template>
+        <lightning-layout slot="actions">
+            <lightning-layout-item class="slds-var-p-right_xx-small">
+                <lightning-input variant="label-hidden" placeholder="Search" type="search"
+                    onchange={handleSearchChange}></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item>
+                <lightning-button-icon onclick={refreshTable} icon-name="utility:refresh" alternative-text="Refresh">
+                </lightning-button-icon>
+            </lightning-layout-item>
+        </lightning-layout>
+        <div class="slds-scrollable slds-size_1-of-1" style="height: 55vh;">
+            <lightning-datatable data={triggerSettingsList} columns={columns} key-field="id" draft-values={draftValues}
+                data-recordid="datatable" onsave={handleSave} oncancel={reset} sorted-by={sortBy}
+                sorted-direction={sortDirection} onsort={handleSortdata}>
+            </lightning-datatable>
+        </div>
+    </lightning-card>
+</template>

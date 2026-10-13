@@ -1,0 +1,433 @@
+<template>
+    <div class="slds-card">
+        <div class="header slds-m-around--xx-small">
+            <div class="slds-grid">
+                <div class="slds-col slds-p-around_xx-small slds-has-flexi-truncate">
+                    <!-- HEADING AREA -->
+                    <!-- MEDIA OBJECT = FIGURE + BODY -->
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div
+                            class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                            <lightning-icon icon-name="standard:checkout">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small">
+                            <p class="slds-text-title slds-line-height_reset">
+                                {labels.productLabel}
+                            </p>
+                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                {labels.LBL_Product_Selection}
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-no-flex slds-grid slds-icon_container slds-align--absolute-center">
+                    <lightning-input type="toggle" class="slds-m-right--x-small"
+                        label={labels.LBL_Show_Previously_Selected} value={showSelectedProducts}
+                        onchange={handleChangeShowSelectedProducts} message-toggle-active=""
+                        message-toggle-inactive=""></lightning-input>
+                    <!-- cancel -->
+                    <lightning-button class="slds-button slds-m-around_xx-small" variant="border-filled"
+                        label={labels.LBL_Cancel} onclick={handleCancel} if:false={openedFromAnotherScreen}>
+                    </lightning-button>
+                    <!-- save -->
+                    <lightning-button class="slds-button slds-m-around_xx-small" variant="brand" label={labels.LBL_Save}
+                        onclick={handleSave} if:true={selectedIds.length}></lightning-button>
+                    <!-- toggle filter button -->
+                    <lightning-button-icon icon-name="utility:add" variant="border-filled"
+                        class="slds-button slds-button-icon slds-m-right--x-small" onclick={toggleUNPopup}>
+                    </lightning-button-icon>
+                </div>
+            </div>
+        </div>
+        <div class=" slds-grid">
+            <div class="main-panel slds-col slds-scrollable">
+                <div class="firstDiv">
+                    <template if:true={prodTableLoading}>
+                        <div class="slds-spinner_container">
+                            <div class="loader slds-spinner_container slds-align--absolute-center">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </template>
+                    <div class="firstTableDiv slds-scrollable">
+                        <table
+                            class="firstTable slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border_right slds-no-row-hover">
+                            <thead>
+                                <tr style="height: 40px;">
+                                    <th style={firstThStyle}>
+                                        <lightning-input type="checkbox" class="input-center"
+                                            onchange={selectAllProducts} value={selectAllValue} checked={selectAllValue}
+                                            variant="label-hidden"></lightning-input>
+                                    </th>
+                                    <template for:each={prodFields} for:item="field">
+                                        <th key={field.fieldName} style={field.headerStyle}>
+                                            <span class="slds-m-right--small">{field.fieldLabel}</span>
+                                            <template if:true={field.isFilterable}>
+                                                <lightning-button-icon-stateful
+                                                    style="color: white;right: 0px;bottom:0;position:absolute;"
+                                                    icon-name="utility:filterList" onclick={toggleDropDownFilter}
+                                                    selected={field.hasFilter} variant="border-filled" size="x-small"
+                                                    class="filter-btn" data-field={field.fieldName}
+                                                    data-button-field={field.fieldName}>
+                                                </lightning-button-icon-stateful>
+                                                <div class="slds-hide slds-scrollable headerFilterSection slds-dropdown slds-p-around_x-small slds-dropdown_left"
+                                                    data-filter-field={field.fieldName} style={field.divStyle}>
+                                                    <span style="position: absolute;right: 0;top: 0; z-index: 7;">
+                                                        <lightning-button-icon variant="container" size="small"
+                                                            icon-name="utility:close" data-field={field.fieldName}
+                                                            onclick={toggleDropDownFilter}>
+                                                        </lightning-button-icon>
+                                                    </span>
+                                                    <div class="slds-scrollable" style="overflow:visible;">
+                                                        <ul class="slds-dropdown__list" role="menu"
+                                                            aria-label="Show More">
+                                                            <li class="slds-dropdown__item" role="presentation"
+                                                                style="text-align: left;">
+                                                                <template if:true={field.isSearchBar}>
+                                                                    <lightning-input name={field.fieldName} type="text"
+                                                                        data-header-filter={field.fieldName}
+                                                                        class="dataFilter" label={field.fieldLabel}
+                                                                        value={field.filterValue}
+                                                                        onchange={setSelectedValues}>
+                                                                    </lightning-input>
+                                                                </template>
+                                                                <template if:true={field.isRange}>
+                                                                    <div class="slds-form-element">
+                                                                        <legend
+                                                                            class="slds-form-element__label slds-form-element__legend">
+                                                                            {field.fieldLabel}
+                                                                        </legend>
+                                                                        <div
+                                                                            class="slds-form-element__control slds-grid slds-gutters">
+                                                                            <lightning-input type={field.dataType}
+                                                                                label={labels.LBL_Minimum}
+                                                                                class="slds-col dataFilter"
+                                                                                name={field.fieldName}
+                                                                                data-header-filter={field.fieldName}
+                                                                                step={field.stepHtml}
+                                                                                data-range="value1"
+                                                                                onchange={setSelectedRangeValue}>
+                                                                            </lightning-input>
+                                                                            <span style="margin-top: 1.75rem;">-</span>
+                                                                            <lightning-input type={field.dataType}
+                                                                                data-header-filter={field.fieldName}
+                                                                                label={labels.LBL_Maximum}
+                                                                                step={field.stepHtml}
+                                                                                class="slds-col dataFilter"
+                                                                                name={field.fieldName}
+                                                                                data-range="value2"
+                                                                                onchange={setSelectedRangeValue}>
+                                                                            </lightning-input>
+                                                                        </div>
+                                                                    </div>
+                                                                </template>
+                                                                <template if:true={field.isPicklist}>
+                                                                    <lightning-checkbox-group if:true={field.isPicklist}
+                                                                        data-name={field.fieldName} class="dataFilter"
+                                                                        data-header-filter={field.fieldName}
+                                                                        name={field.fieldName} label={field.fieldLabel}
+                                                                        options={field.pickListValues}
+                                                                        value={field.values}
+                                                                        onchange={setSelectedValues}>
+                                                                    </lightning-checkbox-group>
+                                                                </template>
+                                                            </li>
+                                                            <li class="slds-has-divider_top-space" role="separator">
+                                                            </li>
+                                                            <div style="width: max-content;"
+                                                                class="slds-align_absolute-center slds-grid">
+                                                                <div class="slds-col slds-var-p-right_xx-large">
+                                                                    <button type="submit" title={labels.LBL_Reset}
+                                                                        data-field={field.fieldName} onclick={reset}
+                                                                        data-type="filter"
+                                                                        class="slds-button slds-button_neutral">
+                                                                        {labels.LBL_Reset}
+                                                                    </button>
+                                                                </div>
+                                                                <div class="slds-col">
+                                                                    <button type="submit" title={labels.LBL_Search}
+                                                                        data-field={field.fieldName}
+                                                                        onclick={toggleDropDownFilter}
+                                                                        data-actiontype="search"
+                                                                        class="slds-button slds-button_brand">
+                                                                        {labels.LBL_Search}
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </th>
+                                    </template>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template if:false={prodTableLoading}>
+                                    <template if:false={productsWList.length}>
+                                        <tr>
+                                            <td colspan={prodColspan}>
+                                                <h2
+                                                    class="slds-align_absolute-center slds-text-align_center slds-m-around_xx-large slds-card__header-title slds-align-content-center">
+                                                    {labels.LBL_No_Item_To_Display}
+                                                </h2>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                    <template if:true={productsWList.length}>
+                                        <template for:each={productsWList} for:item="product" for:index="index">
+                                            <tr key={product.Id} style={product.style}>
+                                                <td class="input-center">
+                                                    <lightning-input type="checkbox" class="slds-m-left--x-small"
+                                                        variant="label-hidden" onchange={handleProductsCheckboxChange}
+                                                        data-index={index} data-type="productCheckbox"
+                                                        data-id={product.Id}
+                                                        checked={product.isChecked}></lightning-input>
+                                                </td>
+                                                <template for:each={product.fields} for:item="field">
+                                                    <td key={field} style={field.style}>
+                                                        <template if:false={field.isHtmlFormatted}>
+                                                            <template if:true={field.isNumberField}>
+                                                                <lightning-formatted-number
+                                                                    maximum-fraction-digits={field.scale}
+                                                                    value={field.fieldValue}>
+                                                                </lightning-formatted-number>
+                                                            </template>
+                                                            <template if:true={field.isText}>
+                                                                {field.fieldValue}
+                                                            </template>
+                                                            <template if:true={field.isPicklist}>
+                                                                {field.fieldValue}
+                                                            </template>
+                                                            <template if:true={field.isReference}>
+                                                                <template if:true={showMultipleProductsPopUp}>
+                                                                    <a href={field.link} target="_blank">
+                                                                        {field.fieldValue}</a>
+                                                                </template>
+                                                                <template if:false={showMultipleProductsPopUp}>
+                                                                    <template if:true={field.isName}>
+                                                                        <a data-id={product.Id} data-index={index}
+                                                                            onclick={handleProductSelection}>{field.fieldValue}</a>
+                                                                    </template>
+                                                                    <template if:false={field.isName}>
+                                                                        <a href={field.link} target="_blank">
+                                                                            {field.fieldValue}</a>
+                                                                    </template>
+                                                                </template>
+                                                            </template>
+                                                            <template if:true={field.isBoolean}>
+                                                                <lightning-input class="slds-p-left_xx-large"
+                                                                    type="checkbox" variant="label-hidden"
+                                                                    checked={field.fieldValue} disabled>
+                                                                </lightning-input>
+                                                            </template>
+                                                        </template>
+                                                        <template if:true={field.isHtmlFormatted}>
+                                                            <lightning-formatted-rich-text value={field.fieldValue}>
+                                                            </lightning-formatted-rich-text>
+                                                        </template>
+                                                    </td>
+                                                </template>
+                                            </tr>
+                                        </template>
+                                    </template>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div if:true={productsWList.length} class="firstTableFooterDiv slds-grid slds-m-around--xx-small">
+                        <span class="slds-m-horizontal_x-small">
+                            <select onchange={changeProductsPageSizeHandler}>
+                                <template for:each={productsPageSizeOptions} for:item="option">
+                                    <option key={option.value} value={option.value} selected={option.isSelected}>
+                                        {option.label}
+                                    </option>
+                                </template>
+                            </select>
+                        </span>
+                        <span>
+                            <lightning-button-group>
+                                <lightning-button label={labels.LBL_First} disabled={previousProductsDisabled}
+                                    data-type="First" onclick={handleChangePageProducts}>
+                                </lightning-button>
+                                <lightning-button label={labels.LBL_Previous} disabled={previousProductsDisabled}
+                                    data-type="Previous" onclick={handleChangePageProducts}>
+                                </lightning-button>
+                                <lightning-button label={labels.LBL_Next} disabled={nextProductsDisabled}
+                                    data-type="Next" onclick={handleChangePageProducts}>
+                                </lightning-button>
+                                <lightning-button label={labels.LBL_Last} disabled={nextProductsDisabled}
+                                    data-type="Last" onclick={handleChangePageProducts}>
+                                </lightning-button>
+                            </lightning-button-group>
+                            <span class="slds-p-left_small slds-p-right_small slds-badge" style="margin-left: 10px;">
+                                {productsPaginationBadge}
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="separator" if:true={showSelectedProducts}></div>
+                <template if:true={showSelectedProducts}>
+                    <div class="secondDiv">
+                        <template if:true={oldProdTableLoading}>
+                            <div class="slds-spinner_container">
+                                <div class="loader slds-spinner_container slds-align--absolute-center">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </template>
+                        <div class="secondTableDiv slds-scrollable">
+                            <template if:false={oldProdTableLoading}>
+                                <table
+                                    class="secondTable slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border_right slds-no-row-hover">
+                                    <tbody>
+                                        <template if:false={previouslySelectedProductsWList.length}>
+                                            <tr>
+                                                <td colspan={prodColspan}>
+                                                    <h2
+                                                        class="slds-align_absolute-center slds-text-align_center slds-m-around_xx-large slds-card__header-title slds-align-content-center">
+                                                        {labels.LBL_No_Item_To_Display}
+                                                    </h2>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                        <template if:true={previouslySelectedProductsWList.length}>
+                                            <template for:each={previouslySelectedProductsWList} for:item="product"
+                                                for:index="index">
+                                                <tr key={product.Id}>
+                                                    <td style="text-align:left;width:30px;">
+                                                    </td>
+                                                    <template for:each={product.fields} for:item="field">
+                                                        <td key={field} style={field.style}>
+                                                            <template if:false={field.isHtmlFormatted}>
+                                                                <template if:true={field.isNumberField}>
+                                                                    <lightning-formatted-number
+                                                                        maximum-fraction-digits={field.scale}
+                                                                        value={field.fieldValue}>
+                                                                    </lightning-formatted-number>
+                                                                </template>
+                                                                <template if:true={field.isText}>
+                                                                    {field.fieldValue}
+                                                                </template>
+                                                                <template if:true={field.isPicklist}>
+                                                                    {field.fieldValue}
+                                                                </template>
+                                                                <template if:true={field.isReference}>
+                                                                    <a href={field.link} target="_blank">
+                                                                        {field.fieldValue}</a>
+                                                                </template>
+                                                                <template if:true={field.isBoolean}>
+                                                                    <lightning-input class="slds-p-left_xx-large"
+                                                                        type="checkbox" variant="label-hidden"
+                                                                        checked={field.fieldValue} disabled>
+                                                                    </lightning-input>
+                                                                </template>
+                                                            </template>
+                                                            <template if:true={field.isHtmlFormatted}>
+                                                                <lightning-formatted-rich-text value={field.fieldValue}>
+                                                                </lightning-formatted-rich-text>
+                                                            </template>
+                                                        </td>
+                                                    </template>
+                                                </tr>
+                                            </template>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </template>
+                        </div>
+                        <div if:true={previouslySelectedProductsWList.length}
+                            class="secondTableFooterDiv slds-grid slds-m-around--xx-small">
+                            <span class="slds-m-horizontal_x-small">
+                                <select onchange={changePreviouslySelectedProductsPageSizeHandler}>
+                                    <template for:each={previouslySelectedproductsPageSizeOptions} for:item="option">
+                                        <option key={option.value} value={option.value} selected={option.isSelected}>
+                                            {option.label}</option>
+                                    </template>
+                                </select>
+                            </span>
+                            <span>
+                                <lightning-button-group>
+                                    <lightning-button label={labels.LBL_First}
+                                        disabled={previousPreviouslySelectedProductsDisabled} data-type="First"
+                                        onclick={handleChangePreviouslySelectedPageProducts}>
+                                    </lightning-button>
+                                    <lightning-button label={labels.LBL_Previous}
+                                        disabled={previousPreviouslySelectedProductsDisabled} data-type="Previous"
+                                        onclick={handleChangePreviouslySelectedPageProducts}>
+                                    </lightning-button>
+                                    <lightning-button label={labels.LBL_Next}
+                                        disabled={nextPreviouslySelectedProductsDisabled} data-type="Next"
+                                        onclick={handleChangePreviouslySelectedPageProducts}>
+                                    </lightning-button>
+                                    <lightning-button label={labels.LBL_Last}
+                                        disabled={nextPreviouslySelectedProductsDisabled} data-type="Last"
+                                        onclick={handleChangePreviouslySelectedPageProducts}>
+                                    </lightning-button>
+                                </lightning-button-group>
+                                <span class="slds-p-left_small slds-p-right_small slds-badge"
+                                    style="margin-left: 10px;">
+                                    {previouslySelectedProductsPaginationBadge}
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <template if:true={createUN}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                class="slds-modal slds-fade-in-open slds-modal_medium">
+                <div class="slds-modal__container">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        onclick={toggleUNPopup}>
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Cancel and close</span>
+                    </button>
+                    <div class="slds-modal__header" style="background-color: #70ad47;color: white;">
+                        <h1 class="slds-modal__title slds-hyphenate" style="color: white;">{labels.LBL_UN_Creation}</h1>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium slds-is-relative" style="min-height: 50px;">
+                        <template if:true={unLoading}>
+                            <div class="slds-spinner_container">
+                                <div class="loader slds-spinner_container slds-align--absolute-center">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </template>
+                        <div class="slds-grid slds-gutters slds-wrap">
+                            <template for:each={prodUNFields} for:item="field">
+                                <div class="slds-col slds-size_1-of-3" key={field.fieldName}>
+                                    <lightning-record-edit-form object-api-name="Product2">
+                                        <lightning-input-field field-name={field.fieldName} onchange={fillUNData}
+                                            data-field-name={field.fieldName} label={field.fieldLabel}>
+                                        </lightning-input-field>
+                                    </lightning-record-edit-form>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" style="background-color: #70ad47;color: white;"
+                            onclick={toggleUNPopup}>{labels.LBL_Cancel}</button>
+                        <button class="slds-button slds-button_brand" style="background-color: #70ad47;color: white;"
+                            onclick={saveUN}>{labels.LBL_Save}</button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+    </div>
+</template>

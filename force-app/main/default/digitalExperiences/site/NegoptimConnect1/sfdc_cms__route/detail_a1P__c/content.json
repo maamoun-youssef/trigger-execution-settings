@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Document juridique Détails",
+  "contentBody" : {
+    "activeViewId" : "detail_a1P",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "detail-LegalDoc__c",
+    "urlPrefix" : "legaldoc"
+  },
+  "urlName" : "document-juridique-détails"
+}

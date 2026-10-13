@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>invoicingTemplate</label>
+    <protected>false</protected>
+    <values>
+        <field>ActionButtons__c</field>
+        <value xsi:type="xsd:string">[{&quot;label&quot;:&quot;button1&quot;,&quot;flow&quot;:&quot;SCREEN_InvoiceValidation&quot;,&quot;color&quot;:&quot;#B0CD6B&quot;}]</value>
+    </values>
+    <values>
+        <field>ActivityFields__c</field>
+        <value xsi:type="xsd:string">[&quot;Account__c&quot;,&quot;Activity_Date__c&quot;,&quot;Activity_Type__c&quot;]</value>
+    </values>
+    <values>
+        <field>ActivityLeftIcon__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;&quot;,&quot;isStaticRessource&quot;:true}</value>
+    </values>
+    <values>
+        <field>ActivityRightIcon__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;&quot;,&quot;isStaticRessource&quot;:true}</value>
+    </values>
+    <values>
+        <field>BottomLeftCornerFields__c</field>
+        <value xsi:type="xsd:string">[&quot;GlobalLocationPayee__c&quot;,&quot;PayeeCity__c&quot;,&quot;SellerCompanyName__c&quot;,&quot;SellerAddress2__c&quot;]</value>
+    </values>
+    <values>
+        <field>BottomLeftCornerLogo1__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;&quot;,&quot;isStaticRessource&quot;:true}</value>
+    </values>
+    <values>
+        <field>BottomLeftCornerLogo2__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;&quot;,&quot;isStaticRessource&quot;:true}</value>
+    </values>
+    <values>
+        <field>EditFlow__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FieldsConfiguration__c</field>
+        <value xsi:type="xsd:string">[[{&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;Note1__c&quot;}],[{&quot;isReadOnly&quot;:true,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;Note2__c&quot;}],[{&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:true,&quot;fieldName&quot;:&quot;Note3__c&quot;}]]</value>
+    </values>
+    <values>
+        <field>HeaderField__c</field>
+        <value xsi:type="xsd:string">{&quot;showHeaderField&quot;:true,&quot;isReadOnly&quot;:true,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;t_Autonum__c&quot;}</value>
+    </values>
+    <values>
+        <field>IsManualEditMode__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Name__c</field>
+        <value xsi:type="xsd:string">invoicingTemplate</value>
+    </values>
+    <values>
+        <field>NbOfRows__c</field>
+        <value xsi:type="xsd:double">3.0</value>
+    </values>
+    <values>
+        <field>NewTaskFlow__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ObjectApiName__c</field>
+        <value xsi:type="xsd:string">Invoice__c</value>
+    </values>
+    <values>
+        <field>RelatedInformations__c</field>
+        <value xsi:type="xsd:string">[{&quot;whereClause&quot;:null,&quot;parentRelationshipApiName&quot;:&quot;INVDInvoice__r&quot;,&quot;objectApiName&quot;:&quot;InvoiceDetail__c&quot;,&quot;label&quot;:&quot;invoiceDetail&quot;,&quot;groupByFields&quot;:null,&quot;filters&quot;:[],&quot;aggregateFunction&quot;:null,&quot;aggregateFieldName&quot;:null},{&quot;whereClause&quot;:null,&quot;parentRelationshipApiName&quot;:&quot;INVLInvoice__r&quot;,&quot;objectApiName&quot;:&quot;InvoiceLink__c&quot;,&quot;label&quot;:&quot;invoiceLink&quot;,&quot;groupByFields&quot;:null,&quot;filters&quot;:[{&quot;value&quot;:&quot;FALSE&quot;,&quot;operator&quot;:&quot;=&quot;,&quot;fieldType&quot;:&quot;Boolean&quot;,&quot;fieldName&quot;:&quot;IsDeleted&quot;}],&quot;aggregateFunction&quot;:null,&quot;aggregateFieldName&quot;:null}]</value>
+    </values>
+    <values>
+        <field>Source__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>StatusField__c</field>
+        <value xsi:type="xsd:string">InvNumber__c</value>
+    </values>
+    <values>
+        <field>StatusIcon__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;&quot;,&quot;isStaticRessource&quot;:true}</value>
+    </values>
+    <values>
+        <field>Tabs__c</field>
+        <value xsi:type="xsd:string">[{&quot;params&quot;:{&quot;actions&quot;:&quot;false&quot;,&quot;readOnly&quot;:&quot;false&quot;,&quot;quickActions&quot;:&quot;&quot;,&quot;filterOnNoneDisplayedFields&quot;:&quot;false&quot;,&quot;cmpHeight&quot;:null,&quot;numberFixedColumns&quot;:&quot;0&quot;,&quot;labelNewInlineButton&quot;:&quot;New inline row&quot;,&quot;saveSuccessMessage&quot;:null,&quot;partialSave&quot;:&quot;false&quot;,&quot;refreshViewAfterSave&quot;:&quot;false&quot;,&quot;enableMassUpdate&quot;:&quot;false&quot;,&quot;isReadOnly&quot;:&quot;false&quot;,&quot;showSubTotal&quot;:&quot;false&quot;,&quot;useRecordIsoCurrency&quot;:&quot;false&quot;,&quot;showCurrencyAsSymbol&quot;:&quot;false&quot;,&quot;showCurrency&quot;:&quot;true&quot;,&quot;nameAsURL&quot;:&quot;true&quot;,&quot;allowOpenRecord&quot;:&quot;true&quot;,&quot;allowFilter&quot;:&quot;true&quot;,&quot;allowExport&quot;:&quot;false&quot;,&quot;allowImport&quot;:&quot;false&quot;,&quot;displayShowHideColumns&quot;:&quot;false&quot;,&quot;allowDelete&quot;:&quot;false&quot;,&quot;displayCloneButton&quot;:&quot;false&quot;,&quot;displayNewInlineButton&quot;:&quot;false&quot;,&quot;displayNewButton&quot;:&quot;false&quot;,&quot;displayListViewActions&quot;:&quot;false&quot;,&quot;includeInListView&quot;:&quot;false&quot;,&quot;objectApiName&quot;:&quot;Invoice__c&quot;},&quot;label&quot;:&quot;tab1&quot;,&quot;contentType&quot;:&quot;grid&quot;,&quot;content&quot;:&quot;InvoicesMassDelete&quot;}]</value>
+    </values>
+    <values>
+        <field>TaskFields__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>TemplateFilterCriteria__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>TopLeftCornerFields__c</field>
+        <value xsi:type="xsd:string">[&quot;Name&quot;,&quot;ExtractLStatus__c&quot;,&quot;DueDate__c&quot;]</value>
+    </values>
+    <values>
+        <field>TopLeftCornerLogo1__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;&quot;,&quot;isStaticRessource&quot;:true}</value>
+    </values>
+    <values>
+        <field>TopLeftCornerLogo2__c</field>
+        <value xsi:type="xsd:string">{&quot;value&quot;:&quot;&quot;,&quot;isStaticRessource&quot;:true}</value>
+    </values>
+    <values>
+        <field>TopRightCornerFields__c</field>
+        <value xsi:type="xsd:string">[&quot;ExtractLStatus__c&quot;,&quot;PaidAmount__c&quot;,&quot;GlobalLocationSeller__c&quot;]</value>
+    </values>
+</CustomMetadata>

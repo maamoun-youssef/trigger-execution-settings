@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract_Number_Prefix__c</fullName>
+    <description>Auto generated prefix used in contract number
+Formula 1: RIGHT(TEXT(YEAR(Contract_EDate__c)), 2) &amp; LEFT(TEXT(Contract_Type__c ), 1) &amp; BusinessUnitContract__r.Code__c
+
+Formula 2: TEXT(YEAR(Contract_BDate__c)) &amp; &apos;-&apos; &amp; LEFT(TEXT(Contract_Type__c ), 1) &amp; BusinessUnitContract__r.Code__c</description>
+    <externalId>false</externalId>
+    <formula>TEXT(YEAR(Contract_BDate__c)) &amp; &apos;-&apos; &amp; LEFT(TEXT(Contract_Type__c ), 1) &amp; BusinessUnitContract__r.Code__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Contract Number Prefix</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

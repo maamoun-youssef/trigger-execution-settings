@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsForeignSupplier__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Specify if country of the contract equal to the country of the NS or its VAT Linked Country</description>
+    <inlineHelpText>Specify if countryu of the contract equal to the country of the NS or its VAT Linked Country</inlineHelpText>
+    <label>Is Foreign Supplier</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

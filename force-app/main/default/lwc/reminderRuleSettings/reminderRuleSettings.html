@@ -1,0 +1,210 @@
+<template>
+  <!-- Loader -->
+  <template if:true={loading}>
+    <div class="slds-spinner_container greyBg">
+      <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+    </div>
+  </template>
+   <!-- Settings profile header -->
+  <div class="slds-page-header slds-page-header_joined"
+       style="position:sticky; top:0; z-index:7; background:#ffffff; border-bottom:1px solid #e5e5e5;">
+    <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+      <!-- Left: label + picker -->
+      <div class="slds-col slds-grow">
+        <div class="section-label slds-p-top_small">
+          {labels.LBL_ReminderRuleSettings_Select_Page_Settings}
+        </div>
+        <div class="slds-m-left_medium" style="max-width:320px;">
+          <lightning-combobox
+            name="PageSettings"
+            value={selectedProfileName}
+            variant="label-hidden"
+            placeholder={labels.LBL_ReminderRuleSettings_Select_Settings}
+            options={profileOptions}
+            onchange={handleProfileChange}>
+          </lightning-combobox>
+        </div>
+      </div>
+      <!-- Right: actions -->
+      <div class="slds-col slds-no-flex slds-p-right_medium">
+        <template if:true={hasProfile}>
+          <div class="slds-button-group" role="group">
+            <lightning-button variant="neutral" label={labels.LBL_Cancel} onclick={handleCancel}></lightning-button>
+            <lightning-button class="slds-m-left_x-small" variant="brand"
+                              disabled={saveStatus} label={labels.LBL_Save} onclick={handleSave}></lightning-button>
+          </div>
+        </template>
+        <template if:false={hasProfile}>
+          <lightning-button variant="brand"
+                            label={labels.LBL_ReminderRuleSettings_Add_New_Settings}
+                            onclick={togglePopupAddProfile}></lightning-button>
+        </template>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add New Settings modal -->
+  <template if:true={addNewRowProfile}>
+    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-rr"
+             class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container">
+        <div class="slds-button slds-button_icon slds-modal__close">
+          <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                                 onclick={togglePopupAddProfile}></lightning-button-icon>
+        </div>
+        <div class="slds-modal__header">
+          <h1 id="modal-heading-rr" class="slds-modal__title slds-hyphenate">
+            {labels.LBL_PageSettings_Add_New_Settings}
+          </h1>
+        </div>
+        <div class="slds-modal__content slds-p-around_medium">
+          <lightning-input label="Name" required value={newProfile.name} data-field="name"
+                           onchange={handleChangeNewProfile}>
+          </lightning-input>
+          <lightning-input label="Description" value={newProfile.description}
+                           data-field="description" onchange={handleChangeNewProfile}>
+          </lightning-input>
+          <!-- Optional visuals -->
+          <div class="slds-m-top_medium">
+            <div class="slds-form-element__label" style="display:inline-block; width:50%; margin-bottom:20px;">
+              {labels.pageSettings.Icon}
+            </div>
+            <template if:true={newProfile.icon}>
+              <img class="slds-m-horizontal_small slds-m-top_small" src={newProfile.icon}
+                   alt="Icon preview" style="width:100px; height:auto;" />
+            </template>
+            <div style="display:inline-block;">
+              <lightning-button-icon icon-name="utility:replace" size="small" data-field="icon"
+                                     onclick={handleChangeNewProfile}>
+              </lightning-button-icon>
+            </div>
+          </div>
+          <div class="slds-m-top_small">
+            <div class="slds-form-element__label" style="display:inline-block; width:50%;">
+              {labels.pageSettings.HeaderBackground}
+            </div>
+            <template if:true={newProfile.headerBackground}>
+              <img class="slds-m-horizontal_small slds-m-top_small"
+                   src={newProfile.headerBackground} alt="Background preview"
+                   style="width:100px; height:auto;" />
+            </template>
+            <div style="display:inline-block;">
+              <lightning-button-icon icon-name="utility:replace" size="small"
+                                     data-field="headerBackground" onclick={handleChangeNewProfile}>
+              </lightning-button-icon>
+            </div>
+          </div>
+        </div>
+        <div class="slds-modal__footer">
+          <lightning-button label={labels.LBL_PageSettings_Add_New_Settings} variant="brand"
+                            onclick={handleAddNewProfile}></lightning-button>
+        </div>
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+  </template>
+
+      <template if:true={hasProfile}>
+        <div>
+          <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeaderRr" style="position:relative; z-index:1;">
+      <div class="sectionTitle slds-media__body">
+        Paramétrage des relances
+      </div>
+    </div>
+
+    <!-- Helper text -->
+    <div class="ml20 slds-m-top_small">
+      <div class="slds-text-title_bold" style="padding-left:0;">
+        Dates clés et notifications
+      </div>
+      <div class="label slds-m-top_xx-small" style="padding-left:0;">
+            Définissez ci-dessous des dates et flux de notification si votre fournisseur
+            ne vous a pas encore envoyé sa déclaration avant la date butoir.
+      </div>
+    </div>
+    <!-- Mini band: Date -->
+    <div class="slds-m-top_medium slds-p-vertical_x-small slds-p-horizontal_small ml20"
+         style="background:#d9f3f6;border-radius:4px;max-width:calc(100% - 40px);">
+      <div class="slds-text-title_bold">{labels.LBL_Date}</div>
+    </div>
+    <!-- Date de rappel 1 -->
+    <div class="section-Container slds-m-top_medium">
+      <div class="section-label slds-col slds-size_3-of-12 slds-truncate"
+             style="white-space:nowrap; padding-right:12px;">
+        {labels.ReminderRule__mdt.ReminderDay1Label}</div>
+        <div class="slds-col slds-size_2-of-12">
+          <lightning-input type="number" min="1" max="31" variant="label-hidden" label=" "
+                           value={rr.reminderDay1}
+                           data-field="reminderDay1"
+                           onchange={handleInput}>
+          </lightning-input>
+        </div>
+        <div class="slds-col slds-size_3-of-12">
+          <lightning-combobox variant="label-hidden" label=" "
+                              options={monthOptions}
+                              value={rr.reminderMonth1}
+                              data-field="reminderMonth1"
+                              onchange={handleInput}>
+          </lightning-combobox>
+        </div>
+      </div>
+    <!-- Date de rappel 2 -->
+    <div class="section-Container slds-m-top_small">
+<div class="section-label slds-col slds-size_3-of-12 slds-truncate"
+             style="white-space:nowrap; padding-right:12px;">
+             {labels.ReminderRule__mdt.ReminderDay2Label}</div>
+        <div class="slds-col slds-size_2-of-12">
+          <lightning-input type="number" min="1" max="31" variant="label-hidden" label=" "
+                           value={rr.reminderDay2}
+                           data-field="reminderDay2"
+                           onchange={handleInput}>
+          </lightning-input>
+        </div>
+        <div class="slds-col slds-size_3-of-12">
+          <lightning-combobox variant="label-hidden" label=" "
+                              options={monthOptions}
+                              value={rr.reminderMonth2}
+                              data-field="reminderMonth2"
+                              onchange={handleInput}>
+          </lightning-combobox>
+        </div>
+      </div>
+    <!-- Date de rappel 3 -->
+    <div class="section-Container slds-m-top_small">
+      <div class="section-label slds-col slds-size_3-of-12 slds-truncate"
+             style="white-space:nowrap; padding-right:12px;">{labels.ReminderRule__mdt.ReminderDay3Label}</div>
+        <div class="slds-col slds-size_2-of-12">
+          <lightning-input type="number" min="1" max="31" variant="label-hidden" label=" "
+                           value={rr.reminderDay3}
+                           data-field="reminderDay3"
+                           onchange={handleInput}>
+          </lightning-input>
+        </div>
+        <div class="slds-col slds-size_3-of-12">
+          <lightning-combobox variant="label-hidden" label=" "
+                              options={monthOptions}
+                              value={rr.reminderMonth3}
+                              data-field="reminderMonth3"
+                              onchange={handleInput}>
+          </lightning-combobox>
+        </div>
+      </div>
+    <!-- Supplier Reminder Flow -->
+    <!-- <div class="section-Container slds-m-top_medium">
+      <div class="slds-grid slds-gutters slds-grid_vertical-align-center">
+        <div class="section-label disp">Flux utilisé pour relancer le fournisseur</div>
+        <div class="slds-col slds-size_5-of-12">
+          <lightning-combobox class="comboBox" variant="label-hidden" label=" "
+                              placeholder="Select an active Screen Flow"
+                              options={flows}
+                              value={rr.reminderFlow}
+                              data-field="reminderFlow"
+                              onchange={handleInput}>
+          </lightning-combobox>
+        </div>
+      </div>
+    </div> -->
+    <div class="add-breaks"></div>
+  </div>
+  </template>
+</template>

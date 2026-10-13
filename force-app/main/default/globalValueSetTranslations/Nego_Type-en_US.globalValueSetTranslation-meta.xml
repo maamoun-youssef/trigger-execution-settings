@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Commission</masterLabel>
+        <translation>Commission</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Concession</masterLabel>
+        <translation>Conession</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Condition</masterLabel>
+        <translation>Condition</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Ferme</masterLabel>
+        <translation>Ferme</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

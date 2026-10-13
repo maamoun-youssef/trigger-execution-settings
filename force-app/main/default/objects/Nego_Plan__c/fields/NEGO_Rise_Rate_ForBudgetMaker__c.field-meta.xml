@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NEGO_Rise_Rate_ForBudgetMaker__c</fullName>
+    <formula>IF ( NOT(ISNULL(NEGO_Rise_Rate_Validated_YE__c)) , NEGO_Rise_Rate_Validated_YE__c,
+IF ( NEGO_Rise_Rate_Requested__c &gt; NEGO_Rise_Rate_IsoPartner__c, NEGO_Rise_Rate_Requested__c, NEGO_Rise_Rate_IsoPartner__c)
+)</formula>
+    <label>NEGO - Rise Rate ForBudgetMaker</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

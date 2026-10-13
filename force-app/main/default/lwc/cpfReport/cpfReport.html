@@ -1,0 +1,937 @@
+<template>
+    <template if:true={loadingData}>
+        <div class="slds-spinner_container">
+            <div class="loader slds-spinner_container slds-align--absolute-center">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </template>
+    <div class="slds-card">
+        <div class="header slds-page-header slds-page-header_record-home">
+            <div class="slds-grid">
+                <div class="slds-col slds-p-around_xx-small slds-has-flexi-truncate">
+                    <!-- HEADING AREA -->
+                    <!-- MEDIA OBJECT = FIGURE + BODY -->
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div
+                            class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                            <lightning-icon icon-name="standard:service_report">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small">
+                            <p class="slds-text-title slds-line-height_reset">
+                                <template if:true={label.commPlanFollowupObjInfo}>
+                                    {label.commPlanFollowupObjInfo.label}
+                                </template>
+                            </p>
+                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                <template if:true={displayReviewData}>
+                                    {label.LBL_CPF_BR_Report}
+                                </template>
+                                <template if:false={displayReviewData}>
+                                    {label.LBL_CPF_Report}
+                                </template>
+                            </h1>
+                        </div>
+
+                        <div class="slds-grid slds-p-around_small slds-m-around_xx-small"
+                            style="position: absolute; padding-left: 280px;">
+                            <template for:each={budgetTypeOptions} for:item="bt">
+                                <div key={bt.label} onclick={handleMultiBudgetType}>
+                                    <span data-budget-type={bt.label} style={bt.style}>
+                                    </span>
+                                    <span class="legend-label">{bt.label}</span>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <!-- ACTION BUTTONS -->
+                <div class="slds-col slds-no-flex slds-grid  slds-icon_container">
+                    <lightning-input class="slds-align_absolute-center slds-m-right--x-small lightBtnBorderColor"
+                        type="toggle" message-toggle-active="" message-toggle-inactive="" onchange={toggleStyle}>
+                    </lightning-input>
+                    <lightning-button class="slds-button slds-m-right--x-small lightBtnBorderColor"
+                        label={label.LBL_Cancel} onclick={handleCancel}>
+                    </lightning-button>
+                    <template if:true={toSaveData.length}>
+                        <lightning-button class="slds-button slds-m-right--x-small lightBtnBorderColor" variant="brand"
+                            label={label.LBL_Save} onclick={handleSave} if:false={displayReviewData}></lightning-button>
+                    </template>
+                    <!-- more actions menu toggle -->
+                    <lightning-button-menu menu-alignment="right" alternative-text="Control List View"
+                        icon-name="utility:connected_apps"
+                        class="slds-align_absolute-center slds-m-right--x-small lightBtnBorderColor " variant="bare">
+                        <!-- <lightning-menu-item variant="base" prefix-icon-name="doctype:excel"
+                            class="slds-button slds-button-icon" label={label.LBL_Export_To_Excel}
+                            onclick={exportExcelJS} title={label.LBL_Export_To_Excel}>
+                        </lightning-menu-item> -->
+                        <template if:true={isRequestForAppActionDisplayed}>
+                            <lightning-menu-item variant="base" class="slds-button slds-button-icon lightBtnBorderColor"
+                                label="Request for approval" title="Request for approval">
+                            </lightning-menu-item>
+                        </template>
+                        <template if:true={isExecBuReviewActionDisplayed}>
+                            <lightning-menu-item variant="base" class="slds-button slds-button-icon lightBtnBorderColor"
+                                label="Exec Business review" title="Exec Business review">
+                            </lightning-menu-item>
+                        </template>
+                    </lightning-button-menu>
+                    <!-- <div class="headerDivider slds-m-right--x-small"></div> -->
+                    <lightning-button-menu menu-alignment="right" alternative-text="Control List View"
+                        icon-name="utility:table_settings"
+                        class="slds-align_absolute-center slds-m-right--x-small slds-p-left--x-small headerDivider lightBtnBorderColor">
+                        <lightning-menu-item variant="base" icon-name="utility:freeze_column"
+                            class="slds-button slds-button-icon" label="Show/hide columns" title="Show/hide columns">
+                        </lightning-menu-item>
+                        <lightning-menu-item variant="base" icon-name="utility:filter"
+                            class="slds-button slds-button-icon" label="Order Columns" title="Order Columns">
+                        </lightning-menu-item>
+                    </lightning-button-menu>
+                    <lightning-button-icon icon-name="utility:filterList" variant="border-filled"
+                        class="slds-button slds-button-icon slds-m-right--x-small lightBtnBorderColor"
+                        onclick={toggleFilter}>
+                    </lightning-button-icon>
+                    <!-- <div class="headerDivider slds-m-right--x-small"></div> -->
+                    <lightning-button-menu menu-alignment="right" alternative-text="Control List View"
+                        icon-name="doctype:excel"
+                        class="slds-align_absolute-center slds-m-right--x-small slds-p-left--x-small headerDivider lightBtnBorderColor">
+                        <template if:true={isExcelBtnDisplayed}>
+                            <lightning-menu-item variant="base" class="slds-button slds-button-icon"
+                                label="Export Excel" title="Export Excel">
+                            </lightning-menu-item>
+                        </template>
+                        <lightning-menu-item variant="base" class="slds-button slds-button-icon" label="Import Excel"
+                            title="Import Excel">
+                        </lightning-menu-item>
+                    </lightning-button-menu>
+                    <lightning-button-menu menu-alignment="right" alternative-text="Control List View"
+                        icon-name="utility:service_report"
+                        class="slds-align_absolute-center slds-m-right--x-small lightBtnBorderColor">
+                        <template if:true={isMonthBtnDisplayed}>
+                            <lightning-menu-item variant="base" icon-name="utility:monthlyview"
+                                class="slds-button slds-button-icon" label="Open Month x Month"
+                                title="Open Month x Month" onclick={openMonthxMonth}>
+                            </lightning-menu-item>
+                        </template>
+                        <template if:true={isBuReviewBtnDisplayed}>
+                            <lightning-menu-item variant="base" icon-name="utility:graph"
+                                class="slds-button slds-button-icon" label="Open Business Review"
+                                title="Open Business Review" onclick={openBusinessReview}>
+                            </lightning-menu-item>
+                        </template>
+                    </lightning-button-menu>
+                    <!-- <template if:true={isExcelBtnDisplayed}>
+                        <lightning-button-icon icon-name="doctype:excel" variant="border-filled" label
+                            class="slds-button slds-button-icon slds-m-right--x-small" onclick={exportExcelJS}
+                            title="Export excel">
+                        </lightning-button-icon>
+                    </template> -->
+                    <!-- <template if:true={isMonthBtnDisplayed}>
+                        <lightning-button-icon icon-name="utility:monthlyview" variant="border-filled"
+                            class="slds-button slds-button-icon slds-m-right--x-small" onclick={openMonthxMonth}
+                            title="Open Month x Month">
+                        </lightning-button-icon>
+                    </template>
+                    <template if:true={isBuReviewBtnDisplayed}>
+                        <lightning-button-icon icon-name="utility:graph" variant="border-filled"
+                            class="slds-button slds-button-icon slds-m-right--x-small" onclick={openBusinessReview}
+                            title="Open Business Review">
+                        </lightning-button-icon>
+                    </template> -->
+                </div>
+            </div>
+        </div>
+        <div class="slds-grid">
+            <div if:false={loadingData} class="main-panel slds-col slds-scrollable">
+                <template if:true={isEmptyData}>
+                    <div class=" slds-col slds-align_absolute-center">
+                        {label.LBL_No_Item_To_Display}
+                    </div>
+                </template>
+                <template if:false={isEmptyData}>
+                    <table
+                        class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-no-row-hover">
+                        <thead>
+                            <tr style="height: 65px;" class="sticky">
+                                <th style="background-color: #0d807d; width:280px; max-width:280px;min-width:280px;"
+                                    colspan="4">
+                                </th>
+                                <th
+                                    style="background-color:#0d807d;color:white;width:130px;max-width:130px;min-width:130px;text-align:center;">
+                                    {label.commPlanObjInfo.cpCategory}
+                                </th>
+                                <th
+                                    style="background-color:#0d807d;color:white;width:130px;max-width:130px;min-width:130px;text-align:center;">
+                                    {label.commPlanObjInfo.cpStatus}
+                                </th>
+                                <template for:each={headerFields} for:item="bt">
+                                    <template for:each={bt.fields} for:item="field">
+                                        <template if:true={field.isDisplayed}>
+                                            <th key={field} style={bt.color} class="headerStyle">
+                                                <div class="slds-grid">
+                                                    {field.fieldLabel}
+                                                    <template if:true={field.isInput}>
+                                                        <lightning-icon icon-name="utility:edit"
+                                                            class="slds-m-top--x-small white-icon pointerCursor"
+                                                            data-fieldname={field.fieldName} data-type={bt.label}
+                                                            onclick={handleEditFields} size="x-small"></lightning-icon>
+                                                    </template>
+                                                </div>
+                                            </th>
+                                        </template>
+                                    </template>
+                                </template>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={CPFDataArray} for:item="cp" for:index="cpIndex">
+                                <tr key={cp.cpId} style="font-weight:bold;" class="compactStyle ">
+                                    <!-- height: 45px; -->
+                                    <td class="slds-grid slds-align--absolute-center compactStyle"
+                                        style="background-color:#595959;white-space: unset; text-align:center;border-right: 0px;">
+                                        <lightning-input type="checkbox" variant="label-hidden" class=" slds-col">
+                                        </lightning-input>
+                                        <template if:true={cp.canBeParent}>
+                                            <lightning-icon icon-name="utility:add" size="xx-small"
+                                                class="white-icon slds-col " data-index={cpIndex}>
+                                            </lightning-icon>
+                                        </template>
+                                        <lightning-button-icon icon-name="utility:copy" variant="bare"
+                                            class="slds-cell-edit__button slds-col white-icon">
+                                        </lightning-button-icon>
+                                        <lightning-button-icon icon-name="utility:delete" variant="bare"
+                                            class="slds-cell-edit__buttonslds-col white-icon" data-cp-id={cp.cpId}
+                                            onclick={setToDeleteCP}>
+                                        </lightning-button-icon>
+                                    </td>
+                                    <td style="background-color:#595959;white-space: unset;max-width:280px;min-width:280px;border-left: 0px;padding-left: 0px;"
+                                        onmouseenter={showInfoIcon} onmouseleave={hideInfoIcon} data-cp-id={cp.cpId}
+                                        data-parent-index={cpIndex}>
+                                        <!--  class="slds-p-around--x-small" -->
+                                        <div>
+                                            <template if:true={cp.hasChildren}>
+                                                <template if:false={cp.isDisplayedChildren}>
+                                                    <lightning-icon icon-name="utility:chevronright" size="xx-small"
+                                                        class="white-icon slds-col" style="margin-right: 15px;"
+                                                        onclick={handleCollapseChidlren} data-index={cpIndex}>
+                                                    </lightning-icon>
+                                                </template>
+                                                <template if:true={cp.isDisplayedChildren}>
+                                                    <lightning-icon icon-name="utility:chevrondown" size="xx-small"
+                                                        class="white-icon slds-col" style="margin-right: 15px;"
+                                                        onclick={handleCollapseChidlren} data-index={cpIndex}>
+                                                    </lightning-icon>
+                                                </template>
+                                            </template>
+                                            <a target="_blank" href={cp.cpURl} style="color:white;">
+                                                {cp.cpName}
+                                            </a>
+                                            <template if:true={cp.isShowInfoIcon}>
+                                                <lightning-button-icon icon-name="utility:info" variant="bare"
+                                                    class="slds-cell-edit__button white-icon " style="right: 0px;
+                                                position: absolute;" onmouseenter={openInfoPanel} data-cp-id={cp.cpId}
+                                                    data-cp-name={cp.cpName} data-parent-index={cpIndex}
+                                                    if:false={cp.isShowEditIcon}>
+                                                </lightning-button-icon>
+                                                <lightning-button-icon icon-name="utility:edit" variant="bare"
+                                                    data-cp-id={cp.cpId} data-cp-name={cp.cpName}
+                                                    data-parent-index={cpIndex}
+                                                    class="slds-cell-edit__button slds-m-left_x-small white-icon" style="right: 0px;
+                                                position: absolute;" onclick={toggleEditCPModel}
+                                                    onmouseleave={closeInfoPanel} if:true={cp.isShowEditIcon}>
+                                                </lightning-button-icon>
+                                            </template>
+                                            <template if:true={cp.isShowInfoPanel}>
+                                                <div class="slds-popover slds-popover_panel slds-nubbin_left-top"
+                                                    style="position: absolute; top: -10px; left: 280px;z-index:7;"
+                                                    data-cp-id={cp.cpId} data-cp-name={cp.cpName}
+                                                    data-parent-index={cpIndex} onmouseleave={closeInfoPanel}>
+                                                    <div class="slds-popover__header">
+                                                        <header class="slds-media slds-media_center">
+                                                            <div class="slds-media__body">
+                                                                <h2 class="slds-text-heading_medium slds-hyphenate">
+                                                                    {cp.cpName}
+                                                                </h2>
+                                                            </div>
+                                                        </header>
+                                                    </div>
+                                                    <div class="slds-popover__body slds-text-align_left">
+                                                        <lightning-record-edit-form
+                                                            object-api-name={API_NAMES.commercialPlan.objectApiName}
+                                                            record-id={currentCommercialPlan.Id}
+                                                            form-class="slds-p-around_xx-small slds-grid slds-wrap">
+                                                            <template for:each={currentCommercialPlan.detailPopupFields}
+                                                                for:item="field">
+                                                                <lightning-output-field key={field}
+                                                                    field-name={field.fieldApiName}
+                                                                    class="slds-size_1-of-2 hide-input">
+                                                                </lightning-output-field>
+                                                            </template>
+                                                        </lightning-record-edit-form>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </td>
+                                    <td style="background-color:#595959;white-space: unset; text-align:center;">
+                                        <lightning-button-icon class="white-icon" variant="bare" size="large"
+                                            icon-name="utility:products" onclick={openPromoScreen}
+                                            data-screen-link={cp.cpPromoScreenURL}>
+                                        </lightning-button-icon>
+                                    </td>
+                                    <td style="background-color:#595959;white-space: unset; text-align:center;">
+                                        <img style="max-height: 15px;min-width: 22px;
+                                        min-height: 15px;" alt="Compnay logo" class="slds-m-top--xx-small "
+                                            src={CPFReportBRIcon} />
+                                    </td>
+
+                                    <td style="background-color:#595959;white-space: unset; text-align:center;">
+                                        <a target="_blank" href={cp.cpCategoryURL} style="color:white;">
+                                            {cp.cpCategory}
+                                        </a>
+                                    </td>
+                                    <td style={cp.statusStyle}>
+                                        {cp.cpStatus.label}
+                                    </td>
+                                    <template for:each={cp.cpfollowUp} for:item="budgetType">
+                                        <template if:false={budgetType.isHachured}>
+                                            <template for:each={budgetType.FieldsValues} for:item="field">
+                                                <template if:true={field.isDisplayed}>
+                                                    <template if:false={field.isInput}>
+                                                        <template if:true={field.isCurrency}>
+                                                            <td key={field} style={field.fieldStyle}>
+                                                                <lightning-formatted-number value={field.fieldValue}>
+                                                                </lightning-formatted-number>
+                                                            </td>
+                                                        </template>
+                                                        <template if:true={field.isDouble}>
+                                                            <td key={field} style={field.fieldStyle}>
+                                                                <lightning-formatted-number value={field.fieldValue}
+                                                                    format-style="decimal">
+                                                                </lightning-formatted-number>
+                                                            </td>
+                                                        </template>
+                                                        <template if:true={field.isPercent}>
+                                                            <td key={field} style={field.fieldStyle}>
+                                                                <lightning-formatted-number value={field.fieldValue}
+                                                                    format-style="decimal">
+                                                                </lightning-formatted-number>
+                                                            </td>
+                                                        </template>
+                                                        <template if:true={field.isDate}>
+                                                            <td key={field} style={field.fieldStyle}>
+                                                                {field.fieldValue}
+                                                            </td>
+                                                        </template>
+                                                    </template>
+                                                    <template if:true={field.isInput}>
+                                                        <template if:true={field.isDouble}>
+                                                            <td key={field} style={field.fieldStyle}>
+                                                                <lightning-input variant="label-hidden"
+                                                                    value={field.fieldValue} type="number"
+                                                                    formatter="decimal" onchange={handleCPEdit}
+                                                                    data-field={field.fieldApiName}
+                                                                    data-cp-id={budgetType.cpId} data-id={field.id}
+                                                                    class="input-right">
+                                                                </lightning-input>
+                                                            </td>
+                                                        </template>
+                                                        <template if:true={field.isCurrency}>
+                                                            <td key={field} style={field.fieldStyle}>
+                                                                <lightning-input type="number" variant="label-hidden"
+                                                                    value={field.fieldValue} formatter="decimal"
+                                                                    onchange={handleCPEdit}
+                                                                    data-field={field.fieldApiName}
+                                                                    data-cp-id={budgetType.cpId} data-id={field.id}
+                                                                    class="input-right">
+                                                                </lightning-input>
+                                                            </td>
+                                                        </template>
+                                                        <template if:true={field.isPercent}>
+                                                            <td key={field} style={field.fieldStyle}>
+                                                                <lightning-input variant="label-hidden"
+                                                                    value={field.fieldValue} type="number"
+                                                                    formatter="decimal" onchange={handleCPEdit}
+                                                                    data-field={field.fieldApiName}
+                                                                    data-cp-id={budgetType.cpId} data-id={field.id}
+                                                                    class="input-right">
+                                                                </lightning-input>
+                                                            </td>
+                                                        </template>
+                                                    </template>
+                                                </template>
+                                            </template>
+                                        </template>
+                                        <template if:true={budgetType.isHachured}>
+                                            <template for:each={budgetType.FieldsValues} for:item="field">
+                                                <td key={field} style={field.fieldStyle} colspan={field.colspan}>
+                                                </td>
+                                            </template>
+                                        </template>
+                                    </template>
+                                </tr>
+                                <template if:true={cp.isDisplayedChildren}>
+                                    <template for:each={cp.cpChildren} for:item="children1" for:index="child1Index">
+                                        <tr key={children1.cpId} class="compactStyle ">
+                                            <td class="slds-grid slds-align--absolute-center"
+                                                style="background-color:white;white-space: unset; text-align:center;border-right: 0px;height: 45px;">
+                                                <lightning-input type="checkbox" variant="label-hidden"
+                                                    class=" slds-col ">
+                                                </lightning-input>
+                                                <template if:true={children1.canBeParent}>
+                                                    <lightning-icon icon-name="utility:add" size="xx-small"
+                                                        class=" slds-col" data-parent-index={cpIndex}
+                                                        data-index={child1Index}>
+                                                    </lightning-icon>
+                                                </template>
+                                                <lightning-button-icon icon-name="utility:copy" variant="bare"
+                                                    class="slds-cell-edit__button slds-col ">
+                                                </lightning-button-icon>
+                                                <lightning-button-icon icon-name="utility:delete" variant="bare"
+                                                    class="slds-cell-edit__button  slds-col" data-cp-id={children1.cpId}
+                                                    onclick={setToDeleteCP}>
+                                                </lightning-button-icon>
+                                            </td>
+                                            <td style="background-color: white;padding-left: 55px;white-space: unset;max-width:280px;min-width:280px;border-left: 0px;"
+                                                onmouseenter={showInfoIcon} onmouseleave={hideInfoIcon}
+                                                data-cp-id={children1.cpId} data-parent-index={cpIndex}
+                                                data-child1-index={child1Index}>
+                                                <!-- slds-p-around--x-small  -->
+                                                <div class="slds-text-align--left">
+                                                    <template if:true={children1.hasChildren}>
+                                                        <template if:false={children1.isDisplayedChildren}>
+                                                            <lightning-icon icon-name="utility:chevronright"
+                                                                size="xx-small" style="margin-right: 5px;"
+                                                                class="slds-col" onclick={handleCollapseChidlren1}
+                                                                data-parent-index={cpIndex} data-index={child1Index}>
+                                                            </lightning-icon>
+                                                        </template>
+                                                        <template if:true={children1.isDisplayedChildren}>
+                                                            <lightning-icon icon-name="utility:chevrondown"
+                                                                size="xx-small" style="margin-right: 5px;"
+                                                                class="slds-col" onclick={handleCollapseChidlren1}
+                                                                data-parent-index={cpIndex} data-index={child1Index}>
+                                                            </lightning-icon>
+                                                        </template>
+                                                    </template>
+                                                    <a target="_blank" href={children1.cpURl} style="color:#516231;">
+                                                        {children1.cpName}
+                                                    </a>
+                                                    <template if:true={children1.isShowInfoIcon}>
+                                                        <lightning-button-icon icon-name="utility:info" variant="bare"
+                                                            class="slds-cell-edit__button "
+                                                            data-cp-name={children1.cpName} data-cp-id={children1.cpId}
+                                                            data-parent-index={cpIndex} data-child1-index={child1Index}
+                                                            onmouseenter={openInfoPanel} style="right: 0px;
+                                                        position: absolute;" if:false={children1.isShowEditIcon}>
+                                                        </lightning-button-icon>
+                                                        <lightning-button-icon icon-name="utility:edit" variant="bare"
+                                                            class="slds-cell-edit__button slds-m-left_x-small" style="right: 0px;
+                                                        position: absolute;" onclick={toggleEditCPModel}
+                                                            onmouseleave={closeInfoPanel}
+                                                            data-cp-name={children1.cpName} data-cp-id={children1.cpId}
+                                                            data-parent-index={cpIndex} data-child1-index={child1Index}
+                                                            if:true={children1.isShowEditIcon}>
+                                                        </lightning-button-icon>
+                                                    </template>
+                                                    <template if:true={children1.isShowInfoPanel}>
+                                                        <div class="slds-popover slds-popover_panel slds-nubbin_left-top"
+                                                            style="position: absolute; top: -10px; left: 280px;z-index:7;"
+                                                            data-cp-name={children1.cpName} data-cp-id={children1.cpId}
+                                                            data-parent-index={cpIndex} data-child1-index={child1Index}
+                                                            onmouseleave={closeInfoPanel}>
+                                                            <div class="slds-popover__header">
+                                                                <header class="slds-media slds-media_center">
+                                                                    <div class="slds-media__body">
+                                                                        <h2
+                                                                            class="slds-text-heading_medium slds-hyphenate">
+                                                                            {children1.cpName}
+                                                                        </h2>
+                                                                    </div>
+                                                                </header>
+                                                            </div>
+                                                            <div class="slds-popover__body slds-text-align_left">
+                                                                <lightning-record-edit-form
+                                                                    object-api-name={API_NAMES.commercialPlan.objectApiName}
+                                                                    record-id={currentCommercialPlan.Id}
+                                                                    form-class="slds-p-around_xx-small slds-grid slds-wrap">
+                                                                    <template
+                                                                        for:each={currentCommercialPlan.detailPopupFields}
+                                                                        for:item="field">
+                                                                        <lightning-output-field disabled key={field}
+                                                                            field-name={field.fieldApiName}
+                                                                            value={field.value} onkeydown={blockSubmit}
+                                                                            class="slds-size_1-of-2 hide-input">
+                                                                        </lightning-output-field>
+                                                                    </template>
+                                                                </lightning-record-edit-form>
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </td>
+                                            <td style="background-color:white;white-space: unset; text-align:center;">
+                                                <lightning-button-icon variant="bare" size="large"
+                                                    icon-name="utility:products" onclick={openPromoScreen}
+                                                    data-screen-link={children1.cpPromoScreenURL}>
+                                                </lightning-button-icon>
+                                            </td>
+                                            <td style="background-color:white;white-space: unset; text-align:center;">
+                                                <img style="max-height: 15px;min-width: 22px;
+                                                min-height: 15px;" alt="Compnay logo" class="slds-m-top--xx-small "
+                                                    src={CPFReportBRIcon} />
+                                            </td>
+
+                                            <td style="background-color:white;white-space: unset; text-align:center;">
+                                                <a target="_blank" href={children1.cpCategoryURL}
+                                                    style="color:#516231;">
+                                                    {children1.cpCategory}
+                                                </a>
+                                            </td>
+                                            <td style={children1.statusStyle}>
+                                                {children1.cpStatus.label}
+                                            </td>
+                                            <template for:each={children1.cpfollowUp} for:item="budgetType1">
+                                                <template for:each={budgetType1.FieldsValues} for:item="field">
+                                                    <template if:true={field.isDisplayed}>
+                                                        <template if:false={field.isInput}>
+                                                            <template if:true={field.isCurrency}>
+                                                                <td key={field} style={field.fieldStyle}>
+                                                                    <lightning-formatted-number
+                                                                        value={field.fieldValue}>
+                                                                    </lightning-formatted-number>
+                                                                </td>
+                                                            </template>
+                                                            <template if:true={field.isDouble}>
+                                                                <td key={field} style={field.fieldStyle}>
+                                                                    <lightning-formatted-number value={field.fieldValue}
+                                                                        format-style="decimal">
+                                                                    </lightning-formatted-number>
+                                                                </td>
+                                                            </template>
+                                                            <template if:true={field.isPercent}>
+                                                                <td key={field} style={field.fieldStyle}>
+                                                                    <lightning-formatted-number value={field.fieldValue}
+                                                                        format-style="decimal">
+                                                                    </lightning-formatted-number>
+                                                                </td>
+                                                            </template>
+                                                            <template if:true={field.isDate}>
+                                                                <td key={field} style={field.fieldStyle}>
+                                                                    {field.fieldValue}
+                                                                </td>
+                                                            </template>
+                                                        </template>
+                                                        <template if:true={field.isInput}>
+                                                            <template if:true={field.isDouble}>
+                                                                <td key={field} style={field.fieldStyle}>
+                                                                    <lightning-input variant="label-hidden"
+                                                                        value={field.fieldValue} type="number"
+                                                                        formatter="decimal" onchange={handleCPEdit}
+                                                                        data-field={field.fieldApiName}
+                                                                        data-cp-id={budgetType1.cpId} data-id={field.id}
+                                                                        class="input-right">
+                                                                    </lightning-input>
+                                                                </td>
+                                                            </template>
+                                                            <template if:true={field.isCurrency}>
+                                                                <td key={field} style={field.fieldStyle}>
+                                                                    <lightning-input type="number"
+                                                                        variant="label-hidden" value={field.fieldValue}
+                                                                        formatter="decimal" onchange={handleCPEdit}
+                                                                        data-field={field.fieldApiName}
+                                                                        data-cp-id={budgetType1.cpId} data-id={field.id}
+                                                                        class="input-right">
+                                                                    </lightning-input>
+                                                                </td>
+                                                            </template>
+                                                            <template if:true={field.isPercent}>
+                                                                <td key={field} style={field.fieldStyle}>
+                                                                    <lightning-input variant="label-hidden"
+                                                                        value={field.fieldValue} type="number"
+                                                                        formatter="decimal" onchange={handleCPEdit}
+                                                                        data-field={field.fieldApiName}
+                                                                        data-cp-id={budgetType1.cpId} data-id={field.id}
+                                                                        class="input-right">
+                                                                    </lightning-input>
+                                                                </td>
+                                                            </template>
+                                                        </template>
+                                                    </template>
+                                                </template>
+                                            </template>
+                                        </tr>
+                                        <template if:true={children1.isDisplayedChildren}>
+                                            <template for:each={children1.cpChildren} for:item="children2"
+                                                for:index="child2Index">
+                                                <tr key={children2.cpId} class="compactStyle ">
+                                                    <td class="slds-grid slds-align--absolute-center"
+                                                        style="background-color:white;white-space: unset; text-align:center;border-right: 0px;">
+                                                        <lightning-input type="checkbox" variant="label-hidden"
+                                                            class=" slds-col">
+                                                        </lightning-input>
+                                                        <template if:true={children2.canBeParent}>
+                                                            <lightning-icon icon-name="utility:add" size="xx-small"
+                                                                class=" slds-col" data-parent-index={cpIndex}
+                                                                data-index={children2}>
+                                                            </lightning-icon>
+                                                        </template>
+
+                                                        <lightning-button-icon icon-name="utility:copy" variant="bare"
+                                                            class="slds-cell-edit__button  slds-col">
+                                                        </lightning-button-icon>
+
+                                                        <lightning-button-icon icon-name="utility:delete" variant="bare"
+                                                            class="slds-cell-edit__button  slds-col"
+                                                            onclick={setToDeleteCP}>
+                                                        </lightning-button-icon>
+                                                    </td>
+                                                    <td
+                                                        style="background-color:white;white-space: unset; text-align:center;border-right: 0px;">
+
+                                                        <div class="slds-p-around--x-small  slds-text-align--left">
+                                                            <a target="_blank" href={children2.cpURl}
+                                                                style="color:#516231;">
+                                                                {children2.cpName}
+                                                            </a>
+                                                        </div>
+                                                        <template if:true={children2.isShowInfoPanel}>
+                                                            <div class="slds-popover slds-popover_panel"
+                                                                style="position: absolute; top: -10px; left: 280px;z-index:7;"
+                                                                onmouseleave={closeInfoPanel}>
+                                                                <div class="slds-popover__header">
+                                                                    <header class="slds-media slds-media_center">
+                                                                        <div class="slds-media__body">
+                                                                            <h2
+                                                                                class="slds-text-heading_medium slds-hyphenate">
+                                                                                {children2.cpName}
+                                                                            </h2>
+                                                                        </div>
+                                                                    </header>
+                                                                </div>
+                                                                <div class="slds-popover__body slds-text-align_left">
+                                                                    <lightning-record-edit-form
+                                                                        object-api-name={API_NAMES.commercialPlan.objectApiName}
+                                                                        record-id={currentCommercialPlan.Id}
+                                                                        form-class="slds-p-around_xx-small slds-grid slds-wrap">
+                                                                        <template
+                                                                            for:each={currentCommercialPlan.detailPopupFields}
+                                                                            for:item="field">
+                                                                            <lightning-output-field disabled key={field}
+                                                                                field-name={field.fieldApiName}
+                                                                                value={field.value}
+                                                                                onkeydown={blockSubmit}
+                                                                                class="slds-size_1-of-2 hide-input">
+                                                                            </lightning-output-field>
+                                                                        </template>
+                                                                    </lightning-record-edit-form>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </td>
+                                                    <td
+                                                        style="background-color:white;white-space: unset; text-align:center;">
+                                                        <img style="max-height: 15px;min-width: 22px;
+                                                        min-height: 15px;" alt="Compnay logo"
+                                                            class="slds-m-top--xx-small " src={CPFReportBRIcon} />
+                                                    </td>
+                                                    <td
+                                                        style="background-color:white;white-space: unset; text-align:center;">
+                                                        <lightning-button-icon variant="bare" size="large"
+                                                            icon-name="utility:products" onclick={openPromoScreen}
+                                                            data-screen-link={children2.cpPromoScreenURL}>
+                                                        </lightning-button-icon>
+                                                    </td>
+                                                    <td
+                                                        style="background-color:white;white-space: unset; text-align:center;">
+                                                        <a target="_blank" href={children2.cpCategoryURL}
+                                                            style="color:#516231;">
+                                                            {children2.cpCategory}
+                                                        </a>
+                                                    </td>
+                                                    <td style={children2.statusStyle}>
+                                                        {children2.cpStatus.label}
+                                                    </td>
+                                                    <template for:each={children2.cpfollowUp} for:item="budgetType2">
+                                                        <template for:each={budgetType2.FieldsValues} for:item="field">
+                                                            <template if:true={field.isDisplayed}>
+                                                                <template if:false={field.isInput}>
+                                                                    <template if:true={field.isCurrency}>
+                                                                        <td key={field} style={field.fieldStyle}>
+                                                                            <lightning-formatted-number
+                                                                                value={field.fieldValue}>
+                                                                            </lightning-formatted-number>
+                                                                        </td>
+                                                                    </template>
+                                                                    <template if:true={field.isDouble}>
+                                                                        <td key={field} style={field.fieldStyle}>
+                                                                            <lightning-formatted-number
+                                                                                value={field.fieldValue}
+                                                                                format-style="decimal">
+                                                                            </lightning-formatted-number>
+                                                                        </td>
+                                                                    </template>
+                                                                    <template if:true={field.isPercent}>
+                                                                        <td key={field} style={field.fieldStyle}>
+                                                                            <lightning-formatted-number
+                                                                                value={field.fieldValue}
+                                                                                format-style="decimal">
+                                                                            </lightning-formatted-number>
+                                                                        </td>
+                                                                    </template>
+                                                                    <template if:true={field.isDate}>
+                                                                        <td key={field} style={field.fieldStyle}>
+                                                                            {field.fieldValue}
+                                                                        </td>
+                                                                    </template>
+                                                                </template>
+                                                                <template if:true={field.isInput}>
+                                                                    <template if:true={field.isDouble}>
+                                                                        <td key={field} style={field.fieldStyle}>
+                                                                            <lightning-input variant="label-hidden"
+                                                                                value={field.fieldValue} type="number"
+                                                                                formatter="decimal"
+                                                                                onchange={handleCPEdit}
+                                                                                data-field={field.fieldApiName}
+                                                                                data-cp-id={budgetType2.cpId}
+                                                                                data-id={field.id} class="input-right">
+                                                                            </lightning-input>
+                                                                        </td>
+                                                                    </template>
+                                                                    <template if:true={field.isCurrency}>
+                                                                        <td key={field} style={field.fieldStyle}>
+                                                                            <lightning-input type="number"
+                                                                                variant="label-hidden"
+                                                                                value={field.fieldValue}
+                                                                                formatter="decimal"
+                                                                                onchange={handleCPEdit}
+                                                                                data-field={field.fieldApiName}
+                                                                                data-cp-id={budgetType2.cpId}
+                                                                                data-id={field.id} class="input-right">
+                                                                            </lightning-input>
+                                                                        </td>
+                                                                    </template>
+                                                                    <template if:true={field.isPercent}>
+                                                                        <td key={field} style={field.fieldStyle}>
+                                                                            <lightning-input variant="label-hidden"
+                                                                                value={field.fieldValue} type="number"
+                                                                                formatter="decimal"
+                                                                                onchange={handleCPEdit}
+                                                                                data-field={field.fieldApiName}
+                                                                                data-cp-id={budgetType2.cpId}
+                                                                                data-id={field.id} class="input-right">
+                                                                            </lightning-input>
+                                                                        </td>
+                                                                    </template>
+                                                                </template>
+                                                            </template>
+                                                        </template>
+                                                    </template>
+                                                </tr>
+                                            </template>
+                                        </template>
+                                    </template>
+                                </template>
+                            </template>
+                        </tbody>
+                    </table>
+                </template>
+
+                <template if:true={isEditCpModelOpen}>
+                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <header class="slds-modal__header">
+                                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                    title="Close" onclick={toggleEditCPModel}>
+                                    <lightning-icon icon-name="utility:close" variant="inverse" size="small">
+                                    </lightning-icon>
+                                </button>
+                                <h2 class="slds-text-heading_medium slds-hyphenate">
+                                    {currentCommercialPlan.Name}
+                                </h2>
+                            </header>
+                            <div class="slds-modal__content slds-p-horizontal_xx-small" style="height: 45vh;">
+                                <div class="slds-grid slds-size--1-of-1">
+                                    <div if:true={currentCommercialPlan}>
+                                        <lightning-record-edit-form
+                                            object-api-name={API_NAMES.commercialPlan.objectApiName}>
+                                            <template for:each={currentCommercialPlan.detailPopupFields}
+                                                for:item="fieldsWrapper">
+                                                <lightning-input-field key={fieldsWrapper.fieldApiName}
+                                                    field-name={fieldsWrapper.fieldApiName} value={fieldsWrapper.value}
+                                                    class="slds-col slds-size--1-of-2">
+                                                </lightning-input-field>
+                                            </template>
+                                        </lightning-record-edit-form>
+                                    </div>
+                                </div>
+                            </div>
+                            <footer class="slds-modal__footer">
+                                <button class="slds-button slds-button_neutral" onclick={toggleEditCPModel}
+                                    title={label.LBL_Cancel}>{label.LBL_Cancel}</button>
+                                <button class="slds-button slds-button_brand" onclick={submitEditCpChanged}
+                                    title={label.LBL_Ok}>{label.LBL_Ok}</button>
+                            </footer>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </template>
+
+                <template if:true={isDeleteRow}>
+                    <div class="slds-backdrop slds-backdrop_open">
+                        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                            class="slds-modal slds-fade-in-open slds-modal_small">
+                            <div class="slds-modal__container deletePopUp">
+                                <div class="slds-modal__header">
+                                    <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate">
+                                        {label.LBL_Confirm}
+                                    </h1>
+                                </div>
+                                <div class="slds-modal__content slds-text-align_center slds-p-around_x-small"
+                                    id="modal-content-id-4">
+                                    <div class="slds-modal__content slds-text-align_center slds-p-around_x-small"
+                                        id="modal-content-id-2">
+                                        <h4 class="slds-hyphenate">{label.MSG_Confirm_Delete}</h4>
+                                    </div>
+                                </div>
+                                <div class="slds-modal__footer">
+                                    <lightning-button label={label.LBL_Cancel} variant="neutral"
+                                        onclick={handleCancelDeleteCP} class="slds-m-right_x-small">
+                                    </lightning-button>
+                                    <lightning-button label={label.LBL_Delete} variant="brand" onclick={handleDeleteCp}>
+                                    </lightning-button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </template>
+            </div>
+            <template if:false={loadingData}>
+                <div class="filter-section slds-col slds-border--left" if:true={isFilterOpen}
+                    style="float: right; z-index:7;width:400px;min-width:400px;max-width:400px;">
+                    <div style="height: 100%;" class="slds-grid slds-no-flex">
+                        <div class="slds-panelslds-panel_docked slds-grid slds-grid_vertical" style="overflow: unset;">
+                            <div class="slds-panel__header">
+                                <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate"
+                                    title={label.LBL_Filter}>
+                                    {label.LBL_Filter}
+                                </h2>
+                                <lightning-button-icon variant="bare" icon-name="utility:close" onclick={toggleFilter}>
+                                </lightning-button-icon>
+                            </div>
+                            <div class="slds-col slds-scrollable filterPanelBody" id="filterPanelBody">
+                                <div class="slds-grid slds-wrap slds-p-around_small">
+                                    <div class="slds-list_vertical slds-list_vertical-space slds-size_1-of-1">
+                                        <!--Number Of Fixed Columns -->
+                                        <div class="slds-item">
+                                            <lightning-combobox label={label.LBL_Number_Of_Fixed_Columns}
+                                                options={fixedColumnsOptions} value={nbOfFixedColumns}
+                                                onchange={setnumberOfFixedColumns} required>
+                                            </lightning-combobox>
+                                        </div>
+                                    </div>
+                                    <template if:false={displayReviewData}>
+                                        <div class="slds-align--absolute-center slds-list_vertical slds-list_vertical-space slds-m-top--medium slds-size_1-of-1"
+                                            style="background-color: red;height: 33px;
+                                font-weight: bold;
+                                text-align: center;">
+                                            {label.LBL_KPI_filter}
+                                        </div>
+                                        <div class="slds-item slds-grid">
+                                            <div class="slds-col">
+                                                <table
+                                                    class="slds-table slds-table_bordered slds-table_col-bordered slds-border_left slds-border_right slds-m-top--small slds-no-row-hover">
+                                                    <tbody>
+                                                        <template for:each={budgetTypeOptions} for:item="field">
+                                                            <tr key={field}>
+                                                                <td
+                                                                    style="background-color: rgb(245, 245, 84);margin-right: 5px;width:140px;">
+                                                                    {field.label}</td>
+                                                                <td>
+                                                                    <lightning-input type="checkbox" value={field.label}
+                                                                        variant="label-hidden" checked={field.checked}
+                                                                        onchange={handleMultiBudgetType}
+                                                                        data-type="budgetType"
+                                                                        data-budget-type={field.label}>
+                                                                    </lightning-input>
+                                                                </td>
+                                                            </tr>
+                                                        </template>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <div class="slds-align--absolute-center slds-list_vertical slds-list_vertical-space slds-m-top--medium slds-size_1-of-1"
+                                        style="background-color: red;height: 33px;font-weight: bold;text-align: center;">
+                                        Advanced Filter
+                                    </div>
+                                    <div class="slds-grid slds-size--1-of-1">
+                                        <div class="slds-col slds-size--1-of-2" style="min-height: 50px">
+                                            <lightning-record-edit-form
+                                                object-api-name={API_NAMES.commercialPlan.objectApiName}
+                                                record-id={currentCommercialPlan.Id}>
+                                                <lightning-input-field label={label.commPlanObjInfo.cpCategory}
+                                                    data-type-param="categoryParam"
+                                                    field-name={API_NAMES.commercialPlan.Hierarchy__c}
+                                                    onchange={fillAdvancedFilter}>
+                                                </lightning-input-field>
+                                            </lightning-record-edit-form>
+                                        </div>
+                                        <div class="slds-col slds-size--1-of-2" style="min-height: 50px">
+                                            <lightning-record-edit-form
+                                                object-api-name={API_NAMES.commercialPlan.objectApiName}>
+                                                <lightning-input-field field-name={API_NAMES.commercialPlan.Status__c}
+                                                    data-type-param="statusParam" onchange={fillAdvancedFilter}
+                                                    label={label.commPlanObjInfo.cpStatus}>
+                                                </lightning-input-field>
+                                            </lightning-record-edit-form>
+                                        </div>
+                                    </div>
+                                    <div class="slds-grid slds-size--1-of-1">
+                                        <div class="slds-col slds-size--1-of-2" style="min-height: 50px">
+                                            <lightning-record-edit-form
+                                                object-api-name={API_NAMES.commercialPlan.objectApiName}>
+                                                <lightning-input-field
+                                                    field-name={API_NAMES.commercialPlan.BusinessUnitTarget__c}
+                                                    data-type-param="buTargetParam" onchange={fillAdvancedFilter}
+                                                    label={label.commPlanObjInfo.cpBUTarget}>
+                                                </lightning-input-field>
+                                            </lightning-record-edit-form>
+                                        </div>
+                                        <div class="slds-col slds-size--1-of-2" style="min-height: 50px">
+                                            <lightning-record-edit-form
+                                                object-api-name={API_NAMES.commercialPlan.objectApiName}>
+                                                <lightning-input-field field-name={API_NAMES.commercialPlan.Supplier__c}
+                                                    data-type-param="clientParam" onchange={fillAdvancedFilter}
+                                                    label={label.commPlanObjInfo.cpSupplier}>
+                                                </lightning-input-field>
+                                            </lightning-record-edit-form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="searchButtons"
+                                class="slds-card__footer slds-grid slds-m-top_none slds-p-vertical_small">
+                                <div class="slds-col">
+                                    <lightning-button onclick={handleReset} label={label.LBL_Reset}>
+                                    </lightning-button>
+                                </div>
+                                <div class="slds-col">
+                                    <lightning-button class="slds-button slds-m-right_x-small" onclick={handleSearch}
+                                        label={label.LBL_Search} variant="brand">
+                                    </lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

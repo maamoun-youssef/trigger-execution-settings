@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ContractConsolidationConfiguration__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Negoptim offers the feautire to consolidate Period Extensions and Signed Contracts in anuelle versions. These versions can be used for invoicing, as a base for next year&apos;s negotiations.
+&lt;br/&gt;There are 3 types of consolidated contracts. You can choose to activate each seperatly and choose a date of generation for each</inlineHelpText>
+    <label>ContractConsolidationConfiguration</label>
+    <length>32768</length>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

@@ -1,0 +1,5 @@
+{
+  "apiName" : "TEST_ContentAssetVSStaticResource",
+  "type" : "sfdc_cms__view",
+  "path" : "views"
+}

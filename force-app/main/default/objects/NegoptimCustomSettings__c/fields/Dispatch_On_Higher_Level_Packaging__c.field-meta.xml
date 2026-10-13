@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dispatch_On_Higher_Level_Packaging__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Used to Dispatch the detail line (Inv_BUDispatch_Detail__c) for PG with RT = higher level packaging when the Product Record Types for NS PG doesn&apos;t contains this RT</description>
+    <label>Dispatch On Higher Level Packaging</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Condition_Grid_Layout_For_SB__c</fullName>
+    <description>Grid Layout for page condition of Contract &quot;Safe Balance&quot;</description>
+    <externalId>false</externalId>
+    <label>Condition Grid Layout For SB</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Job Type --></label>
+    <name>JobType__c</name>
+    <picklistValues>
+        <masterLabel>ApexToken</masterLabel>
+        <translation><!-- ApexToken --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>BatchApex</masterLabel>
+        <translation><!-- BatchApex --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>BatchApexWorker</masterLabel>
+        <translation><!-- BatchApexWorker --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Future</masterLabel>
+        <translation><!-- Future --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Queueable</masterLabel>
+        <translation><!-- Queueable --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>ScheduledApex</masterLabel>
+        <translation><!-- ScheduledApex --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>SharingRecalculation</masterLabel>
+        <translation><!-- SharingRecalculation --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>TestRequest</masterLabel>
+        <translation><!-- TestRequest --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>TestWorker</masterLabel>
+        <translation><!-- TestWorker --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- File Directory Reference --></label>
+    <name>FileDirectoryReference__c</name>
+    <relationshipLabel><!-- File Directories (File Directory Reference) --></relationshipLabel>
+</CustomFieldTranslation>

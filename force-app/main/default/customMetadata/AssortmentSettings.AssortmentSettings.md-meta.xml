@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>AssortmentSettings</label>
+    <protected>false</protected>
+    <values>
+        <field>ASProductSelectionRespectHierarchy__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>ASProductSelectionRespectMarket__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>ApplyCalcFullYearQtyP1__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>AssortmentBUConfiguration__c</field>
+        <value xsi:type="xsd:string">{&quot;periodDays&quot;:60,&quot;LastCodeConfiguration&quot;:{&quot;increaseWithinPeriod&quot;:&quot;N&quot;,&quot;increaseBeforeStart&quot;:&quot;A&quot;,&quot;increaseAfterPeriod&quot;:&quot;R&quot;,&quot;decreaseWithinPeriod&quot;:&quot;S&quot;,&quot;decreaseBeforeStart&quot;:&quot;D&quot;,&quot;decreaseAfterPeriod&quot;:&quot;&quot;},&quot;assortmentBuLevel&quot;:&quot;onlyStores&quot;}</value>
+    </values>
+    <values>
+        <field>AssortmentDirectAccessPluginGrid__c</field>
+        <value xsi:type="xsd:string">AssortmentDirectAccessPluginV1</value>
+    </values>
+    <values>
+        <field>AssortmentMatrixBudget__c</field>
+        <value xsi:type="xsd:string">AssortmentMatrixBudget</value>
+    </values>
+    <values>
+        <field>AssortmentMatrixNego__c</field>
+        <value xsi:type="xsd:string">AssortmentMatrixNego</value>
+    </values>
+    <values>
+        <field>AssortmentMatrixTarget__c</field>
+        <value xsi:type="xsd:string">AssortmentMatrixTarget</value>
+    </values>
+    <values>
+        <field>AssortmentProductSelectionGrid__c</field>
+        <value xsi:type="xsd:string">AssortmentProductSelectionGrid</value>
+    </values>
+    <values>
+        <field>AssortmentProductSelectionRespectBU__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>AssortmentProductSelectionUNGrid__c</field>
+        <value xsi:type="xsd:string">AssortmentProductSelectionUNGrid</value>
+    </values>
+    <values>
+        <field>AssortmentSimulatorConfiguration__c</field>
+        <value xsi:type="xsd:string">{&quot;kpiFields&quot;:[{&quot;textColor&quot;:&quot;#FFFFFF&quot;,&quot;fields&quot;:[&quot;SellinNego_NegoP1Gap__c&quot;,&quot;SelloutNego_NegoP1Gap__c&quot;,&quot;GPNego_NegoP1Gap__c&quot;,&quot;GPNego_TargetGap__c&quot;,&quot;Version__c&quot;],&quot;backgroundColor&quot;:&quot;#0c769e&quot;},{&quot;textColor&quot;:&quot;#FFFFFF&quot;,&quot;fields&quot;:[&quot;NDClientBaseNego_NegoL4LP1Gap__c&quot;,&quot;WDClientBaseNego_NegoL4LP1Gap__c&quot;,&quot;WDChannelBaseNego_NegoL4LP1Gap__c&quot;,&quot;WDChannelBaseNego_TargetGap__c&quot;],&quot;backgroundColor&quot;:&quot;#92d050&quot;},{&quot;textColor&quot;:&quot;#FFFFFF&quot;,&quot;fields&quot;:[&quot;QtyNego_NegoP1Gap__c&quot;,&quot;KVolumeNego_NegoP1Gap__c&quot;,&quot;KVolumeNego_TargetGap__c&quot;],&quot;backgroundColor&quot;:&quot;#e49edd&quot;}],&quot;displayEvolutionArrows&quot;:true,&quot;assortmentSimulatorRTs&quot;:{&quot;previous&quot;:[&quot;Target&quot;,&quot;Simulation&quot;,&quot;Negotiation&quot;],&quot;next&quot;:[&quot;Target&quot;,&quot;Simulation&quot;,&quot;Negotiation&quot;],&quot;current&quot;:[&quot;Target&quot;,&quot;Simulation&quot;,&quot;Negotiation&quot;]}}</value>
+    </values>
+    <values>
+        <field>AvailableImportFields__c</field>
+        <value xsi:type="xsd:string">[{&quot;fieldName&quot;:&quot;ProductGTIN__c&quot;,&quot;fieldLabel&quot;:&quot;GTIN&quot;,&quot;isAdmin&quot;:true,&quot;isUser&quot;:true,&quot;isEAN&quot;:true},{&quot;fieldName&quot;:&quot;WDChannelBaseBudget__c&quot;,&quot;fieldLabel&quot;:&quot;WD Budget&quot;,&quot;isAdmin&quot;:true,&quot;isUser&quot;:false,&quot;isEAN&quot;:false},{&quot;fieldName&quot;:&quot;KVolumeFact__c&quot;,&quot;fieldLabel&quot;:&quot;Kvolume Fact&quot;,&quot;isAdmin&quot;:true,&quot;isUser&quot;:false,&quot;isEAN&quot;:false},{&quot;fieldName&quot;:&quot;GPNego__c&quot;,&quot;fieldLabel&quot;:&quot;GP Nego&quot;,&quot;isAdmin&quot;:true,&quot;isUser&quot;:false,&quot;isEAN&quot;:false},{&quot;fieldName&quot;:&quot;BusinessUnitCluster__c&quot;,&quot;fieldLabel&quot;:&quot;BU Cluster&quot;,&quot;isAdmin&quot;:true,&quot;isUser&quot;:false,&quot;isEAN&quot;:false},{&quot;fieldName&quot;:&quot;StartDate__c&quot;,&quot;fieldLabel&quot;:&quot;Start Date&quot;,&quot;isAdmin&quot;:true,&quot;isUser&quot;:true,&quot;isEAN&quot;:false}]</value>
+    </values>
+    <values>
+        <field>KPI__c</field>
+        <value xsi:type="xsd:string">ND</value>
+    </values>
+    <values>
+        <field>SalesCannibalizationRates__c</field>
+        <value xsi:type="xsd:string">[{&quot;typeHR&quot;:&quot;IN&quot;,&quot;label&quot;:&quot;IN - Incremental 1&quot;,&quot;description&quot;:&quot;IN - Incremental 1&quot;,&quot;stdPerc&quot;:&quot;10&quot;,&quot;api&quot;:&quot;IN1&quot;},{&quot;typeHR&quot;:&quot;IN&quot;,&quot;label&quot;:&quot;IN - Incremental 2&quot;,&quot;description&quot;:&quot;IN - Incremental 2&quot;,&quot;stdPerc&quot;:&quot;20&quot;,&quot;api&quot;:&quot;IN2&quot;},{&quot;typeHR&quot;:&quot;IN&quot;,&quot;label&quot;:&quot;IN - Incremental 3&quot;,&quot;description&quot;:&quot;IN - Incremental 3&quot;,&quot;stdPerc&quot;:&quot;30&quot;,&quot;api&quot;:&quot;IN3&quot;},{&quot;typeHR&quot;:&quot;OUT&quot;,&quot;label&quot;:&quot;OUT - Report 1&quot;,&quot;description&quot;:&quot;OUT - Report 1&quot;,&quot;stdPerc&quot;:&quot;40&quot;,&quot;api&quot;:&quot;OUT1&quot;},{&quot;typeHR&quot;:&quot;OUT&quot;,&quot;label&quot;:&quot;OUT - Report 2&quot;,&quot;description&quot;:&quot;OUT - Report 2&quot;,&quot;stdPerc&quot;:&quot;50&quot;,&quot;api&quot;:&quot;OUT2&quot;},{&quot;typeHR&quot;:&quot;OUT&quot;,&quot;label&quot;:&quot;OUT - Report 3&quot;,&quot;description&quot;:&quot;OUT - Report 3&quot;,&quot;stdPerc&quot;:&quot;60&quot;,&quot;api&quot;:&quot;OUT3&quot;}]</value>
+    </values>
+    <values>
+        <field>ScopeSettings__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>TMP_TodayDate__c</field>
+        <value xsi:type="xsd:date">2026-04-23</value>
+    </values>
+</CustomMetadata>

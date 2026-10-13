@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Incoterm --></label>
+    <name>Delivery_Chain1_Incoterm__c</name>
+    <picklistValues>
+        <masterLabel>CFR – Cost And Freight</masterLabel>
+        <translation><!-- CFR – Cost And Freight --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>CIF – Cost Insurance and Freight</masterLabel>
+        <translation><!-- CIF – Cost Insurance and Freight --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>CIP – Carriage and Insurance Paid To</masterLabel>
+        <translation><!-- CIP – Carriage and Insurance Paid To --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>CPT – Carriage Paid To</masterLabel>
+        <translation><!-- CPT – Carriage Paid To --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>DAP – Delivered At Place</masterLabel>
+        <translation><!-- DAP – Delivered At Place --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>DAT – Delivered At Terminal</masterLabel>
+        <translation><!-- DAT – Delivered At Terminal --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>DDP – Delivered Duty Paid</masterLabel>
+        <translation><!-- DDP – Delivered Duty Paid --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>EXW – Ex Works</masterLabel>
+        <translation><!-- EXW – Ex Works --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>FAS – Free Alongside Ship</masterLabel>
+        <translation><!-- FAS – Free Alongside Ship --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>FCA – Free Carrier</masterLabel>
+        <translation><!-- FCA – Free Carrier --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>FOB – Free On Board</masterLabel>
+        <translation><!-- FOB – Free On Board --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

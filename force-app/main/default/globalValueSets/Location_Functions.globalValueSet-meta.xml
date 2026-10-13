@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Order By</fullName>
+        <default>true</default>
+        <label>Order By</label>
+    </customValue>
+    <customValue>
+        <fullName>Deliver By</fullName>
+        <default>false</default>
+        <label>Deliver By</label>
+    </customValue>
+    <customValue>
+        <fullName>Invoice By</fullName>
+        <default>false</default>
+        <label>Invoice By</label>
+    </customValue>
+    <customValue>
+        <fullName>Paid By</fullName>
+        <default>false</default>
+        <label>Paid By</label>
+    </customValue>
+    <customValue>
+        <fullName>Order To</fullName>
+        <default>false</default>
+        <label>Order To</label>
+    </customValue>
+    <customValue>
+        <fullName>Deliver To</fullName>
+        <default>false</default>
+        <label>Deliver To</label>
+    </customValue>
+    <customValue>
+        <fullName>Invoice To</fullName>
+        <default>false</default>
+        <label>Invoice To</label>
+    </customValue>
+    <customValue>
+        <fullName>Paid To</fullName>
+        <default>false</default>
+        <label>Paid To</label>
+    </customValue>
+    <customValue>
+        <fullName>Administrative</fullName>
+        <default>false</default>
+        <label>Administrative</label>
+    </customValue>
+    <description>Functions of Adressses</description>
+    <masterLabel>Location Functions</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

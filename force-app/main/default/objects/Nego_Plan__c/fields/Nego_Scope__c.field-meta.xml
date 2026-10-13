@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nego_Scope__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Reference NS for the plan</description>
+    <inlineHelpText>Nego Scope of reference for the plan</inlineHelpText>
+    <label>Nego Scope</label>
+    <referenceTo>NegoScope__c</referenceTo>
+    <relationshipLabel>Nego Plans</relationshipLabel>
+    <relationshipName>Nego_Plans</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

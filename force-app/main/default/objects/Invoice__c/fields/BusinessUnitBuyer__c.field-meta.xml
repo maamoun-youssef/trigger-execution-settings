@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BusinessUnitBuyer__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Buyer BU - BU that receives the invoice</description>
+    <label>Buyer BU</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>BusinessUnit__c.SetInvoiceBuyer__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>BusinessUnit__c</referenceTo>
+    <relationshipName>INVBusinessUnitBuyer</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

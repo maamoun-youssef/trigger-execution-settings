@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Base_Calculation_Model__c</fullName>
+    <inlineHelpText>TO w/o VAT (Order)  Regular purchases with return without VAT (Order date)
+TO w/o VAT (Deliv.) - Regular purchases with return without VAT (Delivery date)
+TO w/o Return (Deliv) - Regular purchases without return without VAT (Delivery date)</inlineHelpText>
+    <label>Base Calculation Model</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Calcualtion_method</valueSetName>
+    </valueSet>
+</CustomField>

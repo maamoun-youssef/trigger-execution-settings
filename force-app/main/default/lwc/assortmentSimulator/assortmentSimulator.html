@@ -1,0 +1,203 @@
+<template>
+    <div class="slds-card">
+        <div class="header">
+            <div class="slds-grid">
+                <div class="slds-col slds-p-around_xx-small slds-has-flexi-truncate">
+                    <!-- HEADING AREA -->
+                    <!-- MEDIA OBJECT = FIGURE + BODY -->
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div
+                            class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                            <lightning-icon icon-name="standard:report">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small">
+                            <p class="slds-text-title slds-line-height_reset">
+                                {labels.Assortment__c.label}
+                            </p>
+                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                {headerName}
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-no-flex slds-grid  slds-icon_container slds-align--absolute-center">
+                    <!-- Compare Bloc -->
+                    <button class="slds-button slds-button_neutral" onclick={OpenASDSimulatorMatrix}>
+                        <svg class="slds-button__icon" aria-hidden="true" style="width:25px;height:25px;">
+                            <use xlink:href="/_slds/icons/custom-sprite/svg/symbols.svg#custom90">
+                            </use>
+                        </svg>
+                        <span class="slds-p-left_xx-small">
+                            {labels.LBL_Compare_Bloc}
+                        </span>
+                    </button>
+                    <!-- Compare Detail -->
+                    <button class="slds-button slds-button_neutral slds-m-right--x-small"
+                        onclick={OpenASDSimulatorDetailMatrix}>
+                        <svg class="slds-button__icon" aria-hidden="true"
+                            style="width:15px;height:15px;transform: rotate(90deg);">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#sort">
+                            </use>
+                        </svg>
+                        <span class="slds-p-left_xx-small">
+                            {labels.LBL_Compare_Detail}
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class=" slds-grid">
+            <div class="main-panel slds-col slds-scrollable">
+                <template if:true={loading}>
+                    <div class="slds-spinner_container">
+                        <div class="loader slds-spinner_container slds-align--absolute-center">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </template>
+                <div class="slds-scrollable">
+                    <table
+                        class="firstTable slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border_right slds-no-row-hover">
+                        <thead>
+                            <tr style="height: 40px;">
+                                <th style="background-color:#0d807d;color:white;min-width:200px;">
+                                    {labels.Name}
+                                </th>
+                                <th style="background-color:#0d807d;color:white; min-width: 150px;">
+                                    {labels.simulationVersionOnTopBreakingScenario}
+                                </th>
+                                <th style="background-color:#0d807d;color:white;">
+
+                                </th>
+                                <template for:each={displayedFields} for:item="field">
+                                    <th key={field.fieldName} style={field.style.header} class="slds-text-align_center">
+                                        {field.fieldLabel}
+                                    </th>
+                                </template>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template if:false={loading}>
+                                <template if:false={records.length}>
+                                    <tr>
+                                        <td colspan={colspan}>
+                                            <h2
+                                                class="slds-align_absolute-center slds-text-align_center slds-m-around_xx-large slds-card__header-title slds-align-content-center">
+                                                {labels.LBL_No_Item_To_Display}
+                                            </h2>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <template if:true={records.length}>
+                                    <template for:each={records} for:item="item" for:index="index">
+                                        <tr key={item.Id} class={item.rowClass}>
+                                            <td>
+                                                <a href={item.link} target="_blank">
+                                                    {item.Name}</a>
+                                            </td>
+                                            <td>
+                                                <div class="slds-grid" style="justify-content: center;">
+                                                    <div class="number-icon slds-m-top--xx-small">{item.version}</div>
+                                                    <div if:true={item.isOnTop}
+                                                        class="slds-m-top--xx-small slds-m-left--xx-small">
+                                                        <lightning-icon icon-name="utility:trail" size="small"
+                                                            class="my-icon round-icon">
+                                                        </lightning-icon>
+                                                    </div>
+                                                    <div if:true={item.isBreakingScenario}
+                                                        class="slds-m-top--xx-small slds-m-left--xx-small">
+                                                        <lightning-icon icon-name="utility:close" size="small"
+                                                            class="my-iconClose round-icon">
+                                                        </lightning-icon>
+                                                    </div>
+                                                    <div if:false={item.isBreakingScenario}
+                                                        class="slds-m-top--xx-small slds-m-left--xx-small slds-hidden">
+                                                        <div if:false={item.isOnTop}
+                                                            class="slds-m-top--xx-small slds-m-left--xx-small">
+                                                            <lightning-icon icon-name="utility:trail" size="small"
+                                                                class="my-icon round-icon">
+                                                            </lightning-icon>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <lightning-button-icon icon-name="utility:products" variant="bare"
+                                                    size="large" data-assortment-id={item.Id} data-index={index}
+                                                    onclick={openScreen}></lightning-button-icon>
+                                            </td>
+                                            <template for:each={item.fields} for:item="field">
+                                                <td key={field} style={field.style}>
+                                                    <template if:true={field.isNumber}>
+                                                        <lightning-formatted-number
+                                                            maximum-fraction-digits={field.scale}
+                                                            minimum-fraction-digits={field.scale}
+                                                            value={field.fieldValue}>
+                                                        </lightning-formatted-number>
+                                                        <template lwc:if={displayEvolutionArrows}>
+                                                            <template lwc:if={field.showArrow}>
+                                                                <lightning-icon lwc:if={field.isIncrease} icon-name="utility:up" size="xx-small"
+                                                                    class="green-icon slds-m-left--xx-small">
+                                                                </lightning-icon>
+                                                                <lightning-icon lwc:else icon-name="utility:down" size="xx-small" class="red-icon slds-m-left--xx-small">
+                                                                </lightning-icon>
+                                                            </template>
+                                                            <template lwc:else>
+                                                                <lightning-icon size="xx-small" class="green-icon slds-m-left--xx-small">
+                                                                </lightning-icon>
+                                                            </template>
+                                                        </template>
+                                                    </template>
+                                                    <template if:true={field.isBoolean}>
+                                                        <lightning-input class="slds-p-left_xx-large" type="checkbox"
+                                                            variant="label-hidden" checked={field.fieldValue} disabled>
+                                                        </lightning-input>
+                                                    </template>
+                                                    <template if:true={field.isText}>
+                                                        {field.fieldValue}
+                                                    </template>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                </template>
+                            </template>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div if:true={records.length} class="slds-grid slds-m-around--xx-small">
+            <span style="margin-right: 10px;">
+                <lightning-combobox dropdown-alignment="auto" name="pageSelect" value={pageSize}
+                    variant="label-hidden" placeholder="" options={pageSizeOptions}
+                    onchange={handleChangePageSize}>
+                </lightning-combobox>
+            </span>
+            <span>
+                <lightning-button-group>
+                    <lightning-button label={labels.LBL_First} disabled={previousDisabled} data-type="First"
+                        onclick={handleChangePage}>
+                    </lightning-button>
+                    <lightning-button label={labels.LBL_Previous} disabled={previousDisabled} data-type="Previous"
+                        onclick={handleChangePage}>
+                    </lightning-button>
+                    <lightning-button label={labels.LBL_Next} disabled={nextDisabled} data-type="Next"
+                        onclick={handleChangePage}>
+                    </lightning-button>
+                    <lightning-button label={labels.LBL_Last} disabled={nextDisabled} data-type="Last"
+                        onclick={handleChangePage}>
+                    </lightning-button>
+                </lightning-button-group>
+                <span class="slds-p-left_small slds-p-right_small slds-badge" style="margin-left: 10px;">
+                    {paginationBadge}
+                </span>
+            </span>
+        </div>
+    </div>
+</template>

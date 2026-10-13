@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>false</isExposed>
+    <description>Modal that lists the icons of the iconResources static resource, read from its manifest.json, and returns the URL of the one the user picks.</description>
+</LightningComponentBundle>

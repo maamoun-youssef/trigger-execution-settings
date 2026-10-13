@@ -1,0 +1,122 @@
+<template>
+    <template lwc:if={loadingData}>
+        <div class="slds-spinner_container">
+            <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+        </div>
+    </template>
+    <template lwc:else>
+        <div class="slds-card">
+            <div class="settings-header">
+                <lightning-icon icon-name='utility:settings' class="custom-icon-settings">
+                </lightning-icon>
+                <div>
+                    <p class="settings-subtitle">
+                        {labels.LBL_myCash}
+                    </p>
+                    <h1 class="slds-page-header__title settings-header-title">
+                        {labels.LBL_myCashsettings}
+                    </h1>
+                </div>
+            </div>
+            <!-- ACTION BUTTONS -->
+            <div class="slds-col slds-no-flex slds-grid  slds-icon_container">
+            </div>
+            <div class="main-panel slds-col slds-scrollable">
+                <lightning-tabset variant="vertical" class="tab-set-style slds-m-bottom_x-small mainHeight">
+                    <lightning-tab tabindex="-1" label={labels.LBL_InvoiceNumberingRules_Settings} class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <div>
+                                <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                    <div class="sectionTitle slds-media__body">
+                                        {labels.LBL_Invoice_Stg_General_Settings}
+                                    </div>
+                                    <lightning-button lwc:if={isSaveDisabled} class="slds-button slds-m-right_x-small" variant="brand" disabled="disabled"
+                                        label={labels.LBL_Save}>
+                                    </lightning-button>
+                                    <lightning-button lwc:else class="slds-button slds-m-right_x-small" variant="brand"
+                                        label={labels.LBL_Save} onclick={handleSaveInvoiceSettings}>
+                                    </lightning-button>
+                                </div>
+                                <div class="section-Container slds-m-top_medium">
+                                    <div class="section-label">
+                                        {labels.LBL_InvoiceNumberPrefixFormula}
+                                    </div>
+                                    <textarea class="formulaStyle slds-m-top_small slds-p-around_small"
+                                        max-length="131072" rows="15" data-field="numberPrefixFormula" onchange={handleEditInvoiceSettings}>
+                                                {numberPrefixFormula}
+                                            </textarea>
+                                    <div class="formulaValidationStyle">{formulaValidationMsg}</div>
+                                </div>
+                                <div class="add-breaks"> </div>
+                                <div class="section-Container slds-m-top_medium">
+                                    <div class="section-label">
+                                        {labels.LBL_InvoiceAutonumberLength}
+                                    </div>
+                                    <div>
+                                        <lightning-input type="number" variant="label-hidden" class="numberStyle" step="1" required="required"
+                                            min={minLeftPad} max={maxLeftPad} value={autonumLength} data-field="autonumLength" onchange={handleEditInvoiceSettings}>
+                                        </lightning-input>
+                                        <div class="autoNumberExampleStyle">{autoNumberExampleMsg}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab tabindex="-1" label={labels.LBL_VATsettings}>
+                        <div if:true={isLoadedObjectInfo} style={mainPanelHeight}>
+                            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                <div class="sectionTitle slds-media__body">
+                                    {labels.LBL_Vat_Set_Up}
+                                </div>
+                            </div>
+                            <div class="record-picker-Container slds-m-top_large">
+                                <div class="business-unit-Label">
+                                    {buInfo.data.label}
+                                </div>
+                                <div class="w-record-picker">
+                                    <lightning-record-picker label={buInfo.data.label} variant="label-hidden"
+                                        placeholder={buInfo.data.labelPlural} object-api-name={buInfo.data.apiName}
+                                        value={buId} display-info={displayInfo} onchange={handleChangeBU}
+                                        class="business-unit-width ">
+                                    </lightning-record-picker>
+                                </div>
+                            </div>
+                            <div if:true={isBUSelected} class="slds-m-top_medium">
+                                <lightning-tabset>
+                                    <lightning-tab label={labels.LBL_TabVATRate}>
+                                        <c-vat-settings bu-id={buId}></c-vat-settings>
+                                    </lightning-tab>
+                                    <lightning-tab label={labels.LBL_TabVATRateByCateg}>
+                                        <c-vat-by-category-settings bu-id={buId}></c-vat-by-category-settings>
+                                    </lightning-tab>
+                                </lightning-tabset>
+                            </div>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab tabindex="-1" label={labels.LBL_InvGensettings} class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <c-invoice-generation-settings class="component-w"></c-invoice-generation-settings>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab tabindex="-1" label={labels.LBL_InvoiceMng_settings} class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <c-invoice-Manager-Settings class="component-w"></c-invoice-Manager-Settings>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab tabindex="-1" label={labels.LBL_InvoiceDeletionRules_Settings}
+                        class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <c-invoice-deletion-rules class="component-w"></c-invoice-deletion-rules>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab tabindex="-1" label={labels.LBL_InvoiceValidationRules_Settings}
+                        class="slds-scrollable_y">
+                        <div style={mainPanelHeight}>
+                            <c-invoice-validation-rules class="component-w"></c-invoice-validation-rules>
+                        </div>
+                    </lightning-tab>
+                </lightning-tabset>
+            </div>
+        </div>
+    </template>
+</template>

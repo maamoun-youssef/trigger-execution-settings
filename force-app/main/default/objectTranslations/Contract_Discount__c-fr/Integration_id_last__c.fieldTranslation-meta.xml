@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Give the last integration id for upsert of the line. --></help>
+    <label>Dernier ID d&apos;intégration</label>
+    <name>Integration_id_last__c</name>
+</CustomFieldTranslation>

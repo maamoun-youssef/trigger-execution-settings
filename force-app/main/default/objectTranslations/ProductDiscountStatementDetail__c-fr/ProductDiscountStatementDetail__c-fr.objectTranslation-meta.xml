@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Détail déclaration remise à l&apos;article</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Détails déclaration remise à l&apos;article</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>Product Discount Statement Detail Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>negOptim Product Discount Statement Detail Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Inputs --></label>
+            <section>Inputs</section>
+        </sections>
+        <sections>
+            <label><!-- Product --></label>
+            <section>Product</section>
+        </sections>
+        <sections>
+            <label><!-- Scan / Synchro --></label>
+            <section>Scan / Synchro</section>
+        </sections>
+        <sections>
+            <label><!-- Tarif Conditions --></label>
+            <section>Tarif Conditions</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- PDSD Other --></label>
+        <name>Other</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- PDSD Penality --></label>
+        <name>Penality</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- PDSD Promo --></label>
+        <name>Promo</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- PDSD Regular --></label>
+        <name>Regular</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- PDSD Stock Compensation --></label>
+        <name>StockCompensation</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- ERROR NEGATIVE VALUE --></errorMessage>
+        <name>TEST</name>
+    </validationRules>
+</CustomObjectTranslation>

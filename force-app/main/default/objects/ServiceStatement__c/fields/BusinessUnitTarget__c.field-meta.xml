@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BusinessUnitTarget__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Identifies the internal Business Unit or entity to which this Service Statement applies. Used to determine the scope of the declaration within the organization (e.g., which BU the supplier’s terms or services concern).</description>
+    <label>Business Unit Target</label>
+    <referenceTo>BusinessUnit__c</referenceTo>
+    <relationshipLabel>Service Statements (BU Target)</relationshipLabel>
+    <relationshipName>SERBusinessUnitTarget</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

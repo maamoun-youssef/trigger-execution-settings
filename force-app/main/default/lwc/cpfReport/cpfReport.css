@@ -1,0 +1,136 @@
+table {
+    width: unset;
+}
+
+.slds-page-header {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.legend-label {
+    font-size: smaller;
+    margin: 0.6vw;
+    color: black !important;
+}
+
+.headerStyle {
+    text-align: center;
+    padding: 10px;
+    color: black;
+    width: 100px;
+    max-width: 100px;
+    min-width: 100px;
+    /* width: 5rem; */
+    white-space: unset;
+}
+
+.lastHeader {
+    border-right: 1.5mm ridge rgb(137 122 122 / 58%);
+}
+
+.white-icon {
+    --slds-c-icon-color-foreground: white !important;
+    --slds-c-icon-color-foreground-default: white !important;
+}
+
+.green-icon {
+    --slds-c-icon-color-foreground: #50be50 !important;
+    --slds-c-icon-color-foreground-default: #50be50 !important;
+}
+
+.StatisticsIconClass {
+    position: absolute;
+    bottom: 3px;
+    right: 0;
+}
+
+.cloneIconClass {
+    position: absolute;
+    bottom: 3px;
+    right: 18px;
+}
+
+.infoIconClass {
+    position: absolute;
+    bottom: 3px;
+    right: 35px;
+}
+
+.pointerCursor {
+    cursor: pointer;
+}
+
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+.sticky {
+    position: sticky;
+    z-index: 12;
+    top: 0;
+}
+.slds-button+.slds-button {
+    margin-left: unset;
+}
+
+.slds-table_cell-buffer tr>td:last-child,
+ .slds-table--cell-buffer tr>td:last-child {
+    padding-right: unset;
+ }
+
+ .slds-table--cell-buffer tr>th:last-child, .slds-table_cell-buffer tr>th:last-child {
+   padding: 0.25rem ;
+ } 
+ table tbody td{
+    text-align: center;
+}
+
+.headerDivider {
+    border-left:0.1mm solid #939393; 
+}
+
+.deletePopUp {
+    width: 30% !important;
+}
+
+.confortableStyle {
+    height: 80px;
+}
+.compactStyle {
+    height: 45px;
+}

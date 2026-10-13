@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "PDS List",
+  "contentBody" : {
+    "activeViewId" : "PDS_List",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-pds-list",
+    "urlPrefix" : "pds-list"
+  },
+  "urlName" : "pds-list"
+}

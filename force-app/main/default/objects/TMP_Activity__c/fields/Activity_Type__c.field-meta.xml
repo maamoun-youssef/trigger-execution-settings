@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Activity_Type__c</fullName>
+    <label>Activity Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Customer Call</fullName>
+                <default>false</default>
+                <label>Customer Call</label>
+            </value>
+            <value>
+                <fullName>Customer Email</fullName>
+                <default>false</default>
+                <label>Customer Email</label>
+            </value>
+            <value>
+                <fullName>Internal Call</fullName>
+                <default>false</default>
+                <label>Internal Call</label>
+            </value>
+            <value>
+                <fullName>Internal Email</fullName>
+                <default>false</default>
+                <label>Internal Email</label>
+            </value>
+            <value>
+                <fullName>Status Change</fullName>
+                <default>false</default>
+                <label>Status Change</label>
+            </value>
+            <value>
+                <fullName>Customer Post Mail</fullName>
+                <default>false</default>
+                <label>Customer Post Mail</label>
+            </value>
+            <value>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+                <label>Social Media</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Statut Mvt</label>
+    <name>Client_Status__c</name>
+    <picklistValues>
+        <masterLabel>Complément</masterLabel>
+        <translation><!-- Complément --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Decrease</masterLabel>
+        <translation>ASS-</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Delete</masterLabel>
+        <translation>DEREF</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Increase</masterLabel>
+        <translation>ASS+</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Keep</masterLabel>
+        <translation>STABLE</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>New</masterLabel>
+        <translation>NOUVEAU</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Opportunity</masterLabel>
+        <translation><!-- Opportunity --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Probably deleted</masterLabel>
+        <translation><!-- Probably deleted --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Substitute</masterLabel>
+        <translation><!-- Substitute --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

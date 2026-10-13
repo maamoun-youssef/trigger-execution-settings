@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Follow unicity rules for this tariff condition in the contract --></help>
+    <label>Is Contract Unicity Requiered</label>
+    <name>Is_Contract_Unicity_Requiered__c</name>
+</CustomFieldTranslation>

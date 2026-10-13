@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Client_Status__c</fullName>
+    <label>Client Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Keep</fullName>
+                <color>#0B6FCE</color>
+                <default>false</default>
+                <label>Keep</label>
+            </value>
+            <value>
+                <fullName>Delete</fullName>
+                <color>#78C953</color>
+                <default>false</default>
+                <label>Delete</label>
+            </value>
+            <value>
+                <fullName>New</fullName>
+                <color>#E27001</color>
+                <default>false</default>
+                <label>New</label>
+            </value>
+            <value>
+                <fullName>Increase</fullName>
+                <color>#A845DC</color>
+                <default>false</default>
+                <label>Increase</label>
+            </value>
+            <value>
+                <fullName>Decrease</fullName>
+                <color>#F3D904</color>
+                <default>false</default>
+                <label>Decrease</label>
+            </value>
+            <value>
+                <fullName>Substitute</fullName>
+                <color>#A53711</color>
+                <default>false</default>
+                <label>Substitute</label>
+            </value>
+            <value>
+                <fullName>Probably deleted</fullName>
+                <color>#F96FB7</color>
+                <default>false</default>
+                <label>Probably deleted</label>
+            </value>
+            <value>
+                <fullName>Opportunity</fullName>
+                <default>false</default>
+                <label>Opportunity</label>
+            </value>
+            <value>
+                <fullName>Cplt</fullName>
+                <color>#A53711</color>
+                <default>false</default>
+                <label>Complément</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

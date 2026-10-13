@@ -1,0 +1,402 @@
+<template>
+    <div class="slds-card">
+        <div class="main-header">
+            <div class="slds-card slds-grid slds-p-around_xx-small slds-page-header">
+                <div class="slds-col slds-has-flexi-truncate">
+                    <!-- HEADING AREA -->
+                    <!-- MEDIA OBJECT = FIGURE + BODY -->
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div
+                            class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                            <lightning-icon icon-name="standard:report">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small">
+                            <p class="slds-text-title slds-line-height_reset">
+                                <!-- {assortmentBULabel.labelPlural} --> Assortment
+                            </p>
+                            <p class="slds-m-right_small slds-align-middle slds-truncate">
+                                {mainWrapper.clientName} - {selectedYear}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="FilterRow slds-grid slds-grid_align-spread slds-m-top--x-small">
+                    <template if:true={buWList.length}>
+                        <div class="slds-col">
+                            <div class="slds-grid slds-grid_align-spread slds-m-right_xx-small">
+                                <div class="slds-col slds-border_top slds-border_left slds-border_bottom slds-p-left_xx-small"
+                                    style="background-color:#fce4d6;height:32px">
+                                    <label class="slds-form-element__label"
+                                        style="color:#6a8358">{labels.prodBrand}</label>
+                                </div>
+                                <div class="slds-col">
+                                    <c-neg-optim-custom-lookup object-name={negOptimCustomLookupConfig.brandObject.objectApiName} field-name="Name" data-field="prodBrand"
+                                        is-multi="false" icon-name="" selected-event={negOptimCustomLookupConfig.brandObject.event} onselectedbrand={handleChangeFilterProduct}
+                                        search-fields={negOptimCustomLookupConfig.brandObject.searchBrandFields}>
+                                    </c-neg-optim-custom-lookup>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col">
+                            <div class="slds-grid slds-grid_align-spread slds-m-right_xx-small">
+                                <div class="slds-col slds-border_top slds-border_left slds-border_bottom slds-p-left_xx-small"
+                                    style="background-color:#fce4d6;height:32px">
+                                    <label class="slds-form-element__label"
+                                        style="color:#6a8358;">{labels.prodHierarchy}
+                                    </label>
+                                </div>
+                                <div class="slds-col">
+                                    <c-neg-optim-custom-lookup object-name={negOptimCustomLookupConfig.hierarchyObject.objectApiName} field-name="Name" data-field="prodCategory" filter-token={negOptimCustomLookupConfig.hierarchyObject.filterToken}
+                                        is-multi="false" icon-name="" selected-event={negOptimCustomLookupConfig.hierarchyObject.event} onselectedhierarchy={handleChangeFilterProduct}
+                                        search-fields={negOptimCustomLookupConfig.hierarchyObject.searchHierarchyFields}>
+                                    </c-neg-optim-custom-lookup>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col">
+                            <div class="slds-grid slds-grid_align-spread">
+                                <div class="slds-col slds-border_top slds-border_left slds-border_bottom slds-p-left_xx-small"
+                                    style="background-color:#fce4d6;height:32px">
+                                    <label class="slds-form-element__label"
+                                        style="color:#6a8358">{labels.clientCategory}</label>
+                                </div>
+                                <div class="slds-col">
+                                    <lightning-input type="text" data-field="clientCategory"
+                                        onblur={handleChangeFilterProduct} variant="label-hidden">
+                                    </lightning-input>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                <lightning-button-icon icon-name="utility:refresh" alternative-text="Filter" variant="border-filled"
+                    class="slds-button slds-button-icon slds-m-around_xx-small"
+                    onclick={recalculateAssortmentClustersCount}>
+                </lightning-button-icon>
+                <lightning-button-icon icon-name="utility:filterList" alternative-text="Filter" variant="border-filled"
+                    class="slds-button slds-button-icon slds-m-around_xx-small" onclick={toggleFilter}>
+                </lightning-button-icon>
+            </div>
+        </div>
+        <div class=" slds-grid">
+            <div class="table-div slds-card slds-col slds-no-flex slds-grid slds-size_9-of-12 main-panel">
+                <template if:true={tableLoading}>
+                    <div class="slds-spinner_container">
+                        <div class="loader slds-spinner_container slds-align--absolute-center">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </template>
+                <div class="div-table">
+                    <template if:true={buWList.length}>
+                        <table
+                            class="slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-no-row-hover">
+                            <thead>
+                                <tr>
+                                    <th style="background-color:#0d807d;color:white;" rowspan="3">
+                                        {labels.GTIN}
+                                        <div class="filter-div">
+                                            <template lwc:if={filters.prodGTIN}>
+                                                <lightning-button-icon-stateful icon-name="utility:filterList"
+                                                    size="x-small" style="position: absolute;top: 0px;right: 0px;"
+                                                    class="white-icon" onclick={openDropDownFilter}
+                                                    data-field="prodGTIN" selected>
+                                                </lightning-button-icon-stateful>
+                                            </template>
+                                            <template lwc:else>
+                                                <lightning-button-icon-stateful icon-name="utility:filterList"
+                                                    size="x-small" style="position: absolute;top: 0px;right: 0px;"
+                                                    class="white-icon" onclick={openDropDownFilter}
+                                                    data-field="prodGTIN">
+                                                </lightning-button-icon-stateful>
+                                            </template>
+                                            <div class="slds-hide slds-dropdown slds-p-horizontal--medium"
+                                                data-filter-field="prodGTIN"
+                                                style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;top: 100%; z-index:6;left:100% !important;">
+                                                <span style="position: absolute;right: 0;top: 0; z-index: 7;">
+                                                    <lightning-button-icon variant="container" size="small"
+                                                        icon-name="utility:close" data-field="prodGTIN"
+                                                        onclick={openDropDownFilter} alternative-text='close'>
+                                                    </lightning-button-icon>
+                                                </span>
+                                                <ul class="slds-dropdown__list slds-scrollable--y" role="menu">
+                                                    <li class="slds-dropdown__item" role="presentation"
+                                                        style="text-align: left;margin-top: 5px;">
+                                                        <lightning-input type="text" placeholder={labels.LBL_Search}
+                                                            data-field="prodGTIN" variant="label-hidden" slot="actions"
+                                                            onchange={handleChangeFilterProduct}
+                                                            value={filters.prodGTIN} style="top:10px">
+                                                        </lightning-input>
+                                                    </li>
+                                                    <li class="slds-has-divider_top-space" role="separator"></li>
+                                                </ul>
+                                                <div class="slds-grid">
+                                                    <div style="width: max-content;"
+                                                        class="slds-col slds-align--absolute-center slds-m-right--x-small">
+                                                        <button type="submit" title={labels.LBL_Reset}
+                                                            onclick={handleResetFilters}
+                                                            class="slds-button slds-button_neutral"
+                                                            data-field="prodGTIN">
+                                                            {labels.LBL_Reset}
+                                                        </button>
+                                                    </div>
+                                                    <div style="width: max-content;"
+                                                        class="slds-col slds-align--absolute-center">
+                                                        <button type="submit" title={labels.LBL_Apply}
+                                                            data-field="prodGTIN" onclick={handleApplyFilters}
+                                                            class="slds-button slds-button_brand">
+                                                            {labels.LBL_Apply}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th style="background-color:#0d807d;color:white;" rowspan="3">
+                                        {labels.prodName}
+                                        <div class="filter-div">
+                                            <template lwc:if={filters.prodName}>
+                                                <lightning-button-icon-stateful icon-name="utility:filterList"
+                                                    size="x-small" style="position: absolute;top: 0px;right: 0px;"
+                                                    class="white-icon" onclick={openDropDownFilter}
+                                                    data-field="prodName" selected>
+                                                </lightning-button-icon-stateful>
+                                            </template>
+                                            <template lwc:else>
+                                                <lightning-button-icon-stateful icon-name="utility:filterList"
+                                                    size="x-small" style="position: absolute;top: 0px;right: 0px;"
+                                                    class="white-icon" onclick={openDropDownFilter}
+                                                    data-field="prodName">
+                                                </lightning-button-icon-stateful>
+                                            </template>
+                                            <div class="slds-hide slds-dropdown slds-p-horizontal--medium"
+                                                data-filter-field="prodName"
+                                                style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;top: 100%; z-index:6;left:100% !important;">
+                                                <span style="position: absolute;right: 0;top: 0; z-index: 7;">
+                                                    <lightning-button-icon variant="container" size="small"
+                                                        icon-name="utility:close" data-field="prodName"
+                                                        onclick={openDropDownFilter} alternative-text='close'>
+                                                    </lightning-button-icon>
+                                                </span>
+                                                <ul class="slds-dropdown__list slds-scrollable--y" role="menu">
+                                                    <li class="slds-dropdown__item" role="presentation"
+                                                        style="text-align: left;margin-top: 5px;">
+                                                        <lightning-input type="text" placeholder={labels.LBL_Search}
+                                                            data-field="prodName" variant="label-hidden" slot="actions"
+                                                            onchange={handleChangeFilterProduct}
+                                                            value={filters.prodName} style="top:10px">
+                                                        </lightning-input>
+                                                    </li>
+                                                    <li class="slds-has-divider_top-space" role="separator"></li>
+                                                </ul>
+                                                <div class="slds-grid">
+                                                    <div style="width: max-content;"
+                                                        class="slds-col slds-align--absolute-center slds-m-right--x-small">
+                                                        <button type="submit" title={labels.LBL_Reset}
+                                                            onclick={handleResetFilters}
+                                                            class="slds-button slds-button_neutral"
+                                                            data-field="prodName">
+                                                            {labels.LBL_Reset}
+                                                        </button>
+                                                    </div>
+                                                    <div style="width: max-content;"
+                                                        class="slds-col slds-align--absolute-center">
+                                                        <button type="submit" title={labels.LBL_Apply}
+                                                            data-field="prodName" onclick={handleApplyFilters}
+                                                            class="slds-button slds-button_brand">
+                                                            {labels.LBL_Apply}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th style="background-color:#0d807d;color:white;width: 100px;min-width: 100px;"
+                                        rowspan="2">
+                                        {labels.LBL_Total_Sites_of_Sale}
+                                    </th>
+                                    <th style="background-color:#0d807d;color:white;width: 100px;min-width: 100px;"
+                                        rowspan="2">
+                                        {labels.LBL_ND}
+                                    </th>
+                                    <template for:each={buWList} for:item="buW">
+                                        <th key={buW.Id} colspan={buW.colspan} style={buW.style}>
+                                            <!-- <a href={buW.link} target="_blank"> -->
+                                            {buW.Name} -
+                                            {buW.siteOfSales}
+                                            <!-- </a> -->
+                                        </th>
+                                    </template>
+                                </tr>
+                                <tr>
+                                    <template for:each={buWList} for:item="buW">
+                                        <template for:each={buW.strats} for:item="strat">
+                                            <th key={strat.Id} style={strat.style1}>{strat.Name}</th>
+                                        </template>
+                                        <template for:each={buW.cplts} for:item="cplt">
+                                            <th key={cplt.Id} style={cplt.style1}>{cplt.Name}</th>
+                                        </template>
+                                        <template if:true={displaySOS}>
+                                            <th key={buW.keySOS} style={buW.style1}>{labels.LBL_SOS}</th>
+                                        </template>
+                                        <template if:true={displayND}>
+                                            <th key={buW.keyND} style={buW.style1}>{labels.LBL_ND}</th>
+                                        </template>
+                                    </template>
+                                </tr>
+                                <tr>
+                                    <th class="slds-border--left"
+                                        style="background-color:#0d807d;color:white;text-align:right !important;">
+                                        {totalPDV}
+                                    </th>
+                                    <th style="background-color:#0d807d;color:white;text-align:right !important">
+                                    </th>
+                                    <template for:each={buWList} for:item="buW">
+                                        <template for:each={buW.strats} for:item="strat">
+                                            <th key={strat.Id} style={strat.style2}>
+                                                <!-- <lightning-formatted-number value={strat.pdv}>
+                                                </lightning-formatted-number>strat.pdv -->
+                                                <lightning-formatted-number value={strat.selectedItems}>
+                                                </lightning-formatted-number>
+                                            </th>
+                                        </template>
+                                        <template for:each={buW.cplts} for:item="cplt">
+                                            <th key={cplt.Id} style={cplt.style2}>
+                                                <!-- <lightning-formatted-number value={cplt.pdv}>
+                                                </lightning-formatted-number>cplt.pdv -->
+                                                <lightning-formatted-number value={cplt.selectedItems}>
+                                                </lightning-formatted-number>
+                                            </th>
+                                        </template>
+                                        <template if:true={displaySOS}>
+                                            <th key={buW.keySOS} style={buW.style2}></th>
+                                        </template>
+                                        <template if:true={displayND}>
+                                            <th key={buW.keyND} style={buW.style2}></th>
+                                        </template>
+                                    </template>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template if:true={records.length}>
+                                    <template for:each={records} for:item="item">
+                                        <tr key={item.Id}>
+                                            <td style="background-color:white;">
+                                                {item.EAN}
+                                            </td>
+                                            <td style="background-color:white;">
+                                                <a href={item.link} target="_blank">
+                                                    {item.Name}
+                                                </a>
+                                            </td>
+                                            <td style="text-align:right;">
+                                                <lightning-formatted-number value={item.totalPDV}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td style="text-align:right;">
+                                                <lightning-formatted-number value={item.totalDN}
+                                                    format-style="percent-fixed" minimum-fraction-digits="2"
+                                                    maximum-fraction-digits="2"></lightning-formatted-number>
+                                            </td>
+                                            <template for:each={item.values} for:item="value">
+                                                <td key={value} style={value.style} if:false={value.isHidden}>
+                                                    <template lwc:if={value.isNum}>
+                                                        <lightning-formatted-number value={value.value}>
+                                                        </lightning-formatted-number>
+                                                    </template>
+                                                    <template lwc:elseif={value.isPercent}>
+                                                        <lightning-formatted-number value={value.value}
+                                                            format-style="percent-fixed" minimum-fraction-digits="2"
+                                                            maximum-fraction-digits="2">
+                                                        </lightning-formatted-number>
+                                                    </template>
+                                                    <template lwc:else>
+                                                        {value.value}
+                                                    </template>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                </template>
+                                <template if:false={records.length}>
+                                    <tr>
+                                        <td colspan={colspan}>{labels.LBL_No_Record_To_Display}</td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </template>
+                    <template if:false={buWList.length}>
+                        <div class="slds-text-align--center slds-m-around--large">
+                            {labels.LBL_No_Record_To_Display}
+                        </div>
+                    </template>
+                </div>
+            </div>
+            <div class="filter-panel slds-size_3-of-12 slds-card slds-m-around_none ">
+                <div class="filter-header slds-panel__header">
+                    <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate">
+                        {labels.LBL_Filter}</h2>
+                    <lightning-button-icon variant="bare" icon-name="utility:close" onclick={toggleFilter}>
+                    </lightning-button-icon>
+                </div>
+                <div class="filter-section slds-p-around_xx-small ">
+                    <lightning-combobox label={labels.ASYear} value={selectedYear} data-field="selectedYear"
+                        options={yearsArray} onchange={handleChangeFilter}></lightning-combobox>
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label">
+                            {labels.supplier}
+                        </label>
+                        <c-neg-optim-custom-lookup object-name={negOptimCustomLookupConfig.supplierObject.objectApiName} field-name="Name" data-field="selectedSupplier"
+                            is-multi="false" icon-name="" selected-event={negOptimCustomLookupConfig.supplierObject.event} onselectsupplier={handleChangeFilter}
+                            search-fields={negOptimCustomLookupConfig.supplierObject.searchSupplierFields}>
+                        </c-neg-optim-custom-lookup>
+                    </div>
+                    <lightning-input type="toggle" label={labels.LBL_Show_SOS} onclick={handleToggleFilter}
+                        data-name="SOS" checked={displaySOS}></lightning-input>
+                    <lightning-input type="toggle" label={labels.LBL_Show_ND} onclick={handleToggleFilter}
+                        data-name="ND" checked={displayND}></lightning-input>
+                </div>
+                <div class="slds-grid slds-card__footer ">
+                    <lightning-button variant="brand" class="slds-size_1-of-1" onclick={handleSearch}
+                        label={labels.LBL_Search}></lightning-button>
+                </div>
+            </div>
+        </div>
+
+        <div if:true={records.length} class="footerDiv slds-grid slds-m-around--xx-small">
+            <span class="slds-m-horizontal_x-small">
+                <select onchange={handleChangePageSize} style="width: 45px;">
+                    <template for:each={pageSizeOptions} for:item="option">
+                        <option key={option.value} value={option.value} selected={option.isSelected}>
+                            {option.label}
+                        </option>
+                    </template>
+                </select>
+            </span>
+            <span>
+                <lightning-button-group>
+                    <lightning-button label={labels.LBL_First} disabled={previousDisabled} data-type="First"
+                        onclick={handleChangePage}>
+                    </lightning-button>
+                    <lightning-button label={labels.LBL_Previous} disabled={previousDisabled} data-type="Previous"
+                        onclick={handleChangePage}>
+                    </lightning-button>
+                    <lightning-button label={labels.LBL_Next} disabled={nextDisabled} data-type="Next"
+                        onclick={handleChangePage}>
+                    </lightning-button>
+                    <lightning-button label={labels.LBL_Last} disabled={nextDisabled} data-type="Last"
+                        onclick={handleChangePage}>
+                    </lightning-button>
+                </lightning-button-group>
+                <span class="slds-p-left_small slds-p-right_small slds-badge" style="margin-left: 10px;">
+                    {paginationBadge}
+                </span>
+            </span>
+        </div>
+    </div>
+</template>

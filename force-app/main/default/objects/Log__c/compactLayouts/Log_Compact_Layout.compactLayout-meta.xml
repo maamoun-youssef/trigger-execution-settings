@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Log_Compact_Layout</fullName>
+    <fields>Name</fields>
+    <fields>StatusFlag__c</fields>
+    <fields>Status__c</fields>
+    <fields>Started_From__c</fields>
+    <fields>Class_Name__c</fields>
+    <fields>Submitted_Date__c</fields>
+    <fields>CompletedDate__c</fields>
+    <label>Log Compact Layout</label>
+</CompactLayout>

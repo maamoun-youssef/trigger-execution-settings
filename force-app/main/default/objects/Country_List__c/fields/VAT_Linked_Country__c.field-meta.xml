@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VAT_Linked_Country__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>For example, MONACO has got same VAT as FRANCE, so for MONACO, VAT Linked Country will be FRANCE.</description>
+    <label>VAT Linked Country</label>
+    <referenceTo>Country_List__c</referenceTo>
+    <relationshipLabel>Countries</relationshipLabel>
+    <relationshipName>Countries</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

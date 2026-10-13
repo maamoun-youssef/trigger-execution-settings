@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PriceModificationDescription__c</fullName>
+    <description>Details the main changes introduced in the new price list compared to the previous declaration. Provided by the supplier to explain pricing evolutions (e.g., cost adjustments, packaging changes, new product references).</description>
+    <label>Price Modification Description</label>
+    <length>32768</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

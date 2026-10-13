@@ -1,0 +1,73 @@
+:host {
+    display: block;
+    min-width: 15rem;
+}
+
+/* Every image is fitted inside its box, never cropped */
+.srs-preview, .srs-thumb, .srs-tile img, .srs-stage img {
+    object-fit: contain;
+}
+
+/* Explorer rows */
+.srs-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.5rem 0.25rem 0;
+    cursor: pointer;
+}
+.srs-row:hover { background: #eceff3; }
+.srs-row_selected { background: #e5f2ff; }
+.srs-chevron { width: 1rem; flex-shrink: 0; }
+.srs-thumb { width: 1.5rem; height: 1.5rem; flex-shrink: 0; }
+.srs-preview { width: 2.25rem; height: 2.25rem; }
+
+/* Gallery panes fill the height: the header stays, the rest scrolls */
+.srs-pane {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+}
+.srs-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+.srs-gallery {
+    display: grid;
+    align-content: start;
+    gap: 0.5rem;
+}
+.srs-more {
+    grid-column: 1 / -1; /* full row under the tiles */
+    padding: 0.5rem;
+}
+
+/* Tiles */
+.srs-tile {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    cursor: pointer;
+}
+.srs-tile:hover { background: #f3f3f3; }
+.srs-tile_selected { border-color: #0176d3; }
+.srs-tile img {
+    width: 100%;
+    aspect-ratio: 1;
+    padding: 10%;
+}
+
+/* Preview stage: fixed box, image centred and never bigger than it */
+.srs-stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15rem;
+    overflow: hidden;
+}
+.srs-stage img {
+    max-width: 100%;
+    max-height: 100%;
+}

@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "SellIn Statement Matrix",
+  "contentBody" : {
+    "activeViewId" : "SellIn_Statement_Matrix",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-sellin-statement-matrix",
+    "urlPrefix" : "sellin-statement-matrix"
+  },
+  "urlName" : "sellin-statement-matrix"
+}

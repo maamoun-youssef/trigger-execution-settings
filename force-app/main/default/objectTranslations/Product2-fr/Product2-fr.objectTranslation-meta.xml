@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <layouts>
+        <layout>negOptim Product Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Box --></label>
+        <name>Box</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Produit Concurrent</label>
+        <name>Competitor</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Code GTIN utilisé pour l&apos;emballage et la livraison des produits de détails (UL= Unité logistique)</description>
+        <label>Unité logistique (UL)</label>
+        <name>Higher_Level_Packaging</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Variant pour les couleurs et tailles</description>
+        <label>Modèle</label>
+        <name>Model</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Article</label>
+        <name>Product</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Kit à l&apos;achat</label>
+        <name>Purchases_Kit</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Standard (hors NegOptim)</label>
+        <name>Regular</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Kit à la vente</label>
+        <name>Sales_Kit</name>
+    </recordTypes>
+    <recordTypes>
+        <label>EAN Secondaire</label>
+        <name>Secondary</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Avant la création du produit dans les référentiels internes</description>
+        <label>Unité de besoin</label>
+        <name>Unit_Need</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Etape préparatoire à la création de l&apos;Unité de Besoin utilisé avant la création du produit dans les référentiels internes</description>
+        <label>Projet unité de besoin</label>
+        <name>Unit_Need_Initialization</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage><!-- Vous n&apos;avez pas l&apos;autorisation de modifier le nom de l&apos;article --></errorMessage>
+        <name>No_name_update_from_specific_profil</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- MassImportProduct --></label>
+        <name>MassImportProduct</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Mass_Print_Products --></label>
+        <name>Mass_Print_Products</name>
+    </webLinks>
+    <webLinks>
+        <label>Synchro Produit vers ASD</label>
+        <name>ProductToASD</name>
+    </webLinks>
+</CustomObjectTranslation>

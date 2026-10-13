@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Online portal referencing</fullName>
+        <default>false</default>
+        <label>Online portal referencing</label>
+    </customValue>
+    <customValue>
+        <fullName>Merchandizing</fullName>
+        <default>true</default>
+        <label>Merchandizing</label>
+    </customValue>
+    <customValue>
+        <fullName>Promotionning</fullName>
+        <default>false</default>
+        <label>Promotionning</label>
+    </customValue>
+    <customValue>
+        <fullName>Renting (material)</fullName>
+        <default>false</default>
+        <label>Renting (material)</label>
+    </customValue>
+    <customValue>
+        <fullName>Statistics sharing</fullName>
+        <default>false</default>
+        <label>Statistics sharing</label>
+    </customValue>
+    <customValue>
+        <fullName>Staffing</fullName>
+        <default>false</default>
+        <label>Staffing</label>
+    </customValue>
+    <customValue>
+        <fullName>Training</fullName>
+        <default>false</default>
+        <label>Training</label>
+    </customValue>
+    <description>Define the type of counterparty subject of your negotiation (Merch, Promo Event, Statistics Sharing, ..</description>
+    <masterLabel>Counterparty type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

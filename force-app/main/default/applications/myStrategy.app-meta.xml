@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#E4CD00</headerColor>
+        <logo>mystrategy_light_logo_only1</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>NegOptim App to manage Pol Com Condition / Accounting Docs Planning / ...</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>myStrategy</label>
+    <navType>Standard</navType>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>CPGSupplierPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Supplier__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>CPGSupplierPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Supplier__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Analytics Cloud Integration User</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>CPGSupplierPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Supplier__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Analytics Cloud Security User</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>CPGSupplierPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Supplier__c</pageOrSobjectType>
+        <recordType>Supplier__c.Client</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>CPGSupplierPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Supplier__c</pageOrSobjectType>
+        <recordType>Supplier__c.Client</recordType>
+        <type>Flexipage</type>
+        <profile>Analytics Cloud Integration User</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>CPGSupplierPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Supplier__c</pageOrSobjectType>
+        <recordType>Supplier__c.Client</recordType>
+        <type>Flexipage</type>
+        <profile>Analytics Cloud Security User</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>CPGSupplierPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Supplier__c</pageOrSobjectType>
+        <recordType>Supplier__c.Supplier</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>CPGSupplierPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Supplier__c</pageOrSobjectType>
+        <recordType>Supplier__c.Supplier</recordType>
+        <type>Flexipage</type>
+        <profile>Analytics Cloud Integration User</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>CPGSupplierPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Supplier__c</pageOrSobjectType>
+        <recordType>Supplier__c.Supplier</recordType>
+        <type>Flexipage</type>
+        <profile>Analytics Cloud Security User</profile>
+    </profileActionOverrides>
+    <tabs>Pol_Com_Condition__c</tabs>
+    <tabs>InvoicePlanning__c</tabs>
+    <tabs>Contrats_d_application_sell_in</tabs>
+    <tabs>APTT__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>myStrategy_UtilityBar</utilityBar>
+</CustomApplication>

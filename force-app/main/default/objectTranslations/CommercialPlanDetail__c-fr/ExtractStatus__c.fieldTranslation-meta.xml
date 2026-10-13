@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Extrct. Statut</label>
+    <name>ExtractStatus__c</name>
+    <picklistValues>
+        <masterLabel>Extract</masterLabel>
+        <translation><!-- Extract --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Extracted</masterLabel>
+        <translation><!-- Extracted --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

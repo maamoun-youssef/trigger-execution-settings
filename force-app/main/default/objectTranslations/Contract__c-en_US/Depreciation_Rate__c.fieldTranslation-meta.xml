@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Estimation of an average product technical drop for the contract --></help>
+    <label>Depreciation Rate</label>
+    <name>Depreciation_Rate__c</name>
+</CustomFieldTranslation>

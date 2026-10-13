@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>DocumentsCenter_QualitySectionTitle</label>
+    <protected>false</protected>
+    <values>
+        <field>DisplayOrder__c</field>
+        <value xsi:type="xsd:double">5.0</value>
+    </values>
+    <values>
+        <field>IsDeleted__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>SObjectName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>SectionColor__c</field>
+        <value xsi:type="xsd:string">#987E9E</value>
+    </values>
+    <values>
+        <field>SectionIcon__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>SectionSubTitle__c</field>
+        <value xsi:type="xsd:string">{!$Label.LBL_DocumentsCenter_QualitySectionSubTitle}</value>
+    </values>
+    <values>
+        <field>SectionTitle__c</field>
+        <value xsi:type="xsd:string">{!$Label.LBL_DocumentsCenter_QualitySectionTitle}</value>
+    </values>
+    <values>
+        <field>ThemesSettings__c</field>
+        <value xsi:type="xsd:string">[{&quot;themeLabel&quot;:null,&quot;theme&quot;:&quot;{!$Label.LBL_FileDirectoryCertificationsTheme}&quot;,&quot;smallThemeImage&quot;:&quot;&quot;,&quot;relatedSection&quot;:&quot;{!$Label.LBL_DocumentsCenter_QualitySectionTitle}&quot;,&quot;largeThemeImage&quot;:&quot;&quot;,&quot;isPortalDisplayed&quot;:true,&quot;isDisplayed&quot;:true,&quot;gridSettingsName&quot;:&quot;Certifications_Grid&quot;},{&quot;themeLabel&quot;:null,&quot;theme&quot;:&quot;{!$Label.LBL_FileDirectoryComplianceAuditTheme}&quot;,&quot;smallThemeImage&quot;:&quot;&quot;,&quot;relatedSection&quot;:&quot;{!$Label.LBL_DocumentsCenter_QualitySectionTitle}&quot;,&quot;largeThemeImage&quot;:&quot;&quot;,&quot;isPortalDisplayed&quot;:true,&quot;isDisplayed&quot;:true,&quot;gridSettingsName&quot;:&quot;Compliance_Audits_Grid&quot;},{&quot;themeLabel&quot;:null,&quot;theme&quot;:&quot;{!$Label.LBL_FileDirectoryEthicalChartTheme}&quot;,&quot;smallThemeImage&quot;:&quot;&quot;,&quot;relatedSection&quot;:&quot;{!$Label.LBL_DocumentsCenter_QualitySectionTitle}&quot;,&quot;largeThemeImage&quot;:&quot;&quot;,&quot;isPortalDisplayed&quot;:true,&quot;isDisplayed&quot;:true,&quot;gridSettingsName&quot;:&quot;Ethical_Chart_Grid&quot;},{&quot;themeLabel&quot;:null,&quot;theme&quot;:&quot;{!$Label.LBL_FileDirectoryScorecardTheme}&quot;,&quot;smallThemeImage&quot;:&quot;&quot;,&quot;relatedSection&quot;:&quot;{!$Label.LBL_DocumentsCenter_QualitySectionTitle}&quot;,&quot;largeThemeImage&quot;:&quot;&quot;,&quot;isPortalDisplayed&quot;:true,&quot;isDisplayed&quot;:true,&quot;gridSettingsName&quot;:&quot;Scorecard_Grid&quot;}]</value>
+    </values>
+</CustomMetadata>

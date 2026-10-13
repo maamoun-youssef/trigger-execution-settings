@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Introduction</masterLabel>
+        <translation>Introduction</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Promo</masterLabel>
+        <translation>Promo</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Regular</masterLabel>
+        <translation>Permanent</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Seasonal</masterLabel>
+        <translation>Saisonnier</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Commercial Plan Detail</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Commercial Plan Details</value>
+    </caseValues>
+    <layouts>
+        <layout>O Commercial Plan Detail</layout>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+        <sections>
+            <label><!-- Opération Promo --></label>
+            <section>Opération Promo</section>
+        </sections>
+        <sections>
+            <label><!-- Price &amp; Margin --></label>
+            <section>Price &amp; Margin</section>
+        </sections>
+        <sections>
+            <label><!-- Prévisionnel vs Réel --></label>
+            <section>Prévisionnel vs Réel</section>
+        </sections>
+        <sections>
+            <label><!-- TMP --></label>
+            <section>TMP</section>
+        </sections>
+        <sections>
+            <label><!-- Unit Need Description --></label>
+            <section>Unit Need Description</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Event Detail Name --></nameFieldLabel>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

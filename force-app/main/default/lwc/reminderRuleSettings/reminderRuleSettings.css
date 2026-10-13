@@ -1,0 +1,62 @@
+/* Match the toggle colors you adopted in stsSettings */
+.connect-toggle .slds-checkbox_toggle input:not(:checked)
+  + .slds-checkbox_faux_container .slds-checkbox_faux {
+  background:#c23934; border-color:#c23934;
+}
+.connect-toggle .slds-checkbox_toggle input:checked
+  + .slds-checkbox_faux_container .slds-checkbox_faux {
+  background:#1589ee; border-color:#1589ee;
+}
+.connect-toggle .slds-checkbox_faux:before { background:#fff; }
+
+/* Reminder component */
+:host {
+  display: block;
+  position: relative;   /* new stacking context */
+  z-index: 0;
+}
+.stickyHeader {
+  position: sticky;
+  top: 0;
+  z-index: 5;           /* slightly higher than STS so it appears above when reached */
+}
+
+/* Local, collision-free sticky header just for the Reminder LWC */
+.stickyHeaderRr {
+  position: sticky;
+  top: 0;
+  z-index: 7;                 /* above STS */
+  background: #36a2ad;        /* same teal as the page header */
+  padding: 8px 12px;
+  border-radius: 0;           /* match page bar */
+}
+
+/* Title inside the teal bar */
+.stickyHeaderRr .sectionTitle {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.section-Container {
+  display: flex;
+  column-gap: 40px;
+}
+.section-label {
+  font-weight: 600;
+  width: 30%;
+  padding-left: 20px;
+  font-size: 16px;
+  color: var(--text-body);
+}
+.info-container-w { width: 75%; }
+.comboBox { width: 300px; }
+
+/* Helpers used in the STS markup */
+.ml10 { margin-left: 10px; }
+.ml20 { margin-left: 20px; }
+.ml40 { margin-left: 40px; }
+.w36  { width: 36%; }
+.lh15 { line-height: 15px; }
+.italic { font-style: italic; font-size: 14px; color: var(--text-body); }
+.add-breaks { height: 30px; }

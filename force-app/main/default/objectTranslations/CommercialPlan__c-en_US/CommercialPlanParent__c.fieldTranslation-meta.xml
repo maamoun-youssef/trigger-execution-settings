@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Promo plan</label>
+    <lookupFilter>
+        <errorMessage>The Parent Commercial Plan should have the same Client as the Commercial Plan. The Begin date of the Commercial Plan should be posterior or equal to the Begin date of the Parent Commercial Plan. The End date of the Commercial Plan should be anterior or equal to the End date of the Parent Commercial Plan.</errorMessage>
+    </lookupFilter>
+    <name>CommercialPlanParent__c</name>
+    <relationshipLabel><!-- Commercial Plans --></relationshipLabel>
+</CustomFieldTranslation>

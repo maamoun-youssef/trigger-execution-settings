@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Modèle d&apos;e-mail pour confirmer l’annulation d&apos;un rendez-vous de service payé.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Planificateur de paiement : e-mail d’annulation du rendez-vous de service</name>
+    <style>none</style>
+    <subject>Rendez-vous annulé !</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

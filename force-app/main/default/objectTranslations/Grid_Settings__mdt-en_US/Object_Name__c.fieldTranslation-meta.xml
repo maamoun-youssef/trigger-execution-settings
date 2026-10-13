@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Nom API de l’objet auquel s’applique cette configuration. Détermine quel objet est affiché.</help>
+    <label><!-- Object Name --></label>
+    <name>Object_Name__c</name>
+</CustomFieldTranslation>

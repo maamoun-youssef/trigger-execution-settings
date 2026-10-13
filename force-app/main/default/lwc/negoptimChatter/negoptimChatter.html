@@ -1,0 +1,153 @@
+<template>
+    <div if:false={isLoading} class="slds-grid slds-gutters" style="position:relative;">
+        <!-- <lighning-button variant="brand" label="Add" title="Add" onclick={handleAddFeed} class="slds-m-bottom_medium">
+
+        </lightning-button> -->
+        <!-- <lightning-button if:true={ShowAddFeed} class="slds-m-right--small" label="new"
+                                        onclick={handleAddFeed}></lightning-button> -->
+        <div class="slds-col slds-size_2-of-2">
+            <!-- Scrollable Comments Container - Includes ALL comments -->
+            <div class="comments-scrollable-container">
+                <ul class="comments-list-unified" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                    <!-- First Comment - Same styling as others -->
+                    <template if:true={showFirstRecord}>
+                        <li style="list-style: none;">
+                            <article class="slds-comment slds-media slds-hint-parent">
+                                <div class="slds-media__figure">
+                                    <a href="#" class="slds-avatar slds-avatar_circle slds-avatar_medium"
+                                        style={firstRecord.photoStyle}>
+                                        <div style={firstRecord.photoStyle}></div>
+                                    </a>
+                                </div>
+                                <div class="slds-media__body">
+                                    <header class="slds-post__header">
+                                        <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+                                            <p class="slds-truncate" title={firstRecord.Assignee__c}>
+                                                <a href="#">{firstRecord.Assignee__c}</a>
+                                            </p>
+                                        </div>
+                                        <p class="slds-text-body_small">
+                                            <a href="#" title="Click for single-item view of this post"
+                                                class="slds-text-link_reset">
+                                                <lightning-formatted-date-time
+                                                    value={firstRecord.ActionDate__c} year="numeric" month="2-digit"
+                                                    day="2-digit" hour="2-digit"
+                                                    minute="2-digit"></lightning-formatted-date-time>
+                                            </a>
+                                        </p>
+                                    </header>
+                                    <div class="slds-comment__content slds-text-longform">
+                                        <p>{firstRecord.Comment__c}</p>
+                                    </div>
+                                </div>
+                            </article>
+                        </li>
+                    </template>
+                    
+                    <!-- All Other Comments -->
+                    <template if:true={showMoreComments} for:each={moreComments} for:item="comment"
+                        for:index="index">
+                        <li key={comment.Id} style="list-style: none;">
+                            <article class="slds-comment slds-media slds-hint-parent">
+                                <div class="slds-media__figure">
+                                    <a href="#" class="slds-avatar slds-avatar_circle slds-avatar_medium"
+                                        style={comment.photoStyle}>
+                                        <div style={comment.photoStyle}></div>
+                                    </a>
+                                </div>
+                                <div class="slds-media__body">
+                                    <header class="slds-post__header">
+                                        <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+                                            <p class="slds-truncate" title={comment.Assignee__c}>
+                                                <a href="#">{comment.Assignee__c}</a>
+                                            </p>
+                                        </div>
+                                        <p class="slds-text-body_small">
+                                            <a href="#" title="Click for single-item view of this post"
+                                                class="slds-text-link_reset">
+                                                <lightning-formatted-date-time
+                                                    value={comment.ActionDate__c} year="numeric" month="2-digit"
+                                                    day="2-digit" hour="2-digit"
+                                                    minute="2-digit"></lightning-formatted-date-time>
+                                            </a>
+                                        </p>
+                                    </header>
+                                    <div class="slds-comment__content slds-text-longform">
+                                        <p>{comment.Comment__c}</p>
+                                    </div>
+                                </div>
+                            </article>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+            
+            <!-- Comment Editor - Outside scrollable area, always visible -->
+            <div class="comment-editor-wrapper">
+                <div class="comment-editor-avatar">
+                    <div class="avatar-circle" style={defaultPhoto}></div>
+                </div>
+                <div class="comment-editor-content">
+                    <div class="comment-editor-box">
+                        <label for="comment-text-input-01" class="slds-assistive-text">Write a comment</label>
+                        <textarea 
+                            id="comment-text-input-01"
+                            class="comment-textarea"
+                            placeholder="Write a comment…"
+                            onchange={handleAddCommentText}
+                            rows="3">{newCommentText}</textarea>
+                        <div class="comment-editor-action">
+                            <button 
+                                type="button"
+                                class="comment-btn-cancel"
+                                onclick={handleCancelComment}>
+                                Cancel
+                            </button>
+                            <button 
+                                type="button"
+                                class="comment-btn-submit"
+                                onclick={handleSaveComment}>
+                                Comment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- new added code By Sara -->
+        <template if:true={trackPathAct.length}>
+            <div class="slds-box slds-m-around--small slds-p-around--small statusList slds-m-left--medium slds-scrollable"
+                style="width: 450px; height: 425px">
+                <template for:each={trackPathAct} for:item="act" for:index="idx">
+                    <div key={act.Id} class="slds-grid" style="position:relative">
+                        <div class="activityIcon" style="position: absolute;">
+                            <div style={act.leftIconStyle}></div>
+                        </div>
+                        <div class="slds-col">
+                            <div class=" slds-p-left--x-large slds-m-left--large slds-p-bottom_x-large"
+                                style={act.dashStyle}>
+                                <div class="titleClass">
+                                    Statut: {act.Status__c}
+                                </div>
+                                <div class="fieldRow">
+                                    Assigné(e): {act.Assignee__c}
+                                </div>
+                                <div class="fieldRow">
+                                    Date d'activité:
+                                    <span class="dateValue">
+                                        <lightning-formatted-date-time value={act.ActionDate__c} year="numeric"
+                                            month="2-digit" day="2-digit" hour="2-digit" minute="2-digit">
+                                        </lightning-formatted-date-time>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profileIcon">
+                            <div style={act.rightIconStyle}></div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Les conditions saisies sont-elles diffusées sur les niveaux partenaires pour les accords de ce NS. &lt;br/&gt;• Aucun : pas de diffusion. &lt;br/&gt;• Toutes les saisies : toutes les conditions saisies sont diffusées sur les niveaux partenaires. &lt;br/&gt;• Décision de l&apos;utilisateur : doit faire l&apos;objet d&apos;un choix de diffusion systématique de l&apos;utilisateur. --></help>
+    <label>Condition Dispatch Level</label>
+    <name>ConditionsDispatchLevel__c</name>
+    <picklistValues>
+        <masterLabel>Advanced To Partner</masterLabel>
+        <translation>Advanced to Partner</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Bidirectional</masterLabel>
+        <translation>Bidirectional</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Partner To Advanced</masterLabel>
+        <translation>Partner to Advanced</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>User Decision</masterLabel>
+        <translation>User Decision</translation>
+    </picklistValues>
+</CustomFieldTranslation>

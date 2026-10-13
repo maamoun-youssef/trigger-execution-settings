@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsTradeItemAConsumerUnit__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indication que l&apos;unité commerciale déclarée est une unité consommateur (oui ou non).</description>
+    <label>Is TradeItem A ConsumerUnit</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

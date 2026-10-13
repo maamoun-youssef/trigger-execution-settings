@@ -1,0 +1,20 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Documents Center",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "attributes" : {
+          "richTextValue" : "<p><strong style=\"font-size: 26px; color: rgb(255, 255, 255);\">1. Negotiation Preparation</strong></p><p><span style=\"color: rgb(255, 255, 255); font-size: 16px;\">This library provides access to framework agreement templates, appendices, commercial conditions, and other documents to help you thoroughly prepare for your upcoming negotiation. </span></p><p><span style=\"color: rgb(255, 255, 255); font-size: 16px;\">﻿</span></p>"
+        },
+        "id" : "972e1541-f881-4445-ad41-d2c3b5d65824"
+      }, {
+        "id" : "a6a507cd-6ffc-40d3-a516-1df26f167eca",
+        "attributes" : {
+          "richTextValue" : "<p><strong style=\"font-size: 26px; color: rgb(255, 255, 255);\">2. Mes documents contractuels</strong></p><p><span style=\"font-size: 16px; color: rgb(255, 255, 255);\">Les documents suivants ont été partagés par vous ou avec vous au cours des différentes négociations passées et actuelles</span></p><p><span style=\"color: rgb(255, 255, 255);\">&nbsp;</span></p>"
+        }
+      } ]
+    }
+  },
+  "urlName" : "documents-center"
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Préciser le Type d&apos;Offre/Gestion de l&apos;Assortiment pour le Client/Fournisseur pour l&apos;accord lié</help>
+    <label>Type de collection</label>
+    <name>CollectionType__c</name>
+</CustomFieldTranslation>

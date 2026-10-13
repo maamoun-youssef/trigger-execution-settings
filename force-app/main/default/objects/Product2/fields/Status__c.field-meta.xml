@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <inlineHelpText>Etape du cycle de vie dans laquelle l&apos;article se trouve</inlineHelpText>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Initialization</fullName>
+                <default>false</default>
+                <label>Initialization</label>
+            </value>
+            <value>
+                <fullName>In process of creation</fullName>
+                <default>false</default>
+                <label>In process of creation</label>
+            </value>
+            <value>
+                <fullName>Planned</fullName>
+                <default>false</default>
+                <label>Planned</label>
+            </value>
+            <value>
+                <fullName>In preparation</fullName>
+                <default>false</default>
+                <label>In preparation</label>
+            </value>
+            <value>
+                <fullName>Pre opening</fullName>
+                <default>false</default>
+                <label>Pre opening</label>
+            </value>
+            <value>
+                <fullName>Open</fullName>
+                <default>true</default>
+                <label>Open</label>
+            </value>
+            <value>
+                <fullName>On sale</fullName>
+                <default>false</default>
+                <label>On sale</label>
+            </value>
+            <value>
+                <fullName>In process of deletion</fullName>
+                <default>false</default>
+                <label>In process of deletion</label>
+            </value>
+            <value>
+                <fullName>EOL</fullName>
+                <default>false</default>
+                <label>EOL</label>
+            </value>
+            <value>
+                <fullName>Closed</fullName>
+                <default>false</default>
+                <label>Closed</label>
+            </value>
+            <value>
+                <fullName>Canceled</fullName>
+                <default>false</default>
+                <label>Canceled</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

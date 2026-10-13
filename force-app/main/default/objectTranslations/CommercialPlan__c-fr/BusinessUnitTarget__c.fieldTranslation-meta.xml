@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- BU Target --></label>
+    <lookupFilter>
+        <errorMessage>
+            <!-- The BU Status should be &apos;Open&apos;.
+The selected Client should be the same as the one selected at the Commercial Plan Parent level. -->
+        </errorMessage>
+    </lookupFilter>
+    <name>BusinessUnitTarget__c</name>
+    <relationshipLabel><!-- Commercial Plans (BU Target) --></relationshipLabel>
+</CustomFieldTranslation>

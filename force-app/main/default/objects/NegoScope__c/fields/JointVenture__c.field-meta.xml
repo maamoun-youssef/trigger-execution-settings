@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>JointVenture__c</fullName>
+    <label>Joint Venture</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>JointVenture1</fullName>
+                <default>false</default>
+                <label>JointVenture1</label>
+            </value>
+            <value>
+                <fullName>JointVenture2</fullName>
+                <default>false</default>
+                <label>JointVenture2</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

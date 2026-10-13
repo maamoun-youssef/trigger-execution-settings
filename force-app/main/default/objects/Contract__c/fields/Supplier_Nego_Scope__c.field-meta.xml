@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Supplier_Nego_Scope__c</fullName>
+    <description>Is the nego scope of the contract</description>
+    <label>Supplier Nego Scope</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>The Nego Scope value does not exist or does not match filter criteria (one of the NS of the supplier, having no parent, not a sub-NS).</errorMessage>
+        <filterItems>
+            <field>$Source.Supplier__c</field>
+            <operation>equals</operation>
+            <valueField>NegoScope__c.Supplier__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>NegoScope__c.NegoscopeParent__c</field>
+            <operation>equals</operation>
+            <value></value>
+        </filterItems>
+        <filterItems>
+            <field>NegoScope__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Sub NS</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>NegoScope__c</referenceTo>
+    <relationshipLabel>Agreements</relationshipLabel>
+    <relationshipName>Contracts1</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>true</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

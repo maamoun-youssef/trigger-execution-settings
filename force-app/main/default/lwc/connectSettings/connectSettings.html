@@ -1,0 +1,1235 @@
+<template>
+    <div class="mainContainer slds-card">
+        <div class="settings-header">
+            <lightning-icon icon-name='utility:settings' class="custom-icon-settings">
+            </lightning-icon>
+            <div>
+                <p class="settings-subtitle">
+                    {labels.LBL_Connect_Settings_Title}
+                </p>
+                <h1 class="slds-page-header__title settings-header-title">
+                    {labels.LBL_Connect_Settings_SubTitle}
+                </h1>
+            </div>
+        </div>
+        <!-- <template lwc:if={showSaveButton}>
+            <div class="slds-grid slds-grid_align-end">
+                <div class="slds-col save-button-container">
+                    <lightning-button class="slds-button slds-m-right_x-small" variant="brand" label={labels.LBL_Save}
+                        onclick={handleSave}>
+                    </lightning-button>
+                </div>
+            </div>
+        </template> -->
+        <lightning-tabset variant="vertical" class="tab-set-style slds-m-bottom_x-small mainHeight"
+            active-tab-value="1">
+            <template lwc:if={isLoading}>
+                <div class="slds-spinner_container greyBg">
+                    <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+                </div>
+            </template>
+            <lightning-tab value="1" tabindex="-1" label={labels.LBL_Welcome_Page} class="slds-scrollable_y">
+                <div style={mainPanelHeight}>
+                    <div class="slds-grid slds-grid_align-end">
+                        <div class="slds-col save-button-container">
+                            <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                label={labels.LBL_Save} onclick={handleSave}>
+                            </lightning-button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                            <div class="sectionTitle">
+                                {labels.LBL_Connect_Navigation}
+                            </div>
+
+                        </div>
+                        <div class="label">
+                            {labels.LBL_Connect_NavigationDescription}
+                        </div>
+                        <div class="negoptim-tablesection">
+                            <table>
+                                <tr class="table-header">
+                                    <th class="table-th th-w7">{labels.LBL_Connect_MenuNumber}</th>
+                                    <th class="table-th">{labels.LBL_Connect_MenuName}</th>
+                                    <!-- <th class="table-th">{labels.LBL_Connect_MenuShow}</th> -->
+                                    <th class="table-th">{labels.LBL_Connect_MenuActivate}</th>
+                                    <th class="table-th">{labels.LBL_Connect_MenuIcon}</th>
+                                    <th class="table-th">{labels.LBL_Connect_MenuRedirectionType}</th>
+                                    <th class="table-th">{labels.LBL_Connect_MenuRedirection}</th>
+                                </tr>
+                                <template for:each={connectSettings.modulesConfiguration} for:item="module"
+                                    for:index="index">
+                                    <tr key={module.index}>
+                                        <td class="table-td">{module.index}</td>
+                                        <td class="table-td">
+                                            <lightning-input value={module.name} data-index={index} data-field="name"
+                                                onchange={handleChangeModuleConfigurations} variant="label-hidden">
+                                            </lightning-input>
+                                        </td>
+                                        <!-- <td class="table-td">
+                                            <label class="switch" data-index={index} data-field="isDisplayed">
+                                                <input type="checkbox" checked={module.isDisplayed} data-index={index}
+                                                    data-field="isDisplayed" onchange={handleChangeModuleConfigurations} />
+                                                <span class="slider">
+                                                </span>
+                                            </label>
+                                        </td> -->
+                                        <td class="table-td">
+                                            <label class="switch" data-index={index} data-field="isActive">
+                                                <input type="checkbox" checked={module.isActive} data-index={index}
+                                                    data-field="isActive" onchange={handleChangeModuleConfigurations} />
+                                                <span class="slider">
+                                                </span>
+                                            </label>
+                                        </td>
+                                        <td class="table-td">
+                                            <div>
+                                                <div style={module.iconStyle} class="disp">
+                                                </div>
+                                                <div class="disp button-trans">
+                                                    <lightning-button-icon icon-name="utility:replace" size="small"
+                                                        data-index={index} data-field="iconUrl"
+                                                        onclick={handleChangeModuleConfigurations}>
+                                                    </lightning-button-icon>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="table-td">
+                                            <div class="slds-align--absolute-center" style="width: fit-content;">
+                                                <lightning-radio-group variant="label-hidden" style="text-align: left;"
+                                                    options={redirectionOptions} value={module.redirectionType}
+                                                    data-index={index} data-field="redirectionType"
+                                                    onchange={handleChangeModuleConfigurations} type="radio">
+                                                </lightning-radio-group>
+                                            </div>
+                                        </td>
+                                        <td class="table-td">
+                                            <template lwc:if={module.isURL}>
+                                                <lightning-input value={module.redirection} data-index={index}
+                                                    data-field="redirection" onchange={handleChangeModuleConfigurations}
+                                                    variant="label-hidden">
+                                                </lightning-input>
+                                            </template>
+                                            <template lwc:else>
+                                                <lightning-combobox value={module.redirection}
+                                                    options={pageSettingOptions} data-index={index}
+                                                    data-field="redirection" variant="label-hidden"
+                                                    onchange={handleChangeModuleConfigurations}>
+                                                </lightning-combobox>
+                                            </template>
+                                        </td>
+
+                                    </tr>
+                                </template>
+                            </table>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                            <div class="sectionTitle">
+                                {labels.LBL_Connect_SearchParameters}
+                            </div>
+                        </div>
+                        <div class="label">
+                            {labels.LBL_Connect_SearchParametersDescription}
+                        </div>
+                        <div class="section-Container slds-m-top_medium">
+                            <div class="section-label">
+                                {labels.LBL_Searcheable_Objects}
+                            </div>
+                            <div class="info-container-w">
+                                <div class="search">
+                                    <lightning-input value={searchTerm} onchange={handleSearch} type="search">
+                                    </lightning-input>
+                                </div>
+                                <div class="negoptim-firsttable">
+                                    <div class="negoptim-available">{labels.LBL_Connect_AvailableObjects}</div>
+                                    <div class="negoptim-availableobjects">
+                                        <template for:each={objectDescriptions} for:item="objDesc">
+                                            <div key={objDesc.apiName} data-id={objDesc.apiName}
+                                                onclick={handleObjectSelection}>
+                                                <template if:true={objDesc.isSelected}>
+                                                    <div class="selected">{objDesc.label}</div>
+                                                </template>
+                                                <template if:false={objDesc.isSelected}>
+                                                    <div>{objDesc.label}</div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="negoptim-sorticon">
+                                    <div class="negoptim-sortleft">
+                                        <img src={sortLeft} onclick={moveSelectedObjectsToLeft} />
+                                    </div>
+                                    <div class="negoptim-sortright">
+                                        <img src={sortRight} onclick={moveSelectedObjectsToRight} />
+                                    </div>
+                                    <div class="negoptim-sortup">
+                                        <img src={sortUp} onclick={moveSelectedObjectsToLeft} />
+                                    </div>
+                                    <div class="negoptim-sortdown">
+                                        <img src={sortDown} onclick={moveSelectedObjectsToRight} />
+                                    </div>
+                                </div>
+                                <div class="negoptim-secondtable">
+                                    <div class="negoptim-allowed">{labels.LBL_Connect_SearchableObjects}</div>
+                                    <div class="negoptim-allowedobjects">
+                                        <template for:each={searchableObjects} for:item="search">
+                                            <div key={search.apiName} data-id={search.apiName}
+                                                onclick={handleSearchableObjectSelection}>
+                                                <template if:true={search.isSelected}>
+                                                    <div class="selected">{search.label}</div>
+                                                </template>
+                                                <template if:false={search.isSelected}>
+                                                    <div>{search.label}</div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-breaks"></div>
+                        <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                            <div class="sectionTitle">
+                                {labels.LBL_Connect_UserOnboardingParameters}
+                            </div>
+                        </div>
+                        <div class="label">
+                            {labels.LBL_Connect_UserOnboardingParametersDescription}
+                        </div>
+                        <div class="negoptim-tablesection">
+                            <table>
+                                <tr class="table-header">
+                                    <th class="table-th">{labels.LBL_Connect_Functionality}</th>
+                                    <th class="table-th">{labels.LBL_Connect_Description}</th>
+                                    <th class="table-th">{labels.LBL_Connect_MenuActivation}</th>
+                                    <th class="table-th">{labels.LBL_Connect_RedirectionURL}</th>
+                                </tr>
+                                <tr>
+                                    <td class="table-td">{labels.LBL_Connect_UserSelfOnboarding}</td>
+                                    <td class="table-td">
+                                        {labels.LBL_Connect_UserSelfOnboardingDescription}
+                                    </td>
+                                    <td class="table-td">
+                                        <label class="switch">
+                                            <input type="checkbox" checked={connectSettings.enableUserSettings}
+                                                onchange={handleToggleSettings} />
+                                            <span class="slider">
+                                            </span>
+                                        </label>
+                                    </td>
+                                    <td class="table-td">{labels.LBL_Connect_UserSelfOnboardingRedirectionUR}</td>
+                                </tr>
+                                <tr>
+                                    <td class="table-td">{labels.LBL_Connect_PresentationVideo}</td>
+                                    <td class="table-td">
+                                        {labels.LBL_Connect_PresentationVideoDescription}
+                                    </td>
+                                    <td class="table-td">
+                                        <label class="switch">
+                                            <input type="checkbox" checked={connectSettings.enableSelfOnboarding}
+                                                onchange={handleToggleBoarding} />
+                                            <span class="slider">
+                                            </span>
+                                        </label>
+                                    </td>
+                                    <td class="table-td"><a href={connectSettings.onboardingVideoUrl}
+                                            target="_blank">{labels.LBL_Connect_PresentationVideoRedirectionURL}</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                            <div class="sectionTitle">
+                                {labels.LBL_Connect_BrandLogoUpload}
+                            </div>
+                        </div>
+                        <div class="label">
+                            {labels.LBL_Connect_BrandLogoUploadDescription}
+                        </div>
+                        <div class="negoptim-remember">
+                            {labels.MSG_Connect_Saving_Settings_Reminder}
+                        </div>
+                        <div class="negoptim-mainuploads">
+                            <div class="negoptim-uploadlogo">
+                                <template if:true={showCloudIcon.portalFav}>
+                                    <div class="negoptim-cloudicon" style="margin-bottom: 1rem; text-align: center;">
+                                        <img src={uploadCloud} />
+                                    </div>
+                                </template>
+                                <template if:false={showCloudIcon.portalFav}>
+                                    <div class="negoptim-cloudicon" style={PortalFavIcon}></div>
+                                </template>
+                                <!-- <lightning-file-upload name="logoUploader"
+                                    accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff,.webp" data-lang="FR" record-id={recordId}
+                                    data-field="logo" onuploadfinished={handleUploadFinished} class="img-pos">
+                                </lightning-file-upload> -->
+                                <input type="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff,.webp"
+                                    onchange={handleLogoFileSelect} style="display:none" data-field="logo"
+                                    class="logo-file-input" />
+                                <lightning-file-upload name="logoUploader"
+                                    accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff,.webp" data-lang="FR" record-id={recordId}
+                                    data-field="logo" onuploadfinished={handleUploadFinished} class="img-pos">
+                                </lightning-file-upload>
+
+                            </div>
+                            <div class="negoptim-verticalline"></div>
+                            <div class="negoptim-uploadvideo">
+                                <template if:true={showCloudIcon.portalVideo}>
+                                    <div class="negoptim-cloudicon" style="margin-bottom: 1rem; text-align: center;">
+                                        <img src={uploadCloud} />
+                                    </div>
+                                </template>
+                                <template if:false={showCloudIcon.portalVideo}>
+                                    <div class="negoptim-videoplay">
+                                        <video width="300" height="200" controls>
+                                            <source src={videoUrl} type="video/mp4">
+                                        </video>
+                                    </div>
+                                </template>
+                                <lightning-file-upload name="videoUploader" data-lang="FR" accept=".mp4,.mov,.avi"
+                                    record-id={recordId} data-field="video" onuploadfinished={handleUploadFinished}
+                                    class="img-pos">
+                                </lightning-file-upload>
+                            </div>
+                        </div>
+
+                        <div class="negoptim-mainuploads">
+                            <div class="negoptim-uploadlogo">
+                                <template if:true={showCloudIcon.portalGuide}>
+                                    <div style="margin-bottom: 1rem; text-align: center;">
+                                        <img src={uploadCloud} alt="Upload Cloud Image" />
+                                    </div>
+                                </template>
+                                <template if:false={showCloudIcon.portalGuide}>
+                                    <div style="margin-bottom: 1rem; text-align: center;">
+                                        <lightning-icon label="" title="Download Guide" onclick={downloadGuide}
+                                            icon-name="utility:download" class="slds-m-top_small">
+                                        </lightning-icon>
+                                    </div>
+                                </template>
+
+                                <lightning-file-upload label={labels.LBL_Connect_UploadUserGuide} name="guideUploader"
+                                    accept=".pdf,.doc,.docx,.xls,.xlsx" record-id={recordId} data-field="guide"
+                                    onuploadfinished={handleUploadFinished} class="img-pos">
+                                </lightning-file-upload>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </lightning-tab>
+            <lightning-tab value="2" tabindex="-1" label={labels.LBL_PageSettings_settings} class="slds-scrollable_y">
+                <div style={mainPanelHeight}>
+                    <c-page-Settings class="component-w"></c-page-Settings>
+                </div>
+            </lightning-tab>
+            <!-- <lightning-tab value="5" tabindex="-1" label={labels.LBL_PageLayout} class="slds-scrollable_y">
+                <div style={mainPanelHeight} class="slds-scrollable--y">
+                    <c-page-layout-settings class="component-w"></c-page-layout-settings>
+                </div>
+            </lightning-tab> -->
+            <lightning-tab value="3" tabindex="-1" label={labels.LBL_Directory} class="slds-scrollable_y">
+                <div style={mainPanelHeight} class="slds-scrollable_y">
+                    <div class="slds-grid slds-grid_align-end">
+                        <div class="slds-col save-button-container">
+                            <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                label={labels.LBL_Save} onclick={handleSave}>
+                            </lightning-button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                            <div class="sectionTitle">
+                                {labels.LBL_Connect_ContactCreationParameters}
+                            </div>
+                        </div>
+                        <div class="label">
+                            {labels.LBL_Connect_ContactCreationParametersDescription}
+                        </div>
+                        <div class="section-Container slds-m-top_medium">
+                            <div class="section-label disp">
+                                {labels.LBL_Connect_ContactCreationWithoutRFA}
+                                <div class="infoIcon disp">
+                                    <lightning-helptext
+                                        content={labels.LBL_Connect_ContactCreationWithoutRFADescription}>
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div class="info-container-w">
+                                <div class="firsttable">
+                                    <div class="listBoxHeader">{labels.LBL_Connect_Available_Profiles}</div>
+                                    <div class="fieldslist">
+                                        <template for:each={availableNonApprovalProfiles} for:item="profile"
+                                            for:index="index">
+                                            <div key={profile.label} data-index={index}
+                                                data-array="availableNonApprovalProfiles"
+                                                onclick={handleFieldSelection}>
+                                                <template if:true={profile.isSelected}>
+                                                    <div class="selected">{profile.label}</div>
+                                                </template>
+                                                <template if:false={profile.isSelected}>
+                                                    <div class="listBoxElement">{profile.label}</div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="sorticon">
+                                    <div class="sortIconContainer">
+                                        <div>
+                                            <div class="sortleft">
+                                                <img src={sortLeft} data-selected-array="selectedNonApprovalProfiles"
+                                                    data-available-array="availableNonApprovalProfiles"
+                                                    onclick={moveSelectedItemsToLeft} />
+                                            </div>
+                                            <div class="sortright">
+                                                <img src={sortRight} data-selected-array="selectedNonApprovalProfiles"
+                                                    data-available-array="availableNonApprovalProfiles"
+                                                    onclick={moveSelectedItemsToRight} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="secondtable">
+                                    <div class="listBoxHeader">{labels.LBL_Connect_Selected_Profiles}</div>
+                                    <div class="fieldslist">
+                                        <template for:each={selectedNonApprovalProfiles} for:item="profile"
+                                            for:index="index">
+                                            <div key={profile.label} data-id={profile.name}
+                                                data-array="selectedNonApprovalProfiles" data-index={index}
+                                                onclick={handleFieldSelection}>
+                                                <template if:true={profile.isSelected}>
+                                                    <div class="selected listBoxElement">{profile.label}</div>
+                                                </template>
+                                                <template if:false={profile.isSelected}>
+                                                    <div class="listBoxElement">{profile.label}</div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-Container slds-m-top_medium">
+                            <div class="section-label disp">
+                                {labels.LBL_Connect_ContactCreationWithRFA}
+                                <div class="infoIcon disp">
+                                    <lightning-helptext content={labels.LBL_Connect_ContactCreationWithRFADescription}>
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div class="info-container-w">
+                                <div class="firsttable">
+                                    <div class="listBoxHeader">{labels.LBL_Connect_Available_Profiles}</div>
+                                    <div class="fieldslist">
+                                        <template for:each={availableApprovalProfiles} for:item="profile"
+                                            for:index="index">
+                                            <div key={profile.label} data-index={index}
+                                                data-array="availableApprovalProfiles" onclick={handleFieldSelection}>
+                                                <template if:true={profile.isSelected}>
+                                                    <div class="selected">{profile.label}</div>
+                                                </template>
+                                                <template if:false={profile.isSelected}>
+                                                    <div class="listBoxElement">{profile.label}</div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="sorticon">
+                                    <div class="sortIconContainer">
+                                        <div>
+                                            <div class="sortleft">
+                                                <img src={sortLeft} data-selected-array="selectedApprovalProfiles"
+                                                    data-available-array="availableApprovalProfiles"
+                                                    onclick={moveSelectedItemsToLeft} />
+                                            </div>
+                                            <div class="sortright">
+                                                <img src={sortRight} data-selected-array="selectedApprovalProfiles"
+                                                    data-available-array="availableApprovalProfiles"
+                                                    onclick={moveSelectedItemsToRight} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="secondtable">
+                                    <div class="listBoxHeader">{labels.LBL_Connect_Selected_Profiles}</div>
+                                    <div class="fieldslist">
+                                        <template for:each={selectedApprovalProfiles} for:item="profile"
+                                            for:index="index">
+                                            <div key={profile.label} data-id={profile.name}
+                                                data-array="selectedApprovalProfiles" data-index={index}
+                                                onclick={handleFieldSelection}>
+                                                <template if:true={profile.isSelected}>
+                                                    <div class="selected listBoxElement">{profile.label}</div>
+                                                </template>
+                                                <template if:false={profile.isSelected}>
+                                                    <div class="listBoxElement">{profile.label}</div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-Container slds-m-top_medium">
+                            <div class="section-label disp">
+                                {labels.LBL_Connect_DirectoryManagerSetting}
+                                <div class="infoIcon disp">
+                                    <lightning-helptext content={labels.LBL_Connect_DirectoryManagerSettingDescription}>
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div class="info-container-w">
+                                <lightning-radio-group name="radioGroup" label=" " variant="label-hidden"
+                                    options={directoryManagerOptions} onchange={handleChangeDirectoryManager}
+                                    value={connectSettings.directoryManager} type="radio">
+                                </lightning-radio-group>
+                            </div>
+                        </div>
+                        <div class="add-breaks"></div>
+
+                        <div>
+                            <div>
+                                <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                                    <div class="sectionTitle">
+                                        {labels.LBL_Connect_LicenseQuotaSetting}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="label">
+                                {labels.LBL_Connect_LicenseQuotaSettingDescription}
+                            </div>
+                            <div class="pb15"></div>
+                            <div>
+                                <table>
+                                    <tr class="table-header">
+                                        <th class="table-th">{labels.LBL_Connect_Functionality}</th>
+                                        <th class="table-th">{labels.LBL_Connect_Description}</th>
+                                        <th class="table-th">{labels.LBL_Connect_Parameters}</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="table-td">{labels.LBL_License_Quota_Activation}</td>
+                                        <td class="table-td">{labels.LBL_License_Quota_Activation_Desc}</td>
+                                        <td class="table-td">
+                                            <label class="switch">
+                                                <input type="checkbox" checked={licenseQuotas.activation}
+                                                    data-lisence="activation" onchange={handleLicenseQuota} />
+                                                <span class="slider">
+                                                </span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <template if:true={licenseQuotas.activation}>
+                                        <tr>
+                                            <td class="table-td">{labels.LBL_License_Quota_per_Supplier}</td>
+                                            <td class="table-td">{labels.LBL_License_Quota_per_Supplier_Desc}</td>
+                                            <td class="table-td">
+                                                <lightning-input class="slds-align_absolute-center slds-size_xx-small"
+                                                    type="number" variant="label-hidden"
+                                                    data-lisence="licensePerSupplier"
+                                                    value={licenseQuotas.licensePerSupplier}
+                                                    onchange={handleLicenseQuota}>
+                                                </lightning-input>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="section-Container slds-m-top_medium">
+                            <div class="section-label disp">
+                                {labels.LBL_Connect_DefaultUserProfile}
+                                <div class="infoIcon disp">
+                                    <lightning-helptext content={labels.LBL_Connect_DefaultUserProfileDescription}>
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div class="info-container-w">
+                                <lightning-combobox class="comboBox" variant="label-hidden" name="defaultUser" label=" "
+                                    value={connectSettings.connectUserProfile}
+                                    placeholder={labels.LBL_Connect_Select_Profile_Placeholder} options={profileOptions}
+                                    onchange={handleChangeUserProfile}>
+                                </lightning-combobox>
+                            </div>
+                        </div>
+                        <div class="section-Container slds-m-top_medium">
+                            <div class="section-label disp">
+                                {labels.LBL_Connect_DefaultUserGroup}
+                                <div class="infoIcon disp">
+                                    <lightning-helptext content={labels.LBL_Connect_DefaultUserGroupDescription}>
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div class="info-container-w">
+                                <lightning-combobox class="comboBox" variant="label-hidden" name="defaultUser" label=" "
+                                    value={connectSettings.connectUserGroup}
+                                    placeholder={labels.LBL_Connect_Select_Group_Placeholder} options={groupOptions}
+                                    onchange={handleChangeUserGroup}>
+                                </lightning-combobox>
+                            </div>
+                        </div>
+                        <div class="section-Container slds-m-top_medium">
+                            <div class="section-label disp">
+                                {labels.LBL_Connect_UserPermissionSetGroup}
+                                <div class="infoIcon disp">
+                                    <lightning-helptext content={labels.LBL_Connect_UserPermissionSetGroupDescription}>
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div class="info-container-w">
+                                <lightning-combobox class="comboBox" variant="label-hidden"
+                                    value={connectSettings.connectUserPermissionSetGroup}
+                                    placeholder={labels.LBL_Connect_Select_Group_Placeholder}
+                                    options={permissionSetGroupOptions} onchange={handleChangePermissionSetGroup}>
+                                </lightning-combobox>
+                            </div>
+                        </div>
+                        <div class="section-Container slds-m-top_medium">
+                            <div class="section-label disp">
+                                {labels.LBL_Connect_DefaultLanguage}
+                                <div class="infoIcon disp">
+                                    <lightning-helptext content={labels.LBL_Connect_DefaultLanguageDescription}>
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div class="info-container-w">
+                                <lightning-combobox class="comboBox" variant="label-hidden"
+                                    value={connectSettings.LanguageLocaleKey}
+                                    placeholder={labels.LBL_Connect_Select_LanguageLocaleKey_Placeholder}
+                                    options={LanguageLocaleKeyOptions} onchange={handleChangeLanguageLocaleKey}>
+                                </lightning-combobox>
+                            </div>
+                        </div>
+                        <div class="section-Container slds-m-top_medium">
+                            <div class="section-label disp">
+                                {labels.LBL_Connect_DefaultLocale}
+                                <div class="infoIcon disp">
+                                    <lightning-helptext content={labels.LBL_Connect_DefaultLocaleDescription}>
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div class="info-container-w">
+                                <lightning-combobox class="comboBox" variant="label-hidden"
+                                    value={connectSettings.LocaleSidKey}
+                                    placeholder={labels.LBL_Connect_Select_LocaleSidKey_Placeholder}
+                                    options={LocaleSidKeyOptions} onchange={handleChangeLocaleSidKey}>
+                                </lightning-combobox>
+                            </div>
+                        </div>
+
+                        <div class="add-breaks"></div>
+                        <div>
+                            <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                                <div class="sectionTitle">
+                                    {labels.LBL_UploadFileDirectoryTitle}
+                                </div>
+                            </div>
+                            <div class="label">
+                                {labels.LBL_UploadFileDirectoryDescription}
+                            </div>
+                            <div class="section-Container slds-m-top_medium">
+                                <div class="section-label disp">
+                                    {labels.LBL_ConnectFlow}
+                                </div>
+                                <div class="info-container-w">
+                                    <lightning-combobox class="comboBox" variant="label-hidden" name="defaultUser"
+                                        label=" " value={connectSettings.connectUploadFileFlow}
+                                        data-id="connectUploadFileFlow" options={flowPickList}
+                                        onchange={handleChangeFlow}>
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+
+                            <div class="section-Container slds-m-top_medium">
+                                <div class="section-label disp">
+                                    {labels.LBL_InternalFlow}
+                                </div>
+                                <div class="info-container-w">
+                                    <lightning-combobox class="comboBox" variant="label-hidden" name="defaultUser"
+                                        label=" " value={connectSettings.uploadFileFlow} data-id="uploadFileFlow"
+                                        options={flowPickList} onchange={handleChangeFlow}>
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+                            <div class="add-breaks"></div>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                            <div class="sectionTitle">
+                                {labels.LBL_Connect_ContactLayout}
+                            </div>
+                        </div>
+                        <div class="label">
+                            {labels.LBL_Connect_ContactLayoutDescription}
+                        </div>
+                        <div class="section-Container slds-m-top_medium">
+                            <div class="section-label disp">
+                                {labels.LBL_Connect_ContactCardSummary}
+                                <div class="infoIcon disp">
+                                    <lightning-helptext content={labels.LBL_Connect_ContactCardSummaryDescription}>
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div class="info-container-w">
+                                <div class="firsttable">
+                                    <div class="listBoxHeader">{labels.LBL_Connect_Available_Fields}</div>
+                                    <div class="fieldslist">
+                                        <template for:each={availableSummaryFields} for:item="field" for:index="index">
+                                            <div key={field.name} data-index={index} data-array="availableSummaryFields"
+                                                onclick={handleFieldSelection}>
+                                                <template if:true={field.isSelected}>
+                                                    <div class="selected">{field.label}</div>
+                                                </template>
+                                                <template if:false={field.isSelected}>
+                                                    <div class="listBoxElement">{field.label}</div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="sorticon">
+                                    <div class="sortIconContainer">
+                                        <div>
+                                            <div class="sortleft">
+                                                <img src={sortLeft} data-selected-array="selectedSummaryFields"
+                                                    data-available-array="availableSummaryFields"
+                                                    onclick={moveSelectedItemsToLeft} />
+                                            </div>
+                                            <div class="sortright">
+                                                <img src={sortRight} data-selected-array="selectedSummaryFields"
+                                                    data-available-array="availableSummaryFields"
+                                                    onclick={moveSelectedItemsToRight} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="secondtable">
+                                    <div class="listBoxHeader">{labels.LBL_Connect_Selected_Fields}</div>
+                                    <div class="fieldslist">
+                                        <template for:each={selectedSummaryFields} for:item="field" for:index="index">
+                                            <div key={field.name} data-id={field.name}
+                                                data-array="selectedSummaryFields" data-index={index}
+                                                onclick={handleFieldSelection}>
+                                                <template if:true={field.isSelected}>
+                                                    <div class="selected listBoxElement">{field.label}</div>
+                                                </template>
+                                                <template if:false={field.isSelected}>
+                                                    <div class="listBoxElement">{field.label}</div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="sorticon">
+                                    <div class="sortIconContainer">
+                                        <div>
+                                            <div class="sortUp">
+                                                <img src={sortUp} data-array="selectedSummaryFields"
+                                                    onclick={moveSelectedItemsUp} />
+                                            </div>
+                                            <div class="sortDown">
+                                                <img src={sortDown} data-array="selectedSummaryFields"
+                                                    onclick={moveSelectedItemsDown} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-Container slds-m-top_medium">
+                            <div class="section-label disp">
+                                {labels.LBL_Connect_ContactCardHeader}
+                                <div class="infoIcon disp">
+                                    <lightning-helptext content={labels.LBL_Connect_ContactCardHeaderDescription}>
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div class="info-container-w">
+                                <div class="firsttable">
+                                    <div class="listBoxHeader">{labels.LBL_Connect_Available_Fields}</div>
+                                    <div class="fieldslist">
+                                        <template for:each={availableHeaderFields} for:item="field" for:index="index">
+                                            <div key={field.name} data-index={index} data-array="availableHeaderFields"
+                                                onclick={handleFieldSelection}>
+                                                <template if:true={field.isSelected}>
+                                                    <div class="selected">{field.label}</div>
+                                                </template>
+                                                <template if:false={field.isSelected}>
+                                                    <div class="listBoxElement">{field.label}</div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="sorticon">
+                                    <div class="sortIconContainer">
+                                        <div>
+                                            <div class="sortleft">
+                                                <img src={sortLeft} data-selected-array="selectedHeaderFields"
+                                                    data-available-array="availableHeaderFields"
+                                                    onclick={moveSelectedItemsToLeft} />
+                                            </div>
+                                            <div class="sortright">
+                                                <img src={sortRight} data-selected-array="selectedHeaderFields"
+                                                    data-available-array="availableHeaderFields"
+                                                    onclick={moveSelectedItemsToRight} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="secondtable">
+                                    <div class="listBoxHeader">{labels.LBL_Connect_Selected_Fields}</div>
+                                    <div class="fieldslist">
+                                        <template for:each={selectedHeaderFields} for:item="field" for:index="index">
+                                            <div key={field.name} data-id={field.name} data-array="selectedHeaderFields"
+                                                data-index={index} onclick={handleFieldSelection}>
+                                                <template if:true={field.isSelected}>
+                                                    <div class="selected listBoxElement">{field.label}</div>
+                                                </template>
+                                                <template if:false={field.isSelected}>
+                                                    <div class="listBoxElement">{field.label}</div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="sorticon">
+                                    <div class="sortIconContainer">
+                                        <div>
+                                            <div class="sortUp">
+                                                <img src={sortUp} data-array="selectedHeaderFields"
+                                                    onclick={moveSelectedItemsUp} />
+                                            </div>
+                                            <div class="sortDown">
+                                                <img src={sortDown} data-array="selectedHeaderFields"
+                                                    onclick={moveSelectedItemsDown} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-Container slds-m-top_medium">
+                            <div class="section-label disp">
+                                {labels.LBL_Connect_ContactCardAdditional}
+                                <div class="infoIcon disp">
+                                    <lightning-helptext content={labels.LBL_Connect_ContactCardAdditionalDescription}>
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div class="info-container-w">
+                                <div class="firsttable">
+                                    <div class="listBoxHeader">{labels.LBL_Connect_Available_Fields}</div>
+                                    <div class="fieldslist">
+                                        <template for:each={availableAdditionalFields} for:item="field"
+                                            for:index="index">
+                                            <div key={field.name} data-index={index}
+                                                data-array="availableAdditionalFields" onclick={handleFieldSelection}>
+                                                <template if:true={field.isSelected}>
+                                                    <div class="selected">{field.label}</div>
+                                                </template>
+                                                <template if:false={field.isSelected}>
+                                                    <div class="listBoxElement">{field.label}</div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="sorticon">
+                                    <div class="sortIconContainer">
+                                        <div>
+                                            <div class="sortleft">
+                                                <img src={sortLeft} data-selected-array="selectedAdditionalFields"
+                                                    data-available-array="availableAdditionalFields"
+                                                    onclick={moveSelectedItemsToLeft} />
+                                            </div>
+                                            <div class="sortright">
+                                                <img src={sortRight} data-selected-array="selectedAdditionalFields"
+                                                    data-available-array="availableAdditionalFields"
+                                                    onclick={moveSelectedItemsToRight} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="secondtable">
+                                    <div class="listBoxHeader">{labels.LBL_Connect_Selected_Fields}</div>
+                                    <div class="fieldslist">
+                                        <template for:each={selectedAdditionalFields} for:item="field"
+                                            for:index="index">
+                                            <div key={field.name} data-id={field.name}
+                                                data-array="selectedAdditionalFields" data-index={index}
+                                                onclick={handleFieldSelection}>
+                                                <template if:true={field.isSelected}>
+                                                    <div class="selected listBoxElement">{field.label}</div>
+                                                </template>
+                                                <template if:false={field.isSelected}>
+                                                    <div class="listBoxElement">{field.label}</div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="sorticon">
+                                    <div class="sortIconContainer">
+                                        <div>
+                                            <div class="sortUp">
+                                                <img src={sortUp} data-array="selectedAdditionalFields"
+                                                    onclick={moveSelectedItemsUp} />
+                                            </div>
+                                            <div class="sortDown">
+                                                <img src={sortDown} data-array="selectedAdditionalFields"
+                                                    onclick={moveSelectedItemsDown} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-breaks"></div>
+                        <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                            <div class="sectionTitle">
+                                {labels.LBL_ConnectSettings_RoleTitle}
+                            </div>
+                        </div>
+                        <div class="label">
+                            {labels.LBL_ConnectSettings_RoleDescription}
+                        </div>
+                        <div class="table-div">
+                            <table class="slds-table table-char">
+                                <thead>
+                                    <tr>
+                                        <th class="table-header-blank"></th>
+                                        <th class="table-header-blank"></th>
+                                        <template for:each={table.headerLabels} lwc:if={table} for:item="header"
+                                            for:index="headerIndex">
+                                            <th class="col table-header-border" key={header} colspan="2">{header}</th>
+                                        </template>
+                                    </tr>
+                                    <tr>
+                                        <th class="table-header-blank"></th>
+                                        <th class="table-header-blank"></th>
+                                        <th class="col" style="background: #14b3bb;" colspan={table.headerColspan}>
+                                            {labels.LBL_Connect_DocumentManagement}</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="table-header-blank" style="background: #806bbf; color: #ffffff">
+                                            {labels.LBL_Type}</th>
+                                        <th class="table-header-blank" style="background: #806bbf; color: #ffffff">
+                                            {labels.LBL_FileDirectorySection_TableSubTitle}
+                                        </th>
+                                        <template for:each={table.headerLabels} lwc:if={table} for:item="header"
+                                            for:index="headerIndex">
+                                            <th class="col table-header-border" key={header}
+                                                style="background: #DDDDDD; color: #000000">{labels.LBL_HasAccessToFile}
+                                            </th>
+                                            <th class="col table-header-border" key={header}
+                                                style="background: #DDDDDD; color: #000000">{labels.LBL_CanUploadFile}
+                                            </th>
+                                        </template>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template lwc:if={table}>
+                                        <template for:each={table.roles} for:item="role" for:index="roleIndex">
+                                            <template for:each={role.permissionRoles} for:item="item"
+                                                for:index="itemIndex">
+                                                <tr key={item._key} data-index={itemIndex} data-size={roleIndex}>
+                                                    <template if:true={item.firstIndex}>
+                                                        <td rowspan={role.rowspan}>{role.label}</td>
+                                                    </template>
+                                                    <td>{item.label}</td>
+                                                    <template for:each={item.permissionDetails}
+                                                        for:item="permissionDetail" for:index="permissionDetailIndex">
+                                                        <td key={permissionDetail._keyhasAccessToFile}>
+                                                            <lightning-input type="checkbox"
+                                                                data-id={permissionDetail.name}
+                                                                data-field="hasAccessToFile"
+                                                                data-index={permissionDetailIndex}
+                                                                checked={permissionDetail.hasAccessToFile}
+                                                                onchange={handleRoleChange}>
+                                                            </lightning-input>
+                                                        </td>
+                                                        <template lwc:if={permissionDetail.hasAccessToFile}>
+                                                            <td key={permissionDetail._keycanUploadFile}>
+                                                                <lightning-input type="checkbox"
+                                                                    data-id={permissionDetail.name}
+                                                                    data-field="canUploadFile"
+                                                                    data-index={permissionDetailIndex}
+                                                                    checked={permissionDetail.canUploadFile}
+                                                                    onchange={handleRoleChange}>
+                                                                </lightning-input>
+                                                            </td>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            <td key={permissionDetail._keycanUploadFile}>
+                                                                <lightning-input type="checkbox" disabled='true'>
+                                                                </lightning-input>
+                                                            </td>
+                                                        </template>
+                                                    </template>
+                                                </tr>
+                                            </template>
+                                        </template>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </lightning-tab>
+            <lightning-tab value="4" tabindex="-1" label={labels.LBL_Connect_SalesTermsStatement}
+                class="slds-scrollable_y" onactive={handleSTSActive}>
+                <div style={mainPanelHeight} class="slds-scrollable_y">
+                    <!-- <div class="slds-grid slds-grid_align-end">
+                        <div class="slds-col save-button-container">
+                            <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                label={labels.LBL_Save} onclick={handleSave}>
+                            </lightning-button>
+                        </div>
+                    </div> -->
+                    <template if:true={showSTS}>
+                        <!-- <c-sts-settings class="component-w"></c-sts-settings> -->
+                        <c-service-statement-settings class="component-w"></c-service-statement-settings>
+                    </template>
+                    <div class="add-breaks"></div>
+                </div>
+            </lightning-tab>
+            <lightning-tab value="5" tabindex="-1" label="Reminder rule settings" class="slds-scrollable_y"
+                onactive={handleSTSActive}>
+                <div style={mainPanelHeight} class="slds-scrollable_y">
+                    <!-- <div class="slds-grid slds-grid_align-end">
+                        <div class="slds-col save-button-container">
+                            <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                label={labels.LBL_Save} onclick={handleSave}>
+                            </lightning-button>
+                        </div>
+                    </div> -->
+                    <c-reminder-rule-settings></c-reminder-rule-settings>
+                    <div class="add-breaks"></div>
+                </div>
+            </lightning-tab>
+            <lightning-tab value="6" tabindex="-1" label={labels.LBL_Connect_SellInStatement} class="slds-scrollable_y">
+                <div style={mainPanelHeight} class="slds-scrollable_y">
+                    <div class="slds-grid slds-grid_align-end">
+                        <div class="slds-col save-button-container">
+                            <lightning-button class="slds-button slds-m-right_x-small" variant="brand"
+                                label={labels.LBL_Save} onclick={handleSave}>
+                            </lightning-button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                            <div class="sectionTitle">
+                                {labels.LBL_Connect_SellInStatementInitializationParameters}
+                            </div>
+                        </div>
+                        <div class="label">
+                            {labels.LBL_Connect_SellInStatementInitializationDescription}
+                        </div>
+                        <div>
+                            <div class="slds-m-top--small ml10">
+                                <lightning-formatted-rich-text
+                                    value={labels.LBL_Connect_StatementGenerationModeDescription}
+                                    class="italic lh15"></lightning-formatted-rich-text>
+                            </div>
+                            <div class="add-breaks"></div>
+                            <div class="section-Container slds-m-top_medium">
+                                <div class="section-label disp">
+                                    {labels.LBL_Connect_StatementGenerationMode}
+                                </div>
+                                <div class="info-container-w">
+                                    <lightning-combobox class="comboBox" variant="label-hidden" name="defaultUser"
+                                        label=" " options={SellinStatementGenerationModeOptions}
+                                        onchange={handleChangeGenerationMode}
+                                        value={connectSettings.statementGenerationMode}>
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+                            <div class="add-breaks"></div>
+                        </div>
+                        <div>
+                            <div class="slds-m-top--small ml10">
+                                <ul class="slds-list--dotted">
+                                    <template for:each={sellinStatementRevenueTypeOptionsWithDescription}
+                                        for:item="sellinStatementRecordType">
+                                        <li key={sellinStatementRecordType.value} class="italic">
+                                            {sellinStatementRecordType.label}: {sellinStatementRecordType.description}
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                            <div class="add-breaks"></div>
+                            <div class="section-Container slds-m-top_medium">
+                                <div class="section-label disp">
+                                    {labels.LBL_Connect_StatementRevenueType}
+                                </div>
+                                <div class="info-container-w">
+                                    <lightning-combobox class="comboBox" variant="label-hidden" name="defaultUser"
+                                        label=" " options={sellinStatementRevenueTypeOptions}
+                                        onchange={handleChangeRevenueTypeMode}
+                                        value={connectSettings.sellinStatementRevenueType}>
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-breaks"></div>
+                        <div class="slds-media__body slds-p-around_x-small stickyHeader">
+                            <div class="sectionTitle">
+                                {labels.LBL_Connect_SellInStatementParameters}
+                            </div>
+                        </div>
+                        <div class="label">
+                            {labels.LBL_Connect_SellInStatementParametersDescription}
+                        </div>
+                        <div>
+                            <div class="slds-m-top--small ml20">
+                                <lightning-formatted-rich-text
+                                    value={labels.LBL_Connect_SellInRevenueOptionsDescription}
+                                    class="lh9 label-li"></lightning-formatted-rich-text>
+                            </div>
+                            <div class="slds-m-top--small"></div>
+
+                            <div class="ml40">
+                                <ol class="li-style">
+                                    <li><span class="label-li">{labels.LBL_Connect_RegularDiscountableRevenue}</span>
+                                        &nbsp;
+                                        {labels.LBL_Connect_RegularDiscountableRevenueDescription}</li>
+                                    <li><span class="label-li">{labels.LBL_Connect_PromoDiscountableRevenue}</span>
+                                        &nbsp;
+                                        {labels.LBL_Connect_PromoDiscountableRevenueDescription}</li>
+                                    <li><span class="label-li">{labels.LBL_Connect_TotalDiscountableRevenue}</span>
+                                        &nbsp;
+                                        {labels.LBL_Connect_TotalDiscountableRevenueDescription}</li>
+                                    <li><span class="label-li">{labels.LBL_Connect_NonDiscountableRevenue}</span> &nbsp;
+                                        {labels.LBL_Connect_NonDiscountableRevenueDescription}</li>
+                                    <li><span class="label-li">{labels.LBL_Connect_RegularDiscountableQuantity}</span>
+                                        &nbsp;
+                                        {labels.LBL_Connect_RegularDiscountableQuantityDescription}</li>
+                                    <li><span class="label-li">{labels.LBL_Connect_PromoDiscountableQuantity}</span>
+                                        &nbsp;
+                                        {labels.LBL_Connect_PromoDiscountableQuantityDescription}</li>
+                                    <li><span class="label-li">{labels.LBL_Connect_TotalDiscountableQuantity}</span>
+                                        &nbsp;
+                                        {labels.LBL_Connect_TotalDiscountableQuantityDescription}</li>
+                                    <li><span class="label-li">{labels.LBL_Connect_NonDiscountableQuantity}</span>
+                                        &nbsp;
+                                        {labels.LBL_Connect_NonDiscountableQuantityDescription}</li>
+                                </ol>
+                            </div>
+                            <div class="section-Container slds-m-top_medium">
+                                <div class="section-label disp">
+                                    {labels.LBL_Connect_SellInRevenueOptions}
+                                </div>
+                                <div class="info-container-w">
+                                    <div class="firsttable">
+                                        <div class="listBoxHeader">{labels.LBL_Connect_Available_Types}</div>
+                                        <div class="fieldslist">
+                                            <template for:each={availableSellinTypes} for:item="revenue"
+                                                for:index="index">
+                                                <div key={revenue.name} data-index={index}
+                                                    data-array="availableSellinTypes" onclick={handleFieldSelection}>
+                                                    <template if:true={revenue.isSelected}>
+                                                        <div class="selected">{revenue.name}</div>
+                                                    </template>
+                                                    <template if:false={revenue.isSelected}>
+                                                        <div class="listBoxElement">{revenue.name}</div>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="sorticon">
+                                        <div class="sortIconContainer">
+                                            <div>
+                                                <div class="sortleft">
+                                                    <img src={sortLeft} data-selected-array="selectedSellinType"
+                                                        data-available-array="availableSellinTypes"
+                                                        onclick={moveSelectedItemsToLeft} />
+                                                </div>
+                                                <div class="sortright">
+                                                    <img src={sortRight} data-selected-array="selectedSellinType"
+                                                        data-available-array="availableSellinTypes"
+                                                        onclick={moveSelectedItemsToRight} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="secondtable">
+                                        <div class="listBoxHeader">{labels.LBL_Connect_Selected_Types}</div>
+                                        <div class="fieldslist">
+                                            <template for:each={selectedSellinType} for:item="revenue"
+                                                for:index="index">
+                                                <div key={revenue.name} data-array="selectedSellinType"
+                                                    data-index={index} onclick={handleFieldSelection}>
+                                                    <template if:true={revenue.isSelected}>
+                                                        <div class="selected listBoxElement">{revenue.name}</div>
+                                                    </template>
+                                                    <template if:false={revenue.isSelected}>
+                                                        <div class="listBoxElement">{revenue.name}</div>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="sorticon">
+                                        <div class="sortIconContainer">
+                                            <div>
+                                                <div class="sortUp">
+                                                    <img src={sortUp} data-array="selectedSellinType"
+                                                        onclick={moveSelectedItemsUp} />
+                                                </div>
+                                                <div class="sortDown">
+                                                    <img src={sortDown} data-array="selectedSellinType"
+                                                        onclick={moveSelectedItemsDown} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-Container slds-m-top_medium">
+                            <div class="section-label disp">
+                                {labels.LBL_Connect_StatementWelcomeMessage}
+                                <div class="infoIcon disp">
+                                    <lightning-helptext content={labels.LBL_Connect_StatementWelcomeMessageDescription}>
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div class="info-container-w">
+                                <div class="w36">
+                                    <lightning-textarea value={connectSettings.sellInWelcomeMessage}
+                                        onchange={handleChangeSellInWelcomeMessage} variant="label-hidden">
+                                    </lightning-textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-breaks"></div>
+                        <div class="section-Container slds-m-top_medium">
+                            <div class="section-label disp">
+                                {labels.LBL_Connect_StatementSubmission}
+                                <div class="infoIcon disp">
+                                    <lightning-helptext content={labels.LBL_Connect_StatementSubmissionDescription}>
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div class="info-container-w">
+                                <lightning-combobox class="comboBox" variant="label-hidden" name="defaultUser" label=" "
+                                    value={connectSettings.sellInSubmissionFlow} data-id="sellInSubmissionFlow"
+                                    options={flowPickList} onchange={handleChangeFlow}>
+                                </lightning-combobox>
+                            </div>
+                        </div>
+                        <div class="add-breaks"></div>
+                    </div>
+                </div>
+            </lightning-tab>
+        </lightning-tabset>
+        <!-- Icon Picker -->
+        <template if:true={showIconPicker}>
+            <c-icon-resource-picker oniconselect={handleIconSelect} onclose={closeIconPicker}>
+            </c-icon-resource-picker>
+        </template>
+    </div>
+</template>

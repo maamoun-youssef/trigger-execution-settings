@@ -1,0 +1,336 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'customFontTest', 'Salesforce Sans', sans-serif;
+}
+
+.flex-container {
+    max-width: 1100px;
+    display: flex;
+    flex-wrap: wrap;
+    /* Enables items to wrap to the next line */
+    justify-content: center;
+    /* Centers items horizontally */
+    align-items: flex-start;
+    font-family: inherit;
+}
+
+.card {
+    transition: transform 0.5s ease-in-out;
+
+}
+
+.card:hover {
+    transform: translatey(-10px);
+}
+
+.header-block {
+    position: absolute;
+    top: 0px;
+    left: 55%;
+}
+
+.header-img {
+    display: inline-block;
+    width: 70px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+.header-line {
+    height: 65px;
+    width: 2px;
+    background-color: #b9b5cc;
+    display: inline-block;
+    margin-right: 20px;
+    translate: 0px 20px;
+}
+
+.header-word {
+    display: inline-block;
+    font-size: 30px;
+    color: white;
+    font-weight: 500;
+}
+
+.theme-flex-container {
+    max-width: 1100px;
+    display: flex;
+    flex-wrap: wrap;
+    /* Enables items to wrap to the next line */
+    justify-content: center;
+    /* Centers items horizontally */
+    align-items: flex-start;
+    column-gap: 20px;
+    row-gap: 32px;
+    padding-top: 32px;
+    padding-left: 30px;
+    font-family: inherit;
+}
+
+.theme-container {
+    width: 250px;
+    font-family: inherit;
+}
+
+.icon-container {
+    width: fit-content;
+    display: flex;
+    align-items: flex-start;
+}
+
+.description-container {
+    min-width: 300px;
+    max-width: 500px;
+    margin-right: 120px;
+    margin-left: 30px;
+    padding: 8px;
+    text-align: center;
+    font-family: inherit;
+}
+
+.section-icon {
+    width: 120px;
+    height: 120px;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 500;
+    font-family: inherit;
+}
+
+.section-sub-title {
+    font-size: 16px;
+    line-height: 1.4;
+    font-family: inherit;
+}
+
+.theme {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    overflow-wrap: break-word;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.theme-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.theme-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+    font-family: inherit;
+}
+
+.theme-title-overlay {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+    width: 100%;
+    height: 40%;
+    padding-inline: 10px;
+    color: white;
+    font-weight: bold;
+    background-color: rgba(0, 102, 153, 0.8);
+    text-align: center;
+    font-size: 16px;
+    transition: height 0.3s ease;
+    font-family: inherit;
+
+}
+
+.connect-filet {
+    width: 100px;
+    margin-left: 30px;
+}
+
+.filet-container {
+    display: flex;
+    justify-content: center;
+    flex-basis: 100%;
+}
+
+.dc-header {
+    width: 100%;
+    height: 150px;
+    font-family: inherit;
+    position: relative;
+}
+
+/* .dc-header-img {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+}
+
+.header-bg-img {
+    display: block;
+    width: 100%;
+    height: 150px;
+    object-position: top left;
+}
+
+
+.dc-header-img {
+    width: 100%;
+    height: 150px;
+    position: relative;
+} */
+
+.dc-header-img {
+    width: 100%;
+    height: 150px;
+    display: block;
+    background-color: #f5f5f5;
+}
+
+.background-style {
+    background-repeat: repeat-x;
+    background-size: contain;
+}
+
+
+.dc-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-family: inherit;
+}
+
+.dc-section-button {
+    width: fit-content;
+    background-color: white;
+    color: black;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 0px;
+    margin-inline: 8px;
+}
+
+.btn-header {
+    position: relative;
+    z-index: 1;
+    padding: 0.5rem 1rem;
+    background: white;
+    color: #2f86a1;
+    transition: transform 0.7s ease-in-out;
+    border: none;
+    background-clip: padding-box;
+}
+
+.btn-header::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #71c89e, #2f86a1);
+    border-radius: 4px;
+    pointer-events: none;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+    padding: 2px;
+}
+
+
+/* .btn-header {
+    transition: transform 0.7s ease-in-out;
+} */
+
+.btn-header:hover {
+    background: linear-gradient(45deg, #71c89e, #2f86a1);
+    filter: hue-rotate(45deg);
+    color: white;
+    animation: btn-header-effect 2s ease-in-out forwards;
+    transform: scale(1.1);
+}
+
+.dc-upload-container {
+    margin-top: 15px;
+    font-family: inherit;
+}
+
+.dc-upload-icon {
+    --slds-c-icon-color-foreground-default: #2F86A1;
+}
+
+.dc-container {
+    background-color: #F0F0F3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'customFontTest', 'Salesforce Sans', sans-serif;
+}
+
+.centered-control {
+    display: flex;
+    justify-content: center;
+}
+
+.td-char {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+
+@keyframes btn-header-effect {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+
+    100% {
+        filter: hue-rotate(45deg);
+    }
+}
+
+.scroll-to-top-button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 1350px) {
+    .icon-container {
+        flex-basis: 100%;
+        justify-content: center;
+    }
+
+    .description-container {
+        flex-basis: 100%;
+        margin: 0px;
+    }
+
+    .connect-filet {
+        margin: 0px;
+    }
+
+    .theme-flex-container {
+        padding-left: 0px;
+    }
+}

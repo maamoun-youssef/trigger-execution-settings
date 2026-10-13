@@ -1,0 +1,242 @@
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+/* 
+.pageHeader {
+    border-left: 1px #e61f1f00 !important;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    color: #033c3a;
+} */
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+a {
+    /* color: #8cc58a; */
+}
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+.pageHeader {
+    padding: 0;
+}
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+.headerTitle {
+    font-size: .75rem;
+    line-height: 1.25;
+    color: var(--slds-g-color-neutral-base-30, rgb(68, 68, 68));
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: .0625rem;
+}
+.pr0 {
+    padding-right: 0;
+    margin-right: 0;
+}
+.pm0 {
+    padding: 0;
+    margin: 0;
+}
+.filterInput {
+    width: 25vh;
+}
+.mainContainer {
+    /*height: 100%;*/
+    /*min-height: 10vh;
+    position: relative;*/
+}
+.filter-panel {
+    position: relative;
+}
+.filterButtons {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+.saveRow {
+    text-align: center;
+    background: rgb(243, 243, 243);
+}
+.color1 {
+    background: #0d807d;
+    color: white;
+}
+.color2 {
+    color: white;
+    background: #92D050;
+}
+.color3 {
+    color: white;
+    background: #E49EDD;
+}
+.consoCell {
+    background-color: #DAF2D0 !important;
+}
+.detailCell {
+    background-color: #F8E4F6 !important;
+}
+tr.newLoading {
+    background-image: linear-gradient(to right, transparent 50%, rgba(0, 0, 0, .08) 50%);
+    background-size: 200% 100%;
+    animation: newLoading 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+tr.newLoading td {
+    opacity: .45;
+    pointer-events: none;
+}
+.whiteBg {
+    background: white;
+}
+.main-table tr:focus-within {
+    border: black solid;
+}
+@keyframes newLoading {
+    0% {
+        background-position: 0;
+    }
+
+    50% {
+        background-position: -30%;
+    }
+
+    80% {
+        background-position: -100%;
+    }
+
+    100% {
+        background-position: -200%;
+    }
+}
+.loadingContainer {
+    width: 100%;
+}
+.alignRight {
+    justify-self: end;
+}
+.buttonSection {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: end;
+    align-items: center;
+    justify-content: space-between;
+}
+.alignRight {
+    justify-self: end;
+}
+
+.rows {
+    height: 30px;
+}
+.noDataText {
+    font-size: larger;
+    font-weight: 600;
+    width: 100%;
+}
+h1 {
+    font-size: 16px;
+    color: #14a7ac;
+    margin-bottom: 5px;
+}
+.newRow td {
+    background-color: rgb(248 255 150 / 32%);
+}
+.filter-panel {
+    position: sticky;
+    right: 0;
+    z-index: 7;
+    background: white;
+}
+.stickyHeader {
+    position: sticky;
+    z-index: 4;
+    top: 0;
+}
+.buttonTd {
+    text-align: left;
+}
+.pageBody {
+    min-height: 75px;
+    position: relative;
+}
+.headerTds {
+    font-weight: 645;
+    padding: 10px;
+    text-align: center;
+}
+.truncate {
+    width: 300px;
+    white-space: break-spaces;
+}
+th {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+}
+.spinnerDiv {
+    min-height: 10vh;
+}
+.pageHeader {
+    position: relative;
+}
+.tableDiv {
+    height: 100%;
+    /* height: 50%; */
+    /* width: 50%; */
+}
+.largeWidth {
+    width: 50%;
+}
+.medWidth {
+    /* width: 25%; */
+    border-left: 0.5px #ffffff4a solid;
+}
+.blankCell {
+    background: repeating-linear-gradient(45deg, #7ad4ef 10px, #ffffff 15px);
+    width: 100%;
+    height: 15px;
+    display: inline-block;
+}
+.subTotalRow td {
+    background-color: rgb(89, 89, 89) !important;
+    color: white;
+}
+.filter-section {
+    height: 100%;
+}
+select {
+    display: block;
+    position: relative;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    border-radius: 4px;
+    z-index: 2;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+}

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- NEGO - Rise Rate10 Requested --></label>
+    <name>NEGO_Rise_Rate10_Requested__c</name>
+</CustomFieldTranslation>

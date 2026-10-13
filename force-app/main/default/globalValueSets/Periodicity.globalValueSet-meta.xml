@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Month</fullName>
+        <default>false</default>
+        <label>Month</label>
+    </customValue>
+    <customValue>
+        <fullName>Trimester</fullName>
+        <default>true</default>
+        <label>Trimester</label>
+    </customValue>
+    <customValue>
+        <fullName>Year</fullName>
+        <default>false</default>
+        <label>Year</label>
+    </customValue>
+    <customValue>
+        <fullName>Week</fullName>
+        <default>false</default>
+        <label>Week</label>
+    </customValue>
+    <customValue>
+        <fullName>Semester</fullName>
+        <default>false</default>
+        <label>Semester</label>
+    </customValue>
+    <customValue>
+        <fullName>03-07-10</fullName>
+        <default>false</default>
+        <label>March/July/October</label>
+    </customValue>
+    <customValue>
+        <fullName>Contrat d&apos;application</fullName>
+        <default>false</default>
+        <label>Contrat d&apos;application</label>
+    </customValue>
+    <masterLabel>Periodicity</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

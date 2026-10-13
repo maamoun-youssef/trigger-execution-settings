@@ -1,0 +1,169 @@
+<template>
+    <article class="slds-card">
+        <template if:true={isLoading}>
+            <div class="slds-spinner_container">
+                <div class="loader slds-spinner_container slds-align--absolute-center">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </template>
+        <!-- Header -->
+          <div class="slds-card slds-grid slds-p-around_xx-small slds-page-header pageHeader" style="background: white">
+            <div class="slds-col slds-has-flexi-truncate">
+                <div
+                    class="slds-media slds-media_center slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small">
+                    <div>
+                        <lightning-icon class="slds-m-right--small"
+                            icon-name="standard:contract"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body" lwc:if={isAdvanced}>
+                        <div class="slds-text-heading_small slds-text-title_bold">{labels.LBL_ControlledContracts_Title}</div>
+                        <div class="slds-text-title">{labels.LBL_ControlledContracts_SubTitle}</div>
+                    </div>
+                    <div class="slds-media__body" lwc:else>
+                        <div class="slds-text-heading_small slds-text-title_bold">{labels.LBL_CockpitRelatedContracts_Title}</div>
+                        <div class="slds-text-title">{labels.LBL_CockpitRelatedContracts_SubTitle2}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <template if:false={records.length}>
+            <div class="slds-align_absolute-center slds-m-vertical_small">
+                <span class="slds-truncate" title={labels.LBL_No_Item_To_Display}>
+                    {labels.LBL_No_Item_To_Display}
+                </span>
+            </div>        
+        </template>
+        <!-- BODY -->
+        <template if:true={records.length}>
+            <template for:each={records} for:item="record">
+                <div key={record.Id}>
+                    <template if:false={isAdvanced}>
+                        <!-- Master row -->
+                        <div class={record.rowClass}>
+                            <!-- Left chevron -->
+                            <button
+                                if:true={record.showChevron}
+                                class={record.chevronClass}
+                                type="button"
+                                data-id={record.Id}
+                                onclick={toggleAdvancedContracts}
+                            >
+                                <lightning-icon icon-name={record.chevronIcon} size="x-small" alternative-text="Toggle"></lightning-icon>
+                            </button>
+                            <!-- Middle content -->
+                            <div class="slds-grid slds-grid_vertical-align-center slds-col slds-has-flexi-truncate">
+                                <span class={record.shieldClass}>
+                                    <lightning-icon icon-name="utility:shield"
+                                                    size="x-small"
+                                                    class="slds-m-right_xx-small"
+                                                    alternative-text="Advanced">
+                                    </lightning-icon>
+                                    {labels.LBL_Advanced}
+                                </span>
+                                    <a class="slds-truncate slds-text-link slds-text-title_bold"
+                                    href={record.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    title={record.name}>
+                                        {record.name}
+                                    </a>
+                                <span class={record.siblingClass} data-id={record.Id}>
+                                    {record.siblingText}
+                                </span>
+                            </div>
+                            <!-- Eye icon -->
+                            <button class="slds-button slds-button_icon rc-eye" type="button" data-id={record.Id} onclick={handleConditionManager} title="Open Condition Manager">
+                                <lightning-icon icon-name="utility:preview" size="x-small" alternative-text="View"></lightning-icon>
+                            </button>
+                        </div>
+                    </template>
+                        <!-- Expanded section: table -->
+                        <template lwc:if={record.isExpanded}>
+                            <div>
+                                <div if:false={isAdvanced} class="slds-text-title_caps slds-m-around--xx-small">{labels.LBL_Sibling_Contracts}</div>
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout">
+                                    <thead>
+                                        <tr>
+                                            <template for:each={displayedFields} for:item="field">
+                                                <th key={field.fieldName}
+                                                    title={field.fieldLabel}
+                                                    style={field.headerStyle}
+                                                    class="rowspanHeightTh">
+                                                    {field.fieldLabel}
+                                                </th>
+                                            </template>
+                                            <th style={lastThStyle} class="slds-text-align--center slds-p-around--none">{labels.LBL_Actions}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={record.rows} for:item="row">
+                                            <tr key={row.Id}>
+                                                    <template for:each={row.values} for:item="field">
+                                                        <td key={field.fieldName} style={field.style}>
+                                                            <template lwc:if={field.isNameField}>
+                                                                <a class="slds-text-link" href={field.link} target="_blank">
+                                                                    {field.fieldValue}
+                                                                </a>
+                                                            </template>
+                                                            <lightning-formatted-number lwc:elseif={field.isNumberField}
+                                                                maximum-fraction-digits={field.scale}
+                                                                minimum-fraction-digits={field.scale}
+                                                                value={field.fieldValue} variant="label-hidden">
+                                                            </lightning-formatted-number>
+                                                            <template lwc:elseif={field.isText}>
+                                                                <template lwc:if={field.isHTMLFormatted}>
+                                                                    <lightning-formatted-rich-text value={field.fieldValue}
+                                                                        variant="label-hidden">
+                                                                    </lightning-formatted-rich-text>
+                                                                </template>
+                                                                <template lwc:else>
+                                                                    {field.fieldValue}
+                                                                </template>
+                                                            </template>
+                                                            <template lwc:elseif={field.isReference}>
+                                                                <a href={field.link} target="_blank">
+                                                                    {field.fieldOutputValue}</a>
+                                                            </template>
+                                                            <lightning-input lwc:elseif={field.isBoolean} type="checkbox"
+                                                                class="input-center" variant="label-hidden"
+                                                                checked={field.fieldValue} disabled>
+                                                            </lightning-input>
+                                                            <lightning-formatted-date-time lwc:elseif={field.isDate}
+                                                                value={field.fieldValue} year="numeric" month="2-digit"
+                                                                day="2-digit"></lightning-formatted-date-time>
+                                                            <lightning-formatted-date-time lwc:elseif={field.isDateTime}
+                                                                value={field.fieldValue} year="numeric" month="2-digit"
+                                                                day="2-digit" hour="2-digit"
+                                                                minute="2-digit"></lightning-formatted-date-time>
+                                                            <template lwc:elseif={field.isPicklist}>
+                                                                {field.fieldOutputValue}
+                                                            </template>
+                                                            <template lwc:else>
+                                                                {field.fieldValue}
+                                                            </template>
+                                                        </td>
+                                                    </template>
+                                                <td style={row.lastTdStyle} class="slds-text-align--center slds-p-around--none">
+                                                    <lightning-button-icon
+                                                        icon-name="utility:preview"
+                                                        variant="bare"
+                                                        alternative-text="View"
+                                                        data-id={row.Id}
+                                                        onclick={handleConditionManager}>
+                                                    </lightning-button-icon>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </template>
+                </div>
+            </template>
+        </template>
+    </article>
+</template>

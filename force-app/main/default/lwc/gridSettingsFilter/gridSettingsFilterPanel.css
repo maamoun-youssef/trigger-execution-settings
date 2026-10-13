@@ -1,0 +1,7 @@
+.panel-footer {
+    /*position: absolute;*/
+    bottom: 0;
+    background-color: var(--lwc-colorBackground);
+    border-top: 2px solid var(--lwc-colorBorder);
+    padding: var(--lwc-spacingXSmall, .5rem) var(--lwc-spacingMedium, 1rem);
+}

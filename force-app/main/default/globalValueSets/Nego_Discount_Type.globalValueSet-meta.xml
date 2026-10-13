@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Price Discount</fullName>
+        <default>false</default>
+        <label>Price Discount</label>
+    </customValue>
+    <customValue>
+        <fullName>Rebates</fullName>
+        <default>false</default>
+        <label>Rebates</label>
+    </customValue>
+    <customValue>
+        <fullName>Progressive Rebates</fullName>
+        <default>false</default>
+        <label>Progressive Rebates</label>
+    </customValue>
+    <customValue>
+        <fullName>Administrative Fees</fullName>
+        <default>false</default>
+        <label>Administrative Fees</label>
+    </customValue>
+    <customValue>
+        <fullName>Advertising fees</fullName>
+        <default>false</default>
+        <label>Advertising fees</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <customValue>
+        <fullName>Financial Fees</fullName>
+        <default>false</default>
+        <label>Financial Fees</label>
+    </customValue>
+    <customValue>
+        <fullName>Penalties</fullName>
+        <default>false</default>
+        <label>Penalties</label>
+    </customValue>
+    <customValue>
+        <fullName>Supply Fees</fullName>
+        <default>false</default>
+        <label>Supply Fees</label>
+    </customValue>
+    <customValue>
+        <fullName>Rebates 2</fullName>
+        <default>false</default>
+        <label>Rebates 2</label>
+    </customValue>
+    <customValue>
+        <fullName>Advertising Fees 2</fullName>
+        <default>false</default>
+        <label>Advertising Fees 2</label>
+    </customValue>
+    <customValue>
+        <fullName>Others 2</fullName>
+        <default>false</default>
+        <label>Others 2</label>
+    </customValue>
+    <customValue>
+        <fullName>Store Fees</fullName>
+        <default>false</default>
+        <label>Store Fees</label>
+    </customValue>
+    <customValue>
+        <fullName>Quality</fullName>
+        <default>false</default>
+        <label>Quality</label>
+    </customValue>
+    <customValue>
+        <fullName>Payment</fullName>
+        <default>false</default>
+        <label>Payment</label>
+    </customValue>
+    <customValue>
+        <fullName>International Fees</fullName>
+        <default>false</default>
+        <label>International Fees</label>
+    </customValue>
+    <customValue>
+        <fullName>International Fees 2</fullName>
+        <default>false</default>
+        <label>International Fees 2</label>
+    </customValue>
+    <customValue>
+        <fullName>Stock Returns</fullName>
+        <default>false</default>
+        <label>Stock Returns</label>
+    </customValue>
+    <customValue>
+        <fullName>Rebates 4Net</fullName>
+        <default>false</default>
+        <label>Rebates 4Net</label>
+    </customValue>
+    <description>Type parent of the tariff condition (tariff Discounts, Rebates, Marketing fees, ....</description>
+    <masterLabel>Nego Discount Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

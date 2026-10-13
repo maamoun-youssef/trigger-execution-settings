@@ -1,0 +1,125 @@
+<template>
+    <div class="slds-card mainContainer">
+        <h1 class="slds-text-heading_small slds-align-middle slds-truncate bold-text">{Label.LBL_NS_Summary_Title}</h1>
+        <template if:false={includeAllHEs}>
+            <template if:true={includedCategories.length}>
+                <h1 class="slds-text-heading_small slds-truncate">
+                    {Label.LBL_NS_Summary_Included_HE}</h1>
+                <div class="slds-grid slds-wrap">
+                    <template for:each={includedCategories} for:item="record">
+                        <template for:each={record.items} for:item="item">
+                            <div class="element-box alignmentClass he-box slds-col slds-m-around_xx-small"
+                                key={item.Id}>
+                                <div style="font-weight: bold;">
+                                    <a href={item.url} target="_blank"
+                                        title={item.hierarchyDisplayName}>{item.hierarchyDisplayName}</a>
+                                </div>
+                                <div class="slds-p-around_xx-small slds-truncate">
+                                    <template if:true={item.isMultiLevels}>...></template>
+                                    <template for:each={item.path} for:item="path">
+                                        <a href={path.url} target="_blank" key={path} title={path.name}>{path.name}</a>
+                                        <template if:false={path.isLast}>></template>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </template>
+        </template>
+        <template if:true={includeAllHEs}>
+            <h1 class="slds-text-heading_small slds-truncate">
+                {Label.LBL_NS_Summary_Included_HE}</h1>
+            <span class="slds-badge slds-theme_success"> {includeAllHEsLabel} : {Label.LBL_Yes}</span>
+        </template>
+        <template if:true={excludedCategories.length}>
+            <h1 class="slds-text-heading_small slds-truncate">
+                {Label.LBL_NS_Summary_Excluded_HE}</h1>
+            <div class="slds-grid slds-wrap">
+                <template for:each={excludedCategories} for:item="record">
+                    <template for:each={record.items} for:item="item">
+                        <div class="element-box alignmentClass he-box slds-col slds-m-around_xx-small" key={item.Id}>
+                            <div style="font-weight: bold;">
+                                <a href={item.url} target="_blank"
+                                    title={item.hierarchyDisplayName}>{item.hierarchyDisplayName}</a>
+                            </div>
+                            <div class="slds-p-around_xx-small slds-truncate">
+                                <template if:true={item.isMultiLevels}>...></template>
+                                <template for:each={item.path} for:item="path">
+                                    <a href={path.url} target="_blank" key={path} title={path.name}>{path.name}</a>
+                                    <template if:false={path.isLast}>></template>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </template>
+        <template if:false={includeAllBrands}>
+            <template if:true={brands.length}>
+                <h1 class="slds-text-heading_small slds-truncate">
+                    {Label.LBL_NS_Summary_Selected_Brands}</h1>
+                <div class="slds-grid slds-wrap">
+                    <template for:each={brands} for:item="item">
+                        <div class="element-box alignmentClass brand-box slds-col slds-m-around_xx-small"
+                            style="font-weight: bold;" key={item.Id}>
+                            <a href={item.url} target="_blank" title={item.brandName}>{item.brandName}</a>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </template>
+        <template if:true={includeAllBrands}>
+            <h1 class="slds-text-heading_small slds-truncate">
+                {Label.LBL_NS_Summary_Selected_Brands}</h1>
+            <span class="slds-badge slds-theme_success">{IncludeAllBrandsLabel}: {Label.LBL_Yes}</span>
+            <template if:true={includeNewBrands}>
+                <div><span class="slds-badge slds-theme_success slds-m-top_x-small">{IncludeNewBrandsLabel}:
+                        {Label.LBL_Yes}</span></div>
+            </template>
+            <template if:false={includeNewBrands}>
+                <div><span class="slds-badge slds-theme_error slds-m-top_x-small">{IncludeNewBrandsLabel}:
+                        {Label.LBL_No}</span></div>
+            </template>
+        </template>
+        <template if:true={productAttributes.length}>
+            <h1 class="slds-text-heading_small slds-truncate">
+                {Label.LBL_NS_Summary_Product_Attributes}</h1>
+            <div class="slds-wrap">
+                <template for:each={productAttributes} for:item="item">
+                    <div class="element-box product-box slds-p-around_xx-small slds-m-around_xx-small"
+                        style="font-weight: bold;" key={item.index}>
+                        {item.labelToDisplay}
+                    </div>
+                </template>
+            </div>
+        </template>
+        <h1 class="slds-text-heading_small slds-truncate">
+            {Label.LBL_NS_Summary_Product_Info}
+        </h1>
+        <div class="slds-wrap">
+            <template if:true={includeAllProducts}>
+                <div><span class="slds-badge slds-theme_success">{IncludeAllProductsLabel}: {Label.LBL_Yes}</span></div>
+                <template if:true={includeNewProducts}>
+                    <div><span class="slds-badge slds-theme_success slds-m-top_x-small">{IncludeNewProductsLabel}:
+                            {Label.LBL_Yes}</span></div>
+                </template>
+                <template if:false={includeNewProducts}>
+                    <div><span class="slds-badge slds-theme_error slds-m-top_x-small">{IncludeNewProductsLabel}:
+                            {Label.LBL_No}</span></div>
+                </template>
+            </template>
+            <template if:false={includeAllProducts}>
+                <div><span class="slds-badge slds-theme_error">{IncludeAllProductsLabel}: {Label.LBL_No}</span></div>
+                <template if:true={excludedPGsFromFilter}>
+                    <div><span class="slds-badge slds-m-top_x-small">{Label.LBL_NS_Summary_Excluded_Products}</span>
+                    </div>
+                </template>
+                <template if:true={includedPGsHorsFilter}>
+                    <div><span class="slds-badge slds-m-top_x-small">{Label.LBL_NS_Summary_Included_Products}</span>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </div>
+</template>

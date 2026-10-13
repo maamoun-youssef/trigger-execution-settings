@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "RFx",
+  "contentBody" : {
+    "activeViewId" : "RFx",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-rfx",
+    "urlPrefix" : "rfx"
+  },
+  "urlName" : "rfx"
+}

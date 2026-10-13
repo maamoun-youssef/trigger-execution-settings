@@ -1,0 +1,87 @@
+<template>
+    <div class="dc-container">
+        <template lwc:if={isLoading}>
+            <div class="slds-spinner_container">
+                <div class="dc-loader slds-spinner_container slds-align_absolute-center"></div>
+            </div>
+        </template>
+        <template if:false={isLoading}>
+            <!-- HEADER -->
+            <div class="dc-header slds-m-bottom_x-large">
+                <img class="dc-header-img" src={images.headerImg} alt="header-img" />
+            </div>
+            <!-- FILE UPLOADER -->
+            <div class="dc-upload-container">
+                <div class="slds-form-element slds-m-bottom_x-large">
+                    <span class="slds-form-element__label dc-inherit-font dc-12px-font"
+                        id="file-selector-primary-label-105">{labels.LBL_DocumentsCenter_AttachFile}</span>
+                    <div class="slds-form-element__control">
+                        <div class="slds-file-selector slds-file-selector_files">
+                            <div class="slds-file-selector__dropzone">
+                                <input onclick={handleOpenModal} data-context={modalContext.flow.value}
+                                    class="slds-file-selector__input slds-assistive-text" id="file-upload-input-107"
+                                    aria-labelledby="file-selector-primary-label-105 file-selector-secondary-label106" />
+                                <label class="slds-file-selector__body" for="file-upload-input-107"
+                                    id="file-selector-secondary-label106">
+                                    <span
+                                        class="slds-file-selector__button slds-button slds-button_neutral dc-inherit-font dc-13px-font">
+                                        <lightning-icon icon-name="utility:upload" alternative-text="Upload"
+                                            title="Upload" size="xx-small"
+                                            class="dc-upload-icon  slds-m-right_xx-small"></lightning-icon>
+                                        {labels.LBL_DocumentsCenter_UploadFiles}</span>
+                                    <span
+                                        class="slds-file-selector__text slds-medium-show dc-13px-font">{labels.LBL_DocumentsCenter_OrDropFiles}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- BUTTONS RIBBON -->
+            <div class="dc-buttons-container slds-p-horizontal_xx-large">
+                <button class="dc-location-button slds-p-horizontal_large slds-p-vertical_small slds-m-vertical_small">
+                    {labels.LBL_Connect_DocumentsCenter_Menu}
+                </button>
+                <template for:each={fileDirectorySettings} for:item="settings">
+                    <button if:true={settings.showSection} key={settings.displayOrder}
+                        data-section-id={settings.sectionLabel} onclick={handleSectionBtnClick}
+                        class="dc-section-button slds-p-horizontal_large slds-p-vertical_small slds-m-vertical_small btn-header">
+                        {settings.sectionLabel}
+                    </button>
+                </template>
+            </div>
+            <!-- SECTIONS -->
+            <div class="slds-grid slds-wrap slds-p-horizontal_xx-large ">
+                <template for:each={fileDirectorySettings} for:item="settings">
+                    <div if:true={settings.showSection} class="slds-col slds-size_1-of-1 dc-section-container"
+                        key={settings.displayOrder} data-section-target-id={settings.sectionLabel}>
+                        <c-documents-center-section settings={settings} onthemeclick={handleOpenModal}
+                            data-context={modalContext.fdm.value}></c-documents-center-section>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+    <!-- MODAL -->
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container" style={modalContainerStyle}>
+                <lightning-button-icon icon-name="utility:close" alternative-text="Cancel and close" size="large"
+                    class="dc-modal-close-button-icon" variant="bare"
+                    onclick={handleCloseModal}></lightning-button-icon>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1" style={modalContentStyle}>
+                    <div style="position: relative;">
+                        <lightning-flow if:true={showFlowModal} flow-api-name={uploadFlow}
+                            flow-input-variables={flowInputVariables} onstatuschange={handleflowStatusChange}
+                            flow-finish-behavior="NONE">
+                        </lightning-flow>
+                    </div>
+                    <c-file-directory-manager if:true={showFdmModal} theme={gridKey} record-id={recordId}>
+                    </c-file-directory-manager>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

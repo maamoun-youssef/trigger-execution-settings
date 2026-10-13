@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Nego Scope Detail",
+  "contentBody" : {
+    "activeViewId" : "Nego_Scope_Detail",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "detail-NegoScope__c",
+    "urlPrefix" : "negoscope"
+  },
+  "urlName" : "nego-scope-detail"
+}

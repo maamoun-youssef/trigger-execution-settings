@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "SellIn Statement List",
+  "contentBody" : {
+    "activeViewId" : "SellIn_Statement_List",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-sellin-statement-list",
+    "urlPrefix" : "sellin-statement-list"
+  },
+  "urlName" : "sellin-statement-list"
+}

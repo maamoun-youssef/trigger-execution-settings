@@ -1,0 +1,99 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Accord Détails",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"de3b2f6b-8d79-4604-a8f6-8d97d3f8185f\",\"columns\":[{\"UUID\":\"303c8c60-b61f-41bb-8ea8-413cfbdc8101\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "actions" : false,
+                "allowDelete" : false,
+                "allowExport" : false,
+                "allowFilter" : false,
+                "allowImport" : false,
+                "allowOpenRecord" : false,
+                "applyNewDesign" : false,
+                "displayCloneButton" : false,
+                "displayListViewActions" : false,
+                "displayNewButton" : false,
+                "displayNewInlineButton" : false,
+                "displayRowActionIcons" : false,
+                "displayShowHideColumns" : false,
+                "enableMassUpdate" : false,
+                "filterOnNoneDisplayedFields" : false,
+                "includeInListView" : false,
+                "isReadOnly" : false,
+                "labelNewInlineButton" : "New inline row",
+                "nameAsURL" : false,
+                "numberFixedColumns" : 0,
+                "objectApiName" : "None",
+                "partialSave" : false,
+                "quickActions" : "",
+                "readOnly" : false,
+                "recordId" : "{!recordId}",
+                "refreshViewAfterSave" : false,
+                "showCurrency" : true,
+                "showCurrencyAsSymbol" : false,
+                "showSubTotal" : false,
+                "templateName" : "Contract_Discount_Community_Grid",
+                "useRecordIsoCurrency" : false
+              },
+              "definition" : "c:gridSettingsPlugin",
+              "id" : "97c2e7d5-d521-4718-9123-26940fc5efe3",
+              "type" : "component"
+            } ],
+            "id" : "303c8c60-b61f-41bb-8ea8-413cfbdc8101",
+            "name" : "col1",
+            "title" : "Colonne 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "de3b2f6b-8d79-4604-a8f6-8d97d3f8185f",
+          "type" : "component"
+        } ],
+        "id" : "fa6537d3-f37a-4cea-aea1-5c7625c347e8",
+        "name" : "content",
+        "title" : "Contenu",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "pageTitle" : "{!Record._Object}: {!Record._Title}",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "281a23c6-398f-4186-a4fe-20b8a3caa810",
+          "type" : "component"
+        } ],
+        "id" : "41bfa928-a528-4a75-8b2c-7bd0f81a2176",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "200bcc14-1fbd-475b-8605-0ddee57c0d5b",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "detail-Contract__c"
+  },
+  "urlName" : "accord-détails"
+}

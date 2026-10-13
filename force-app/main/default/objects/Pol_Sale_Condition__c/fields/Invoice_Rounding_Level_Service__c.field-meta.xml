@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Invoice_Rounding_Level_Service__c</fullName>
+    <description>Specify the attended rounded level for the invoice (Million, Thousand, Hundred, Ten, Unit)</description>
+    <inlineHelpText>Specify the attended rounded level for the invoice (Million, Thousand, Hundred, Ten, Unit)</inlineHelpText>
+    <label>Invoice Rounding Level Service</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>-4</fullName>
+                <default>false</default>
+                <label>10000 Unit</label>
+            </value>
+            <value>
+                <fullName>-3</fullName>
+                <default>false</default>
+                <label>1000 Unit</label>
+            </value>
+            <value>
+                <fullName>-2</fullName>
+                <default>false</default>
+                <label>100 Unit</label>
+            </value>
+            <value>
+                <fullName>-1</fullName>
+                <default>false</default>
+                <label>10 Unit</label>
+            </value>
+            <value>
+                <fullName>0</fullName>
+                <default>false</default>
+                <label>Unit</label>
+            </value>
+            <value>
+                <fullName>1</fullName>
+                <default>false</default>
+                <label>1 Decimal</label>
+            </value>
+            <value>
+                <fullName>2</fullName>
+                <default>false</default>
+                <label>2 Decimals</label>
+            </value>
+            <value>
+                <fullName>3</fullName>
+                <default>false</default>
+                <label>3 Decimals</label>
+            </value>
+            <value>
+                <fullName>4</fullName>
+                <default>false</default>
+                <label>4 Decimals</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

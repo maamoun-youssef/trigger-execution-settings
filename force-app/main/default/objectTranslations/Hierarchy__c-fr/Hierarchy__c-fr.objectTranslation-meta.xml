@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Segmentation</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Segmentations</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>negOptim Hierarchy</layout>
+        <sections>
+            <label><!-- Filter Settings --></label>
+            <section>Filter Settings</section>
+        </sections>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+        <sections>
+            <label><!-- Life Cycle --></label>
+            <section>Life Cycle</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Nom hiérarchie</nameFieldLabel>
+    <recordTypes>
+        <label>Produit</label>
+        <name>Product</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Achat</label>
+        <name>Purchasing</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Direct to Store</masterLabel>
+        <translation>Direct to Store</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>To Warehouse</masterLabel>
+        <translation>To Warehouse</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Via Wholesaler</masterLabel>
+        <translation>Via Wholesaler</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

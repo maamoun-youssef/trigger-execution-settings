@@ -1,0 +1,13 @@
+<template>
+    <div class={containerClass}>
+        <img if:true={imageUrl} src={imageUrl} alt={logo} style={imageStyle} class="image-viewer"
+            onload={handleImageLoad} onerror={handleImageError} />
+        <div if:true={errorMessage} class="error-message">
+            <lightning-icon icon-name="utility:warning" size="small"></lightning-icon>
+            <span>{errorMessage}</span>
+        </div>
+        <div if:true={isLoading} class="loading-message">
+            <lightning-spinner alternative-text="Loading image..." size="small"></lightning-spinner>
+        </div>
+    </div>
+</template>

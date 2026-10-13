@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_NetPrice_wo_Promo_woTax__c</fullName>
+    <formula>ROUND(New_CostPrice__c, IF(ISBLANK(TEXT(Assortment_BU__r.CostPrice_Rounding_Level__c)), 4, VALUE(TEXT(Assortment_BU__r.CostPrice_Rounding_Level__c))))
+-(IF(CONTAINS(New_Promo_Discounts__c, &apos;P1/&apos;), 0, New_Disc_1_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P2/&apos;), 0, New_Disc_2_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P3/&apos;), 0, New_Disc_3_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P4/&apos;), 0, New_Disc_4_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P5/&apos;), 0, New_Disc_5_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P6/&apos;), 0, New_Disc_6_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P7/&apos;), 0, New_Disc_7_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P8/&apos;), 0, New_Disc_8_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P9/&apos;), 0, New_Disc_9_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P10/&apos;), 0, New_Disc_10_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P11/&apos;), 0, New_Disc_11_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P12/&apos;), 0, New_Disc_12_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P13/&apos;), 0, New_Disc_13_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P14/&apos;), 0, New_Disc_14_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P15/&apos;), 0, New_Disc_15_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P16/&apos;), 0, New_Disc_16_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P17/&apos;), 0, New_Disc_17_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P18/&apos;), 0, New_Disc_18_Val__c)
++ IF(CONTAINS(New_Promo_Discounts__c, &apos;P19/&apos;), 0, New_Disc_19_Val__c))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>New NetPrice wo Promo woTax</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

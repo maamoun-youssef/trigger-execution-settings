@@ -1,0 +1,103 @@
+<template>
+    <div class="slds-card mainContainer">
+        <div class="main-header">
+            <div class="slds-card slds-grid slds-p-around_xx-small slds-page-header">
+                <div class="slds-col slds-has-flexi-truncate">
+                    <!-- HEADING AREA -->
+                    <!-- MEDIA OBJECT = FIGURE + BODY -->
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div
+                            class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                            <lightning-icon icon-name="utility:percent">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small">
+                            <p class="slds-text-title slds-line-height_reset">
+                                {labels.BULabel}
+                            </p>
+                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                {labels.LBL_Sales_Cannibalization}
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <lightning-button class="slds-button header_button slds-m-around_xx-small" variant="brand"
+                    label={labels.LBL_Save} onclick={handleSave}></lightning-button>
+            </div>
+        </div>
+        <div class="main-panel slds-scrollable">
+            <template if:true={loading}>
+                <div class="slds-spinner_container">
+                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </template>
+            <template if:false={loading}>
+                <table
+                    class="slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border--right slds-no-row-hover">
+                    <thead>
+                        <tr style="height: 60px;">
+                            <th style="background-color: #0d807d;color: white;" class="stickyHeader">
+                                {labels.LBL_TypeHR}
+                            </th>
+                            <th style="background-color: #0d807d;color: white;" class="stickyHeader">
+                                {labels.LBL_Sales_Cannibalization}
+                            </th>
+                            <th style="background-color: #0d807d;color: white;" class="stickyHeader descriptionSize">
+                                {labels.LBL_DescriptionHR}
+                            </th>
+                            <th style="background-color: #0d807d;color: white;" class="stickyHeader">
+                                {labels.LBL_API}
+                            </th>
+                            <th style="background-color: #0d807d;color: white;text-align:center;" class="stickyHeader percSize">
+                                {labels.LBL_Std_Perc}
+                            </th>
+                            <th style="background-color: #0d807d;color: white;text-align:center;" class="stickyHeader percSize">
+                                {labels.LBL_Client_Perc}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template if:false={records.length}>
+                            <tr>
+                                <td colspan="6">
+                                    {labels.MSG_SC_not_Generated_or_Configured}
+                                </td>
+                            </tr>
+                        </template>
+                        <template if:true={records.length}>
+                            <template for:each={records} for:item="record" for:index="index">
+                                <!-- <template iterator:record={records}> -->
+                                <tr key={record.label} style={record.style}>
+                                    <td>
+                                        {record.typeHRLabel}
+                                    </td>
+                                    <td>
+                                        {record.label}
+                                    </td>
+                                    <td class="descriptionSize">
+                                        {record.description}
+                                    </td>
+                                    <td>
+                                        {record.api}
+                                    </td>
+                                    <td class="percSize" style="text-align:center;">
+                                        {record.stdPerc}
+                                    </td>
+                                    <td>
+                                        <lightning-input class="percSize input-center" type="number" variant="label-hidden" data-index={index}
+                                            data-property="clientPerc" value={record.clientPerc} onchange={handleChange}></lightning-input>
+                                    </td>
+                                </tr>
+                            </template>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+        </div>
+    </div>
+</template>

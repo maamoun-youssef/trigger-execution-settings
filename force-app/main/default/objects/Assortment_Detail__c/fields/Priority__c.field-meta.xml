@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Priority__c</fullName>
+    <description>Display the priority of the product on the right channel.</description>
+    <externalId>false</externalId>
+    <formula>/* Define the priority of the Product for the right channel
+- The channel is the BU Target for Budget Assortment and the BU source for others
+- Be carefull the customer could choose to have different names for the BU Channel eg HMSM... you have to adapt the formula */
+
+
+CASE(if(  Assortment_type__c  = &apos;Budget&apos;,  Assortment_BU__r.BU_Target__r.Name , Assortment_BU__r.BU_source__r.Name ), 
+  &apos;HM&apos;, text(Product__r.PriorityHM__c) ,
+  &apos;SM&apos;, text(Product__r.Priority_SM__c) ,
+  &apos;Proxi&apos;, text( Product__r.PriorityConv__c ) ,
+  &apos;Drive&apos;, text( Product__r.PriorityDrive__c ) ,
+  &apos;LAD&apos;, text( Product__r.PriorityWeb__c ) ,
+  &apos;Cash&amp;Carry&apos;, text( Product__r.PriorityCashCarry__c ), 
+  null)</formula>
+    <inlineHelpText>La formule peut devoir être adaptée en fonction des noms des BU circuits</inlineHelpText>
+    <label>Priority</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

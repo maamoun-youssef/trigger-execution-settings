@@ -1,0 +1,412 @@
+<template>
+    <div class="slds-card mainContainer" style="position: relative;">
+        <div class="slds-page-header pageHeader">
+            <template lwc:if={isLoading}>
+                <div class="slds-spinner_container spinnerDiv">
+                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </template>
+            <template lwc:else>
+                <div class="slds-page-header__row slds-p-around--medium">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                            <div class="slds-media__figure slds-align_absolute-center">
+                                <lightning-icon icon-name="standard:change_request"
+                                    alternative-text={Labels.LBL_InvoiceManager} title={Labels.LBL_InvoiceManager}
+                                    size="medium"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <p class="slds-text-title slds-line-height_reset">
+                                    {Labels.LBL_InvoiceManager}
+                                </p>
+                                <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                    {Labels.LBL_InvoiceMng_FilterAndRun}
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-page-header__col-actions slds-align-bottom">
+                        <div class="slds-page-header__controls">
+                            <div if:false={isLoading} class="slds-page-header__control slds-grid">
+                                <button class="slds-button slds-button_neutral slds-m-right--x-small"
+                                    style="margin-left: 10px;" onclick={resetSessionFilters}>
+                                    {Labels.LBL_ResetFilters}
+                                </button>
+                                <!-- Button group: simple buttons -->
+                                <lightning-button-group>
+                                    <lightning-button if:false={activateAdvancedFilters}
+                                        label={Labels.LBL_InvoiceMng_PredefinedFilters} variant='Brand'
+                                        onclick={handleAddAdvancedFilters}></lightning-button>
+                                    <lightning-button if:true={activateAdvancedFilters}
+                                        label={Labels.LBL_InvoiceMng_PredefinedFilters}
+                                        onclick={handleAddAdvancedFilters}></lightning-button>
+                                    <lightning-button if:true={activateAdvancedFilters}
+                                        label={Labels.LBL_InvoiceMng_AdvancedFilters} variant='Brand'
+                                        onclick={handleAddAdvancedFilters}>
+                                    </lightning-button>
+                                    <lightning-button if:false={activateAdvancedFilters}
+                                        label={Labels.LBL_InvoiceMng_AdvancedFilters}
+                                        onclick={handleAddAdvancedFilters}>
+                                    </lightning-button>
+                                </lightning-button-group>
+                                <button class="slds-button slds-button_brand" style="margin-left: 10px;"
+                                    onclick={handleSearch}>
+                                    {Labels.LBL_Run}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-card-wrapper">
+                    <div class="" style="padding: 0;">
+                        <template lwc:if={activateAdvancedFilters}>
+                            <div class="pm0 slds-grid ">
+                                <div>
+                                    <!-- <div
+                                    class="slds-form-element__legend slds-text-heading_label-normal slds-p-top_small"><br /> -->
+                                    <!-- <div class="titleText slds-p-left_small"> -->
+                                    <div class="titleText ">
+                                        {Labels.LBL_InvoiceMng_AdvancedFilters}</div>
+                                    <!-- <div class=" slds-p-around_small slds-grid slds-form-element__static "> -->
+                                    <div class="slds-grid slds-form-element__static ">
+                                        <div class="slds-grid slds-form-element__static slds-wrap">
+                                            <template for:each={advancedFilterFields} for:item="field"
+                                                for:index="index">
+                                                <div key={field} class="slds-size_1-of-6 slds-p-right--x-large">
+                                                    <span
+                                                        class="slds-form-element__label fieldLabelText ">{field.fieldLabel}</span>
+                                                    <template lwc:if={field.isText}>
+                                                        <lightning-helptext content={Labels.LBL_TextAreaHelpText}>
+                                                        </lightning-helptext>
+                                                        <lightning-textarea label="Enter some text" name="filter"
+                                                            placeholder="INV001, INV002, CODE123" value=''
+                                                            data-type="text" variant="label-hidden"
+                                                            data-field={field.fieldName}
+                                                            onchange={handleChangeFilter}></lightning-textarea>
+                                                    </template>
+                                                    <template lwc:if={field._isNumber}>
+                                                        <lightning-input name="filter" type="number"
+                                                            variant="label-hidden" value='' data-number="1"
+                                                            data-field={field.fieldName} data-type="number"
+                                                            onchange={handleChangeFilter} placeholder={Labels.LBL_From}>
+                                                        </lightning-input>
+                                                        <lightning-input name="filter" type="number"
+                                                            class="slds-m-top_small" variant="label-hidden" value=''
+                                                            data-number="2" data-field={field.fieldName}
+                                                            data-type="number" onchange={handleChangeFilter}
+                                                            placeholder={Labels.LBL_To}>
+                                                        </lightning-input>
+                                                    </template>
+                                                    <template lwc:if={field._isDate}>
+                                                        <lightning-input name="filter" type="date"
+                                                            variant="label-hidden" value='' data-number="1"
+                                                            data-field={field.fieldName} data-type="date"
+                                                            onchange={handleChangeFilter} placeholder={Labels.LBL_From}>
+                                                        </lightning-input>
+                                                        <lightning-input name="filter" type="date" value=''
+                                                            class="slds-m-top_small" variant="label-hidden"
+                                                            data-number="2" data-field={field.fieldName}
+                                                            data-type="date" onchange={handleChangeFilter}
+                                                            placeholder={Labels.LBL_To}>
+                                                        </lightning-input>
+                                                    </template>
+                                                    <template lwc:if={field.isPicklist}>
+                                                        <c-neg-optim-custom-picklist data-type="picklist"
+                                                            data-field={field.fieldName}
+                                                            options={field.picklistOptionsStr} show-all-option="true"
+                                                            selected-event={Events.handleChangeMultiPicklistValues}
+                                                            onhandlechangemultipicklistvalues={handleChangeFilter}>
+                                                        </c-neg-optim-custom-picklist>
+                                                    </template>
+                                                    <template lwc:if={field.isReference}>
+                                                        <c-neg-optim-custom-lookup object-name={field.referenceTo}
+                                                            value='' data-type="reference" data-field={field.fieldName}
+                                                            field-name="Name" is-multi="true"
+                                                            icon-name="standard:account"
+                                                            selected-event={Events.handleChangeMultiPicklistValues}
+                                                            onhandlechangemultipicklistvalues={handleChangeFilter}
+                                                            search-fields={searchFields} place-holder=""
+                                                            label="NegoScope" isportal="false"
+                                                            label-variant="label-hidden">
+                                                        </c-neg-optim-custom-lookup>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        <template lwc:elseif={isAvailable}>
+                            <div class="pm0 slds-grid ">
+                                <template lwc:if={dataIsLoading}>
+                                    <div class="slds-spinner_container greyBg">
+                                        <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+                                    </div>
+                                </template>
+                                <template if:true={chooseAction}>
+                                    <div style="min-width:400px; min-height: 240px;">
+                                        <!-- <div class="titleText">{Labels.LBL_InvoiceMng_ActionTitle}</div> -->
+                                        <template for:each={topicsList} for:item="topic">
+                                            <div key={topic.topicIndex} class="slds-p-bottom_xx-small">
+                                                <div class="topic-title">
+                                                    <strong class="slds-text-heading_small">
+                                                        {topic.topicLabel}
+                                                    </strong>
+                                                </div>
+                                                <lightning-radio-group name={topic.topicLabel} options={topic.actions}
+                                                    value={selectedAction.value} onchange={handleActionChange}
+                                                    type="radio">
+                                                </lightning-radio-group>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
+                                <div lwc:if={hasSelectedAction} class="slds-grid slds-grid--vertical slds-border_left">
+                                    <div class="slds-p-left_x-large">
+                                        <div class="titleText ">{Labels.LBL_InvoiceMng_AdditionalFilters}
+                                        </div>
+                                        <div class="slds-text-body_small actionLabel slds-p-bottom_small">
+                                            {selectedAction.label}</div>
+                                        <template lwc:if={selectedAction.filterWrapper.length}>
+                                            <div class="subTitleText slds-text-heading_label-normal">
+                                                {Labels.LBL_InvoiceMng_AdditionalFiltersNote}</div>
+                                            <div class="slds-grid slds-p-bottom_small " style="gap:10px;">
+                                                <template for:each={selectedAction.filterWrapper} for:item="field"
+                                                    for:index="index">
+                                                    <div key={field} class="fixedFilterDiv">
+                                                        <!-- Text Field Rendering -->
+                                                        <template if:true={field.isText}>
+                                                            <div
+                                                                class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-hint-parent">
+                                                                <span
+                                                                    class="slds-form-element__label fieldLabelText">{field.fieldLabel}</span>
+                                                                <div class="slds-form-element__static contentFontSize">
+                                                                    {field.valuesTranslated}</div>
+                                                            </div>
+                                                        </template>
+                                                        <!-- Date Field Rendering -->
+                                                        <template if:true={field.isDate}>
+                                                            <div class="slds-grid">
+                                                                <span
+                                                                    class="slds-form-element__label fieldLabelText ">{field.fieldLabel}</span>
+                                                                <div class="slds-grid">
+                                                                    <div class="slds-col ">
+                                                                        <div
+                                                                            class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-hint-parent">
+                                                                            <span
+                                                                                class="slds-form-element__label fieldLabelText">{Labels.LBL_From}</span>
+                                                                            <div
+                                                                                class="slds-form-element__control contentFontSize">
+                                                                                <lightning-formatted-date-time
+                                                                                    value={field.value1} year="numeric"
+                                                                                    month="2-digit" day="2-digit">
+                                                                                </lightning-formatted-date-time>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="slds-col slds-p-left_small">
+                                                                        <div
+                                                                            class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-hint-parent">
+                                                                            <span
+                                                                                class="slds-form-element__label fieldLabelText">{Labels.LBL_To}</span>
+                                                                            <div
+                                                                                class="slds-form-element__control contentFontSize">
+                                                                                <lightning-formatted-date-time
+                                                                                    value={field.value2} year="numeric"
+                                                                                    month="2-digit" day="2-digit">
+                                                                                </lightning-formatted-date-time>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <div class="slds-p-left_x-large">
+                                        <template lwc:if={selectedAction.filterWrapper.length}>
+                                            <div class="subTitleText slds-text-heading_label-normal">
+                                                {Labels.LBL_InvoiceMng_ComplementaryFilters}</div>
+                                        </template>
+                                        <div class=" slds-grid slds-form-element__static slds-wrap">
+                                            <template if:true={showAppliedFilter}
+                                                for:each={selectedAction.complementaryFilters} for:item="field"
+                                                for:index="index">
+                                                <div key={field} class={field.classSize}>
+                                                    <span class="slds-form-element__label fieldLabelText "
+                                                        if:false={field.isText}>{field.fieldLabel}</span>
+                                                    <template lwc:if={field.isText}>
+                                                        <div style="display: flex;">
+                                                            <span
+                                                                class="slds-form-element__label fieldLabelText ">{field.fieldLabel}</span>
+                                                            <lightning-helptext content={Labels.LBL_TextAreaHelpText}>
+                                                            </lightning-helptext>
+                                                        </div>
+                                                        <lightning-textarea label="Enter some text" name="filter"
+                                                            value='' placeholder="Num1, Num2, Num3..." data-type="text"
+                                                            variant="label-hidden" data-field={field.fieldName}
+                                                            onchange={handleChangeFilter}>
+                                                        </lightning-textarea>
+                                                    </template>
+                                                    <template lwc:if={field._isNumber}>
+                                                        <lightning-input name="filter" type="number"
+                                                            variant="label-hidden" value='' data-number="1"
+                                                            data-field={field.fieldName} data-type="number"
+                                                            onchange={handleChangeFilter} placeholder={Labels.LBL_From}>
+                                                        </lightning-input>
+                                                    </template>
+                                                    <template lwc:if={field._isDate}>
+                                                        <div style="display:flex;">
+                                                            <lightning-input name="filter" type="date"
+                                                                variant="label-hidden"
+                                                                class="slds-size_1-of-2 slds-p-right--medium" value=''
+                                                                data-number="1" data-field={field.fieldName}
+                                                                data-type="date" onchange={handleChangeFilter}
+                                                                placeholder={Labels.LBL_From}>
+                                                            </lightning-input>
+                                                            <lightning-input name="filter" type="date" value=''
+                                                                class="slds-size_1-of-2 slds-p-left_medium"
+                                                                variant="label-hidden" data-number="2"
+                                                                data-field={field.fieldName} data-type="date"
+                                                                onchange={handleChangeFilter}
+                                                                placeholder={Labels.LBL_To}>
+                                                            </lightning-input>
+                                                        </div>
+                                                    </template>
+                                                    <!-- check if picklist options is empty -->
+                                                    <template lwc:if={field.isPicklist}>
+                                                        <template lwc:if={field.picklistOptions.length}>
+                                                            <c-neg-optim-custom-picklist data-type="picklist"
+                                                                data-field={field.fieldName}
+                                                                selected-values={field.value}
+                                                                options={field.picklistOptionsStr}
+                                                                show-all-option="true"
+                                                                selected-event={Events.handleChangeMultiPicklistValues}
+                                                                onhandlechangemultipicklistvalues={handleChangeFilter}>
+                                                            </c-neg-optim-custom-picklist>
+                                                        </template>
+                                                        <!-- if empty remove the options field -->
+                                                        <template lwc:else>
+                                                            <c-neg-optim-custom-picklist data-type="picklist"
+                                                                data-field={field.fieldName} show-all-option="true">
+                                                            </c-neg-optim-custom-picklist>
+                                                        </template>
+                                                    </template>
+                                                    <template lwc:if={field.isReference}>
+                                                        <c-neg-optim-custom-lookup object-name={field.referenceTo}
+                                                            value='' data-type="reference" data-field={field.fieldName}
+                                                            field-name="Name" is-multi="true"
+                                                            icon-name="standard:account"
+                                                            selected-event={Events.handleChangeMultiPicklistValues}
+                                                            onhandlechangemultipicklistvalues={handleChangeFilter}
+                                                            search-fields={searchFields} place-holder=""
+                                                            label="NegoScope" isportal="false"
+                                                            label-variant="label-hidden">
+                                                        </c-neg-optim-custom-lookup>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                                <template if:true={activateAdvancedFilters}>
+                                    <div>
+                                        <!-- <div
+                                        class="slds-form-element__legend slds-text-heading_label-normal slds-p-top_small"><br /> -->
+                                        <!-- <div class="titleText slds-p-left_small"> -->
+                                        <div class="titleText ">
+                                            {Labels.LBL_InvoiceMng_AdvancedFilters}</div>
+                                        <!-- <div class=" slds-p-around_small slds-grid slds-form-element__static "> -->
+                                        <div class="slds-grid slds-form-element__static ">
+                                            <div class="slds-grid slds-form-element__static slds-wrap">
+                                                <template for:each={advancedFilterFields} for:item="field"
+                                                    for:index="index">
+                                                    <div key={field} class="slds-size_1-of-6 slds-p-right--x-large">
+                                                        <span
+                                                            class="slds-form-element__label fieldLabelText ">{field.fieldLabel}</span>
+                                                        <template lwc:if={field.isText}>
+                                                            <lightning-helptext content={Labels.LBL_TextAreaHelpText}>
+                                                            </lightning-helptext>
+                                                            <lightning-textarea label="Enter some text" name="filter"
+                                                                placeholder="INV001, INV002, CODE123" value=''
+                                                                data-type="text" variant="label-hidden"
+                                                                data-field={field.fieldName}
+                                                                onchange={handleChangeFilter}></lightning-textarea>
+                                                        </template>
+                                                        <template lwc:if={field._isNumber}>
+                                                            <lightning-input name="filter" type="number"
+                                                                variant="label-hidden" value='' data-number="1"
+                                                                data-field={field.fieldName} data-type="number"
+                                                                onchange={handleChangeFilter}
+                                                                placeholder={Labels.LBL_From}>
+                                                            </lightning-input>
+                                                            <lightning-input name="filter" type="number"
+                                                                class="slds-m-top_small" variant="label-hidden" value=''
+                                                                data-number="2" data-field={field.fieldName}
+                                                                data-type="number" onchange={handleChangeFilter}
+                                                                placeholder={Labels.LBL_To}>
+                                                            </lightning-input>
+                                                        </template>
+                                                        <template lwc:if={field._isDate}>
+                                                            <lightning-input name="filter" type="date"
+                                                                variant="label-hidden" value='' data-number="1"
+                                                                data-field={field.fieldName} data-type="date"
+                                                                onchange={handleChangeFilter}
+                                                                placeholder={Labels.LBL_From}>
+                                                            </lightning-input>
+                                                            <lightning-input name="filter" type="date" value=''
+                                                                class="slds-m-top_small" variant="label-hidden"
+                                                                data-number="2" data-field={field.fieldName}
+                                                                data-type="date" onchange={handleChangeFilter}
+                                                                placeholder={Labels.LBL_To}>
+                                                            </lightning-input>
+                                                        </template>
+                                                        <template lwc:if={field.isPicklist}>
+                                                            <c-neg-optim-custom-picklist data-type="picklist"
+                                                                data-field={field.fieldName}
+                                                                options={field.picklistOptionsStr}
+                                                                show-all-option="true"
+                                                                selected-event={Events.handleChangeMultiPicklistValues}
+                                                                onhandlechangemultipicklistvalues={handleChangeFilter}>
+                                                            </c-neg-optim-custom-picklist>
+                                                        </template>
+                                                        <template lwc:if={field.isReference}>
+                                                            <c-neg-optim-custom-lookup object-name={field.referenceTo}
+                                                                value='' data-type="reference"
+                                                                data-field={field.fieldName} field-name="Name"
+                                                                is-multi="true" icon-name="standard:account"
+                                                                selected-event={Events.handleChangeMultiPicklistValues}
+                                                                onhandlechangemultipicklistvalues={handleChangeFilter}
+                                                                search-fields={searchFields} place-holder=""
+                                                                label="NegoScope" isportal="false"
+                                                                label-variant="label-hidden">
+                                                            </c-neg-optim-custom-lookup>
+                                                        </template>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                        <template lwc:else>
+                            <div style=" min-height: 240px; display:flex; justify-content:center; text-align:center;">
+                                {Labels.LBL_Connect_Invoice_NoActiveInvoiceManagerActions}
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

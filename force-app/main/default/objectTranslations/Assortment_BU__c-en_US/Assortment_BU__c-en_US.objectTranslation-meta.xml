@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Assortment BU</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Assortment BU</value>
+    </caseValues>
+    <layouts>
+        <layout>O- Assort Budget Channel</layout>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>O- Assort Nego/Simu...</layout>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>O- Assort Target/PR</layout>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Assortment Name --></nameFieldLabel>
+    <quickActions>
+        <label><!-- Clone Simulation --></label>
+        <name>CloneSimulation</name>
+    </quickActions>
+    <recordTypes>
+        <description><!-- Objective (or budget) between the group and the market base --></description>
+        <label><!-- Budget --></label>
+        <name>Budget</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Aggregate client segmented assortments --></description>
+        <label><!-- Conso --></label>
+        <name>Conso</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Aggregate client segmented simulation assortments --></description>
+        <label><!-- Conso Simulation --></label>
+        <name>Conso_Simulation</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Aggregate client segmented target assortments --></description>
+        <label><!-- Conso Target --></label>
+        <name>Conso_Target</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Identical reproduction of the client WD with the WD of the new year --></description>
+        <label><!-- Like 4 Like --></label>
+        <name>L4L</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Objective (budget) construction for the client --></description>
+        <label><!-- Ass BU Nego --></label>
+        <name>Nego</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Copy of Target --></description>
+        <label><!-- PR --></label>
+        <name>PR</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Assortments with Panelist data only --></description>
+        <label><!-- Panel --></label>
+        <name>Panel</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- for any simulation, used automatically when cloning Target Assortment --></description>
+        <label><!-- Ass BU Simulation --></label>
+        <name>Simulation</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Objective declination on a banner --></description>
+        <label><!-- Ass BU Target --></label>
+        <name>Target</name>
+    </recordTypes>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <errorMessage><!-- The End Date should be superior or equal to the Begin Date. --></errorMessage>
+        <name>Begin_Date_Inferior_Or_Equal_End_Date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Vous n&apos;avez pas l&apos;autorisation de modifier la BU source. --></errorMessage>
+        <name>No_BU_Source_update_from_specfic_profil</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Vous n&apos;avez pas l&apos;autorisation de modifier la BU cible. --></errorMessage>
+        <name>No_BU_Target_update_from_specfic_profil</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Vous n&apos;avez pas l&apos;autorisation de modifier l&apos;hiérarchie articles. --></errorMessage>
+        <name>No_Org_HE_update_from_specfic_profil</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- No update of the year can be performed after the assortment creation. --></errorMessage>
+        <name>No_year_update</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- WD can&apos;t be equal to NULL for this status. --></errorMessage>
+        <name>WD_NotNull_for_Budget_RequestforApproval</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The Year should be between the Begin Date Year and the End Date Year. --></errorMessage>
+        <name>Year_Between_BDate_Year_EDate_Year</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- AssortmentMatrixTarget --></label>
+        <name>AssortmentMatrixTarget</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- AssortmentMatrixWD --></label>
+        <name>AssortmentMatrixWD</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Assortment_PriceWaterFall_Matrix --></label>
+        <name>Assortment_PriceWaterFall_Matrix</name>
+    </webLinks>
+</CustomObjectTranslation>

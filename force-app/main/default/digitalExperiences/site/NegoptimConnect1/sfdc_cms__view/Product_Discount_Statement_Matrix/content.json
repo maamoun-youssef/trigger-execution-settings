@@ -1,0 +1,72 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Product Discount Statement Matrix",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"a4143738-7512-4eab-ad85-71bb434f5ed9\",\"columns\":[{\"UUID\":\"c332f84b-df81-49c6-a36c-39cb46411c83\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "dxpStyle" : { },
+                "recordId" : ""
+              },
+              "definition" : "c:productDiscountStatementMatrix",
+              "id" : "bb87c4f7-921a-406e-9648-9084fadf1c7b",
+              "type" : "component"
+            } ],
+            "id" : "c332f84b-df81-49c6-a36c-39cb46411c83",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "a4143738-7512-4eab-ad85-71bb434f5ed9",
+          "type" : "component"
+        } ],
+        "id" : "23a10bb3-8138-43e4-938d-f04a97b58bc3",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "dxpStyle" : { },
+            "pageTitle" : "Product Discount Statement Matrix",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "fe3c2057-08fa-456f-96a3-9046c83ae2c7",
+          "type" : "component"
+        } ],
+        "id" : "a1b0bc2a-524b-4a12-b1f2-a9a3d5975223",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "7d6b36a8-43de-4745-8fc9-01ec9fd62225",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-product-discount-statement-matrix"
+  },
+  "urlName" : "product-discount-statement-matrix"
+}

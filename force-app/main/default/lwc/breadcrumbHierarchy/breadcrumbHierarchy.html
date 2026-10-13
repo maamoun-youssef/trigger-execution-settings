@@ -1,0 +1,31 @@
+<template>
+    <template if:true={hierarchyList}>
+        <div class="slds-path" style="max-width: 600px;">
+            <div class="slds-grid slds-path__track">
+                <div class="slds-grid slds-path__scroller-container">
+                    <div class="slds-path__scroller" style="overflow-x: auto;">
+                        <div class="slds-path__scroller_inner">
+                            <ul class="slds-path__nav" role="listbox" aria-orientation="horizontal"
+                                aria-labelledby="slds-path__stage-name">
+                                <template for:each={hierarchyList} for:item="item">
+                                    <li key={item.Id} class={item.sldsClass} role="presentation">
+                                        <a class="slds-path__link" role="option" data-id={item.Id}
+                                            aria-selected={item.isCurrent} tabindex={item.tabIndex}
+                                            onclick={openHierarchy}>
+                                            <span title={item.Name} class="slds-path__title slds-truncate">
+                                                {item.Name}
+                                            </span>
+                                        </a>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template if:true={error}>
+        <p class="slds-text-color_error">{error}</p>
+    </template>
+</template>

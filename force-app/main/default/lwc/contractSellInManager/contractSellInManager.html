@@ -1,0 +1,430 @@
+<template>
+    <div class="slds-card mainContainer slds-scrollable">
+        <div class="header">
+            <div class="slds-grid">
+                <div class="slds-col slds-p-around_xx-small slds-has-flexi-truncate">
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div
+                            class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                            <lightning-icon icon-name="utility:apps" class="header-icon">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small">
+                            <p class="slds-text-title slds-line-height_reset">
+                                {labels.ContractSellInLabel}
+                            </p>
+                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                {headerName}
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-no-flex slds-grid" lwc:if={hasChanges}>
+                    <!-- cancel -->
+                    <lightning-button class="slds-button slds-m-around_xx-small" variant="border-filled"
+                        label={labels.LBL_Cancel} onclick={cancelChanges}>
+                    </lightning-button>
+                    <!-- save -->
+                    <lightning-button class="slds-button slds-m-around_xx-small" variant="brand" label={labels.LBL_Save}
+                        onclick={handleSave}></lightning-button>
+                </div>
+                <div class="slds-col slds-no-flex slds-grid" lwc:else>
+                    <!-- cancel -->
+                    <lightning-button class="slds-button slds-m-around_xx-small" variant="border-filled"
+                        label={labels.LBL_Back} onclick={handleCancel}>
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+        <div class="main-panel">
+            <template if:false={records.length}>
+                <div if:false={loading} class="noItemsClass">
+                    <h2
+                        class="slds-align_absolute-center slds-text-align_center slds-m-around_xx-large slds-card__header-title slds-align-content-center">
+                        {labels.LBL_No_Item_To_Display}
+                    </h2>
+                </div>
+            </template>
+            <div class="slds-scrollable">
+                <template if:true={loading}>
+                    <div class="slds-spinner_container">
+                        <div class="loader slds-spinner_container slds-align--absolute-center">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </template>
+                <!-- Scoped view  -->
+                <template lwc:if={displayAsScopedView}>
+                    <template if:true={records.length}>
+                        <template for:each={records} for:item="item" for:index="recordIndex">
+                            <div key={item.Name} class="slds-grid slds-grid--horizontal slds-m-bottom--small"
+                                style="width:100%;border-collapse: separate;border-spacing:5px">
+                                <div style="width: 100%;">
+                                    <template if:false={item.isOpen}>
+                                        <div style="width: 100%;text-align:left;"
+                                            class="groupCell slds-p-around--xx-small slds-grid">
+                                            <lightning-icon class="white-icon" data-id={item.Name}
+                                                icon-name={item.iconUtility} variant="brand" onclick={openCampaignData}>
+                                            </lightning-icon>
+                                            <div class="slds-align-middle slds-text-title_bold">{item.Name}</div>
+                                        </div>
+                                    </template>
+                                    <template if:true={item.isOpen}>
+                                        <div style="width: 100%;text-align:left;"
+                                            class="groupOpenCell slds-p-around--xx-small slds-grid">
+                                            <lightning-icon class="white-icon" data-id={item.Name}
+                                                icon-name={item.iconUtility} variant="brand" onclick={openCampaignData}>
+                                            </lightning-icon>
+                                            <div class="slds-align-middle slds-text-title_bold">{item.Name}</div>
+                                        </div>
+                                    </template>
+                                    <template if:false={item.isOpen}>
+                                        <div class="groupCell">
+                                            <table class="slds-scrollable_y slds-no-row-hover slds-p-around_x-small"
+                                                style="width:100%;border-collapse: separate;border-spacing:5px">
+                                                <!-- style="border-collapse: separate;border-spacing:2px"> -->
+                                                <thead>
+                                                    <tr style="height: 50px;">
+                                                        <th class="thWidth slds-text-align--center" style="">
+                                                            {labels.LBL_SummaryTotal}</th>
+                                                        <template for:each={sellInFields} for:item="item"
+                                                            for:index="index">
+                                                            <th class="thWidth slds-text-align--center"
+                                                                key={item.fieldName} style={item.style}>
+                                                                {item.fieldLabel}</th>
+                                                        </template>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td> {labels.LBL_SummarySellInValue}</td>
+                                                        <template for:each={item.firstRowSellInValue.values}
+                                                            for:item="value">
+                                                            <td class={value.class} style={value.style}
+                                                                key={value.value}>
+                                                                <lightning-formatted-number value={value.value}>
+                                                                </lightning-formatted-number>
+                                                            </td>
+                                                        </template>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> {labels.LBL_SummarySellInQty} </td>
+                                                        <template for:each={item.firstRowSellInQty.values}
+                                                            for:item="value">
+                                                            <td class={value.class} style={value.style}
+                                                                key={value.value}>
+                                                                <lightning-formatted-number value={value.value}>
+                                                                </lightning-formatted-number>
+                                                            </td>
+                                                        </template>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </template>
+                                    <template if:true={item.isOpen}>
+                                        <div class="slds-grid slds-grid--horizontal ">
+                                            <table class="slds-scrollable_y slds-table slds-no-row-hover"
+                                                style="width:100%;border-collapse: separate;border-spacing:5px">
+                                                <thead>
+                                                    <tr style="height: 50px;">
+                                                        <th style="background-color: white;"></th>
+                                                        <th style="background-color: white;"></th>
+                                                        <th style="background-color: white;"></th>
+                                                        <template for:each={sellInFields} for:item="item"
+                                                            for:index="index">
+                                                            <th class="thWidth" key={item.fieldName}
+                                                                style={item.style1}>
+                                                                <div class="slds-grid slds-grid_align-center">
+                                                                    {item.fieldLabel}
+                                                                    <!-- Icon Container with fixed size -->
+                                                                    <div
+                                                                        style="position: absolute; right: 2px; bottom: 2px;">
+                                                                        <template lwc:if={item.isEditable}>
+                                                                            <template if:false={item.isEdit}>
+                                                                                <lightning-icon variant="inverse"
+                                                                                    icon-name="utility:edit"
+                                                                                    data-index={index}
+                                                                                    data-field={item.fieldName}
+                                                                                    onclick={toggleEdit}
+                                                                                    title={labels.LBL_Edit}
+                                                                                    size="xx-small">
+                                                                                </lightning-icon>
+                                                                            </template>
+                                                                            <template if:true={item.isEdit}>
+                                                                                <lightning-icon variant="inverse"
+                                                                                    icon-name="utility:check"
+                                                                                    data-index={index}
+                                                                                    data-field={item.fieldName}
+                                                                                    onclick={toggleEdit}
+                                                                                    title={labels.LBL_Confirm}
+                                                                                    size="xx-small">
+                                                                                </lightning-icon>
+                                                                            </template>
+                                                                        </template>
+                                                                    </div>
+                                                                </div>
+                                                            </th>
+                                                        </template>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td rowspan={item.rowspan} class="groupCell tdCell"
+                                                            style="min-width: 200px;white-space: pre-wrap;">
+                                                            {item.Name}</td>
+                                                        <td rowspan={item.rowspanSellInValues} class="groupCell tdCell">
+                                                            {labels.LBL_SummarySellInValue}</td>
+                                                        <td class={item.firstRowSellInValue.class}
+                                                            style={item.firstRowSellInValue.style}>
+                                                            {item.firstRowSellInValue.name}</td>
+                                                        <template for:each={item.firstRowSellInValue.values}
+                                                            for:item="value">
+                                                            <td class={value.class} style={value.style}
+                                                                key={value.value}>
+                                                                <lightning-formatted-number value={value.value}>
+                                                                </lightning-formatted-number>
+                                                            </td>
+                                                        </template>
+                                                    </tr>
+                                                    <template iterator:sellinvalue={item.sellInValues}>
+                                                        <tr key={sellinvalue.value.name} if:false={sellinvalue.first}>
+                                                            <td class={sellinvalue.value.class}
+                                                                style={sellinvalue.value.style}>
+                                                                {sellinvalue.value.name}</td>
+                                                            <template for:each={sellinvalue.value.values}
+                                                                for:item="value" for:index="index">
+                                                                <td class={value.class} style={value.style}
+                                                                    key={value.value}>
+                                                                    <template lwc:if={value.isEdit}>
+                                                                        <lightning-input type="number"
+                                                                            variant="label-hidden" class="input-right"
+                                                                            value={value.value} if:true={value.isInput}
+                                                                            data-id={sellinvalue.value.Id}
+                                                                            data-field={value.fieldName}
+                                                                            data-year={sellinvalue.value.year}
+                                                                            data-record-index={recordIndex}
+                                                                            data-line-index={sellinvalue.index}
+                                                                            data-index={index}
+                                                                            data-advanced-contractsellin={sellinvalue.value.advancedContractSellIn}
+                                                                            data-parentid={sellinvalue.value.parentId}
+                                                                            data-nsid={sellinvalue.value.nsId}
+                                                                            data-array-values="sellInValues"
+                                                                            onblur={handleFieldEdits}>
+                                                                        </lightning-input>
+                                                                        <lightning-formatted-number value={value.value}
+                                                                            if:false={value.isInput}>
+                                                                        </lightning-formatted-number>
+                                                                    </template>
+                                                                    <template lwc:else>
+                                                                        <lightning-formatted-number
+                                                                            value={value.value}></lightning-formatted-number>
+                                                                    </template>
+                                                                </td>
+                                                            </template>
+                                                        </tr>
+                                                    </template>
+                                                    <tr>
+                                                        <td rowspan={item.rowspanSellInQty} class="groupCell tdCell">
+                                                            {labels.LBL_SummarySellInQty}</td>
+                                                        <td class={item.firstRowSellInQty.class}
+                                                            style={item.firstRowSellInQty.style}>
+                                                            {item.firstRowSellInQty.name}</td>
+                                                        <template for:each={item.firstRowSellInQty.values}
+                                                            for:item="value">
+                                                            <td class={value.class} style={value.style}
+                                                                key={value.value}>
+                                                                <lightning-formatted-number value={value.value}>
+                                                                </lightning-formatted-number>
+                                                            </td>
+                                                        </template>
+                                                    </tr>
+                                                    <template iterator:sellinqty={item.sellInQuantities}>
+                                                        <tr key={sellinqty.value.name} if:false={sellinqty.first}>
+                                                            <td class={sellinqty.value.class}
+                                                                style={sellinqty.value.style}>
+                                                                {sellinqty.value.name}</td>
+                                                            <template for:each={sellinqty.value.values} for:item="value"
+                                                                for:index="index">
+                                                                <td class={value.class} style={value.style}
+                                                                    key={value.value}>
+                                                                    <template lwc:if={value.isEdit}>
+                                                                        <lightning-input type="number"
+                                                                            variant="label-hidden" class="input-right"
+                                                                            value={value.value} if:true={value.isInput}
+                                                                            data-id={sellinqty.value.Id}
+                                                                            data-field={value.fieldName}
+                                                                            data-year={sellinqty.value.year}
+                                                                            data-record-index={recordIndex}
+                                                                            data-line-index={sellinqty.index}
+                                                                            data-index={index}
+                                                                            data-advanced-contractsellin={sellinqty.value.advancedContractSellIn}
+                                                                            data-parentid={sellinqty.value.parentId}
+                                                                            data-nsid={sellinqty.value.nsId}
+                                                                            data-array-values="sellInQuantities"
+                                                                            onblur={handleFieldEdits}>
+                                                                        </lightning-input>
+                                                                        <lightning-formatted-number value={value.value}
+                                                                            if:false={value.isInput}>
+                                                                        </lightning-formatted-number>
+                                                                    </template>
+                                                                    <template lwc:else>
+                                                                        <lightning-formatted-number value={value.value}>
+                                                                        </lightning-formatted-number>
+                                                                    </template>
+                                                                </td>
+                                                            </template>
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                </template>
+                <template lwc:else>
+                    <template if:true={records.length}>
+                        <table class="slds-scrollable_y slds-table slds-no-row-hover"
+                            style="width:100%;border-collapse: separate;border-spacing:5px">
+                            <thead>
+                                <tr style="height: 50px;">
+                                    <th style="background-color: white;"></th>
+                                    <th style="background-color: white;"></th>
+                                    <th style="background-color: white;"></th>
+                                    <template for:each={sellInFields} for:item="item" for:index="index">
+                                        <th class="thWidth" key={item.fieldName} style={item.style1}>
+                                            <div class="slds-grid slds-grid_align-center">
+                                                {item.fieldLabel}
+                                                <!-- Icon Container with fixed size -->
+                                                <div style="position: absolute; right: 2px; bottom: 2px;">
+                                                    <template lwc:if={item.isEditable}>
+                                                        <template if:false={item.isEdit}>
+                                                            <lightning-icon variant="inverse" icon-name="utility:edit"
+                                                                data-index={index} data-field={item.fieldName}
+                                                                onclick={toggleEdit} title={labels.LBL_Edit}
+                                                                size="xx-small">
+                                                            </lightning-icon>
+                                                        </template>
+                                                        <template if:true={item.isEdit}>
+                                                            <lightning-icon variant="inverse" icon-name="utility:check"
+                                                                data-index={index} data-field={item.fieldName}
+                                                                onclick={toggleEdit} title={labels.LBL_Confirm}
+                                                                size="xx-small">
+                                                            </lightning-icon>
+                                                        </template>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </th>
+                                    </template>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={records} for:item="item" for:index="recordIndex">
+                                    <tr key={item.Name}>
+                                        <td rowspan={item.rowspan} class="groupCell tdCell"
+                                            style="min-width: 200px;white-space: pre-wrap;">{item.Name}</td>
+                                        <td rowspan={item.rowspanSellInValues} class="groupCell tdCell">
+                                            {labels.LBL_SummarySellInValue}</td>
+                                        <td class={item.firstRowSellInValue.class}
+                                            style={item.firstRowSellInValue.style}>
+                                            {item.firstRowSellInValue.name}</td>
+                                        <template for:each={item.firstRowSellInValue.values} for:item="value">
+                                            <td class={value.class} style={value.style} key={value.value}>
+                                                <lightning-formatted-number value={value.value}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                        </template>
+                                    </tr>
+                                    <template iterator:sellinvalue={item.sellInValues}>
+                                        <tr key={sellinvalue.value.name} if:false={sellinvalue.first}>
+                                            <td class={sellinvalue.value.class} style={sellinvalue.value.style}>
+                                                {sellinvalue.value.name}</td>
+                                            <template for:each={sellinvalue.value.values} for:item="value"
+                                                for:index="index">
+                                                <td class={value.class} style={value.style} key={value.value}>
+                                                    <template lwc:if={value.isEdit}>
+                                                        <lightning-input type="number" variant="label-hidden"
+                                                            class="input-right" value={value.value}
+                                                            if:true={value.isInput} data-id={sellinvalue.value.Id}
+                                                            data-field={value.fieldName}
+                                                            data-year={sellinvalue.value.year}
+                                                            data-record-index={recordIndex}
+                                                            data-line-index={sellinvalue.index} data-index={index}
+                                                            data-advanced-contractsellin={sellinvalue.value.advancedContractSellIn}
+                                                            data-parentid={sellinvalue.value.parentId}
+                                                            data-nsid={sellinvalue.value.nsId}
+                                                            data-array-values="sellInValues" onblur={handleFieldEdits}>
+                                                        </lightning-input>
+                                                        <lightning-formatted-number value={value.value}
+                                                            if:false={value.isInput}>
+                                                        </lightning-formatted-number>
+                                                    </template>
+                                                    <template lwc:else>
+                                                        <lightning-formatted-number
+                                                            value={value.value}></lightning-formatted-number>
+                                                    </template>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                    <tr key={item.Name}>
+                                        <td rowspan={item.rowspanSellInQty} class="groupCell tdCell">
+                                            {labels.LBL_SummarySellInQty}</td>
+                                        <td class={item.firstRowSellInQty.class} style={item.firstRowSellInQty.style}>
+                                            {item.firstRowSellInQty.name}</td>
+                                        <template for:each={item.firstRowSellInQty.values} for:item="value">
+                                            <td class={value.class} style={value.style} key={value.value}>
+                                                <lightning-formatted-number value={value.value}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                        </template>
+                                    </tr>
+                                    <template iterator:sellinqty={item.sellInQuantities}>
+                                        <tr key={sellinqty.value.name} if:false={sellinqty.first}>
+                                            <td class={sellinqty.value.class} style={sellinqty.value.style}>
+                                                {sellinqty.value.name}</td>
+                                            <template for:each={sellinqty.value.values} for:item="value"
+                                                for:index="index">
+                                                <td class={value.class} style={value.style} key={value.value}>
+                                                    <template lwc:if={value.isEdit}>
+                                                        <lightning-input type="number" variant="label-hidden"
+                                                            class="input-right" value={value.value}
+                                                            if:true={value.isInput} data-id={sellinqty.value.Id}
+                                                            data-field={value.fieldName}
+                                                            data-year={sellinqty.value.year}
+                                                            data-record-index={recordIndex}
+                                                            data-line-index={sellinqty.index} data-index={index}
+                                                            data-advanced-contractsellin={sellinqty.value.advancedContractSellIn}
+                                                            data-parentid={sellinqty.value.parentId}
+                                                            data-nsid={sellinqty.value.nsId}
+                                                            data-array-values="sellInQuantities"
+                                                            onblur={handleFieldEdits}>
+                                                        </lightning-input>
+                                                        <lightning-formatted-number value={value.value}
+                                                            if:false={value.isInput}>
+                                                        </lightning-formatted-number>
+                                                    </template>
+                                                    <template lwc:else>
+                                                        <lightning-formatted-number value={value.value}>
+                                                        </lightning-formatted-number>
+                                                    </template>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                </template>
+                            </tbody>
+                        </table>
+                    </template>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

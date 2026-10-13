@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Regular</fullName>
+    <active>true</active>
+    <label>Regular</label>
+    <picklistValues>
+        <picklist>Language__c</picklist>
+        <values>
+            <fullName>English</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>French</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Market__c</picklist>
+        <values>
+            <fullName>FOOD CPG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NON-FOOD CPG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Others</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>PartnerStatus__c</picklist>
+        <values>
+            <fullName>Open</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Validated</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>InPreparation</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Legal publishing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supplier publishing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Validated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Validated by legal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Validated by supplier</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type__c</picklist>
+        <values>
+            <fullName>Amendment to the Framework Contract</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Framework Contract</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Single Agreement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supplier contract</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

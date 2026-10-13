@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ScheduledForWithdrawal__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>A flag to identify records that are marked for withdrawal but have not been withdrawn yet.
+A withdrawn record could either be permanently deleted from the database or archived.</description>
+    <inlineHelpText>A flag to identify records that are marked for withdrawal but have not been withdrawn yet.
+A withdrawn record could either be permanently deleted from the database or archived.</inlineHelpText>
+    <label>Scheduled for Withdrawal</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

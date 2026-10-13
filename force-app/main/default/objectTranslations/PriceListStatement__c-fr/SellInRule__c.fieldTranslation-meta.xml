@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- SellIn Rule --></label>
+    <name>SellInRule__c</name>
+    <picklistValues>
+        <masterLabel>12M</masterLabel>
+        <translation><!-- 12M --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Manual</masterLabel>
+        <translation><!-- Manual --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>YE</masterLabel>
+        <translation><!-- YE --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>YTD</masterLabel>
+        <translation><!-- YTD --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

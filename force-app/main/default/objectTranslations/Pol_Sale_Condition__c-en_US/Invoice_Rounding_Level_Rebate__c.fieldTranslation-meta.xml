@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Specify the attended rounding level for the invoice (Million, Thousand, Hundred, Ten, Unit, Decimal(s)) for Rebates --></help>
+    <label><!-- Invoice Rounding Level Rebate --></label>
+    <name>Invoice_Rounding_Level_Rebate__c</name>
+    <picklistValues>
+        <masterLabel>1 Decimal</masterLabel>
+        <translation><!-- 1 Decimal --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>10 Unit</masterLabel>
+        <translation><!-- 10 Unit --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>100 Unit</masterLabel>
+        <translation><!-- 100 Unit --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>1000 Unit</masterLabel>
+        <translation><!-- 1000 Unit --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>10000 Unit</masterLabel>
+        <translation><!-- 10000 Unit --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>2 Decimals</masterLabel>
+        <translation><!-- 2 Decimals --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>3 Decimals</masterLabel>
+        <translation><!-- 3 Decimals --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>4 Decimals</masterLabel>
+        <translation><!-- 4 Decimals --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Unit</masterLabel>
+        <translation><!-- Unit --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

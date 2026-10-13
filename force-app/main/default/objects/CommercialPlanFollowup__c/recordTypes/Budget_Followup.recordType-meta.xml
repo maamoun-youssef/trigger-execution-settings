@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Budget_Followup</fullName>
+    <active>true</active>
+    <label>Budget Followup</label>
+    <picklistValues>
+        <picklist>BudgetType__c</picklist>
+        <values>
+            <fullName>CTN gratuits</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FG</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>NIP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SellInDiscount %28TMP%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

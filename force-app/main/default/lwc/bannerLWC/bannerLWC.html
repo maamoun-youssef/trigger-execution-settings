@@ -1,0 +1,70 @@
+<template>
+    <div>
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative slds-p-vertical_medium">
+                <lightning-spinner size="small" alternative-text="Loading banner"></lightning-spinner>
+            </div>
+        </template>
+        <template lwc:else>
+            <header class="slds-page-header slds-page-header_record-home slds-p-around_small">
+                <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread slds-wrap">
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div class="slds-media__figure">
+                            <lightning-icon icon-name={iconName} size="medium" alternative-text="Record icon"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body">
+                            <p class="slds-page-header__name-meta">{objectLabel}</p>
+                            <h1 class="slds-page-header__title slds-truncate" title={titleValue}>{titleValue}</h1>
+                            <template lwc:if={hasDetailFields}>
+                                <ul class="slds-list_horizontal slds-wrap slds-m-top_x-small">
+                                    <template for:each={detailFields} for:item="field">
+                                        <li key={field.apiName} class="slds-item slds-m-right_large slds-m-bottom_x-small">
+                                            <div class="slds-text-title_caps slds-text-color_weak">{field.label}</div>
+                                            <template lwc:if={field.hasLink}>
+                                                <a href={field.recordUrl}>{field.value}</a>
+                                            </template>
+                                            <template lwc:else>
+                                                <div>{field.value}</div>
+                                            </template>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </template>
+                        </div>
+                    </div>
+                    <template lwc:if={hasActions}>
+                        <div class="slds-col slds-grid slds-grid_vertical-align-center">
+                            <template for:each={primaryActions} for:item="action">
+                                <div key={action.key} class="slds-col slds-m-left_xx-small">
+                                    <lightning-button
+                                        label={action.label}
+                                        variant="neutral"
+                                        data-action-key={action.key}
+                                        onclick={handlePrimaryActionClick}>
+                                    </lightning-button>
+                                </div>
+                            </template>
+                            <template lwc:if={hasOverflowActions}>
+                                <div class="slds-col slds-m-left_xx-small">
+                                    <lightning-button-menu
+                                        alternative-text="More actions"
+                                        icon-name="utility:down"
+                                        onselect={handleActionSelect}
+                                        menu-alignment="right">
+                                        <template for:each={bannerActions} for:item="action">
+                                            <lightning-menu-item
+                                                key={action.value}
+                                                value={action.value}
+                                                label={action.label}>
+                                            </lightning-menu-item>
+                                        </template>
+                                    </lightning-button-menu>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </header>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InvoiceGenerationMode__c</fullName>
+    <description>Automatic: Invoice generation using a button in contract layout for the following settings
+Manual: Invoice generation using a button in contract layout for the following settings</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Automatic: Invoice generation using a button in contract layout for the following settings
+Manual: Invoice generation using a button in contract layout for the following settings</inlineHelpText>
+    <label>InvoiceGenerationMode</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Automatic</fullName>
+                <default>false</default>
+                <label>Automatic</label>
+            </value>
+            <value>
+                <fullName>Manual</fullName>
+                <default>true</default>
+                <label>Manual</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

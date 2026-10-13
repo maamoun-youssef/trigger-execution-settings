@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dispatch_Aggregate_Mode__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Flag used to indicate if DispatchingBatch use an aggregation (SUM) on purchases or select all data.</description>
+    <inlineHelpText>Flag used to indicate if DispatchingBatch use an aggregation (SUM) on purchases or select all data.</inlineHelpText>
+    <label>Dispatch Aggregate Mode</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

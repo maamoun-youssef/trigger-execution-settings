@@ -1,0 +1,7 @@
+.THIS .app-item {
+    text-align: center;
+    padding: 5px;
+}
+.THIS .app-item:hover {
+    border: 1px solid grey;
+}

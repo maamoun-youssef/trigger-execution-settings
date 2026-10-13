@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Slab_Reach_Actual_QtyInc__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Is_Conditional__c, 
+case( slab_calc_method__c , 
+&quot;Inc Qty&quot;, 
+
+IF(SlabBaseQtyFact__c &gt;= Slab_1__c &amp;&amp; (SlabBaseQtyFact__c &lt; Slab_2__c || ISBLANK(Slab_2__c)), 1 , 
+IF(SlabBaseQtyFact__c &gt;= Slab_2__c &amp;&amp; (SlabBaseQtyFact__c &lt; Slab_3__c || ISBLANK(Slab_3__c)), 2 , 
+IF(SlabBaseQtyFact__c &gt;= Slab_3__c &amp;&amp; (SlabBaseQtyFact__c &lt; Slab_4__c || ISBLANK(Slab_4__c)), 3 , 
+IF(SlabBaseQtyFact__c &gt;= Slab_4__c &amp;&amp; (SlabBaseQtyFact__c &lt; Slab_5__c || ISBLANK(Slab_5__c)), 4 , 
+IF(SlabBaseQtyFact__c &gt;= Slab_5__c &amp;&amp; (SlabBaseQtyFact__c &lt; Slab_6__c || ISBLANK(Slab_6__c)), 5 , 
+IF(SlabBaseQtyFact__c &gt;= Slab_6__c, 6 , null)))))), 
+&quot;Inc Prog Qty&quot;, 
+
+IF(Prog_Quantity_Actu__c*100 &gt;= Slab_1__c &amp;&amp; (Prog_Quantity_Actu__c*100 &lt; Slab_2__c || ISBLANK(Slab_2__c)), 1 , 
+IF(Prog_Quantity_Actu__c*100 &gt;= Slab_2__c &amp;&amp; (Prog_Quantity_Actu__c*100 &lt; Slab_3__c || ISBLANK(Slab_3__c)), 2 , 
+IF(Prog_Quantity_Actu__c*100 &gt;= Slab_3__c &amp;&amp; (Prog_Quantity_Actu__c*100 &lt; Slab_4__c || ISBLANK(Slab_4__c)), 3 , 
+IF(Prog_Quantity_Actu__c*100 &gt;= Slab_4__c &amp;&amp; (Prog_Quantity_Actu__c*100 &lt; Slab_5__c || ISBLANK(Slab_5__c)), 4 , 
+IF(Prog_Quantity_Actu__c*100 &gt;= Slab_5__c &amp;&amp; (Prog_Quantity_Actu__c*100 &lt; Slab_6__c || ISBLANK(Slab_6__c)), 5 , 
+IF(Prog_Quantity_Actu__c*100 &gt;= Slab_6__c, 6 , null)))))), 
+
+null),null)</formula>
+    <label>Slab Reach - Actual Qty Inc</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

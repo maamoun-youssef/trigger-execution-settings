@@ -1,0 +1,67 @@
+<template>
+    <template lwc:if={loadingData}>
+        <div class="slds-spinner_container">
+            <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+        </div>
+    </template>
+    <template lwc:else>
+        <div class="slds-card">
+            <div style={headerClass} class="header">
+                <div class="slds-media slds-no-space slds-grow settings-header">
+                    <div class="slds-p-around_xx-small slds-m-top_xx-small slds-m-left_x-small slds-icon_container">
+                        <div class="icon-container">
+                            <img src={currentSectionSettings.sectionIcon} alt="section-icon" class="section-icon" />
+                        </div>
+                    </div>
+                    <div class="slds-media__body slds-p-around_x-small">
+                        <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" style={headerClass}>
+                            {labels.LBL_Connect_DocumentsCenter_Menu} - {currentSectionSettings.sectionLabel}
+                        </h1>
+                        <p class="slds-text-title slds-line-height_reset" style={headerClass}>
+                            {currentSectionSettings.sectionSubTitle}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- ACTION BUTTONS -->
+            <div class="slds-col slds-no-flex slds-grid  slds-icon_container">
+            </div>
+            <div class="main-panel slds-col slds-scrollable">
+                <lightning-tabset variant="vertical" class="tab-set-style slds-m-bottom_x-small mainHeight" active-tab-value={activeTheme}>
+                    <template for:each={currentSectionSettings.themesSettings} for:item="theme">
+                        <lightning-tab lwc:if={theme.showTheme} key={theme.theme} tabindex="-1" label={theme.themeLabel} class="slds-scrollable_y"
+                            icon-name="utility:moneybag" value={theme.theme}>
+                            <div style={mainPanelHeight}>
+                                <c-sellin-statement-list theme={theme.gridKey}></c-sellin-statement-list>
+                            </div>
+                        </lightning-tab>
+                        
+                    </template>
+                </lightning-tabset>
+                <!-- <div class="slds-vertical-tabs slds-m-bottom_x-small mainHeight">
+                    <ul class="slds-vertical-tabs__nav" role="tablist" aria-orientation="vertical">
+                        <template for:each={currentSectionSettings.themesSettings} for:item="theme">
+                            <li key={theme.theme} class="slds-vertical-tabs__nav-item slds-is-active" title="Opportunities" role="presentation">
+                                <a class="slds-vertical-tabs__link" href="#" role="tab" tabindex="0" aria-selected="true"
+                                    aria-controls={theme.theme} id={theme.theme}>
+                                    <span class="slds-vertical-tabs__left-icon">
+                                        <div class="icon-container">
+                                            <img src={theme.smallThemeImage} alt="section-icon" class="section-icon" />
+                                        </div>
+                                    </span>
+                                    <span class="slds-truncate" title={theme.themeLabel}>{theme.themeLabel}</span>
+                                    <span class="slds-vertical-tabs__right-icon"></span>
+                                </a>
+                            </li>
+                        </template>
+                    </ul>
+                    <template for:each={currentSectionSettings.themesSettings} for:item="theme">
+                        <div key={theme.theme} class="slds-vertical-tabs__content slds-show" id={theme.theme} role="tabpanel" aria-labelledby={theme.theme}>
+                            <c-file-directory-manager theme={theme.gridSettingsName} record-id={recordId}></c-file-directory-manager>
+                        </div>
+                    </template>
+                </div> -->
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>
+        <!-- Give the country zone of the country.
+This will be required to obtain open status country -->
+    </help>
+    <label><!-- Country Zone origin --></label>
+    <name>Country_Zone_origin__c</name>
+    <relationshipLabel><!-- Business Units (Country Zone origin) --></relationshipLabel>
+</CustomFieldTranslation>

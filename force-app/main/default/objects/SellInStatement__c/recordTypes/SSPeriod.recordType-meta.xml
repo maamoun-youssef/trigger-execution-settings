@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SSPeriod</fullName>
+    <active>true</active>
+    <description>The supplier declares the revenue earned during a specific period.  For example, if the period type is &quot;Month&quot; and the period number is 3, the supplier will declare the revenue generated in March.</description>
+    <label>Period-Based Statement</label>
+    <picklistValues>
+        <picklist>ExtractStatus__c</picklist>
+        <values>
+            <fullName>Extracted</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>PeriodType__c</picklist>
+        <values>
+            <fullName>Annual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Month</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Semester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trimester</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Requested</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Submitted</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,10 @@
+<template>
+    <template lwc:if={showMedia}>
+        <template lwc:if={isVideo}>
+            <video src={url} class="lr-media" style={style} autoplay muted loop playsinline onerror={handleError}></video>
+        </template>
+        <template lwc:else>
+            <img src={url} class="lr-media" style={style} alt={altText} title={altText} onerror={handleError} />
+        </template>
+    </template>
+</template>

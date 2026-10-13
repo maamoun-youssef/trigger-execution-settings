@@ -1,0 +1,3 @@
+.negoIntroTable td {
+  background-color: var(--c-brief-color-background, #E2F2F2);
+}

@@ -1,0 +1,116 @@
+.iconTile lightning-icon {
+    --slds-c-icon-color-foreground-default: #ffffff;
+}
+
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+/* Eye icon inside white circle (right) */
+.rc-eye {
+  border-radius: 10px; /* keep your rounded square look */
+  padding: 5px;
+  background-color: white;
+}
+
+.rc-eye lightning-icon {
+  --slds-c-icon-color-foreground-default: #42ce71;
+}
+
+/* Optional: soften table row separators */
+.slds-table tbody tr {
+    border-top-color: rgba(0, 0, 0, 0.05);
+}
+
+.masterRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    border-top: 1px solid #ecebea;
+    border-radius: .25rem;
+    background-color: #8080800f;
+}
+
+.masterRow_active {
+    background: #c8ffd4db;
+    --slds-c-badge-color-background: #0b6f4a;
+}
+
+.chevronCircle {
+    width: 28px;
+    height: 28px;
+    border-radius: 10px;
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d8dde6;
+}
+
+.chevronCircle_active {
+    border-color: #1ed058;
+    --slds-c-icon-color-foreground-default :#1ed058;
+}
+
+.rc-advancedPillCompact {
+    --slds-c-badge-color-background: #5e6263;
+    --slds-c-badge-text-color: #ffffff;
+    --slds-c-badge-radius-border: 5px;
+}
+
+.rc-advancedPillCompact_active {
+    --slds-c-badge-color-background: #2e844a;
+    --slds-c-badge-text-color: #ffffff;
+    --slds-c-badge-radius-border: 5px;
+}
+
+.rc-advancedPillCompact lightning-icon,
+.rc-advancedPillCompact_active lightning-icon {
+    --slds-c-icon-color-foreground-default: #ffffff;
+}
+
+.siblingBadge {
+    background-color: #71fb713d;
+    color: #2e844a;
+}
+
+th,
+td {
+    white-space: pre-wrap;
+}

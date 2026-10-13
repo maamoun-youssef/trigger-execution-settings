@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtlClntAppGlobalOauthSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <callbackUrl>https://login.salesforce.com/services/oauth2/callback</callbackUrl>
+    <certificate>MIIEazCCA1OgAwIBAgIOAZ+o7TiYAAAAAAjcJfAwDQYJKoZIhvcNAQELBQAwdjEP
+MA0GA1UEAwwGVGFsZW5kMRgwFgYDVQQLDA8wMERRSDAwMDAwMTlHWnIxFzAVBgNV
+BAoMDlNhbGVzZm9yY2UuY29tMRYwFAYDVQQHDA1TYW4gRnJhbmNpc2NvMQswCQYD
+VQQIDAJDQTELMAkGA1UEBhMCVVMwHhcNMjYwNzI4MTMzMjI2WhcNMjcwNzI4MTIw
+MDAwWjB2MQ8wDQYDVQQDDAZUYWxlbmQxGDAWBgNVBAsMDzAwRFFIMDAwMDAxOUda
+cjEXMBUGA1UECgwOU2FsZXNmb3JjZS5jb20xFjAUBgNVBAcMDVNhbiBGcmFuY2lz
+Y28xCzAJBgNVBAgMAkNBMQswCQYDVQQGEwJVUzCCASIwDQYJKoZIhvcNAQEBBQAD
+ggEPADCCAQoCggEBAL02iPf01unr6GFNAfH210opRWkM14dFpaNTXCM9n/ZHcvIX
+XrtwKCkjd+Xo5IarBcRFY3BKVbBVIaxqqiVvYweFal6aLt11NTKkke00G8r2D9ey
+fxcZd7Bsd7f3Ntevnp+audRBQnDL/O/l5bSXXwomAdbns9R9+Yk5Sn25GS3XZPzd
+op+v4pkInGD+ny9TdjyDMIizfyeB7cFXCNOpmWshkC2jOYrxSnem5q6tCDcUztCK
+0FW3d+wSE2xrT8vXMeF10Q8H5nMiIZaDnyz9RHabSiPmB3x5UwzfTXIGaGHBcK/0
+v/p2lY4zVhb3bmyn2yrA4LWk+mBppm7xawWvrskCAwEAAaOB9jCB8zAdBgNVHQ4E
+FgQUPAkhEPESrYIPAYuan9EpDVUC+xIwEQYDVR0RBAowCIIGVGFsZW5kMA8GA1Ud
+EwEB/wQFMAMBAf8wga0GA1UdIwSBpTCBooAUPAkhEPESrYIPAYuan9EpDVUC+xKh
+eqR4MHYxDzANBgNVBAMMBlRhbGVuZDEYMBYGA1UECwwPMDBEUUgwMDAwMDE5R1py
+MRcwFQYDVQQKDA5TYWxlc2ZvcmNlLmNvbTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNj
+bzELMAkGA1UECAwCQ0ExCzAJBgNVBAYTAlVTgg4Bn6jtOJgAAAAACNwl8DANBgkq
+hkiG9w0BAQsFAAOCAQEAJRnk00OcneG62zmF15nBU6ULi4yr908HoqJDQGLU8k2L
+xbBucReKVHUGE1qWiO0GiiUB19AXMa6eeY0YuZdyJ1VKaWGVAUwLHzEis8bUvHWZ
+QdayXtn+RcTMsCtIkgXwuFaqZjKp5aLatnVxCOIJuP3ZUPsj39tpoOmY2fhjoqxK
+LV9VxS8ffwcfMnrw9vknBTisFXlXVHNOSLCwd34vlXT1YuqA9Bk8tLxm1yie9/pI
+FbQCNvG32+2KVKTSJ1kSW7Klv6L2VTTIGC4oKxL61U+kSSd+F4s6szuj54O9MTm2
+5yIJMMqhApmzm9dZfyuzNbufPs5/o3U6xLcEG1ujSw==</certificate>
+    <consumerKey>3MVG9slge.VWGNwkNCKjfN0HisNhBW7sUtdeHqG_o_DKJRsWVYtV9jHiArdpUFX_uuPbTvCh0KGfLPwfgpHWK</consumerKey>
+    <externalClientApplication>TalendTest</externalClientApplication>
+    <isClientCredentialsFlowEnabled>true</isClientCredentialsFlowEnabled>
+    <isCodeCredFlowEnabled>true</isCodeCredFlowEnabled>
+    <isCodeCredPostOnly>true</isCodeCredPostOnly>
+    <isConsumerSecretOptional>false</isConsumerSecretOptional>
+    <isDPopEnabled>false</isDPopEnabled>
+    <isDeviceFlowEnabled>true</isDeviceFlowEnabled>
+    <isEnforceRefreshTokenTTL>true</isEnforceRefreshTokenTTL>
+    <isIntrospectAllTokens>false</isIntrospectAllTokens>
+    <isNamedUserJwtEnabled>true</isNamedUserJwtEnabled>
+    <isPkceRequired>true</isPkceRequired>
+    <isRefreshTokenRotationEnabled>true</isRefreshTokenRotationEnabled>
+    <isSecretRequiredForRefreshToken>true</isSecretRequiredForRefreshToken>
+    <isSecretRequiredForTokenExchange>true</isSecretRequiredForTokenExchange>
+    <isTokenExchangeEnabled>false</isTokenExchangeEnabled>
+    <label>TalendTest_glbloauth</label>
+    <shouldRotateConsumerKey>false</shouldRotateConsumerKey>
+    <shouldRotateConsumerSecret>false</shouldRotateConsumerSecret>
+</ExtlClntAppGlobalOauthSettings>

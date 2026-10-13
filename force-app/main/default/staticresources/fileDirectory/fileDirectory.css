@@ -1,0 +1,10 @@
+c-file-directory-manager .custom-style-file-upload .slds-file-selector__text,
+negoptim-file-directory-manager .custom-style-file-upload .slds-file-selector__text {
+    display: none;
+}
+
+c-file-directory-manager .custom-style-file-upload .slds-file-selector__button,
+negoptim-file-directory-manager .custom-style-file-upload .slds-file-selector__button {
+    font-size: 0;
+    padding: 0;
+}

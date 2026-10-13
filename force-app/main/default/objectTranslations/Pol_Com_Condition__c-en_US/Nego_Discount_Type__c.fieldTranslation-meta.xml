@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Type of the condition (Price discount, Rebates, Adverstising fees, .. --></help>
+    <label><!-- Nego Discount Type --></label>
+    <name>Nego_Discount_Type__c</name>
+</CustomFieldTranslation>

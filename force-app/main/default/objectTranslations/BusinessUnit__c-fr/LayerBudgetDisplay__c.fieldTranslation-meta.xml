@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Définit si cette BU et les valeurs de l&apos;assortiment négociable doivent être affichées dans la &quot;DV Objectif Circuit&quot; ou non. Ex: je sélectionne Carrefour HM, Leclerc national mais ne sélectionne pas les différentes SCA Leclerc pour éviter une multiplication inutile du nombre de colonnes.</help>
+    <label>Affichage Assort Obj. Circuit</label>
+    <name>LayerBudgetDisplay__c</name>
+</CustomFieldTranslation>

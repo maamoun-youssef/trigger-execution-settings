@@ -1,0 +1,86 @@
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.green-icon {
+    --slds-c-icon-color-foreground: green !important;
+    --slds-c-icon-color-foreground-default: green !important;
+}
+
+.red-icon {
+    --slds-c-icon-color-foreground: red !important;
+    --slds-c-icon-color-foreground-default: red !important;
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+.round-icon {
+    border-radius: 50%;
+    overflow: hidden;
+    /* Ensures the icon stays within the circular boundary */
+}
+
+.my-icon {
+    --slds-c-icon-color-foreground-default: white;
+    --slds-c-icon-color-background: #ff5c2c;
+}
+
+.my-iconClose {
+    --slds-c-icon-color-foreground-default: white;
+    --slds-c-icon-color-background: #156082;
+}
+
+.slds-table th,
+.slds-table td {
+    white-space: pre-wrap;
+}
+
+.number-icon {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+    line-height: 25px;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+.current-assortment-row td {
+    background-color: #E8F3FF !important;
+}
+
+.current-assortment-row td:first-child {
+    border-left: 3px solid #1E7ECA;
+}

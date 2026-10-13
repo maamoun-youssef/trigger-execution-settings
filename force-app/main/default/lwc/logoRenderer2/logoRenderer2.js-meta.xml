@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Logo Renderer</masterLabel>
+    <description>Displays an image or video from a static resource, in Lightning and in Experience Cloud sites.</description>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage,lightning__RecordPage,lightning__HomePage">
+            <property name="path" type="String" label="Resource path" description="e.g. MyIcons/logos/acme.png" required="true" />
+            <property name="size" type="String" label="Size" description="Pixels (e.g. 64) or a CSS length (e.g. 3rem). Leave empty for the natural size." />
+            <property name="alt" type="String" label="Alternative text" />
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="path" type="String" label="Resource path" description="e.g. MyIcons/logos/acme.png" required="true" />
+            <property name="size" type="String" label="Size" description="Pixels (e.g. 64) or a CSS length (e.g. 3rem). Leave empty for the natural size." />
+            <property name="alt" type="String" label="Alternative text" />
+        </targetConfig>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="path" type="String" label="Image Url" required="true" default=""/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,27 @@
+.notify_container {
+    position: fixed;
+    left: 0;
+    top: 15%;
+    z-index: 10000;
+    text-align: center;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.notify_toast {
+    align-items: start;
+    min-width: 480px;
+    opacity: 0;
+    animation: fade-in 0.3s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

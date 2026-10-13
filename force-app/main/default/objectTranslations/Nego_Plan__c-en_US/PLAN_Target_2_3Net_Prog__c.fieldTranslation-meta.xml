@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- PLAN - Target 2-3Net Prog --></label>
+    <name>PLAN_Target_2_3Net_Prog__c</name>
+</CustomFieldTranslation>

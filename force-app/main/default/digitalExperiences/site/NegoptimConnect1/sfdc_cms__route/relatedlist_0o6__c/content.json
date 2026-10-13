@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Client Liste associée",
+  "contentBody" : {
+    "activeViewId" : "relatedlist_0o6",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "relatedlist-0o6",
+    "urlPrefix" : "customer"
+  },
+  "urlName" : "client-liste-associée"
+}

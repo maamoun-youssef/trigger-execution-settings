@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>PDSD_Regular</label>
+    <protected>false</protected>
+    <values>
+        <field>DefaultLoadStartLine__c</field>
+        <value xsi:type="xsd:double">2.0</value>
+    </values>
+    <values>
+        <field>DefaultSheetNumber__c</field>
+        <value xsi:type="xsd:double">1.0</value>
+    </values>
+    <values>
+        <field>ExtIdSeparator__c</field>
+        <value xsi:type="xsd:string">-</value>
+    </values>
+    <values>
+        <field>ExternalIdField__c</field>
+        <value xsi:type="xsd:string">ExtId__c</value>
+    </values>
+    <values>
+        <field>ImportFields__c</field>
+        <value xsi:type="xsd:string">[{&quot;referenceExtIdOrder&quot;:6,&quot;referenceExtId&quot;:null,&quot;name&quot;:&quot;input_BUCode__c&quot;,&quot;isUser&quot;:true,&quot;isRequired&quot;:true,&quot;isMandatory&quot;:false,&quot;isAdmin&quot;:true,&quot;defaultColumn&quot;:&quot;A&quot;,&quot;allowDefaultValue&quot;:null},{&quot;referenceExtIdOrder&quot;:5,&quot;referenceExtId&quot;:null,&quot;name&quot;:&quot;input_BUName__c&quot;,&quot;isUser&quot;:true,&quot;isRequired&quot;:true,&quot;isMandatory&quot;:false,&quot;isAdmin&quot;:true,&quot;defaultColumn&quot;:&quot;B&quot;,&quot;allowDefaultValue&quot;:null},{&quot;referenceExtIdOrder&quot;:3,&quot;referenceExtId&quot;:null,&quot;name&quot;:&quot;input_PRDCode__c&quot;,&quot;isUser&quot;:true,&quot;isRequired&quot;:true,&quot;isMandatory&quot;:false,&quot;isAdmin&quot;:true,&quot;defaultColumn&quot;:&quot;C&quot;,&quot;allowDefaultValue&quot;:null},{&quot;referenceExtIdOrder&quot;:2,&quot;referenceExtId&quot;:null,&quot;name&quot;:&quot;input_PRDGTIN__c&quot;,&quot;isUser&quot;:true,&quot;isRequired&quot;:true,&quot;isMandatory&quot;:false,&quot;isAdmin&quot;:true,&quot;defaultColumn&quot;:&quot;D&quot;,&quot;allowDefaultValue&quot;:null},{&quot;referenceExtIdOrder&quot;:1,&quot;referenceExtId&quot;:null,&quot;name&quot;:&quot;input_PRDName__c&quot;,&quot;isUser&quot;:true,&quot;isRequired&quot;:true,&quot;isMandatory&quot;:false,&quot;isAdmin&quot;:true,&quot;defaultColumn&quot;:&quot;E&quot;,&quot;allowDefaultValue&quot;:null},{&quot;referenceExtIdOrder&quot;:4,&quot;referenceExtId&quot;:null,&quot;name&quot;:&quot;input_PCCCode__c&quot;,&quot;isUser&quot;:true,&quot;isRequired&quot;:true,&quot;isMandatory&quot;:false,&quot;isAdmin&quot;:true,&quot;defaultColumn&quot;:&quot;F&quot;,&quot;allowDefaultValue&quot;:null},{&quot;referenceExtIdOrder&quot;:null,&quot;referenceExtId&quot;:null,&quot;name&quot;:&quot;UType__c&quot;,&quot;isUser&quot;:false,&quot;isRequired&quot;:false,&quot;isMandatory&quot;:false,&quot;isAdmin&quot;:false,&quot;defaultColumn&quot;:&quot;G&quot;,&quot;allowDefaultValue&quot;:null},{&quot;referenceExtIdOrder&quot;:7,&quot;referenceExtId&quot;:null,&quot;name&quot;:&quot;BDate__c&quot;,&quot;isUser&quot;:true,&quot;isRequired&quot;:true,&quot;isMandatory&quot;:false,&quot;isAdmin&quot;:true,&quot;defaultColumn&quot;:&quot;H&quot;,&quot;allowDefaultValue&quot;:null},{&quot;referenceExtIdOrder&quot;:8,&quot;referenceExtId&quot;:null,&quot;name&quot;:&quot;EDate__c&quot;,&quot;isUser&quot;:true,&quot;isRequired&quot;:true,&quot;isMandatory&quot;:false,&quot;isAdmin&quot;:true,&quot;defaultColumn&quot;:&quot;I&quot;,&quot;allowDefaultValue&quot;:null},{&quot;referenceExtIdOrder&quot;:null,&quot;referenceExtId&quot;:null,&quot;name&quot;:&quot;GrossPrice__c&quot;,&quot;isUser&quot;:true,&quot;isRequired&quot;:false,&quot;isMandatory&quot;:false,&quot;isAdmin&quot;:true,&quot;defaultColumn&quot;:&quot;J&quot;,&quot;allowDefaultValue&quot;:null},{&quot;referenceExtIdOrder&quot;:null,&quot;referenceExtId&quot;:null,&quot;name&quot;:&quot;Perc__c&quot;,&quot;isUser&quot;:false,&quot;isRequired&quot;:false,&quot;isMandatory&quot;:false,&quot;isAdmin&quot;:false,&quot;defaultColumn&quot;:&quot;K&quot;,&quot;allowDefaultValue&quot;:null},{&quot;referenceExtIdOrder&quot;:9,&quot;referenceExtId&quot;:null,&quot;name&quot;:&quot;input_CPCode__c&quot;,&quot;isUser&quot;:true,&quot;isRequired&quot;:true,&quot;isMandatory&quot;:false,&quot;isAdmin&quot;:true,&quot;defaultColumn&quot;:&quot;L&quot;,&quot;allowDefaultValue&quot;:null},{&quot;referenceExtIdOrder&quot;:10,&quot;referenceExtId&quot;:null,&quot;name&quot;:&quot;ProductQty__c&quot;,&quot;isUser&quot;:true,&quot;isRequired&quot;:true,&quot;isMandatory&quot;:false,&quot;isAdmin&quot;:true,&quot;defaultColumn&quot;:&quot;M&quot;,&quot;allowDefaultValue&quot;:null},{&quot;referenceExtIdOrder&quot;:11,&quot;referenceExtId&quot;:null,&quot;name&quot;:&quot;ProductQtyMax__c&quot;,&quot;isUser&quot;:true,&quot;isRequired&quot;:true,&quot;isMandatory&quot;:false,&quot;isAdmin&quot;:true,&quot;defaultColumn&quot;:&quot;N&quot;,&quot;allowDefaultValue&quot;:null},{&quot;referenceExtIdOrder&quot;:12,&quot;referenceExtId&quot;:null,&quot;name&quot;:&quot;ProductQtyMin__c&quot;,&quot;isUser&quot;:true,&quot;isRequired&quot;:true,&quot;isMandatory&quot;:false,&quot;isAdmin&quot;:true,&quot;defaultColumn&quot;:&quot;O&quot;,&quot;allowDefaultValue&quot;:null},{&quot;referenceExtIdOrder&quot;:null,&quot;referenceExtId&quot;:null,&quot;name&quot;:&quot;DeclarantComment__c&quot;,&quot;isUser&quot;:true,&quot;isRequired&quot;:false,&quot;isMandatory&quot;:false,&quot;isAdmin&quot;:true,&quot;defaultColumn&quot;:&quot;P&quot;,&quot;allowDefaultValue&quot;:null}]</value>
+    </values>
+    <values>
+        <field>Name__c</field>
+        <value xsi:type="xsd:string">PDSD_Regular</value>
+    </values>
+    <values>
+        <field>ObjectName__c</field>
+        <value xsi:type="xsd:string">ProductDiscountStatementDetail__c</value>
+    </values>
+    <values>
+        <field>RecordIdLookupField__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ShowAdvancedMode__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Status__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

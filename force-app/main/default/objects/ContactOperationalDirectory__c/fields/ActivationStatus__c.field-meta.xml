@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ActivationStatus__c</fullName>
+    <defaultValue>&apos;In Preparation&apos;</defaultValue>
+    <description>Is this entry currently being drafted, submitted by the supplier for approval to retailer, or active and managing permissions in the application?</description>
+    <label>Activation Status</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>In Preparation</fullName>
+                <default>true</default>
+                <label>In Preparation</label>
+            </value>
+            <value>
+                <fullName>Requested Creation</fullName>
+                <default>false</default>
+                <label>Requested Creation</label>
+            </value>
+            <value>
+                <fullName>Requested Modification</fullName>
+                <default>false</default>
+                <label>Requested Modification</label>
+            </value>
+            <value>
+                <fullName>Validated Entry</fullName>
+                <default>false</default>
+                <label>Validated Entry</label>
+            </value>
+            <value>
+                <fullName>Inactive Entry</fullName>
+                <default>false</default>
+                <label>Inactive Entry</label>
+            </value>
+            <value>
+                <fullName>Requested Deactivation</fullName>
+                <default>false</default>
+                <label>Requested Deactivation</label>
+            </value>
+            <value>
+                <fullName>Deactivated</fullName>
+                <default>false</default>
+                <label>Deactivated</label>
+            </value>
+            <value>
+                <fullName>Requested Reactivation</fullName>
+                <default>false</default>
+                <label>Requested Reactivation</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

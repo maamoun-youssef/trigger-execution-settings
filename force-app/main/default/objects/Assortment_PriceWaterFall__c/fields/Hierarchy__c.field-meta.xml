@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hierarchy__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Category</label>
+    <referenceTo>Hierarchy__c</referenceTo>
+    <relationshipLabel>Assortment Price Waterfalls (Hierarchy)</relationshipLabel>
+    <relationshipName>Assortment_PriceWaterFallsHierarchy</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

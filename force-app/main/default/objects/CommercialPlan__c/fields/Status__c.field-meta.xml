@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <label>Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>In preparation</fullName>
+                <default>false</default>
+                <label>In preparation</label>
+            </value>
+            <value>
+                <fullName>Request for approval</fullName>
+                <default>false</default>
+                <label>Request for approval</label>
+            </value>
+            <value>
+                <fullName>Validated</fullName>
+                <default>false</default>
+                <label>Validated</label>
+            </value>
+            <value>
+                <fullName>Revue budg. mars.</fullName>
+                <default>false</default>
+                <label>Revue budg. mars.</label>
+            </value>
+            <value>
+                <fullName>Revue budg. juin.</fullName>
+                <default>false</default>
+                <label>Revue budg. juin.</label>
+            </value>
+            <value>
+                <fullName>Revue budg. sept.</fullName>
+                <default>false</default>
+                <label>Revue budg. sept.</label>
+            </value>
+            <value>
+                <fullName>Revue budg. déc.</fullName>
+                <default>false</default>
+                <label>Revue budg. déc.</label>
+            </value>
+            <value>
+                <fullName>Closed</fullName>
+                <default>false</default>
+                <label>Closed</label>
+            </value>
+            <value>
+                <fullName>Diffused</fullName>
+                <default>false</default>
+                <label>Diffused</label>
+            </value>
+            <value>
+                <fullName>Printed</fullName>
+                <default>false</default>
+                <label>Printed</label>
+            </value>
+            <value>
+                <fullName>Live</fullName>
+                <default>false</default>
+                <label>Live</label>
+            </value>
+            <value>
+                <fullName>Request for approval Fact</fullName>
+                <default>false</default>
+                <label>Request for approval Fact</label>
+            </value>
+            <value>
+                <fullName>Update with fact data</fullName>
+                <default>false</default>
+                <label>Update with fact data</label>
+            </value>
+            <value>
+                <fullName>Validate with fact data</fullName>
+                <default>false</default>
+                <label>Validate with fact data</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

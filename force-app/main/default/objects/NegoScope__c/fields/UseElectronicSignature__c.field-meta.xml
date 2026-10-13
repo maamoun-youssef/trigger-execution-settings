@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UseElectronicSignature__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Specify if the Client/Supplier Nego Scope is using electronic signature management</description>
+    <inlineHelpText>Specify if the Client/Supplier Nego SCope is using electronic signature management</inlineHelpText>
+    <label>Use Electronic Signature</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

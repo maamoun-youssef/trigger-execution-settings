@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>BU d&apos;origine</label>
+    <name>BusinessUnitOrigin__c</name>
+    <relationshipLabel><!-- Products (Business Unit Origin) --></relationshipLabel>
+</CustomFieldTranslation>

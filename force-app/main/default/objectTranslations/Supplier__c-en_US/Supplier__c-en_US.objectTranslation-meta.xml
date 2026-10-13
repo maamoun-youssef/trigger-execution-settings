@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Client/Supplier</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Clients/Suppliers</value>
+    </caseValues>
+    <layouts>
+        <layout>negOptim CPG Client Supplier</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Life Cycle --></label>
+            <section>Life Cycle</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Client/Supplier Name</nameFieldLabel>
+    <quickActions>
+        <label><!-- Send Sales Terms Statement Request --></label>
+        <name>Send_Sales_Terms_Statement_Request</name>
+    </quickActions>
+    <recordTypes>
+        <label>Client</label>
+        <name>Client</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Supplier</label>
+        <name>Supplier</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label>Add Nego Scope</label>
+        <name>Add_NegoScope</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- DocumentsCenter --></label>
+        <name>DocumentsCenter</name>
+    </webLinks>
+    <webLinks>
+        <label>Add Nego Scope (Guided)</label>
+        <name>Guided_Add_NegoScope</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- InvoiceManager --></label>
+        <name>InvoiceManager</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- InvoiceManagerVisualizer --></label>
+        <name>InvoiceManagerVisualizer</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- PGClientCategoryToASD --></label>
+        <name>PGClientCategoryToASD</name>
+    </webLinks>
+</CustomObjectTranslation>

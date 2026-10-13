@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Thème</label>
+    <name>Assortment__c</name>
+    <picklistValues>
+        <masterLabel>Deal</masterLabel>
+        <translation>Négociation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Landing</masterLabel>
+        <translation>Atterissage</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Simul</masterLabel>
+        <translation>Simulation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Statement</masterLabel>
+        <translation>Statement - A TRADUIRE</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Target</masterLabel>
+        <translation>Objectif</translation>
+    </picklistValues>
+</CustomFieldTranslation>

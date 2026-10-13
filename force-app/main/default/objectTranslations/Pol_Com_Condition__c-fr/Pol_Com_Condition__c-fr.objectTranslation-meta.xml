@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Condition</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Bibli. des conditions</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>Tariff Condition Layout</layout>
+        <sections>
+            <label><!-- (Support) --></label>
+            <section>(Support)</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Données de facturation --></label>
+            <section>Données de facturation</section>
+        </sections>
+        <sections>
+            <label><!-- Dénominations complémentaires --></label>
+            <section>Dénominations complémentaires</section>
+        </sections>
+        <sections>
+            <label><!-- Détails condition --></label>
+            <section>Détails condition</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Nom de la condition</nameFieldLabel>
+    <recordTypes>
+        <description><!-- Define the main condition for the contract --></description>
+        <label>Condition principale</label>
+        <name>Main_Term</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Define the sub condition linked to a main condition for the contract --></description>
+        <label>Sous condition</label>
+        <name>Sub_Term</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

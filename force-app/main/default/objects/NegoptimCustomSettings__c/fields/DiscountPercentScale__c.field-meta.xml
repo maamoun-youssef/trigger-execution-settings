@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DiscountPercentScale__c</fullName>
+    <defaultValue>2</defaultValue>
+    <description>This field can be either set to 2 or 3 (empty means it&apos;s set to 2).
+It controls the scale of the percent fields in contract discounts, promo and price waterfall.
+The fields are set to 3 decimal places in their configurations, but are displayed based on this setting in negOptim custom pages, such as conditions manager, negotiate, duplicate contract, price waterfall and commercial plan simulation.</description>
+    <externalId>false</externalId>
+    <label>Discount Percent Scale</label>
+    <precision>1</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

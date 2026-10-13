@@ -1,0 +1,71 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Addresses",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"e536e1fb-069d-4576-a0b6-abf9bfca30e0\",\"columns\":[{\"UUID\":\"cd713d3d-6866-4995-b529-0f33daa8aecc\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "dxpStyle" : { }
+              },
+              "definition" : "c:negOptimGlobalLocationManager",
+              "id" : "18b5d758-230f-4aa3-9c6b-ac6b3b1021fa",
+              "type" : "component"
+            } ],
+            "id" : "cd713d3d-6866-4995-b529-0f33daa8aecc",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "e536e1fb-069d-4576-a0b6-abf9bfca30e0",
+          "type" : "component"
+        } ],
+        "id" : "0714d48f-ae68-47f9-b2df-7f58bc94feea",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "dxpStyle" : { },
+            "pageTitle" : "Addresses",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "c5ccb3c6-5ec3-40c3-bccc-a398fc8018b0",
+          "type" : "component"
+        } ],
+        "id" : "c8d6867c-d069-43b5-932b-d3c9129c1833",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "98ae9b4d-b01d-4beb-b61a-5e8283310fd5",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-addresses"
+  },
+  "urlName" : "addresses"
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>
+        <!-- What I should obtain?
+What are my priority needs ? -->
+    </help>
+    <label><!-- BRIEF - Take --></label>
+    <name>BRIEF_Take__c</name>
+</CustomFieldTranslation>

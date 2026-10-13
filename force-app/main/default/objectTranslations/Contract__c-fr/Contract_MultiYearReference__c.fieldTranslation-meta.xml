@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Ref contrat multi-année</label>
+    <name>Contract_MultiYearReference__c</name>
+    <relationshipLabel><!-- All contracts (Contract Multi Year Reference) --></relationshipLabel>
+</CustomFieldTranslation>

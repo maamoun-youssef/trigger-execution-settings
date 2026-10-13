@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BrandParent__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Brand Parent</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>Parent Brand - Value does not exist or does not match filter criteria.</errorMessage>
+        <filterItems>
+            <field>Brand__c.BrandParent__c</field>
+            <operation>equals</operation>
+            <value></value>
+        </filterItems>
+        <infoMessage>Choose a master brand without Parent</infoMessage>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Brand__c</referenceTo>
+    <relationshipLabel>Brands (Parent Brand)</relationshipLabel>
+    <relationshipName>BrandsBrandParent</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

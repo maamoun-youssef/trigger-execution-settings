@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Previous Status --></label>
+    <name>PreviousStatus__c</name>
+    <picklistValues>
+        <masterLabel>Complement</masterLabel>
+        <translation><!-- Complement --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Decrease</masterLabel>
+        <translation><!-- Decrease --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Delist</masterLabel>
+        <translation><!-- Delist --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Increase</masterLabel>
+        <translation><!-- Increase --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Keep</masterLabel>
+        <translation><!-- Keep --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>N/A</masterLabel>
+        <translation><!-- N/A --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>New</masterLabel>
+        <translation><!-- New --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Opportunity</masterLabel>
+        <translation><!-- Opportunity --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Probably deleted</masterLabel>
+        <translation><!-- Probably deleted --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Substitute</masterLabel>
+        <translation><!-- Substitute --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

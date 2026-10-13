@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Master_BU__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Specify a conditions list defined by BU</description>
+    <inlineHelpText>Specify a conditions list defined by BU</inlineHelpText>
+    <label>Master Business Unit</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Orga_BU__c.Name</field>
+            <operation>equals</operation>
+            <value></value>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Orga_BU__c</referenceTo>
+    <relationshipLabel>Conditions Tarifaires (Master Business Unit)</relationshipLabel>
+    <relationshipName>Conditions_Tarifaires</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- The sub_Condition is selected by default when a main condition is selected for contract --></help>
+    <label>Sous-Condition sélectionnée par défaut</label>
+    <name>Is_Default_SubCondition__c</name>
+</CustomFieldTranslation>

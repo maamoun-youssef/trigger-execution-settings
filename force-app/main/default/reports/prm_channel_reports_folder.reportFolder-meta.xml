@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReportFolder xmlns="http://soap.sforce.com/2006/04/metadata">
+    <folderShares>
+        <accessLevel>Manage</accessLevel>
+        <sharedTo>developer3@negoptim2.dev4</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <folderShares>
+        <accessLevel>Manage</accessLevel>
+        <sharedTo>ulit@negoptim2.dev4</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <name>Rapports Gestion des relations avec les</name>
+</ReportFolder>

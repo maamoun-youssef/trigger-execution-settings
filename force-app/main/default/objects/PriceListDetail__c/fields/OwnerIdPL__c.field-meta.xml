@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OwnerIdPL__c</fullName>
+    <description>Retrieves the OwnerId from the related PriceList__c record on creation</description>
+    <externalId>false</externalId>
+    <formula>CASESAFEID(PriceList__r.OwnerId)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>OwnerIdPL</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

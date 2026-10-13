@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Assortment Detail</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Assortment Details</value>
+    </caseValues>
+    <nameFieldLabel><!-- ASD Id --></nameFieldLabel>
+    <recordTypes>
+        <label><!-- HigherLevelPackaging --></label>
+        <name>HigherLevelPackaging</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- ASD Regular --></label>
+        <name>Regular</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Test_List_View_action --></label>
+        <name>Test_List_View_action</name>
+    </webLinks>
+</CustomObjectTranslation>

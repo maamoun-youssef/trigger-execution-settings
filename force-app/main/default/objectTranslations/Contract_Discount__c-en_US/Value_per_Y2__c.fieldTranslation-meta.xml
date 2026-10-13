@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Secure contract value for year+2 --></help>
+    <label>% Y+2</label>
+    <name>Value_per_Y2__c</name>
+</CustomFieldTranslation>

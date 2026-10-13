@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Banking_Transfert</fullName>
+        <default>true</default>
+        <label>Banking Transfert</label>
+    </customValue>
+    <customValue>
+        <fullName>Deduction</fullName>
+        <default>false</default>
+        <label>Deduction</label>
+    </customValue>
+    <customValue>
+        <fullName>Effect</fullName>
+        <default>false</default>
+        <label>Effect</label>
+    </customValue>
+    <customValue>
+        <fullName>Cheque</fullName>
+        <default>false</default>
+        <label>Cheque</label>
+    </customValue>
+    <customValue>
+        <fullName>Debt_Rephasing</fullName>
+        <default>false</default>
+        <label>Debt Rephasing(Créance mobilisée)</label>
+    </customValue>
+    <customValue>
+        <fullName>Debt_Repurchasing</fullName>
+        <default>false</default>
+        <label>Debt Repurchasing (Créance rachetée)</label>
+    </customValue>
+    <customValue>
+        <fullName>Divers</fullName>
+        <default>false</default>
+        <label>Divers</label>
+    </customValue>
+    <description>Payment type (cash, cheque, ...)</description>
+    <masterLabel>Payment term (type)</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

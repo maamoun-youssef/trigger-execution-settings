@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Ligne d&apos;accord</label>
+    <name>Contract_Discount__c</name>
+    <relationshipLabel><!-- Commercial Plans(Contract Discount) --></relationshipLabel>
+</CustomFieldTranslation>

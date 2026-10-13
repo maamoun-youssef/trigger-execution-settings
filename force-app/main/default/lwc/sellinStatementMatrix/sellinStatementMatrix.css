@@ -1,0 +1,210 @@
+.negoptim-tablesection {
+    background-color: white;
+}
+
+table,
+td,
+th {
+    border: 1px solid #00000030;
+    padding: 5px;
+
+}
+
+table {
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+td {
+    text-align: center;
+    text-wrap: auto;
+}
+
+th {
+    text-align: center;
+    height: 50px;
+    /* color: white; */
+    word-break: break-word;
+    background: white;
+    z-index: 2;
+}
+
+.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+}
+
+.leftText {
+    text-align: left;
+}
+
+.rightText {
+    text-align: right;
+}
+
+.centerText {
+    text-align: center;
+}
+
+.field-input {
+    border: none;
+    border: none;
+    cursor: default;
+}
+
+.field-input:disabled {
+    background: none;
+    
+}
+
+.filterIcon {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+
+.tableHeader {
+    position: sticky;
+    top: -1px;
+    z-index: 12;
+}
+
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+.greyBg {
+    background-color: #f3f3f3;
+}
+
+.statusLogoIcon {
+    width: 20px;
+    height: 20px;
+}
+
+.firstColIcon {
+    width: 20px;
+    height: 20px;
+}
+
+.progressCol {
+    /* width: 35%;
+    background: #f3f3f3; */
+    width: 40%;
+    color: white;
+    background: #8CC58A;
+
+}
+
+.header-ruller {
+    border: 1px solid #5E5E5E;
+    border-radius: 5px;
+    width: fit-content;
+    margin-left: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+}
+.header-ruller-PeriodType {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.header-ruller-period-disabled {
+    color: #505050;
+    background-color: #d9d9d9;
+}
+
+.accordionSummary {
+    padding: 10px;
+    margin: 0px;
+    display: flex;
+    position: sticky;
+    z-index: 2;
+    top: 100px;
+    background-color: white;
+}
+
+.header-ruller-period-enable {
+    color: white;
+    background-color: #14B3BB;
+}
+
+/* Remove spinner/arrows in Chrome, Safari, Edge, and Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    text-align: center;
+}
+
+/* Remove spinner in Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+    font-size: 16px;
+    padding: 10px;
+    width: 200px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.bg-white {
+    background: white;
+}
+
+.icons-container{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.white-icon {
+    --slds-c-icon-color-foreground: white !important;
+    --slds-c-icon-color-foreground-default: white !important;
+}
+
+
+.custom-button {
+    --slds-c-button-brand-color-background: #14B3BB;
+    --slds-c-button-brand-color-background-hover: #0f8c92;
+    --slds-c-button-brand-text-color: #ffffff;
+}
+
+.tracking-label {
+    white-space: nowrap;       
+    width: fit-content;
+    margin-left: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 2rem;
+    display: flex;
+    align-items: center;    
+}

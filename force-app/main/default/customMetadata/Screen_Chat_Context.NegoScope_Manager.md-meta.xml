@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>NegoScope_Manager</label>
+    <protected>false</protected>
+    <values>
+        <field>Allowed_Objects__c</field>
+        <value xsi:type="xsd:string">PG__c,NSPG__c,Product2,NegoScope__c,Supplier__c,Brand__c,BRADistributor__c,Hierarchy__c,NSHE__c,NSBRA__c</value>
+    </values>
+    <values>
+        <field>Suggested_Questions_Json__c</field>
+        <value xsi:type="xsd:string">[
+&quot;Why don&apos;t I see any products here?&quot;,
+&quot;What hierarchies are in this scope?&quot;,
+&quot;How many products per brand?&quot;,
+&quot;Why is a product not showing?&quot;
+]</value>
+    </values>
+    <values>
+        <field>Tool_Instructions__c</field>
+        <value xsi:type="xsd:string">This screen (Negotiation Scope) builds a product scope for a chosen Client/Supplier. Extra tools:
+
+&quot;scope&quot; - reads ALL rows currently in scope on this screen (every page, not just visible ones).
+- Distinct values + counts: {&quot;tool&quot;:&quot;scope&quot;,&quot;groupBy&quot;:&quot;&lt;field&gt;&quot;}
+- Total count: {&quot;tool&quot;:&quot;scope&quot;,&quot;countOnly&quot;:true}
+- Rows: {&quot;tool&quot;:&quot;scope&quot;,&quot;fields&quot;:[&quot;&lt;f1&gt;&quot;],&quot;orderBy&quot;:&quot;&lt;field&gt;&quot;,&quot;limit&quot;:50,&quot;offset&quot;:950}
+Rows come back ordered by orderBy (defaults to Name). Use offset to reach a page: with page size 50 the last page of 977 rows is offset 950, limit 50. Use for &quot;what are all the X&quot;, &quot;how many per Y&quot;, &quot;list everything in this scope&quot;, &quot;list the last page&quot;.
+
+&quot;diagnose&quot; - use ONLY for &quot;why don&apos;t I see any products&quot;, &quot;why is this empty&quot;, &quot;nothing shows&quot;. {&quot;tool&quot;:&quot;diagnose&quot;}
+Answer ONLY from its reason code, never guess from the filter descriptions:
+- noSupplierChosen -&gt; &quot;Pick a Client/Supplier on the Information tab first, then products load.&quot;
+- noProductsExistForThisClient -&gt; &quot;There are no products for this client in the system, so the grid stays empty. Choose a different Client/Supplier on the Information tab.&quot;
+- filtersRemoveEverything -&gt; products exist for this client but the current filters exclude them all. Name the active ones from activeFilters (Hierarchies, Brands, or Product Attributes) and say: &quot;widen or clear those, or turn on Include All Products.&quot; Only ever blame a filter when the reason is this one.
+- productsExistButAreOnAnotherPageOrColumnSearchHidesThem -&gt; &quot;Products are in scope but hidden by a column search box in the grid header, or they are on another page. Clear the column search.&quot;
+- productsAreShowingNothingIsWrong -&gt; the grid already shows products. Reply in ONE sentence: &quot;You do have products - the grid shows &lt;N&gt; (from productsCurrentlyShownInGrid). If you are looking for a specific one, tell me its name.&quot; Nothing else.
+
+&quot;find&quot; - everything about ONE product, by name. USE THIS FIRST for any question about a specific product: its details, its code, which suppliers have it, or why it is not showing. {&quot;tool&quot;:&quot;find&quot;,&quot;name&quot;:&quot;&lt;the product name the user typed&gt;&quot;}
+Returns per match: supplier, brand, hierarchy, status, GTIN, and inCurrentScreenScope. Also suppliersForThisProduct (every supplier that has this product name), currentScopeClient (the client this scope is built for), and matchedExactly (false if only a partial name matched).
+Result handling:
+- Use the product name EXACTLY as returned (Name field). If matchedExactly is false, first line: &quot;I couldn&apos;t find that exact name, but here is the closest match:&quot; then answer.
+- Which suppliers a product has -&gt; answer from suppliersForThisProduct, comma separated. If more than one, say the same product name exists for each of those suppliers.
+- found = 0 -&gt; that product does not exist anywhere under that name. Say so and suggest checking the spelling.
+- existsAsProductButHasNoProductGroup = true -&gt; it exists in the catalogue but has no product-group record, so it can never appear here for anyone. Say a product group must be created for it first.
+- inCurrentScreenScope = true -&gt; it IS in this scope and part of the Products list. Say: &quot;This product is in scope, so it&apos;s in the Products list. If you don&apos;t see it on the current page, it&apos;s on another page - use Next or Last Page - or a column search box in the grid header is filtering it out; clear that.&quot; Do NOT claim it belongs to another client, and do NOT look up more.
+- inCurrentScreenScope = false -&gt; give WHY in one short line, first reason that applies, then the exact click:
+  - different client: if the product&apos;s suppliers do not include the current client, say &quot;This product belongs to &lt;supplier(s) from suppliersForThisProduct&gt;. This scope is for &lt;currentScopeClient&gt;, so it cannot appear here.&quot;
+  - brand not ticked: &quot;Brands tab -&gt; tick &lt;brand&gt;.&quot;
+  - hierarchy not included: &quot;Hierarchies tab -&gt; set &lt;hierarchy&gt; to Include.&quot;
+  - an attribute filter excludes it: name the filter and the value that blocks it.
+  - inactive: &quot;Its status is &lt;status&gt;, so it is not offered.&quot;
+
+&quot;scope&quot; empty -&gt; nothing is in scope. Give the one thing blocking it (no supplier chosen, no hierarchy included, no brand ticked, or an attribute filter too narrow) and the click to fix it.
+&quot;db&quot; empty -&gt; that item does not exist under that name; suggest checking the spelling or the supplier.</value>
+    </values>
+    <values>
+        <field>Tool_Provider_Class__c</field>
+        <value xsi:type="xsd:string">NegoScopeChatToolProvider</value>
+    </values>
+</CustomMetadata>

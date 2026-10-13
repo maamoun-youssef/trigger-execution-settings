@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Duplication_Discount_Mapping__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Create discount mapping for comparble condition on difféerent period</description>
+    <label>Duplication Discount Mapping</label>
+    <referenceTo>Pol_Com_Condition__c</referenceTo>
+    <relationshipLabel>Conditions Tarifaires (Duplication Discount Mapping)</relationshipLabel>
+    <relationshipName>Conditions_Tarifaires</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

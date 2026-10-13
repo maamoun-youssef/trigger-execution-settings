@@ -1,0 +1,145 @@
+<template>
+    <template if:true={loading}>
+        <div class="slds-spinner_container">
+            <div class="loader slds-spinner_container slds-align--absolute-center">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </template>
+    <div class="slds-card">
+        <div class="header slds-m-around--x-small">
+            <div class="slds-grid">
+                <div class="slds-col slds-p-around_xx-small slds-has-flexi-truncate">
+                    <!-- HEADING AREA -->
+                    <!-- MEDIA OBJECT = FIGURE + BODY -->
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div
+                            class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                            <lightning-icon icon-name="standard:budget_allocation">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small">
+                            <p class="slds-text-title slds-line-height_reset">
+                                {label.AssortmentLabel}
+                            </p>
+                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate"
+                                if:true={CurrentAssortment}>
+                                {assortmentLongName}
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-grid">
+            <div class="main-panel slds-col slds-scrollable">
+                <table
+                    class="slds-table slds-table--bordered slds-table--cell-buffer slds-table--col-bordered slds-tree slds-table_tree main-table"
+                    role="treegrid">
+                    <thead>
+                        <!-- Check if there is headers to display-->
+                        <template if:true={headers.length}>
+                            <template if:false={justOneHeaderDisplayed}>
+                                <tr class="slds-line-height_reset">
+                                    <th class="fixedHeader" style="background-color: #267a7c; color: white;">
+
+                                    </th>
+                                    <template for:each={headers} for:item="head">
+                                        <th key={head} colspan={head.columns.length}  style={head.style}
+                                            class="slds-text-align--center fixedHeader">
+                                            <template if:true={head.headerUrl}>
+                                                <a href={head.headerUrl} target="_blank" style="color:white;">{head.headerName}</a>
+                                            </template>
+                                            <template if:false={head.headerUrl}>
+                                                {head.headerName}
+                                            </template>
+                                        </th>
+                                    </template>
+                                </tr>
+                            </template>
+
+                            <tr class="slds-line-height_reset">
+                                <th class="fixedHeader" style="background-color: #267a7c; color: white;">
+
+                                </th>
+                                <template for:each={headers} for:item="head">
+                                    <template for:each={head.columns} for:item="col">
+                                        <th key={col.label} class="fixedHeader" style={col.style}>
+                                            {col.label}
+                                        </th>
+                                    </template>
+                                </template>
+                            </tr>
+                        </template>
+                    </thead>
+                    <tbody>
+                        <template for:each={treeData} for:item="item">
+                            <template if:true={item.show}>
+                                <tr key={item.key} aria-expanded={item.ariaExpanded} aria-level={item.level} aria-posinset="2"
+                                    aria-selected="false" aria-setsize="4">
+                                    <th class="slds-tree__item" data-label={item.title} scope="row" style="background-color: #267a7c; color: white;">
+                                        <template if:true={item.showChevronButton}>
+                                            <button type="button" onclick={expandAndCollapse} data-recordid={item.key} style="color: white;"
+                                                class="slds-button slds-button_icon slds-button_icon-x-small slds-m-right_x-small">
+                                                <svg class="slds-button__icon slds-button__icon_small" aria-hidden="true">
+                                                    <use
+                                                        xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#chevronright">
+                                                    </use>
+                                                </svg>
+                                            </button>
+                                        </template>
+                                        <template if:false={item.showChevronButton}>
+                                            <button type="button" onclick={expandAndCollapse} data-recordid={item.key} style="color: white;"
+                                                class="slds-button slds-button_icon slds-button_icon-x-small slds-m-right_x-small slds-hidden">
+                                                <svg class="slds-button__icon slds-button__icon_small" aria-hidden="true">
+                                                    <use
+                                                        xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#chevronright">
+                                                    </use>
+                                                </svg>
+                                            </button>
+                                        </template>
+                                        <div class="slds-truncate" title={item.title}>
+                                            {item.title}
+                                        </div>
+                                    </th>
+                                    <template for:each={item.values} for:item="sum">
+                                        <td key={sum} scope="row" data-id={sum.Id} class={sum.class} style={sum.style} >
+                                            <lightning-formatted-number value={sum.value} format-style="decimal"
+                                                maximum-fraction-digits={sum.scale} minimum-fraction-digits={sum.scale}>
+                                            </lightning-formatted-number>
+                                        </td>
+                                    </template>
+                                </tr>
+                                <template if:true={item.ariaExpanded}>
+                                    <template if:false={hideHistory} >
+                                        <template if:true={item.hasOld}>
+                                            <tr key={item.key} aria-expanded={item.ariaExpanded} aria-level={item.historyLevel}
+                                                aria-posinset="2" aria-selected="false" aria-setsize="4"
+                                                class="historyStyle">
+                                                <th class="slds-tree__item" data-label={item.title} scope="row">
+                                                    <div class="slds-truncate" title={item.title}>
+                                                        {item.title}
+                                                    </div>
+                                                </th>
+                                                <template for:each={item.oldValues} for:item="sum">
+                                                    <td key={sum} scope="row" class="slds-text-align--right" >
+                                                        <lightning-formatted-number value={sum.value} format-style="decimal"
+                                                            maximum-fraction-digits={sum.scale} minimum-fraction-digits={sum.scale}>
+                                                        </lightning-formatted-number>
+                                                    </td>
+                                                </template>
+                                            </tr>
+                                        </template>
+                                    </template>
+                                </template>
+                            </template>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>

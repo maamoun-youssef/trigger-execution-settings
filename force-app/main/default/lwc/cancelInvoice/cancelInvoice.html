@@ -1,0 +1,123 @@
+<template>
+    <div class="slds-card" style="margin-top: 0; border-top: 0;">
+        <div class="slds-grid">
+            <div class="tableDiv slds-scrollable">
+                <table
+                    class="slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border_right slds-no-row-hover">
+                    <thead>
+                        <tr class="slds-border--bottom">
+                            <th style="text-align:center;top: 0px; position: sticky; z-index: 2;">
+                                {labels.InvoiceDetail__c.DISCBudgetCode__c}
+                            </th>
+                            <th style="text-align:center;top: 0px; position: sticky; z-index: 2;">
+                                {labels.LBL_InvoiceAmount}
+                            </th>
+                            <th style="text-align:center;top: 0px; position: sticky; z-index: 2;">
+                                {labels.LBL_AmountToCreate}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template if:false={loading}>
+                            <template if:false={invoiceDetailRecords.length}>
+                                <tr>
+                                    <td colspan="3">
+                                        <h2
+                                            class="slds-align_absolute-center slds-text-align_center slds-m-around_x-small slds-card__header-title slds-align-content-center">
+                                            {labels.LBL_No_Item_To_Display}
+                                        </h2>
+                                    </td>
+                                </tr>
+                            </template>
+                            <template if:true={invoiceDetailRecords.length}>
+                                <template for:each={invoiceDetailRecords} for:item="item" for:index="index">
+                                    <tr key={item.id} class="slds-border--bottom tableRow">
+                                        <td>
+                                            {item.discBudgetCode}
+                                        </td>
+                                        <td style="text-align:right;">
+                                            <lightning-formatted-number maximum-fraction-digits="2"
+                                                minimum-fraction-digits="2" value={item.restToPaidAmount}>
+                                            </lightning-formatted-number>
+                                        </td>
+                                        <template lwc:if={isFullCancel}>
+                                            <td style="text-align:right;">
+                                                <lightning-formatted-number style="text-align:right;"
+                                                    maximum-fraction-digits="2" minimum-fraction-digits="2"
+                                                    value={item.restToPaidAmount}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                        </template>
+                                        <template lwc:else>
+                                            <td>
+                                                <lightning-input type="number" class={item.id} data-id={item.id}
+                                                    data-field={API_NAMES.InvoiceDetail__c.RestToPaidAmount__c}
+                                                    onchange={handleFieldsEdit} variant="label-hidden"
+                                                    value={item.amountToCancel}>
+                                                </lightning-input>
+                                            </td>
+                                        </template>
+                                    </tr>
+                                </template>
+                            </template>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <template lwc:if={isFullCancel}>
+            <div class="slds-m-top_medium slds-p-around_small">
+                <div class="slds-grid slds-grid_vertical-align-center slds-m-bottom_small">
+                    <div class="slds-col slds-size_1-of-2">
+                        <span class="slds-text-title_bold">{labels.LBL_INVCNCancel_InitPageQuestion}</span>
+                    </div>
+                    <div class="slds-col slds-text-align_right">
+                        <lightning-input type="toggle" message-toggle-active="" message-toggle-inactive=""
+                            checked={isCreateSupplierCreditNote} onchange={handleToggleCreateSupplierCreditNote}>
+                        </lightning-input>
+                    </div>
+                </div>
+                <template if:true={isCreateSupplierCreditNote}>
+                    <div class="slds-box slds-theme_default slds-m-top_small">
+                        <p class="slds-text-title_bold slds-m-bottom_small">{labels.LBL_INVCNCancel_FormPageMessage}</p>
+                        <div class="slds-size_1-of-2">
+                            <lightning-input label={labels.Invoice__c.InvNumber__c} variant="label-inline"
+                                value={invNumber} onchange={handleChangeSupplierCreditNote}
+                                data-field={API_NAMES.Invoice__c.InvNumber__c} required data-required="true">
+                            </lightning-input>
+                            <lightning-combobox label={labels.Invoice__c.PaymentType__c} variant="label-inline"
+                                value={paymentType} options={paymentTypeOptions}
+                                onchange={handleChangeSupplierCreditNote}
+                                data-field={API_NAMES.Invoice__c.PaymentType__c} required data-required="true">
+                            </lightning-combobox>
+                            <div class="slds-form-element slds-form-element_horizontal">
+                                <label class="slds-form-element__label">{labels.Invoice__c.TotalAmount__c}</label>
+                                <div class="slds-form-element__control">
+                                    <lightning-formatted-number style="text-align:right;" maximum-fraction-digits="2"
+                                        minimum-fraction-digits="2" value={invoiceRecord.RestToPaidAmount__c}>
+                                    </lightning-formatted-number> {invoiceRecord.CurrencyIsoCode}
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-form-element_horizontal">
+                                <label class="slds-form-element__label">{labels.Invoice__c.TotalVATAmount__c}</label>
+                                <div class="slds-form-element__control">
+                                    <lightning-formatted-number style="text-align:right;" maximum-fraction-digits="2"
+                                        minimum-fraction-digits="2" value={invoiceRecord.RestToPaidVATAmount__c}>
+                                    </lightning-formatted-number> {invoiceRecord.CurrencyIsoCode}
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-form-element_horizontal">
+                                <label class="slds-form-element__label">{labels.Invoice__c.TotalAmountwVAT__c}</label>
+                                <div class="slds-form-element__control">
+                                    <lightning-formatted-number style="text-align:right;" maximum-fraction-digits="2"
+                                        minimum-fraction-digits="2" value={invoiceRecord.RestToPaidAmountwVAT__c}>
+                                    </lightning-formatted-number> {invoiceRecord.CurrencyIsoCode}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,188 @@
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+.mainContainer {
+    height: 100%;
+}
+
+.fileGenerationContainer {
+    width: 50vh;
+}
+
+.slds-table th,
+.slds-table td {
+    white-space: pre-wrap;
+}
+
+* {
+    font-size: 12px !important;
+}
+
+.checkboxClass {
+    scale: 1.2;
+    width: 25px;
+    accent-color: white;
+}
+
+.main-panel {
+    min-height: 20vh;
+}
+
+.headerRow {
+    text-align: center;
+}
+
+.noItemsClass {
+    height: 100%;
+    width: 100%;
+}
+
+.spaceBetween {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    justify-content: space-between;
+}
+
+.buttonSection {
+    justify-self: end;
+    align-items: center;
+}
+
+.hlpTable th {
+    background-color: #0d807d;
+    color: white;
+}
+
+.stickyHeader {
+    position: sticky;
+    z-index: 4;
+    top: 0;
+}
+
+select {
+    display: block;
+    position: relative;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    border-radius: 4px;
+    z-index: 2;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.headerDivider {
+    border-left: 0.1mm solid #939393;
+}
+
+.green-icon {
+    --slds-c-icon-color-foreground: green !important;
+    --slds-c-icon-color-foreground-default: green !important;
+}
+
+.red-icon {
+    --slds-c-icon-color-foreground: red !important;
+    --slds-c-icon-color-foreground-default: red !important;
+}
+
+.white-icon {
+    --slds-c-icon-color-foreground: white !important;
+    --slds-c-icon-color-foreground-default: white !important;
+}
+
+.black-icon {
+    --slds-c-icon-color-foreground: black !important;
+    --slds-c-icon-color-foreground-default: black !important;
+}
+
+.sortSelected-icon {
+    --slds-c-icon-color-foreground: #17d7b3 !important;
+    --slds-c-icon-color-foreground-default: #17d7b3 !important;
+}
+
+.lengend-square {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.categoryTd {
+    background-color: rgb(89, 89, 89) !important;
+    color: white;
+}
+
+.subTotalRow {
+    height: 35px;
+}
+.borderColor{
+    border-color:red;
+}
+tr.newLoading {
+    background-image: linear-gradient(to right, transparent 50%, rgba(0, 0, 0, .08) 50%);
+    background-size: 200% 100%;
+    animation: newLoading 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+tr.newLoading td {
+    opacity: .45;
+    pointer-events: none;
+}
+@keyframes newLoading {
+    0% {
+        background-position: 0;
+    }
+
+    50% {
+        background-position: -30%;
+    }
+
+    80% {
+        background-position: -100%;
+    }
+
+    100% {
+        background-position: -200%;
+    }
+}
+.filter-section {
+    height: 100%;
+}

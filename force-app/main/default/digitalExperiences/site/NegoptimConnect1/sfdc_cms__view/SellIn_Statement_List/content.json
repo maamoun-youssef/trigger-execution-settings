@@ -1,0 +1,71 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "SellIn Statement List",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"d7dc0f24-5161-4b0d-a763-4ec35d49ec93\",\"columns\":[{\"UUID\":\"e112d3a9-8a57-4d44-9186-cca5e9d44861\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "dxpStyle" : { }
+              },
+              "definition" : "c:sellinStatementList",
+              "id" : "f5c09464-af90-474a-80f3-905cc5c2db37",
+              "type" : "component"
+            } ],
+            "id" : "e112d3a9-8a57-4d44-9186-cca5e9d44861",
+            "name" : "col1",
+            "title" : "Colonne 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "d7dc0f24-5161-4b0d-a763-4ec35d49ec93",
+          "type" : "component"
+        } ],
+        "id" : "2ab21092-6f09-4dd3-8cd8-ea36ab64a383",
+        "name" : "content",
+        "title" : "Contenu",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "dxpStyle" : { },
+            "pageTitle" : "SellIn Statement List",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "412825e1-b3b1-4a9e-8159-e31e84d9e459",
+          "type" : "component"
+        } ],
+        "id" : "4bc2cac0-f599-4a81-88b7-bfe12bb52988",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "899d37c8-d436-4ce0-822e-aa800aafee26",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-sellin-statement-list"
+  },
+  "urlName" : "sellin-statement-list"
+}

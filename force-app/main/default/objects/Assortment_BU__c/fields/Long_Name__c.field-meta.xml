@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Long_Name__c</fullName>
+    <externalId>false</externalId>
+    <formula>/*IF (DAY(Ass_BDate__c) &gt;= 10, TEXT(DAY(Ass_BDate__c)), &apos;0&apos; &amp; TEXT(DAY(Ass_BDate__c)))&amp;&apos;-&apos;&amp;IF (MONTH(Ass_BDate__c) &gt;= 10, TEXT(MONTH(Ass_BDate__c)), &apos;0&apos; &amp; TEXT(MONTH(Ass_BDate__c)))&amp;&apos;-&apos;&amp;TEXT(YEAR(Ass_BDate__c)) &amp;&apos; | &apos;&amp;
+IF (DAY(Ass_EDate__c) &gt;= 10, TEXT(DAY(Ass_EDate__c)), &apos;0&apos; &amp; TEXT(DAY(Ass_EDate__c)))&amp;&apos;-&apos;&amp;IF (MONTH(Ass_EDate__c) &gt;= 10, TEXT(MONTH(Ass_EDate__c)), &apos;0&apos; &amp; TEXT(MONTH(Ass_EDate__c)))&amp;&apos;-&apos;&amp;TEXT(YEAR(Ass_EDate__c)) &amp;&apos; | &apos;&amp;
+*/
+
+CASE(RecordType.DeveloperName, &quot;Budget&quot;, $Label.RT_Assortment_Budget,
+&quot;Conso&quot;, $Label.RT_Assortment_Conso,
+&quot;L4L&quot;, $Label.RT_Assortment_Like4Like,
+&quot;Nego&quot;, $Label.RT_Assortment_Nego,
+&quot;Simulation&quot;, $Label.RT_Assortment_Simulation,
+&quot;Target&quot;,  $Label.RT_Assortment_Target,
+&quot;Conso_Target&quot;, $Label.RT_Assortment_Conso_Target,
+&quot;Panel&quot;, $Label.RT_Assortment_Panel, &quot;&quot;) &amp;&apos; | &apos;&amp;
+
+BusinessUnitTarget__r.Name &amp;&apos; | &apos;&amp;
+CASE(TEXT(Status__c),
+&quot;Open (in bulding process)&quot;,$Label.LBL_Status_In_Preparation,
+&quot;Request for approval&quot;,$Label.LBL_Status_Request_For_Approval,
+&quot;Validated&quot;,$Label.LBL_Status_Validated,
+&quot;Signed IN&quot;,$Label.LBL_Status_Signed_In,
+&quot;Signed OUT&quot;,$Label.LBL_Status_Signed_Out,
+&quot;Closed&quot;,$Label.LBL_Status_Closed,
+&quot;Deleted&quot;,$Label.LBL_Status_Deleted,
+Null)+ &apos; | &apos; + TEXT(Year__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Long Name</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,160 @@
+<template>
+    <article class="slds-card slds-theme_default mainContainer">
+        <template if:true={isLoading}>
+            <div class="slds-spinner_container">
+                <div class="loader slds-spinner_container slds-align--absolute-center">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </template>
+        <!-- Header -->
+        <div class="slds-card slds-grid slds-p-around_xx-small slds-page-header pageHeader" style="background: white">
+            <div class="slds-col slds-has-flexi-truncate">
+                <div
+                    class="slds-media slds-media_center slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small">
+                    <div>
+                        <lightning-icon class="slds-m-right--small"
+                            icon-name="standard:delegated_account"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-text-heading_small slds-text-title_bold">
+                            {labels.LBL_CockpitRelatedContracts_Title}</div>
+                        <div class="slds-text-title">{labels.LBL_CockpitRelatedContracts_SubTitle}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <template if:true={records.length}>
+            <div class="yearStrip" role="tablist" aria-label="Reference year">
+                <template for:each={years} for:item="year">
+                    <button key={year.year} type="button" class={year.tabClass} data-year={year.year}
+                        onclick={handleYearChange} role="tab" aria-selected={year.isSelected}>
+                        <span class="yearText">{year.year}</span>
+                        <span class={year.badgeClass}>{year.count}</span>
+                    </button>
+                </template>
+            </div>
+
+            <div class="slds-scrollable_x">
+                <table
+                    class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_fixed-layout slds-no-row-hover">
+                    <thead>
+                        <tr class="slds-text-title_caps" style="height: 40px;">
+                            <template for:each={displayedFields} for:item="field">
+                                <th key={field.fieldName} title={field.fieldLabel} style={field.headerStyle}>
+                                    <div title={field.fieldLabel}>{field.fieldLabel}</div>
+                                </th>
+                            </template>
+                            <th style={lastThStyle}>
+                                <div title="Actions">{labels.LBL_Actions}</div>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <template if:true={filteredRows.length}>
+                            <template for:each={filteredRows} for:item="row">
+                                <tr key={row.Id}>
+                                    <!-- You currently render Name here even though header doesn't show it.
+                                Either include Name in displayedFields OR add a Name <th>. -->
+                                    <template for:each={row.values} for:item="field">
+                                        <td key={field.fieldName} style={field.style}>
+                                            <lightning-formatted-number lwc:if={field.isNumberField}
+                                                maximum-fraction-digits={field.scale}
+                                                minimum-fraction-digits={field.scale} value={field.fieldValue}>
+                                            </lightning-formatted-number>
+                                            <template lwc:elseif={field.isText}>
+                                                <template lwc:if={field.isNameField}>
+                                                    <a class="slds-text-link" href={field.link} target="_blank">
+                                                        {field.fieldValue}
+                                                    </a>
+                                                </template>
+                                                <template lwc:elseif={field.isHTMLFormatted}>
+                                                    <lightning-formatted-rich-text value={field.fieldValue}>
+                                                    </lightning-formatted-rich-text>
+                                                </template>
+                                                <template lwc:else>
+                                                    {field.fieldValue}
+                                                </template>
+                                            </template>
+                                            <template lwc:elseif={field.isReference}>
+                                                <a class="slds-text-link" href={field.link} target="_blank">
+                                                    {field.fieldOutputValue}
+                                                </a>
+                                            </template>
+                                            <lightning-input lwc:elseif={field.isBoolean} type="checkbox"
+                                                variant="label-hidden" checked={field.fieldValue} disabled>
+                                            </lightning-input>
+                                            <lightning-formatted-date-time lwc:elseif={field.isDate}
+                                                value={field.fieldValue} year="numeric" month="2-digit" day="2-digit">
+                                            </lightning-formatted-date-time>
+                                            <lightning-formatted-date-time lwc:elseif={field.isDateTime}
+                                                value={field.fieldValue} year="numeric" month="2-digit" day="2-digit"
+                                                hour="2-digit" minute="2-digit">
+                                            </lightning-formatted-date-time>
+                                            <template lwc:elseif={field.isPicklist}>
+                                                {field.fieldOutputValue}
+                                            </template>
+                                            <template lwc:else>
+                                                {field.fieldValue}
+                                            </template>
+                                        </td>
+                                    </template>
+                                    <td style={row.lastTdStyle} class="slds-text-align_center slds-p-around--none">
+                                        <div class="slds-grid slds-grid--align-center">
+                                            <lightning-icon icon-name="utility:preview" size="x-small"
+                                                title="Open condition manager" data-id={row.Id}
+                                                class="slds-m-right--x-small" data-component-name="conditionManager"
+                                                onclick={handleActions}>
+                                            </lightning-icon>
+                                            <lightning-icon icon-name="utility:copy" size="x-small" title="Duplicate"
+                                                data-id={row.Id} data-component-name="duplicateContract"
+                                                onclick={handleOpenDuplicate}>
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+        <template if:false={records.length}>
+            <tr>
+                <td colspan={tableColspan} class="slds-text-align_center slds-p-vertical_medium">
+                    {labels.LBL_No_Item_To_Display}
+                </td>
+            </tr>
+        </template>
+        <!-- Table -->
+
+        <!-- Duplicate modal (unchanged) -->
+        <template if:true={isDuplicateModalOpen}>
+            <div role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large"
+                aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-modal__title slds-hyphenate">
+                            {labels.LBL_Duplicate_Contarct}: {selectedContract.Name}
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-is-relative popUpBody">
+                        <c-duplicate-contract record-id={selectedContract.Id} display-from-popup="true">
+                        </c-duplicate-contract>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral"
+                            onclick={togglePopupDuplicate}>{labels.LBL_Cancel}</button>
+                        <button class="slds-button slds-button_brand"
+                            onclick={handleDuplicate}>{labels.LBL_Duplicate_Contract}</button>
+                    </footer>
+                </div>
+            </div>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </article>
+</template>

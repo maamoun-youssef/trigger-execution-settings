@@ -1,0 +1,165 @@
+.dc-container {
+    background-color: #F0F0F3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'customFontTest', 'Salesforce Sans', sans-serif;
+    height: 100%;
+    overflow-x: hidden;
+    min-height: 440px;
+}
+.btn-header {
+    transition: transform 0.7s ease-in-out;
+}
+
+.btn-header:hover {
+    background: linear-gradient(45deg, #71c89e, #2f86a1);
+    filter: hue-rotate(45deg);
+    color: white;
+    animation: btn-header-effect 2s ease-in-out forwards;
+    transform: scale(1.1);
+}
+
+@keyframes btn-header-effect {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        filter: hue-rotate(45deg);
+    }
+}
+
+.dc-header {
+    width: 100%;
+    font-family: inherit;
+}
+
+.dc-header-img {
+    width: 100%;
+    height: 100%;
+}
+
+.dc-upload-container {
+    margin-top: 15px;
+    font-family: inherit;
+}
+
+.dc-upload-icon {
+    --slds-c-icon-color-foreground-default: #2F86A1;
+}
+
+.dc-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-family: inherit;
+}
+
+.dc-location-button {
+    width: fit-content;
+    background-color: #2F86A1;
+    color: white;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 0px;
+    margin-inline: 8px;
+    cursor: default;
+    font-family: inherit;
+}
+
+.dc-section-button {
+    width: fit-content;
+    background-color: white;
+    color: black;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 0px;
+    margin-inline: 8px;
+}
+
+/* Targeting the button within the .slds-file-selector__button class */
+.slds-file-selector__button.slds-button_neutral {
+    color: #2F86A1;            /* Custom text color for contrast */
+    border-color: #2F86A1;      /* Optional: border color to match the background */
+}
+
+.slds-file-selector__text {
+    display: block !important;
+}
+
+.dc-section-container {
+    margin-bottom: 25px;
+}
+
+.dc-modal-container {
+    position: relative;
+    transform: translate(0, 0);
+    transition: transform var(--lwc-durationQuickly, 0.1s) linear, opacity var(--lwc-durationQuickly, 0.1s) linear;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 var(--lwc-spacingXLarge, 2rem);
+    height: 100%;
+    padding: var(--lwc-squareIconLargeBoundary, 3rem) 0 var(--lwc-squareIconLargeBoundaryAlt, 5rem) 0;
+    border-radius: var(--lwc-borderRadiusMedium, 0.25rem);
+}
+
+.dc-modal-close-button-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px;
+    width: fit-content;
+    align-self: end;
+    margin-bottom: 15px;
+}
+
+.dc-inherit-font {
+    font-family: inherit;
+}
+
+.dc-12px-font {
+    font-size: 13px;
+}
+
+.dc-13px-font {
+    font-size: 13px;
+}
+
+.dc-loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+.dc-loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+.dc-loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+.greyBg {
+    background-color: #f3f3f3;
+}

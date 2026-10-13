@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- La remise est exclue de la Base de calcul  des conditions hors factures (Base Ristournable) --></help>
+    <label>Is Non Discountable</label>
+    <name>Is_NonDiscountable__c</name>
+</CustomFieldTranslation>

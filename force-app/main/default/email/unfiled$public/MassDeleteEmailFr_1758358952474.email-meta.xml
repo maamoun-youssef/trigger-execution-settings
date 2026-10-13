@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <name>MassDeleteEmailFr</name>
+    <relatedEntityType>Log__c</relatedEntityType>
+    <style>none</style>
+    <subject>negOptim : Suppression des pièces comptables terminée pour l&apos;execution du X à Y.</subject>
+    <type>custom</type>
+    <uiType>SFX</uiType>
+</EmailTemplate>

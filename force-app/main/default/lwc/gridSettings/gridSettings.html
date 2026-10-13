@@ -1,0 +1,487 @@
+<template>
+    <div class="mainContainer slds-card">
+      <!-- Header -->
+        <div class="slds-page-header slds-p-around_small" style="background: white;">
+            <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                <!-- Left: icon + titles -->
+                <div class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <lightning-icon icon-name={headerLabels.iconName} size="small"></lightning-icon>
+                    <div class="slds-media__body slds-m-left_small slds-truncate">
+                        <p class="slds-text-title slds-line-height_reset slds-truncate">
+                            <template lwc:if={headerLabels.layoutSlogan}>
+                                {headerLabels.layoutSlogan}
+                            </template>
+                            <template lwc:else>
+                                {headerLabels.objectLabel}
+                            </template>
+                        </p>
+                        <div class="slds-text-heading_small slds-text-title_bold slds-truncate">
+                            {headerLabels.layoutLabel}
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-grid slds-media--center" if:false={isTreeGrid}>
+                    <!-- Flow Actions buttons and Icons -->
+                    <div class="slds-align--absolute-center">
+                        <template for:each={iconFlows} for:item="flow">
+                            <img key={flow.value} if:true={flow.value} src={flow.icon} alt={flow.label}
+                                data-flow-name={flow.value} data-flow-label={flow.label} onclick={toggleFlow}
+                                style="width:30px; height:30px; margin-left:6px; cursor:pointer; border-radius:3px;" />
+                        </template>
+                    </div>
+                    <template for:each={buttonFlows} for:item="flow">
+                        <lightning-button key={flow.value} if:true={flow.value} label={flow.label}
+                            class="slds-button slds-m-around--xx-small" data-flow-name={flow.value}
+                            data-flow-label={flow.label} onclick={toggleFlow}>
+                        </lightning-button>
+                    </template>
+                    <lightning-button-menu icon-name="utility:connected_apps" menu-alignment="right" nubbin
+                        class="slds-var-p-left_xx-small">  <!--if:true={hasMenu} -->
+                        <template for:each={actionFlows} for:item="flow">
+                            <lightning-menu-item if:true={flow.value} key={flow.value} label={flow.label}
+                                prefix-icon-name={flow.icon} data-flow-name={flow.value} data-flow-label={flow.label}
+                                onclick={toggleFlow}>
+                            </lightning-menu-item>
+                        </template>
+                        <template if:true={displayShowHideColumns}>
+                            <lightning-menu-item label={Labels.LBL_Show_Hide_Columns}
+                                prefix-icon-name="utility:freeze_column" onclick={setShowHideColumns}>
+                            </lightning-menu-item>
+                        </template>
+                        <!-- EXPORT EXCEL -->
+                        <lightning-menu-item label={Labels.LBL_Export} prefix-icon-name="doctype:excel"
+                            if:true={allowExport} onclick={handleExportExcel}>
+                        </lightning-menu-item>
+                    </lightning-button-menu>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Table -->
+         <div class="slds-card" style="margin-top: 0; border-top: 0;">
+            <div class="slds-grid">
+                <div class="slds-size_1-of-1 slds-grid">
+                    <div class="slds-col slds-wrap slds-scrollable">
+                        <div class="slds-p-around_none">
+                            <div class="main-panel slds-scrollable" style={tableStyle}>
+                                <!-- Loading -->
+                                <lightning-spinner variant="brand" size="large" if:true={isLoading}></lightning-spinner>
+                                <template if:true={hasRecords}>
+                                    <template if:false={isTreeGrid}>
+                                        <table class="initial-table slds-table slds-table_bordered slds-table_col-bordered main-table slds-no-row-hover slds-border_right">
+                                            <thead class="stickyHeader">
+                                                <tr>
+                                                    <template if:true={isGrouped}>
+                                                        <th scope="col"
+                                                            title={groupedFieldTh.label}
+                                                            style={groupedFieldTh.headerStyle}
+                                                            class="sticky-header">
+                                                            {groupedFieldTh.label}
+                                                        </th>
+                                                    </template>
+                                                    <template for:each={displayedFields} for:item="field">
+                                                        <template if:false={field.isHidden}>
+                                                            <th key={field.fieldName}
+                                                                scope="col"
+                                                                title={field.fieldLabel}
+                                                                style={field.headerStyle}
+                                                                class="sticky-header">
+                                                                {field.fieldLabel}
+                                                            </th>
+                                                        </template>
+                                                    </template>
+                                                    <th scope="col" class="sticky-header" style="width: 3rem;"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template for:each={records} for:item="group">
+                                                    <template for:each={group.records} for:item="row">
+                                                        <tr key={row.rowKey}>
+                                                            <!-- Only renders in real grouping mode because only then you set showGroupCell -->
+                                                            <template if:true={row.showGroupCell}>
+                                                                <td rowspan={group.rowspan}
+                                                                    style={groupedFieldTh.bodyStyle}
+                                                                    class="slds-border_left slds-border_right slds-border_bottom">
+                                                                    <template if:true={group.link}>
+                                                                        <a href={group.link} target="_blank">{group.GroupName}</a>
+                                                                    </template>
+                                                                    <template if:false={group.link}>
+                                                                        {group.GroupName}
+                                                                    </template>
+                                                                </td>
+                                                            </template>
+                                                            <!-- existing cells (UNCHANGED) -->
+                                                            <template for:each={row.values} for:item="field">
+                                                                <template if:false={field.isHidden}>
+                                                                    <td key={field.fieldName}
+                                                                        style={field.style}
+                                                                        class="slds-border_left slds-border_right slds-border_bottom">
+                                                                        <!-- EDIT MODE -->
+                                                                        <template lwc:if={field.isInputField}>
+                                                                            <!-- Text -->
+                                                                            <template lwc:if={field.isText}>
+                                                                                <lightning-input value={field.fieldValue} variant="label-hidden"></lightning-input>
+                                                                            </template>
+
+                                                                            <!-- Textarea / Rich Text -->
+                                                                            <template lwc:elseif={field.isTextarea}>
+                                                                                <template lwc:if={field.isRichText}>
+                                                                                    <lightning-input-rich-text value={field.fieldValue} variant="label-hidden"></lightning-input-rich-text>
+                                                                                </template>
+                                                                                <template lwc:else>
+                                                                                    <lightning-textarea value={field.fieldValue} variant="label-hidden"></lightning-textarea>
+                                                                                </template>
+                                                                            </template>
+
+                                                                            <!-- Boolean -->
+                                                                            <template lwc:elseif={field.isBoolean}>
+                                                                                <lightning-input type="checkbox" checked={field.fieldValue} variant="label-hidden"></lightning-input>
+                                                                            </template>
+
+                                                                            <!-- Date -->
+                                                                            <template lwc:elseif={field.isDate}>
+                                                                                <lightning-input type="date" value={field.fieldValue} variant="label-hidden"></lightning-input>
+                                                                            </template>
+
+                                                                            <!-- DateTime -->
+                                                                            <template lwc:elseif={field.isDateTime}>
+                                                                                <lightning-input type="datetime" value={field.fieldValue} variant="label-hidden"></lightning-input>
+                                                                            </template>
+
+                                                                            <!-- Currency -->
+                                                                            <template lwc:elseif={field.isCurrency}>
+                                                                                <lightning-input type="number" step={field.step} value={field.fieldValue} variant="label-hidden" class="input-right"></lightning-input>
+                                                                            </template>
+
+                                                                            <!-- Percent -->
+                                                                            <template lwc:elseif={field.isPercent}>
+                                                                                <lightning-input type="number" step={field.step} value={field.fieldValue} variant="label-hidden" class="input-right"></lightning-input>
+                                                                            </template>
+
+                                                                            <!-- Number -->
+                                                                            <template lwc:elseif={field.isNumberField}>
+                                                                                <lightning-input type="number" step={field.step} value={field.fieldValue} variant="label-hidden" class="input-right"></lightning-input>
+                                                                            </template>
+
+                                                                            <!-- Picklist -->
+                                                                            <template lwc:elseif={field.isPicklist}>
+                                                                                <select>
+                                                                                    <template for:each={field.pickListValues} for:item="opt">
+                                                                                        <option key={opt.value} value={opt.value} selected={opt.isSelected}>
+                                                                                            {opt.label}
+                                                                                        </option>
+                                                                                    </template>
+                                                                                </select>
+                                                                            </template>
+
+                                                                            <!-- URL -->
+                                                                            <template lwc:elseif={field.isURL}>
+                                                                                <lightning-input value={field.fieldValue} variant="label-hidden" disabled={field.hasFileInput}></lightning-input>
+                                                                                <template lwc:if={field.hasFileInput}>
+                                                                                    <div class="slds-truncate slds-m-top_xx-small">
+                                                                                        <a href={field.fieldValue} target="_blank">{field.fieldValue}</a>
+                                                                                    </div>
+                                                                                </template>
+                                                                            </template>
+
+                                                                            <!-- REFERENCE -->
+                                                                            <template lwc:elseif={field.isReference}>
+                                                                                <lightning-record-edit-form if:false={field.isRecordType} object-api-name={objectApiName} class="lookup">
+                                                                                    <lightning-input-field variant="label-hidden" field-name={field.fieldName} value={field.fieldValue}
+                                                                                        data-field={field.fieldName} data-index={index}>
+                                                                                    </lightning-input-field>
+                                                                                </lightning-record-edit-form>
+
+                                                                                <template if:true={field.isRecordType}>
+                                                                                    <lightning-combobox variant="label-hidden" value={field.fieldValue} options={field.pickListValues}
+                                                                                        data-field={field.fieldName} data-index={index}>
+                                                                                    </lightning-combobox>
+                                                                                </template>
+                                                                            </template>
+
+                                                                            <!-- Fallback -->
+                                                                            <template lwc:else>
+                                                                                <lightning-input value={field.fieldValue} variant="label-hidden"></lightning-input>
+                                                                            </template>
+                                                                        </template>
+
+                                                                        <!-- DISPLAY MODE -->
+                                                                        <template lwc:else>
+                                                                            <template lwc:if={field.nameAsURL}>
+                                                                                <a href={field.nameURL} target="_blank">{field.fieldValue}</a>
+                                                                            </template>
+
+                                                                            <template lwc:elseif={field.isReference}>
+                                                                                <a href={field.link} target="_blank">{field.fieldOutputValue}</a>
+                                                                            </template>
+
+                                                                            <template lwc:elseif={field.isCurrency}>
+                                                                                <lightning-formatted-number
+                                                                                    value={field.fieldValue}
+                                                                                    format-style="currency"
+                                                                                    currency-code={field.CurrencyIsoCode}
+                                                                                    minimum-fraction-digits={field.scale}
+                                                                                    maximum-fraction-digits={field.scale}>
+                                                                                </lightning-formatted-number>
+                                                                            </template>
+
+                                                                            <template lwc:elseif={field.isPercent}>
+                                                                                <lightning-formatted-number
+                                                                                    value={field.fieldValue}
+                                                                                    format-style="percent-fixed"
+                                                                                    minimum-fraction-digits={field.scale}
+                                                                                    maximum-fraction-digits={field.scale}>
+                                                                                </lightning-formatted-number>
+                                                                            </template>
+
+                                                                            <template lwc:elseif={field.isNumberField}>
+                                                                                <lightning-formatted-number
+                                                                                    value={field.fieldValue}
+                                                                                    minimum-fraction-digits={field.scale}
+                                                                                    maximum-fraction-digits={field.scale}>
+                                                                                </lightning-formatted-number>
+                                                                            </template>
+
+                                                                            <template lwc:elseif={field.isBoolean}>
+                                                                                <lightning-input type="checkbox" variant="label-hidden" checked={field.fieldValue} disabled></lightning-input>
+                                                                            </template>
+
+                                                                            <template lwc:elseif={field.isDate}>
+                                                                                <lightning-formatted-date-time value={field.fieldValue} year="numeric" month="2-digit" day="2-digit"></lightning-formatted-date-time>
+                                                                            </template>
+
+                                                                            <template lwc:elseif={field.isDateTime}>
+                                                                                <lightning-formatted-date-time value={field.fieldValue} year="numeric" month="2-digit" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time>
+                                                                            </template>
+
+                                                                            <template lwc:elseif={field.isURL}>
+                                                                                <div class="slds-truncate">
+                                                                                    <a href={field.fieldValue} target="_blank">
+                                                                                        <template lwc:if={field.displayFullURL}>{field.fieldValue}</template>
+                                                                                        <template lwc:else>{field.replaceURLWith}</template>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </template>
+
+                                                                            <template lwc:elseif={field.isHTMLFormatted}>
+                                                                                <lightning-formatted-rich-text value={field.fieldValue}></lightning-formatted-rich-text>
+                                                                            </template>
+
+                                                                            <template lwc:elseif={field.isPicklist}>
+                                                                                {field.fieldOutputValue}
+                                                                            </template>
+
+                                                                            <template lwc:else>
+                                                                                {field.fieldOutputValue}
+                                                                            </template>
+                                                                        </template>
+                                                                    </td>
+                                                                </template>
+                                                            </template>
+
+                                                            <!-- Open record -->
+                                                            <td class="slds-text-align_center" style={row.lastTdStyle}>
+                                                                <template if:true={row.link}>
+                                                                    <a href={row.link} target="_blank" title="Open">
+                                                                        <lightning-icon icon-name="utility:threedots" size="x-small"></lightning-icon>
+                                                                    </a>
+                                                                </template>
+                                                            </td>
+                                                        </tr>
+                                                    </template>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </template>
+                                    <template if:true={isTreeGrid}>
+                                        <table
+                                            class="initial-table slds-table slds-table_bordered no-help-text slds-scrollable_y slds-table slds-table_col-bordered slds-no-row-hover slds-border_right">
+                                            <thead class="stickyHeader">
+                                                <tr class="slds-border_top slds-border_bottom sticky-thead header-row-1">
+                                                    <template for:each={displayedFields} for:item="field" for:index="index">
+                                                        <template if:false={field.isHidden}>
+                                                            <th key={field.fieldName} class="centerText relativeDiv sticky-header"
+                                                                style={field.headerStyle}>
+                                                                <div>{field.fieldLabel}</div>
+                                                                <div class="icons-container slds-grid">
+                                                                    <div if:true={field.hasHelpText}>
+                                                                        <lightning-icon style={field.iconStyle} size="xx-small"
+                                                                            icon-name="utility:info" title={field.helpText}>
+                                                                        </lightning-icon>
+                                                                    </div>
+                                                                </div>
+                                                            </th>
+                                                        </template>
+                                                    </template>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template for:each={treeList} for:item="item">
+                                                    <template if:true={item.show}>
+                                                        <tr key={item.key} aria-expanded={item.ariaExpanded}
+                                                            aria-level={item.level} aria-posinset="2" aria-selected="false"
+                                                            aria-setsize="4">
+                                                            <template iterator:field={item.values}>
+                                                                <td key={field.value.fieldName} class={field.value.class}
+                                                                    style={field.value.style}>
+                                                                    <template lwc:if={field.first}>
+                                                                        <template if:true={item.showChevronButton}>
+                                                                            <button type="button" onclick={expandAndCollapse}
+                                                                                data-recordid={item.key}
+                                                                                class="slds-button slds-button_icon slds-button_icon-x-small slds-var-m-right_x-small">
+                                                                                <svg class="slds-button__icon slds-button__icon_small"
+                                                                                    aria-hidden="true">
+                                                                                    <use
+                                                                                        xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#chevronright">
+                                                                                    </use>
+                                                                                </svg>
+                                                                            </button>
+                                                                        </template>
+                                                                        <template if:false={item.showChevronButton}>
+                                                                            <span
+                                                                                class="slds-button slds-button_icon slds-button_icon-x-small slds-var-m-right_x-small"
+                                                                                style="visibility: hidden;"></span>
+                                                                        </template>
+                                                                    </template>
+                                                                    <lightning-formatted-number
+                                                                        lwc:if={field.value.isNumberField}
+                                                                        maximum-fraction-digits={field.value.scale}
+                                                                        minimum-fraction-digits={field.value.scale}
+                                                                        value={field.value.fieldValue} variant="label-hidden">
+                                                                    </lightning-formatted-number>
+                                                                    <template lwc:elseif={field.value.isNameField}>
+                                                                        <a href={field.value.link} target="_blank">
+                                                                            {field.value.fieldValue}</a>
+                                                                    </template>
+                                                                    <template lwc:elseif={field.value.isText}>
+                                                                        <template lwc:if={field.value.isHTMLFormatted}>
+                                                                            <lightning-formatted-rich-text
+                                                                                value={field.value.fieldValue}
+                                                                                variant="label-hidden">
+                                                                            </lightning-formatted-rich-text>
+                                                                        </template>
+                                                                        <template lwc:else>
+                                                                            {field.value.fieldValue}
+                                                                        </template>
+                                                                    </template>
+                                                                    <template lwc:elseif={field.value.isReference}>
+                                                                        <a href={field.value.link} target="_blank">
+                                                                            {field.value.fieldValue}</a>
+                                                                    </template>
+                                                                    <lightning-input lwc:elseif={field.value.isBoolean}
+                                                                        type="checkbox" class="input-center"
+                                                                        variant="label-hidden" checked={field.value.fieldValue}
+                                                                        disabled>
+                                                                    </lightning-input>
+                                                                    <lightning-formatted-date-time
+                                                                        lwc:elseif={field.isDate}
+                                                                        value={field.fieldValue} year="numeric"
+                                                                        month="2-digit" day="2-digit">
+                                                                    </lightning-formatted-date-time>
+                                                                    <!-- isDateTime -->
+                                                                    <lightning-formatted-date-time
+                                                                        lwc:elseif={field.isDateTime}
+                                                                        value={field.fieldValue} year="numeric"
+                                                                        month="2-digit" day="2-digit" hour="2-digit"
+                                                                        minute="2-digit">
+                                                                    </lightning-formatted-date-time>
+                                                                    <template lwc:elseif={field.value.isPicklist}>
+                                                                        {field.value.fieldValue}
+                                                                    </template>
+                                                                    <template lwc:else>
+                                                                        {field.value.fieldValue}
+                                                                    </template>
+                                                                </td>
+                                                            </template>
+                                                        </tr>
+                                                    </template>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </template>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div if:true={showHideColumns}>
+            <!-- Modal/Popup Box starts here-->
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-05" aria-modal="true"
+            aria-describedby="modal-content-id-5" class="slds-modal slds-fade-in-open ">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box Header Starts here-->
+                <header class="slds-modal__header">
+                <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{Labels.LBL_Show_Hide_Columns}
+                </div>
+                </header>
+                <!--Modal/Popup Box Body Starts here-->
+                <div class="slds-modal__content slds-var-p-around_medium slds-text-align_center" id="modal-content-id-5">
+                <lightning-dual-listbox class="slds-p-around--x-small" name="Columns" label={Labels.LBL_Select_Columns}
+                    source-label={Labels.LBL_Available} selected-label={Labels.LBL_Selected} options={showHideFieldOptions}
+                    disable-reordering onchange={handleChangeSelectedFields} value={selectedFields} data-is-input={}>
+                </lightning-dual-listbox>
+                </div>
+                <!--Modal/Popup Box Footer Starts here-->
+                <footer class="slds-modal__footer">
+                <lightning-button title={Labels.LBL_Cancel} label={Labels.LBL_Cancel} onclick={setShowHideColumns}
+                    class="slds-var-p-right_x-small">
+                </lightning-button>
+                <lightning-button title={Labels.LBL_Yes} label={Labels.LBL_Yes} variant="brand"
+                    onclick={confirmSelectionFields}>
+                </lightning-button>
+                </footer>
+            </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" style="opacity: 0.8;"></div>
+        </div>
+
+        <!-- Flow Actions popup -->
+        <template if:true={openFlow}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                class="slds-modal slds-fade-in-open slds-modal_medium">
+                <div class="slds-modal__container">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        onclick={closeFlow}>
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
+                        </svg>
+                        <span class="slds-assistive-text">{Labels.LBL_Cancel}</span>
+                    </button>
+                    <div class="slds-modal__header">
+                        <h1 id="modal-heading-03" class="slds-modal__title slds-hyphenate">
+                            {currentFlow.header}</h1>
+                    </div>
+                    <div class="slds-modal__content">
+                        <lightning-flow flow-api-name={currentFlow.flowApiName} onstatuschange={handleFlowStatusChange}
+                            flow-input-variables={currentFlow.flowVariables} flow-finish-behavior="NONE">
+                        </lightning-flow>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <div if:true={hasPagination}
+            style="position: relative; height: fit-content;background: white;padding: 10px;"
+            class="slds-grid footerDiv">
+            <span style="margin-right: 10px; color: black;">
+                <lightning-combobox dropdown-alignment="auto" name="pageSelect" value={pageSize}
+                    variant="label-hidden" options={pageSizeOptions} onchange={handlePageSize}></lightning-combobox>
+            </span>
+            <span>
+                <lightning-button-group>
+                    <lightning-button label={Labels.LBL_First} disabled={previousDisabled} data-type="First"
+                        onclick={handleChangePage}></lightning-button>
+                    <lightning-button label={Labels.LBL_Previous} disabled={previousDisabled} data-type="Previous"
+                        onclick={handleChangePage}></lightning-button>
+                    <lightning-button label={Labels.LBL_Next} disabled={nextDisabled} data-type="Next"
+                        onclick={handleChangePage}></lightning-button>
+                    <lightning-button label={Labels.LBL_Last} disabled={nextDisabled} data-type="Last"
+                        onclick={handleChangePage}></lightning-button>
+                </lightning-button-group>
+                <lightning-badge label={paginationBadge}></lightning-badge>
+            </span>
+        </div>
+    </div>
+</template>

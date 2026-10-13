@@ -1,0 +1,176 @@
+lightning-button-icon.In .slds-button__icon {
+  fill: blue !important;
+}
+
+lightning-button-icon.Out .slds-button__icon {
+  fill: orange !important;
+}
+
+lightning-button-icon.Personalised .slds-button__icon {
+  fill: green !important;
+}
+
+option.In {
+  color: blue;
+}
+
+option.Out {
+  color: orange;
+}
+
+option.Personalised {
+  color: green;
+}
+
+.dimmedField {
+  opacity: 0.4;
+}
+
+select.slds-input {
+  padding: 0;
+}
+
+.slds-button.In {
+  background-color: blue;
+  color: var(--lwc-colorTextButtonBrand, rgb(255, 255, 255)) !important;
+}
+
+.slds-button.Out {
+  background-color: orange;
+  color: var(--lwc-colorTextButtonBrand, rgb(255, 255, 255)) !important;
+}
+
+.oSelect {
+  min-height: 250px;
+  min-width: 200px;
+  max-width: 200px;
+}
+
+.custom_slds-grid_align-start,
+.custom--slds-grid--align-start {
+  justify-content: flex-start;
+}
+
+.negoptimHeader {
+  border-left: 1px #e61f1f00 !important;
+  background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+.loader {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+  animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader span {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+
+.loader:after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  background: #f1f1f1;
+  border-radius: 50%;
+}
+
+.btn-group lightning-button-icon {
+  color: white;
+  /* White text */
+  padding-top: 10px;
+  /* Some padding */
+  cursor: pointer;
+  /* Pointer/hand icon */
+  width: 50%;
+  /* Set a width if needed */
+  display: block;
+  /* Make the buttons appear below each other */
+}
+
+.orange-icon {
+  --slds-c-icon-color-foreground: #ffae00 !important;
+  --slds-c-icon-color-foreground-default: #ffae00 !important;
+}
+
+.blue-icon {
+  --slds-c-icon-color-foreground: #0088ff !important;
+  --slds-c-icon-color-foreground-default: #0088ff !important;
+}
+
+.apple-green-icon {
+  --slds-c-icon-color-foreground: #ccd534 !important;
+  --slds-c-icon-color-foreground-default: #ccd534 !important;
+}
+
+.filter-brand {
+  --lwc-brandAccessible: #ccd534;
+  --lwc-brandAccessibleActive: #ccd534;
+  --lwc-colorTextIconDefault: white;
+  --slds-c-icon-color-foreground-default: white;
+  position: relative;
+}
+
+.lago-blue-icon {
+  --slds-c-icon-color-foreground: #22bbc0 !important;
+  --slds-c-icon-color-foreground-default: #22bbc0 !important;
+}
+
+.inputWidth {
+  max-width: 200px;
+}
+
+.sectionHeader {
+  position: sticky;
+  z-index: 3;
+  top: 0;
+  background-color: rgb(12 180 186);
+  padding-left: 20px;
+  height: 50px;
+}
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 600;
+  color: white;
+  translate: 0px 7px;
+}
+
+.formula-text {
+  color: red
+}
+
+.filter-count {
+  position: absolute;
+  bottom: 22px;
+  right: -5px;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: white;
+  background-color: red;
+  border-radius: 50%;
+}

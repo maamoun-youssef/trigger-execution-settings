@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SellInDiscountUType__c</fullName>
+    <description>Type d&apos;unité applicable à la remise de type montant unitaire. Par ex, si la remise est de 0.47 euros par pièce achetée, alors le type correspond à &apos;Pièce&apos; ou &apos;UC&apos; et vient se substituer au prix unitaire du produit (€/pièce). S&apos;il s&apos;agit d&apos;une remise au kilo, alors le type correspont à &apos;Kilos&apos; et le montant doit être recalculé (€/kilos).</description>
+    <label>SellIn Discount UType</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Unit_Fac</valueSetName>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Unité commerciale (old)</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Unités commerciales (old)</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>O -  Channel</layout>
+        <sections>
+            <label>Paramètres pour filtrage - Assortiments</label>
+            <section>Assortment - Settings</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label>Informations générales</label>
+            <section>General Information</section>
+        </sections>
+        <sections>
+            <label>Cycle de vie</label>
+            <section>Life cycle</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>O - Banner</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label>Paramètres pour filtrage - Assortiments</label>
+            <section>Filter Settings - Assortment</section>
+        </sections>
+        <sections>
+            <label>Informations générales</label>
+            <section>General Information</section>
+        </sections>
+        <sections>
+            <label>Cycle de vie</label>
+            <section>Life cycle</section>
+        </sections>
+        <sections>
+            <label>Montée DN/DV Innos</label>
+            <section>Weight Distribution Rise Plan for Inno</section>
+        </sections>
+        <sections>
+            <label>Montée DN/DV Arrêt</label>
+            <section>Weight Distribution Rise Plan for Stop</section>
+        </sections>
+        <sections>
+            <label>Montée DN/DV Switch</label>
+            <section>Weight Distribution Rise Plan for Switch</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>O - Cluster</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label>Paramètres pour filtrage - Assortiments</label>
+            <section>Filter Settings - Assortment</section>
+        </sections>
+        <sections>
+            <label>Informations générales</label>
+            <section>General Information</section>
+        </sections>
+        <sections>
+            <label>Cycle de vie</label>
+            <section>Life cycle</section>
+        </sections>
+        <sections>
+            <label>Base de calcul pour DN/DV</label>
+            <section>ND/WD Calculation</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>O - Country</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label>Informations générales</label>
+            <section>General Information</section>
+        </sections>
+        <sections>
+            <label>Cycle de vie</label>
+            <section>Life cycle</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>O - Group</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label>Paramètres pour filtrage - Assortiments</label>
+            <section>Filter Settings - Assortment</section>
+        </sections>
+        <sections>
+            <label>Informations générales</label>
+            <section>General Information</section>
+        </sections>
+        <sections>
+            <label>Cycle de vie</label>
+            <section>Life cycle</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Nom</nameFieldLabel>
+    <startsWith>Vowel</startsWith>
+    <webLinks>
+        <label><!-- BU_Clustering --></label>
+        <name>BU_Clustering</name>
+    </webLinks>
+</CustomObjectTranslation>

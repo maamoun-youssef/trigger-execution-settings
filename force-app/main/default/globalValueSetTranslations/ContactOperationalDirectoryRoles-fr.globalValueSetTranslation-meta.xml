@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Accounting - Main Contact</masterLabel>
+        <translation>Financier - Principal</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Accounting - Secondary Contact</masterLabel>
+        <translation>Financier - Secondaire</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Commercial - Main Contact</masterLabel>
+        <translation>Commercial - Principal</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Commercial - Secondary Contact</masterLabel>
+        <translation>Commercial - Secondaire</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Legal - Main Contact</masterLabel>
+        <translation>Juridique - Principal</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Legal - Secondary Contact</masterLabel>
+        <translation>Juridique - Secondaire</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

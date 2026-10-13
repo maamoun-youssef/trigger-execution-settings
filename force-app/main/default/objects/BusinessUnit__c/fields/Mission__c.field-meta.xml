@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mission__c</fullName>
+    <label>Mission</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sale</fullName>
+                <default>false</default>
+                <label>Sale</label>
+            </value>
+            <value>
+                <fullName>Negotiation</fullName>
+                <default>true</default>
+                <label>Negotiation</label>
+            </value>
+            <value>
+                <fullName>Marketing</fullName>
+                <default>false</default>
+                <label>Marketing</label>
+            </value>
+            <value>
+                <fullName>Offer</fullName>
+                <default>false</default>
+                <label>Offer</label>
+            </value>
+            <value>
+                <fullName>Pricing</fullName>
+                <default>false</default>
+                <label>Pricing</label>
+            </value>
+            <value>
+                <fullName>Merchandizing</fullName>
+                <default>false</default>
+                <label>Merchandizing</label>
+            </value>
+            <value>
+                <fullName>Buying</fullName>
+                <default>false</default>
+                <label>Buying</label>
+            </value>
+            <value>
+                <fullName>Sales development</fullName>
+                <default>false</default>
+                <label>Sales development</label>
+            </value>
+            <value>
+                <fullName>Supply</fullName>
+                <default>false</default>
+                <label>Supply</label>
+            </value>
+            <value>
+                <fullName>Floor animation</fullName>
+                <default>false</default>
+                <label>Floor animation</label>
+            </value>
+            <value>
+                <fullName>Business Control</fullName>
+                <default>false</default>
+                <label>Business Control</label>
+            </value>
+            <value>
+                <fullName>Quality control</fullName>
+                <default>false</default>
+                <label>Quality control</label>
+            </value>
+            <value>
+                <fullName>Panelist</fullName>
+                <default>false</default>
+                <label>Panelist</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>8</visibleLines>
+</CustomField>

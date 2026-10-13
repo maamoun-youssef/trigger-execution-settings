@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>t_ExtId__c</fullName>
+    <description>Populated with Contact__r.t_ExtID__c &amp; Negoscope__r.t_ ExtID__c</description>
+    <externalId>true</externalId>
+    <label>Ext Id</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>true</unique>
+</CustomField>

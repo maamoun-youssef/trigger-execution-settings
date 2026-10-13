@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Si un palier de conditions est atteint pour une remise conditionnelle, la remise appliquée pour ce palier est diffusée sur les niveaux partenaires</help>
+    <label>Descente des barèmes conditionnels</label>
+    <name>SlabsApplication__c</name>
+    <picklistValues>
+        <masterLabel>No</masterLabel>
+        <translation>Non</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Yes</masterLabel>
+        <translation>Oui</translation>
+    </picklistValues>
+</CustomFieldTranslation>

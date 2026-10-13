@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>negOptimCustomPicklist</label>
+    <protected>false</protected>
+    <values>
+        <field>Configuration__c</field>
+        <value xsi:type="xsd:string">[{&quot;name&quot;: &quot;label&quot;, &quot;label&quot;: &quot;Object Name&quot;, &quot;type&quot;: &quot;String&quot;, &quot;datasource&quot;: null, &quot;defaultValue&quot;: &quot;&quot;, &quot;description&quot;: null, &quot;required&quot;: null}, {&quot;name&quot;: &quot;options&quot;, &quot;label&quot;: &quot;options&quot;, &quot;type&quot;: &quot;String&quot;, &quot;datasource&quot;: null, &quot;defaultValue&quot;: &quot;&quot;, &quot;description&quot;: null, &quot;required&quot;: null}, {&quot;name&quot;: &quot;selectedValues&quot;, &quot;label&quot;: &quot;selected values&quot;, &quot;type&quot;: &quot;String&quot;, &quot;datasource&quot;: null, &quot;defaultValue&quot;: &quot;&quot;, &quot;description&quot;: null, &quot;required&quot;: null}, {&quot;name&quot;: &quot;showAllOption&quot;, &quot;label&quot;: &quot;showAllOption&quot;, &quot;type&quot;: &quot;Boolean&quot;, &quot;datasource&quot;: null, &quot;defaultValue&quot;: &quot;true&quot;, &quot;description&quot;: null, &quot;required&quot;: null}]</value>
+    </values>
+</CustomMetadata>

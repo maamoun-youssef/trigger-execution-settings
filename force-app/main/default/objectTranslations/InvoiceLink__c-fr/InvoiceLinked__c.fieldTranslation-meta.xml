@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Pièce comptable liée</label>
+    <name>InvoiceLinked__c</name>
+    <relationshipLabel>Lien pièce comptable (Pièce comptable liée)</relationshipLabel>
+</CustomFieldTranslation>

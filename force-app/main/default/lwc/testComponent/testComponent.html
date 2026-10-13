@@ -1,0 +1,327 @@
+<template>
+    <lightning-card title="Combobox Input Demo" icon-name="standard:choice">
+        <div class="slds-grid slds-gutters">
+        <div class="slds-p-around_medium slds-col slds-size_1-of-3" style="width:400px;">
+            <h1>new comboboxInput</h1>
+        <c-combo-box-input
+            label="Country options multiselect required"
+            options={countryOptions}
+            is-multi-select="true"
+            default-values={defaultCountry}
+            required="true"
+            help-text="Search and select a country"
+            onchange={handleSubmit}>
+        </c-combo-box-input>
+        <c-combo-box-input
+            label="Country options multiselect required checkbox"
+            options={countryOptions}
+            is-multi-select="true"
+            default-values={defaultCountry}
+            required="true"
+            help-text="Search and select a country"
+            show-checkbox="true"
+            onchange={handleSubmit}>
+        </c-combo-box-input>
+
+        <c-combo-box-input
+            label="object and multiselect required checkbox"
+            object="Invoice__c"
+            field = "AccDoc__c"
+            is-multi-select="true"
+            default-values="Invoice"
+            required="true"
+            help-text="Search and select a country"
+            show-checkbox="true"
+            onchange={handleSubmit}>
+        </c-combo-box-input>
+
+        <c-combo-box-input
+            label="Country options multiselect required"
+            options={countryOptions}
+            is-multi-select="true"
+            default-values={defaultCountry}
+            required="true"
+            onchange={handleSubmit}
+            option-render-mode="input">
+        </c-combo-box-input>
+        <c-combo-box-input
+            label="Country options multiselect disabled required"
+            options={countryOptions}
+            is-multi-select="true"
+            default-values={defaultCountry}
+            required="true"
+            disabled="true"
+            onchange={handleSubmit}>
+        </c-combo-box-input>
+        <c-combo-box-input
+            label="Country options one selection required"
+            options={countryOptions}
+            default-value="lebanon"
+            required="true"
+            onchange={handleSubmit}>
+        </c-combo-box-input>
+        <c-combo-box-input
+            label="Country options one selection wrong default value required"
+            options={countryOptions}
+            default-value="ffffff"
+            required="true"
+            onchange={handleSubmit}>
+        </c-combo-box-input>
+        <c-combo-box-input
+            label="Country options one selection right default value disabled required"
+            options={countryOptions}
+            default-value="lebanon"
+            required="true">
+        </c-combo-box-input>
+
+        <!--test it with object name and field name-->
+        <c-combo-box-input
+            label="Country options one selection object and field set required "
+            object="Invoice__c"
+            field = "AccDoc__c"
+            required="true">
+        </c-combo-box-input>
+        <h3> single input with pills</h3>
+        <c-combo-box-input
+            label="Country options one selection object and field set required "
+            object="Invoice__c"
+            field = "AccDoc__c"
+            option-render-mode="pills"
+            required="true">
+        </c-combo-box-input>
+        <c-combo-box-input
+            label="Country options one selection object and field and options set required "
+            options={countryOptions}
+            object="Invoice__c"
+            field = "AccDoc__c"
+            required="true">
+        </c-combo-box-input>
+        <c-combo-box-input
+            label="Country options one selection object and options set required "
+            options={countryOptions}
+            object="Invoice__c"
+            required="true">
+        </c-combo-box-input>
+        <c-combo-box-input
+            label="Country options one selection field without object  set required "
+            field="AccDoc__c"
+            required="true">
+        </c-combo-box-input>
+
+        <lightning-button 
+            label="Submit" 
+            variant="brand"
+            class="slds-m-top_medium">
+        </lightning-button>
+    </div>
+    
+    <div class="slds-p-around_medium slds-col slds-size_1-of-3" style="width:400px;">
+        <h1>negoptim searchable picklist</h1>
+        
+        <!-- Basic -->
+        <c-neg-optim-searchable-picklist
+            label="Select Option"
+            options={options}
+            value={selectedValue}
+            onchange={handleChange}>
+        </c-neg-optim-searchable-picklist>
+    
+        <!-- With placeholder -->
+        <c-neg-optim-searchable-picklist
+            placeholder="Search something..."
+            options={options}
+            value={selectedValue}
+            onchange={handleChange}>
+        </c-neg-optim-searchable-picklist>
+    
+        <!-- Required -->
+        <c-neg-optim-searchable-picklist
+            label="Required Field"
+            required
+            options={options}
+            value={selectedValue}
+            onchange={handleChange}>
+        </c-neg-optim-searchable-picklist>
+    
+        <!-- Disabled -->
+        <c-neg-optim-searchable-picklist
+            label="Disabled Picklist"
+            disabled
+            options={options}
+            value={selectedValue}>
+        </c-neg-optim-searchable-picklist>
+    
+        <!-- Help text -->
+        <c-neg-optim-searchable-picklist
+            label="Account"
+            help-text="Search and select an account"
+            options={options}
+            value={selectedValue}
+            onchange={handleChange}>
+        </c-neg-optim-searchable-picklist>
+    
+        <!-- No label -->
+        <c-neg-optim-searchable-picklist
+            placeholder="Search..."
+            options={options}
+            onchange={handleChange}>
+        </c-neg-optim-searchable-picklist>
+    
+        <!-- Default value -->
+        <c-neg-optim-searchable-picklist
+            label="Default Selected"
+            options={options}
+            value="option2"
+            onchange={handleChange}>
+        </c-neg-optim-searchable-picklist>
+    
+        <!-- Full example -->
+        <c-neg-optim-searchable-picklist
+            label="Search Accounts"
+            placeholder="Type to search..."
+            help-text="Select one account"
+            options={options}
+            value={selectedValue}
+            required
+            onchange={handleChange}>
+        </c-neg-optim-searchable-picklist>
+        <lightning-button 
+            label="Submit" 
+            variant="brand"
+            class="slds-m-top_medium">
+        </lightning-button>
+    </div>
+
+    <div class="slds-p-around_medium slds-col slds-size_1-of-3" style="width:400px;">
+        <h1>negoptim custom picklist (multi-select)</h1>
+        <!-- Basic -->
+        <c-neg-optim-custom-picklist
+            label="Select Options"
+            options={customPicklistoptions}
+            selected-values={customselectedValues}
+            selected-event="selectionchange">
+        </c-neg-optim-custom-picklist>
+
+        <!-- With placeholder -->
+        <c-neg-optim-custom-picklist
+            placeholder="Search options..."
+            options={customPicklistoptions}
+            selected-values={customselectedValues}
+            selected-event="selectionchange">
+        </c-neg-optim-custom-picklist>
+
+        <!-- Disabled -->
+        <c-neg-optim-custom-picklist
+            label="Disabled Picklist"
+            options={customPicklistoptions}
+            selected-values={customselectedValues}
+            disabled
+            selected-event="selectionchange">
+        </c-neg-optim-custom-picklist>
+
+        <!-- With "Select All" option -->
+        <c-neg-optim-custom-picklist
+            label="With Select All"
+            options={customPicklistoptions}
+            selected-values={customselectedValues}
+            show-all-option="true"
+            selected-event="selectionchange">
+        </c-neg-optim-custom-picklist>
+
+        <!-- Without label -->
+        <c-neg-optim-custom-picklist
+            placeholder="Search..."
+            options={customPicklistoptions}
+            selected-values={customselectedValues}
+            selected-event="selectionchange">
+        </c-neg-optim-custom-picklist>
+
+        <!-- Preselected values -->
+        <c-neg-optim-custom-picklist
+            label="Default Selected"
+            options={customPicklistoptions}
+            selected-values='["opt1","opt2"]'
+            selected-event="selectionchange">
+        </c-neg-optim-custom-picklist>
+
+        <!-- Full example -->
+        <c-neg-optim-custom-picklist
+            label="Select Accounts"
+            placeholder="Search accounts..."
+            options={customPicklistoptions}
+            selected-values={customselectedValues}
+            show-all-option="true"
+            selected-event="selectionchange">
+        </c-neg-optim-custom-picklist>
+
+        <lightning-button 
+            label="Submit" 
+            variant="brand"
+            onclick={handleSubmit}
+            class="slds-m-top_medium">
+        </lightning-button>
+    </div>
+
+    </div>
+    </lightning-card>
+    <!-- <lightning-card title="Create Record">
+
+        <div class="slds-p-around_medium slds-grid slds-wrap slds-gutters">
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input 
+                    label="Name"
+                    value={name}
+                    data-field="name"
+                    onchange={handleChange}
+                    required>
+                </lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input 
+                    type="number"
+                    label="Amount"
+                    value={amount}
+                    data-field="amount"
+                    onchange={handleChange}>
+                </lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <c-combo-box-input
+                    label="Status"
+                    options={statusOptions}
+                    default-value="new"
+                    onchange={handleStatusChange}>
+                </c-combo-box-input>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <c-combo-box-input
+                    label="Tags"
+                    options={tagOptions}
+                    is-multi-select="true"
+                    default-values={defaultTags}
+                    onchange={handleTagsChange}>
+                </c-combo-box-input>
+            </div>
+            <div class="slds-col slds-size_1-of-1">
+                <c-neg-optim-custom-lookup
+                    label="Account"
+                    object-name="Account"
+                    field-name="Name"
+                    search-fields={accountSearchFields}
+                    selected-event="accountselected"
+                    is-multi="false"
+                    icon-name="standard:account"
+                    place-holder="Search Account..."
+                    onaccountselected={handleAccountSelected}>
+                </c-neg-optim-custom-lookup>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-m-top_medium">
+                <lightning-button 
+                    variant="brand"
+                    label="Submit"
+                    onclick={handleSubmit}>
+                </lightning-button>
+            </div>
+        </div>
+    </lightning-card> -->
+</template>

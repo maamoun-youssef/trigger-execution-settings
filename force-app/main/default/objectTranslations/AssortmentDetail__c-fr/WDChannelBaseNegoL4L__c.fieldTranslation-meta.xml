@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Calculé uniquement lorsque la PDM N+1 est renseignée au niveau des strates et que le Statut de l’ASD est Validé.</help>
+    <label>DV Négo corrigée circuit</label>
+    <name>WDChannelBaseNegoL4L__c</name>
+</CustomFieldTranslation>

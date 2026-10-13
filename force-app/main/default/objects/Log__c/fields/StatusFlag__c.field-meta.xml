@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StatusFlag__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(NumberOfErrors__c  = 0 &amp;&amp; NumberOfWarnings__c = 0, IMAGE(&apos;/img/msg_icons/confirm16.png&apos;, &apos;Successful&apos;),
+	IF(NumberOfErrors__c  &gt; 0 &amp;&amp; NumberOfErrors__c =  TotalJobItems__c , IMAGE(&apos;/img/msg_icons/error16.png&apos;, &apos;Failed&apos;),
+     IF((NumberOfErrors__c  &gt; 0 &amp;&amp; NumberOfErrors__c &lt;  TotalJobItems__c) || NumberOfWarnings__c &gt; 0 , IMAGE(&apos;/img/msg_icons/warning16.png&apos;, &apos;Warning&apos;), null)
+	)
+)</formula>
+    <label>Status Flag</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,65 @@
+<template>
+    <div class={customClass}>
+        <div class="slds-p-horizontal--x-small slds-size_1-of-2">
+            <div class="slds-p-left--x-small slds-grid">
+                <template if:true={dataIndexes}>
+                    <div class="whiteBackground slds-align_absolute-center contract-title">
+                        <div
+                            class="slds-accordion__summary-action-icon slds-align_absolute-center slds-card__header-title slds-p-around_xx-small">
+                            {labels.LBL_Index_Table}
+                        </div>
+                    </div>
+                </template>
+                <div class="slds-p-left--x-small" style="width: 95%;">
+                    <div class="slds-scrollable back-color" style={tableHeightCond}>
+                        <table
+                            class="slds-table slds-table_bordered stickyHead slds-tree slds-table_tree slds-no-row-hover">
+                            <thead>
+                                <tr class="headerIndHeight" style="height: 15px">
+                                    <th scope="col" class="index-cell contract-header"></th>
+                                    <th scope="col" class="index-cell slds-text-align_center contract-header">
+                                        <div class="slds-truncate">{contractName}</div>
+                                    </th>
+                                    <th scope="col" class="index-cell slds-text-align_center contract-header">
+                                        <div class="slds-truncate">{parentContractName}</div>
+                                    </th>
+                                    <th scope="col" class="index-cell slds-text-align_center contract-header">
+                                        <div class="slds-truncate">{labels.LBL_Evoluation_Rate}</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="baseHeader contract-base">
+                                    <td>Base</td>
+                                    <td style="text-align: center;">
+                                        <lightning-formatted-number value={baseIndex} maximum-fraction-digits="2"
+                                            minimum-fraction-digits="2">
+                                        </lightning-formatted-number>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <lightning-formatted-number value={baseIndexParent} maximum-fraction-digits="2"
+                                            minimum-fraction-digits="2">
+                                        </lightning-formatted-number>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <template for:each={dataIndexes} for:item="item">
+                                    <tr key={item.indexName}>
+                                        <td class="tdIndHeight">{item.indexName}</td>
+                                        <template for:each={item.indexValue} for:item="val">
+                                            <td key={item.indexName} style="text-align: center;">
+                                                <lightning-formatted-number value={val} maximum-fraction-digits="2"
+                                                    minimum-fraction-digits="2">
+                                                </lightning-formatted-number>
+                                            </td>
+                                        </template>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

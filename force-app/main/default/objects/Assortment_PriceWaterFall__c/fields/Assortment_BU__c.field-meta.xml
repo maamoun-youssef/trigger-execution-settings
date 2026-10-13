@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Assortment_BU__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Assortment BU</label>
+    <referenceTo>Assortment_BU__c</referenceTo>
+    <relationshipName>Assortment_PriceWaterFalls</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

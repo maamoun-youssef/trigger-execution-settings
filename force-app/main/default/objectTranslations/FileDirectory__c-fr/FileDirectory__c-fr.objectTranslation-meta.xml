@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>File Directory</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>File Directories</value>
+    </caseValues>
+    <gender>Masculine</gender>
+    <recordTypes>
+        <label>Administratif</label>
+        <name>Administrative</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Contractuel</label>
+        <name>Contractual</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Financier</label>
+        <name>Financial</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Commercialisation</label>
+        <name>Marketing</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Other --></label>
+        <name>Other</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Tarifs</label>
+        <name>Pricing</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Qualité</label>
+        <name>Quality</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Sourcing</label>
+        <name>Sourcing</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Modèle</label>
+        <name>Template</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

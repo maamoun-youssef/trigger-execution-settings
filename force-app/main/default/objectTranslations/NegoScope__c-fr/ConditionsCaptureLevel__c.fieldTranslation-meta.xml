@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Défini le niveau de saisie pour les accords de ce NS. &lt;br/&gt;• Aucun : pas de saisie attendue, uniquement la visualisation des conditions partenaires reçues. &lt;br/&gt;• Saisie uniquement : pas de remontée des conditions partenaires attendue, uniquement la saisie des conditions de ce NS &lt;br/&gt;• Les deux: visualisation des conditions partenaires + saisie des conditions de ce NS</help>
+    <label>Niveau de saisie de l&apos;accord</label>
+    <name>ConditionsCaptureLevel__c</name>
+    <picklistValues>
+        <masterLabel>Advanced And Partner</masterLabel>
+        <translation>Niveaux avancé et partenaire</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Advanced Only</masterLabel>
+        <translation>Niveau avancé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>CaptureOnly</masterLabel>
+        <translation><!-- CaptureOnly --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Partner Only</masterLabel>
+        <translation>Niveau partenaire</translation>
+    </picklistValues>
+</CustomFieldTranslation>

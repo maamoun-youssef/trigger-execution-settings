@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Liée la BU à la BU Groupe --></help>
+    <label>Group Origin</label>
+    <name>Group_Origin__c</name>
+    <relationshipLabel><!-- Business Units (Group) --></relationshipLabel>
+</CustomFieldTranslation>

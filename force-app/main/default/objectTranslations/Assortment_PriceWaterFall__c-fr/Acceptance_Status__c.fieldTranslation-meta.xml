@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Statut d&apos;acceptation</label>
+    <name>Acceptance_Status__c</name>
+    <picklistValues>
+        <masterLabel>Accepted</masterLabel>
+        <translation>Accepté</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Approved</masterLabel>
+        <translation>Approuvé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Refused</masterLabel>
+        <translation>Refusé</translation>
+    </picklistValues>
+</CustomFieldTranslation>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Purchases w/o VAT (Order date)</fullName>
+        <default>true</default>
+        <label>Purchases w/o VAT (Order date)</label>
+    </customValue>
+    <customValue>
+        <fullName>Purchases w/o VAT (Delivery date)</fullName>
+        <default>false</default>
+        <label>Purchases w/o VAT (Delivery date)</label>
+    </customValue>
+    <customValue>
+        <fullName>Purchases w/o Return (Delivery date)</fullName>
+        <default>false</default>
+        <label>Purchases w/o Return (Delivery date)</label>
+    </customValue>
+    <customValue>
+        <fullName>Purchases w/o VAT (Payment date)</fullName>
+        <default>false</default>
+        <label>Purchases w/o VAT (Payment date)</label>
+    </customValue>
+    <customValue>
+        <fullName>Promo purchases w/o VAT (Delivery Date)</fullName>
+        <default>false</default>
+        <label>Promo purchases w/o VAT (Delivery Date)</label>
+    </customValue>
+    <masterLabel>Calcualtion method</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

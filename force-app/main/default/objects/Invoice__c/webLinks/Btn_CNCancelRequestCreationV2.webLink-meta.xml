@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Btn_CNCancelRequestCreationV2</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <height>600</height>
+    <linkType>url</linkType>
+    <masterLabel>Create credit note cancel request V2</masterLabel>
+    <openType>sidebar</openType>
+    <protected>false</protected>
+    <url>/lightning/action/quick/Invoice__c.CancelInvoiceFlow?objectApiName&amp;context=RECORD_DETAIL&amp;recordId={!CASESAFEID(Invoice__c.Id)}&amp;isFullCancel=false$backgroundContext=%2Flightning%2Fr%2FInvoice__c%2F{!CASESAFEID(Invoice__c.Id)}%2Fview</url>
+</WebLink>

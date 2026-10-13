@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Accounting Collabs",
+  "contentBody" : {
+    "activeViewId" : "Accounting_Collabs",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-accounting-collabs",
+    "urlPrefix" : "accounting-collabs"
+  },
+  "urlName" : "accounting-collabs"
+}

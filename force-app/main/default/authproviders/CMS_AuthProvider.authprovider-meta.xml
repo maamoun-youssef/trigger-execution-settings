@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuthProvider xmlns="http://soap.sforce.com/2006/04/metadata">
+    <authorizeUrl>https://negoptim2-dev4-dev-ed.develop.my.salesforce.com/services/oauth2/authorize</authorizeUrl>
+    <consumerKey>3MVG9slge.VWGNwkNCKjfN0HisKmD71NQBFhWAcaH5zwdgM.uoXQdR97Pk09_HYOuCaC5Lxe03Nkiu8BKUTbi</consumerKey>
+    <consumerSecret>Placeholder_Value</consumerSecret>
+    <defaultScopes>full refresh_token api</defaultScopes>
+    <friendlyName>CMS_AuthProvider</friendlyName>
+    <includeOrgIdInIdentifier>true</includeOrgIdInIdentifier>
+    <isPkceEnabled>true</isPkceEnabled>
+    <providerType>Salesforce</providerType>
+    <requireMfa>false</requireMfa>
+    <sendAccessTokenInHeader>false</sendAccessTokenInHeader>
+    <sendClientCredentialsInHeader>false</sendClientCredentialsInHeader>
+    <sendSecretInApis>true</sendSecretInApis>
+    <tokenUrl>https://negoptim2-dev4-dev-ed.develop.my.salesforce.com/services/oauth2/token</tokenUrl>
+</AuthProvider>

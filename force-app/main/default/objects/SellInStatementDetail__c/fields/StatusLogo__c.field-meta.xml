@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StatusLogo__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(TEXT(Status__c),
+&quot;In Preparation&quot;, &quot;PICTOS/PNG/Picto_negOptim2_ReadyToWork2&quot;,
+&quot;Submitted&quot;, &quot;PICTOS/PNG/Picto_negOptim2_Sent&quot;,
+&quot;Validated&quot;, &quot;PICTOS/PNG/Picto_negOptim2_Validated&quot;,
+&quot;Rejected&quot;, &quot;PICTOS/PNG/Picto_negOptim2_Rejected&quot;,
+null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>StatusLogo</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

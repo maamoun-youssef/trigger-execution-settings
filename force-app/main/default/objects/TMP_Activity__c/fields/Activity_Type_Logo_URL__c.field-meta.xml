@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Activity_Type_Logo_URL__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(TEXT(Activity_Type__c),
+&quot;Internal Email&quot;,&quot;/resource/Factory_Logo_Green?&quot;,
+&quot;Internal Call&quot;,&quot;/resource/Caller_Logo_Green?&quot;,
+&quot;Customer Call&quot;,&quot;/resource/Phone_Logo_Purple?&quot;,
+&quot;Customer Email&quot;,&quot;/resource/Email_Logo_Blue?&quot;,
+&quot;Customer Post Mail&quot;,&quot;/resource/Post_Mail_Logo_Blue?&quot;,
+&quot;Social Media&quot;,&quot;/resource/Website_Channel_Logo?&quot;,
+
+null
+
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Activity Type Logo URL</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

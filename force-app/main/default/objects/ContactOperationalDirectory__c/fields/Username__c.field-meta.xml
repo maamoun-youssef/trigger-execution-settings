@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Username__c</fullName>
+    <description>Related username if contact is a Connect platform user (Contact__r.Username__c)</description>
+    <externalId>false</externalId>
+    <formula>Contact__r.Username__c</formula>
+    <label>Username</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

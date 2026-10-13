@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InternalContactUser__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Internal contact person responsible for this Service Statement. Used for information and display purposes on the portal so that the supplier knows who to reach out to if needed.</description>
+    <label>Internal Contact User</label>
+    <referenceTo>User</referenceTo>
+    <relationshipLabel>Service Statements (Inter. Contact User)</relationshipLabel>
+    <relationshipName>SERInternalContactUser</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

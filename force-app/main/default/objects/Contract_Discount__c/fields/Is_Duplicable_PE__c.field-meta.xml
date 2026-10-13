@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Duplicable_PE__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Is duplicable exception in case of contract duplication to contract with Period Extension record type</description>
+    <label>Is Duplicable PE</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

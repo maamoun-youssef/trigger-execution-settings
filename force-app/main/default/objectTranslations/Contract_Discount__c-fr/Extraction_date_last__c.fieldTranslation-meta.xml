@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Give the last extraction date for upsert of the line. --></help>
+    <label>Dern. date d&apos;extraction</label>
+    <name>Extraction_date_last__c</name>
+</CustomFieldTranslation>

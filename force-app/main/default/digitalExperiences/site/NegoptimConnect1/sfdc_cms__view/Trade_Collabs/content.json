@@ -1,0 +1,71 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Trade Collabs",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0, 0, 0, 0.34)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"f04a9374-a4fe-480b-81c5-4000c7f45b13\",\"columns\":[{\"UUID\":\"c0ec4ba8-0832-4e41-b1b6-acabb685e325\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "235px",
+            "sectionVerticalAlign" : "center"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "dxpStyle" : { }
+              },
+              "definition" : "c:tradeCollabs",
+              "id" : "7bb61e14-0ced-46a0-8d44-a920c4e3eb62",
+              "type" : "component"
+            } ],
+            "id" : "c0ec4ba8-0832-4e41-b1b6-acabb685e325",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "f04a9374-a4fe-480b-81c5-4000c7f45b13",
+          "type" : "component"
+        } ],
+        "id" : "19e196d7-448d-4ea1-9216-f2d38acc6683",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "dxpStyle" : { },
+            "pageTitle" : "Trade Collabs",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "65162b5e-3e9e-4377-b30f-c8c44c4e1a67",
+          "type" : "component"
+        } ],
+        "id" : "602a50c6-f70a-46ac-8d34-1482da58cb38",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "7e8bbc72-f457-4fbb-b492-fa8628902fe5",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-trade-collabs"
+  },
+  "urlName" : "trade-collabs"
+}

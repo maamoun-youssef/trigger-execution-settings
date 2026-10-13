@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RelatedScope__c</fullName>
+    <description>Defines the scope to which this Service Statement applies. Depending on the process, it may refer to the supplier as a whole (global scope) or to a specific Negoscope (negotiation scope). This field helps clarify whether the declaration concerns all business relations or a targeted negotiation.</description>
+    <externalId>false</externalId>
+    <formula>IF(ISBLANK(NegoScope__c), Supplier__r.Name, NegoScope__r.Name )</formula>
+    <label>Related Scope</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>
+        <!-- Enables the setup of grid settings templates and import settings templates for each type of product discount statement.
+Each type of product discount statement is represented by a row in the table below, allowing the configuration of the desired settings. -->
+    </help>
+    <label><!-- Product Discounts Configuration --></label>
+    <name>ProductDiscountsConfiguration__c</name>
+</CustomFieldTranslation>

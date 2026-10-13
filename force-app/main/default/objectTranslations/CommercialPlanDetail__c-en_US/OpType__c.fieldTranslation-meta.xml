@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Support Type --></label>
+    <name>OpType__c</name>
+    <picklistValues>
+        <masterLabel>Carte %</masterLabel>
+        <translation><!-- Carte % --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Carte €</masterLabel>
+        <translation><!-- Carte € --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Hors tract</masterLabel>
+        <translation><!-- Hors tract --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Regional Tract</masterLabel>
+        <translation><!-- Regional Tract --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Stop rayon</masterLabel>
+        <translation><!-- Stop rayon --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Tract</masterLabel>
+        <translation><!-- Tract --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

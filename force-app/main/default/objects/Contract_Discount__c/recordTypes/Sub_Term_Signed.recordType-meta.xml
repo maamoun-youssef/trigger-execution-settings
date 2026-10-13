@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Term_Signed</fullName>
+    <active>true</active>
+    <label>Sub Term Signed</label>
+    <picklistValues>
+        <picklist>Balance_Base__c</picklist>
+        <values>
+            <fullName>ActualYTD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Forecasted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Negotiated</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Base_Calculation_Model__c</picklist>
+        <values>
+            <fullName>Promo purchases w%2Fo VAT %28Delivery Date%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchases w%2Fo Return %28Delivery date%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchases w%2Fo VAT %28Delivery date%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchases w%2Fo VAT %28Order date%29</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Purchases w%2Fo VAT %28Payment date%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Base_Redistribution_Model__c</picklist>
+        <values>
+            <fullName>Equally</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Purchases of the month</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>YTD Purchases %28current year%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Ext_Synchro_Status__c</picklist>
+        <values>
+            <fullName>Extract</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extracted</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Force_RightToChange_InStatus__c</picklist>
+        <values>
+            <fullName>Balanced</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Confirmed by supplier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deleted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Document Printed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In preparation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Merged</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Published</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request for approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Signed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Updated wAddendum</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Updated woAddendum</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Validated</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Invoice_base__c</picklist>
+        <values>
+            <fullName>ActualYTD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Forecasted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Negotiated</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Invoice_period__c</picklist>
+        <values>
+            <fullName>03-07-10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Month</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Semester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trimester</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Week</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Year</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Nego_Discount_Type__c</picklist>
+        <values>
+            <fullName>Administrative Fees</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Advertising Fees 2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Advertising fees</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financial Fees</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>International Fees</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>International Fees 2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Others</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Others 2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Payment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Penalties</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Price Discount</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Progressive Rebates</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quality</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rebates</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rebates 2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rebates 4Net</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stock Returns</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Store Fees</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supply Fees</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Payment_Condition__c</picklist>
+        <values>
+            <fullName>End of Month</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>End of Month%2C the 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>End of The 10th</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Net</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>The 10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>The 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>The 20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Twice the Month</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Payment_Days__c</picklist>
+        <values>
+            <fullName>0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>120</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>14</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>30</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>45</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>50</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>60</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>90</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Proof_Counterparty_Execution_Agreement__c</picklist>
+        <values>
+            <fullName>Application</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mandat</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Proof_counterparty_object__c</picklist>
+        <values>
+            <fullName>Listing Assortment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Listing Detention</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Listing Sales</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Listing Stock</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Merch Plan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Merch Schema</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Online publishing w%2Fo approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Online publishing with approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Photo Event</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Photo Shelf</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Photo Shop Window</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Proof_counterparty_period__c</picklist>
+        <values>
+            <fullName>Monthly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oneshot</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quarterly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Weekly</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Proof_counterparty_status__c</picklist>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Opened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Published</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Started</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Proof_counterparty_type__c</picklist>
+        <values>
+            <fullName>Merchandizing</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Online portal referencing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Promotionning</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Renting %28material%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Staffing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Statistics sharing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Training</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Provision_base__c</picklist>
+        <values>
+            <fullName>ActualYTD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Forecasted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Negotiated</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Provision_period__c</picklist>
+        <values>
+            <fullName>03-07-10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Month</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Semester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trimester</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Week</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Year</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Redistribution_flow_criteria__c</picklist>
+        <values>
+            <fullName>No redistribution</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Redisitrbute to any flow %28Indirect %2B direct%29</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Redistribute to any indirect flow</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Scope_BU__c</picklist>
+        <values>
+            <fullName>Canal - Entrepots</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Canal - Magasins</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Canal - Web</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Format - BHV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Format - Galeries Lafayette</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Region</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Slab_Calc_Method_TO_Origin__c</picklist>
+        <values>
+            <fullName>Actual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nego</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Target</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Deleted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Open</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Previously Signed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Previously Validated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Signed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Updated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Validated</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Unit_Amount_Type__c</picklist>
+        <values>
+            <fullName>G</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>L</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ML</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>index_v2__c</picklist>
+        <values>
+            <fullName>Index1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Index2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Index3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Index4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Index5</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Index6</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Index7</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>slab_calc_method__c</picklist>
+        <values>
+            <fullName>Inc Prog Qty</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inc Prog Sell out</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inc Prog TO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inc Qty</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inc Sell Out</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inc TO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prog Qty</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prog Qty byBU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prog Sell Out</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prog TO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prog TO byBU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qty</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qty byBU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sell Out</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TO</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>TO byBU</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>t_invoicingMode__c</picklist>
+        <values>
+            <fullName>InvoiceableAutomatic</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>InvoiceableCounterparty</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>InvoiceableManual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NotInvoiceable</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

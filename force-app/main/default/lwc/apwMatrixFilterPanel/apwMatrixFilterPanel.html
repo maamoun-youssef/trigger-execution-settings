@@ -1,0 +1,189 @@
+<template>
+    <div id="filter-panel" style="height: 100%;" class="slds-grid slds-no-flex">
+        <div class="slds-panel slds-size_medium slds-panel_docked slds-panel_docked-right slds-grid slds-grid_vertical"
+            style="overflow: unset;">
+            <div class="slds-panel__header">
+                <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate" title={Label.LBL_Filter}>
+                    {Label.LBL_Filter}
+                </h2>
+                <lightning-button-icon variant="bare" icon-name="utility:close" onclick={handleCancelFilter}>
+                </lightning-button-icon>
+            </div>
+            <div class="slds-col slds-scrollable filterPanelBody" id="filterPanelBody">
+                <div class="slds-grid slds-wrap slds-p-around_small">
+                    <div class="slds-list_vertical slds-list_vertical-space slds-size_1-of-1">
+                        <!--fixed columns -->
+                        <div class="slds-item">
+                            <lightning-combobox label={Label.LBL_Number_Of_Fixed_Columns} data-filter-item="fixedColumn"
+                                value={filterData.numberOfFixedColumns} options={fixedColumnsOptions}
+                                onchange={handleGenericFilterChanged}>
+                            </lightning-combobox>
+                        </div>
+                        <!--Search FILTER -->
+                        <div class="slds-item slds-has-divider_top-space">
+                            <lightning-input label={Label.LBL_Product_Filters}
+                                placeholder={Label.LBL_Tooltip_Product_Search} value={filterData.productSearchTerm}
+                                data-filter-item="productSearchTerm" onchange={handleGenericFilterChanged}>
+                            </lightning-input>
+                        </div>
+                        <!--Category search Box -->
+                        <div class="slds-item">
+                            <!-- <p class="slds-text-title slds-truncate slds-m-bottom_xx-small"> -->
+                            <div class="slds-col slds-m-top_small ">
+                                <c-neg-optim-custom-lookup search-term={filterData.categorySearchTerm}
+                                    object-name="Hierarchy__c" field-name="Name" is-multi="false" icon-name=""
+                                    selected-event={Events.selectCategAction} onselectcategaction={selectCategAction}
+                                    search-fields={searchCategFields} place-holder={Label.LBL_Tooltip_Category_Search}>
+                                </c-neg-optim-custom-lookup>
+                            </div>
+                            <div class="slds-item slds-m-top_small ">
+                                <div class="slds-form__row">
+                                    <div class="slds-form__item" role="listitem">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-checkbox">
+                                                <lightning-input type="checkbox"
+                                                    label={Label.LBL_Only_Display_Switch_Products}
+                                                    checked={filterData.isOnlySwitchProduct}
+                                                    data-filter-item="isOnlySwitchProduct"
+                                                    onchange={handleGenericFilterChanged}>
+                                                </lightning-input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Mov date/ FILTER -->
+                        <div class="slds-item slds-has-divider_top-space">
+                            <label>{Label.Assortment_PriceWaterFall__c.Movement_Date__c}</label>
+                            <div class="slds-grid slds-gutters_direct-xx-small">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input type="date" variant="label-hidden"
+                                        placeholder={Label.LBL_Tooltip_Interval_BDate}
+                                        value={filterData.minMovementDate} data-filter-item="minMovementDate"
+                                        onchange={handleGenericFilterChanged}>
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input type="date" variant="label-hidden"
+                                        placeholder={Label.LBL_Tooltip_Interval_EDate}
+                                        value={filterData.maxMovementDate} data-filter-item="maxMovementDate"
+                                        onchange={handleGenericFilterChanged}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- PROMO SEARCH -->
+                        <div class="slds-item slds-has-divider_top-space">
+                            <lightning-input label={Label.LBL_Promo_Filters}
+                                placeholder={Label.LBL_Tooltip_Promo_Search} value={filterData.promoSearchTerm}
+                                data-filter-item="promoSearch" onchange={handleGenericFilterChanged}>
+                            </lightning-input>
+                        </div>
+                        <!--Promo date FILTER -->
+                        <div class="slds-item">
+                            <div class="slds-grid slds-gutters_direct-xx-small">
+                                <div class="slds-col slds-size_1-of-2 slds-p-top_xx-small">
+                                    <lightning-input type="date" variant="label-hidden"
+                                        placeholder={Label.LBL_Tooltip_Interval_BDate} value={filterData.minPromoDate}
+                                        data-filter-item="minPromoDate" onchange={handleGenericFilterChanged}>
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-p-top_xx-small">
+                                    <lightning-input type="date" variant="label-hidden"
+                                        placeholder={Label.LBL_Tooltip_Interval_EDate} value={filterData.maxPromoDate}
+                                        data-filter-item="maxPromoDate" onchange={handleGenericFilterChanged}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                        </div>
+                        <!--History checkboxes Filter -->
+                        <div class="slds-item">
+                            <div class="slds-form__row">
+                                <div class="slds-form__item" role="listitem">
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-checkbox">
+                                            <lightning-input type="checkbox"
+                                                label={Label.LBL_Show_Regular_Products_Related_To_Promo_Lines}
+                                                checked={filterData.isShowRegularOfPromo}
+                                                data-filter-item="isShowRegularOfPromo"
+                                                onchange={handleGenericFilterChanged}>
+                                            </lightning-input>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Display only products/category -->
+                        <div class="slds-item slds-has-divider_top-space">
+                            <div class="slds-form__row">
+                                <div class="slds-form__item" role="listitem">
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-checkbox">
+                                            <lightning-input type="checkbox" label={Label.LBL_Show_History_Nego}
+                                                checked={filterData.isShowHistoryNego}
+                                                data-filter-item="isShowHistoryNego"
+                                                onchange={handleGenericFilterChanged}>
+                                            </lightning-input>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <template if:true={filterData.isShowHistoryNego}>
+                                <div class="slds-item">
+                                    <div class="slds-form__row">
+                                        <div class="slds-form__item" role="listitem">
+                                            <div class="slds-form-element__control" style="width: 100%;">
+                                                <div class="slds-checkbox">
+                                                    <p>{Label.LBL_History_Status_Filter}</p>
+                                                        <lightning-spinner style="z-index: 9" variant="brand" size="large" if:true={loading}>
+                                                        </lightning-spinner>
+                                                        <c-neg-optim-custom-picklist if:false={loading}
+                                                            selected-values={multiStatusSelectySerialized}
+                                                            options={stringifiedPicklistOptions}
+                                                            selected-event={Events.handleChangeMultiPicklistValues}
+                                                            show-all-option="false"
+                                                            onhandlechangemultipicklistvalues={handleChangeMultiPicklistValues}>
+                                                        </c-neg-optim-custom-picklist>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </template>
+                        <div class="slds-item slds-has-divider_top-space">
+                            <div class="slds-form__row">
+                                <div class="slds-form__item" role="listitem">
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-checkbox">
+                                            <lightning-input class="slds-item" type="checkbox"
+                                                label={Label.LBL_Show_Regular_PWF} checked={filterData.isOnlyProduct}
+                                                data-filter-item="onlyProduct" onchange={handleGenericFilterChanged}>
+                                            </lightning-input>
+                                            <lightning-input class="slds-item" type="checkbox"
+                                                label={Label.LBL_Show_Promo_PWF} checked={filterData.isOnlyPromo}
+                                                data-filter-item="onlyPromo" onchange={handleGenericFilterChanged}>
+                                            </lightning-input>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="searchButtons" class="slds-card__footer slds-grid slds-m-top_none slds-p-vertical_small">
+                <div class="slds-col">
+                    <lightning-button onclick={resetFilter} label={Label.LBL_Reset}>
+                    </lightning-button>
+                </div>
+                <div class="slds-col">
+                    <lightning-button onclick={handleSubmitSearch} label={Label.LBL_Search} variant="brand">
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

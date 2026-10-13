@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Proof_counterparty_captation_Process__c</fullName>
+    <defaultValue>&quot;Describe here the process for counterpart execution&quot;</defaultValue>
+    <description>Describe the process for the counterpart execution.</description>
+    <inlineHelpText>Describe the process for the counterpart execution.</inlineHelpText>
+    <label>Counterparty Captation Process</label>
+    <length>32768</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

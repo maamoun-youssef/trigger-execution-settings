@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Depreciation_Rate_Nb__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF (ISBLANK(Depreciation_Rate1__c),0,1) + 
+IF (ISBLANK(Depreciation_Rate2__c),0,1) + 
+IF (ISBLANK(Depreciation_Rate3__c),0,1)</formula>
+    <label>Depreciation Rate Nb</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

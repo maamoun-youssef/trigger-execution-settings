@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email template for aproval process to validation an onTop simulation</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>negOptim Simulation Validation Request Email</name>
+    <relatedEntityType>Contract__c</relatedEntityType>
+    <style>none</style>
+    <subject>Demande de validation pour le contrat {{{Contract__c.Name}}}</subject>
+    <type>custom</type>
+    <uiType>SFX</uiType>
+</EmailTemplate>

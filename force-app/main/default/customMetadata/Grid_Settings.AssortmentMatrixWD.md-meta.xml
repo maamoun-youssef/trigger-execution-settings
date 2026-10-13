@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Assortment Matrix WD</label>
+    <protected>false</protected>
+    <values>
+        <field>Calendar_Setting__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Columns__c</field>
+        <value xsi:type="xsd:string">[
+            {
+                &quot;FieldName&quot;: &quot;Product__r.Logo_Small__c&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Product__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Product_EAN__c&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Priority__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;&quot;,
+                    &quot;width&quot;: &quot;&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;font-weight: bold;color: #FFFEFE;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: true,
+                        &quot;color&quot;: &quot;#FFFEFE&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;background-color: #35C4C1;font-weight: bold;color: #FFFEFE;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#35C4C1&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;picklistColorsMap&quot;: {}
+            },
+            {
+                &quot;FieldName&quot;: &quot;InnoRanking__c&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Movement_Date__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;&quot;,
+                    &quot;width&quot;: &quot;&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;background-color: #FABFC8;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#FABFC8&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;isInputField&quot;: true,
+                &quot;picklistColorsMap&quot;: {},
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Status__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;&quot;,
+                    &quot;width&quot;: &quot;&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;background-color: #FABFC8;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#FABFC8&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;isInputField&quot;: true,
+                &quot;picklistColorsMap&quot;: {
+                    &quot;Previously Validated&quot;: &quot;&quot;,
+                    &quot;Validated&quot;: &quot;&quot;,
+                    &quot;Request for Approval&quot;: &quot;&quot;,
+                    &quot;In preparation&quot;: &quot;&quot;
+                },
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Ref_Client_Clust1__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Ref_Client_Clust2__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Ref_Client_Clust3__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Ref_Client_Clust4__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Ref_Client_Clust5__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Ref_Client_Clust6__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Ref_Client_Clust_Cplt1__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Ref_Client_Clust_Cplt2__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Ref_Client_Clust_Cplt3__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Ref_Client_Clust_Cplt4__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Ref_Client_Clust_Cplt5__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Ref_Client_Clust_Cplt6__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Ref_Client_ProductNumber__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;min-width: 100px; max-width: 100px; width: 100px;&quot;,
+                    &quot;width&quot;: &quot;100px&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;min-width: 100px; max-width: 100px; width: 100px;background-color: #FFFFFF;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#FFFFFF&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;picklistColorsMap&quot;: {},
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Client_Status__c&quot;,
+                &quot;isInputField&quot;: true,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Client_Clust1__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Client_Clust2__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Client_Clust3__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Client_Clust4__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Client_Clust5__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Client_Clust6__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Client_Clust_Cplt1__c&quot;,
+                &quot;isInputField&quot;: true,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Client_Clust_Cplt2__c&quot;,
+                &quot;isInputField&quot;: true,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Client_Clust_Cplt3__c&quot;,
+                &quot;isInputField&quot;: true,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Client_Clust_Cplt4__c&quot;,
+                &quot;isInputField&quot;: true,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Client_Clust_Cplt5__c&quot;,
+                &quot;isInputField&quot;: true,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Client_Clust_Cplt6__c&quot;,
+                &quot;isInputField&quot;: true,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;New_Client_ProductNumber__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;min-width: 50px; max-width: 50px; width: 50px;&quot;,
+                    &quot;width&quot;: &quot;50px&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;min-width: 50px; max-width: 50px; width: 50px;background-color: #FFFFFF;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#FFFFFF&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;picklistColorsMap&quot;: {},
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;New_Client_ProductNumber_Gap__c&quot;,
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;Avg_Weekly_Sales_Ext_MarketBased__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;&quot;,
+                    &quot;width&quot;: &quot;&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;background-color: #AAFAB2;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#AAFAB2&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;picklistColorsMap&quot;: {}
+            },
+            {
+                &quot;FieldName&quot;: &quot;Avg_Weekly_Sales_Ext_ClientBased__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;&quot;,
+                    &quot;width&quot;: &quot;&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;background-color: #AAFAB2;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#AAFAB2&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;isInputField&quot;: true,
+                &quot;picklistColorsMap&quot;: {}
+            },
+            {
+                &quot;FieldName&quot;: &quot;New_Client_Quantity_YE__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;&quot;,
+                    &quot;width&quot;: &quot;&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;background-color: #AAFAB2;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#AAFAB2&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;picklistColorsMap&quot;: {}
+            },
+            {
+                &quot;FieldName&quot;: &quot;Carry_Over__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;&quot;,
+                    &quot;width&quot;: &quot;&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;background-color: #AAFAB2;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#AAFAB2&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;picklistColorsMap&quot;: {}
+            },
+            {
+                &quot;FieldName&quot;: &quot;Fact_ShelfNumber__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;&quot;,
+                    &quot;width&quot;: &quot;&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;background-color: #FAEC9A;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#FAEC9A&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;picklistColorsMap&quot;: {}
+            },
+            {
+                &quot;FieldName&quot;: &quot;Fact_ND_ClientBased_Pts__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;&quot;,
+                    &quot;width&quot;: &quot;&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;background-color: #FAEC9A;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#FAEC9A&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;picklistColorsMap&quot;: {}
+            },
+            {
+                &quot;FieldName&quot;: &quot;New_Client_ND_ClientBased_Pts__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;&quot;,
+                    &quot;width&quot;: &quot;&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;background-color: #FAEC9A;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#FAEC9A&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;picklistColorsMap&quot;: {},
+                &quot;bgColor&quot;: &quot;#D6FAF5&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;DN_Nego_Ens_vs_N_1__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;&quot;,
+                    &quot;width&quot;: &quot;&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;background-color: #FAEC9A;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#FAEC9A&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;picklistColorsMap&quot;: {}
+            },
+            {
+                &quot;FieldName&quot;: &quot;TMP_DN_1_Nego_Ensg__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;&quot;,
+                    &quot;width&quot;: &quot;&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;background-color: #FAEC9A;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#FAEC9A&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;picklistColorsMap&quot;: {}
+            },
+            {
+                &quot;FieldName&quot;: &quot;Fact_WD_ClientBased_Pts__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;&quot;,
+                    &quot;width&quot;: &quot;&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;background-color: #D6FAF5;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#D6FAF5&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;picklistColorsMap&quot;: {},
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;New_Client_WD_ClientBased_Pts__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;&quot;,
+                    &quot;width&quot;: &quot;&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;background-color: #D6FAF5;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#D6FAF5&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;picklistColorsMap&quot;: {},
+                &quot;bgColor&quot;: &quot;#D6FAF5&quot;
+            },
+            {
+                &quot;FieldName&quot;: &quot;DV_Nego_Ens_vs_DV_N_1__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;&quot;,
+                    &quot;width&quot;: &quot;&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;background-color: #D6FAF5;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#D6FAF5&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;picklistColorsMap&quot;: {}
+            },
+            {
+                &quot;FieldName&quot;: &quot;Ref_Client_WD_ClientBased_Nego_Pts__c&quot;,
+                &quot;nonConditional&quot;: {
+                    &quot;widthStyle&quot;: &quot;&quot;,
+                    &quot;width&quot;: &quot;&quot;,
+                    &quot;textStyle&quot;: {
+                        &quot;style&quot;: &quot;&quot;,
+                        &quot;size&quot;: &quot;&quot;,
+                        &quot;isUnderLine&quot;: false,
+                        &quot;isStrikeThrought&quot;: false,
+                        &quot;isItalic&quot;: false,
+                        &quot;isBold&quot;: null,
+                        &quot;color&quot;: &quot;&quot;,
+                        &quot;align&quot;: &quot;&quot;
+                    },
+                    &quot;style&quot;: &quot;background-color: #D6FAF5;&quot;,
+                    &quot;isAdvanced&quot;: null,
+                    &quot;borderStyle&quot;: null,
+                    &quot;bgColor&quot;: &quot;#D6FAF5&quot;,
+                    &quot;advancedStyle&quot;: null
+                },
+                &quot;picklistColorsMap&quot;: {},
+                &quot;bgColor&quot;: &quot;#FFFFFF&quot;
+            }
+        ]</value>
+    </values>
+    <values>
+        <field>Compiled_Grid_JSON__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Filters__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Grid_Configuration__c</field>
+        <value xsi:type="xsd:string">{&quot;Display_Order&quot;:3,&quot;Include_In_List_View&quot;:true,&quot;Default_Page_Size&quot;:&quot;50&quot;}</value>
+    </values>
+    <values>
+        <field>Grid_Slogan__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">standard:orders</value>
+    </values>
+    <values>
+        <field>Master_Object_Columns__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Master_Object_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Object_Name__c</field>
+        <value xsi:type="xsd:string">Assortment_Detail__c</value>
+    </values>
+    <values>
+        <field>ReadOnly_Criteria__c</field>
+        <value xsi:type="xsd:string">{}</value>
+    </values>
+    <values>
+        <field>Relationship_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Time_Line_Settings__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:type="xsd:string">Detail</value>
+    </values>
+</CustomMetadata>

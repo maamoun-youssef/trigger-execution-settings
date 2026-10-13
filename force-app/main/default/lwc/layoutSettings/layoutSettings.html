@@ -1,0 +1,473 @@
+<template>
+    <div class="main-container mainContainer">
+        <div class="slds-is-relative">
+            <template if:true={Loading}>
+                <!-- <lightning-spinner variant="brand" size="large"></lightning-spinner> -->
+                <div class="slds-spinner_container">
+                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </template>
+            <div class="pageHeader negoptimHeader slds-page-header">
+                <!-- LAYOUT GRID -->
+                <div class="header ">
+                    <div class=" slds-grid slds-show_small">
+                        <!-- GRID COL -->
+                        <div class="slds-col">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <lightning-icon icon-name="utility:matrix"></lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                    <p class="slds-line-height_reset">{labels.LBL_LayoutSettings_LayoutPageBuilderTitle}</p>
+                                    <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate"
+                                        title={labels.LBl_LayoutPageSettings_Subtitle}>
+                                        <div class="slds-grid">
+                                            <div>{labels.LBl_LayoutPageSettings_Subtitle}</div>
+                                            <div if:true={instance.currentLayout.settings.label}>
+                                                <span>: {instance.currentLayout.settings.label}</span>
+                                            </div>
+                                        </div>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                            <template if:false={showTemplate}>
+                                <lightning-button value={labels.LBL_New} label={labels.LBL_New}
+                                    onclick={handleNew} class="slds-p-right--xxx-small">
+                                </lightning-button>
+                            </template>
+                            <template if:true={showTemplate}>
+                                <lightning-button value={labels.Cancel} label={labels.Cancel}
+                                    onclick={handleCancel} class="slds-p-right--xxx-small">
+                                </lightning-button>
+                                <lightning-button value={labels.LBL_Preview} label={labels.LBL_Preview}
+                                    onclick={handlePreview} class="slds-p-right--xxx-small" >
+                                </lightning-button>
+                                <lightning-button onclick={handlePublish} label={labels.LBL_Publish}
+                                    class="slds-p-right--xx-small slds-button_text-destructive">
+                                </lightning-button>
+                                <lightning-button variant="brand" label={labels.LBL_Save} onclick={handleSave}>
+                            </lightning-button>
+                            <lightning-button-menu icon-name="utility:connected_apps" menu-alignment="right" nubbin
+                                class="slds-p-left--xxx-small" if:false={disableSaveAs}>
+                                <lightning-menu-item onclick={openSaveAsPopup} label={labels.LBL_Save_As}
+                                    prefix-icon-name="utility:save">
+                                </lightning-menu-item>
+                                <lightning-menu-item onclick={openDeleteConfirmationPopup} label={labels.LBL_Delete}
+                                    prefix-icon-name="utility:delete">
+                                </lightning-menu-item>
+                                <!-- <lightning-menu-divider></lightning-menu-divider> -->
+                            </lightning-button-menu>
+                            </template>
+                    </div>
+                    <div class="slds-grid slds-wrap slds-hide_small">
+                        <div class="slds-size_1-of-1">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <lightning-icon icon-name="utility:settings"></lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                    <p class="slds-line-height_reset">
+                                        {labels.LBL_LayoutSettings_LayoutPageBuilderTitle}
+                                    </p>
+                                    <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate"
+                                        title={labels.LBl_LayoutPageSettings_Subtitle}>
+                                        <div class="slds-grid">
+                                            <div>{labels.LBl_LayoutPageSettings_Subtitle}</div>
+                                            <div if:true={instance.currentLayout.settings.label}>
+                                                <span>: {instance.currentLayout.settings.label}</span>
+                                            </div>
+                                        </div>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-1 slds-grid slds-p-top_x-small">
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-page-header__detail-row slds-grid slds-wrap pageBody" style="padding: 0; position: relative;">
+                    <template if:false={showTemplate}>
+                        <template if:false={isSidebarOpen}>
+                            <div class="sidebarToggleAnchor sidebarToggleAnchor_closed">
+                                <lightning-button-icon icon-name={sidebarToggleIcon} alternative-text={sidebarToggleTitle}
+                                    title={sidebarToggleTitle} onclick={handleToggleSidebar}
+                                    variant="bare" class="sidebarToggleButton">
+                                </lightning-button-icon>
+                            </div>
+                        </template>
+                    </template>
+                    <div class="slds-col slds-grid slds-truncate" style="height: -webkit-fill-available;">
+                        <template if:false={showTemplate}>
+                            <div class={sidebarClass} style="background-color: white; height: inherit; position: relative;">
+                                <template if:true={isSidebarOpen}>
+                                    <div class="sidebarToggleAnchor sidebarToggleAnchor_open">
+                                        <lightning-button-icon icon-name={sidebarToggleIcon} alternative-text={sidebarToggleTitle}
+                                            title={sidebarToggleTitle} onclick={handleToggleSidebar}
+                                            variant="bare" class="sidebarToggleButton">
+                                        </lightning-button-icon>
+                                    </div>
+                                </template>
+                                <div class="templatesSplitView slds-split-view_container slds-panel_docked-left slds-is-open" style="height: -webkit-fill-available;">
+                                    <div class="slds-panel__header slds-p-around_x-small searchBox" id="filterHeader">
+                                        <div style="padding: 0; margin-bottom: 0.75rem;" class="slds-page-header__col-details">
+                                            <lightning-input type="search" data-form="first" variant="label-hidden"
+                                                autocomplete="off" onfocus={focusTemplateInput} onchange={searchTemplate}
+                                                onblur={closeDropdownTemplate} onkeyup={searchTemplate}
+                                                onkeydown={searchTemplate} value={searchTermTemplate}>
+                                            </lightning-input>
+                                        </div>
+                                    </div>
+                                    <template lwc:if={layouts.length}>
+                                        <div class="slds-scrollable--y">
+                                            <article aria-hidden="false" id="split-view-id" class="slds-split-view slds-grid slds-grid_vertical slds-scrollable">
+                                                <div class="slds-grid slds-grid_vertical">
+                                                    <ul aria-multiselectable="true" class="slds-scrollable_y" role="listbox"
+                                                        aria-label="Select an item to open it in a new workspace tab.">
+                                                        <template if:true={layouts.length} for:each={layouts} for:item="layout">
+                                                            <li class={layout.listItemClass} role="presentation"
+                                                                key={layout.value} data-id={layout.value}
+                                                                onclick={TemplateChangeHandler}>
+                                                                <a href="#" role="option" data-id={layout.value}
+                                                                    class="menuItem slds-split-view__list-item-action slds-grow slds-has-flexi-truncate"
+                                                                    tabindex="0">
+                                                                    <div class="slds-grid slds-wrap">
+                                                                        <b>
+                                                                            <span class="slds-truncate slds-text-body_regular slds-text-color_default"
+                                                                                title={layout.label}>{layout.label}</span>
+                                                                        </b>
+                                                                        <span class="slds-truncate slds-col_bump-left"
+                                                                            title="packageIcon">
+                                                                            <lightning-icon if:true={layout.namespacePrefix}
+                                                                                icon-name="utility:package" size="xx-small">
+                                                                            </lightning-icon>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="slds-grid">
+                                                                        <span class="slds-truncate"
+                                                                            title={layout.currentObject}>{layout.currentObject}
+                                                                        </span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        </template>
+                                                    </ul>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    </template>
+                                    <template lwc:else>
+                                        <div class="slds-align_absolute-center slds-m-vertical_small">
+                                            <span class="slds-truncate" title={labels.LBL_No_Item_To_Display}>
+                                                {labels.LBL_No_Item_To_Display}
+                                            </span>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                        <div class={tabContainerClass}>
+                            <template if:true={showTemplate}>
+                                <!-- <lightning-tabset></lightning-tabset> -->
+                                <div>
+                                  <div class="slds-grid slds-grid_vertical-align-center slds-gutters_x-small slds-m-left_small slds-m-top_small">
+                                       <div>
+                                           <h1 class="slds-page-header__title slds-m-right_medium">{instance.currentLayout.settings.label}</h1>
+                                       </div>
+                                       <div>
+                                           <span class={statusBadgeClass}>
+                                               {statusLabel}
+                                           </span>
+                                       </div>
+                                   </div>
+                                  <div class="c-container">
+                                       <lightning-layout>
+                                           <lightning-layout-item padding="around-small">
+                                               <div class="header-column">
+                                                   <p class="field-title" title="Field 1">Field 1</p>
+                                                   <p>Name</p>
+                                               </div>
+                                           </lightning-layout-item>
+                                           <lightning-layout-item padding="around-small">
+                                               <div class="header-column">
+                                                   <p class="field-title" title="Field2 (3)">Field 2</p>
+                                                   <p>Eligibility</p>
+                                               </div>
+                                           </lightning-layout-item>
+                                           <lightning-layout-item padding="around-small">
+                                               <div class="header-column">
+                                                   <p class="field-title" title="Field 3">Field 3</p>
+                                                   <a href="#">Website</a>
+                                               </div>
+                                           </lightning-layout-item>
+                                           <lightning-layout-item padding="around-small">
+                                               <div class="header-column">
+                                                   <p class="field-title" title="Field 4">Field 4</p>
+                                                   <p>
+                                                       <span title="">Address</span>
+                                                   </p>
+                                               </div>
+                                           </lightning-layout-item>
+                                       </lightning-layout>
+                                   </div>
+                                </div>
+                                <div class="slds-grid slds-p-horizontal_x-small slds-scrollable--y">
+                                    <template lwc:if={isLeftOpen}>
+                                        <div class={leftSize}>
+                                            <div class="slds-box slds-theme_shade">Left Content (2 Cols)</div>
+                                        </div>
+                                    </template>
+                                    <div class={middleSize}>
+                                        <div class="slds-box slds-theme_default">Middle Content (Fluid Cols)</div>
+                                    </div>
+                                    <template lwc:if={isRightOpen}>
+                                        <div class={rightSize}>
+                                            <div class="properties-panel slds-border_left slds-theme_default">
+
+                                                <!-- 1. Header Section -->
+                                                <div class="panel-section header-section slds-p-around_medium slds-border_bottom">
+                                                    <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                                                        <h2 class="slds-text-heading_small panel-main-title">{labels.LBL_LayoutSettings_PropertiesSectionTitle}</h2>
+                                                        <div class="header-actions">
+                                                            <lightning-button-icon icon-name="utility:delete" variant="bare" size="medium" alternative-text="Delete" title="Delete" class="slds-m-right_x-small"></lightning-button-icon>
+                                                            <lightning-button-icon icon-name="utility:copy" variant="bare" size="medium" alternative-text="Clone" title="Clone" class="slds-m-right_x-small"></lightning-button-icon>
+                                                            <lightning-button-icon icon-name="utility:close" variant="bare" size="medium" alternative-text="Close" title="Close" onclick={handleClose}></lightning-button-icon>
+                                                        </div>
+                                                    </div>
+                                                
+                                                    <!-- Sub-header branding row -->
+                                                    <div class="slds-media slds-media_center slds-m-top_medium component-badge">
+                                                        <div class="slds-media__figure">
+                                                            <lightning-icon icon-name="utility:file" size="small" class="custom-badge-icon"></lightning-icon>
+                                                        </div>
+                                                        <div class="slds-media__body">
+                                                            <span class="slds-text-heading_label text-primary-brand">Documents</span>
+                                                        </div>
+                                                    </div>
+                                                
+                                                    <!-- Multi-column structural layouts: Type & Region -->
+                                                    <div class="slds-grid slds-gutters_x-small slds-m-top_medium">
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <lightning-combobox name="type" label="Type" value="tabs-table" options={typeOptions}></lightning-combobox>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <lightning-combobox name="region" label="Region" value="main" options={regionOptions}></lightning-combobox>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            
+                                                <!-- 2. General Settings Body Section -->
+                                                <div class="panel-section slds-p-around_medium slds-border_bottom scrollable-body">
+                                                    <h3 class="section-subtitle slds-m-bottom_medium">General Settings</h3>
+
+                                                    <div class="slds-form slds-form_stacked">
+                                                        <div class="slds-form-element slds-m-bottom_medium">
+                                                            <lightning-input type="text" label="Title" value="Documents"></lightning-input>
+                                                        </div>
+                                                        <div class="slds-form-element slds-m-bottom_medium">
+                                                            <lightning-input type="text" label="Section Key" value="documents"></lightning-input>
+                                                        </div>
+
+                                                        <!-- Toggle switches with inline horizontal alignment -->
+                                                        <div class="slds-form-element toggle-row slds-m-bottom_small">
+                                                            <span class="slds-form-element__label">Show Header</span>
+                                                            <lightning-input type="toggle" variant="label-hidden" checked message-toggle-active="" message-toggle-inactive=""></lightning-input>
+                                                        </div>
+                                                        <div class="slds-form-element toggle-row slds-m-bottom_small">
+                                                            <span class="slds-form-element__label">Collapsible</span>
+                                                            <lightning-input type="toggle" variant="label-hidden" message-toggle-active="" message-toggle-inactive=""></lightning-input>
+                                                        </div>
+                                                        <div class="slds-form-element toggle-row slds-m-bottom_medium">
+                                                            <span class="slds-form-element__label">Default Expanded</span>
+                                                            <lightning-input type="toggle" variant="label-hidden" checked message-toggle-active="" message-toggle-inactive=""></lightning-input>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            
+                                                <!-- 3. Tabs Dynamic Configuration Section -->
+                                                <div class="panel-section slds-p-around_medium">
+                                                    <h3 class="section-subtitle slds-m-bottom_medium">Tabs Configuration</h3>
+                                                    <!-- Outer List Wrapper -->
+                                                        <div class="config-list-group slds-m-bottom_medium">
+                                                            <template for:each={instance.currentLayout.settingsWrappers.tabsConfigurationWrapper} for:item="tab" for:index="index">
+                                                                <div key={tab.key} class={tab.wrapperClass}>
+                                                                    <div class="slds-grid slds-grid_vertical-align-center slds-p-around_small cursor-pointer" 
+                                                                         data-rowindex={index} 
+                                                                         onclick={handleToggleExpand}>
+                                                                        <lightning-icon 
+                                                                            icon-name="utility:chevronright" 
+                                                                            size="x-small" 
+                                                                            class={tab.chevronClass}>
+                                                                        </lightning-icon>
+
+                                                                        <span class={tab.textClass}>{tab.label}</span>
+                                                                    </div>
+                                                                    <template lwc:if={tab.isExpanded}>
+                                                                        <div class="tab-drawer-content slds-p-around_medium slds-border_top slds-theme_shade">
+                                                                            <div class="slds-form slds-form_stacked">
+                                                                                <div class="slds-form-element slds-m-bottom_small">
+                                                                                    <lightning-input 
+                                                                                        type="text" 
+                                                                                        label="Tab Rename" 
+                                                                                        value={tab.label} 
+                                                                                        data-rowindex={index}
+                                                                                        data-field="components"
+                                                                                        data-wrapper="tabsConfigurationWrapper"
+                                                                                        data-type="label"
+                                                                                        onchange={handleTabChange}>
+                                                                                    </lightning-input>
+                                                                                </div>
+                                                                                <div class="slds-form-element slds-m-bottom_small">
+                                                                                    <lightning-combobox
+                                                                                        label="Type"
+                                                                                        value={tab.type}
+                                                                                        data-rowindex={index}
+                                                                                        data-field="components"
+                                                                                        data-wrapper="tabsConfigurationWrapper"
+                                                                                        data-type="type"
+                                                                                        options={tabComponentsOptions}
+                                                                                        onchange={handleTabChange}>
+                                                                                    </lightning-combobox>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </template>
+                                                                </div>
+                                                            </template>
+                                                            <template lwc:if={isAddingNewTab}>
+                                                                <div class="config-item inline-add-row slds-p-around_small">
+                                                                    <div class="slds-grid slds-grid_vertical-align-center">
+                                                                        <div class="slds-col slds-grow_1">
+                                                                            <lightning-input 
+                                                                                type="text" 
+                                                                                variant="label-hidden" 
+                                                                                data-rowindex={index}
+                                                                                data-field="components"
+                                                                                data-wrapper="tabsConfigurationWrapper"
+                                                                                data-type="label"
+                                                                                value={tab.label}
+                                                                                onchange={handleTabChange}>
+                                                                            </lightning-input>
+                                                                        </div>
+                                                                        <div class="slds-col slds-grow_0 slds-m-left_small">
+                                                                            <lightning-button-icon 
+                                                                                icon-name="utility:check" 
+                                                                                variant="border-filled" 
+                                                                                alternative-text="Save Tab" 
+                                                                                title="Save Tab"
+                                                                                onclick={handleSaveNewTab}>
+                                                                            </lightning-button-icon>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </template>
+                                                        </div>
+                                                        <lightning-button 
+                                                            label="Add Tab" 
+                                                            icon-name="utility:add" 
+                                                            variant="neutral" 
+                                                            class="add-button-canvas"
+                                                            onclick={handleInitAddTab}>
+                                                        </lightning-button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div if:true={newTemplatePopup.isOpen}>
+        <!-- Modal/Popup Box starts here-->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-13" aria-modal="true"
+            aria-describedby="modal-content-id-13" class="slds-modal slds-fade-in-open ">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box Header Starts here-->
+                <header class="slds-modal__header">
+                    <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        {labels.LBL_PageLayoutSettings_NewTemplate}
+                    </div>
+                </header>
+                <!--Modal/Popup Box Body Starts here-->
+                <div class="slds-modal__content slds-p-around_medium slds-grid slds-wrap" id="modal-content-id-13"
+                    style="overflow: unset;">
+                    <!-- <div class="section-Container slds-m-top_medium slds-size--1-of-1">
+                        <div class="section-label header-title ">{labels.LBL_TemplateName} <lightning-helptext content="Help"></lightning-helptext></div> -->
+                        <lightning-input value={instance.currentLayout.settings.label} data-field="label"
+                            onchange={handlePageLayoutSettingsChange} label={labels.LBL_TemplateName}>
+                        </lightning-input>
+                        <lightning-input value={instance.currentLayout.settings.type} data-field="type"
+                            onchange={handlePageLayoutSettingsChange} label={labels.LBL_TemplateType}>
+                        </lightning-input>
+                    <!-- </div> -->
+                    <!-- Select Object Section -->
+                    <div class="section-Container slds-m-top_medium slds-size--1-of-1">
+                        <template if:true={isNewTemplate}>
+                            <!-- <div class="section-label header-title ">{labels.LBL_SelectObject} <lightning-helptext content="Help"></lightning-helptext></div> -->
+                            <!-- Search Input -->
+                            <div class="slds-is-relative" style="width: 100%;">
+                                <lightning-input
+                                    onfocus={showallObjects} type="search" data-field="objectApiName"
+                                    value={instance.currentLayout.settings.objectApiName} label={labels.LBL_SelectObject}>
+                                </lightning-input>
+                                <!-- Dropdown List -->
+                                <template if:true={showObjectDropdown}>
+                                    <div lwc:if={objectsList.length} class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" role="listbox">
+                                        <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                            <template for:each={objectsList} for:item="searchResult">
+                                                <li key={searchResult.value} data-value={searchResult.value} data-field="objectApiName"
+                                                    data-label={searchResult.label} role="presentation"
+                                                    onclick={handleChangeLayoutObject} class="slds-listbox__item">
+                                                    <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                                                        role="option" data-value={searchResult.value} onclick={handleChangeLayoutObject}
+                                                        data-label={searchResult.label} data-field="objectApiName">
+                                                        <span class="slds-media__body"
+                                                            data-value={searchResult.value}
+                                                            data-label={searchResult.label}
+                                                             data-field="objectApiName">
+                                                            <span class="slds-truncate"
+                                                                title={searchResult.label}
+                                                                data-value={searchResult.value}
+                                                                data-label={searchResult.label}
+                                                                data-field="objectApiName">
+                                                                {searchResult.label}
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                    </div>
+                    <lightning-input
+                        data-field="description" label={labels.LBL_AddDescription}  onchange={handlePageLayoutSettingsChange}
+                        value={instance.currentLayout.settings.description}>
+                    </lightning-input>
+                </div>
+                <!--Modal/Popup Box Footer Starts here-->
+                <footer class="slds-modal__footer">
+                    <lightning-button title={labels.Cancel} label={labels.Cancel} onclick={handleCancelNewTemplate}
+                        class="slds-p-right--xxx-small">
+                    </lightning-button>
+                    <lightning-button title={labels.LBL_Save} label={labels.LBL_Save} variant="brand"
+                        onclick={createNewTemplate}>
+                    </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="opacity: 0.8;"></div>
+    </div>
+</template>

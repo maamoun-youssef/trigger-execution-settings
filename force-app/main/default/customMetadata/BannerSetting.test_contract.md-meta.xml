@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>test_contract</label>
+    <protected>false</protected>
+    <values>
+        <field>BackgroundColor__c</field>
+        <value xsi:type="xsd:string">#FFFFFF</value>
+    </values>
+    <values>
+        <field>DetailFields__c</field>
+        <value xsi:type="xsd:string">[{&quot;fieldApiName&quot;:&quot;BU_Source__r.CreatedBy.Alias&quot;,&quot;color&quot;:&quot;#16325c&quot;,&quot;bold&quot;:true,&quot;italic&quot;:true,&quot;underline&quot;:false,&quot;labelPosition&quot;:&quot;above&quot;,&quot;labelMode&quot;:&quot;fieldLabel&quot;,&quot;customLabel&quot;:&quot;&quot;,&quot;labelIcon&quot;:&quot;utility:info&quot;},{&quot;fieldApiName&quot;:&quot;Autonum__c&quot;,&quot;color&quot;:&quot;#16325c&quot;,&quot;bold&quot;:false,&quot;italic&quot;:false,&quot;underline&quot;:false,&quot;labelPosition&quot;:&quot;above&quot;,&quot;labelMode&quot;:&quot;fieldLabel&quot;,&quot;customLabel&quot;:&quot;&quot;,&quot;labelIcon&quot;:&quot;utility:info&quot;},{&quot;fieldApiName&quot;:&quot;Supplier_Nego_Scope__r.CodeLong__c&quot;,&quot;color&quot;:&quot;#16325c&quot;,&quot;bold&quot;:false,&quot;italic&quot;:false,&quot;underline&quot;:false,&quot;labelPosition&quot;:&quot;above&quot;,&quot;labelMode&quot;:&quot;fieldLabel&quot;,&quot;customLabel&quot;:&quot;&quot;,&quot;labelIcon&quot;:&quot;utility:info&quot;},{&quot;fieldApiName&quot;:&quot;ContractP1__r.ContractP1__r.ContractP1__r.Contract_EDate__c&quot;,&quot;color&quot;:&quot;#0062F4&quot;,&quot;bold&quot;:true,&quot;italic&quot;:true,&quot;underline&quot;:true,&quot;labelPosition&quot;:&quot;above&quot;,&quot;labelMode&quot;:&quot;customLabel&quot;,&quot;customLabel&quot;:&quot;Test&quot;,&quot;labelIcon&quot;:&quot;utility:info&quot;}]</value>
+    </values>
+    <values>
+        <field>DisplayMode__c</field>
+        <value xsi:type="xsd:string">Horizontal</value>
+    </values>
+    <values>
+        <field>IconSource__c</field>
+        <value xsi:type="xsd:string">staticResource</value>
+    </values>
+    <values>
+        <field>IconValue__c</field>
+        <value xsi:type="xsd:string">EmailReview</value>
+    </values>
+    <values>
+        <field>Iconsize__c</field>
+        <value xsi:type="xsd:string">150</value>
+    </values>
+    <values>
+        <field>IsActive__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>NumberOfFieldsDisplay__c</field>
+        <value xsi:type="xsd:double">3.0</value>
+    </values>
+    <values>
+        <field>ObjectAPIName__c</field>
+        <value xsi:type="xsd:string">Contract__c</value>
+    </values>
+    <values>
+        <field>SelectedActions__c</field>
+        <value xsi:type="xsd:string">{&quot;quickActions&quot;:[],&quot;screenFlows&quot;:[{&quot;value&quot;:&quot;SCREEN_Assortment_Create_Simulation_from_target_Simulation&quot;,&quot;label&quot;:&quot;test a&quot;,&quot;redirectionType&quot;:&quot;Flow&quot;,&quot;icon&quot;:&quot;/sfc/servlet.shepherd/document/download/069QH00000BWj8XYAT&quot;,&quot;displayType&quot;:&quot;Icon&quot;},{&quot;value&quot;:&quot;SCREEN_Generate_Invoices&quot;,&quot;label&quot;:&quot;test test&quot;,&quot;redirectionType&quot;:&quot;Flow&quot;,&quot;icon&quot;:&quot;utility:forward_up&quot;,&quot;displayType&quot;:&quot;Action&quot;}]}</value>
+    </values>
+    <values>
+        <field>SubtitleFieldAPI__c</field>
+        <value xsi:type="xsd:string">BusinessUnitSource__c</value>
+    </values>
+    <values>
+        <field>TextColor__c</field>
+        <value xsi:type="xsd:string">#000000</value>
+    </values>
+    <values>
+        <field>TitleFieldAPI__c</field>
+        <value xsi:type="xsd:string">Contract_Number__c</value>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:type="xsd:string">Record</value>
+    </values>
+</CustomMetadata>

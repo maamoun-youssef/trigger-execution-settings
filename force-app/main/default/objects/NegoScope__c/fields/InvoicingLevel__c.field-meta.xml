@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InvoicingLevel__c</fullName>
+    <inlineHelpText>Défini le niveau de facturation des conditions saisies poiur les accords de ce NS.</inlineHelpText>
+    <label>Invoicing Level</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>PartnerOnly</fullName>
+                <default>false</default>
+                <label>Partner Only</label>
+            </value>
+            <value>
+                <fullName>AdvancedOnly</fullName>
+                <default>false</default>
+                <label>Advanced Only</label>
+            </value>
+            <value>
+                <fullName>AdvancedAndPartner</fullName>
+                <default>false</default>
+                <label>Advanced And Partner</label>
+            </value>
+            <value>
+                <fullName>PartnerAndAdvanced</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>PartnerAndAdvanced</label>
+            </value>
+            <value>
+                <fullName>test</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>test</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

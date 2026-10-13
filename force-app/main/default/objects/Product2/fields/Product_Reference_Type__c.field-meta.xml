@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Reference_Type__c</fullName>
+    <description>Indicate if the product is a reference product to another product of type Switch or Reno.
+Fill automtically when the product is selected as a reference by another product of type Switch or Reno.</description>
+    <label>Product Reference Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Switch</fullName>
+                <default>false</default>
+                <label>Switch</label>
+            </value>
+            <value>
+                <fullName>Reno</fullName>
+                <default>false</default>
+                <label>Reno</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

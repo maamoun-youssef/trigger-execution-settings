@@ -1,0 +1,128 @@
+.stickyHeader td {
+    position: fixed;
+    top: 0;
+}
+
+.container {
+    /* width: 100% */
+    min-height: 100px;
+    position: relative;
+}
+.redColor {
+    color: red;
+}
+.fieldNameClass {
+    display: flex;
+}
+.loadStartClass {
+    width: fit-content;
+}
+.sheetNumberClass {
+    width: fit-content;
+}
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+table th {
+    background-color: #498576;
+    color: white;
+    min-width: 70px;
+    height: 45px;
+    text-align: center;
+    white-space: pre-wrap;
+}
+
+.emptyCell {
+    text-align: center;
+}
+
+.tableActions {
+    text-align: right;
+}
+.separatorClass {
+    width: fit-content;
+}
+.templateClass {
+    min-width: 90%;
+}
+.separatorContainer {
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+}
+.cmpActions {
+
+}
+.tableContainer {
+    display: grid;
+    align-content: center;
+}
+.fieldTable {
+    /* width: 55%; */
+}
+.mainContainer {
+    min-height: 200px;
+    position: relative;
+    display: grid;
+    min-width: fit-content;
+}
+.errorMsg {
+    color: rgb(234, 0, 30);
+}
+.successColor {
+    color: green;
+}
+.newRow td {
+    background-color: #FFFFC5;
+}
+
+.alignCenter {
+    text-align: center;
+}
+
+.cmpHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cmpTitle {
+    font-size: larger;
+    font-weight: 600;
+}
+.importMessage {
+    white-space: pre;
+}

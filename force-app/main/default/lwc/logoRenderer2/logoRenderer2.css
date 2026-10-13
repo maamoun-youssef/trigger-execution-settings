@@ -1,0 +1,10 @@
+:host {
+    display: inline-block;
+    line-height: 0;
+}
+
+/* Without a size the image keeps its natural size but never overflows its container */
+.lr-media {
+    max-width: 100%;
+    object-fit: contain;
+}

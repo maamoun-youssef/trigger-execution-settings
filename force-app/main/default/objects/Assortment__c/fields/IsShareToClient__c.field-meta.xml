@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsShareToClient__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This assortment version has been sent to the client</description>
+    <label>Is Share To Client</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

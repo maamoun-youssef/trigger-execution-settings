@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <label>Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Attempt</fullName>
+                <default>false</default>
+                <label>Attempt</label>
+            </value>
+            <value>
+                <fullName>Demande de capa</fullName>
+                <default>false</default>
+                <label>Demande de capa</label>
+            </value>
+            <value>
+                <fullName>Validated Capa</fullName>
+                <default>false</default>
+                <label>Validated Capa</label>
+            </value>
+            <value>
+                <fullName>StandBY</fullName>
+                <default>false</default>
+                <label>StandBY</label>
+            </value>
+            <value>
+                <fullName>Request for approval</fullName>
+                <default>false</default>
+                <label>Request for approval</label>
+            </value>
+            <value>
+                <fullName>Validated</fullName>
+                <default>false</default>
+                <label>Validated</label>
+            </value>
+            <value>
+                <fullName>Realized</fullName>
+                <default>false</default>
+                <label>Realized</label>
+            </value>
+            <value>
+                <fullName>Invoiced</fullName>
+                <default>false</default>
+                <label>Invoiced</label>
+            </value>
+            <value>
+                <fullName>Rejected DC</fullName>
+                <default>false</default>
+                <label>Rejected DC</label>
+            </value>
+            <value>
+                <fullName>Rejected Client</fullName>
+                <default>false</default>
+                <label>Rejected Client</label>
+            </value>
+            <value>
+                <fullName>Canceled</fullName>
+                <default>false</default>
+                <label>Canceled</label>
+            </value>
+            <value>
+                <fullName>A supprimer</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>A supprimer</label>
+            </value>
+            <value>
+                <fullName>Facture en cours</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Facture en cours</label>
+            </value>
+            <value>
+                <fullName>Facturée et close</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Facturée et close</label>
+            </value>
+            <value>
+                <fullName>Non envoyée</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Non envoyée</label>
+            </value>
+            <value>
+                <fullName>Non retenue</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Non retenue</label>
+            </value>
+            <value>
+                <fullName>Proposée</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Proposée</label>
+            </value>
+            <value>
+                <fullName>Request for approval (Proposée)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Request for approval (Proposée)</label>
+            </value>
+            <value>
+                <fullName>Retenue</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Retenue</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

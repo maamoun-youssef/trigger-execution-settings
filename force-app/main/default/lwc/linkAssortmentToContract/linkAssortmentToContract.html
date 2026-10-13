@@ -1,0 +1,94 @@
+<template>
+    <div class="slds-card slds-grid">
+        <div class="main-panel slds-col slds-scrollable">
+            <template if:true={loading}>
+                <div class="slds-spinner_container">
+                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </template>
+            <div class="slds-box" if:false={contractSelected}>
+                <lightning-formatted-rich-text
+                    value={labels.MSG_Link_AS_to_Contract_Introduction_Msg}></lightning-formatted-rich-text>
+
+            </div>
+            <div class="slds-box" if:true={contractSelected}>
+                <lightning-formatted-rich-text value={labels.MSG_Link_AS_to_Contract_Status_Msg}></lightning-formatted-rich-text>
+            </div>
+            <div class="slds-scrollable">
+                <table
+                    class="firstTable slds-table slds-table_bordered slds-table_col-bordered main-table slds-border--left slds-border_right slds-no-row-hover">
+                    <thead>
+                        <tr style="height: 40px;">
+                            <th style="text-align:left;top: 0px; position: sticky; z-index: 2;width:30px;padding:0;">
+                            </th>
+                            <template for:each={displayedFields} for:item="field">
+                                <th key={field.fieldName}
+                                    style="text-align:left;top: 0px; position: sticky; z-index: 2;">
+                                    {field.fieldLabel}
+                                </th>
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template if:false={loading}>
+                            <template if:false={records.length}>
+                                <tr>
+                                    <td colspan={colspan}>
+                                        <h2
+                                            class="slds-align_absolute-center slds-text-align_center slds-m-around_xx-large slds-card__header-title slds-align-content-center">
+                                            {labels.LBL_No_Item_To_Display}
+                                        </h2>
+                                    </td>
+                                </tr>
+                            </template>
+                            <template if:true={records.length}>
+                                <template for:each={records} for:item="record" for:index="index">
+                                    <tr key={record.Id}>
+                                        <td style="text-align:center;width:30px;padding:0;">
+                                            <input name="radio" type="radio" data-index={index}
+                                                checked={record.isChecked} onclick={handleSelectionContract}
+                                                disabled={contractSelected} />
+                                        </td>
+                                        <template for:each={record.values} for:item="field">
+                                            <td key={field}>
+                                                <template if:true={field.isLink}>
+                                                    <a href={field.link} target="_blank">
+                                                        {field.fieldValue}</a>
+                                                </template>
+                                                <template if:false={field.isLink}>
+                                                    {field.fieldValue}
+                                                </template>
+                                            </td>
+                                        </template>
+                                    </tr>
+                                </template>
+                            </template>
+                        </template>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan={colspan}
+                                style="position:sticky;bottom:0;background-color:white;border-top: 1px solid;text-align: right;">
+                                <lightning-button variant="brand-outline" label={labels.LBL_Confirm}
+                                    onclick={updateAssortment} if:false={contractSelected} class="slds-m-left_small">
+                                </lightning-button>
+                                <lightning-button variant="brand-outline" label={labels.LBL_Change_Contract}
+                                    onclick={handleChangeContract} if:true={contractSelected} class="slds-m-left_small">
+                                </lightning-button>
+                                <lightning-button variant="brand-outline" label={labels.LBL_Update_Price}
+                                    onclick={executeSynchroPWF} if:true={contractSelected}
+                                    class="slds-m-left_small">
+                                </lightning-button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>

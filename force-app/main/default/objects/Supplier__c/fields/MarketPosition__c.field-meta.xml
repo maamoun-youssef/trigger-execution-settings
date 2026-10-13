@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MarketPosition__c</fullName>
+    <label>Market Position</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Leader</fullName>
+                <default>false</default>
+                <label>Leader</label>
+            </value>
+            <value>
+                <fullName>Major Player</fullName>
+                <default>false</default>
+                <label>Major Player</label>
+            </value>
+            <value>
+                <fullName>Key Player</fullName>
+                <default>false</default>
+                <label>Key Player</label>
+            </value>
+            <value>
+                <fullName>Local Player</fullName>
+                <default>false</default>
+                <label>Local Player</label>
+            </value>
+            <value>
+                <fullName>Newcomer</fullName>
+                <default>false</default>
+                <label>Newcomer</label>
+            </value>
+            <value>
+                <fullName>In Decline</fullName>
+                <default>false</default>
+                <label>In Decline</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,177 @@
+.pageBody {
+    height: 76vh;
+}
+
+.container {
+    min-height: 100px;
+    position: relative;
+}
+
+/* ── Header gradient matching negoptimHeader ── */
+.themeManagerHeader {
+    border-left: 1px #e61f1f00 !important;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+/* ── Loader (matches your existing loader animation) ── */
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+@keyframes animate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ── Theme swatch in list ── */
+.theme-swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+}
+
+/* ── Selected list item ── */
+.menuItem-selected {
+    background-color: #eef4fd;
+    border-left: 3px solid #0d807d;
+}
+
+.cardPreview {
+    background-color: var(--slds-g-card-color-background);
+    font-family: var(--slds-g-font-family-base);
+}
+
+/* ── Preview scope: reads theme tokens ── */
+[data-id="preview-scope"] {
+    /* background-color: var(--slds-c-card-color-background); */
+    color: var(--slds-g-color-on-surface-1);
+    font-family: var(--slds-g-font-family-base);
+    border-radius: var(--slds-g-radius-border-2);
+}
+
+/* ── Banner ── */
+.preview-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background-color: var(--slds-g-color-surface-container-2);
+    border: 1px solid var(--slds-g-color-border-1);
+    border-left: 4px solid var(--slds-g-color-accent-1);
+    border-radius: var(--slds-g-radius-border-2);
+}
+
+.preview-banner__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.preview-banner__eyebrow {
+    font-size: var(--slds-g-font-scale-1);
+    color: var(--slds-g-color-on-surface-3);
+    margin: 0 0 2px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.preview-banner__title {
+    font-size: var(--slds-g-font-scale-4);
+    font-weight: var(--slds-g-font-weight-7);
+    color: var(--slds-g-color-on-surface-1);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.preview-banner__actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* ── Table ── */
+.preview-table-wrapper {
+    border: 1px solid var(--slds-g-color-border-1);
+    border-radius: var(--slds-g-radius-border-2);
+    overflow: hidden;
+}
+
+.preview-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--slds-c-card-color-background);
+    color: var(--slds-g-color-on-surface-1);
+    font-family: var(--slds-g-font-family-base);
+    font-size: var(--slds-g-font-scale-2);
+}
+
+.preview-table thead {
+    background-color: var(--slds-g-color-accent-1);
+}
+
+.preview-table thead th {
+    color: var(--slds-g-color-on-accent-1);
+    text-align: left;
+    padding: 8px 12px;
+    font-weight: var(--slds-g-font-weight-7);
+    font-size: var(--slds-g-font-scale-1);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    border-bottom: 1px solid var(--slds-g-color-border-accent-3);
+}
+
+.preview-table tbody td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--slds-g-color-border-1);
+}
+
+.preview-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.preview-table tbody tr:nth-child(even) {
+    background-color: var(--slds-g-color-surface-container-2);
+}
+
+/* .preview-banner__icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--slds-g-color-accent-1);
+    border-radius: var(--slds-g-radius-border-2);
+    flex-shrink: 0;
+    --slds-c-icon-color-foreground: var(--slds-g-color-on-accent-1);
+    --sds-c-icon-color-foreground: var(--slds-g-color-on-accent-1);
+} */
+[data-id="preview-scope"] lightning-button:hover {
+    --slds-c-button-brand-color-background: var(--slds-c-button-brand-color-background-hover);
+    --slds-c-button-brand-color-border: var(--slds-c-button-brand-color-background-hover);
+    --slds-c-button-neutral-color-background: var(--slds-c-button-neutral-color-background-hover);
+}

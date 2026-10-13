@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>Nego_Year__c</columns>
+    <columns>NAME</columns>
+    <columns>Nego_Scope__c</columns>
+    <columns>NEGO_MOM_RDV1__c</columns>
+    <columns>NEGO_MOM_RDV2__c</columns>
+    <columns>NEGO_MOM_RDV3__c</columns>
+    <columns>NEGO_Keynote_Marketing_Plan__c</columns>
+    <columns>Reference_Contract__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

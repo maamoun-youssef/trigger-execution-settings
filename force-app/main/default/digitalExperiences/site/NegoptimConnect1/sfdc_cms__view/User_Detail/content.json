@@ -1,0 +1,61 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "User Detail",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"21fc9399-82fa-42f8-b562-8544f4dbb1d8\",\"columns\":[{\"UUID\":\"765a9b23-933c-4eeb-979a-479838898aac\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : { },
+              "definition" : "c:userProfile",
+              "id" : "642eae04-d781-470a-8c47-d5dc1ee642dc",
+              "type" : "component"
+            } ],
+            "id" : "765a9b23-933c-4eeb-979a-479838898aac",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "21fc9399-82fa-42f8-b562-8544f4dbb1d8",
+          "type" : "component"
+        } ],
+        "id" : "3d1588ce-896e-4645-833a-327b2f2fe17b",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "dxpStyle" : { },
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "a245961a-7696-4440-83e7-865e14923748",
+          "type" : "component"
+        } ],
+        "id" : "ba4eaf68-49b7-43ac-91a0-d36ae56e76eb",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "ab63ef55-514f-4f29-b873-95b73fc16333",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "detail-005"
+  },
+  "urlName" : "user-detail"
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>NegoScopeManagerPGGrid</label>
+    <protected>false</protected>
+    <values>
+        <field>Calendar_Setting__c</field>
+        <value xsi:type="xsd:string">{&quot;startDate&quot;:&quot;&quot;,&quot;endDate&quot;:&quot;&quot;,&quot;pickListValue&quot;:&quot;&quot;,&quot;showCalendarSettings&quot;:false}</value>
+    </values>
+    <values>
+        <field>Columns__c</field>
+        <value xsi:type="xsd:string">[{&quot;label&quot;:&quot;Nom&quot;,&quot;FieldName&quot;:&quot;Name&quot;,&quot;nonConditional&quot;:{&quot;widthStyle&quot;:&quot;&quot;,&quot;width&quot;:&quot;&quot;,&quot;textStyle&quot;:{&quot;style&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;,&quot;isUnderLine&quot;:false,&quot;isStrikeThrought&quot;:false,&quot;isItalic&quot;:false,&quot;isBold&quot;:null,&quot;color&quot;:&quot;&quot;,&quot;align&quot;:&quot;&quot;},&quot;style&quot;:&quot;&quot;,&quot;isAdvanced&quot;:null,&quot;borderStyle&quot;:null,&quot;bgColor&quot;:&quot;&quot;,&quot;advancedStyle&quot;:null},&quot;headerStyle&quot;:{&quot;style&quot;:&quot;&quot;,&quot;color&quot;:&quot;&quot;,&quot;bgColor&quot;:&quot;&quot;}},{&quot;label&quot;:&quot;GTIN&quot;,&quot;FieldName&quot;:&quot;GTINPRD__c&quot;},{&quot;label&quot;:&quot;Produit&gt;Code du produit&quot;,&quot;FieldName&quot;:&quot;Product__r.ProductCode&quot;},{&quot;label&quot;:&quot;Marque&quot;,&quot;FieldName&quot;:&quot;Brand__c&quot;},{&quot;label&quot;:&quot;Hierarchie&quot;,&quot;FieldName&quot;:&quot;Hierarchy__c&quot;,&quot;nonConditional&quot;:{&quot;widthStyle&quot;:&quot;&quot;,&quot;width&quot;:&quot;&quot;,&quot;textStyle&quot;:{&quot;style&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;,&quot;isUnderLine&quot;:false,&quot;isStrikeThrought&quot;:false,&quot;isItalic&quot;:false,&quot;isBold&quot;:null,&quot;color&quot;:&quot;&quot;,&quot;align&quot;:&quot;&quot;},&quot;style&quot;:&quot;&quot;,&quot;isAdvanced&quot;:false,&quot;borderStyle&quot;:null,&quot;bgColor&quot;:&quot;&quot;,&quot;advancedStyle&quot;:&quot;&quot;},&quot;headerStyle&quot;:{&quot;style&quot;:&quot;&quot;,&quot;color&quot;:&quot;&quot;,&quot;bgColor&quot;:&quot;&quot;},&quot;picklistColorsMap&quot;:{},&quot;controllerFieldActions&quot;:[]},{&quot;label&quot;:&quot;Business Unit&quot;,&quot;FieldName&quot;:&quot;BusinessUnit__c&quot;},{&quot;label&quot;:&quot;Statut&quot;,&quot;FieldName&quot;:&quot;Status__c&quot;}]</value>
+    </values>
+    <values>
+        <field>Compiled_Grid_JSON__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Filters__c</field>
+        <value xsi:type="xsd:string">[{&quot;fieldName&quot;:&quot;Brand__c&quot;,&quot;values&quot;:[],&quot;userFilterable&quot;:true},{&quot;fieldName&quot;:&quot;Hierarchy__c&quot;,&quot;values&quot;:[],&quot;userFilterable&quot;:true}]</value>
+    </values>
+    <values>
+        <field>Grid_Configuration__c</field>
+        <value xsi:type="xsd:string">{&quot;Default_Page_Size&quot;:&quot;50&quot;,&quot;isShowFilterOnColumnHeader&quot;:false,&quot;overrideFilter&quot;:false}</value>
+    </values>
+    <values>
+        <field>Grid_Slogan__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">standard:product</value>
+    </values>
+    <values>
+        <field>Master_Object_Columns__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Master_Object_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Object_Name__c</field>
+        <value xsi:type="xsd:string">PG__c</value>
+    </values>
+    <values>
+        <field>ReadOnly_Criteria__c</field>
+        <value xsi:type="xsd:string">{}</value>
+    </values>
+    <values>
+        <field>Relationship_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Time_Line_Settings__c</field>
+        <value xsi:type="xsd:string">{&quot;levelControl&quot;:1,&quot;masterLookup&quot;:&quot;&quot;,&quot;masterLookupParent&quot;:&quot;&quot;,&quot;isTimeLineSettings&quot;:false}</value>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:type="xsd:string">Detail</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Used_as_SubCondition_only__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Define if the condition will be used as regular condition or only as a sub condition</description>
+    <inlineHelpText>Define if the condition will be used as regular condition or only as a sub condition</inlineHelpText>
+    <label>Used as a Sub condition only</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

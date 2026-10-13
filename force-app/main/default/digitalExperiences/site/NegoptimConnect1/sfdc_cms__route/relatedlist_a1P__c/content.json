@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Document juridique Liste associée",
+  "contentBody" : {
+    "activeViewId" : "relatedlist_a1P",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "relatedlist-LegalDoc__c",
+    "urlPrefix" : "legaldoc"
+  },
+  "urlName" : "document-juridique-liste-associée"
+}

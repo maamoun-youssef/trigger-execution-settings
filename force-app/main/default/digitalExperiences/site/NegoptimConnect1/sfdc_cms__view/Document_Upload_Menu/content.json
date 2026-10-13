@@ -1,0 +1,73 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Document Upload Menu",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"b6d2e484-f4f4-4c06-ab54-5b2074046971\",\"columns\":[{\"UUID\":\"2d8f5f50-b2a1-4845-8076-344dc4bcceb0\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "dxpStyle" : { },
+                "flowArguments" : "[{\"label\":\"IsLaunchedFromConnect\",\"dataType\":\"Boolean\",\"supportsRecordId\":false,\"inputType\":\"checkbox\",\"name\":\"IsLaunchedFromConnect\",\"type\":\"Boolean\",\"value\":true,\"checked\":true}]",
+                "flowName" : "{\"flowName\":\"SCREEN_File_Directory_Upload\",\"flowLabel\":\"SCREEN - File Directory Upload\"}"
+              },
+              "definition" : "dxp_flow:flow",
+              "id" : "70a1286e-b293-4abd-9e9e-b9b75464e96c",
+              "type" : "component"
+            } ],
+            "id" : "2d8f5f50-b2a1-4845-8076-344dc4bcceb0",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "b6d2e484-f4f4-4c06-ab54-5b2074046971",
+          "type" : "component"
+        } ],
+        "id" : "f7fbc700-8c89-45bf-88f2-d68baed99e8a",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "dxpStyle" : { },
+            "pageTitle" : "Document Upload Menu",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "7ee42864-5555-4e41-a408-d4a359f1a852",
+          "type" : "component"
+        } ],
+        "id" : "addedb97-60f1-435e-a5c4-807466356b43",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "2da91bad-00d4-4bf8-9dcc-8b81661034be",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-document-upload-menu"
+  },
+  "urlName" : "document-upload-menu"
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Allowed profiles to manage Products. --></help>
+    <label><!-- Allowed profiles to manage Products --></label>
+    <name>ProductManagementProfiles__c</name>
+</CustomFieldTranslation>

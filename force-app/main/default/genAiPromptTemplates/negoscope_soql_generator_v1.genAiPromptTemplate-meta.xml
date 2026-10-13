@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>iIcJWlZCalY+7GkYcHY6Ku9Hf0d9ubXrdA5LyZAfzog=_1</activeVersionIdentifier>
+    <developerName>negoscope_soql_generator_v1</developerName>
+    <masterLabel>negoscope_soql_generator_v1</masterLabel>
+    <overridable>false</overridable>
+    <templateVersions>
+        <content>If the user&apos;s question can be answered purely from the screen (layout, toggles, filter meanings, field definitions) and does NOT require checking real records, respond with exactly:
+NONE
+(no SOQL, no punctuation, nothing else).
+
+If SCREEN CONTEXT below references a specific Supplier/NegoScope/Contract Id, scope your WHERE clause to it when relevant.
+
+=== SCREEN CONTEXT ===
+{!$Input:screenContext}
+</content>
+        <fileDroppingStrategy>{&quot;dropFilesBy&quot;:&quot;LAST_MODIFIED_DATE&quot;,&quot;dropFileStartingWith&quot;:&quot;OLDEST&quot;}</fileDroppingStrategy>
+        <inputs>
+            <apiName>screenContext</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>screenContext</masterLabel>
+            <referenceName>Input:screenContext</referenceName>
+            <required>false</required>
+        </inputs>
+        <inputs>
+            <apiName>userQuestion</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>userQuestion</masterLabel>
+            <referenceName>Input:userQuestion</referenceName>
+            <required>false</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultGPT5Mini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>iIcJWlZCalY+7GkYcHY6Ku9Hf0d9ubXrdA5LyZAfzog=_1</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

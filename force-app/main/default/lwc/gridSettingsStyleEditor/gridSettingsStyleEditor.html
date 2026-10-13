@@ -1,0 +1,58 @@
+<template>
+    <lightning-input type="toggle" label={Label.LBL_Advanced} checked={fieldStyle.isAdvanced}
+        onchange={IsAdvancedChangeHandler} message-toggle-active="" message-toggle-inactive=""
+        class="slds-p-left_small"></lightning-input>
+    <lightning-textarea value={fieldStyle.advancedStyle} onchange={advancedStyleChangeHandler}
+        class="slds-p-around_small" if:true={fieldStyle.isAdvanced} label={Label.LBL_Style}>
+    </lightning-textarea>
+    <lightning-accordion allow-multiple-sections-open if:false={fieldStyle.isAdvanced}>
+        <lightning-accordion-section name="section1" label={Label.LBL_Column}>
+            <lightning-input placeholder="100px" field-level-help="Example: 100px" label={Label.LBL_Width}
+                value={fieldStyle.width} onchange={widthChangeHandler}>
+            </lightning-input>
+            <lightning-input type="color" label={Label.LBL_Background} onchange={backgroundColorChangeHandler}
+                value={fieldStyle.bgColor}></lightning-input>
+        </lightning-accordion-section>
+        <lightning-accordion-section name="section2" label={Label.LBL_Text}>
+            <lightning-input label={Label.LBL_Size} value={fieldStyle.textStyle.size} onchange={textSizeChangeHandler}>
+            </lightning-input>
+            <div class="slds-grid slds-grid_align-end custom_slds-grid_align-start slds-p-top_small slds-wrap">
+                <lightning-button-icon-stateful icon-name="utility:left_align_text" selected={isLeft}
+                    class="slds-col slds-p-right_x-small" onclick={toggleIsLeft}>
+                </lightning-button-icon-stateful>
+                <lightning-button-icon-stateful icon-name="utility:center_align_text" selected={isCenter}
+                    class="slds-col slds-p-right_x-small" onclick={toggleIsCenter}>
+                </lightning-button-icon-stateful>
+                <lightning-button-icon-stateful icon-name="utility:right_align_text" selected={isRight}
+                    class="slds-col slds-p-right_x-small" onclick={toggleIsRight}>
+                </lightning-button-icon-stateful>
+                <lightning-button-icon-stateful icon-name="utility:bold" selected={fieldStyle.textStyle.isBold}
+                    class="slds-col slds-p-right_x-small" onclick={toggleIsBold}>
+                </lightning-button-icon-stateful>
+                <lightning-button-icon-stateful icon-name="utility:italic" selected={fieldStyle.textStyle.isItalic}
+                    class="slds-col slds-p-right_x-small" onclick={toggleIsItalic}>
+                </lightning-button-icon-stateful>
+                <lightning-button-icon-stateful icon-name="utility:underline"
+                    selected={fieldStyle.textStyle.isUnderLine} class="slds-col slds-p-right_x-small"
+                    onclick={toggleIsUnderLine}>
+                </lightning-button-icon-stateful>
+                <lightning-button-icon-stateful icon-name="utility:strikethrough"
+                    selected={fieldStyle.textStyle.isStrikeThrought} class="slds-col slds-p-right_x-small"
+                    onclick={toggleIsStrikeThrought}>
+                </lightning-button-icon-stateful>
+            </div>
+            <lightning-input type="color" label={Label.LBL_Color} value={fieldStyle.textStyle.color}
+                onchange={textColorChangeHandler}></lightning-input>
+        </lightning-accordion-section>
+        <lightning-accordion-section name="section3" label={Label.LBL_Border}>
+            <lightning-input placeholder="1px" field-level-help="Example: 1px" label={Label.LBL_Size}
+                value={fieldStyle.borderStyle.size} onchange={borderSizeChangeHandler}>
+            </lightning-input>
+            <lightning-combobox label={Label.LBL_Patern} options={borderStyleOptions}
+                value={fieldStyle.borderStyle.pattern} onchange={borderPaternChangeHandler}>
+            </lightning-combobox>
+            <lightning-input type="color" label={Label.LBL_Color} value={fieldStyle.borderStyle.color}
+                onchange={borderColorChangeHandler}></lightning-input>
+        </lightning-accordion-section>
+    </lightning-accordion>
+</template>

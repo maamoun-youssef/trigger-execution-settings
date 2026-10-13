@@ -1,0 +1,1377 @@
+.negoptim-agenda {
+  padding: 0px 10px;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+}
+
+.negoptim-container {
+  margin-bottom: 10px;
+  /* display: flex; */
+  /* display: inline-block; */
+  /* align-items: center;
+  justify-content: space-between; */
+}
+
+.negoptim-chevtask {
+  width: 6%;
+  font-size: 0px;
+  margin-left: 14px;
+}
+
+.negoptim-taskclick-container {
+  /* flex-grow: 1; */
+  /* overflow: hidden; */
+  display: inline-block;
+}
+
+.negoptim-taskclick {
+  font-size: 25px;
+  /* white-space: nowrap; */
+  /* overflow: hidden;
+  text-overflow: ellipsis; */
+  display: inline-block;
+}
+
+.negoptim-taskclick-inner {
+  display: flex;
+  /* align-items: center; */
+}
+
+
+.main-agenda {
+  /* border: 1px rgb(168,206,153) solid; */
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #EDEEF2;
+  border-radius: 30px;
+  /* height: 380px; */
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.negoptim-mainprof {
+  width: 20%;
+  background-color: #E3EAEB;
+  border-radius: 40px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.negoptim-cyear {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.negoptim-days {
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.negoptim-chevyear {
+  display: inline-block;
+  padding-left: 10px;
+  /* padding-bottom: 15px; */
+  vertical-align: top;
+  padding-top: 23px;
+}
+
+.negoptim-calendar {
+  width: 25%;
+  background-color: #E3EAEB;
+  border-radius: 40px;
+  padding-left: 10px;
+  display: inline-block;
+  vertical-align: top;
+  padding-bottom: 10px;
+}
+
+.negoptim-taskportion {
+  width: 90%;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.negoptim-maintasks {
+  width: 55%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* .jiko {
+width: 20%;
+display: inline-block;
+vertical-align: top;
+} */
+
+.negoptim-search {
+  /* width: 50%; */
+  display: block;
+  /* margin-left: 20%; */
+  /* padding-top: 20px; */
+  margin-left: 13%;
+  margin-right: 13%;
+
+}
+
+.negoptim-message {
+  width: 90%;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.negoptim-tasksection {
+  width: 90%;
+  display: inline-block;
+  vertical-align: top;
+  /* text-align: center; */
+  margin-top: 10px;
+  padding: 10px;
+  /* margin-left: 55px; */
+  /* height: 330px; */
+  /* overflow-y: scroll;
+  height: 200px; */
+  margin-left: 25px;
+}
+
+.negoptim-profborder {
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+  position: relative;
+  background: linear-gradient(90deg, rgb(208, 214, 52), transparent) rgb(12, 180, 187);
+}
+
+.user-info {
+  /* padding-right: 65px;  */
+  font-size: 20px;
+  line-height: 30px;
+  text-align: left;
+  padding-left: 8px;
+}
+
+.option {
+  position: absolute;
+  padding: 3px;
+  background-color: #E3EAEB;
+  border-radius: 7px;
+  z-index: 10;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.year-option:hover {
+  background-color: #ddd;
+}
+
+.chat-right-nav {
+  width: 350px;
+  background: #EDEEF2;
+  z-index: 103;
+  border-bottom-right-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+.calendar-head {
+  display: inline-block;
+}
+
+.year {
+  font-size: 30px;
+  font-weight: bold;
+  display: inline-block;
+  padding: 10px;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.chev {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.negoptim-cmonth {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.negoptim-parent {
+  font-size: 0px;
+}
+
+.negoptim-icon {
+  display: inline-block;
+  width: 15%;
+  /* font-size: 14px; */
+}
+
+.day-week {
+  width: 14%;
+  display: inline-block;
+  font-size: 14px;
+
+}
+
+.negoptim-searchicons {
+  display: inline-block;
+  width: 15%;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.negoptim-contacticon {
+  display: inline-block;
+  width: 5%;
+  float: right;
+  /* font-size: 25px;
+  vertical-align: middle; */
+}
+
+.negoptim-filterdays {
+  display: inline-block;
+  width: 15%;
+  font-size: 10px;
+  vertical-align: middle;
+  float: right;
+  margin-right: 10%;
+  padding: 3px;
+}
+
+.negoptim-searchbar {
+  display: inline-block;
+  width: 70%;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.negoptim-filter {
+  display: inline-block;
+  vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100%;
+  cursor: pointer
+}
+
+.negoptim-contact {
+  display: inline-block;
+  vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100%;
+  cursor: pointer
+}
+
+.negoptim-taskaddwhite {
+  background: white;
+  width: 45px;
+  height: 45px;
+  border-radius: 50px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.negoptim-taskaddblue {
+  background: #00B7BC;
+  width: 35px;
+  height: 35px;
+  border-radius: 50px;
+  translate: 14% 14% 0px;
+}
+
+.negoptim-placeholder {
+  line-height: 25px;
+  width: 100%;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.negoptim-messagelabel {
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: bold;
+  font-size: 22px;
+  padding-right: 5px;
+}
+
+.negoptim-selecteddaymessage {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 22px;
+  padding-right: 5px;
+}
+
+.negoptim-selectedactivityday {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.negoptim-filternum {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.negoptim-bluecircle {
+  border: #00B7BC 3px solid;
+  width: 27px;
+  height: 33px;
+  translate: -7% 3% 0px;
+  border-radius: 7px;
+  font-size: 16px;
+  color: #00B7BC;
+}
+
+.negoptim-image {
+  background-size: cover;
+}
+
+.negoptim-account {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.negoptim-priority {
+  font-weight: bold;
+  line-height: 40px;
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+.negoptim-proflabel {
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.negoptim-profsizes {
+  font-weight: bold;
+  line-height: 40px;
+  font-size: 15px;
+}
+
+.negoptim-profbsize {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.negoptim-supper {
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.negoptim-change {
+  display: inline-block;
+  width: 15%;
+  /* font-size: 14px; */
+}
+
+.negoptim-upper {
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.negoptim-msection {
+  margin-bottom: 15px;
+}
+
+.negoptim-chevtask {
+  display: inline-block;
+  font-size: 0px;
+  width: 6%;
+  /* vertical-align: middle; */
+}
+
+/* .negoptim-taskclick {
+  display: inline-block;
+
+  font-size: 25px;
+} */
+
+/* .negoptim-chevrrr {
+  display: inline-block;
+  font-size: 14px;
+  vertical-align: middle;
+  color: #00B7BC;
+  float: right;
+  width: 6%;
+  float: right;
+  translate: -130% 30%;
+} */
+
+.negoptim-profpos {
+  display: inline-block;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.negoptim-profinfo {
+  display: inline-block;
+  width: 75%;
+  vertical-align: middle;
+
+}
+
+.negoptim-numtranslate {
+  translate: 0% 15% 0px;
+  font-size: 14px;
+}
+
+.negoptim-tasklabel {
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: bold;
+  font-size: 35px;
+  padding-right: 5px;
+}
+
+.negoptim-taskadd {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.negoptim-zeroo {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0
+}
+
+.negoptim-months {
+  display: inline-block;
+  width: 70%;
+  vertical-align: middle;
+
+}
+
+.negoptim-falseprofsection {
+  border-radius: 40px;
+  width: 85%;
+  margin: auto;
+  /* height: 70px; */
+  margin-bottom: 10px;
+  padding: 10px;
+  line-height: 15px;
+  border: 3px solid rgb(0, 183, 188);
+  margin-top: 45px;
+}
+
+.negoptim-todo {
+  color: rgb(0, 183, 188);
+  text-align: center;
+  font-size: 25px;
+  padding-bottom: 10px;
+
+}
+
+.negoptim-linescheck {
+  /* margin-top: 20px; */
+  padding: 10px;
+}
+
+.negoptim-linescheck1 {
+  margin-top: 4px;
+  padding: 10px;
+}
+
+.negoptim-linescheck2 {
+  margin-top: 4px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.negoptim-checktrue {
+  display: inline-block;
+  width: 10%;
+}
+
+.negoptim-blocklines {
+  display: inline-block;
+  width: 90%;
+  height: 16px;
+  padding-left: 19px;
+}
+
+.negoptim-blocklines1 {
+  display: inline-block;
+  width: 90%;
+  height: 16px;
+  padding-left: 19px;
+}
+
+.negoptim-blocklines2 {
+  display: inline-block;
+  width: 90%;
+  height: 17px;
+  padding-left: 19px;
+}
+
+.check-nowhite {
+  -webkit-appearance: none;
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  background: #E3EAEB;
+  border: 3px solid #00B7BC;
+  border-radius: 5px;
+  vertical-align: bottom;
+}
+
+.check-nowhite:after {
+  content: "";
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  left: 9px;
+  width: 6px;
+  height: 14px;
+  border-bottom: 3px solid #E3EAEB;
+  border-right: 3px solid #E3EAEB;
+  -webkit-transform: rotate(45deg);
+}
+
+.negoptim-descfalse {
+  width: 85%;
+  margin: auto;
+  /* height: 70px; */
+  margin-bottom: 35px;
+  padding: 10px;
+  line-height: 30px;
+  margin-top: 35px;
+  color: rgb(139, 139, 139);
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* .circle {
+  background-color: yellow;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+.negoptim-wmonths {
+  display: inline-block;
+  width: 33.3334%;
+  font-size: 20px;
+  font-weight: bold;
+
+}
+
+.negoptim-mbetween {
+  display: inline-block;
+  width: 33.3334%;
+  font-size: 20px;
+  font-weight: bold;
+
+}
+
+.negoptim-whitecolor {
+  color: rgba(255, 255, 255, 1)
+}
+
+/* .cc1 {
+  translate: 0% 13% 0px
+} */
+
+.negoptim-addtranslate {
+  translate: 0% 38% 0px;
+}
+
+/* .con {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center
+} */
+
+.pointer {
+  cursor: pointer
+}
+
+@font-face {
+  font-family: 'customFontTest';
+  src: url('/resource/ASSETTS/Exo_2/Exo2-VariableFont_wght.ttf') format('TrueType');
+}
+
+* {
+  font-family: 'customFontTest';
+
+}
+
+.section-footer {
+  height: 45px;
+  border-radius: 51px
+}
+
+.doc-effect {
+  background: white;
+  transition: 0.3s;
+
+}
+
+.doc-effect:hover {
+  background: #DFEDD1;
+}
+
+.msg-effect {
+  background: white;
+  transition: 0.3s;
+}
+
+.msg-effect:hover {
+  background: #CFEFE7;
+}
+
+.news-images {
+  transition: .5s ease all;
+}
+
+.news-css:hover .news-images {
+  transform: scale(1.1);
+}
+
+/*calendar css*/
+.calendar-body .calendar-weekdays div {
+  cursor: default;
+  color: black
+}
+
+.calendar-dates {
+  text-align: center;
+  font-size: 1.07rem;
+  color: #414141;
+  /* translate: 8% 0% 0px; */
+  margin-bottom: 10px;
+}
+
+.calendar-body .calendar-dates div {
+  cursor: pointer;
+}
+
+.calendar-dates div.inactive {
+  color: rgb(156, 162, 171, .6);
+}
+
+.calendar-dates div.inactiveCurrent {
+  color: rgb(156, 162, 171, .6);
+}
+
+.calendar-dates .parent-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-60%, -20%);
+  border: 1px solid transparent;
+  color: black;
+}
+
+.calendar-dates .active {
+  /* background-color: yellow;
+  color: white;
+  font-weight: bold; */
+  border: 2px solid #00B7BC;
+}
+
+.calendar-dates .active-day {
+  background: rgb(217, 235, 248, .7);
+  border: 1px solid #00B7BC
+}
+
+.inactive .holiday {
+  opacity: .4;
+
+}
+
+/*calendar css*/
+
+/*check box style*/
+.check {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  background: #FFFFFF;
+  border: 2px solid #8B8B8B;
+}
+
+.check:after {
+  content: "";
+  display: inline-block;
+  position: relative;
+  top: -6px;
+  left: 4px;
+  width: 4px;
+  height: 7px;
+  border-bottom: 1px solid #fff;
+  border-right: 1px solid #fff;
+  -webkit-transform: rotate(45deg);
+}
+
+.check-css {
+  -webkit-appearance: none;
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  background: #FFFFFF;
+  border: 3px solid #00B7BC;
+  border-radius: 5px;
+  vertical-align: bottom;
+  position: relative;
+  cursor: pointer;
+}
+
+.check-css:checked::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 3px;
+  left: 9px;
+  width: 6px;
+  height: 14px;
+  border-bottom: 3px solid #ffffff;
+  border-right: 3px solid #ffffff;
+  transform: rotate(45deg);
+}
+
+.check-css:disabled:hover {
+  border: 3px solid #00B7BC;
+}
+
+.check-css:disabled {
+  /* background-color: lightgray !important; */
+  border: 3px solid #00B7BC;
+  cursor: not-allowed;
+}
+
+.check-css:disabled:checked {
+  background-color: grey;
+  border-color: grey;
+}
+
+.completed-task {
+  text-decoration: line-through;
+  color: rgb(97, 94, 94);
+  /* Optional: change text color */
+  text-decoration-thickness: 1px;
+
+}
+
+.completed-task span {
+  text-decoration: inherit;
+  /* Ensure child spans inherit the strikethrough */
+}
+
+input:focus,
+input:active {
+  outline: none;
+}
+
+input:hover {
+  border: 2px solid #00B7BC;
+}
+
+.dropdown {
+  position: absolute;
+  border-radius: 7px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  z-index: 1;
+  display: block;
+  cursor: pointer;
+  padding: 3px;
+  background-color: #E3EAEB;
+  color: #00B7BC;
+  width: 200px;
+  font-size: 18px;
+}
+
+.hidden {
+  display: none;
+}
+
+.negoptim-viewall {
+  margin-top: 20px;
+  font-size: 35px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.negoptim-viewall a:link {
+  color: #8B8B8B !important;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.a,
+a:link:not(.slds-button, .slds-dropdown__item>a),
+a:visited:not(.slds-button, .slds-dropdown__item>a) {
+  color: #8B8B8B !important;
+}
+
+/* .negoptim-viewall a:visited {
+  color: pink !important;
+  background-color: transparent;
+  text-decoration: none;
+} */
+
+.negoptim-viewall a:hover {
+  color: #00B7BC !important;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.task-section {
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.calendar-dates .has-task {
+  background-color: #00B7BC;
+  color: white;
+  font-weight: bold;
+}
+
+.task-details {
+  color: #8B8B8B;
+  cursor: pointer;
+}
+
+.task-comp * {
+  color: #8B8B8B;
+  text-decoration: line-through;
+}
+
+.task-lil {
+  color: #00B7BC;
+}
+
+.task-items {
+  display: flex;
+}
+
+.task-comp input[type=checkbox]:checked {
+  background: #8B8B8B;
+  outline: none;
+  border: 1px solid #8B8B8B;
+}
+
+.task-comp input:hover {
+  border: 2px solid #8B8B8B;
+}
+
+.task-comp input:focus,
+input:active {
+  outline: none;
+}
+
+.task-comp .check-css {
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  border: 3px solid #8B8B8B;
+}
+
+.activeclicked {
+  background-color: #E3EAEB;
+  border-radius: 50px;
+}
+
+@media (max-width:1100px) {
+  .negoptim-mbetween {
+    font-size: 15px;
+  }
+
+  .negoptim-wmonths {
+    font-size: 15px;
+  }
+
+  .negoptim-tasksection {
+    margin-left: 0px;
+  }
+
+  .negoptim-cyear {
+    font-size: 20px;
+  }
+
+  .negoptim-days {
+    margin-bottom: 5px;
+  }
+
+  .calendar-dates {
+    padding-bottom: 15px;
+  }
+
+  .negoptim-chevyear {
+    padding-top: 15px;
+  }
+
+  .negoptim-tasklabel {
+    font-size: 26px;
+  }
+
+  .dropdown {
+    width: 170px;
+    font-size: 15px;
+  }
+
+  .option {
+    font-size: 15px;
+  }
+
+  /* .negoptim-messagelabel {
+    font-size: 18px;
+  } */
+
+  .negoptim-search {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .negoptim-taskclick {
+    font-size: 22px;
+  }
+
+  .negoptim-bluecircle {
+    width: 25px;
+    height: 29px;
+    font-size: 15px;
+    color: #00B7BC;
+  }
+
+  .negoptim-chevtask {
+    width: 12%;
+  }
+
+  .negoptim-proflabel {
+    font-size: 15px;
+  }
+
+  .negoptim-calendar {
+    padding-bottom: 0px;
+  }
+
+}
+
+@media (max-width:900px) {
+  .negoptim-calendar {
+    width: 30%;
+  }
+
+  /* .negoptim-mbetween {
+    font-size: 15px;
+  }
+
+  .negoptim-wmonths {
+    font-size: 15px;
+  } */
+
+  .negoptim-cyear {
+    font-size: 20px;
+  }
+
+  /* .calendar-dates .parent-circle {
+    width: 28px;
+    height: 28px;
+  } */
+
+  .negoptim-days {
+    margin-bottom: 5px;
+  }
+
+  .negoptim-profborder {
+    width: 50px;
+    height: 50px;
+  }
+
+  /* .negoptim-profinfo {
+    width: 66%;
+  } */
+
+  .user-info {
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  .calendar-dates {
+    padding-bottom: 15px;
+  }
+
+  .negoptim-chevyear {
+    padding-top: 15px;
+  }
+
+  .negoptim-maintasks {
+    width: 50%;
+  }
+
+  .negoptim-tasklabel {
+    font-size: 22px;
+  }
+
+  .negoptim-viewall {
+    font-size: 22px;
+  }
+
+  .negoptim-taskaddwhite {
+    width: 40px;
+    height: 40px;
+  }
+
+  .negoptim-taskaddblue {
+    width: 30px;
+    height: 30px;
+    translate: 17% 17% 0px;
+  }
+
+  .negoptim-addtranslate {
+    translate: 0% 22% 0px;
+  }
+
+  .negoptim-messagelabel {
+    font-size: 16px;
+  }
+
+  .negoptim-selecteddaymessage {
+    font-size: 16px;
+  }
+
+  .negoptim-selectedactivityday {
+    font-size: 16px;
+  }
+
+  .negoptim-search {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .negoptim-taskclick {
+    font-size: 25px;
+  }
+
+  .negoptim-bluecircle {
+    width: 22px;
+    height: 26px;
+    font-size: 13px;
+    color: #00B7BC;
+  }
+
+  .negoptim-chevtask {
+    width: 16%;
+  }
+
+  .negoptim-container {
+    display: flex;
+  }
+
+  .negoptim-taskclick-container {
+    width: calc(100% - 11%);
+    margin-right: 5px;
+  }
+
+  .negoptim-contacticon {
+    width: 18%;
+  }
+
+  .activeclicked {
+    padding-top: 8px;
+    padding-left: 8px;
+  }
+
+}
+
+@media (max-width:700px) {
+  .negoptim-calendar {
+    width: 100%;
+    display: block;
+  }
+
+  .negoptim-mbetween {
+    font-size: 15px;
+  }
+
+  .negoptim-wmonths {
+    font-size: 15px;
+  }
+
+  .negoptim-cyear {
+    font-size: 20px;
+  }
+
+  .negoptim-days {
+    margin-bottom: 5px;
+  }
+
+  .calendar-dates {
+    padding-bottom: 15px;
+  }
+
+  .negoptim-chevyear {
+    padding-top: 15px;
+  }
+
+  .negoptim-maintasks {
+    width: 100%;
+  }
+
+  .negoptim-tasklabel {
+    font-size: 16px;
+  }
+
+  .negoptim-viewall {
+    font-size: 16px;
+  }
+
+  .negoptim-taskaddwhite {
+    width: 35px;
+    height: 35px;
+  }
+
+  .negoptim-taskaddblue {
+    width: 25px;
+    height: 25px;
+    translate: 20% 20% 0px;
+  }
+
+  .negoptim-addtranslate {
+    translate: 0% 14% 0px;
+  }
+
+  .negoptim-messagelabel {
+    font-size: 13px;
+  }
+
+  .negoptim-selecteddaymessage {
+    font-size: 13px;
+  }
+
+  .negoptim-selectedactivityday {
+    font-size: 13px;
+  }
+
+  .negoptim-search {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .negoptim-taskclick {
+    font-size: 16px;
+  }
+
+  .negoptim-bluecircle {
+    width: 22px;
+    height: 25px;
+    font-size: 12px;
+    color: #00B7BC;
+  }
+
+  .negoptim-mainprof {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .dropdown {
+    width: 170px;
+    font-size: 15px;
+  }
+
+  .negoptim-filterdays {
+    width: 40%;
+  }
+
+  .activeclicked {
+    padding-top: 8px;
+    padding-left: 8px;
+  }
+
+}
+
+@media (max-width:400px) {
+  .negoptim-calendar {
+    width: 100%;
+    display: block;
+  }
+
+  .negoptim-mbetween {
+    font-size: 15px;
+  }
+
+  .negoptim-wmonths {
+    font-size: 15px;
+  }
+
+  .negoptim-cyear {
+    font-size: 20px;
+  }
+
+  .negoptim-days {
+    margin-bottom: 5px;
+  }
+
+  .calendar-dates {
+    padding-bottom: 15px;
+  }
+
+  .negoptim-chevyear {
+    padding-top: 15px;
+  }
+
+  .negoptim-maintasks {
+    width: 100%;
+  }
+
+  .negoptim-tasklabel {
+    font-size: 16px;
+  }
+
+  .negoptim-viewall {
+    font-size: 16px;
+  }
+
+  .negoptim-taskaddwhite {
+    width: 35px;
+    height: 35px;
+  }
+
+  .negoptim-taskaddblue {
+    width: 25px;
+    height: 25px;
+    translate: 20% 19% 0px;
+  }
+
+  .negoptim-addtranslate {
+    translate: 0% 14% 0px;
+  }
+
+  .negoptim-messagelabel {
+    font-size: 13px;
+  }
+
+  .negoptim-selecteddaymessage {
+    font-size: 13px;
+  }
+
+  .negoptim-selectedactivityday {
+    font-size: 13px;
+  }
+
+  .negoptim-search {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .negoptim-taskclick {
+    font-size: 16px;
+  }
+
+  .negoptim-tasksection {
+    margin-left: 0px;
+    /* height: 180px; */
+  }
+
+  /* .negoptim-chevtask {
+    width: 14%;
+  } */
+
+  .negoptim-chevtask {
+    width: 24%;
+  }
+
+  .negoptim-bluecircle {
+    width: 22px;
+    height: 25px;
+    font-size: 12px;
+    color: #00B7BC;
+  }
+
+  .negoptim-mainprof {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .user-info {
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  /* .negoptim-profinfo {
+    display: inline-block;
+    width: 75%;
+    vertical-align: middle;  
+  } */
+
+  .negoptim-filterdays {
+    width: 45%;
+  }
+
+  .dropdown {
+    width: 120px;
+    font-size: 10px;
+  }
+
+  .negoptim-container {
+    display: flex;
+  }
+
+  .negoptim-taskclick-container {
+    width: calc(100% - 11%);
+    margin-right: 5px;
+  }
+
+  .negoptim-contacticon {
+    width: 18%;
+  }
+
+  .activeclicked {
+    padding-top: 8px;
+    padding-left: 8px;
+  }
+
+
+}
+
+.checkbox-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  translate: 0px 4px;
+}
+
+.task-title {
+  font-size: 22px;
+}
+
+/* Medium screens (Tablets, small laptops) */
+@media screen and (max-width: 1024px) {
+  .task-title {
+    font-size: 20px;
+  }
+}
+
+/* Small screens (Smartphones) */
+@media screen and (max-width: 768px) {
+  .task-title {
+    font-size: 18px;
+  }
+}
+
+/* Extra small screens (small smartphones) */
+@media screen and (max-width: 480px) {
+  .task-title {
+    font-size: 14px;
+  }
+}

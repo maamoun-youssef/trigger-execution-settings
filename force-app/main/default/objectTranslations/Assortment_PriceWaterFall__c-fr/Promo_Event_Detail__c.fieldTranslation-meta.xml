@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Ligne promo</label>
+    <name>Promo_Event_Detail__c</name>
+    <relationshipLabel><!-- Assortment PriceWaterFalls --></relationshipLabel>
+</CustomFieldTranslation>

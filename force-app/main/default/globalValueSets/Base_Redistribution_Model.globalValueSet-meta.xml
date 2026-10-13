@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Equally</fullName>
+        <default>true</default>
+        <label>Equally</label>
+    </customValue>
+    <customValue>
+        <fullName>Purchases of the month</fullName>
+        <default>false</default>
+        <label>Purchases of the month</label>
+    </customValue>
+    <customValue>
+        <fullName>YTD Purchases (current year)</fullName>
+        <default>false</default>
+        <label>YTD Purchases (current year)</label>
+    </customValue>
+    <customValue>
+        <fullName>YTD Sales (current year)</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>YTD Sales (current year)</label>
+    </customValue>
+    <customValue>
+        <fullName>YTD Sales (12 sliding months)</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>YTD Sales (12 sliding months)</label>
+    </customValue>
+    <customValue>
+        <fullName>YTD Sales (previous year)</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>YTD Sales (previous year)</label>
+    </customValue>
+    <customValue>
+        <fullName>YTD Purchases (12 sliding months)</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>YTD Purchases (12 sliding months)</label>
+    </customValue>
+    <customValue>
+        <fullName>YTD Purchases (previous year)</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>YTD Purchases (previous year)</label>
+    </customValue>
+    <customValue>
+        <fullName>Sales of the month</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Sales of the month</label>
+    </customValue>
+    <description>Give the different redistribution option for a condition</description>
+    <masterLabel>Base Redistribution Model</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

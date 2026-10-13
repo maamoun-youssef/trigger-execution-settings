@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Definition_Change_Authorization__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Give opportunity to the user to change or Not Definition in its Contract Condition row (False by default)</description>
+    <label>Definition Change Authorization</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

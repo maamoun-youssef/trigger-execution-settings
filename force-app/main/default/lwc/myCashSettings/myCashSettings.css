@@ -1,0 +1,251 @@
+:host {
+    --beij: #F2F6DFff;
+    --midnight-green: #08484Aff;
+    --verdigris: #14B2BBff;
+    --amethyst: #816BC0ff;
+    --russian-violet: #3C094Bff;
+    --space-cadet: #322B4Cff;
+    --honeydew: #E8F4E8ff;
+    --dark-violet: #9719BBff;
+    --pistachio: #8BC58Aff;
+    --mint-green: #DDF4EEff;
+    --text-body: #5C5C5C;
+    --light-gray: #B1B1B1;
+}
+
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+table thead th,
+table tbody td {
+    height: 35px;
+}
+
+.slds-page-header {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.slds-vertical-tabs__content {
+    padding: 0 !important;
+}
+
+table tbody td,
+table thead th {
+    text-align: center;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.sectionTitle {
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+    translate: 0px 7px;
+}
+
+.pageBody {
+    min-height: 50vh;
+    position: relative;
+}
+
+.add-breaks {
+    height: 30px;
+}
+
+.numberStyle {
+    width: 100px
+}
+
+.formulaStyle {
+    width: 600px;
+}
+
+.formulaValidationStyle {
+    color: red;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.autoNumberExampleStyle {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.slds-tabs_card .slds-page-header,
+.slds-card .slds-page-header {
+    border: 1px solid #00000014;
+    border-radius: 5px 5px 0px 0px !important;
+}
+
+.stickyHeader {
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    background-color: var(--verdigris);
+    padding-left: 20px;
+    height: 70px;
+}
+
+.formulaLabel {
+    font-weight: 600;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.mainHeight {
+    height: 100%;
+}
+
+.mainPanelHeight {
+    height: 100%;
+}
+
+.business-unit-Label {
+    font-weight: 600;
+    width: 20%;
+    padding-left: 20px;
+    font-size: 16px;
+    color: var(--text-body);
+}
+
+.record-picker-Container {
+    display: flex;
+    column-gap: 40px;
+}
+
+.w-record-picker {
+    width: 400px;
+}
+
+.settings-header {
+    background-color: var(--space-cadet);
+    padding: var(--lwc-spacingXSmall);
+    gap: var(--lwc-spacingXSmall);
+    display: flex;
+    align-items: flex-start;
+}
+
+.custom-icon-settings {
+    --slds-c-icon-color-foreground-default: white;
+    --slds-c-icon-color-background: var(--space-cadet);
+    vertical-align: middle;
+    align-self: center;
+    margin-left: var(--lwc-spacingXSmall);
+}
+
+.settings-header-title {
+    color: white;
+}
+
+.settings-subtitle {
+    font-size: medium;
+    color: white;
+}
+
+.icon-header {
+    translate: 0px 8px;
+}
+
+.formula-hight {
+    height: 60vh;
+}
+
+.business-unit-width {
+    width: 300px;
+    translate: -10px 10px;
+}
+
+.component-w {
+    height: 100%;
+}
+
+.section-Container {
+    display: flex;
+    column-gap: 40px;
+}
+
+.section-label {
+    font-weight: 600;
+    width: 30%;
+    padding-left: 20px;
+    font-size: 16px;
+    color: var(--text-body);
+}
+
+@media screen and (max-width: 980px) {
+    .sectionTitle {
+        font-size: 18px;
+        translate: 0px 12px;
+    }
+
+    .settings-header-title {
+        font-size: 20px;
+    }
+
+    .icon-header {
+        translate: 0px 6px;
+    }
+
+    .section-Container {
+        display: block;
+    }
+
+    .record-picker-Container {
+        display: block;
+    }
+
+    .business-unit-Label {
+        width: 100%;
+    }
+
+    .section-label {
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .w-record-picker {
+        padding: 20px;
+    }
+
+    .formulaStyle {
+        margin-left: 20px;
+    }
+}

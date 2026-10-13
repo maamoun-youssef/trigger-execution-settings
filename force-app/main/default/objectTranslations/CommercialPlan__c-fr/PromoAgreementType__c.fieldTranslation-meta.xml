@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Promo Agreement Type --></label>
+    <name>PromoAgreementType__c</name>
+    <picklistValues>
+        <masterLabel>AgencyAgreement</masterLabel>
+        <translation><!-- AgencyAgreement --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>CallOffAgreementSellIn</masterLabel>
+        <translation><!-- CallOffAgreementSellIn --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>CallOffAgreementSellOut</masterLabel>
+        <translation><!-- CallOffAgreementSellOut --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>SellIn</masterLabel>
+        <translation><!-- SellIn --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>SellOut</masterLabel>
+        <translation><!-- SellOut --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Services</masterLabel>
+        <translation><!-- Services --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

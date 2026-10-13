@@ -1,0 +1,182 @@
+:host{
+    --beij: #F2F6DFff;
+     --midnight-green: #08484Aff;
+     --verdigris: #14B2BBff;
+     --amethyst: #816BC0ff;
+     --russian-violet: #3C094Bff;
+     --space-cadet: #322B4Cff;
+     --honeydew: #E8F4E8ff;
+     --dark-violet: #9719BBff;
+     --pistachio: #8BC58Aff;
+     --mint-green: #DDF4EEff;
+     --text-body: #5C5C5C;
+     --light-gray: #B1B1B1;
+}
+
+.tableDiv {
+    width: 100%;
+}
+
+.pageBody {
+    overflow-y: auto;
+    border: none;
+}
+
+
+.slds-is-deleted {
+    border: none;
+}
+
+.custom-icon-delete {
+    --slds-c-icon-color-foreground-default: white;
+    --slds-c-icon-color-background: var(--dark-violet);
+}
+
+.custom-icon-log_event {
+    --slds-c-icon-color-foreground: white;
+    margin-right: 12px;
+}
+
+.custom-icon-edit {
+    --slds-c-icon-color-foreground-default: white;
+    --slds-c-icon-color-background: var(--pistachio);
+}
+
+.custom-icon-add {
+    --slds-c-icon-color-foreground-default: white;
+}
+
+.edit-icon {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.add-icon {
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    background-color: var(--verdigris);
+}
+
+.save-button {
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    margin-right: 15px;
+    background-color: var(--verdigris);
+}
+
+.save-word {
+    font-size: 1rem;
+    color: white;
+    text-align: center;
+    translate: 0px 6px;
+}
+
+.edit-icon-remove {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 8px;
+    margin-top: -3px;
+    cursor: pointer;
+}
+
+.slds-icon-action-log-event {
+    background-color: var(--russian-violet) !important;
+
+}
+
+.custom-icon-remove {
+    --slds-c-icon-color-foreground-default: white;
+}
+
+.label-title {
+    margin-bottom: 5px;
+    font-weight: 600;
+    padding-left: 20px;
+    font-size: 16px;
+    color: var(--text-body);
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+.removeButtonClass {
+    display: none;
+}
+
+.slds-icon-action-remove {
+    background-color: var(--verdigris) !important;
+}
+
+.table-th {
+    width: 130px;
+    text-align: center;
+    background-color: var( --mint-green);
+    color: var(--text-body);
+    font-size: 1rem;
+}
+
+.table-th-actions {
+    width: 50px;
+    text-align: center;
+    background-color: var( --mint-green);
+    color: var(--text-body);
+    font-size: 1rem;
+}
+
+.save-m {
+    margin-right: 10px;
+}
+
+.table-header {
+    height: 56px;
+    background-color: var( --mint-green);
+}
+
+.table-body {
+    margin-top: 0;
+    border-top: 0;
+}
+
+.table-data {
+    padding: 0px;
+}
+
+.display-divs {
+    display: inline-block;
+}
+
+.remove-trans {
+    translate: -2px 5px;
+}
+.add-trans {
+    translate: 12px 11.5px;
+}
+
+.edit-trans {
+    translate: 1px 6px;
+}
+
+.delete-trans {
+    translate: 0px 6px;
+}
+
+.log-event-trans {
+    translate: 6px 6px;
+}

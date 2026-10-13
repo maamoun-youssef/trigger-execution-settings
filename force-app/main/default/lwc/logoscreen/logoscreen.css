@@ -1,0 +1,573 @@
+/*3 image sizes view in right panel*/
+.example-preview {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+/* sprite image view in right panel*/
+.sprite-preview {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+/*code parts in right panel*/
+.code-section {
+  width: 100%;
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-left: 4px solid #032d60;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 10px rgba(31, 58, 147, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.code-section:hover {
+  box-shadow: 0 4px 16px rgba(31, 58, 147, 0.1);
+}
+
+/*header in code part*/
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+/*header title in code part*/
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #032d60;
+  margin: 0;
+}
+/*code snippet in code part*/
+.code-block {
+  background-color: #f4f6f8;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.85rem;
+  color: #2e3b4e;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+
+.left-panel {
+  transition: width 0.3s ease;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: 65%;
+}
+
+.right-panel {
+  width: 35%;
+  padding-left: 0.5rem;
+  animation: fadeInRight 0.3s ease-in-out;
+  position: relative;
+  height:100%;
+  flex: 1;
+}
+
+
+/*sprite images view in right panel*/
+.sprite-preview img {
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 6px;
+}
+
+/*each image in right panel*/
+.example-preview img {
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  transition: border-color 0.3s ease, transform 0.2s ease;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+.example-preview img:hover {
+  transform: scale(1.05);
+}
+
+.example-preview img.selected-size {
+  border: 2px solid #032d60 !important;
+  box-shadow: 0 0 10px #032d70 !important;
+ 
+}
+
+/* Sizes */
+.example-preview img.small {
+  width: 50px !important;
+  height: 50px!important;
+  object-fit: contain;
+}
+
+.example-preview img.medium {
+  width: 100px !important;
+  height: 100px !important;
+  object-fit: contain;
+}
+
+.example-preview img.large {
+  width: 150px !important;
+  height: 150px !important;
+  object-fit: contain;
+}
+
+/*container for images preview in right panel*/
+.sticky-preview {
+  position: relative;
+  top: 0;
+  background: #fefefe;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #dcdcdc;
+  z-index: 10;
+
+ 
+}
+
+.sticky-preview p {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 0.75rem;
+}
+
+.sticky-bar {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 20;
+}
+/*load spinner*/
+.loader {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(0.4turn, #032d70, rgb(62, 119, 210), #032d79);
+  animation: animate 1.2s linear infinite;
+}
+
+
+
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.loader:after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  background: #f1f1f1;
+  border-radius: 50%;
+}
+
+.preview-sprite {
+  width: 100%;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: 0 0;
+  object-fit: contain;
+}
+
+/*sprite image in right panel*/
+.full-sprite-image {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+/*wrapps sprite image in right panel*/
+.sprite-image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+/*red marker for sprite display*/
+.selection-marker {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+
+/*main container*/
+.template {
+    background-color: white;
+      display: flex;
+  flex-direction: row;
+  height: 100%;
+   align-items: stretch;
+}
+
+/* Header Bar */
+.header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #032d60; 
+    color: white;
+    padding: 0.75rem 1rem;
+    /* margin-bottom: 1rem; */
+    
+}
+
+/*sarch input details*/
+.quick-find lightning-input {
+    max-width: 200px;
+    color: black;
+    height: 50px;
+}
+
+.header-title {
+    font-size: 1.2rem;
+}
+
+/* Categories<folders> Menu */
+.categories {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0 1rem 0.5rem 1rem;
+   
+}
+/*folders buttons*/
+.category-btn {
+    background: none;
+    border: 1px solid #032d60;
+    color: #032d60;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.1s ease-in-out;
+
+
+}
+/*buttons holding folder-category names*/
+.category-btn:hover {
+    background-color: #032d60;
+    color: white;
+}
+
+.category-btn.active {
+    background-color: #032d60;
+    color: white;
+    font-weight: 600;
+   
+}
+
+
+
+/*section for displaying the content of each folder*/
+.category-section {
+    margin-bottom: 2rem;
+}
+
+
+/* Section Title */
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #032d60;
+    margin: 0 1rem 0.25rem 1rem;
+}
+/*line under section name */
+.title-line {
+    height: 2px;
+    background-color: #dcdcdc;
+    margin: 0 1rem 1rem 1rem;
+}
+
+/* Logo Grid */
+.logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+    gap: 2rem 0.5rem;
+    padding: 1rem;
+    background-color: white;
+    justify-content: space-evenly; 
+}
+
+
+/* Logo + Name Wrapper */
+.logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 150px;
+    width : 150px;
+}
+
+/* Logo Box */
+.logo-item {
+    flex-shrink: 0;
+    height: 150px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    transition: transform 0.2s, box-shadow 0.2s;
+    transform: 0.1s ease;
+}
+
+
+
+
+.logo-item img{
+  max-height: 150px;
+}
+
+.logo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+
+.logo-wrapper.selected {
+  border: 2px  #032d60;
+  box-shadow: 0 0 10px #032d60;
+  transform: scale(1.05);
+  z-index: 1;
+  
+}
+.logo-wrapper.selected::after{
+   content: '';
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  border-radius: 16px;
+  background: rgba(0, 150, 136, 0.12);
+  animation: pulseGlow 2s infinite;
+  z-index: 0
+}
+
+
+/*name under images in left panel*/
+.logo-name {
+    width: 150px;              /* keeps alignment with the logo box */
+    text-align: center;         /* centers the text */
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+    /* white-space: nowrap; */
+            /* prevents line breaks */
+       /* hides overflow if text is too long */
+       /* overflow: hidden; */
+    text-overflow: ellipsis;    /* adds "..." if text is too long */
+}
+
+
+/* No results message */
+.no-results {
+    text-align: center;
+    font-size: 1rem;
+    color: #888;
+    grid-column: 1 / -1;
+}
+
+
+
+
+/*section for folder buttons in left panel*/
+.folder-bar {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  background: #ffffff;
+  padding: 0.25rem;
+  border-bottom: 1px solid #d8dde6;
+}
+/*container for folder buttons in left panel*/
+.folder-container {
+  display: flex;
+  gap: 0.5rem;
+  
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  transition: none; /* no transform */
+}
+
+
+
+/*hiding the scrollar part*/
+.folder-container::-webkit-scrollbar {
+  display: none; 
+}
+
+
+
+/* right (>) button */
+
+.more-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  display: none; /* Hidden unless overflow */
+}
+
+.more-btn lightning-icon {
+    --slds-c-icon-color-foreground: gray;
+    --slds-c-icon-color-background: transparent;
+}
+/* inside the same .css file of the component holding <button class="more-btn"> */
+.more-btn:hover lightning-icon {
+    --slds-c-icon-color-foreground: #0070D2;
+    --slds-c-icon-color-background: transparent;
+}
+
+
+.more-icon {
+  color: #606060; /* default gray */
+  transition: color 0.2s ease;
+}
+
+.more-btn:hover .more-icon {
+  color: #0070d2; /* Salesforce blue */
+}
+
+
+
+
+
+
+/* left (<) button */
+.less-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  display: none; /* Hidden unless overflow */
+}
+
+.less-btn lightning-icon {
+    --slds-c-icon-color-foreground: gray;
+    --slds-c-icon-color-background: transparent;
+}
+/* inside the same .css file of the component holding <button class="more-btn"> */
+.less-btn:hover lightning-icon {
+    --slds-c-icon-color-foreground: #0070D2;
+    --slds-c-icon-color-background: transparent;
+}
+
+.less-icon {
+  color: #606060; /* default gray */
+  transition: color 0.2s ease;
+}
+
+.less-btn:hover .less-icon {
+  color: #0070d2; /* Salesforce blue */
+}
+
+
+/*button to close the right panel*/
+.close-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+}
+
+.close-btn lightning-icon {
+    --slds-c-icon-color-foreground: gray;
+    --slds-c-icon-color-background: transparent;
+}
+
+.close-btn:hover lightning-icon {
+    --slds-c-icon-color-foreground: #0070D2;
+    --slds-c-icon-color-background: transparent;
+}
+
+.closeicon {
+  color: #606060; /* default gray */
+  transition: color 0.2s ease;
+}
+
+.close-btn:hover .closeicon {
+  color: #0070d2; /* Salesforce blue */
+}
+
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 16px;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+}

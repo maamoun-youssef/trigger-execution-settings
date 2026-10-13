@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Page Settings Plugin",
+  "contentBody" : {
+    "activeViewId" : "Page_Settings_Plugin",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-page-settings-plugin",
+    "urlPrefix" : "page-settings-plugin"
+  },
+  "urlName" : "page-settings-plugin"
+}

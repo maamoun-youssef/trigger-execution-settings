@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>A cocher pour avoir un code budget unique sur le contrat</help>
+    <label>Contrôle code unique</label>
+    <name>Is_Contract_Unicity_Requiered__c</name>
+</CustomFieldTranslation>

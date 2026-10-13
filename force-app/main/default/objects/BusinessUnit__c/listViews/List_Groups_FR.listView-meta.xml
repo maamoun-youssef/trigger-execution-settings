@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>List_Groups_FR</fullName>
+    <columns>Logo__c</columns>
+    <columns>NAME</columns>
+    <columns>SetBULinkMaster__c</columns>
+    <columns>Code__c</columns>
+    <columns>LayerBudgetDisplay__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>BusinessUnit__c.Group</value>
+    </filters>
+    <label>2. Les Groupes</label>
+</ListView>

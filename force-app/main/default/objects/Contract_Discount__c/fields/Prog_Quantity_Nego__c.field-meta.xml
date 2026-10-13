@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prog_Quantity_Nego__c</fullName>
+    <formula>If(SlabBaseQtyNegoP1__c = 0, Null, (SlabBaseQtyNego__c -SlabBaseQtyNegoP1__c )/SlabBaseQtyNegoP1__c )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Prog Quantity Nego</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

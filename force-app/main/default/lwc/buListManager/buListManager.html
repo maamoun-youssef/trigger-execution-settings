@@ -1,0 +1,656 @@
+<template>
+    <div class="slds-card mainContainer">
+        <div class="header slds-page-header slds-m-bottom_xxx-small slds-clearfix">
+            <div class="slds-grid sticky-header">
+                <div class="slds-col slds-p-around_xx-small slds-has-flexi-truncate">
+                    <div class="slds-media sticky-header slds-no-space slds-grow">
+                        <lightning-icon icon-name="standard:forecasts" size="medium" class="slds-m-right_small">
+                        </lightning-icon>
+                        <div class="slds-media__body">
+                            <p class="slds-text-title_caps slds-line-height_reset">
+                                {labels.LBL_BUListManager_Title}
+                            </p>
+                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                {bu.Name}
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-no-flex slds-grid">
+                    <lightning-button label={labels.LBL_Back} class="slds-m-left_small" onclick={handleCancel}>
+                    </lightning-button>
+                    <lightning-button variant="brand" label={labels.Save} class="slds-m-left_small" onclick={saveBUInfo}
+                        disabled={disableSave}>
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <lightning-spinner style="z-index: 9" variant="brand" size="large" if:true={loading}>
+            </lightning-spinner>
+            <!-- tabs -->
+            <lightning-tabset if:true={activeTab} variant="vertical" onclick={handleTabClick}
+                active-tab-value={activeTab} class="tab-set-style slds-m-bottom_x-small">
+                <!-- Tab BU -->
+                <lightning-tab label={labels.LBL_BUListManager_BU_Tab_Information}
+                    title={labels.LBL_BUListManager_BU_Tab_Information} value="BU" icon-name="utility:info_alt"
+                    style="padding:0px;" class="slds-scrollable_y sectionNS">
+                    <div style={mainPanelHeight} class="main-panel slds-border--left">
+                        <div class="slds-grid slds-wrap">
+                            <template for:each={displayedBUFields} for:item="field" for:index="fieldIndex">
+                                <div key={field.fieldName} class="slds-col slds-size_1-of-2 slds-p-around--x-small">
+                                    <template if:true={field.isInputField}>
+                                        <div lwc:if={field.isNameField}
+                                            class="slds-form-element slds-form-element_horizontal">
+                                            <label class="slds-form-element__label">{field.fieldLabel}</label>
+                                            <div class="slds-form-element__control">
+                                                <div class="slds-grid">
+                                                    <lightning-input data-field={field.fieldName}
+                                                        onchange={handleFieldEdits} label={field.fieldLabel}
+                                                        variant="label-hidden" value={bu.Name}
+                                                        class="slds-m-right_small slds-size_2-of-3">
+                                                    </lightning-input>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <lightning-input lwc:elseif={field.isText} data-field={field.fieldName}
+                                            onchange={handleFieldEdits} label={field.fieldLabel} variant="label-inline"
+                                            value={field.fieldValue}>
+                                        </lightning-input>
+                                        <lightning-textarea lwc:elseif={field.isTextarea} data-field={field.fieldName}
+                                            onchange={handleFieldEdits} label={field.fieldLabel} variant="label-inline"
+                                            value={field.fieldValue}>
+                                        </lightning-textarea>
+                                        <lightning-input lwc:elseif={field.isNumberField} type="number"
+                                            data-field={field.fieldName} onchange={handleFieldEdits}
+                                            label={field.fieldLabel} variant="label-inline" step={field.step}
+                                            value={field.fieldValue} class="input-right">
+                                        </lightning-input>
+                                        <lightning-record-edit-form lwc:elseif={field.isReference}
+                                            object-api-name={field.objectName} record-id={bu.Id}>
+                                            <lightning-input-field field-name={field.fieldName} if:false={field.isOwner}
+                                                data-field={field.fieldName} onchange={handleFieldEdits}
+                                                label={field.fieldLabel} variant="label-inline"
+                                                value={field.fieldValue}>
+                                            </lightning-input-field>
+                                        </lightning-record-edit-form>
+                                        <lightning-input lwc:elseif={field.isBoolean} type="checkbox"
+                                            label={field.fieldLabel} variant="label-inline" data-isboolean="true"
+                                            data-field={field.fieldName} onchange={handleFieldEdits}
+                                            checked={field.fieldValue}>
+                                        </lightning-input>
+                                        <template lwc:elseif={field.isPicklist}>
+                                            <div class="slds-form-element slds-form-element_horizontal">
+                                                <label class="slds-form-element__label">{field.fieldLabel}</label>
+                                                <div class="slds-form-element__control">
+                                                    <select onchange={handleFieldEdits} data-field={field.fieldName}>
+                                                        <template for:each={field.picklistOptions} for:item="option">
+                                                            <template lwc:if={option.isDisabled}>
+                                                                <option key={option.value} value={option.value}
+                                                                    selected={option.isSelected} disabled>
+                                                                    {option.label}
+                                                                </option>
+                                                            </template>
+                                                            <template lwc:else>
+                                                                <option key={option.value} value={option.value}
+                                                                    selected={option.isSelected}>
+                                                                    {option.label}
+                                                                </option>
+                                                            </template>
+                                                        </template>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </template>
+                                        <lightning-input lwc:elseif={field.isDate} type="date"
+                                            data-categindex={categIndex} data-field={field.fieldName}
+                                            onchange={handleFieldEdits} label={field.fieldLabel} variant="label-inline"
+                                            value={field.fieldValue}>
+                                        </lightning-input>
+                                        <lightning-input lwc:elseif={field.isDateTime} type="datetime"
+                                            data-categindex={categIndex} data-field={field.fieldName}
+                                            onchange={handleFieldEdits} label={field.fieldLabel} variant="label-inline"
+                                            value={field.fieldValue}>
+                                        </lightning-input>
+                                    </template>
+                                    <template if:false={field.isInputField}>
+                                        <div class="slds-form-element slds-form-element_horizontal">
+                                            <label class="slds-form-element__label">{field.fieldLabel}</label>
+                                            <div class="slds-form-element__control">
+                                                <lightning-formatted-number lwc:if={field.isNumberField}
+                                                    maximum-fraction-digits={field.scale} value={field.fieldValue}
+                                                    label={field.fieldLabel} variant="label-inline">
+                                                </lightning-formatted-number>
+                                                <template lwc:elseif={field.isText}>
+                                                    <template lwc:if={field.isHTMLFormatted}>
+                                                        <lightning-formatted-rich-text value={field.fieldValue}
+                                                            label={field.fieldLabel} variant="label-inline">
+                                                        </lightning-formatted-rich-text>
+                                                    </template>
+                                                    <template lwc:else>
+                                                        {field.fieldValue}
+                                                    </template>
+                                                </template>
+                                                <template lwc:elseif={field.isReference}>
+                                                    <a href={field.link} target="_blank">
+                                                        {field.fieldValue}</a>
+                                                </template>
+                                                <lightning-input lwc:elseif={field.isBoolean} type="checkbox"
+                                                    class="input-center" variant="label-hidden"
+                                                    checked={field.fieldValue} disabled>
+                                                </lightning-input>
+                                                <lightning-formatted-date-time lwc:elseif={field.isDate}
+                                                    value={field.fieldValue} year="numeric" month="2-digit"
+                                                    day="2-digit"></lightning-formatted-date-time>
+                                                <lightning-formatted-date-time lwc:elseif={field.isDateTime}
+                                                    value={field.fieldValue} year="numeric" month="2-digit"
+                                                    day="2-digit" hour="2-digit" minute="2-digit">
+                                                </lightning-formatted-date-time>
+                                                <template lwc:elseif={field.isPicklist}>
+                                                    {field.fieldValue}
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </lightning-tab>
+                <template if:false={isNewBU}>
+                    <!-- BU Attributes -->
+                    <lightning-tab label={labels.LBL_BUListManager_BU_Attributes} value="busAttributes"
+                        title={labels.LBL_BUListManager_BU_Attributes} icon-name="standard:variation_attribute_setup"
+                        style="padding:0px;">
+                        <div style={mainPanelHeight} class="main-panel">
+                            <article class="slds-card">
+                                <div class="slds-card__header slds-grid slds-box slds-m-around--x-small card-header">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__body">
+                                            <h2 class="slds-card__header-title">
+                                                <span>{labels.LBL_BUListManager_BU_Attributes}</span>
+                                            </h2>
+                                        </div>
+                                        <div class="slds-no-flex">
+                                            <lightning-button variant="brand"
+                                                label={labels.LBL_BUListManager_Add_BU_Attribute}
+                                                icon-name="utility:add" onclick={handleAddBUAttribute}
+                                                class="slds-m-left_x-small">
+                                            </lightning-button>
+                                        </div>
+                                    </header>
+                                </div>
+                                <div class="slds-card__body">
+                                    <template lwc:if={buAttributes.length}>
+                                        <div
+                                            class="slds-scrollable slds-p-horizontal_x-small slds-p-vertical_x-small slds-size_1-of-1">
+                                            <div class="slds-scrollable divTable">
+                                                <table
+                                                    class="slds-table slds-table_cell-buffer slds-table_bordered slds-table-header-fixed_container slds-border_right slds-border_left slds-no-row-hover slds-scrollable_y">
+                                                    <thead>
+                                                        <tr class="slds-line-height_reset sticky-header">
+                                                            <th if:true={showBUAttributesLogicFilter}></th>
+                                                            <th
+                                                                class="slds-cell-fixed slds-text-align_center sticky-header">
+                                                                {labels.LBL_BUListManager_BU_Field}</th>
+                                                            <th
+                                                                class="slds-cell-fixed slds-text-align_center sticky-header">
+                                                                {labels.LBL_BUListManager_Value_or_Field}
+                                                            </th>
+                                                            <th
+                                                                class="slds-cell-fixed slds-text-align_center sticky-header">
+                                                                {labels.LBL_BUListManager_Operator}</th>
+                                                            <th
+                                                                class="slds-cell-fixed slds-text-align_center sticky-header">
+                                                                {labels.LBL_BUListManager_Value}</th>
+                                                            <th>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <template for:each={buAttributes} for:item="buAttribute"
+                                                            for:index="index">
+                                                            <tr key={buAttribute.fieldName} class="slds-hint-parent">
+                                                                <td if:true={showBUAttributesLogicFilter}>
+                                                                    <b>{buAttribute.index}</b>
+                                                                </td>
+                                                                <td>
+                                                                    <div
+                                                                        class="slds-form-element slds-form-element__control">
+                                                                        <c-field-selector-input
+                                                                            object-name={API_NAMES.BusinessUnit__c.objectApiName}
+                                                                            value={buAttribute.fieldName}
+                                                                            data-index={index}
+                                                                            onfieldselect={handleBUFieldSelect}
+                                                                            onfieldrestore={handleBUFieldRestore}>
+                                                                        </c-field-selector-input>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <lightning-combobox
+                                                                        value={buAttribute.operationType}
+                                                                        data-field="operationType"
+                                                                        options={typesOptions}
+                                                                        onchange={handleChangeBUAttribute}
+                                                                        data-index={index} variant="label-hidden">
+                                                                    </lightning-combobox>
+                                                                </td>
+                                                                <td>
+                                                                    <lightning-combobox value={buAttribute.operation}
+                                                                        data-field="operation"
+                                                                        options={buAttribute.operationsOptions}
+                                                                        onchange={handleChangeBUAttribute}
+                                                                        data-index={index} variant="label-hidden">
+                                                                    </lightning-combobox>
+                                                                </td>
+                                                                <td>
+                                                                    <template if:false={buAttribute.disableValue}>
+                                                                        <template if:false={buAttribute.isField}>
+                                                                            <template lwc:if={buAttribute.isReference}>
+                                                                                <lightning-record-edit-form
+                                                                                    object-api-name={buAttribute.previousObject}>
+                                                                                    <lightning-input-field
+                                                                                        value={buAttribute.fieldValue}
+                                                                                        data-field="lookup"
+                                                                                        data-index={index}
+                                                                                        onchange={handleChangeBUAttribute}
+                                                                                        variant="label-hidden"
+                                                                                        field-name={buAttribute.refFieldName}>
+                                                                                    </lightning-input-field>
+                                                                                </lightning-record-edit-form>
+                                                                            </template>
+                                                                            <lightning-combobox
+                                                                                lwc:elseif={buAttribute.isPicklist}
+                                                                                options={buAttribute.picklistValues}
+                                                                                value={buAttribute.fieldValue}
+                                                                                data-field="fieldValue"
+                                                                                data-index={index}
+                                                                                onchange={handleChangeBUAttribute}
+                                                                                variant="label-hidden">
+                                                                            </lightning-combobox>
+                                                                            <c-neg-optim-custom-picklist
+                                                                                lwc:elseif={buAttribute.isMultiPicklist}
+                                                                                data-field="fieldValue"
+                                                                                data-index={index}
+                                                                                selected-values={buAttribute.fieldValue}
+                                                                                options={buAttribute.picklistValues}
+                                                                                selected-event={Events.handleChangeMultiPicklistValues}
+                                                                                show-all-option="false"
+                                                                                onhandlechangemultipicklistvalues={handleChangeMultiPicklistValues}>
+                                                                            </c-neg-optim-custom-picklist>
+                                                                            <lightning-input lwc:else
+                                                                                type={buAttribute.fieldType}
+                                                                                value={buAttribute.fieldValue}
+                                                                                data-field="fieldValue"
+                                                                                data-index={index}
+                                                                                onchange={handleChangeBUAttribute}
+                                                                                variant="label-hidden">
+                                                                            </lightning-input>
+                                                                        </template>
+                                                                        <template if:true={buAttribute.isField}>
+                                                                            <lightning-combobox
+                                                                                value={buAttribute.fieldValue}
+                                                                                data-field="fieldValue"
+                                                                                options={buAttribute.buFieldsType}
+                                                                                onchange={handleChangeBUAttribute}
+                                                                                data-index={index}
+                                                                                variant="label-hidden">
+                                                                            </lightning-combobox>
+                                                                        </template>
+                                                                    </template>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="slds-shrink-none">
+                                                                        <lightning-icon size="xx-small"
+                                                                            class="red-icon slds-icon slds-input__icon_right slds-icon-text-default slds-align_absolute-center slds-button--icon-border"
+                                                                            icon-name="utility:delete"
+                                                                            data-index={index}
+                                                                            onclick={removeBUAttribute}>
+                                                                        </lightning-icon>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </template>
+                                                    </tbody>
+                                                </table>
+                                                <div>
+                                                    <a href="javascript:void(0)" onclick={toggleFilterLogic}>
+                                                        <template if:true={showBUAttributesLogicFilter}>
+                                                            {labels.LBL_BUListManager_Clear_Filter_Logic}
+                                                        </template>
+                                                        <template if:false={showBUAttributesLogicFilter}>
+                                                            {labels.LBL_BUListManager_Show_Filter_Logic}
+                                                        </template>
+                                                    </a>
+                                                    <div if:true={showBUAttributesLogicFilter}>
+                                                        <lightning-input type="text" value={buAttributesLogicFilter}
+                                                            onchange={handleChangeLogicFilter}></lightning-input>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template lwc:else>
+                                        <div class="slds-align--absolute-center" style={noDataHeight}>
+                                            <div class="slds-illustration slds-illustration_small"
+                                                style={noDataImageStyle} aria-hidden="true">
+                                                <img src="/img/chatter/OpenRoad.svg" class="slds-illustration__svg"
+                                                    alt="" />
+                                                <div class="slds-text-color_weak">
+                                                    <b class="slds-text-heading_medium">{labels.LBL_BUListManager_No_BU_Attribute}
+                                                    </b>
+                                                </div>
+                                                <div class="slds-align--absolute-center">
+                                                    <span class="slds-popover__body">
+                                                        <lightning-formatted-rich-text
+                                                            value={labels.LBL_BUListManager_No_BU_Attribute_Help}>
+                                                        </lightning-formatted-rich-text>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </article>
+                        </div>
+                    </lightning-tab>
+                    <!-- Tab BU Links -->
+                    <lightning-tab label={labels.LBL_BUListManager_Tab_BULink} value="BUs" class="slds-scrollable"
+                        title={labels.LBL_BUListManager_Tab_BULink} icon-name="standard:products" style="padding:0px;">
+                        <div style={mainPanelHeight} class="main-panel">
+                            <div class="slds-tabs_scoped">
+                                <div class="slds-tabs_scoped__content buLinkTab" role="tabpanel"
+                                    aria-labelledby="tab-scoped-2__item" style="padding:0px;border:0px;">
+                                    <div
+                                        class="slds-card__header slds-grid slds-box slds-m-around--x-small card-header">
+                                        <div class="slds-col">
+                                            <div class="slds-grid slds-grid--align-end">
+                                                <div class="slds-col slds-p-right--x-small">
+                                                    <lightning-input type="search" onblur={handleSearchBUBlur}
+                                                        onkeypress={handleEnterKeyPress} onchange={handleBUChange}
+                                                        class="slds-show slds-is-relative slds-var-m-bottom_small input-text-align_right"
+                                                        variant="label-hidden" placeholder="Business Unit"
+                                                        data-tabname="buLinkTab">
+                                                    </lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-p-right--x-small">
+                                                    <lightning-button-menu menu-alignment="right" alternative-text="Show menu" variant="border-filled"
+                                                        icon-name="utility:connected_apps" nubbin class="slds-m-bottom--medium">
+                                                        <lightning-menu-item label={labels.LBL_Only_Select_Scoped_BUs} onclick={selectOnlyRespectBUs}>
+                                                        </lightning-menu-item>
+                                                    </lightning-button-menu>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-card__body slds-m-around--x-small" if:true={buLinkMng.data.length}>
+                                        <div
+                                            class="slds-scrollable slds-border_left slds-border_right slds-border--bottom divTable">
+                                            <table
+                                                class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                                                <thead style="position: sticky; top: 0px; z-index: 5;">
+                                                    <tr class="slds-line-height_reset sticky-header">
+                                                        <th class="checkboxTh" style="padding: 0px;">
+                                                            <lightning-input type="checkbox"
+                                                                class="slds-m-around--x-small" checked={isAllBUSelected}
+                                                                variant="label-hidden" onchange={handleSelectAllBU}>
+                                                            </lightning-input>
+                                                        </th>
+                                                        <template for:each={buLinkMng.displayedFields} for:item="field">
+                                                            <th key={field} style={field.headerStyle}>
+                                                                <template if:true={isShowFilterOnColumnHeaderPGGrid}>
+                                                                    <template if:true={field.isFilterable}>
+                                                                        <button
+                                                                            class="filter-btn slds-button slds-button_icon slds-builder-header__utilities slds-m-right_xx-small"
+                                                                            type="button" onclick={openDropDownFilter}
+                                                                            data-field={field.fieldName}
+                                                                            data-tabname="buLinkTab"
+                                                                            style="position: absolute;top: 0px;right: 0px;">
+                                                                            <svg class="slds-button__icon"
+                                                                                aria-hidden="true">
+                                                                                <use
+                                                                                    xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#filterList">
+                                                                                </use>
+                                                                            </svg>
+                                                                        </button>
+                                                                        <div class="slds-hide slds-dropdown slds-p-around_x-small filterDropdownStyle"
+                                                                            data-butab-filter-field={field.fieldName}>
+                                                                            <span
+                                                                                style="position: absolute;right: 0;top: 0; z-index: 7;">
+                                                                                <lightning-button-icon
+                                                                                    variant="container" size="small"
+                                                                                    icon-name="utility:close"
+                                                                                    data-field={field.fieldName}
+                                                                                    data-tabname="buLinkTab"
+                                                                                    onclick={openDropDownFilter}
+                                                                                    alternative-text='close'>
+                                                                                </lightning-button-icon>
+                                                                            </span>
+                                                                            <div class="slds-scrollable">
+                                                                                <ul class="slds-dropdown__list"
+                                                                                    role="menu" aria-label="Show More">
+                                                                                    <li class="slds-dropdown__item"
+                                                                                        role="presentation"
+                                                                                        style="text-align: left;">
+                                                                                        <lightning-input type="text"
+                                                                                            placeholder="Search"
+                                                                                            data-field={field.fieldName}
+                                                                                            data-tabname="buLinkTab"
+                                                                                            variant="label-hidden"
+                                                                                            data-type={field.fieldType}
+                                                                                            value={field.filterValue}
+                                                                                            slot="actions"
+                                                                                            onchange={handleChangeBUFilter}
+                                                                                            style="top:10px">
+                                                                                        </lightning-input>
+                                                                                    </li>
+                                                                                    <li class="slds-has-divider_top-space"
+                                                                                        role="separator">
+                                                                                    </li>
+                                                                                    <div style="width: max-content;"
+                                                                                        class="slds-align_absolute-center">
+                                                                                        <button type="submit"
+                                                                                            title={labels.LBL_Apply}
+                                                                                            data-field={field.fieldName}
+                                                                                            data-tabname="buLinkTab"
+                                                                                            onclick={handleApplyBUFilters}
+                                                                                            class="slds-button slds-button_brand">
+                                                                                            {labels.LBL_Apply}
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </template>
+                                                                </template>
+                                                                <div class="slds-truncate" style="white-space:normal;">
+                                                                    {field.fieldLabel}
+                                                                </div>
+                                                            </th>
+                                                        </template>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <template if:true={buLinkMng.loading}>
+                                                        <div
+                                                            class="slds-card__body slds-card__body_inner slds-m-around--x-small">
+                                                            <lightning-spinner size="small" variant="brand">
+                                                            </lightning-spinner>
+                                                        </div>
+                                                    </template>
+                                                    <template if:false={buLinkMng.loading}>
+                                                        <template lwc:if={buLinkMng.data.length}>
+                                                            <template for:each={buLinkMng.data} for:item="item"
+                                                                for:index="index">
+                                                                <tr key={item.Id} class="brandStyle"
+                                                                    style={item.backgroundColor}>
+                                                                    <td class="firstTdBU" style="padding:0;">
+                                                                        <div class="slds-grid slds-m-around--x-small">
+                                                                            <lightning-input type="checkbox"
+                                                                                data-selecttab="buLinkTab"
+                                                                                data-buid={item.Id} data-index={index}
+                                                                                checked={item.selected}
+                                                                                variant="label-hidden"
+                                                                                onchange={handleSelectBU}>
+                                                                            </lightning-input>
+                                                                            <template if:true={item.isUnFiltered}>
+                                                                                <lightning-icon
+                                                                                    icon-name="utility:record"
+                                                                                    size="x-small"
+                                                                                    alternative-text="record"
+                                                                                    title={labels.LBL_Unfiltered_Row}
+                                                                                    class="orange-icon slds-m-top--xxx-small">
+                                                                                </lightning-icon>
+                                                                            </template>
+                                                                        </div>
+                                                                    </td>
+                                                                    <template for:each={item.values} for:item="field">
+                                                                        <td key={field.key} style={field.style}>
+                                                                            <lightning-formatted-number
+                                                                                lwc:if={field.isNumberField}
+                                                                                maximum-fraction-digits={field.scale}
+                                                                                minimum-fraction-digits={field.scale}
+                                                                                value={field.fieldValue}
+                                                                                variant="label-hidden">
+                                                                            </lightning-formatted-number>
+                                                                            <template lwc:elseif={field.isText}>
+                                                                                <template
+                                                                                    lwc:if={field.isHTMLFormatted}>
+                                                                                    <lightning-formatted-rich-text
+                                                                                        value={field.fieldValue}
+                                                                                        variant="label-hidden">
+                                                                                    </lightning-formatted-rich-text>
+                                                                                </template>
+                                                                                <template lwc:else>
+                                                                                    {field.fieldValue}
+                                                                                </template>
+                                                                            </template>
+                                                                            <template lwc:elseif={field.isReference}>
+                                                                                <a href={field.link} target="_blank">
+                                                                                    {field.fieldValue}</a>
+                                                                            </template>
+                                                                            <lightning-input
+                                                                                lwc:elseif={field.isBoolean}
+                                                                                type="checkbox" class="input-center"
+                                                                                variant="label-hidden"
+                                                                                checked={field.fieldValue} disabled>
+                                                                            </lightning-input>
+                                                                            <lightning-formatted-date-time
+                                                                                lwc:elseif={field.isDate}
+                                                                                value={field.fieldValue} year="numeric"
+                                                                                month="2-digit" day="2-digit">
+                                                                            </lightning-formatted-date-time>
+                                                                            <lightning-formatted-date-time
+                                                                                lwc:elseif={field.isDateTime}
+                                                                                value={field.fieldValue} year="numeric"
+                                                                                month="2-digit" day="2-digit"
+                                                                                hour="2-digit" minute="2-digit">
+                                                                            </lightning-formatted-date-time>
+                                                                            <template lwc:elseif={field.isPicklist}>
+                                                                                {field.fieldValue}
+                                                                            </template>
+                                                                        </td>
+                                                                    </template>
+                                                                </tr>
+                                                            </template>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            <tr>
+                                                                <td colspan={colspanLength}>
+                                                                    <div class="slds-text-align_center">
+                                                                        <p>{labels.LBL_No_Item_To_Display}
+                                                                        </p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </template>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div if:false={buLinkMng.loading} class="pagination">
+                                            <div class="slds-grid slds-p-around_x-small">
+                                                <lightning-combobox options={pageSizeOptions} value={buLinkMng.pageSize}
+                                                    onchange={changePageSizeHandler} dropdown-alignment="bottom-left"
+                                                    variant="label-hidden"
+                                                    class="slds-size_xx-small slds-var-p-right_small" size="1"
+                                                    data-foottab="buLinkTab">
+                                                </lightning-combobox>
+                                                <lightning-button-group class="slds-var-p-right_small slds-wrap">
+                                                    <lightning-button label={labels.LBL_First}
+                                                        disabled={buLinkMng.previousDisabled} onclick={handleFirst}
+                                                        data-foottab="buLinkTab">
+                                                    </lightning-button>
+                                                    <lightning-button label={labels.LBL_Previous}
+                                                        disabled={buLinkMng.previousDisabled} onclick={handlePrevious}
+                                                        data-foottab="buLinkTab">
+                                                    </lightning-button>
+                                                    <lightning-button label={labels.LBL_Next}
+                                                        disabled={buLinkMng.nextDisabled} onclick={handleNext}
+                                                        data-foottab="buLinkTab">
+                                                    </lightning-button>
+                                                    <lightning-button label={labels.LBL_Last}
+                                                        disabled={buLinkMng.nextDisabled} onclick={handleLast}
+                                                        data-foottab="buLinkTab">
+                                                    </lightning-button>
+                                                </lightning-button-group>
+                                                <lightning-badge label={buLinkMng.pagesBadge}>
+                                                </lightning-badge>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <template if:false={buLinkMng.data.length}>
+                                        <template if:false={buLinkMng.loading}>
+                                            <div class="slds-card__body slds-card__body_inner slds-m-around--x-small">
+                                                <div class="slds-align--absolute-center" style={noDataHeight}>
+                                                    <div class="slds-illustration slds-illustration_large"
+                                                        style={noDataImageStyle} aria-hidden="true">
+                                                        <img src="/img/chatter/OpenRoad.svg"
+                                                            class="slds-illustration__svg" alt="" />
+                                                        <div class="slds-text-color_weak">
+                                                            <b class="slds-text-heading_medium">{labels.LBL_BUListManager_BU_No_Data}
+                                                            </b>
+                                                        </div>
+                                                        <div class="slds-align--absolute-center">
+                                                            <span class="slds-popover__body">
+                                                                <lightning-formatted-rich-text
+                                                                    value={labels.LBL_BUListManager_BU_No_Data_Help}>
+                                                                </lightning-formatted-rich-text>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </lightning-tab>
+                </template>
+                <template if:true={popUp.confirmationDelete.isOpen}>
+                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <header class="slds-modal__header">
+                                {popUp.confirmationDelete.title}
+                            </header>
+                            <div class="slds-modal__content slds-text-align_center slds-p-around_medium">
+                                <p><b>{labels.MSG_BUListManager_BULink_Delete_Confirmation}</b></p>
+                            </div>
+                            <footer class="slds-modal__footer">
+                                <button class="slds-button slds-button_neutral"
+                                    onclick={popUp.confirmationDelete.closeModal}
+                                    title="Cancel">{labels.LBL_Cancel}</button>
+                                <button class="slds-button slds-button_brand"
+                                    onclick={popUp.confirmationDelete.submitDetails}
+                                    title="OK">{labels.LBL_Yes}</button>
+                            </footer>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </template>
+            </lightning-tabset>
+        </div>
+    </div>
+</template>

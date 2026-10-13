@@ -1,0 +1,111 @@
+.sticky-header {
+    position: sticky;
+    top: 0px;
+    z-index: 3;
+}
+
+.THIS td {
+    overflow: initial;
+}
+
+.panel-footer-color {
+    background-color: var(--lwc-colorBackground);
+}
+
+.limited-cell {
+    width: 1px;
+}
+
+.error-icon {
+    --sds-c-icon-color-foreground-default: red;
+}
+
+.filter-div {
+    margin-left: 90%;
+}
+
+.icons-container {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+}
+
+select {
+    display: block;
+    position: relative;
+    /* font-family:monospace; */
+    border-radius: 0.25rem;
+    background: white url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAYAAAAdHLWhAAAAAXNSR0IArs4c6QAABppJREFUeF7tnH1sE2Ucx28yX+i1iDJoryPpHWJIlJhoMDEahBg0JL7hti68xBCCGWsRcL3yFiJeyBJA2m5B19ZpcJGEt2tDQNEomohviW9Ro0ZDQnplrNcBYmS9DhCZuTb+Y8S2T++5+7X77d8+v9/z/X4//XVPL8/WwOAP6AQaQKtDcQwCAv4mQEAICHgCwOXhBCEg4AkAl4cThICAJwBcHk4QAgKeAHB5OEEICHgCwOXhBCEg4AkAl4cThICAJwBcHk4QAgKeAHB5OEEICHgCwOXhBCEg4AkAl4cThICAJwBcHk4QAgKeAHB5OEH1CsjbsePWscbGft6WbQfu0VJ5iuZ60z6a8w8MSJdIhBBPUJsvtJ9ns4tJNh1vNYrG9SZiYheJb2JAwWBwjGTD8VijaNx3iZh4H4l3YkBtvvDnPKs+SLLpeKtJ5biBZFxcQeKbGFCrP/KkYMscJdl0vNUMjnKzDvaJJ0l8EwPSN2vzh7fxNvVFko3HS006526R44HDpH6rAiRJ0g0/DU+SeTbTQiqgnuvSmvslORbYVo3HqgDpGz8b3MU6meFcNSLqsTatccm7nSPtkiRdq8Zf1YD0zVtWhzwzJmaVaoTUW206Lzjk6Oqq37iGACpA6ux5aIZ96LN6C5rEz5lcs3Ag3mXIG9YwQIVDgy+ygmcze0hM1UtNWnPPl2OBE0b5MRSQLqrVFw4LrBowSmAt9UnnOL8cF2NGajYckNd7aMJY0+A7PKsuNFIo9F5KnnstERU7jdZpOCBd4KIXeibPbBz63WixUPspGvdpw/mRBbIsXTFaIxVAhY+6VS/fKTjOEn17Ntok7X6nck7n4fj6szT2oQaocLLz9SyYwQ4dpyEcSs90vvleOdr1PS09VAEVT3ahNTyb3U3LgJV9FY1rT8REmaYG6oAYZqyh1dcTF9hMB00jZvdWNFd3Ihak/hzSBEAM4/VKNzFTHMc9dvVhs4OksZ+S447Mdo20VPsYpxxtpgDShSzpCDU1T8qeK0cU9DUnL0yddHTPxhEzdJoGSDfzTOeu2XfYh380wxitPQYvTpt5sH/DKVr9/93XVED65l5f+CkPqx4xy6CR+yij3IJEn/iRkT1L9TIdUAFSZ2iTx57dXkocpNdTOW5dMi6afhq1BJB+smvzR/byNnUZJAjX06LkuT2JaOA5hmkw/aKMRYAYxtsVmchcGjvhYdX7IUNSNO4LrfHGR957Ze1lK3RaBkg3u/j5ne7pt5wbssJ4uXum89M4ObohW+56o9dZCkg307oqMkdwZL422pgR/dKaa44cC35rRC/SHpYDKkDyh5YItuw+UhM06lJ519JkNLifRu9KeoIAVIDUGe4W7OqWSsTTWqto3M5ETNxEq38lfcEA0q9w/TzsSHpYdVElBoxeq2juYw3npz8ty+1/Gd2bpB8YQIXvR/4+u8eWMuURyvXCSl9smiz3b/qDJEwaNaAAFU52nT38dPtQiobZUj2ruaJbqjfp6+AA6UbafJG5PJv5hNQUSV0q51qYjAffJ6mlWQMSUPHjLrLSY8u8QdP8P72VnDuYiAfCZuxV6R5gARVPdpFewZ5ZV6mpStanNPfeZKxruRWPccrRCRrQfElqbDrreJe3qY+WY6bSNYrGfWUfHZlH+ueJle5Hsh40IN3QUt/229zsbxdIzJWqOXNpavOBVzdmSq2z8nXwgAq/j3y9szzsmV+NDCo16nwg2bf+SyN70uhVE4AKJzt/5DHeljHklKXkueWJqPgWjUCN7lkzgIonu9A6jy3bW00IKY2LJGOiWE0PM2trClDxClfkdYFVV5KEpGjcB+edI49/LElXSeqtqKkxQMUrXGNNjg95Vp1baWAZbcrt+2Kba+rOeM0BKnzUrdk91XPz6YruQg/mm+86GO36pVKoVq+vSUCFL7G+XfcI7PAP5QSY1pxPyLH1x8pZC21NzQIqQgotEtjs//6Jezrn2izHgzugBV+unpoGVDzZhbd4bGr3fxlWctz+RDywDOpjnHIg1Tyg613hUvLcN5ev2ue93b8qX04QUNfUASD9ZHdowrWm01sFNrtVD1r/3zh/Xrm61qz70zTh1gUgmgFZ3RsBWU2gxP4ICAEBTwC4PJwgBAQ8AeDycIIQEPAEgMvDCUJAwBMALg8nCAEBTwC4PJwgBAQ8AeDycIIQEPAEgMvDCUJAwBMALg8nCAEBTwC4PJwgBAQ8AeDycIIQEPAEgMvDCUJAwBMALg8nCAEBTwC4vL8B50GueK6fxiUAAAAASUVORK5CYII=) right 0.5rem center no-repeat;
+    cursor: pointer;
+    background-size: 12px;
+    padding: 0.4rem;
+    border-radius: 4px;
+    z-index: 2;
+    -webkit-appearance: none;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.sortSelected-icon {
+    --slds-c-icon-color-foreground: #17d7b3 !important;
+    --slds-c-icon-color-foreground-default: #17d7b3 !important;
+}
+
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+
+.initial-table td a {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.initial-table th, td {
+    white-space: pre-wrap;
+}
+
+.initial-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.groupedFieldTextStyle {
+    white-space: pre-wrap;
+    word-break: break-word;
+}

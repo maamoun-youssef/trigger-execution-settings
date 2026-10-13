@@ -1,0 +1,107 @@
+:host{
+    --beij: #F2F6DFff;
+     --midnight-green: #08484Aff;
+     --verdigris: #14B2BBff;
+     --amethyst: #816BC0ff;
+     --russian-violet: #3C094Bff;
+     --space-cadet: #322B4Cff;
+     --honeydew: #E8F4E8ff;
+     --dark-violet: #9719BBff;
+     --pistachio: #8BC58Aff;
+     --mint-green: #DDF4EEff;
+     --text-body: #5C5C5C;
+     --light-gray: #B1B1B1;
+}
+
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+table thead th, table tbody td {
+    height: 35px;
+}
+.slds-page-header {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.slds-vertical-tabs__content {
+padding: 0 !important;
+}
+
+table tbody td,
+table thead th {
+    text-align: center;
+}
+
+.mainPanelHeight{
+    height: 100%;
+}
+
+.custom-icon-component_customization {
+    --slds-c-icon-color-foreground-default: black;
+    --slds-c-icon-color-background: #B9DA94;
+}
+
+.component-height {
+    height:100%;
+}
+
+.settings-header {
+    background-color: var(--space-cadet);
+    padding : 5px;
+}
+
+.settings-header-title {
+    color: white;
+    font-size: 22px;
+}
+
+.settings-subtitle {
+    font-size: 1rem;
+    font-weight: lighter;
+    color: white;
+}
+
+.icon-header {
+    translate: 0px 8px;
+}
+
+.custom-icon-settings {
+    --slds-c-icon-color-foreground-default: white;
+    --slds-c-icon-color-background: var(--space-cadet);
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BusinessUnitTarget__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>To be populated when an industrial is creating a price list, a rate increase statement, or a depreciation rate statement that they will send to the retailer. or in case the Retailer is receiving a statement in its portal. It should be filled with a the Retailer&apos;s BU</description>
+    <label>Business Unit Target</label>
+    <referenceTo>BusinessUnit__c</referenceTo>
+    <relationshipLabel>Price Lists (Business Unit Target)</relationshipLabel>
+    <relationshipName>PLBusinessUnitTarget</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Inno_Profile__c</fullName>
+    <description>Grid Settings Profiles: Product Inno Profile</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Product Inno Profile</inlineHelpText>
+    <label>Product Inno Profile</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

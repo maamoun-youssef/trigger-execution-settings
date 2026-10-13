@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Contrepartie - Statut</label>
+    <name>Proof_counterparty_status__c</name>
+    <picklistValues>
+        <masterLabel>Closed</masterLabel>
+        <translation>Fermé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Opened</masterLabel>
+        <translation>Ouvert</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Published</masterLabel>
+        <translation>Publié</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Started</masterLabel>
+        <translation>Actif</translation>
+    </picklistValues>
+</CustomFieldTranslation>

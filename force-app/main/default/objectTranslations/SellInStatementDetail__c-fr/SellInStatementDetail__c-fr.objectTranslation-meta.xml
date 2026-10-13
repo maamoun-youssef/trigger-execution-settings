@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Ligne de CA déclaré</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Lignes de CA déclaré</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>negOptim Sell In Statement Detail Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Ligne de CA déclaré</nameFieldLabel>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

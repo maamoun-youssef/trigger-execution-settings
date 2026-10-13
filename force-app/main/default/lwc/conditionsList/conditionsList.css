@@ -1,0 +1,87 @@
+.cl-layout {
+  display: flex;
+  align-items: stretch;
+}
+
+.cl-ribbon {
+  width: 28px;
+  background: linear-gradient(0deg, #c94c4c 0%, #dd6a6a 65%, #ffffff 100%);
+  border-top-left-radius: .5rem;
+  border-bottom-left-radius: .5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cl-ribbon > span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: .5px;
+  font-size: .9rem;
+  text-shadow: 0 1px 0 rgba(0,0,0,.2);
+  padding: 8px 0;
+}
+
+.cl-main {
+  flex: 1;
+  background: #fff;
+  border-top-right-radius: .5rem;
+  border-bottom-right-radius: .5rem;
+  overflow: hidden;
+}
+
+.cl-container {
+  padding: 0;
+}
+
+.cl-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.cl-header {
+  background: #c94c4c;
+  color: white;
+  text-align: left;
+  font-weight: 600;
+}
+
+.cl-header > th {
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  border-right: 1px solid rgba(255,255,255,0.2);
+}
+.cl-header > th:last-child {
+  border-right: none;
+}
+
+.cl-row td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 0.95rem;
+  background: #fff;
+}
+
+.cl-code { width: 14%; }
+.cl-num  { width: 13%; text-align: left; }
+.cl-index{ width: 20%; }
+
+.cl-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+.cl-link {
+  color: #0b5cab;
+  text-decoration: none;
+}
+.cl-link:hover {
+  text-decoration: underline;
+}
+
+.cl-empty {
+  padding: 12px 10px;
+  color: #666;
+}

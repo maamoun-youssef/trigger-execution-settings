@@ -1,0 +1,878 @@
+<template>
+    <!-- promo detail section-->
+    <template if:false={isCalender}>
+        <div class="mainContainer slds-card">
+            <div class="pageHeader negoptimHeader slds-page-header">
+                <!-- LAYOUT GRID -->
+                <div class="slds-grid">
+                    <!-- GRID COL -->
+                    <div class="slds-col slds-has-flexi-truncate">
+                        <div class="slds-media slds-no-space slds-grow">
+                            <div class="slds-media__figure">
+                                <lightning-icon icon-name="standard:settings" alternative-text="Settings"
+                                    title="Settings">
+                                </lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <p class="slds-text-title_caps slds-line-height_reset">
+                                    {Labels.LBL_PromoCalendar_Title1}
+                                    <!-- {!$ObjectType.Commercial_Plan_Detail__c.Label} -->
+                                </p>
+                                <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                    {Labels.LBL_PromoCalendar_Title2}
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                        <div role="group">
+                            <!-- VIEWS  -->
+                            <lightning-button-icon-stateful icon-name="utility:event" onclick={viewMode}
+                                value="CalenderView" variant="border-filled" class="slds-var-p-right_xx-small"
+                                selected={isCalender}>
+                            </lightning-button-icon-stateful>
+
+                            <lightning-button-icon-stateful icon-name="utility:list" onclick={viewMode} value="List"
+                                selected={isList} variant="border-filled" class="slds-var-p-right_xx-small">
+                            </lightning-button-icon-stateful>
+
+                            <lightning-button-icon-stateful icon-name="utility:apps" onclick={viewMode} value="Grid"
+                                selected={isGrid} variant="border-filled" class="slds-var-p-right_xx-small">
+                            </lightning-button-icon-stateful>
+                            <!-- END VIEWS -->
+                            <lightning-button-icon-stateful icon-name="utility:refresh" onclick={handleRefresh}
+                                class="slds-var-p-right_xx-small" value="promo"></lightning-button-icon-stateful>
+                            <lightning-button-icon-stateful icon-name="utility:filterList" onclick={toggleFilter}
+                                selected={isFilterOpen} variant="border-filled" class="slds-var-p-right_xx-small">
+                            </lightning-button-icon-stateful>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mainDiv">
+                <div class="slds-card">
+                    <div class="slds-grid tableClass" style="height: 70vh;">
+                        <div class="slds-col slds-is-relative slds-scrollable_y">
+                            <template if:true={Loading}>
+                                <!-- <lightning-spinner variant="brand" size="large"></lightning-spinner> -->
+                                <div class="slds-spinner_container">
+                                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </template>
+                            <!-- list view-->
+                            <template if:true={isList}>
+                                <table
+                                    class="initial-table TableDiv slds-table slds-table_bordered slds-tree slds-table_tree slds-no-row-hover slds-table_col-bordered">
+                                    <thead style="position: sticky; top: 0px; z-index: 5;">
+                                        <tr>
+                                            <!-- style="height: 50px;" -->
+                                            <template for:each={cpdColumn} for:item="label">
+                                                <th key={label.fieldLabel} style={label.style}
+                                                    class={label.negoptimClass}>
+                                                    {label.fieldLabel}
+                                                </th>
+                                            </template>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template if:false={hasCPDDataToDisplay}>
+                                            <tr>
+                                                <td colspan={dataLength}
+                                                    class="slds-text-align_center slds-text-color_error slds-text-heading_small">
+                                                    {Labels.LBL_No_Item_To_Display}</td>
+                                            </tr>
+                                        </template>
+                                        <template if:true={hasCPDDataToDisplay}>
+                                            <template for:each={cpdDataList} for:item="cpd" for:index="cpdIndex">
+                                                <tr key={cpd.index}>
+                                                    <template for:each={cpd.values} for:item="commercialPlanDetailField"
+                                                        for:index="fieldindex">
+                                                        <td key={commercialPlanDetailField.fieldApiName}
+                                                            style={commercialPlanDetailField.style}
+                                                            class={commercialPlanDetailField.class}>
+                                                            <template if:true={commercialPlanDetailField.isBoolean}>
+                                                                <lightning-input type="checkbox" disabled="true"
+                                                                    value={commercialPlanDetailField.fieldValue}
+                                                                    checked={commercialPlanDetailField.fieldValue}>
+                                                                </lightning-input>
+                                                            </template>
+                                                            <template if:true={commercialPlanDetailField.isString}>
+                                                                <div>
+                                                                    {commercialPlanDetailField.fieldValue}
+                                                                </div>
+                                                            </template>
+                                                            <template if:true={commercialPlanDetailField.isLookUp}>
+                                                                <a href={commercialPlanDetailField.link}
+                                                                    target="_blank">
+                                                                    <div style="text-align: left;">
+                                                                        {commercialPlanDetailField.fieldValue}
+                                                                    </div>
+                                                                </a>
+                                                            </template>
+                                                            <template if:true={commercialPlanDetailField.isDate}>
+                                                                <template if:false={commercialPlanDetailField.isText}>
+                                                                    <lightning-formatted-date-time year="numeric"
+                                                                        month="numeric" day="numeric"
+                                                                        value={commercialPlanDetailField.fieldValue}
+                                                                        style="text-align: left;">
+                                                                    </lightning-formatted-date-time>
+                                                                </template>
+                                                            </template>
+                                                            <template if:true={commercialPlanDetailField.fieldValue}>
+                                                                <template if:true={commercialPlanDetailField.isImg}>
+                                                                    <img class="slds-align_absolute-center"
+                                                                        style="cursor: pointer; aspect-ratio: 16 / 9; width: 100px !important;"
+                                                                        src={commercialPlanDetailField.fieldValue}
+                                                                        onclick={handleImgViewer}
+                                                                        data-id={cpd.productId}>
+                                                                </template>
+                                                            </template>
+                                                        </td>
+                                                    </template>
+                                                </tr>
+                                            </template>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </template>
+                            <!-- GRID view-->
+                            <template if:true={isGrid}>
+                                <div class="TableDiv grid slds-scrollable">
+                                    <ul class="slds-has-dividers_around-space slds-grid slds-wrap">
+                                        <template for:each={cpdDataList} for:item="cpd" for:index="index">
+                                            <li class="slds-m-left_x-small slds-item liClass"
+                                                key={cpd.commercialPlanDetail.Id}
+                                                style="width: 24%; border-color:green;background-color:#ffffff;">
+                                                <!-- slds-col  -->
+                                                <article class="slds-tile slds-tile_board">
+                                                    <div
+                                                        class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+                                                        <h3 class="slds-tile__title slds-wrap slds-truncate slds-col">
+                                                            <a href={cpd.Link} target="_blank" class="">
+                                                                {cpd.LinkVal}
+                                                                </p>
+                                                                {cpd.LinkVal1}
+                                                                </p>
+                                                                {cpd.LinkVal2}
+                                                                </p>
+                                                                {cpd.LinkVal3}</p>
+                                                                {cpd.LinkVal4}
+                                                                </p>
+                                                            </a>
+                                                        </h3>
+                                                        <template if:true={cpd.urlImg}>
+                                                            <img class="slds-col slds-align_absolute-center"
+                                                                style="cursor: pointer;aspect-ratio: 16 / 9; width: 100px !important;"
+                                                                src={cpd.urlImg} onclick={handleImgViewer}
+                                                                data-id={cpd.productId}>
+                                                        </template>
+                                                        <template if:false={cpd.urlImg}>
+                                                            <div style="aspect-ratio: 16 / 9; width: 100px !important;">
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </article>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <!--Table Footer Start-->
+                    <div id="footer" class="paginationDiv slds-grid slds-p-around_small footerPage"
+                        style="border: 0; border-top: 1px solid #e5e5e5;">
+                        <lightning-combobox options={pageSizeOptions} value={pageSize} onchange={handlePageSize}
+                            dropdown-alignment="bottom-left" variant="label-hidden"
+                            class="slds-size_xx-small slds-var-p-right_small">
+                        </lightning-combobox>
+                        <lightning-button-group class="slds-var-p-right_small slds-wrap">
+                            <lightning-button label={Labels.LBL_First} disabled if:true={previousDisabled}>
+                            </lightning-button>
+                            <lightning-button label={Labels.LBL_First} onclick={first} if:false={previousDisabled}>
+                            </lightning-button>
+                            <lightning-button label={Labels.LBL_Previous} disabled if:true={previousDisabled}>
+                            </lightning-button>
+                            <lightning-button label={Labels.LBL_Previous} onclick={previous}
+                                if:false={previousDisabled}>
+                            </lightning-button>
+                            <lightning-button label={Labels.LBL_Next} disabled if:true={nextDisabled}>
+                            </lightning-button>
+                            <lightning-button label={Labels.LBL_Next} onclick={next} if:false={nextDisabled}>
+                            </lightning-button>
+                            <lightning-button label={Labels.LBL_Last} disabled if:true={nextDisabled}>
+                            </lightning-button>
+                            <lightning-button label={Labels.LBL_Last} onclick={last} if:false={nextDisabled}>
+                            </lightning-button>
+                        </lightning-button-group>
+                        <lightning-badge label={paginationBadge}></lightning-badge>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <!-- promo detail section: Filter model-->
+    <template if:true={isFilterOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            style="z-index: 99999;" aria-describedby="modal-content-id-1"
+            class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-grid slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                    onclick={toggleFilter}>
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close">
+                        </use>
+                    </svg>
+                    <span class="slds-assistive-text">{Labels.LBL_Cancel}</span>
+                </button>
+                <div class="slds-card">
+                    <div class="slds-page-header">
+                        <div class="slds-grid">
+                            <div class="slds-card__header-title slds-p-around_xx-small">
+                                {Labels.LBL_Filter}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-scrollable slds-scrollable_y slds-is-relative slds-p-horizontal_medium"
+                        style="height:400px; background-color: white;">
+                        <template for:each={filterData} for:item="filter">
+                            <template if:true={filter.isPicklist}>
+                                <lightning-checkbox-group label={filter.fieldLabel} key={filter.fieldApiName}
+                                    name={filter.fieldApiName} data-field={filter.fieldApiName}
+                                    data-index={filter.fieldIndex} options={filter.picklist} onchange={handleFieldEdits}
+                                    value={filter.picklistValue}>
+                                </lightning-checkbox-group>
+                            </template>
+                            <template if:true={filter.isDouble}>
+                                <div class="slds-grid" key={filter.fieldApiName}>
+                                    <template for:each={filter.valueObject} for:item="filterValue" for:index="filterDoubleIndex">
+                                        <div class="slds-col slds-m-around--xxx-small" key={filter.fieldApiName}>
+                                            <lightning-input label={filter.fieldLabel} name={filter.fieldApiName}
+                                                data-field={filter.fieldApiName} data-index={filter.fieldIndex}
+                                                data-findex ={filterDoubleIndex} placeholder={filterValue.label}
+                                                data-isnumber="true" type="number" onchange={handleFieldEdits} class={filterValue.class}
+                                                formatter="decimal" step=".0001" value={filterValue.value} variant={filterValue.varient}>
+                                            </lightning-input>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                            <template if:true={filter.isPercent}>
+                                <div class="slds-grid" key={filter.fieldApiName}>
+                                    <template for:each={filter.valueObject} for:item="filterValue" for:index="filterDoubleIndex">
+                                        <div class="slds-col slds-m-around--xxx-small" key={filter.fieldApiName}>
+                                            <lightning-input label={filter.fieldLabel} placeholder={filterValue.label} name={filter.fieldApiName}
+                                                data-index={filter.fieldIndex} data-field={filter.fieldApiName}
+                                                data-findex ={filterDoubleIndex} class={filterValue.class}
+                                                type="numer" onchange={handleFieldEdits} formatter="percent" step="0.01"
+                                                value={filterValue.value} variant={filterValue.varient}>
+                                            </lightning-input>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                            <template if:true={filter.isBoolean}>
+                                <lightning-input key={filter.fieldApiName} label={filter.fieldLabel}
+                                    data-index={filter.fieldIndex} name={filter.fieldApiName}
+                                    data-field={filter.fieldApiName} type="checkbox" checked={filter.value}
+                                    onchange={handleFieldEdits} value={filter.value}>
+                                </lightning-input>
+                            </template>
+                            <template if:true={filter.isText}>
+                                <lightning-input key={filter.fieldApiName} label={filter.fieldLabel}
+                                    data-index={filter.fieldIndex} name={filter.fieldApiName}
+                                    data-field={filter.fieldApiName} type="text" onchange={handleFieldEdits}
+                                    value={filter.value}>
+                                </lightning-input>
+                            </template>
+                            <template if:true={filter.isReference}>
+                                <template if:false={filter.load}>
+                                    <lightning-record-edit-form key={filter.fieldApiName}
+                                        object-api-name={filter.ObjectAPI}>
+                                        <lightning-input-field field-name={filter.fieldApiName}
+                                            label={filter.fieldLabel} data-index={filter.fieldIndex}
+                                            name={filter.fieldApiName} data-field={filter.fieldApiName}
+                                            value={filter.selectedValue} variant="label-stacked"
+                                            onchange={handleFieldEdits}>
+                                        </lightning-input-field>
+                                    </lightning-record-edit-form>
+                                </template>
+                                <template if:true={filter.load}>
+                                    <lightning-spinner key={filter.fieldApiName} variant="brand" size="small">
+                                    </lightning-spinner>
+                                </template>
+                                <template for:each={filter.referenceValues} for:item="val">
+                                    <lightning-pill key={val.id} data-id={val.id} label={val.name}
+                                        data-index={filter.fieldIndex} onremove={handleRemoveFilter}
+                                        class="slds-m slds-m-bottom_xx-small slds-m-right_xx-small"
+                                        style="display: inline-grid;"></lightning-pill>
+                                </template>
+                            </template>
+                            <template if:true={filter.isDate}>
+                                <div class="slds-grid" key={filter.fieldApiName}>
+                                    <template for:each={filter.valueObject} for:item="filterValue" for:index="filterDoubleIndex">
+                                        <div class="slds-col slds-m-around--xxx-small" key={filter.fieldApiName}>
+                                            <lightning-input label={filter.fieldLabel} data-index={filter.fieldIndex}
+                                                data-findex ={filterDoubleIndex} placeholder={filterValue.label} variant={filterValue.varient}
+                                                name={filter.fieldApiName} data-field={filter.fieldApiName} type="date" class={filterValue.class}
+                                                onchange={handleFieldEdits} value={filterValue.value}>
+                                            </lightning-input>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                            <template if:true={filter.isDateTime}>
+                                <div class="slds-grid" key={filter.fieldApiName}>
+                                    <template for:each={filter.valueObject} for:item="filterValue" for:index="filterDoubleIndex">
+                                        <div class="slds-col slds-m-around--xxx-small" key={filter.fieldApiName}>
+                                            <lightning-input label={filter.fieldLabel} data-index={filter.fieldIndex}
+                                                name={filter.fieldApiName} data-field={filter.fieldApiName}
+                                                data-findex ={filterDoubleIndex} placeholder={filterValue.label} class={filterValue.class}
+                                                type="datetime" onchange={handleFieldEdits} value={filterValue.value} variant={filterValue.varient}>
+                                            </lightning-input>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <!-- <lightning-button label={Labels.LBL_Cancel} title={Labels.LBL_Cancel} onclick={toggleFilter}>
+                    </lightning-button> -->
+                    <lightning-button onclick={filterReset} label={Labels.LBL_Reset}
+                        class="slds-var-p-right_x-small slds-p-around_xx-small"></lightning-button>
+                    <lightning-button onclick={getPromoFiltered} label={Labels.LBL_Search}
+                        class="slds-var-p-right_x-small slds-p-around_xx-small" variant="brand">
+                    </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- calendar section-->
+    <!-- calendar section: Full Calendar -->
+    <div class="calendarClass mainContainer slds-card" style="height: 100%;">
+        <div class="pageHeaderCal negoptimHeader slds-page-header">
+            <!-- LAYOUT GRID -->
+            <div class="slds-grid">
+                <!-- GRID COL -->
+                <div class="slds-col slds-has-flexi-truncate">
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div class="slds-media__figure">
+                            <lightning-icon icon-name="standard:event" alternative-text="Calendar" title="Calendar">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-media__body">
+                            <p class="slds-text-title_caps slds-line-height_reset">
+                                Promo Calendar
+                            </p>
+                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                Event
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                    <div role="group">
+                        <!-- VIEWS  -->
+                        <lightning-button-icon-stateful icon-name="utility:event" onclick={viewMode}
+                            value="CalenderView" variant="border-filled" class="slds-var-p-right_xx-small"
+                            selected={isCalender}>
+                        </lightning-button-icon-stateful>
+
+                        <lightning-button-icon-stateful icon-name="utility:list" onclick={viewMode} value="List"
+                            selected={isList} variant="border-filled" class="slds-var-p-right_xx-small">
+                        </lightning-button-icon-stateful>
+
+                        <lightning-button-icon-stateful icon-name="utility:apps" onclick={viewMode} value="Grid"
+                            selected={isGrid} variant="border-filled" class="slds-var-p-right_xx-small">
+                        </lightning-button-icon-stateful>
+                        <!-- END VIEWS -->
+                        <lightning-button-icon-stateful icon-name="utility:refresh" value="fullcalendar"
+                            onclick={handleRefresh} class="slds-var-p-right_xx-small"></lightning-button-icon-stateful>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="slds-grid slds-wrap"
+                style="background:#ffffff; padding-bottom:0.5rem;padding-left:0.5rem;padding-right:0.5rem;padding-top:0.5rem;overflow-y:auto">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-button-group" role="group">
+                        <button class="slds-var-p-right_xx-small slds-button slds-button_icon"
+                            onclick={fullCalendarToday} style="margin-right:1em">
+                            <lightning-icon icon-name="standard:today" alternative-text="Today" size="small">
+                            </lightning-icon>
+                        </button>
+                        <button
+                            class="slds-m-right--x-small slds-var-p-right_xx-small slds-box_border slds-button slds-button_icon"
+                            onclick={fullCalendarDailyViewHandler}>
+                            <lightning-icon icon-name="utility:dayview" alternative-text="Day view" size="small">
+                            </lightning-icon>
+                        </button>
+                        <button
+                            class="slds-m-right--x-small slds-var-p-right_xx-small slds-box_border slds-button slds-button_icon"
+                            onclick={fullCalendarWeeklyViewHandler}>
+                            <lightning-icon icon-name="utility:weeklyview" alternative-text="Weekly View" size="small">
+                            </lightning-icon>
+                        </button>
+                        <button class="slds-var-p-right_xx-small slds-box_border slds-button slds-button_icon"
+                            onclick={fullCalendarMonthlyViewHandler}>
+                            <lightning-icon icon-name="utility:monthlyview" alternative-text="Monthly View"
+                                size="small">
+                            </lightning-icon>
+                        </button>
+                    </div>
+                </div>
+                <!-- <div class="slds-col slds-size_1-of-3 slds-align_absolute-center">
+                    <h2 class="slds-text-heading_medium">{calendarLabel}</h2>
+                </div> -->
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-clearfix">
+                        <div class="slds-float_right">
+                            <div class="slds-button-group" role="group">
+                                <button class="slds-m-right--x-small slds-box_border slds-button slds-button_icon"
+                                    onclick={fullCalendarPreviousHandler}>
+                                    <lightning-icon icon-name="utility:chevronleft" alternative-text="Previous"
+                                        size="small">
+                                    </lightning-icon>
+                                </button>
+                                <div class="slds-col">
+                                    <h2 class="slds-m-right--x-small slds-text-heading_medium">{calendarLabel}</h2>
+                                </div>
+                                <button class="slds-box_border slds-button slds-button_icon"
+                                    onclick={fullCalendarNextHandler}>
+                                    <lightning-icon icon-name="utility:chevronright" alternative-text="Next"
+                                        size="small">
+                                    </lightning-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="background:#ffffff;" class="slds-grid">
+            <div class="calendar" lwc:dom="manual" ontouchmove={fullCalendarHandleScroll}
+                onscroll={fullCalendarHandleScroll}></div>
+        </div>
+    </div>
+    <!-- calendar section: Custom Calendar -->
+    <template if:true={isRecordPage}>
+        <div class="calendarClass mainContainer" style="height: 100%;">
+            <div class="pageHeaderCal negoptimHeader slds-page-header">
+                <!-- LAYOUT GRID -->
+                <div class="slds-grid">
+                    <!-- GRID COL -->
+                    <div class="slds-col slds-has-flexi-truncate">
+                        <div class="slds-media slds-no-space slds-grow">
+                            <div class="slds-media__figure">
+                                <lightning-icon icon-name="standard:settings" alternative-text="Settings"
+                                    title="Settings">
+                                </lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <p class="slds-text-title_caps slds-line-height_reset">
+                                    {Labels.LBL_PromoCalendar_Title3}
+                                </p>
+                                <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">
+                                    {Labels.LBL_PromoCalendar_Title3}
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                        <div role="group">
+                            <!-- VIEWS  -->
+                            <!--<lightning-button-icon-stateful icon-name="utility:event" onclick={viewMode}
+                                value="CalenderView" variant="border-filled" class="slds-var-p-right_xx-small"
+                                selected={isCalender}>
+                            </lightning-button-icon-stateful>
+
+                            <lightning-button-icon-stateful icon-name="utility:list" onclick={viewMode} value="List"
+                                selected={isList} variant="border-filled" class="slds-var-p-right_xx-small">
+                            </lightning-button-icon-stateful>
+
+                            <lightning-button-icon-stateful icon-name="utility:apps" onclick={viewMode} value="Grid"
+                                selected={isGrid} variant="border-filled" class="slds-var-p-right_xx-small">
+                            </lightning-button-icon-stateful> -->
+                            <!-- END VIEWS -->
+                            <div class="slds-grid">
+                                <lightning-combobox class="slds-var-p-right_xx-small sld-col" variant="label-hidden"
+                                    label={referenceYearObj.fieldLabel} name={referenceYearObj.fieldName}
+                                    data-field={referenceYearObj.pickListValues}
+                                    options={referenceYearObj.pickListValues} onchange={handleYearFieldChange}
+                                    value={referenceYear}>
+                                </lightning-combobox>
+                                <lightning-button-icon-stateful icon-name="utility:refresh" onclick={handleRefresh}
+                                    class="slds-var-p-right_xx-small sld-col" value="CustomCalendar">
+                                </lightning-button-icon-stateful>
+                                <lightning-button-icon-stateful icon-name="utility:filterList" onclick={toggleFilter}
+                                    selected={isFilterOpen} variant="border-filled"
+                                    class="slds-var-p-right_xx-small sld-col">
+                                </lightning-button-icon-stateful>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mainDiv">
+                <div class="slds-card">
+                    <div class="slds-grid tableClass" style="height: 70vh;">
+                        <template if:true={LoadingFullCal}>
+                            <div class="slds-spinner_container">
+                                <div class="loader slds-spinner_container slds-align--absolute-center">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </template>
+                        <div class="slds-col slds-is-relative slds-scrollable">
+                            <table
+                                class="initial-table initialtable TableDiv slds-table slds-table_bordered slds-tree slds-table_tree slds-no-row-hover slds-table_col-bordered"
+                                style="width: 0 !important; ">
+                                <thead style="position: sticky; top: 0px; z-index: 5;">
+                                    <tr>
+                                        <th rowspan="3"
+                                            style="background-color: #F7FFC9;text-align: center;width: 300px !important;"
+                                            class="thHeader slds-border_right sticky-header slds-text-align--center">
+                                            {CPNameLabel}
+                                        </th>
+                                        <th colspan={yearObj.colSpanN}
+                                            style="background-color: #F7FFC9;text-align: center;border-left:1px solid; border-left-color:#c9c9c9"
+                                            class="sticky-header">
+                                            {referenceYear}
+                                        </th>
+                                        <th if:true={yearObj.hasN1} colspan={yearObj.colSpanN1}
+                                            style="background-color: #F7FFC9;text-align: center; border-left: 3px solid; border-left-color: #c9c9c9;" class="sticky-header">
+                                            {yearN1}
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <template for:each={yearObj.columnsMonth} for:item="label">
+                                            <th colspan={label.col} key={label.label}
+                                                style={label.style}
+                                                class="sticky-header">
+                                                {label.label}
+                                            </th>
+                                        </template>
+                                        <template if:true={yearObj.hasN1} for:each={yearObj.columnsMonthN1}
+                                            for:item="label">
+                                            <th colspan={label.col} key={label.label} style={label.style}
+                                                class="sticky-header">
+                                                {label.label}
+                                            </th>
+                                        </template>
+                                    </tr>
+                                    <tr>
+                                        <template for:each={yearObj.value} for:item="m">
+                                            <template for:each={m.nbrsOfWeek} for:item="item">
+                                                <th key={item.weekNum}
+                                                    style={item.style}
+                                                    class="thClass2 thClass3 sticky-header">
+                                                    {item.weekNum}
+                                                </th>
+                                            </template>
+                                        </template>
+                                        <template if:true={yearObj.hasN1} for:each={yearObj.valueN1} for:item="m">
+                                            <template for:each={m.nbrsOfWeek} for:item="item">
+                                                <th key={item.weekNum}
+                                                    style={item.style}
+                                                    class="thClass2 thClass3 sticky-header">
+                                                    {item.weekNum}
+                                                </th>
+                                            </template>
+                                        </template>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template if:true={noDataToDisplay}>
+                                        <tr>
+                                            <td colspan={yearObj.colSpanN}
+                                                class="slds-text-align_center slds-text-color_error slds-text-heading_small">
+                                                {Labels.LBL_No_Item_To_Display}
+                                            </td>
+                                        </tr>
+                                    </template>
+                                    <template if:false={noDataToDisplay}>
+                                        <template for:each={campaignList} for:item="ele" for:index="cpIndex">
+                                            <tr key={ele.cp.Id} aria-level="1" style="height: 30px"
+                                                class={ele.cp.rowLoadClass}>
+                                                <td style="background-color: white;width: 300px !important;" class="slds-border--right">
+                                                    <div class="slds-grid">
+                                                        <div style={ele.cp.getChevronStyle}>
+                                                            <lightning-button-icon size="small" variant="bare"
+                                                                data-id={ele.cp.Id} icon-name="utility:chevronright"
+                                                                onclick={openCampaignData} data-index={cpIndex}>
+                                                            </lightning-button-icon>
+                                                        </div>
+                                                        <div class="slds-p-left_x-small">
+                                                            <a href={ele.cp.Link} target="_blank">
+                                                                {ele.cp.Name}
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="tdClass"
+                                                    style="font-size: 11px;max-width: 35px;min-width: 35px;height: 35px;padding: 0px">
+                                                    <div class="gantt-bar" style={ele.cp.negoptimStyle}
+                                                        onclick={openPromoDetailView} data-id={ele.cp.Id}>
+                                                    </div>
+                                                </td>
+                                                <template for:each={tdList} for:item="tditem">
+                                                    <td key={tditem.index} class="tdClass"
+                                                        style={tditem.style}>
+                                                    </td>
+                                                </template>
+                                            </tr>
+                                            <template for:each={ele.operationList} for:item="oper"
+                                                for:index="operIndex">
+                                                <tr key={oper.operation.Id} aria-level="2" style="height: 30px"
+                                                    class={oper.operation.rowLoadClass}>
+                                                    <td class="slds-text-align_center slds-border--right" style="background-color: white;">
+                                                        <div class="slds-grid slds-m-left--large">
+                                                            <div style={oper.operation.getChevronStyle}>
+                                                                <lightning-button-icon size="small" variant="bare"
+                                                                    data-id={ele.cp.Id} data-operid={oper.operation.Id}
+                                                                    icon-name="utility:chevronright"
+                                                                    onclick={openOperationData} data-index={operIndex}
+                                                                    data-cpindex={cpIndex}>
+                                                                </lightning-button-icon>
+                                                            </div>
+                                                            <div class="slds-p-left_x-small slds-p-top_xx-small">
+                                                                <a href={oper.operation.Link} target="_blank">
+                                                                    {oper.operation.Name}
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="tdClass"
+                                                        style="font-size: 11px;max-width: 35px;min-width: 35px;height: 35px;padding: 0px">
+                                                    </td>
+                                                    <template for:each={tdList} for:item="tditem">
+                                                        <td key={tditem.index} class="tdClass"
+                                                            style={tditem.style}>
+                                                        </td>
+                                                    </template>
+                                                </tr>
+                                                <template for:each={oper.cpd} for:item="cpdItem" for:index="cpdIndex">
+                                                    <tr key={cpdItem.Id} aria-level="3" class={ele.cp.classList}
+                                                        style="height: 30px">
+                                                        <td class="slds-tree__item wrapped-content slds-border--right" style="background-color: white; height: 35px;" >
+                                                            <a href={cpdItem.Link} target="_blank">
+                                                                {cpdItem.Name}
+                                                            </a>
+                                                        </td>
+                                                        <td class="tdClass"
+                                                            style="font-size: 11px;max-width: 35px;min-width: 35px;height: 35px;padding: 0px">
+                                                            <div class="gantt-bar" style={cpdItem.negoptimStyle}
+                                                                onclick={handleClickDetail} data-id={cpdItem.Id}
+                                                                data-cp={ele.cp.Id} title={cpdItem.caption}>
+                                                            </div>
+                                                        </td>
+                                                        <template for:each={tdList} for:item="tditem">
+                                                            <td key={tditem.index} class="tdClass"
+                                                                style={tditem.style}>
+                                                            </td>
+                                                        </template>
+                                                    </tr>
+                                                </template>
+                                                <template if:false={Loading}>
+                                                    <template if:true={isFilterResult}>
+                                                        <template if:false={oper.operation.isHideLoadMore}>
+                                                            <template if:true={oper.operation.isOpen}>
+                                                                <tr key={oper.operation.Id} aria-level="3"
+                                                                    class={ele.cp.classList} style="height: 30px">
+                                                                    <td class="slds-tree__item slds-border--right" style="background-color: white;width: 100% !important; height: 35px;" >
+                                                                        <a onclick={loadMoreHandler}
+                                                                            data-operid={oper.operation.Id}
+                                                                            data-index={operIndex}
+                                                                            data-cpindex={cpIndex}
+                                                                            data-id={oper.operation.Id}>
+                                                                            {Labels.LBL_Load_More}
+                                                                        </a>
+                                                                    </td>
+                                                                    <td class="tdClass"
+                                                                        style="font-size: 11px;max-width: 35px;min-width: 35px;height: 35px;padding: 0px">
+                                                                    </td>
+                                                                    <template for:each={tdList} for:item="tditem">
+                                                                        <td key={tditem.index} class="tdClass"
+                                                                            style={tditem.style}>
+                                                                        </td>
+                                                                    </template>
+                                                                </tr>
+                                                            </template>
+                                                        </template>
+                                                    </template>
+                                                </template>
+                                            </template>
+                                            <template for:each={ele.cpd} for:item="cpd" for:index="cpdIndex">
+                                                <tr key={cpd.Id} aria-level="2" class={ele.cp.classList}
+                                                    style="height: 30px">
+                                                    <td
+                                                        class="wrapped-content slds-text-align_center slds-border_right slds-m-left--large">
+                                                        <a href={cpd.Link} target="_blank">
+                                                            {cpd.Name}
+                                                        </a>
+                                                    </td>
+                                                    <td class="tdClass"
+                                                        style="font-size: 11px;max-width: 35px;min-width: 35px;height: 35px;padding: 0px">
+                                                        <div class="gantt-bar" style={cpd.negoptimStyle}
+                                                            onclick={handleClickDetail} data-id={cpd.Id}
+                                                            data-cp={ele.cp.Id} title={cpd.caption}>
+                                                        </div>
+                                                    </td>
+                                                    <template for:each={tdList} for:item="tditem">
+                                                        <td key={tditem.index} class="tdClass"
+                                                            style={tditem.style}>
+                                                        </td>
+                                                    </template>
+                                                </tr>
+                                            </template>
+                                        </template>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- DETAIL TAB -->
+                        <template if:true={isDetailPageOpen}>
+                            <div class="slds-card grid-area slds-col slds-size_1-of-3 gridSettings"
+                                style="position: relative;">
+                                <template if:true={LoadingDetail}>
+                                    <div class="slds-spinner_container">
+                                        <div class="loader slds-spinner_container slds-align--absolute-center">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template if:false={LoadingDetail}>
+                                    <div class="slds-p-around_medium slds-border_bottom detailHeader">
+                                        <a href={recordCPD.Link}
+                                            target="_blank">{recordCPD.commercialPlanDetail.Name}</a>
+                                        <div title="aaea"
+                                            style="max-width: 320px; white-space: unset; text-overflow: ellipsis; overflow: hidden;">
+                                            {CPDLabel}
+                                        </div>
+                                        <div class="slds-p-around--medium"
+                                            style="position: absolute; top: 0; right: 0;">
+                                            <lightning-button-icon variant="bare" icon-name="utility:close"
+                                                onclick={closeDetailButton}>
+                                            </lightning-button-icon>
+                                        </div>
+                                    </div>
+                                    <!-- <template if:false={recordCPD.urlImg}>
+                                        <div class="slds-carousel">
+                                            <div class="slds-carousel__stage">
+                                                <div class="slds-carousel__panels" style="transform:translateX(-0%)">
+                                                    <div id="content-id-01" class="slds-carousel__panel" role="tabpanel"
+                                                        aria-hidden="false" aria-labelledby="indicator-id-01">
+                                                        <div class="slds-carousel__panel-action" tabindex="0"> -->
+                                    <!-- <div if:true={recordCPD.urlImg} class="slds-carousel__image">
+                                                            <img src={recordCPD.urlImg} />
+                                                        </div> -->
+                                    <!-- <div class="slds-carousel__content">
+                                                                <h2 class="slds-carousel__content-title">Promotion
+                                                                    {recordCPD.commercialPlanDetail.Product__r.Name}</h2>
+                                                                <p>PAS D'IMAGE </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template> -->
+                                    <!-- <template if:true={recordCPD.urlImg}> -->
+                                    <div class="slds-p-around--medium prodLabelClass">
+                                        <!-- <lightning-formatted-rich-text> -->
+                                        <div class="slds-carousel__content-title slds-align_absolute-center">
+                                            <p class="slds-text-align_center">{Labels.LBL_Promotion} <a
+                                                    href={recordCPD.prodLink}
+                                                    target="_blank">{recordCPD.productName}</a></p>
+                                        </div>
+                                        <div style="min-height: 50px; max-height:50px; height:50px">
+                                            <lightning-record-edit-form object-api-name="Product2"
+                                                record-id={recordCPD.productId}>
+                                                <lightning-output-field field-name={logoField}
+                                                    class="slds-align_absolute-center"
+                                                    style="cursor: pointer;max-width: 250px;max-height: 250px;"
+                                                    variant="label-hidden">
+                                                </lightning-output-field>
+                                            </lightning-record-edit-form>
+                                        </div>
+                                        <!-- </lightning-formatted-rich-text> -->
+                                        <!-- <img class="slds-align_absolute-center"
+                                                style="cursor: pointer; aspect-ratio: 16 / 9;max-width: 250px;max-height: 250px;"
+                                                src={recordCPD.urlImg} onclick={handleImgViewer}
+                                                data-id={recordCPD.commercialPlanDetail.Product__c}> -->
+                                    </div>
+                                    <!-- </template> -->
+                                    <!-- TAB SET -->
+                                    <div class="detailBody">
+                                        <lightning-tabset>
+                                            <lightning-tab label={Labels.Informations} size="Large"
+                                                class="slds-scrollable_y lightningTabClass" style={infoHeight}>
+                                                <div class="slds-grid slds-wrap ">
+                                                    <template for:each={displayedFields} for:item="fieldSet">
+                                                        <div class="slds-col slds-size_1-of-2 slds-p-left_small"
+                                                            key={fieldSet.fieldName}>
+                                                            <lightning-record-form object-api-name={CPDObject}
+                                                                record-id={recordCPD.commercialPlanDetail.Id}
+                                                                fields={fieldSet.fieldName} mode="readonly">
+                                                            </lightning-record-form>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </lightning-tab>
+                                        </lightning-tabset>
+                                    </div>
+                                </template>
+                            </div>
+                            <!-- <div class="slds-col slds-size_1-of-3 gridSettings"> -->
+
+
+                            <!-- </div> -->
+                        </template>
+                    </div>
+                    <!--Table Footer Start-->
+                    <div id="footer2" class="paginationDiv slds-grid slds-p-around_small footerPage"
+                        style="border: 0; border-top: 1px solid #e5e5e5;">
+                        <lightning-button-group class="slds-var-p-right_small slds-wrap">
+                            <lightning-button label={Labels.LBL_First} disabled if:true={previousDisabled}>
+                            </lightning-button>
+                            <lightning-button label={Labels.LBL_First} onclick={firstCC} if:false={previousDisabled}>
+                            </lightning-button>
+                            <lightning-button label={Labels.LBL_Previous} disabled if:true={previousDisabled}>
+                            </lightning-button>
+                            <lightning-button label={Labels.LBL_Previous} onclick={previous}
+                                if:false={previousDisabledCC}>
+                            </lightning-button>
+                            <lightning-button label={Labels.LBL_Next} disabled if:true={nextDisabled}>
+                            </lightning-button>
+                            <lightning-button label={Labels.LBL_Next} onclick={nextCC} if:false={nextDisabled}>
+                            </lightning-button>
+                            <lightning-button label={Labels.LBL_Last} disabled if:true={nextDisabled}>
+                            </lightning-button>
+                            <!-- <lightning-button label={Labels.LBL_Last} onclick={lastCC} if:false={nextDisabledCC}>
+                            </lightning-button> -->
+                        </lightning-button-group>
+                        <lightning-badge label={paginationBadgeCC}></lightning-badge>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>TESTING</label>
+    <protected>false</protected>
+    <values>
+        <field>Calendar_Setting__c</field>
+        <value xsi:type="xsd:string">{&quot;startDate&quot;:&quot;&quot;,&quot;endDate&quot;:&quot;&quot;,&quot;pickListValue&quot;:&quot;&quot;,&quot;showCalendarSettings&quot;:false}</value>
+    </values>
+    <values>
+        <field>Columns__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Compiled_Grid_JSON__c</field>
+        <value xsi:type="xsd:string">{&quot;WARNINGS&quot;:[&quot;Template Has No Fields&quot;],&quot;USERFILTERS&quot;:[],&quot;TIME_LINE_SETTINGS&quot;:{&quot;masterLookupParent&quot;:&quot;&quot;,&quot;masterLookup&quot;:&quot;&quot;,&quot;levelControl&quot;:1,&quot;isTimeLineSettings&quot;:false},&quot;STATIC_FIELDS&quot;:&quot;&quot;,&quot;SEARCHABLE_FIELDS&quot;:null,&quot;relationName&quot;:null,&quot;readOnlyCriteria&quot;:null,&quot;Quick_Actions&quot;:[],&quot;picklistValuesMap&quot;:{&quot;Status__c&quot;:{&quot;Previously Validated&quot;:&quot;Previously Validated&quot;,&quot;Validated&quot;:&quot;Validated&quot;,&quot;Request for Approval&quot;:&quot;Request for Approval&quot;,&quot;In preparation&quot;:&quot;In preparation&quot;},&quot;Fact_Client_PCB__c&quot;:{&quot;Palet(1)&quot;:&quot;Palet(1)&quot;,&quot;Palet(1/2)&quot;:&quot;Palet(1/2)&quot;,&quot;Palet(1/4)&quot;:&quot;Palet(1/4)&quot;,&quot;Box(x56)&quot;:&quot;Box(x56)&quot;,&quot;Box(x48)&quot;:&quot;Box(x48)&quot;,&quot;Box(x24)&quot;:&quot;Box(x24)&quot;,&quot;Box(x12)&quot;:&quot;Box(x12)&quot;,&quot;Box(x6)&quot;:&quot;Box(x6)&quot;,&quot;Unit&quot;:&quot;Unit&quot;},&quot;Client_Status__c&quot;:{&quot;Cplt&quot;:&quot;Complément&quot;,&quot;Opportunity&quot;:&quot;Opportunity&quot;,&quot;Probably deleted&quot;:&quot;Probably deleted&quot;,&quot;Substitute&quot;:&quot;Substitute&quot;,&quot;Decrease&quot;:&quot;Decrease&quot;,&quot;Increase&quot;:&quot;Increase&quot;,&quot;New&quot;:&quot;New&quot;,&quot;Delete&quot;:&quot;Delete&quot;,&quot;Keep&quot;:&quot;Keep&quot;},&quot;RecordTypeId&quot;:{&quot;Regular&quot;:&quot;Regular (deprecated)&quot;,&quot;Higher_Level_Packaging&quot;:&quot;Higher-Level Packaging (deprecated)&quot;},&quot;CurrencyIsoCode&quot;:{&quot;LBP&quot;:&quot;Lebanese Pound&quot;,&quot;EUR&quot;:&quot;Euro&quot;}},&quot;overrideFilter&quot;:false,&quot;objectReferenceMap&quot;:{&quot;Hierarchy__c&quot;:&quot;Hierarchy__c&quot;,&quot;HierarchyClient__c&quot;:&quot;Hierarchy__c&quot;,&quot;BusinessUnitAssCluster__c&quot;:&quot;BusinessUnit__c&quot;,&quot;Ref_Corp_Assortment__c&quot;:&quot;Assortment_Detail__c&quot;,&quot;Ref_Client_Assortment__c&quot;:&quot;Assortment_Detail__c&quot;,&quot;Ref_BU_Cluster__c&quot;:&quot;Orga_BU__c&quot;,&quot;Product_linked__c&quot;:&quot;Product2&quot;,&quot;Product__c&quot;:&quot;Product2&quot;,&quot;Last_History__c&quot;:&quot;Assortment_Detail__c&quot;,&quot;Ass_BU_Cluster__c&quot;:&quot;Orga_BU__c&quot;,&quot;Assortment_BU__c&quot;:&quot;Assortment_BU__c&quot;,&quot;LastModifiedById&quot;:&quot;User&quot;,&quot;CreatedById&quot;:&quot;User&quot;,&quot;RecordTypeId&quot;:&quot;RecordType&quot;},&quot;OBJECT_NAME&quot;:&quot;Assortment_Detail__c&quot;,&quot;Master_OBJECT_STATIC_FIELDS&quot;:&quot;&quot;,&quot;Master_OBJECT_NAME&quot;:&quot;&quot;,&quot;layoutSlogan&quot;:null,&quot;layoutLabel&quot;:&quot;TESTING&quot;,&quot;isShowFilterOnColumnHeader&quot;:false,&quot;isReadOnly&quot;:false,&quot;Include_In_List_View&quot;:false,&quot;iconSection&quot;:&quot;standard&quot;,&quot;iconName&quot;:&quot;orders&quot;,&quot;iconClass&quot;:&quot;slds-icon-standard-orders&quot;,&quot;hierarchyParentField&quot;:[&quot;&quot;],&quot;hasMaster&quot;:false,&quot;groupedField&quot;:&quot;&quot;,&quot;gridTypeValue&quot;:&quot;normal&quot;,&quot;gridLayout&quot;:{&quot;attributes&quot;:{&quot;type&quot;:&quot;Grid_Settings__mdt&quot;,&quot;url&quot;:&quot;/services/data/v65.0/sobjects/Grid_Settings__mdt/m01QH000020WXMhYAO&quot;},&quot;Id&quot;:&quot;m01QH000020WXMhYAO&quot;,&quot;Calendar_Setting__c&quot;:&quot;{\&quot;startDate\&quot;:\&quot;\&quot;,\&quot;endDate\&quot;:\&quot;\&quot;,\&quot;pickListValue\&quot;:\&quot;\&quot;,\&quot;showCalendarSettings\&quot;:false}&quot;,&quot;Time_Line_Settings__c&quot;:&quot;{\&quot;levelControl\&quot;:1,\&quot;masterLookup\&quot;:\&quot;\&quot;,\&quot;masterLookupParent\&quot;:\&quot;\&quot;,\&quot;isTimeLineSettings\&quot;:false}&quot;,&quot;DeveloperName&quot;:&quot;TESTING&quot;,&quot;MasterLabel&quot;:&quot;TESTING&quot;,&quot;Columns__c&quot;:&quot;[]&quot;,&quot;Object_Name__c&quot;:&quot;Assortment_Detail__c&quot;,&quot;Master_Object_Columns__c&quot;:&quot;[]&quot;,&quot;Icon__c&quot;:&quot;standard:orders&quot;,&quot;Filters__c&quot;:&quot;[]&quot;,&quot;ReadOnly_Criteria__c&quot;:&quot;{}&quot;,&quot;Type__c&quot;:&quot;Detail&quot;,&quot;Grid_Configuration__c&quot;:&quot;{\&quot;Default_Page_Size\&quot;:\&quot;50\&quot;,\&quot;displayAsTree\&quot;:false,\&quot;hierarchyParentField\&quot;:[\&quot;\&quot;],\&quot;displayAsGroupable\&quot;:false,\&quot;groupedField\&quot;:\&quot;\&quot;,\&quot;gridTypeValue\&quot;:\&quot;normal\&quot;,\&quot;isShowFilterOnColumnHeader\&quot;:false,\&quot;overrideFilter\&quot;:false,\&quot;Quick_Actions\&quot;:[],\&quot;actions\&quot;:{\&quot;screenFlows\&quot;:[],\&quot;quickActions\&quot;:[]}}&quot;},&quot;GRID_FIELDS&quot;:[],&quot;FILTERS&quot;:[],&quot;FILTER_FIELDS&quot;:[],&quot;ERRORS&quot;:[],&quot;displayAsTree&quot;:false,&quot;displayAsGroupable&quot;:false,&quot;Display_Order&quot;:null,&quot;Default_Page_Size&quot;:50,&quot;CALENDAR_SETTINGS&quot;:{&quot;startDate&quot;:&quot;&quot;,&quot;showCalendarSettings&quot;:false,&quot;pickListValue&quot;:&quot;&quot;,&quot;endDate&quot;:&quot;&quot;},&quot;BANNER_FIELDS&quot;:[],&quot;ALL_FIELDS&quot;:[&quot;id&quot;,&quot;currencyisocode&quot;],&quot;ALL_BANNER_FIELDS&quot;:[&quot;id&quot;],&quot;actions&quot;:{&quot;screenFlows&quot;:[],&quot;quickActions&quot;:[]}}</value>
+    </values>
+    <values>
+        <field>Filters__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Grid_Configuration__c</field>
+        <value xsi:type="xsd:string">{&quot;Display_Order&quot;:2,&quot;Include_In_List_View&quot;:true,&quot;actions&quot;:{&quot;quickActions&quot;:[],&quot;screenFlows&quot;:[]},&quot;Quick_Actions&quot;:[],&quot;overrideFilter&quot;:false,&quot;isShowFilterOnColumnHeader&quot;:false,&quot;gridTypeValue&quot;:&quot;normal&quot;,&quot;groupedField&quot;:&quot;&quot;,&quot;displayAsGroupable&quot;:false,&quot;hierarchyParentField&quot;:[&quot;&quot;],&quot;displayAsTree&quot;:false,&quot;Default_Page_Size&quot;:&quot;50&quot;}</value>
+    </values>
+    <values>
+        <field>Grid_Slogan__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">standard:orders</value>
+    </values>
+    <values>
+        <field>Master_Object_Columns__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Master_Object_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Object_Name__c</field>
+        <value xsi:type="xsd:string">Assortment_Detail__c</value>
+    </values>
+    <values>
+        <field>ReadOnly_Criteria__c</field>
+        <value xsi:type="xsd:string">{}</value>
+    </values>
+    <values>
+        <field>Relationship_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Time_Line_Settings__c</field>
+        <value xsi:type="xsd:string">{&quot;levelControl&quot;:1,&quot;masterLookup&quot;:&quot;&quot;,&quot;masterLookupParent&quot;:&quot;&quot;,&quot;isTimeLineSettings&quot;:false}</value>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:type="xsd:string">Detail</value>
+    </values>
+</CustomMetadata>

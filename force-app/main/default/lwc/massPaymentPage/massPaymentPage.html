@@ -1,0 +1,199 @@
+<template>
+    <!-- Loading -->
+    <template lwc:if={isLoading}>
+        <div class="slds-spinner_container spinnerDiv">
+            <div class="loader slds-spinner_container slds-align--absolute-center">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </template>
+    <template lwc:else>
+        <!-- Main Page -->
+        <article class="slds-card main" style="height: 100%;">
+            <!-- Header -->
+            <div class="slds-card__header slds-grid header">
+                <!-- Titles -->
+                <div class="slds-col slds-has-flexi-truncate">
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div class="slds-media__figure">
+                            <lightning-icon icon-name={pageIcon} alternative-text={componentName} title={componentName}
+                                size="medium"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body slds-p-right_small">
+                            <h2 class="header-title-container">
+                                <span class="slds-card__header-title" style="text-wrap: auto">
+                                    {labels.LBL_MassPayment_PageTitle} </span>
+                                <span style="text-wrap: auto">
+                                    {labels.LBL_MassPayment_PageSubTitle} </span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <!-- Buttons -->
+                <div class="slds-no-flex slds-p-right--x-small header-btn">
+                    <div>
+                        <button data-id="cancel" class="slds-button slds-button_neutral slds-button_stretch"
+                            aria-label={labels.LBL_Cancel} disabled={isBackButtonDisabled}
+                            onclick={handleBackButton}>{labels.LBL_Cancel}</button>
+                    </div>
+                    <div>
+                        <button data-id="confirm" class="slds-button slds-button_brand"
+                            onclick={handleCreatePayments}>{labels.LBL_MassPayment_PageNextButton}</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Table -->
+            <div class="negoptim-tablesection slds-scrollable relativeDiv">
+                <table
+                    class="sticky main-table no-help-text slds-scrollable_y slds-table slds-table_bordered slds-table_col-bordered slds-border_left slds-no-row-hover slds-border_right"
+                    style="width:100%;">
+                    <thead class="tableHeader" if:true={fieldsWrapperList.length}>
+                        <tr>
+                            <th>
+                                <div
+                                    style="text-wrap: auto; min-width: 150px; max-width: 150px; display: flex; gap: 2px;">
+                                    <div>
+                                        <lightning-input type='checkbox' variant="label-hidden"
+                                            onchange={handleSelectAll} checked={allSelected}>
+                                        </lightning-input>
+                                    </div>
+                                    <div>{labels.LBL_MassPayment_SelectedInvoice}</div>
+                                </div>
+                            </th>
+                            <template for:each={fieldsWrapperList} for:item="field" for:index="index">
+                                <th key={field.Id} style={field.style} class="centerText relativeDiv">
+                                    <div style="text-wrap: auto;">
+                                        {field.fieldLabel}
+                                    </div>
+                                </th>
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template lwc:if={recordsWrapperList.length} for:each={recordsWrapperList} for:item="record"
+                            for:index="index">
+                            <tr key={record.Id} data-index={index} data-id={record.Id}>
+                                <!-- Select check box -->
+                                <td>
+                                    <lightning-input type='checkbox' variant="label-hidden"
+                                        onchange={handleChangeInputPayment} data-index={index} data-field="selected"
+                                        checked={record.selected}>
+                                    </lightning-input>
+                                </td>
+                                <template for:each={record.columns} for:item="field">
+                                    <td key={field.Id} style={field.style} title={field.value}>
+                                        <template if:false={field.isHidden}>
+                                            <!-- Input fields -->
+                                            <template lwc:if={field.isEditable}>
+                                                <template lwc:if={field.isPicklist}>
+                                                    <lightning-combobox options={field.pickListValues}
+                                                        variant="label-hidden" value={field.value}
+                                                        data-field={field.fieldName} onchange={handleChangeInputPayment}
+                                                        data-index={index}
+                                                        onhandlechangemultipicklistvalues={handleChangePickList}>
+                                                    </lightning-combobox>
+                                                </template>
+                                                <template lwc:elseif={field.isDate}>
+                                                    <lightning-input value={field.value} type="date"
+                                                        variant="label-hidden" data-field={field.fieldName}
+                                                        data-index={index}
+                                                        onchange={handleChangeInputPayment}></lightning-input>
+                                                </template>
+                                                <template lwc:elseif={field.isNumberField}>
+                                                    <lightning-input type='number' variant="label-hidden"
+                                                        data-index={index} data-field={field.fieldName}
+                                                        value={field.value} onchange={handleChangeInputPayment}>
+                                                    </lightning-input>
+                                                </template>
+                                                <template lwc:elseif={field.isTextArea}>
+                                                    <lightning-input type='text' variant="label-hidden"
+                                                        data-field={field.fieldName} data-index={index}
+                                                        onchange={handleChangeInputPayment}>
+                                                    </lightning-input>
+                                                </template>
+                                            </template>
+                                            <!-- Display only -->
+                                            <template lwc:else>
+                                                <template lwc:if={field.isNumberField}>
+                                                    <div>
+                                                        {field.value}
+                                                    </div>
+                                                </template>
+                                                <template lwc:elseif={field.isReference}>
+                                                    {field.value}
+                                                </template>
+                                                <template lwc:elseif={field.isBoolean}>
+                                                    <label>
+                                                        <lightning-input ltype="checkbox" class="input-center"
+                                                            variant="label-hidden" checked={field.value} disabled>
+                                                        </lightning-input>
+                                                    </label>
+                                                </template>
+                                                <template lwc:elseif={field.isStatementBase}>
+                                                    <div style="text-align: left; display: flex;">
+                                                        <img style="align-self: center; width: 30px; height:30px;"
+                                                            src={table.headerIconSrc} title={table.headerLabel}
+                                                            class="slds-m-right_small" data-key={table.key}>
+                                                        <div style="align-content: center;">{field.value}</div>
+                                                    </div>
+                                                </template>
+                                                <template lwc:elseif={field.isDate}>
+                                                    <lightning-formatted-date-time value={field.value} year="numeric"
+                                                        month="2-digit" day="2-digit"></lightning-formatted-date-time>
+                                                </template>
+                                                <template lwc:else>
+                                                    {field.value}
+                                                </template>
+                                            </template>
+                                        </template>
+                                    </td>
+                                </template>
+                            </tr>
+                        </template>
+                        <!-- No record found -->
+                        <template lwc:else>
+                            <tr>
+                                <td colspan={colspanDisplayedFields}>
+                                    <div class="slds-text-heading_small"
+                                        style="height: 5vh; width: fit-content; position: sticky; left: 50%; transform: translateX(-50%);">
+                                        <p style="height: 100%; align-content: center;">
+                                            {labels.LBL_No_Item_To_Display}
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+        <!-- Pop up -->
+        <template if:true={popup.visibility}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <div class="slds-modal__header">
+                        <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate" tabindex="-1">
+                            {popup.title}</h1>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <p>{popup.body}</p>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                        <p>{popup.subBody}</p>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button data-id="cancel" class="slds-button slds-button_neutral" aria-label="Cancel and close"
+                            onclick={submitPopUp} lwc:if={popup.cancelBtn}>{popup.cancelBtn}</button>
+                        <button data-id="confirm" class={popup.submitBtnClass}
+                            onclick={submitPopUp}>{popup.submitBtn}</button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+    </template>
+</template>

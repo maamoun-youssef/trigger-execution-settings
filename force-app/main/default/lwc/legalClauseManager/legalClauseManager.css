@@ -1,0 +1,1346 @@
+/* ==================== CSS Variables (Only for custom brand colors) ==================== */
+:host {
+    --gradient: linear-gradient(0.4turn, rgb(210, 215, 48), rgb(12, 180, 186), rgb(255, 255, 255));
+    --primary: rgb(12, 180, 186);
+    --primary-dark: rgb(10, 150, 155);
+    --primary-light: rgb(230, 248, 249);
+}
+
+/* ==================== Loading State ==================== */
+.loading-container {
+    min-height: 400px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+}
+
+.loading-text {
+    color: var(--primary-dark);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+    animation: animate 1.2s linear infinite;
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0.4turn, rgb(210 215 48), rgb(12 180 186), rgb(255, 255, 255));
+}
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+}
+/* ==================== Header Section ==================== */
+
+
+.header-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.info-row {
+    line-height: 1.5;
+}
+.info-row-detail {
+    font-size: 0.8125rem;
+    color: #000000;
+}
+.info-label {
+    font-weight: 600;
+    color: #444;
+}
+
+.info-value {
+    color: #222;
+}
+
+/* ==================== Action Buttons ==================== */
+.header-action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease;
+}
+
+.header-action-btn:hover {
+    background: #f3f3f3;
+}
+
+.header-action-icon {
+    /* width: 22px;
+    height: 22px; */
+    width: 28px;
+    height: 28px;
+}
+
+.global-actions-right {
+    margin-left: auto;
+}
+
+/* ==================== Clause Styles ==================== */
+.clause-item {
+    background-color: #fafafa;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.clause-item:hover {
+    background-color: var(--primary-light);
+    border-left-color: var(--primary);
+}
+
+.clause-row-flex {
+    width: 100%;
+}
+
+/* Clause Type Styles */
+.clause-text-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000000;
+}
+
+.clause-text-subtitle {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-left: 2rem;
+}
+
+.clause-text-body {
+    font-size: 0.875rem;
+    color: #333333;
+    margin-left: 4rem;
+}
+
+.clause-type-title .clause-item {
+    border-left: 4px solid var(--primary);
+}
+
+.clause-type-subtitle .clause-item {
+    border-left: 3px solid var(--primary-dark);
+}
+
+.clause-type-body .clause-item {
+    border-left: 2px solid #e5e5e5;
+}
+
+/* Display Order Badge */
+.display-order {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    background: linear-gradient(135deg, var(--primary-light) 0%, rgba(12, 180, 186, 0.15) 100%);
+    padding: 0.375rem 0.75rem;
+    border-radius: 8px;
+    min-width: 32px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+/* ==================== Drag and Drop ==================== */
+.clause-item-wrapper.draggable {
+    cursor: move;
+}
+
+.clause-item-wrapper.dragging {
+    opacity: 0.5;
+    transform: scale(0.98);
+}
+
+.clause-item-wrapper.clause-marked-for-deletion {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: not-allowed;
+    background-color: #f2F6DE;
+}
+
+.clause-item-wrapper.clause-marked-for-deletion .clause-item-enhanced {
+    background-color: #f2F6DE;
+}
+
+/* Newly created clauses (version 0) when legal doc has supplier */
+.clause-item-wrapper.clause-newly-created,
+.clause-item-wrapper.clause-newly-created .clause-item-enhanced {
+    background-color: #d0f0f1;
+}
+
+.clause-item-wrapper.drag-over {
+    border-top: 3px solid var(--primary);
+}
+
+.drag-icon {
+    color: #706e6b;
+    transition: color 0.2s ease;
+}
+
+.clause-item-wrapper:hover .drag-icon {
+    color: var(--primary);
+}
+
+/* ==================== Edit Button ==================== */
+.edit-btn {
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: transform 0.2s ease;
+}
+
+.edit-btn:hover:not(:disabled) {
+    transform: scale(1.1);
+}
+
+.edit-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.edit-icon-img {
+    width: 20px;
+    height: 20px;
+}
+
+/* ==================== Status Badges (SLDS-based) ==================== */
+.badge-draft {
+    --slds-c-badge-color-background: #ff9800 !important;
+    background-color: #ff9800 !important;
+    background: #ff9800 !important;
+    border-color: #ff9800 !important;
+    color: white !important;
+    --slds-c-badge-text-color: #fff;
+}
+
+.badge-published-supplier {
+    --slds-c-badge-color-background: #9c27b0 !important;
+    border-color: #9c27b0 !important;
+    background-color: #9c27b0 !important;
+    background: #9c27b0 !important;
+    color: white !important;
+    --slds-c-badge-text-color: #fff !important;
+}
+
+.badge-published-legal {
+    --slds-c-badge-color-background: #009688 !important;
+    border-color: #009688 !important;
+    background-color: #009688 !important;
+    background: #009688 !important;
+    color: white !important;
+
+    --slds-c-badge-text-color: #fff !important;
+}
+
+.badge-validated {
+    --slds-c-badge-color-background: #00bcd4 !important;
+    border-color: #00bcd4 !important;
+    background-color: #00bcd4 !important;
+    background: #00bcd4 !important;
+    color: white !important;
+    --slds-c-badge-text-color: #fff !important;
+}
+.badge-validated-supplier {
+    --slds-c-badge-color-background: #3F51B5 !important;
+    border-color: #3F51B5 !important;
+    background-color: #3F51B5 !important;
+    background: #3F51B5 !important;
+    color: white !important;
+    --slds-c-badge-text-color: #fff !important;
+}
+.badge-approved {
+    --slds-c-badge-color-background: #4caf50 !important;
+    background-color: #4caf50 !important;
+    border-color: #4caf50 !important;
+    border: #4caf50 !important;
+    color: white !important;
+
+    --slds-c-badge-text-color: #fff !important;
+}
+
+.badge-rejected {
+    --slds-c-badge-color-background: #f44336 !important;
+    border-color: #f44336 !important;
+    background-color: #f44336 !important;
+    background: #f44336 !important;
+    color: white !important;
+
+    --slds-c-badge-text-color: #fff !important;
+}
+
+.badge-warning {
+    --slds-c-badge-color-background: #ffc107 !important;
+    background-color: #ffc107 !important;
+    background: #ffc107 !important;
+    border-color: #ffc107 !important;
+    color: white !important;
+
+    --slds-c-badge-text-color: #fff !important;
+}
+
+.badge-default {
+    --slds-c-badge-color-background: #9e9e9e !important;
+    background-color: #9e9e9e !important;
+    background: #9e9e9e !important;
+    border-color: #9e9e9e !important;
+    color: white !important;
+
+    --slds-c-badge-text-color: #fff !important;
+}
+.custom-badge {
+    /* font-weight: 1000; */
+    color:#009688;
+}
+.custom-badge-supplier {
+    /* font-weight: 1000; */
+    color:#9c27b0;
+}
+.wordBtn {
+    /* width:25px;
+    height:25px; */
+    width: 34px;
+    height: 34px;
+}
+
+/* ==================== Modal Header ==================== */
+.sldsModalHeader {
+    background: var(--gradient);
+}
+
+.sldsModalHeader,
+.slds-modal__title {
+    color: white;
+}
+/* ==================== Supplier Table ==================== */
+.supplier-modal-content {
+    min-height: 500px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.supplier-table-container {
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+.supplier-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.supplier-table .checkbox-col {
+    width: 40px;
+}
+
+.supplier-link {
+    color: #0176d3;
+    text-decoration: none;
+}
+
+.supplier-link:hover {
+    text-decoration: underline;
+}
+
+.supplier-row-disabled {
+    background-color: #f9f9f9;
+    opacity: 0.6;
+}
+
+.supplier-row-disabled td {
+    color: #706e6b;
+}
+
+/* ==================== Version Comparison ==================== */
+.version-column {
+    border: 1px solid #e5e5e5;
+    border-radius: 0.5rem;
+    /* overflow: hidden; */
+    overflow-y: scroll;
+    background-color: #ffffff;
+}
+
+.version-header {
+    /* border-bottom: 2px solid; */
+}
+
+.past-header {
+    /* background-color: #f0f0f0;
+    border-bottom-color: #706e6b; */
+}
+
+.current-header {
+    /* background-color: #e8f4fc;
+    border-bottom-color: #0176d3; */
+}
+
+.new-header {
+    /* background-color: var(--primary-light);
+    border-bottom-color: var(--primary); */
+}
+
+.version-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.version-selector {
+    min-width: 150px;
+    max-width: 200px;
+}
+
+.version-content {
+    max-height: 550px;
+    min-height: 450px;
+    overflow-y: auto;
+    /* background-color: #fafafa; */
+}
+
+.past-content {
+    /* background-color: #f5f5f5; */
+}
+
+.current-content {
+    /* background-color: #f8fbfd; */
+}
+
+.new-content {
+    background-color: #f9faf7;
+}
+
+.version-text {
+    font-size: 0.8125rem;
+    line-height: 1.6;
+}
+
+/* New line (insert) and deleted line backgrounds in version diff */
+.version-content .diff-insert {
+    background-color: #dcf3ee !important;
+    color: #1b5e20;
+}
+
+.version-content .diff-delete {
+    background-color: #f2f6de !important;
+    color: #b71c1c;
+    text-decoration: line-through;
+}
+
+.new-version-editor,
+.clause-rich-text-editor {
+    /* min-height: 150px; */
+    --slds-c-textarea-sizing-min-height: 400px;
+}
+
+.version-content lightning-input-rich-text {
+    --slds-c-textarea-sizing-min-height: 400px;
+}
+
+/* Version Badges */
+.header-version-badge {
+    background-color: var(--primary-dark);
+    color: white;
+    padding: 0.125rem 0.375rem;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+.header-version-badge.past-badge {
+    background-color: #6c757d;
+}
+
+.header-version-badge.current-badge {
+    background-color: #0d6efd;
+}
+
+.header-version-badge.new-badge {
+    background-color: #198754;
+}
+
+.display-only-tag {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+}
+
+/* ==================== Simple Edit View ==================== */
+.simple-edit-inline,
+.comparison-inline {
+    border-radius: 0.5rem;
+    background-color: #f7f9f9;
+    border: 2px solid var(--primary);
+    overflow: hidden;
+}
+
+.simple-edit-header,
+.comparison-header {
+    background: var(--gradient);
+}
+
+.simple-edit-title,
+.comparison-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+}
+
+.simple-edit-content,
+.comparison-columns {
+    /* background-color: #ffffff; */
+}
+
+.comparison-footer {
+    background-color: #f3f3f3;
+    border-top: 1px solid #e5e5e5;
+}
+
+.simple-edit-editor {
+    min-height: 200px;
+}
+
+.close-inline-btn {
+    --slds-c-icon-color-foreground-default: white;
+}
+
+.chatterDiv {
+    /* border: 1px solid grey;
+    border-radius: 1%;
+    height: 300px;
+    overflow: scroll;
+    background-color: white; */
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    max-height: 350px;
+    overflow-y: auto;
+    /* background-color: #f9fbfd;
+    border: 1px solid #d8dde6;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); */
+
+}
+
+.comment-header {
+    font-weight: 600;
+    font-size: 14px;
+    color: #2e3a59;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.comparison-inline .version-column {
+    min-height: 400px;
+    max-height: 500px;
+}
+
+.comparison-inline .version-content {
+    /* max-height: 450px;
+    min-height: 400px; */
+    min-height: 400px;
+    max-height: 500px;
+}
+
+/* ==================== CHATTER SIDEBAR ==================== */
+.chatter-sidebar {
+    position: fixed;
+    top: 200px;
+    bottom: 200px;
+    right: 0;
+    width: 430px;
+    max-width: 90vw;
+    height: auto;
+    background: #ffffff;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+    z-index: 9000;
+    display: flex;
+    flex-direction: column;
+    animation: slideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    transition: width 0.3s ease, height 0.3s ease, top 0.3s ease, bottom 0.3s ease;
+}
+
+/* Minimized state - shrink sidebar and stick to bottom */
+.chatter-sidebar.chatter-minimized {
+    width: 350px;
+    height: 60vh;
+    max-height: 60vh;
+    top: auto;
+    bottom: 0;
+    align-self: flex-end;
+}
+
+/* Blur effect when chatter is open - blur all clauses except the one with open chatter */
+.clauses-list:has(.chatter-open) .clause-item-wrapper:not(.chatter-open) {
+    filter: blur(3px);
+    opacity: 0.5;
+    pointer-events: none;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+/* Keep the clause with open chatter clear and focused */
+.clause-item-wrapper.chatter-open {
+    filter: none;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 10;
+    position: relative;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    transition: filter 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+}
+
+.clause-item-wrapper.chatter-open .clause-item-enhanced {
+    background-color: #ffffff;
+}
+
+/*newww*/
+.clauses-list {
+    position: relative;
+    transition: padding-right 0.3s ease;
+}
+
+/* When chatter is open, add padding to container */
+.clauses-container.chatter-open-padding {
+    padding-right: 470px;
+}
+
+/* Shift only the active clause slightly */
+.clause-item-wrapper.shift-left {
+    transform: translateX(-10px);
+    transition: transform 0.3s ease;
+    z-index: 10;
+}
+
+.clauses-list.chatter-active {
+    padding-right: 470px;
+}
+
+
+
+
+
+
+/* Fallback for browsers that don't support :has() */
+.clauses-list.chatter-active .clause-item-wrapper:not(.chatter-open) {
+    filter: blur(3px);
+    opacity: 0.5;
+    pointer-events: none;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.chatter-sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: var(--gradient);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chatter-title-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.chatter-sidebar-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    letter-spacing: 0.5px;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* When minimized, make title smaller and ensure it doesn't overflow */
+.chatter-sidebar.chatter-minimized .chatter-sidebar-title {
+    font-size: 0.9375rem;
+    max-width: 200px;
+}
+
+.chatter-sidebar.chatter-minimized .chatter-title-container {
+    gap: 0.5rem;
+}
+
+.chatter-sidebar.chatter-minimized .chatter-comment-badge {
+    flex-shrink: 0;
+}
+
+.chatter-comment-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.2s ease;
+}
+
+.chatter-comment-badge:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.chatter-comment-badge .comment-icon {
+    --slds-c-icon-color-foreground-default: white;
+    --slds-c-icon-color-foreground-hover: white;
+}
+
+.chatter-comment-badge .comment-count {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+    line-height: 1;
+}
+
+.chatter-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.chatter-minimize-btn,
+.chatter-close-btn {
+    --slds-c-icon-color-foreground-default: white;
+    --slds-c-icon-color-foreground-hover: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0.375rem;
+    border-radius: 4px;
+    min-width: 2rem;
+    min-height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chatter-minimize-btn:hover,
+.chatter-close-btn:hover {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.chatter-minimize-btn:active,
+.chatter-close-btn:active {
+    transform: scale(0.95);
+}
+
+/* When minimized, ensure content is still scrollable */
+.chatter-sidebar.chatter-minimized .chatter-sidebar-content {
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+}
+
+.chatter-sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1rem;
+    background: #fafafa;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.chatter-sidebar-content>* {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Override negoptimChatter styles when inside sidebar */
+.chatter-sidebar-content c-comment-manager {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    float: none !important;
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+    border-left: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    position: static !important;
+    z-index: auto !important;
+}
+
+.chatter-sidebar-content c-comment-manager>div {
+    max-height: none !important;
+    min-height: auto !important;
+    height: auto !important;
+    padding: 0 !important;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+}
+
+.chatter-sidebar-content c-comment-manager>* {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Fix grid gutters causing horizontal overflow */
+.chatter-sidebar-content .slds-grid.slds-gutters {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.chatter-sidebar-content .slds-grid.slds-gutters>.slds-col {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.chatter-sidebar-content .slds-col {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Active state for chatter buttons */
+.edit-btn.chatter-active {
+    background: var(--primary-light);
+    border: 1px solid var(--primary);
+}
+
+/* ==================== Portal Mode ==================== */
+.portal-header {
+    background: #ffffff;
+    border-bottom: 3px solid;
+    border-image: var(--gradient) 1;
+}
+
+.portal-illustration {
+    width: 100px;
+    height: 100px;
+    border-radius: 0.75rem;
+    object-fit: cover;
+}
+
+.portal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.portal-detail {
+    font-size: 0.8125rem;
+    color: #000000;
+}
+
+/* Progress Path */
+.path-container lightning-progress-indicator {
+    --slds-c-path-color-background: #f3f3f3;
+    --slds-c-path-color-foreground: var(--primary);
+}
+
+/* Info Cards */
+.info-card {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e5e5;
+    overflow: hidden;
+}
+
+.info-card-header {
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #fafafa;
+}
+
+.info-icon-img {
+    width: 24px;
+    height: 24px;
+}
+
+.info-card-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #7e5ba3;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-line {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+}
+
+/* ==================== Responsive ==================== */
+@media (max-width: 768px) {
+    .header .slds-grid {
+        flex-direction: column;
+    }
+
+    .comparison-columns {
+        flex-direction: column;
+    }
+
+    .comparison-inline .version-column {
+        margin-bottom: 1rem;
+    }
+}
+
+.viewBtn {
+    /* width:30px;
+    height:30px; */
+    width: 36px;
+    height: 36px;
+}
+
+
+/*hadi */
+/* Enhanced Clause Item */
+.clause-item-enhanced {
+    background-color: #ffffff;
+    /* border-radius: 12px; */
+    margin: 0px !important;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    border-left: 4px solid transparent;
+    cursor: pointer;
+    padding: 1rem 0.25rem;
+    position: relative;
+    contain: layout style paint;
+    will-change: background-color;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    min-height: 80px;
+    margin-bottom: 0 !important;
+    border-bottom: 1px solid transparent;
+    margin-top: -1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    transform: none !important;
+}
+
+.clause-item-wrapper {
+    position: relative;
+    margin-bottom: 0;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-top: -1px;
+}
+
+.clause-item-wrapper:hover .clause-item-enhanced {
+    border-bottom-color: #e0e0e0;
+}
+.clauseRow{
+    padding-right: 0 !important;
+    border-left: 1px solid #e5e7eb;
+}
+.clause-item-wrapper.clause-new-inline {
+    margin-top: 0.75rem;
+}
+
+.new-clause-inline .new-clause-editor {
+    min-height: 120px;
+}
+
+.clauses-list .clause-item-wrapper+.clause-item-wrapper {
+    margin-top: -1px;
+}
+
+.clause-item-enhanced:hover {
+    background-color: #fafafa;
+    transform: none !important;
+    position: relative;
+}
+
+.clause-item-enhanced[data-disabled="true"] {
+    cursor: not-allowed;
+    /* opacity: 0.6; */
+    background-color: #f5f5f5;
+}
+.clause-item-enhanced[data-disabled="true"] > .slds-grid {
+    opacity: 0.6;
+    pointer-events: none; 
+}
+.clause-item-enhanced[data-disabled="true"]:hover {
+    background-color: #f5f5f5;
+    transform: none;
+
+}
+
+.clause-item {
+    background-color: #ffffff;
+    margin-bottom: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 4px solid transparent;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 1rem 1.25rem;
+}
+
+.clause-item:hover {
+    background-color: #ffffff;
+    border-color: rgba(12, 180, 186, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(12, 180, 186, 0.1);
+}
+
+.clause-item[data-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background-color: #f5f5f5;
+}
+
+.clause-item[data-disabled="true"]:hover {
+    background-color: #f5f5f5;
+    border-left: 3px solid transparent;
+    transform: none;
+
+}
+
+/* ==================== CLAUSE TYPE STYLES ==================== */
+
+.clause-type-title .clause-item-enhanced,
+.clause-type-title .clause-item {
+    border-left: 4px solid #1B96FF;
+
+}
+
+.clause-type-title .clause-item-enhanced:hover,
+.clause-type-title .clause-item:hover {
+    border-left: 4px solid #1B96FF;
+}
+
+.separator {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+}
+
+.clause-text-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000000;
+    line-height: 1.4;
+    margin-left: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.clause-type-subtitle .clause-item-enhanced,
+.clause-type-subtitle .clause-item {
+    border-left: 4px solid #04844B;
+
+}
+
+.clause-type-subtitle .clause-item-enhanced:hover,
+.clause-type-subtitle .clause-item:hover {
+    border-left: 4px solid #04844B;
+}
+
+.clause-type-body .clause-item-enhanced,
+.clause-type-body .clause-item {
+    border-left: 4px solid #FFB75D;
+
+}
+
+.clause-type-body .clause-item-enhanced:hover,
+.clause-type-body .clause-item:hover {
+    border-left: 4px solid #FFB75D;
+}
+
+.clause-drag-handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.5rem;
+    cursor: grab;
+}
+
+
+.clause-drag-handle:active {
+    cursor: grabbing;
+}
+
+.clause-display {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 1rem;
+    position: relative;
+    transform: none;
+    transition: none;
+}
+
+.clause-item-enhanced:hover .clause-display,
+.clause-item-wrapper:hover .clause-display,
+.clause-item:hover .clause-display {
+    transform: none;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.clause-content {
+    position: relative;
+    transform: none;
+    transition: none;
+    /* Prevent any layout shifts */
+    flex: 1;
+    min-width: 0;
+}
+
+.clause-item-enhanced:hover .clause-content,
+.clause-item-wrapper:hover .clause-content,
+.clause-item:hover .clause-content {
+    transform: none;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.clause-type-label-placeholder {
+    color: #999;
+    font-style: italic;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.greyBackground {
+    background-color: #fafafa;
+}
+
+/* Prevent text wrapping in clause type labels */
+.clause-type-title .clause-type-label-placeholder,
+.clause-type-subtitle .clause-type-label-placeholder,
+.clause-type-body .clause-type-label-placeholder {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+
+/* Status Badge Inside Clause */
+.clause-status-inside {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-left: 1rem;
+    will-change: opacity, visibility;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    width: 100%;
+    min-height: 40px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.clause-status-inside lightning-badge {
+    cursor: pointer;
+    transition: opacity 0.15s ease, visibility 0.15s ease, transform 0.2s ease;
+    font-weight: 600;
+    padding: 0.375rem 0.75rem;
+    border-radius: 6px;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.clause-status-inside lightning-badge:hover {
+    transform: scale(1.05);
+}
+
+.actions {
+    will-change: opacity, visibility;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+    pointer-events: auto;
+}
+
+.clause-item-enhanced * {
+    pointer-events: auto;
+}
+
+.clause-item-enhanced>.slds-grid>.slds-col {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    will-change: contents;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.clause-item-enhanced>.slds-grid.slds-grid_align-spread {
+    position: relative;
+    align-items: center;
+    min-height: 80px;
+}
+
+.clause-item-enhanced .clause-status-inside,
+.clause-item-enhanced .actions {
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    min-height: 40px;
+    transition-delay: 0.05s;
+}
+
+.clause-item-enhanced[data-transitioning="true"] {
+    pointer-events: none;
+}
+
+.clause-item-enhanced[data-transitioning="true"] * {
+    pointer-events: none;
+}
+
+.clause-item-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.clause-item-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.clause-item-enhanced .actions {
+    /* min-width: 200px;
+    width: 200px;
+    max-width: 200px; */
+    /* justify-content: flex-end; */
+    /* position: absolute; */
+    /* top: 50%; */
+    /* right: 0; */
+    /* transform: translateY(-50%); */
+    /* min-height: 40px; */
+    /* z-index: 1; */
+    /* margin-left: 0;
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 0; */
+}
+
+.clause-item-enhanced .slds-col.slds-shrink-none {
+    min-width: 200px;
+    width: 200px;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: relative;
+    flex-shrink: 0;
+    justify-content: center;
+}
+
+/* Supplier comment icon: palette green #8cc58a */
+.edit-btn.has-comments {
+    position: relative;
+    background: #ead1f1;
+    border: 2px solid #9718bb;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(140, 197, 138, 0.5);
+    animation: comment-pulse 2s ease-in-out infinite;
+}
+
+.edit-btn.has-comments::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 10px;
+    height: 10px;
+    background-color: #f44336;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* BO comment icon: teal from palette (#4ec2a9) - distinct from supplier green */
+.edit-btn.comment-btn-bo.has-comments-bo {
+    position: relative;
+    background: linear-gradient(135deg, #e0f7f4 0%, #b2efe6 100%);
+    border: 2px solid #4ec2a9;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(78, 194, 169, 0.5);
+    animation: comment-pulse 2s ease-in-out infinite;
+}
+
+.edit-btn.comment-btn-bo.has-comments-bo::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 10px;
+    height: 10px;
+    background-color: #f44336;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

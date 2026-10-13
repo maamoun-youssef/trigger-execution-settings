@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Assortment BU --></label>
+    <name>Assortment_BU__c</name>
+    <relationshipLabel><!-- Assortment BU Details --></relationshipLabel>
+</CustomFieldTranslation>

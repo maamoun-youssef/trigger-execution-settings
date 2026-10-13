@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Set how deep should the system search for related linked entities --></help>
+    <label><!-- BU Navigation Depth --></label>
+    <name>BU_Navigation_Depth__c</name>
+</CustomFieldTranslation>

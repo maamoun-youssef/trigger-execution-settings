@@ -1,0 +1,9 @@
+.hatched-background {
+    background: repeating-linear-gradient(45deg, var(--c-empty-cell-color-1-background, #7AD4EF) 10px, var(--c-empty-cell-color-2-background, #FFFFFF) 15px);
+}
+
+th,
+td {
+    /* height: 30px; */
+    white-space: pre-wrap;
+}

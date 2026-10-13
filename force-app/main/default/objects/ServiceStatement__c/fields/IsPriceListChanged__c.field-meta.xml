@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsPriceListChanged__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates whether the supplier’s price list has changed compared to the previous declaration. Automatically or manually set to identify when price updates occur between two submissions.</description>
+    <label>Price List Was Changed</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

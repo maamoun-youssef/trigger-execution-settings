@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>
+        <!-- Purchases calculation base for condition in percent based on the Nego Scope, BU Scope and date filter.
+The field is automatically felt by trigger. -->
+    </help>
+    <label>CA réel - Palier</label>
+    <name>SlabBaseTOFact__c</name>
+</CustomFieldTranslation>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ref_Client_Assortment__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Ref Client Assortment</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Assortment_Detail__c.Name</field>
+            <operation>equals</operation>
+            <value></value>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Assortment_Detail__c</referenceTo>
+    <relationshipLabel>Assortment BU Details (Ref Client Assortment)</relationshipLabel>
+    <relationshipName>Assortment_BU_Details1</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_name_update_from_specific_profil</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISCHANGED( Name ) &amp;&amp; ($Profile.Name = &apos;DDC&apos;) &amp;&amp; ( RecordType.DeveloperName = &apos;Product&apos;)</errorConditionFormula>
+    <errorDisplayField>Name</errorDisplayField>
+    <errorMessage>Vous n&apos;avez pas l&apos;autorisation de modifier le nom de l&apos;article</errorMessage>
+</ValidationRule>

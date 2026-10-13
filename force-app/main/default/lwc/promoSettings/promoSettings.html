@@ -1,0 +1,320 @@
+<template>
+    <template if:true={loading}>
+        <div class="slds-spinner_container">
+            <div class="loader slds-spinner_container slds-align_absolute-center">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </template>
+    <div class="slds-card">
+        <div class="header">
+            <div class="slds-media slds-no-space slds-grow settings-header">
+                <div class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                    <lightning-icon icon-name='utility:settings' class="custom-icon-settings icon-header">
+                    </lightning-icon>
+                </div>
+                <div class="slds-media__body slds-p-around_x-small">
+                    <p class="slds-text-title slds-line-height_reset settings-subtitle">
+                        {Labels.LBL_myPromo}
+                    </p>
+                    <h1
+                        class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate settings-header-title">
+                        {Labels.LBL_Promo_Settings}
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-grid slds-grid_align-end">
+            <div class="slds-col save-button-container">
+                <lightning-button class="slds-button slds-m-right_x-small" variant="brand" label={Labels.LBL_Save}
+                    onclick={handleSave}>
+                </lightning-button>
+            </div>
+        </div>
+        <div class="slds-col slds-scrollable">
+            <lightning-tabset variant="vertical" class="tab-set-style slds-m-bottom_x-small mainHeight">
+                <lightning-tab label={Labels.LBL_Promo_Calendar} class="slds-scrollable_y">
+                    <div style={mainPanelHeight}>
+                        <div>
+                            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                <div class="sectionTitle slds-media__body">
+                                    {Labels.LBL_NS_Stg_General_Settings}
+                                </div>
+                            </div>
+                            <div class="section-Container slds-m-top_medium section-Container-m">
+                                <div class="section-label">
+                                    <label>{Labels.PromoSettings__mdt.NumberOfMonthN1__c}</label>
+                                </div>
+                                <div class="combobox-characteristic">
+                                    <lightning-combobox class="slds-m-around_x-small" options={numberOfMonths}
+                                        onchange={handleFieldChange} variant="label-inline" data-field="numberOfMonthN1"
+                                        value={settings.numberOfMonthN1} if:true={settings}>
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-tab>
+                <lightning-tab label={Labels.LBL_KPI_Setup} class="slds-scrollable_y">
+                    <div style={mainPanelHeight}>
+                        <div>
+                            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                <div class="sectionTitle slds-media__body">
+                                    {Labels.LBL_NS_Stg_General_Settings}
+                                </div>
+                            </div>
+                            <div class="slds-grid slds-wrap slds-grid_vertical-stretch full-height section-mtop">
+                                <div
+                                    class="slds-col slds-p-horizontal_x-small slds-p-vertical_x-small slds-size_1-of-2">
+                                    <table
+                                        class="slds-table slds-table_cell-buffer slds-border_right slds-border_left slds-no-row-hover">
+                                        <thead class="table-header">
+                                            <th class="slds-text-align_center table-th" width="50%">
+                                                {Labels.LBL_CPF_BudgetType}
+                                            </th>
+                                            <th class="slds-text-align_center table-th" width="50%">
+                                                {Labels.LBL_KPI_Setup}</th>
+                                        </thead>
+                                        <tbody>
+                                            <template for:each={CPFBudgetTypePicklist} for:item="item">
+                                                <tr key={item.value}>
+                                                    <td class="slds-text-align_center"
+                                                        style="background-color:#c9c9c9;">
+                                                        {item.label}</td>
+                                                    <td class="slds-text-align_center"><a
+                                                            onclick={handleChangeCPFBudgetType}
+                                                            data-kpi-name={item.value}>{Labels.LBL_Update_KPI_Setup}</a>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <template if:true={selectedCPFBudgetType}>
+                                    <lightning-spinner style="z-index: 9" variant="brand" size="large"
+                                        if:true={loadingCPFBudgetType}>
+                                    </lightning-spinner>
+                                    <div
+                                        class="slds-col slds-p-horizontal_x-small slds-p-vertical_x-small slds-size_1-of-2">
+                                        <table
+                                            class="slds-table slds-table_cell-buffer slds-border_right slds-border_left slds-no-row-hover">
+                                            <thead class="table-header">
+                                                <th class="slds-text-align_center table-th" width="50%">
+                                                    {Labels.LBL_CPD_BudgetType}</th>
+                                                <th width="50%" class="table-th"></th>
+                                            </thead>
+                                            <tbody>
+                                                <template for:each={availableCPDBudgetTypes} for:item="item">
+                                                    <tr key={item.value}>
+                                                        <td class="slds-text-align_center"
+                                                            style="background-color:#9bc2e6;">
+                                                            {item.label}</td>
+                                                        <td class="slds-text-align_center">
+                                                            <lightning-input type="checkbox" checked={item.isSelected}
+                                                                data-value={item.value}
+                                                                onchange={handleChangeCPDBudgetType}>
+                                                            </lightning-input>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div
+                                        class="slds-col slds-p-horizontal_x-small slds-p-vertical_x-small slds-size_1-of-1">
+                                        <div if:false={loading}>
+                                            <table
+                                                class="slds-table slds-table_bordered slds-border--left slds-border--right slds-no-row-hover">
+                                                <thead class="table-header">
+                                                    <th class="slds-cell-fixed slds-text-align_center sticky-header table-th"
+                                                        scope="col">{Labels.LBL_Available_Fields}</th>
+                                                    <th class="slds-cell-fixed slds-text-align_center sticky-header table-th"
+                                                        scope="col">
+                                                        {Labels.LBL_CPF_Field}</th>
+                                                    <th class="slds-cell-fixed slds-text-align_center sticky-header table-th"
+                                                        scope="col">
+                                                        {Labels.LBL_Input}</th>
+                                                    <th class="slds-cell-fixed slds-text-align_center sticky-header table-th"
+                                                        scope="col">
+                                                        {Labels.LBL_CPD_Status}</th>
+                                                    <th class="slds-cell-fixed slds-text-align_center sticky-header table-th"
+                                                        scope="col">
+                                                        {Labels.LBL_CPD_Field_Conso}</th>
+                                                </thead>
+                                                <tbody>
+                                                    <template for:each={availableCPFFields} for:item="item">
+                                                        <tr key={item.key} data-key={item.key}>
+                                                            <td class="slds-text-align_center" scope="row">
+                                                                <lightning-input type="checkbox"
+                                                                    checked={item.isSelected} value={item.isSelected}
+                                                                    data-field={item.fieldName}
+                                                                    onchange={handleChangeCPFField}>
+                                                                </lightning-input>
+                                                            </td>
+                                                            <td class="slds-text-align_center" scope="row"
+                                                                title={item.fieldName}>{item.fieldLabel}
+                                                            </td>
+                                                            <template if:true={item.isSelected}>
+                                                                <td class="slds-text-align_center" scope="row">
+                                                                    <lightning-input type="checkbox"
+                                                                        checked={item.isInput} value={item.isInput}
+                                                                        data-field={item.fieldName}
+                                                                        onchange={handleChangeCPFFieldInput}>
+                                                                    </lightning-input>
+                                                                </td>
+                                                                <td class="slds-text-align_center" scope="row">
+                                                                    <template if:false={item.isInput}>
+                                                                        <c-neg-optim-custom-picklist
+                                                                            if:false={loadingCPFBudgetType}
+                                                                            data-field={item.fieldName}
+                                                                            selected-values={item.multiStatusSelectSerialized}
+                                                                            options={stringifiedCPDStatusOptions}
+                                                                            selected-event={Events.handleChangeCPDStatusValues}
+                                                                            show-all-option="false"
+                                                                            onhandlechangecpdstatusvalues={handleChangeCPDStatusValues}>
+                                                                        </c-neg-optim-custom-picklist>
+                                                                    </template>
+                                                                </td>
+                                                                <td class="slds-text-align_center" scope="row">
+                                                                    <template if:false={item.isInput}>
+                                                                        <lightning-combobox class="slds-p-right_x-small"
+                                                                            dropdown-alignment="left"
+                                                                            data-field={item.fieldName}
+                                                                            options={CPDFieldsOptions}
+                                                                            onchange={handleChangeCPDFieldConso}
+                                                                            variant="label-hidden"
+                                                                            value={item.CPDFieldConso}>
+                                                                        </lightning-combobox>
+                                                                    </template>
+                                                                </td>
+                                                            </template>
+                                                            <template if:false={item.isSelected}>
+                                                                <td class="slds-text-align_center" scope="row"></td>
+                                                                <td class="slds-text-align_center" scope="row"></td>
+                                                                <td class="slds-text-align_center" scope="row"></td>
+                                                            </template>
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-tab>
+                <lightning-tab label={Labels.LBL_PromoAgreementConfiguration} class="slds-scrollable_y">
+                    <div style={mainPanelHeight}>
+                        <div>
+                            <div class="slds-p-around_x-small slds-grid slds-grid_align-spread stickyHeader">
+                                <div class="sectionTitle slds-media__body">
+                                    {Labels.LBL_PromoAgreementConfiguration_GridManager_Title}
+                                </div>
+                            </div>
+                            <div class="section-Container slds-m-top_medium">
+                                <div class="label">
+                                    {Labels.LBL_PromoAgreementConfiguration_GridManagerHelpText}
+                                </div>
+                            </div>
+                            <div class="negoptim-tablesection">
+                                <table>
+                                    <thead>
+                                        <tr class="table-header">
+                                            <th class="table-th">
+                                                {Labels.CommercialPlan__c.PromoAgreementType__c}
+                                            </th>
+                                            <th class="table-th">
+                                                {Labels.LBL_Grid_Settings_Template}
+                                            </th>                                     
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={promoAgreementGridConfigurations} for:item="item"
+                                            for:index="index">
+                                            <tr key={item.value}>
+                                                <td style="padding: 10px;">{item.label}</td>
+                                                <td style="padding: 10px;">
+                                                    <lightning-combobox variant="label-hidden" dropdown-alignment="auto"
+                                                        value={item.gridSettings}
+                                                        options={promoAgreementManagerGridOptions}
+                                                        onchange={handleGridSettingChange} data-index={index}>
+                                                    </lightning-combobox>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <div class="section-Container slds-m-top_medium">
+                                <div class="section-label disp">
+                                  {Labels.LBL_PromoAgreementConfiguration_Promo_Agreement_Grid}                          
+                                </div>
+                                <div class="disp" style="width: 30%; margin-left: 10%;">
+                                    <lightning-combobox variant="label-hidden" dropdown-alignment="auto" value={selectedPromoAgreementsGrid}
+                                        options={promoAgreementGridGridOptions} onchange={handlePromoAgreementsGridChange}>
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+                            <div class="section-Container slds-m-top_medium">
+                                <div class="section-label">
+                                    {Labels.LBL_PromoAgreementConfiguration_Promo_Agreement_Grouped_Fields}
+                                </div>
+                                <div class="info-container-w" style="margin-left: 10%;">
+                                    <div class="search">
+                                        <lightning-input value={groupSearchTerm} onchange={handleGroupFieldSearch} type="search">
+                                        </lightning-input>
+                                    </div>                          
+                                    <div class="negoptim-firsttable">
+                                        <div class="negoptim-available">{Labels.LBL_PromoAgreementConfiguration_Available_Fields}</div>
+                                        <div class="negoptim-availableobjects">
+                                            <template for:each={availableGroupableFields} for:item="field">
+                                                <div key={field.apiName} data-id={field.apiName} onclick={handleFieldSelect}>
+                                                    <template if:true={field.isSelected}>
+                                                        <div class="selected">{field.label}</div>
+                                                    </template>
+                                                    <template if:false={field.isSelected}>
+                                                        <div>{field.label}</div>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>                                    
+                                    <div class="negoptim-sorticon">
+                                        <div class="negoptim-sortright" onclick={moveSelectedFieldToRight}>
+                                            <img src={sortRight} />
+                                        </div>
+                                        <div class="negoptim-sortleft" onclick={moveSelectedFieldToLeft}>
+                                            <img src={sortLeft} />
+                                        </div>
+                                    </div>                         
+                                    <div class="negoptim-secondtable">
+                                        <div class="negoptim-allowed">{Labels.LBL_PromoAgreementConfiguration_Groupable_Fields_Selected}</div>
+                                        <div class="negoptim-allowedobjects">
+                                            <template for:each={selectedGroupableFields} for:item="field">
+                                                <div key={field.apiName} data-id={field.apiName} onclick={handleFieldDeselect}>
+                                                    <template if:true={field.isSelected}>
+                                                        <div class="selected">{field.label}</div>
+                                                    </template>
+                                                    <template if:false={field.isSelected}>
+                                                        <div>{field.label}</div>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-tab>
+            </lightning-tabset>
+        </div>
+    </div>
+
+</template>

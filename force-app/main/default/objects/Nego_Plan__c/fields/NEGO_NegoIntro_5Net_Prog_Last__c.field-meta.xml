@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NEGO_NegoIntro_5Net_Prog_Last__c</fullName>
+    <formula>IF (NOT ISBLANK(NEGO_NegoIntro_5Net_Prog_v3__c), NEGO_NegoIntro_5Net_Prog_v3__c, 
+IF (NOT ISBLANK(NEGO_NegoIntro_5Net_Prog_v2__c), NEGO_NegoIntro_5Net_Prog_v2__c,
+IF (NOT ISBLANK(NEGO_NegoIntro_5Net_Prog_v1__c), NEGO_NegoIntro_5Net_Prog_v1__c,
+NEGO_NegoIntro_5Net_Prog_v0__c)))</formula>
+    <label>NEGO - NegoIntro 5Net Prog Last</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

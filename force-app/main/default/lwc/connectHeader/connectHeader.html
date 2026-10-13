@@ -1,0 +1,182 @@
+<template>
+    <div style="z-index: 1000;" class="fixed-header pf w100">
+        <div class="c" style="background:#3d3d3d">
+            <div class="zoom-container pv5 g_nm m_pb10">
+                <div class="fs0" style="padding: 5px;">
+                    <div class="g_nm fs14  w30 l vm m_m_w40">
+                        <div class="con vm w100 g_nm img-m " style={PortalFavIcon} onclick={navigateToHomePage}></div>
+                        <template if:true={showHeaderScreenIcon}>
+                            <div class="g_nm vm con w100 m_h" style={HeaderScreenIcon} if:false={isUserGuest}></div>
+                        </template>
+                    </div>
+                    <div class="g_nm fs14 l vm m_m_w40 hide-on-mobile" style="width:40%;">
+                    </div>
+                    <div class="g_nm fs14  w30 vm r m_m_w60">
+                        <div class="g_nm vm ml5" onmouseenter={cancelCloseGuidePopover} if:false={isUserGuest}
+                            onmouseleave={closeGuidePopover}>
+                            <div onclick={toggleGuidePopover} if:true={guideDocUrl}>
+                                <lightning-icon icon-name="utility:in_app_assistant" alternative-text="in_app_assistant"
+                                    class="custom-icon-in_app_assistant" size="large">
+                                </lightning-icon>
+                            </div>
+
+                            <template if:true={isGuidePopoverOpen}>
+                                <section class="slds-popover slds-nubbin_top-right negoptim-guide" role="dialog"
+                                    style="position: absolute; z-index: 1000; width: 200px;">
+                                    <header class="slds-popover__header slds-border_bottom">
+                                        <div
+                                            style="text-align: left; display: flex; justify-content: space-between; align-items: center;">
+                                            <h2 class="slds-text-heading_small"
+                                                style="color: #3d3d3d; font-size: 14px; margin: 0;">
+                                                {labels.LBL_Connect_UserGuideTitle}
+                                            </h2>
+                                            <button onclick={toggleGuidePopover}
+                                                class="slds-button slds-button_icon-small slds-button_icon-container slds-notification__close"
+                                                title="Close Guide">
+                                                <svg class="slds-button__icon" aria-hidden="true">
+                                                    <use
+                                                        xlink:href="./assets/icons/utility-sprite/svg/symbols.svg#close">
+                                                    </use>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </header>
+                                    <div class="slds-popover__body">
+                                        <!-- <template if:true={guideDocUrl}> -->
+                                        <a href={guideDocUrl} download target="_blank" style="float: inline-start;">
+                                            {labels.LBL_Connect_UserGuideDownload}
+                                        </a>
+                                        <!-- </template> -->
+                                        <!-- <template if:false={guideDocUrl}>
+                                            <p>No guide available.</p>
+                                        </template> -->
+                                    </div>
+                                </section>
+                            </template>
+                        </div>
+                        <div class="g_nm vm con w100 " style={HeaderNotificationIcon} if:false={isUserGuest}
+                            onclick={notificationsConfig.open} onmouseleave={closeYourNotification}
+                            onmouseenter={cancelCloseYourNotification}>
+                            <div class="ov la"
+                                style="background:red;width:15px;height:15px;border-radius:50px;top:6px;right:8px"
+                                if:true={notificationsConfig.hasUnreadNotifications}>
+                                <span class="cc cw fs10">
+                                    {notificationsConfig.unreadNotificationCount}
+                                </span>
+                            </div>
+
+                            <div class="negoptim-icon" onmouseleave={closeYourNotification}
+                                onmouseenter={cancelCloseYourNotification}>
+                                <section class="slds-popover slds-nubbin_top-right" role="dialog"
+                                    if:true={notificationsConfig.isOpen}>
+                                    <header class="slds-popover__header slds-border_bottom">
+                                        <div style="text-align: left;">
+                                            <div
+                                                style="display: inline-block; margin-right: 18px; font-size: 12px; color: gray;">
+                                                {labels.LBL_Notifications}
+                                            </div>
+                                            <a onclick={notificationsConfig.markAllAsRead} class="notification-link"
+                                                style="display: inline-block;">
+                                                {labels.LBL_Mark_All_As_Read}
+                                            </a>
+                                            <button onclick={notificationsConfig.toggleNotificationPanel}
+                                                class="slds-button slds-button_icon-small slds-float_right slds-button_icon-container slds-notification__close"
+                                                title="Close Notifications">
+                                                <svg class="slds-button__icon" aria-hidden="true">
+                                                    <use
+                                                        xlink:href="./assets/icons/utility-sprite/svg/symbols.svg#close">
+                                                    </use>
+                                                </svg>
+                                                <span class="slds-assistive-text">{labels.LBL_Close_Dialog}</span>
+                                            </button>
+                                        </div>
+                                    </header>
+                                    <div class="slds-popover__body slds-p-around_none"
+                                        style="height: 300px; overflow-y: scroll;">
+                                        <template for:each={notificationsConfig.notificationList}
+                                            for:item="notification">
+                                            <section role="dialog" key={notification.id}
+                                                data-notification-id={notification.id}>
+                                                <div class={notification.NotificationClass}>
+                                                    <a class="slds-notification__target slds-media" href="#"
+                                                        onclick={notificationsConfig.openNotification}
+                                                        data-notification-id={notification.id}
+                                                        data-target={notification.target}
+                                                        data-target-page-ref={notification.targetPageRef}>
+                                                        <span
+                                                            class="slds-icon_container slds-icon-standard-event slds-media__figure"
+                                                            title="event">
+                                                            <img class="slds-icon slds-icon_small" aria-hidden="true"
+                                                                src={notification.image} />
+                                                        </span>
+                                                        <div class="slds-media__body">
+                                                            <div style="color: black; text-align: left; direction: ltr;"
+                                                                class="slds-text-heading_small slds-m-bottom_xx-small"
+                                                                id="noti-86">
+                                                                <div style="font-weight: bold;">
+                                                                    {notification.messageTitle}
+                                                                </div>
+                                                                {notification.messageBody}
+                                                            </div>
+                                                            <p>
+                                                                <lightning-formatted-date-time
+                                                                    value={notification.mostRecentActivityDate}
+                                                                    day="2-digit" month="long" year="numeric"
+                                                                    hour="2-digit" minute="2-digit">
+                                                                </lightning-formatted-date-time>
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div style="height: 1px; width: auto; background-color: #80808040;">
+                                                </div>
+                                            </section>
+                                        </template>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="g_nm vm ml5 prof-m" if:false={isUserGuest}
+                            style="border-radius:50px;width:50px;height:50px;overflow:hidden;background: linear-gradient(90deg, #D0D634, transparent) #0CB4BB;"
+                            onclick={handleUserProfileClick} onmouseleave={closeYourProfile}
+                            onmouseenter={cancelCloseYourProfile}>
+                            <img style="border-radius: 50px; width: 50px; height: 50px; object-fit: cover; padding: 1px;"
+                                src={profilePictureUrl} alt="Profile Icon" />
+                        </div>
+
+                        <div style="z-index: 1000;" class="Prof-details" if:false={isUserGuest}
+                            onmouseleave={closeYourProfile} onmouseenter={cancelCloseYourProfile}>
+                            <template if:true={showProfileUser}>
+                                <div style="padding-left: 10px;">
+                                    <a href={profileLink}>{labels.LBL_View_Profile}</a>
+                                </div>
+                                <div style="height: 2px; background-color:white"></div>
+                                <div style="padding-left: 10px; padding-bottom: 10px;">
+                                    <a href={logoutLink}>{labels.LBL_Logout}</a>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div if:true={ShowSearchResult} class="search-details" onmouseleave={closeYourSearch}
+            onmouseenter={cancelCloseYourSearch}>
+            <template if:true={noItemsFounds}>
+                <div style="text-align: center; font-size: 16px">
+                    {labels.LBL_No_Items_Found}
+                </div>
+            </template>
+            <template if:false={noItemsFounds} for:each={allSearches} for:item="search">
+                <div key={search.Id}>
+                    <div style="padding: 10px">
+                        <a href={search.recordUrl} target="_blank">{search.displayText}</a>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+    <div class="shadow">
+    </div>
+</template>

@@ -1,0 +1,516 @@
+<template>
+    <div class="mainContainer slds-card slds-scrollable_none">
+        <template lwc:if={isLoading}>
+            <div class="slds-spinner_container greyBg">
+                <div class="loader slds-spinner_container slds-align_absolute-center"></div>
+            </div>
+        </template>
+        <template lwc:else>
+            <div class="header slds-page-header slds-page-header_record-home slds-p-around--xx-small slds-grid">
+                <div class="slds-grid">
+                    <div class="slds-col slds-p-around_xx-small slds-has-flexi-truncate">
+                        <!-- HEADING AREA -->
+                        <!-- MEDIA OBJECT = FIGURE + BODY -->
+                        <!-- <div class="slds-media slds-no-space slds-grow slds-p-vertical--x-small" -->
+                        <div class="slds-media slds-no-space slds-grow" style="align-items:center;">
+                            <div style="width:60px"
+                                class="slds-p-around_xx-small  slds-m-left_x-small slds-icon_container">
+                                <!-- <lightning-icon icon-name="utility:component_customization" class="negoptim-icon">
+                            </lightning-icon> -->
+                                <div style={titleWrapper.image}>
+                                </div>
+                            </div>
+                            <div class="slds-media__body slds-page-header__title slds-p-vertical_xx-small "
+                                style="height:60px;padding-top:10px;">
+                                <p class="slds-text-title slds-line-height_reset slds-p-left--xx-small title"
+                                    style="text-wrap-mode:nowrap;">
+                                    {labels.LBL_DocumentsCenter}
+                                </p>
+                                <h1
+                                    class="slds-p-around_xx-small slds-m-right_small slds-align-middle slds-truncate slds-page-header__title subtitle">
+                                    {titleWrapper.themeTitle}
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rightControlsClass " style="  display: flex;width: 100%;justify-content: right;">
+                    <div class="slds-page-header__control slds-grid slds-m-right--medium" style="align-items:center">
+                        <div class="slds-col slds-m-right--xx-small">
+                            <lightning-input type="search" value={searchTerm} variant="label-hidden"
+                                onchange={setSearchTerm} style="margin-bottom: -2px;"></lightning-input>
+                        </div>
+                        <lightning-button-icon icon-name="utility:filterList" variant="border-filled"
+                            class="slds-button slds-button-icon slds-col" onclick={toggleFilter}>
+                        </lightning-button-icon>
+                        <template for:each={iconFlows} for:item="flow">
+                            <!-- <img class="slds-button slds-button_icon-border" key={flow.value} if:true={flow.value}
+                                src={flow.icon} alt={flow.label} data-flow-name={flow.value}
+                                data-flow-label={flow.label} onclick={toggleFlow}
+                                style="width:32px; height:32px; margin-left:6px; cursor:pointer; border-radius:3px;" /> -->
+                            <img key={flow.value} if:true={flow.value} src={flow.icon} alt={flow.label}
+                                data-flow-name={flow.value} data-flow-label={flow.label} onclick={toggleFlow}
+                                style="width:30px; height:30px; margin-left:6px; cursor:pointer; border-radius:3px;" />
+                        </template>
+                        <template for:each={buttonFlows} for:item="flow">
+                            <lightning-button key={flow.value} if:true={flow.value} label={flow.label}
+                                class="slds-var-p-left_xx-small" data-flow-name={flow.value}
+                                data-flow-label={flow.label} onclick={toggleFlow}>
+                            </lightning-button>
+                        </template>
+                        <lightning-button label={labels.LBL_FileDirectoryDownload}
+                            class="slds-m-around_xx-small slds-button" onclick={handleDownloadFile}
+                            icon-name="utility:download" icon-position="left" if:false={hasMenu}>
+                        </lightning-button>
+                        <lightning-button-menu icon-name="utility:connected_apps" menu-alignment="right" nubbin
+                            class="slds-var-p-left_xx-small" if:true={hasMenu}>
+                            <template for:each={actionFlows} for:item="flow">
+                                <lightning-menu-item if:true={flow.value} key={flow.value} label={flow.label}
+                                    prefix-icon-name={flow.icon} data-flow-name={flow.value}
+                                    data-flow-label={flow.label} onclick={toggleFlow}>
+                                </lightning-menu-item>
+                            </template>
+                            <lightning-menu-item label={labels.LBL_FileDirectoryDownload}
+                                prefix-icon-name="utility:download" onclick={handleDownloadFile}>
+                            </lightning-menu-item>
+                        </lightning-button-menu>
+                    </div>
+                </div>
+            </div>
+            <div class="bodyDiv">
+                <div class="negoptim-tablesection slds-scrollable" style="height:100%">
+                    <table>
+                        <thead>
+                            <th class='checkCol' style={checkStyle}></th>
+                            <th style={firstHeaderStyle} class="firstCol">{labels.LBL_FileDirectoryFileName}</th>
+                            <th class="secondCol" style={secondHeaderStyle}>
+                                {labels.LBL_Status}
+                            </th>
+                            <th if:false={isHomePage} style={secondHeaderStyle} class="secondCol">
+                                {labels.LBL_FileDirectoryAction}</th>
+                            <template for:each={columns} for:item="col" for:index="index">
+                                <th key={col.Id} style={col.headerCssStyle}>{col.headerTitle}</th>
+                            </template>
+                        </thead>
+                        <tbody>
+                            <template for:each={fileDirectoryWrapperList} for:item="filedir" for:index="index"
+                                lwc:if={fileDirectoryWrapperList.length}>
+                                <tr key={filedir.id} data-index={index}>
+                                    <td style="width:50px;" class='checkCol' data-index={index}>
+                                        <lightning-input type="checkbox" label="Basic option" data-index={index}
+                                            variant="label-hidden" checked={filedir.isSelected}
+                                            onchange={selectFileDirectory}></lightning-input>
+                                    </td>
+                                    <td style={firstColumnsStyle} class="firstCol" data-index={index}>
+                                        <lightning-formatted-rich-text data-index={index} style="cursor: pointer;"
+                                            value={filedir.FilePreview__c} onclick={registerViewCount}>
+                                        </lightning-formatted-rich-text>
+                                    </td>
+                                    <td style="text-align:center; width:100px;" data-index={index}>
+                                        <img style="width:35px;height:35px;" title={filedir._Status__c}
+                                            src={filedir.StatusLogoURL__c}></lightning-icon>
+                                    </td>
+                                    <td if:false={isHomePage} style={secondColumnsStyle}>
+                                        <div class="slds-grid slds-grid_align-start">
+                                            <div class="slds-col slds-p-around_xx-small">
+                                                <div style={icons.eye.activeStyle} lwc:if={filedir.canPreview}
+                                                    class="action-icon" onclick={openFileDirectory} data-index={index}
+                                                    title={labels.LBL_ViewDocument}>
+                                                </div>
+                                                <div style={icons.eye.inactiveStyle} lwc:else
+                                                    class="action-icon-disabled"
+                                                    title={labels.LBL_ViewDocument_Disabled}>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-p-around_xx-small" if:true={allowUpload}>
+                                                <div style={icons.uploadFile.activeStyle}
+                                                    onclick={filedir.handleMultiUploadClick} data-index={index}
+                                                    data-recordid={filedir.Id} data-id={index}
+                                                    lwc:if={filedir.canUpload} class="action-icon"
+                                                    title={labels.LBL_UploadDocument}>
+                                                </div>
+                                                <div style={icons.uploadFile.inactiveStyle} lwc:else
+                                                    class="action-icon-disabled"
+                                                    title={labels.LBL_UploadDocument_Disabled}>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-p-around_xx-small" if:true={allowUpload}>
+                                                <div class="action-icon" style={icons.delete.activeStyle}
+                                                    lwc:if={filedir.canDelete} onclick={handleTruncateDocument}
+                                                    data-index={index} data-id={index}
+                                                    title={labels.LBL_DeleteDocument}>
+                                                </div>
+                                                <div style={icons.delete.inactiveStyle} lwc:else
+                                                    class="action-icon-disabled"
+                                                    title={labels.LBL_DeleteDocument_Disabled}>
+                                                </div>
+                                            </div>
+                                            <template lwc:if={filedir.canShareOrConfirmReceipt}>
+                                                <template if:false={isPortal}>
+                                                    <div class="slds-col slds-p-around_xx-small"
+                                                        lwc:if={filedir.canShare}>
+                                                        <div style={icons.share.activeStyle} class="action-icon"
+                                                            onclick={handleShareDocs} data-index={index} data-id={index}
+                                                            title={labels.LBL_UnshareDocument}>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-col slds-p-around_xx-small" lwc:else>
+                                                        <div style={icons.share.inactiveStyle}
+                                                            title={labels.LBL_ShareDocument}
+                                                            class="action-icon-disabled">
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                                <div class="slds-col slds-p-around_xx-small"
+                                                    if:true={allowReceiptConfirmation}>
+                                                    <div style={icons.confirmation.activeStyle}
+                                                        lwc:if={filedir.canConfirm} class="action-icon"
+                                                        onclick={handleConfirmReceipt} data-index={index}
+                                                        data-id={index} title={labels.LBL_ConfirmReceipt}>
+                                                    </div>
+                                                    <div style={icons.confirmation.inactiveStyle} lwc:else
+                                                        class="action-icon-disabled"
+                                                        title={labels.LBL_ConfirmReceipt_Disabled}>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </td>
+                                    <template for:each={filedir.columns} for:item="field" for:index="index">
+                                        <td key={field.Id} style={field.cellstyle}>
+                                            <div lwc:if={field.isNumberField}>
+                                                {field.value}
+                                            </div>
+                                            <a lwc:elseif={field.isReference} href={field.link} target="_blank">
+                                                {field.value}
+                                            </a>
+                                            <label lwc:elseif={field.isBoolean} class="switch">
+                                                <lightning-icon if:true={field.value} icon-name="utility:check"
+                                                    alternative-text={labels.LBL_FileDirectoryChecked} size="x-small"
+                                                    title={labels.LBL_FileDirectoryChecked}>
+                                                </lightning-icon>
+                                            </label>
+                                            <lightning-formatted-date-time lwc:elseif={field.isDate} value={field.value}
+                                                year="numeric" month="2-digit" day="2-digit" locale={userLocale}>
+                                            </lightning-formatted-date-time>
+                                            <template lwc:elseif={field.isHTMLFormatted}>
+                                                <lightning-formatted-rich-text value={field.value}>
+                                                </lightning-formatted-rich-text>
+                                            </template>
+                                            <template lwc:else>
+                                                {field.value}
+                                            </template>
+                                        </td>
+                                    </template>
+                                </tr>
+                            </template>
+                            <template lwc:else>
+                                <tr>
+                                    <td colspan={colspanDisplayedFields}>
+                                        <div class="slds-text-heading_small"
+                                            style="height: 5vh; width: fit-content; position: sticky; left: 50%; transform: translateX(-50%);">
+                                            <p style="height: 100%; align-content: center;">
+                                                {labels.LBL_No_Item_To_Display}</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+                <div if:true={isPanelFilter} class="filter-section slds-col slds-hide" style="float: right; z-index:7;">
+                    <div id="filter-panel" style="height: 100%;" class="slds-grid slds-no-flex">
+                        <div class="slds-panel filterPanelDiv slds-size_medium slds-panel_docked slds-panel_docked-right slds-grid slds-grid_vertical"
+                            style="overflow: unset;">
+                            <div class="slds-panel__header filterPanelHeader">
+                                <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate"
+                                    title={labels.LBL_Filter}>
+                                    {labels.LBL_Filter}
+                                </h2>
+                                <lightning-button-icon variant="bare" icon-name="utility:close" onclick={toggleFilter}>
+                                </lightning-button-icon>
+                            </div>
+                            <div class="slds-col slds-scrollable filterPanelBody">
+                                <div class="slds-grid slds-wrap slds-p-around_small">
+                                    <div class="slds-list_vertical slds-list_vertical-space slds-size_1-of-1">
+                                        <template if:true={fieldsToFilter.length} for:each={fieldsToFilter}
+                                            for:item="fieldToFilter">
+                                            <div key={fieldToFilter.fieldName} class="slds-p-top--small">
+                                                <template if:true={fieldToFilter.userFilterable}>
+                                                    <div if:true={fieldToFilter.isText}>
+                                                        <legend
+                                                            class="slds-form-element__label slds-form-element__legend">
+                                                            {fieldToFilter.fieldLabel}
+                                                        </legend>
+                                                        <!--text-->
+                                                        <lightning-input name={fieldToFilter.fieldName} data-mode="one"
+                                                            type="text" label={fieldToFilter.fieldLabel}
+                                                            variant="label-hidden" value={fieldToFilter.value}
+                                                            onchange={setSelectedValues}>
+                                                        </lightning-input>
+                                                    </div>
+                                                    <!--lookup-->
+                                                    <template if:true={fieldToFilter.isReference}>
+                                                        <legend
+                                                            class="slds-form-element__label slds-form-element__legend">
+                                                            {fieldToFilter.fieldLabel}
+                                                        </legend>
+                                                        <lightning-input name={fieldToFilter.fieldName} data-mode="one"
+                                                            type="text" label={fieldToFilter.fieldLabel}
+                                                            variant="label-hidden" value={fieldToFilter.value}
+                                                            onchange={setSelectedValues}>
+                                                        </lightning-input>
+                                                    </template>
+                                                    <!--ID-->
+                                                    <template if:true={fieldToFilter.isId}>
+                                                        <legend
+                                                            class="slds-form-element__label slds-form-element__legend">
+                                                            {fieldToFilter.fieldLabel}
+                                                        </legend>
+                                                        <lightning-input name={fieldToFilter.fieldName}
+                                                            data-mode="multiple" type="text"
+                                                            label={fieldToFilter.fieldLabel}
+                                                            value={fieldToFilter.displayVal}
+                                                            field-level-help={labels.MSG_Filter_On_Id_Help_Text}
+                                                            onchange={setSelectedValues}>
+                                                        </lightning-input>
+                                                    </template>
+                                                    <!--number-->
+                                                    <div if:true={fieldToFilter.isNumber} class="slds-form-element">
+                                                        <legend
+                                                            class="slds-form-element__label slds-form-element__legend">
+                                                            {fieldToFilter.fieldLabel}
+                                                        </legend>
+                                                        <div class="slds-form-element__control slds-grid slds-gutters">
+                                                            <lightning-input variant="label-hidden" type="number"
+                                                                class="slds-col" name={fieldToFilter.fieldName}
+                                                                data-range="value1" value={fieldToFilter.value1}
+                                                                onchange={setSelectedRangeValue}
+                                                                formatter={fieldToFilter.formatter}
+                                                                step={fieldToFilter.step}>
+                                                            </lightning-input>
+                                                            <span class="slds-align-middle">-</span>
+                                                            <lightning-input variant="label-hidden" type="number"
+                                                                class="slds-col" name={fieldToFilter.fieldName}
+                                                                data-range="value2" value={fieldToFilter.value2}
+                                                                onchange={setSelectedRangeValue}
+                                                                formatter={fieldToFilter.formatter}
+                                                                step={fieldToFilter.step}>
+                                                            </lightning-input>
+                                                        </div>
+                                                    </div>
+                                                    <!--date-->
+                                                    <div if:true={fieldToFilter.isDate} class="slds-form-element">
+                                                        <legend
+                                                            class="slds-form-element__label slds-form-element__legend">
+                                                            {fieldToFilter.fieldLabel}
+                                                        </legend>
+                                                        <div class="slds-form-element__control slds-grid slds-gutters">
+                                                            <lightning-input variant="label-hidden" type="date"
+                                                                class="slds-col" name={fieldToFilter.fieldName}
+                                                                data-range="value1" value={fieldToFilter.value1}
+                                                                onchange={setSelectedRangeValue}>
+                                                            </lightning-input>
+                                                            <span class="slds-align-middle">-</span>
+                                                            <lightning-input variant="label-hidden" type="date"
+                                                                class="slds-col" name={fieldToFilter.fieldName}
+                                                                data-range="value2" value={fieldToFilter.value2}
+                                                                onchange={setSelectedRangeValue}>
+                                                            </lightning-input>
+                                                        </div>
+                                                    </div>
+                                                    <!--time-->
+                                                    <div if:true={fieldToFilter.isTime} class="slds-form-element">
+                                                        <legend
+                                                            class="slds-form-element__label slds-form-element__legend">
+                                                            {fieldToFilter.fieldLabel}
+                                                        </legend>
+                                                        <div class="slds-form-element__control slds-grid slds-gutters">
+                                                            <lightning-input variant="label-hidden" type="time"
+                                                                class="slds-col" name={fieldToFilter.fieldName}
+                                                                data-range="value1" value={fieldToFilter.value1}
+                                                                onchange={setSelectedRangeValue}>
+                                                            </lightning-input>
+                                                            <span class="slds-align-middle">-</span>
+                                                            <lightning-input variant="label-hidden" type="time"
+                                                                class="slds-col" name={fieldToFilter.fieldName}
+                                                                data-range="value2" value={fieldToFilter.value2}
+                                                                onchange={setSelectedRangeValue}>
+                                                            </lightning-input>
+                                                        </div>
+                                                    </div>
+                                                    <div if:true={fieldToFilter.isCheckboxGroup}>
+                                                        <legend
+                                                            class="slds-form-element__label slds-form-element__legend">
+                                                            {fieldToFilter.fieldLabel}
+                                                        </legend>
+                                                        <lightning-checkbox-group data-name={fieldToFilter.fieldName}
+                                                            name={fieldToFilter.fieldName}
+                                                            label={fieldToFilter.fieldLabel} variant="label-hidden"
+                                                            options={fieldToFilter.options} value={fieldToFilter.values}
+                                                            onchange={setSelectedValues}>
+                                                        </lightning-checkbox-group>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="slds-card__footer slds-grid slds-m-top_none slds-p-vertical_small filterPanelFooter">
+                                <div class="slds-col">
+                                    <lightning-button onclick={handleReset} label={labels.LBL_Reset}>
+                                    </lightning-button>
+                                </div>
+                                <div class="slds-col">
+                                    <lightning-button onclick={confirmFilter} label={labels.LBL_Apply} variant="brand">
+                                    </lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footerDiv slds-grid slds-m-around--xx-small slds-p-bottom--xx-small">
+                <lightning-combobox options={pageSizeOptions} variant="label-hidden" dropdown-alignment="auto"
+                    class="slds-size_xx-small slds-p-horizontal_x-small" value={pageSize}
+                    onchange={handleChangePageSize}>
+                </lightning-combobox>
+                <span>
+                    <lightning-button-group>
+                        <lightning-button label={labels.LBL_First} disabled={previousDisabled} data-type="First"
+                            onclick={handleChangePage}>
+                        </lightning-button>
+                        <lightning-button label={labels.LBL_Previous} disabled={previousDisabled} data-type="Previous"
+                            onclick={handleChangePage}>
+                        </lightning-button>
+                        <lightning-button label={labels.LBL_Next} disabled={nextDisabled} data-type="Next"
+                            onclick={handleChangePage}>
+                        </lightning-button>
+                        <lightning-button label={labels.LBL_Last} disabled={nextDisabled} data-type="Last"
+                            onclick={handleChangePage}>
+                        </lightning-button>
+                    </lightning-button-group>
+                    <lightning-badge class="slds-m-left--x-small" label={pagesBadge}>
+                    </lightning-badge>
+                </span>
+            </div>
+        </template>
+    </div>
+    <div if:true={openFlow}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                    onclick={closeFlow}>
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text">{labels.LBL_Cancel}</span>
+                </button>
+                <div class="slds-modal__header">
+                    <h1 id="modal-heading-03" class="slds-modal__title slds-hyphenate">
+                        {currentFlow.header}
+                    </h1>
+                </div>
+                <div class="slds-modal__content">
+                    <lightning-flow flow-api-name={currentFlow.flowApiName} onstatuschange={handleflowStatusChange}
+                        flow-input-variables={currentFlow.flowVariables} flow-finish-behavior="NONE">
+                    </lightning-flow>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </div>
+    <div if:true={showModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open custom-modal">
+            <div>
+                <header class="custom-header slds-grid slds-grid_vertical-align-center">
+                    <div class="pdf-section">
+                        <div class="slds-media slds-media_center slds-media_small">
+                            <div class="slds-media__figure">
+                                <lightning-icon icon-name={modalFile.iconName} size="medium"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body slds-m-left_small">
+                                <div class="slds-text-title_bold slds-truncate" title={modalFile.Title}
+                                    style="text-align: justify;">
+                                    {modalFile.Title}
+                                </div>
+                                <div class="slds-text-body_small slds-truncate"
+                                    style="text-align: justify; color: white;">
+                                    <lightning-formatted-date-time
+                                        value={modalFile.CreatedDate}></lightning-formatted-date-time> •
+                                    {modalFile.size} • {labels.LBL_Version} {modalFile.VersionNumber}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="downl-section slds-align_absolute-center">
+                        <div class="custom-download-button">
+                            <a href={modalFile.url} download>
+                                <lightning-icon icon-name="utility:download" size="x-small"
+                                    class="slds-m-right_xx-small custom-icon-download"></lightning-icon>
+                                <span class="custom-download-text">{labels.LBL_Download}</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="close-section slds-align_absolute-center">
+                        <lightning-icon icon-name="utility:close" alternative-text="close" size="x-small"
+                            class="custom-icon-close" onclick={closeModal}></lightning-icon>
+                    </div>
+                </header>
+                <div class={modalContentClass} style={modalContent}>
+                    <div class="slds-has-title" style="display:block;">
+                        <figure>
+                            <div>
+                                <img src={modalFile.thumbnail} alt={modalFile.Title} class="slds-align_absolute-center"
+                                    style="background-color: white;" />
+                            </div>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+    <div if:true={popup.visibility}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header" lwc:if={popup.title}>
+                    <h1 class="slds-modal__title slds-hyphenate" tabindex="-1">
+                        {popup.title}
+                    </h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" if:true={popup.body}>
+                    <p>{popup.body}</p>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2" if:true={popup.subBody}>
+                    <p>{popup.subBody}</p>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3"
+                    if:true={popup.isUploadFilePopup}>
+                    <p>
+                        <lightning-file-upload varriant="label-hidden" data-recordid={popup.fdir.Id}
+                            onuploadfinished={popup.fdir.handleUploadFinished} multiple if:true={allowMultipleUpload}>
+                        </lightning-file-upload>
+                        <lightning-file-upload varriant="label-hidden" data-recordid={popup.fdir.Id}
+                            onuploadfinished={popup.fdir.handleUploadFinished} if:false={allowMultipleUpload}>
+                        </lightning-file-upload>
+                    </p>
+                </div>
+                <div class="slds-modal__footer">
+                    <button data-id="cancel" class="slds-button slds-button_neutral" onclick={handlePopupAction}
+                        if:true={popup.cancelBtn}>
+                        {popup.cancelBtn}
+                    </button>
+                    <button data-id="confirm" class={popup.submitBtnClass} onclick={handlePopupAction}>
+                        {popup.submitBtn}
+                    </button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </div>
+</template>

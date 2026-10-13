@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Business Unit types to show in the condition distribution page --></help>
+    <label><!-- BU Record types --></label>
+    <name>BU_Record_types__c</name>
+</CustomFieldTranslation>

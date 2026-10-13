@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Supplier Contact 4</label>
+    <name>BuyerContact4__c</name>
+    <relationshipLabel>Accounting docs (Supplier Contact 4)</relationshipLabel>
+</CustomFieldTranslation>

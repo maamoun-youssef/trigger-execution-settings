@@ -1,0 +1,227 @@
+<template>
+    <div class="slds-card slds-grid slds-m-top_small slds-scrollable" style={containerStyle}>
+        <div style="position: sticky; left: 0; z-index: 2;">
+            <table class="conditionTable slds-no-row-hover slds-table slds-table_tree slds-tree"
+                style="border-right: 12px solid white;">
+                <thead style="background-color: white; position: sticky; top: 0; left: 0; z-index: 3;">
+                    <tr class={indexesClass}>
+                        <td class="limited-cell whiteBackground _slds-p-right_none" style="height: 312px; padding: 0;"
+                            colspan="2">
+                            <div
+                                class="slds-accordion__summary-action-icon slds-align_absolute-center slds-text-heading_medium">
+                                <div>{Labels.LBL_Index_Management}</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="qty-header">
+                        <td class="_slds-p-right_none" colspan="2">
+                            <div class="slds-align_absolute-center">
+                                <lightning-button-icon icon-name="utility:jump_to_top" class="slds-p-right_xx-small"
+                                    onclick={contractAll}>
+                                </lightning-button-icon>
+                                <lightning-button-icon icon-name="utility:jump_to_bottom" class="slds-p-right_xx-small"
+                                    onclick={expandAll}>
+                                </lightning-button-icon>
+                                <lightning-button-icon icon-name="utility:number_input" class="slds-p-right_xx-small"
+                                    onclick={toggleIndexes} if:false={showIndexes}>
+                                </lightning-button-icon>
+                                <lightning-button-icon icon-name="utility:number_input" class="slds-p-right_xx-small"
+                                    onclick={toggleIndexes} variant="brand" if:true={showIndexes}>
+                                </lightning-button-icon>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={grouppedConditions} for:item="item">
+                        <tr key={item.key} data-label={item.key} aria-level="1">
+                            <td class="index-cell _slds-p-right_none slds-tree__item">
+                                <button class="slds-p-right_xx-small slds-button slds-button_icon"
+                                    onclick={toggleExpension} data-index={item.key} if:false={item.isExpanded}>
+                                    <svg class="slds-button__icon index-cell-icon" aria-hidden="true">
+                                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#chevronright">
+                                        </use>
+                                    </svg>
+                                </button>
+                                <button class="slds-p-right_xx-small slds-button slds-button_icon"
+                                    onclick={toggleExpension} data-index={item.key} if:true={item.isExpanded}>
+                                    <svg class="slds-button__icon index-cell-icon" aria-hidden="true">
+                                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#chevrondown"></use>
+                                    </svg>
+                                </button>
+                                <div>
+                                    {Labels.LBL_Total} {item.label}
+                                </div>
+                            </td>
+                            <td class="index-cell"></td>
+                        </tr>
+                        <template for:each={item.negodiscounts} for:item="discounttype">
+                            <tr key={discounttype.key} aria-level="2" class={item.rowClass}>
+                                <td key={discounttype.key} class="nego-type-cell _slds-p-right_none slds-tree__item">
+                                    <div class={discounttype.chevronStyle} if:false={discounttype.isExpanded}>
+                                        <button class="slds-button slds-button_icon" onclick={toggleExpension}
+                                            data-negodiscount={discounttype.key} data-index={item.key}>
+                                            <svg class="slds-button__icon nego-type-cell-icon" aria-hidden="true">
+                                                <use
+                                                    xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#chevronright">
+                                                </use>
+                                            </svg>
+                                        </button>
+                                        <!-- <lightning-button-icon icon-name="utility:chevronright" variant="bare"
+                                            size="small" data-negodiscount={discounttype.key} data-index={item.key}
+                                            onclick={toggleExpension} if:false={discounttype.isExpanded}
+                                            class="white-fill">
+                                        </lightning-button-icon> -->
+                                    </div>
+                                    <div class={discounttype.chevronStyle} if:true={discounttype.isExpanded}>
+                                        <button class="slds-button slds-button_icon" onclick={toggleExpension}
+                                            data-negodiscount={discounttype.key} data-index={item.key}>
+                                            <svg class="slds-button__icon nego-type-cell-icon" aria-hidden="true">
+                                                <use
+                                                    xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#chevrondown">
+                                                </use>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div>
+                                        Total {discounttype.label}
+                                    </div>
+                                </td>
+                                <td class="nego-type-cell">
+                                    <template if:false={loadingLockedActions}>
+                                        <template if:true={discounttype.hasAvailableNewConditions}>
+                                            <button class="slds-button slds-button_icon"
+                                                onclick={addConditionModal.addCondition}
+                                                data-negodiscount={discounttype.key} data-index={item.key}
+                                                if:false={lockedActions} title={Labels.LBL_Add_Condition}>
+                                                <svg class="slds-button__icon nego-type-cell-icon" aria-hidden="true">
+                                                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#add">
+                                                    </use>
+                                                </svg>
+                                            </button>
+                                        </template>
+                                    </template>
+                                </td>
+                            </tr>
+                            <template for:each={discounttype.conditions} for:item="condition">
+                                <tr key={condition} aria-level="3" class={condition.rowClass}>
+                                    <td key={condition.Name} class={condition.cell1Class}>
+                                        <lightning-button-icon icon-name="utility:chevronright" variant="bare"
+                                            size="small" class="slds-hidden white-fill">
+                                        </lightning-button-icon>
+                                        {condition.Name}
+                                    </td>
+                                    <td class={condition.cell2Class}></td>
+                                </tr>
+                            </template>
+                        </template>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+        <template for:each={contracts} for:item="contract">
+            <c-negotiate-contract nonce={nonce} post-signed={postSigned} data-id={contract.contractId} key={contract.contractId}
+                onchildready={childReadyHandle} nego-year={negoYear} slabs-method-map={slabsMethodMap}
+                available-pe-pol-coms={availablePePolComs} contract-id={contract.contractId} class={contract.colclass}
+                has-top-not-simulation={hasTopNotSimulation} has-pe={hasPe}
+                has-pe-signed={hasPeSigned} show-indexes={showIndexes} translation={translation}
+                is-last={contract.isLast} locked-actions={lockedActions} contract-r-t-n1-settings={contractRTN1Settings}
+                current-url={currentUrl}>
+            </c-negotiate-contract>
+        </template>
+    </div>
+    <template if:true={addConditionModal.isOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={addConditionModal.close}>
+                        <lightning-icon icon-name="utility:close" variant="inverse" size="small">
+                        </lightning-icon>
+                    </button>
+                    <h2 class="slds-text-heading_medium slds-hyphenate">
+                        {addConditionModal.indexLabel} - {addConditionModal.negodiscountLabel}
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-scrollable" style="height: 60vh;">
+                    <lightning-spinner variant="brand" size="large" if:true={addConditionModal.Loading}>
+                    </lightning-spinner>
+                    <div class="slds-grid slds-p-around_xx-small"
+                        style="position: sticky; z-index: 3; top: 0px;background-color: white;">
+                        <lightning-combobox name="Condition" label="Condition" class="conditionPicker slds-size_1-of-2"
+                            options={addConditionModal.availablenewTariffsOptions}
+                            onchange={addConditionModal.handleTariffChange} required onkeydown={blockSubmit}>
+                        </lightning-combobox>
+                        <lightning-record-edit-form object-api-name={API_NAMES.Contract_Discount__c.objectApiName}
+                            class="slds-size_1-of-2">
+                            <lightning-input-field field-name={API_NAMES.Contract_Discount__c.Rank__c}
+                                class="rankPicker" onchange={addConditionModal.handleRankChange} onkeydown={blockSubmit}
+                                required={requireRank} value={addConditionModal.rankValue}>
+                            </lightning-input-field>
+                        </lightning-record-edit-form>
+                    </div>
+                    <!-- <div class="slds-scrollable"> -->
+                    <table class="slds-no-row-hover slds-table slds-table_bordered slds-table_striped">
+                        <thead>
+                            <tr>
+                                <th style="height: unset; background-color: white;" class="slds-text-align_center">
+                                </th>
+                                <template for:each={addConditionModal.fields} for:item="field">
+                                    <th style="height: unset; background-color: white;" class="slds-text-align_center"
+                                        key={field}>
+                                        {field.label}
+                                    </th>
+                                </template>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={addConditionModal.currentConditions} for:item="condition"
+                                for:index="itemIndex">
+                                <tr key={condition} class="slds-col" if:true={condition.isDisplayed}>
+                                    <td class={condition.class}>
+                                        {condition.contract.Name}
+                                    </td>
+                                    <!-- <template for:each={addConditionModal.fields} for:item="field">
+                                        <td key={fieldApiName} class={condition.class}>
+                                            <lightning-record-edit-form
+                                                object-api-name={API_NAMES.Contract_Discount__c.objectApiName}>
+                                                <lightning-input-field field-name={field.value} class="hide-info"
+                                                    variant="label-hidden" data-field-api-name={field.value}
+                                                    data-item-index={itemIndex}
+                                                    onchange={addConditionModal.handleConditionValueChange}
+                                                    onkeydown={blockSubmit}>
+                                                </lightning-input-field>
+                                            </lightning-record-edit-form>
+                                        </td>
+                                    </template> -->
+                                    <template for:each={condition.addConditionPopUpFields} for:item="field">
+                                        <td key={fieldApiName} class={condition.class}>
+                                            <lightning-record-edit-form
+                                                object-api-name={API_NAMES.Contract_Discount__c.objectApiName}>
+                                                <lightning-input-field field-name={field.fieldName} class="hide-info"
+                                                    variant="label-hidden" data-field-api-name={field.fieldName}
+                                                    value={field.fieldValue} data-item-index={itemIndex}
+                                                    onchange={addConditionModal.handleConditionValueChange}
+                                                    onkeydown={blockSubmit} onfocusout={addConditionModal.handleFocusOut}>
+                                                </lightning-input-field>
+                                            </lightning-record-edit-form>
+                                        </td>
+                                    </template>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                    <!-- </div> -->
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={addConditionModal.close}
+                        title={Labels.Cancel}>{Labels.Cancel}</button>
+                    <button class="slds-button slds-button_brand" onclick={addConditionModal.submit}
+                        title={Labels.OK}>{Labels.OK}</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

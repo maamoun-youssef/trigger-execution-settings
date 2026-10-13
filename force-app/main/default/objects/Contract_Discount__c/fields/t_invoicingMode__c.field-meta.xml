@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>t_invoicingMode__c</fullName>
+    <label>t_invoicingMode</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>NotInvoiceable</fullName>
+                <default>false</default>
+                <label>NotInvoiceable</label>
+            </value>
+            <value>
+                <fullName>InvoiceableAutomatic</fullName>
+                <default>false</default>
+                <label>InvoiceableAutomatic</label>
+            </value>
+            <value>
+                <fullName>InvoiceableManual</fullName>
+                <default>false</default>
+                <label>InvoiceableManual</label>
+            </value>
+            <value>
+                <fullName>InvoiceableCounterparty</fullName>
+                <default>false</default>
+                <label>InvoiceableCounterparty</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

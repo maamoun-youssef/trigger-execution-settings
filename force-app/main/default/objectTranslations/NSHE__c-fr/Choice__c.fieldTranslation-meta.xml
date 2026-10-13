@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Choix</label>
+    <name>Choice__c</name>
+    <picklistValues>
+        <masterLabel>Exclude</masterLabel>
+        <translation>Exclus</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Include</masterLabel>
+        <translation>Inclus</translation>
+    </picklistValues>
+</CustomFieldTranslation>

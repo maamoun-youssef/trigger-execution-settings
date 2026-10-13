@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Flow Type --></label>
+    <name>FlowType__c</name>
+    <picklistValues>
+        <masterLabel>Cross Dock</masterLabel>
+        <translation><!-- Cross Dock --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Direct</masterLabel>
+        <translation><!-- Direct --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>JIT Delivery</masterLabel>
+        <translation><!-- JIT Delivery --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Split</masterLabel>
+        <translation><!-- Split --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

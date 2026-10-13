@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Year_Between_BDate_Year_EDate_Year</fullName>
+    <active>true</active>
+    <description>The Year should be between the Begin Date Year and the End Date Year.</description>
+    <errorConditionFormula>OR(YEAR(Ass_BDate__c) &gt; Year__c, YEAR(Ass_EDate__c) &lt; Year__c)</errorConditionFormula>
+    <errorDisplayField>Year__c</errorDisplayField>
+    <errorMessage>The Year should be between the Begin Date Year and the End Date Year.</errorMessage>
+</ValidationRule>

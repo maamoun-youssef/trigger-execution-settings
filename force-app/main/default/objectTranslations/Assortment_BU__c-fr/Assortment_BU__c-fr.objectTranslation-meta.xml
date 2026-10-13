@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Assortiment BU (PWF)</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Assortiments BU (PWF)</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>O- Assort Budget Channel</layout>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>O- Assort Nego/Simu...</layout>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>O- Assort Target/PR</layout>
+        <sections>
+            <label><!-- Liens Personnalisés --></label>
+            <section>Liens Personnalisés</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Nom de l&apos;assortiment</nameFieldLabel>
+    <quickActions>
+        <aspect>Master</aspect>
+        <label>Nvlle Simulation</label>
+        <name>CloneSimulation</name>
+    </quickActions>
+    <recordTypes>
+        <description>Construction de l&apos;objectif de la DN/DV au circuit</description>
+        <label>1. Objectif Circuit</label>
+        <name>Budget</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Aggregate client segmented assortments --></description>
+        <label>Conso Négociation</label>
+        <name>Conso</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Aggregate client segmented simulation assortments --></description>
+        <label><!-- Conso Simulation --></label>
+        <name>Conso_Simulation</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Aggregate client segmented target assortments --></description>
+        <label>Conso Objectif</label>
+        <name>Conso_Target</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Identical reproduction of the client WD with the WD of the new year --></description>
+        <label><!-- Like 4 Like --></label>
+        <name>L4L</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Construction de la DN/DV négociée à l&apos;enseigne</description>
+        <label>4. Négociation Enseigne</label>
+        <name>Nego</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Créé automatiquement  - utilisé pour définir la limite inférieure de l&apos;objectif enseigne</description>
+        <label>2. Position de Rupture</label>
+        <name>PR</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Assortments with Panelist data only --></description>
+        <label>Panéliste</label>
+        <name>Panel</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Pour chaque version de simulation, créé automatiquement en dupliquant l&apos;objectif enseigne</description>
+        <label>3. Simulation</label>
+        <name>Simulation</name>
+    </recordTypes>
+    <recordTypes>
+        <description>Créé automatiquement  - utilisé pour décliner les objectifs circuits sur chaque enseigne</description>
+        <label>2. Objectif Enseigne</label>
+        <name>Target</name>
+    </recordTypes>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <errorMessage>La date de fin doit être postérieure à la date du début</errorMessage>
+        <name>Begin_Date_Inferior_Or_Equal_End_Date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Vous n&apos;avez pas l&apos;autorisation de modifier la BU source</errorMessage>
+        <name>No_BU_Source_update_from_specfic_profil</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Vous n&apos;avez pas l&apos;autorisation de modifier la BU cible</errorMessage>
+        <name>No_BU_Target_update_from_specfic_profil</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Vous n&apos;avez pas l&apos;autorisation de modifier la segmentation / hiérarchie articles</errorMessage>
+        <name>No_Org_HE_update_from_specfic_profil</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Vous ne pouvez pas modifier l&apos;année</errorMessage>
+        <name>No_year_update</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>la DV ne peut pas être nulle pour ce statut</errorMessage>
+        <name>WD_NotNull_for_Budget_RequestforApproval</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>L&apos;année doit être comprise entre le début et la fin</errorMessage>
+        <name>Year_Between_BDate_Year_EDate_Year</name>
+    </validationRules>
+    <webLinks>
+        <label>Saisie Objectifs Enseigne</label>
+        <name>AssortmentMatrixTarget</name>
+    </webLinks>
+    <webLinks>
+        <label>Saisie Assortiment</label>
+        <name>AssortmentMatrixWD</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Assortment_PriceWaterFall_Matrix --></label>
+        <name>Assortment_PriceWaterFall_Matrix</name>
+    </webLinks>
+</CustomObjectTranslation>

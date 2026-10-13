@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Code budget services</label>
+    <name>Pol_Com_ConditionServices__c</name>
+    <relationshipLabel><!-- Product Discount Statement Details (Services Pol Com Condition) --></relationshipLabel>
+</CustomFieldTranslation>

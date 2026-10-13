@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Contract Group BU 1 for Invoice RT 1 --></help>
+    <label><!-- Group BU 1 --></label>
+    <name>Group_BU_1__c</name>
+</CustomFieldTranslation>

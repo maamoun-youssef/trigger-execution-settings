@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+     <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="columnsApi" type="String" label="Columns (comma separated API names)"/>
+            <property name="showExpandCollapseButtons" type="Boolean" label="Display Expand / Collapse buttons" default="false" description="Buttons not displayed if the number of records exceeds 100" />
+            <property name="loadFromRoot" type="Boolean" label="Load entire HE tree from root" default="false"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Product Discount Statement Grid",
+  "contentBody" : {
+    "activeViewId" : "Product_Discount_Statement_Grid",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-product-discount-statement-grid",
+    "urlPrefix" : "product-discount-statement-grid"
+  },
+  "urlName" : "product-discount-statement-grid"
+}

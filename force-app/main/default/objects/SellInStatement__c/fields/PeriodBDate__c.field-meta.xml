@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PeriodBDate__c</fullName>
+    <formula>CASE(TEXT(PeriodType__c),
+&quot;Month&quot;, DATE(ReferenceYear__c, PeriodNumber__c, 1),
+&quot;Semester&quot;, IF(PeriodNumber__c = 1, DATE(ReferenceYear__c, 1, 1), DATE(ReferenceYear__c, 7, 1)),
+&quot;Trimester&quot;, IF(PeriodNumber__c = 1, DATE(ReferenceYear__c, 1, 1), IF(PeriodNumber__c = 2, DATE(ReferenceYear__c, 4, 1), IF(PeriodNumber__c = 3, DATE(ReferenceYear__c, 7, 1), DATE(ReferenceYear__c, 10, 1)))),
+&quot;Annual&quot;, DATE(ReferenceYear__c, 1, 1),
+null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Period Begin Date</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

@@ -1,0 +1,100 @@
+.sticky-header-without-bar {
+  z-index: 90;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 90px;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+
+.sticky-header-with-bar {
+  z-index: 90;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 122px;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+
+.side-bar {
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+
+.docked-header {
+  margin: -12px !important;
+  border-radius: 0 !important;
+}
+
+.headerDetail {
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+  background-color: var(--c-header-detail-color-background, unset);
+  color: var(--c-header-detail-color-text, unset);
+}
+
+.negoPlanTable {
+  /* border: 1px solid var(--c-nego-plan-color1-background, #f9bbb9) !important; */
+  color: var(--c-nego-plan-color1-text, unset) !important;
+  -webkit-transition: all .5s ease-out;
+  -moz-transition: all .5s ease-out;
+  -transition: all .5s ease-out;
+}
+
+/* .negoPlanTable td,
+.negoPlanTable th {
+  padding: 0 !important;
+  margin: 0 !important;
+} */
+
+.negoPlanRow1 {
+  background-color: var(--c-nego-plan-color1-background, #f9bbb9);
+  color: var(--c-nego-plan-color1-text, unset) !important;
+}
+
+.negoPlanRow2-3 {
+  background-color: var(--c-nego-plan-color2-background, #fcd3d1) !important;
+  color: var(--c-nego-plan-color2-text, unset) !important;
+}
+
+.negoIntroTable tbody {
+  border: 1px dashed !important;
+}
+
+.negoIntroTable td {
+  background-color: #e2f2f2;
+}
+
+.slider-nubbin:before,
+.slider-nubbin:after {
+  top: var(--lwc-spacingSmall, 0.75rem);
+}
+
+.slider-nubbin:after {
+  /* box-shadow: -1px 1px 2px 0 rgb(0 0 0 / 16%); */
+  box-shadow: -2px 2px 2px 0 rgb(0 0 0 / 25%);
+  z-index: 2;
+}
+
+.slider-nubbin:after {
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  transform: rotate(45deg);
+  content: '';
+  background-color: inherit;
+  left: 0.5rem;
+  margin-top: -0.5rem;
+}
+
+.slider-nubbin {
+  border-radius: var(--lwc-borderRadiusSmall, 0.125rem) var(--lwc-borderRadiusMedium, 0.25rem) var(--lwc-borderRadiusMedium, 0.25rem) var(--lwc-borderRadiusMedium, 0.25rem);
+}

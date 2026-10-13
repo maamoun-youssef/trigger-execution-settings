@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>invoiceTemp</label>
+    <protected>false</protected>
+    <values>
+        <field>Description__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>IsActive__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>ObjectApiName__c</field>
+        <value xsi:type="xsd:string">Invoice__c</value>
+    </values>
+    <values>
+        <field>SectionGroupTab__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>Sections__c</field>
+        <value xsi:type="xsd:string">[{&quot;title&quot;:&quot;Header Card&quot;,&quot;tabset&quot;:[],&quot;styleVariant&quot;:&quot;HeaderCard&quot;,&quot;style&quot;:&quot;&quot;,&quot;showTitle&quot;:true,&quot;sectionGroupTab&quot;:null,&quot;region&quot;:&quot;sidebar&quot;,&quot;order&quot;:1,&quot;name&quot;:&quot;&quot;,&quot;icons&quot;:[{&quot;type&quot;:&quot;primary&quot;,&quot;name&quot;:&quot;/resource.ddd.png&quot;,&quot;contentType&quot;:&quot;staticresource&quot;}],&quot;header&quot;:{&quot;type&quot;:&quot;&quot;,&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;&quot;},&quot;fields&quot;:[[{&quot;type&quot;:&quot;&quot;,&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;Contract__c&quot;}],[{&quot;type&quot;:&quot;&quot;,&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;AgreementEDate__c&quot;}],[{&quot;type&quot;:&quot;&quot;,&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;BuyerCommercialName__c&quot;}]],&quot;components&quot;:[],&quot;aggregates&quot;:[],&quot;actions&quot;:[{&quot;redirectionValue&quot;:&quot;UserAuthStatusTile&quot;,&quot;redirectionType&quot;:&quot;&quot;,&quot;order&quot;:&quot;0&quot;,&quot;label&quot;:&quot;l&quot;,&quot;icon&quot;:&quot;&quot;,&quot;actionType&quot;:&quot;text&quot;}]},{&quot;title&quot;:&quot;Image Fields&quot;,&quot;tabset&quot;:[],&quot;styleVariant&quot;:&quot;imageFields&quot;,&quot;style&quot;:&quot;&quot;,&quot;showTitle&quot;:true,&quot;sectionGroupTab&quot;:null,&quot;region&quot;:&quot;sidebar&quot;,&quot;order&quot;:2,&quot;name&quot;:&quot;&quot;,&quot;icons&quot;:[{&quot;type&quot;:&quot;primary&quot;,&quot;name&quot;:&quot;Contract__c&quot;,&quot;contentType&quot;:&quot;field&quot;},{&quot;type&quot;:&quot;secondary&quot;,&quot;name&quot;:&quot;/resource/gg.png&quot;,&quot;contentType&quot;:&quot;staticresource&quot;}],&quot;header&quot;:{&quot;type&quot;:&quot;&quot;,&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;&quot;},&quot;fields&quot;:[[{&quot;type&quot;:&quot;&quot;,&quot;isReadOnly&quot;:false,&quot;isMandatory&quot;:false,&quot;fieldName&quot;:&quot;AgreementEDate__c&quot;}]],&quot;components&quot;:[],&quot;aggregates&quot;:[],&quot;actions&quot;:[]}]</value>
+    </values>
+    <values>
+        <field>Theme__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

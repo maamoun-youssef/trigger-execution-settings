@@ -1,0 +1,5 @@
+{
+  "apiName" : "ForgotPasswordCustom",
+  "type" : "sfdc_cms__view",
+  "path" : "views"
+}

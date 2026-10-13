@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>AgencyAgreement</fullName>
+        <default>false</default>
+        <label>AgencyAgreement</label>
+    </customValue>
+    <customValue>
+        <fullName>CallOffAgreement</fullName>
+        <default>false</default>
+        <label>CallOffAgreement</label>
+    </customValue>
+    <customValue>
+        <fullName>SellIn</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SellIn</label>
+    </customValue>
+    <customValue>
+        <fullName>SellOut</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SellOut</label>
+    </customValue>
+    <customValue>
+        <fullName>Services</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Services</label>
+    </customValue>
+    <masterLabel>Promo Agreement Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

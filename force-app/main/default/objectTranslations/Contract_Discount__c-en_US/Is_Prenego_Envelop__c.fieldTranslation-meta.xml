@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Define if the contract line is a prenegotiated amount  (then contribution deal inside the initial yearly agreement) or an additional partner contribution dealing during the year. For dispatched fixed amount values follow if contribute to a prenegotiated e --></help>
+    <label>Is Pre-Negotiated Envelop</label>
+    <name>Is_Prenego_Envelop__c</name>
+</CustomFieldTranslation>

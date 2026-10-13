@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RoleInternalContactUser__c</fullName>
+    <description>Specifies the role or position of the internal contact associated with this Service Statement (e.g., Buyer, Category Manager, Legal Representative). Displayed on the portal to clarify the contact’s function.</description>
+    <externalId>false</externalId>
+    <formula>IF( ISBLANK(InternalContactUser__c),null,InternalContactUser__r.Title)</formula>
+    <label>Internal Contact Role</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

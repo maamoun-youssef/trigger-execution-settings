@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Payment Condition for Rendering Services --></label>
+    <name>Services_Payment_Condition__c</name>
+    <picklistValues>
+        <masterLabel>End of Month</masterLabel>
+        <translation><!-- End of Month --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>End of Month, the 15</masterLabel>
+        <translation><!-- End of Month, the 15 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Net</masterLabel>
+        <translation><!-- Net --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>The 10</masterLabel>
+        <translation><!-- The 10 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>The 15</masterLabel>
+        <translation><!-- The 15 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>The 20</masterLabel>
+        <translation><!-- The 20 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Twice the Month</masterLabel>
+        <translation><!-- Twice the Month --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NEGO_Keynote_Marketing_Plan__c</fullName>
+    <description>Keynote / Marketing plan deal with the supplier</description>
+    <inlineHelpText>Keynote / Marketing plan deal with the supplier</inlineHelpText>
+    <label>NEGO - Keynote Marketing Plan</label>
+    <length>16000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>15</visibleLines>
+</CustomField>

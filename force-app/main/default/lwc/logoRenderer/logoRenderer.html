@@ -1,0 +1,24 @@
+<template>
+    <template if:true={imageUrl}>
+        <div class="child-image-container">
+            <template if:true={isSprite}>
+                <div class="sprite-box" style={spriteStyle}></div>
+            </template>
+            <template if:false={isSprite}>
+         
+                <img src={imageUrl} alt={imageName} />
+              
+       
+            </template>
+            <p>{imageName}</p>
+        </div>
+    </template>
+    <template if:true={error}>
+        <p style="color: red;">{error}</p>
+    </template>
+    <template if:false={imageUrl} >
+       <template if:false={error}>
+        <p>Loading image...</p>
+</template>
+    </template>
+</template>

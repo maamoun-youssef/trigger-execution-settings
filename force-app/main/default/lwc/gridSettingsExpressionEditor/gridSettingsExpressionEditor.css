@@ -1,0 +1,11 @@
+.limited-cell {
+    width: 1px;
+}
+
+.limited-cell_medium {
+    width: 200px;
+}
+
+.limited-cell_large {
+    width: 300px;
+}
