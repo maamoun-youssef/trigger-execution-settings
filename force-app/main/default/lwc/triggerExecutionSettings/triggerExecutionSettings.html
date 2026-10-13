@@ -1,0 +1,608 @@
+<template>
+    <div class="slds-card" style="overflow:hidden;">
+        <div class="main-header">
+            <div class="slds-card slds-grid slds-p-around_xx-small slds-page-header negoptimHeader">
+                <div class="slds-col slds-has-flexi-truncate">
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div
+                            class="slds-p-around_xx-small slds-m-top_xxx-small slds-m-left_x-small slds-icon_container">
+                            <lightning-icon icon-name="utility:settings">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-media__body slds-p-around_x-small">
+                            <p class="slds-line-height_reset">{labels.LBL_TriggerExecutionSettings}</p>
+                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate"
+                                title={selectedObject.objectLabel} if:true={selectedObject}>
+                                <div class="slds-grid">
+                                    <div>{selectedObject.objectLabel}</div>
+                                </div>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-no-flex slds-grid slds-icon_container">
+                    <div if:true={selectedObject} class="slds-align-middle">
+                        <lightning-badge label={activeStatus.badgeLabel}
+                            class={activeStatus.badgeClass}></lightning-badge>
+                    </div>
+                    <template if:true={selectedObject}>
+                        <lightning-button label={activeStatus.buttonLabel} class="slds-button slds-m-right_xx-small"
+                            variant={activeStatus.buttonVariant} onclick={handleToggleActive}>
+                        </lightning-button>
+                    </template>
+                    <lightning-button if:true={selectedObject} class="slds-button" variant="brand"
+                        label={labels.LBL_Save} onclick={handleSave}>
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+        <div class="main-div slds-grid">
+            <template if:true={loadingData}>
+                <div class="slds-spinner_container">
+                    <div class="loader slds-spinner_container slds-align--absolute-center">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </template>
+            <div class="slds-col slds-size_1-of-4 slds-border_right " style="background-color: white; height: inherit">
+                <div class="templatesSplitView slds-split-view_container slds-panel_docked-left slds-is-open"
+                    style="height: -webkit-fill-available;">
+                    <div class="slds-panel__header slds-p-around_x-small searchBox" id="filterHeader">
+                        <div style="padding: 0;" class="slds-page-header__col-details">
+                            <lightning-input type="search" variant="label-hidden" autocomplete="off"
+                                onchange={searchObject} value={searchTermObject} onkeyup={searchObject}
+                                onkeydown={searchObject}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                    <template if:false={displayedObjectList.length}>
+                        <div class="slds-align_absolute-center slds-m-vertical_small">
+                            <span class="slds-truncate" title={labels.LBL_No_Item_To_Display}>
+                                {labels.LBL_No_Item_To_Display}
+                            </span>
+                        </div>
+                    </template>
+                    <div class="slds-scrollable--y" if:true={displayedObjectList.length}>
+                        <article aria-hidden="false" id="split-view-id"
+                            class="slds-split-view slds-grid slds-grid_vertical slds-scrollable">
+                            <div class="slds-grid slds-grid_vertical">
+                                <ul aria-multiselectable="true" class="slds-scrollable_y" role="listbox"
+                                    aria-label="Select an item to open it in a new workspace tab.">
+                                    <template for:each={displayedObjectList} for:item="object" for:index="index">
+                                        <li class="slds-split-view__list-item" role="presentation"
+                                            key={object.objectName} data-index={index} onclick={ObjectChangeHandler}>
+                                            <a href="#" role="option" data-id={object.objectName}
+                                                class="menuItem slds-split-view__list-item-action slds-grow slds-has-flexi-truncate"
+                                                tabindex="0">
+                                                <div class="slds-grid slds-wrap">
+                                                    <b>
+                                                        <span
+                                                            class="slds-truncate slds-text-body_regular slds-text-color_default"
+                                                            title={object.objectLabel}>{object.objectLabel}</span>
+                                                    </b>
+                                                </div>
+                                                <div class="slds-grid">
+                                                    <span class="slds-truncate"
+                                                        title={object.objectName}>{object.objectName}</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-form_stacked slds-col slds-scrollable" if:true={selectedObject}
+                style="background: #f9f9f9">
+                <div class="slds-p-around_x-small">
+                    <template for:each={sections} for:item="section">
+                        <div key={section.eventType}>
+                            <!-- Section card -->
+                            <div class="slds-box slds-box_xx-small slds-theme_default section-card">
+                                <!-- ── Header ── -->
+                                <div
+                                    class="slds-grid slds-grid_vertical-align-center slds-p-horizontal_small slds-p-vertical_x-small section-header">
+                                    <!-- Chevron -->
+                                    <div class="slds-no-flex">
+                                        <lightning-button-icon icon-name={section.chevronIcon} variant="bare"
+                                            size="small" alternative-text="Toggle" data-event-type={section.eventType}
+                                            onclick={toggleSection}>
+                                        </lightning-button-icon>
+                                    </div>
+                                    <!-- Title + meta -->
+                                    <div class="slds-col slds-m-left_x-small slds-m-top--x-small">
+                                        <span class="slds-text-title_bold section-title">{section.eventType}</span>
+                                        <template if:true={section.methodsCount}>
+                                            <span
+                                                class="slds-badge slds-badge_inverse slds-m-left_x-small badge-method">{labels.LBL_TriggerExecutionSettings_Methods}
+                                                ({section.methodsCount})</span>
+                                        </template>
+                                        <template if:true={section.formulasCount}>
+                                            <span
+                                                class="slds-badge slds-badge_inverse slds-m-left_x-small badge-formula">{labels.LBL_TriggerExecutionSettings_Formulas}
+                                                ({section.formulasCount})</span>
+                                        </template>
+                                        <template if:true={section.externalIdsCount}>
+                                            <span
+                                                class="slds-badge slds-badge_inverse slds-m-left_x-small badge-extid">Ext.
+                                                IDs ({section.externalIdsCount})</span>
+                                        </template>
+                                    </div>
+                                    <!-- Add New Setting button -->
+                                    <div class="slds-no-flex">
+                                        <lightning-button label={labels.LBL_TriggerExecutionSettings_AddNewSettings}
+                                            icon-name="utility:add" variant="neutral"
+                                            data-event-type={section.eventType} onclick={toggleNewSettingsPopup}>
+                                        </lightning-button>
+                                    </div>
+                                </div>
+                                <!-- ── Body ── -->
+                                <template if:false={section.isCollapsed}>
+                                    <div class="slds-border_top">
+                                        <!-- Empty state -->
+                                        <template if:true={section.isEmpty}>
+                                            <div
+                                                class="slds-p-around--x-small slds-text-align_center slds-text-color_weak">
+                                                <lightning-icon icon-name="utility:no_content" size="small"
+                                                    class="slds-m-right_x-small"></lightning-icon>
+                                                {labels.LBL_No_Item_To_Display}
+                                            </div>
+                                        </template>
+                                        <!-- ── Methods ── -->
+                                        <template if:true={section.methods.length}>
+                                            <div class="slds-p-horizontal_small slds-p-top_x-small">
+                                                <p class="slds-text-title_bold slds-text-color_weak group-label">
+                                                    {labels.LBL_TriggerExecutionSettings_Methods}</p>
+                                            </div>
+                                            <template for:each={section.methods} for:item="method"
+                                                for:index="methodIndex">
+                                                <div key={method.methodName} class={method.rowClass}
+                                                    data-index={method.methodIdx} data-event-index={section.eventIndex}
+                                                    ondragover={handleDragOver} ondrop={handleDrop}
+                                                    ondragenter={handleDragEnter} ondragleave={handleDragLeave}>
+                                                    <!-- Apex icon -->
+                                                    <div
+                                                        class="slds-no-flex slds-grid slds-grid_vertical-align-center slds-m-right_small">
+                                                        <lightning-icon icon-name="utility:apex" size="xx-small"
+                                                            class="icon-method"></lightning-icon>
+                                                    </div>
+                                                    <!-- Content -->
+                                                    <div class="slds-col">
+                                                        <span
+                                                            class="slds-text-body_regular slds-text-color_default">{method.classHandlerName}</span>
+                                                        <span class="slds-text-color_weak"> · </span>
+                                                        <span class="slds-text-body_regular">{method.methodName}</span>
+                                                    </div>
+
+                                                    <div class="slds-no-flex slds-grid slds-gutters_direct-x-small">
+                                                        <!-- Active toggle -->
+                                                        <div class="slds-col slds-p-around_none">
+                                                            <div
+                                                                class="slds-col slds-grid slds-grid_vertical slds-p-around_none">
+                                                                <lightning-input type="toggle" variant="label-hidden"
+                                                                    checked={method.isActive} data-type="Method"
+                                                                    data-event-index={section.eventIndex}
+                                                                    data-method-index={method.methodIdx}
+                                                                    onchange={handleEdit}>
+                                                                </lightning-input>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Delete -->
+                                                        <div class="slds-col">
+                                                            <lightning-button-icon icon-name="utility:delete"
+                                                                variant="border-filled" size="medium"
+                                                                alternative-text="Delete" class="icon-delete"
+                                                                data-field="deleteMethod"
+                                                                data-event-index={section.eventIndex}
+                                                                data-method-index={method.methodIdx}
+                                                                onclick={handleDeleteSettings}>
+                                                            </lightning-button-icon>
+                                                        </div>
+                                                        <!-- Drag handle -->
+                                                        <div class="slds-col drag-handle slds-p-around--none"
+                                                            data-index={method.methodIdx}
+                                                            data-event-index={section.eventIndex} draggable="true"
+                                                            ondragstart={handleDragStart} ondragend={handleDragEnd}>
+                                                            <lightning-icon icon-name="utility:drag_and_drop"
+                                                                size="medium"></lightning-icon>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </template>
+                                        <!-- ── Formulas ── -->
+                                        <template if:true={section.formulas.length}>
+                                            <div class="slds-p-horizontal_small slds-p-top_small">
+                                                <p class="slds-text-title_bold slds-text-color_weak group-label">
+                                                    {labels.LBL_TriggerExecutionSettings_Formulas}</p>
+                                            </div>
+                                            <template for:each={section.formulas} for:item="formula"
+                                                for:index="formulaIndex">
+                                                <div key={formula.fieldName} class={formula.rowClass}>
+                                                    <!-- Icon -->
+                                                    <div class="slds-no-flex slds-m-right_small">
+                                                        <lightning-icon icon-name="utility:formula" size="xx-small"
+                                                            class="icon-formula"></lightning-icon>
+                                                    </div>
+                                                    <!-- Content -->
+                                                    <div class="slds-col">
+                                                        <span
+                                                            class="slds-text-body_regular slds-text-color_default">{formula.fieldName}</span>
+                                                        <span class="slds-text-color_weak"> = </span>
+                                                        <span
+                                                            class="slds-text-body_small slds-text-color_weak formula-preview">{formula.formula}</span>
+                                                    </div>
+                                                    <!-- Edit -->
+                                                    <div
+                                                        class="slds-no-flex slds-grid slds-grid_vertical-align-center slds-m-right--small">
+                                                        <lightning-button-icon icon-name="utility:edit" size="medium"
+                                                            alternative-text="Edit"
+                                                            data-event-index={section.eventIndex} data-type="Formula"
+                                                            data-method-index={formula.formulaIdx} onclick={handleEdit}>
+                                                        </lightning-button-icon>
+                                                    </div>
+                                                    <!-- Delete -->
+                                                    <div class="slds-no-flex slds-grid slds-grid_vertical-align-center">
+                                                        <lightning-button-icon icon-name="utility:delete" size="medium"
+                                                            alternative-text="Delete" class="icon-delete"
+                                                            data-event-index={section.eventIndex}
+                                                            data-method-index={formula.formulaIdx}
+                                                            data-field="deleteFormula" onclick={handleDeleteSettings}>
+                                                        </lightning-button-icon>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </template>
+                                        <!-- ── External IDs ── -->
+                                        <template if:true={section.externalIds.length}>
+                                            <div class="slds-p-horizontal_small slds-p-top_small">
+                                                <p class="slds-text-title_bold slds-text-color_weak group-label">
+                                                    {labels.LBL_TriggerExecutionSettings_ExternalIdGeneration}</p>
+                                            </div>
+                                            <template for:each={section.externalIds} for:item="extId"
+                                                for:index="extIdIndex">
+                                                <div key={extId.externalIdField} class={extId.rowClass}>
+                                                    <!-- Icon -->
+                                                    <div class="slds-no-flex slds-m-right_small">
+                                                        <lightning-icon icon-name="utility:key" size="xx-small"
+                                                            class="icon-extid"></lightning-icon>
+                                                    </div>
+                                                    <!-- Content -->
+                                                    <div class="slds-col">
+                                                        <span
+                                                            class="slds-text-body_regular slds-text-color_default">{extId.externalIdField}</span>
+                                                        <span class="slds-text-color_weak"> = </span>
+                                                        <template for:each={extId.fields} for:item="field">
+                                                            <span key={field.displayValue}>{field.displayValue}</span>
+                                                            <template if:true={field.showSeparator}>
+                                                                <span key={field.displayValue}>{extId.separator}</span>
+                                                            </template>
+                                                        </template>
+                                                    </div>
+                                                    <!-- Edit -->
+                                                    <div
+                                                        class="slds-no-flex slds-grid slds-grid_vertical-align-center slds-m-right--small">
+                                                        <lightning-button-icon icon-name="utility:edit" size="medium"
+                                                            alternative-text="Edit" data-type="ExtId"
+                                                            data-event-index={section.eventIndex}
+                                                            data-method-index={extId.originalIndex}
+                                                            onclick={handleEdit}>
+                                                        </lightning-button-icon>
+                                                    </div>
+                                                    <!-- Delete -->
+                                                    <div class="slds-no-flex slds-grid slds-grid_vertical-align-center">
+                                                        <lightning-button-icon icon-name="utility:delete" size="medium"
+                                                            alternative-text="Delete" class="icon-delete"
+                                                            data-field="deleteExtId"
+                                                            data-event-index={section.eventIndex}
+                                                            data-method-index={extId.originalIndex}
+                                                            onclick={handleDeleteSettings}>
+                                                        </lightning-button-icon>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </template>
+                                    </div>
+                                </template>
+                            </div>
+                            <template if:false={section.isLast}>
+                                <div class="slds-text-align_center connector-arrow">
+                                    <svg width="21" height="32" viewBox="0 0 21 30" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10.5 0V28" stroke="#A0A0A0" stroke-width="2"></path>
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M4.05166 22.3845H16.9681C17.333 22.3845 17.5884 22.8845 17.2965 23.2307L10.9842 31.3845C10.7653 31.6922 10.2909 31.6922 10.072 31.3845L3.68678 23.2307C3.43137 22.8845 3.6503 22.3845 4.05166 22.3845Z"
+                                            fill="#A0A0A0"></path>
+                                    </svg>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                    <!-- ─── end sections ─── -->
+                </div>
+            </div>
+        </div>
+        <template if:true={showTypeSelector}>
+            <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container" style="max-width:480px;">
+                    <div class="slds-button slds-button_icon slds-modal__close">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close"
+                            onclick={closeTypeSelector}>
+                        </lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__header slds-p-around--small">
+                        <h1 class="slds-modal__title slds-hyphenate">
+                            {labels.LBL_TriggerExecutionSettings_AddNewSettings}</h1>
+                        <p class="slds-m-top_xx-small slds-text-color_weak">{pendingEventType}</p>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_large">
+                        <div class="slds-grid slds-gutters slds-wrap slds-grid_align-center">
+
+                            <!-- Method -->
+                            <template if:false={isUpdateInsert}>
+                                <div class="slds-col slds-size_1-of-1 slds-m-bottom_small">
+                                    <div class="slds-box type-option-card slds-grid slds-grid_vertical-align-center clickable"
+                                        data-type="method" onclick={chooseSettingType} role="button" tabindex="0">
+                                        <div class="slds-no-flex slds-m-right_medium type-icon-wrap type-icon-method">
+                                            <lightning-icon icon-name="utility:apex" size="small"></lightning-icon>
+                                        </div>
+                                        <div class="slds-col">
+                                            <p class="slds-text-heading_small">
+                                                {labels.LBL_TriggerExecutionSettings_Methods}</p>
+                                            <p class="slds-text-body_small slds-text-color_weak">
+                                                {labels.LBL_TriggerExecutionSettings_MethodsSubTitle}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <!-- Formula -->
+                            <template if:false={isPendingAfterEvent}>
+                                <div class="slds-col slds-size_1-of-1 slds-m-bottom_small">
+                                    <div class="slds-box type-option-card slds-grid slds-grid_vertical-align-center clickable"
+                                        data-type="formula" onclick={chooseSettingType} role="button" tabindex="0">
+                                        <div class="slds-no-flex slds-m-right_medium type-icon-wrap type-icon-formula">
+                                            <lightning-icon icon-name="utility:formula" size="small"></lightning-icon>
+                                        </div>
+                                        <div class="slds-col">
+                                            <p class="slds-text-heading_small">
+                                                {labels.LBL_TriggerExecutionSettings_Formulas}</p>
+                                            <p class="slds-text-body_small slds-text-color_weak">
+                                                {labels.LBL_TriggerExecutionSettings_FormulasSubTitle}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                            <!-- External ID -->
+                            <template if:false={isPendingAfterEvent}>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <div class="slds-box type-option-card slds-grid slds-grid_vertical-align-center clickable"
+                                        data-type="externalId" onclick={chooseSettingType} role="button" tabindex="0">
+                                        <div class="slds-no-flex slds-m-right_medium type-icon-wrap type-icon-extid">
+                                            <lightning-icon icon-name="utility:key" size="small"></lightning-icon>
+                                        </div>
+                                        <div class="slds-col">
+                                            <p class="slds-text-heading_small">
+                                                {labels.LBL_TriggerExecutionSettings_ExternalIdGeneration}</p>
+                                            <p class="slds-text-body_small slds-text-color_weak">
+                                                {labels.LBL_TriggerExecutionSettings_ExternalIdGenerationSubTitle}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <template if:true={addNewRow}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close" data-type="Method"
+                            onclick={togglePopup}></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__header">
+                        <h1 class="slds-modal__title slds-hyphenate">{labels.LBL_TriggerExecutionSettings_NewMethod}
+                        </h1>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning-combobox label={labels.LBL_TriggerExecutionSettings_ClassName} options={handlers}
+                            value={row.classHandlerName} data-field="classHandlerName" onchange={handleChange}>
+                        </lightning-combobox>
+                        <lightning-combobox if:true={row.classHandlerName}
+                            label={labels.LBL_TriggerExecutionSettings_Methods} options={methods} value={row.methodName}
+                            data-field="methodName" onchange={handleChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button lwc:if={showPrevious} class="slds-button slds-button_neutral" onclick={previousPopUp}
+                            aria-label={LBL_Apply}>{labels.LBL_Previous}</button>
+                        <button class="slds-button slds-button_brand" data-type="Method" onclick={confirmAddNewSettings}
+                            aria-label={LBL_Apply}>{labels.LBL_Confirm}</button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <!-- add/edit formula -->
+        <template if:true={addNewFormula}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-33"
+                class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close" data-type="Formula"
+                            onclick={togglePopup}></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__header">
+                        <template if:true={row.isEdit}>
+                            <h1 class="slds-modal__title slds-hyphenate">
+                                {labels.LBL_TriggerExecutionSettings_EditFormula}</h1>
+                        </template>
+                        <template if:false={row.isEdit}>
+                            <h1 class="slds-modal__title slds-hyphenate">
+                                {labels.LBL_TriggerExecutionSettings_NewFormula}</h1>
+                        </template>
+                    </div>
+                    <div class="modal-content-no-clip slds-modal__content slds-p-around_large">
+                        <div class="slds-grid slds-m-vertical_small slds-gutters_small">
+                            <div class="slds-col">
+                                <c-neg-optim-searchable-picklist label={labels.LBL_TriggerExecutionSettings_FieldName}
+                                    value={row.fieldName} options={fieldNameOptions} placeholder="Search Icons"
+                                    data-field="formulaHandler" onchange={handleChange} disabled={row.isEdit}>
+                                </c-neg-optim-searchable-picklist>
+                            </div>
+                            <template if:true={row.isEdit}>
+                                <div class="slds-col">
+                                    <lightning-combobox label={labels.LBL_TriggerExecutionSettings_EventType}
+                                        options={formulaEventTypes} data-field="formulaEventType"
+                                        onchange={handleChange} value={row.eventType} disabled={isFieldNotSelected}>
+                                    </lightning-combobox>
+                                </div>
+                            </template>
+                        </div>
+                        <!-- Equation -->
+                        <div class="slds-form-element slds-m-around_none slds-m-bottom_none">
+                            <div class="slds-p-around_none">
+                                <!-- Field + Operator -->
+                                <div class="slds-grid slds-m-vertical_small slds-gutters_small">
+                                    <div class="slds-col">
+                                        <!-- <lightning-combobox
+                                            label="Insert Field"
+                                            options={fieldOptions}
+                                            data-field="field"
+                                            onchange={handleChange}
+                                            disabled={isFieldNotSelected}>
+                                        </lightning-combobox> -->
+
+                                        <c-neg-optim-searchable-picklist
+                                            label={labels.LBL_TriggerExecutionSettings_InsertField}
+                                            options={fieldOptions} placeholder="Search Fields" data-field="field"
+                                            onchange={handleChange} disabled={isFieldNotSelected}>
+                                        </c-neg-optim-searchable-picklist>
+                                    </div>
+                                    <div class="slds-col">
+                                        <lightning-combobox label={labels.LBL_TriggerExecutionSettings_AddOperator}
+                                            options={operatorOptions} data-field="field" onchange={handleChange}
+                                            disabled={isFieldNotSelected}>
+                                        </lightning-combobox>
+                                    </div>
+                                </div>
+                                <!-- Equation -->
+                                <lightning-textarea label={labels.LBL_TriggerExecutionSettings_Equation}
+                                    value={row.formula} data-field="equation" onchange={handleChange}
+                                    disabled={isFieldNotSelected}>
+                                </lightning-textarea>
+                                <!-- Actions -->
+                                <div class="slds-m-top_small slds-align_left">
+                                    <lightning-button label={labels.LBL_TriggerExecutionSettings_CheckSyntax}
+                                        onclick={handleCheck} disabled={isFieldNotSelected}>
+                                    </lightning-button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- End Equation -->
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button lwc:if={showPrevious} class="slds-button slds-button_neutral" onclick={previousPopUp}
+                            aria-label={LBL_Apply}>{labels.LBL_Previous}</button>
+                        <button class="slds-button slds-button_brand" data-type="Formula"
+                            onclick={confirmAddNewSettings} aria-label={LBL_Apply}>{labels.LBL_Confirm}</button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+        <!-- add/edit external id -->
+        <template if:true={addNewExternalId}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-extid"
+                class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <div class="slds-button slds-button_icon slds-modal__close">
+                        <lightning-button-icon variant="bare" size="large" icon-name="utility:close" data-type="ExtId"
+                            onclick={togglePopup}></lightning-button-icon>
+                    </div>
+                    <div class="slds-modal__header">
+                        <template if:true={row.isEdit}>
+                            <h1 class="slds-modal__title slds-hyphenate">
+                                {labels.LBL_TriggerExecutionSettings_EditExternalId}</h1>
+                        </template>
+                        <template if:false={row.isEdit}>
+                            <h1 class="slds-modal__title slds-hyphenate">
+                                {labels.LBL_TriggerExecutionSettings_NewExternalId}</h1>
+                        </template>
+                    </div>
+                    <div class="modal-content-no-clip slds-modal__content slds-p-around_medium">
+                        <div class="slds-grid slds-m-vertical_small slds-gutters_small">
+                            <div class="slds-col">
+                                <c-neg-optim-searchable-picklist
+                                    label={labels.LBL_TriggerExecutionSettings_ExternalIdField}
+                                    value={row.externalIdField} options={externalIdFieldOptions}
+                                    onchange={handleExternalIdChange} disabled={row.isEdit} data-field="extIdField">
+                                </c-neg-optim-searchable-picklist>
+                            </div>
+                            <div class="slds-col">
+                                <lightning-combobox label={labels.LBL_TriggerExecutionSettings_Separator}
+                                    options={seperatorOptions} value={row.separator} onchange={handleExternalIdChange}
+                                    disabled={isExternalIdFieldSelected} data-field="extIdSeparator">
+                                </lightning-combobox>
+                            </div>
+                        </div>
+                        <div class="slds-m-top_small">
+                            <div class="slds-grid slds-m-vertical_small slds-gutters_small">
+                                <div class="slds-col">
+                                    <c-neg-optim-searchable-picklist label={labels.LBL_TriggerExecutionSettings_Fields}
+                                        value={selectedFormatField} options={formatFieldOptions}
+                                        onchange={handleExternalIdChange} disabled={isExternalIdFieldSelected}
+                                        data-field="formatFieldSelect">
+                                    </c-neg-optim-searchable-picklist>
+                                </div>
+                                <template if:true={row.isEdit}>
+                                    <div class="slds-col">
+                                        <lightning-combobox label={labels.LBL_TriggerExecutionSettings_EventType}
+                                            options={formulaEventTypes} value={row.eventType}
+                                            data-field="extIdEventType" onchange={handleExternalIdChange}
+                                            disabled={isExternalIdFieldSelected}>
+                                        </lightning-combobox>
+                                    </div>
+                                </template>
+                            </div>
+                            <template if:true={selectedFormatFields.length}>
+                                <div class="slds-box slds-m-top_small">
+                                    <template for:each={selectedFormatFields} for:item="formatField">
+                                        <div key={formatField.index}
+                                            class="slds-grid slds-grid_vertical-align-center slds-m-bottom_xx-small">
+                                            <span class="slds-col slds-truncate">{formatField.label}
+                                                ({formatField.apiName})</span>
+                                            <lightning-button-icon icon-name="utility:delete" variant="bare"
+                                                size="small" class="slds-col slds-grow-none clickable red-icon"
+                                                data-index={formatField.index} onclick={removeFormatField}>
+                                            </lightning-button-icon>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button lwc:if={showPrevious} class="slds-button slds-button_neutral" onclick={previousPopUp}
+                            aria-label={LBL_Apply}>{labels.LBL_Previous}</button>
+                        <button class="slds-button slds-button_brand" data-type="ExtId" onclick={confirmAddNewSettings}
+                            aria-label={LBL_Confirm}>{labels.LBL_Confirm}</button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+    </div>
+</template>
